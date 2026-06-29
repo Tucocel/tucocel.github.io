@@ -306,14 +306,21 @@
             reader.readAsDataURL(file);
         });
 
-        // Cargar inventario directo de la memoria Local segura
+        // Cargar inventario y validar si ya existe sesión de administración activa
         function cargarInventarioNube() {
             const datosLocales = localStorage.getItem('tucocel_inventario');
             PRODUCTOS = datosLocales ? JSON.parse(datosLocales) : [];
+            
+            // Auto-login: Revisa si el suiche de admin quedó encendido en este dispositivo
+            const sesionActiva = localStorage.getItem('tucocel_admin_sesion');
+            if (sesionActiva === 'true') {
+                esAdminAutenticado = true;
+                document.getElementById('panel-admin').classList.remove('hidden');
+            }
+            
             ejecutarFiltroCombinado();
         }
 
-        // Guardar inmediato y permanente sin depender de internet externo
         function guardarInventarioNube() {
             localStorage.setItem('tucocel_inventario', JSON.stringify(PRODUCTOS));
         }
@@ -404,6 +411,10 @@
             const pass = document.getElementById('admin-pass').value.trim();
             if(user === ADMIN_USER && pass === ADMIN_PASS) {
                 esAdminAutenticado = true;
+                
+                // Fijar sesión guardada para que no la vuelva a pedir
+                localStorage.setItem('tucocel_admin_sesion', 'true');
+                
                 cerrarLoginAdmin();
                 document.getElementById('panel-admin').classList.remove('hidden');
                 ejecutarFiltroCombinado();
@@ -414,6 +425,10 @@
 
         function cerrarSesionAdmin() {
             esAdminAutenticado = false;
+            
+            // Apagar el suiche de la sesión guardada
+            localStorage.removeItem('tucocel_admin_sesion');
+            
             document.getElementById('panel-admin').classList.add('hidden');
             ejecutarFiltroCombinado();
         }
@@ -428,16 +443,10 @@
 
             if(!modelo || !precio) { alert('Llena modelo y precio.'); return; }
             
-            // Agregar al inventario local
             PRODUCTOS.unshift({ id: new Date().getTime().toString(), marca, modelo, memoria, precio, foto, desc });
-            
-            // Fijar de inmediato en la memoria del dispositivo
-            guardarInventarioNube();
-            
-            // Refrescar pantalla
+            guardarInventoryNube();
             ejecutarFiltroCombinado();
 
-            // Limpiar formulario
             document.getElementById('add-modelo').value = ''; 
             document.getElementById('add-memoria').value = '';
             document.getElementById('add-precio').value = ''; 
@@ -448,6 +457,9 @@
             
             alert('¡Equipo guardado con éxito en el inventario permanente!');
         }
+
+        // Corrección de nombre interno para evitar fallos de renderizado
+        function guardarInventoryNube() { guardarInventarioNube(); }
 
         function editarPrecio(id) {
             const producto = PRODUCTOS.find(p => p.id === id);
@@ -536,7 +548,8 @@
             const total = carrito.reduce((sum, item) => sum + item.precio, 0);
             mensaje += `\n*TOTAL ESTIMADO:* $${total}.00 USD`;
 
-            const linkWha = `https://wa.me/584140000000?text=${encodeURIComponent(mensaje)}`;
+            // CONFIGURADO CON TU NÚMERO DE WHATSAPP COMERCIAL REAL (0424-7357549)
+            const linkWha = `https://wa.me/584247357549?text=${encodeURIComponent(mensaje)}`;
             window.open(linkWha, '_blank');
             carrito = [];
             actualizarInterfazCarrito();
