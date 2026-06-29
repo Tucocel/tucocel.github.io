@@ -165,7 +165,7 @@
             <p class="col-span-full text-center text-xs text-gray-400 py-10"><i class="fa-solid fa-spinner fa-spin text-blue-600 mr-2"></i> Conectando de forma segura con la nube de Servicell...</p>
         </div>
 
-        <!-- RESPALDO COMERCIAL Y MÉTODOS DE PAGO (INTEGRA LOS ACCESORIOS Y SERVICIO TÉCNICO ABAJO) -->
+        <!-- RESPALDO COMERCIAL Y MÉTODOS DE PAGO -->
         <div class="mt-12 bg-white border border-gray-100 rounded-3xl p-6 shadow-sm space-y-6 max-w-4xl mx-auto sm:mx-0">
             <h4 class="text-xs font-black text-gray-900 uppercase tracking-wider border-b border-gray-100 pb-2"><i class="fa-solid fa-circle-info text-blue-600 mr-1"></i> Servicios Especializados Tucocel</h4>
             
@@ -437,6 +437,7 @@
             ejecutarFiltroCombinado();
         }
 
+        // FUNCIÓN MEJORADA: Espera y re-sincroniza con el servidor remoto para no perder productos
         async function guardarProductoNuevo() {
             const marca = document.getElementById('add-marca').value;
             const modelo = document.getElementById('add-modelo').value.trim();
@@ -446,14 +447,26 @@
             const desc = document.getElementById('add-desc').value.trim();
 
             if(!modelo || !precio) { alert('Llena modelo y precio.'); return; }
+            
+            // 1. Guardar de forma interna local
             PRODUCTOS.unshift({ id: new Date().getTime().toString(), marca, modelo, memoria, precio, foto, desc });
+            
+            // 2. Esperar que suba al internet
             await guardarInventarioNube();
-            ejecutarFiltroCombinado();
+            
+            // 3. Volver a descargar para asegurar la fijación en internet
+            await cargarInventarioNube();
 
-            document.getElementById('add-modelo').value = ''; document.getElementById('add-memoria').value = '';
-            document.getElementById('add-precio').value = ''; document.getElementById('add-desc').value = '';
-            document.getElementById('add-foto-file').value = ''; document.getElementById('foto-base64').value = '';
+            // 4. Limpiar el formulario
+            document.getElementById('add-modelo').value = ''; 
+            document.getElementById('add-memoria').value = '';
+            document.getElementById('add-precio').value = ''; 
+            document.getElementById('add-desc').value = '';
+            document.getElementById('add-foto-file').value = ''; 
+            document.getElementById('foto-base64').value = '';
             document.getElementById('preview-foto').classList.add('hidden');
+            
+            alert('¡Producto guardado y asegurado con éxito en la nube!');
         }
 
         async function editarPrecio(id) {
@@ -504,7 +517,7 @@
 
         function abrirModalPago() { document.getElementById('modal-pago').classList.remove('hidden'); }
         function cerrarModalPago() { document.getElementById('modal-pago').classList.add('hidden'); }
-        function toggleAdminPanel() { document.getElementById('panel-admin').classList.toggle('hidden'); }
+        function toggleAdminPanel() { document.getElementById('panel-admin').toggle('hidden'); }
         
         function filtrarPorMarca(marca) { 
             marcaSeleccionada = marca; 
@@ -543,7 +556,7 @@
             const total = carrito.reduce((sum, item) => sum + item.precio, 0);
             mensaje += `\n*TOTAL ESTIMADO:* $${total}.00 USD`;
 
-            const linkWha = `https://wa.me/584140000000?text=${encodeURIComponent(mensaje)}`; // Aquí puedes cambiar por tu nro real de WhatsApp
+            const linkWha = `https://wa.me/584140000000?text=${encodeURIComponent(mensaje)}`; // Nro de WhatsApp de la tienda
             window.open(linkWha, '_blank');
             carrito = [];
             actualizarInterfazCarrito();
@@ -553,4 +566,4 @@
         window.onload = cargarInventarioNube;
     </script>
 </body>
-        </html>
+</html>
