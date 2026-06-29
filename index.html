@@ -22,7 +22,6 @@
 <body class="pb-32 min-h-screen flex flex-col justify-between">
 
     <div>
-        <!-- ENCABEZADO -->
         <header class="glass-header text-white p-5 sticky top-0 z-40 shadow-xl border-b border-[#00a3e0]/30 max-w-md mx-auto rounded-b-3xl flex justify-between items-center">
             <div class="flex-1 text-center pl-8">
                 <div class="flex items-center justify-center gap-1.5">
@@ -36,17 +35,16 @@
             </button>
         </header>
 
-        <!-- MODAL LOGIN ADMINISTRADOR -->
         <div id="modal-login" class="fixed inset-0 bg-slate-950/80 z-50 flex items-center justify-center hidden p-4 backdrop-blur-sm">
             <div class="bg-white p-6 rounded-2xl w-full max-w-xs space-y-3 shadow-2xl">
                 <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wider text-center">Acceso de Administración</h3>
                 <div>
                     <label class="block text-[11px] font-bold text-slate-500 mb-1">Usuario:</label>
-                    <input type="text" id="admin-user" class="w-full border p-2 rounded-xl text-sm focus:outline-none focus:border-[#00a3e0]">
+                    <input type="text" id="admin-user" class="w-full border border-slate-200 p-2 rounded-xl text-sm focus:outline-none focus:border-[#00a3e0]">
                 </div>
                 <div>
                     <label class="block text-[11px] font-bold text-slate-500 mb-1">Contraseña:</label>
-                    <input type="password" id="admin-pass" class="w-full border p-2 rounded-xl text-sm focus:outline-none focus:border-[#00a3e0]">
+                    <input type="password" id="admin-pass" class="w-full border border-slate-200 p-2 rounded-xl text-sm focus:outline-none focus:border-[#00a3e0]">
                 </div>
                 <div class="flex gap-2 pt-2">
                     <button onclick="cerrarLoginAdmin()" class="w-1/2 bg-slate-100 text-slate-600 p-2 rounded-xl font-bold text-xs">Cancelar</button>
@@ -55,10 +53,9 @@
             </div>
         </div>
 
-        <!-- PANEL DE CONTROL -->
         <div id="panel-admin" class="bg-slate-950 text-slate-100 p-5 hidden max-w-md mx-auto rounded-b-3xl shadow-2xl border-x border-b border-slate-800">
             <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-2">
-                <h3 class="text-xs font-bold uppercase text-amber-400 tracking-wider"><i class="fa-solid fa-database mr-1"></i> Inventario en la Nube</h3>
+                <h3 class="text-xs font-bold uppercase text-amber-400 tracking-wider"><i class="fa-solid fa-folder-open mr-1"></i> Panel de Inventario Tucocel</h3>
                 <button onclick="cerrarSesionAdmin()" class="text-red-400 text-xs bg-red-950/30 px-2 py-1 rounded-lg">Cerrar Sesión ✕</button>
             </div>
             
@@ -83,7 +80,7 @@
                 </div>
                 <div class="grid grid-cols-2 gap-2">
                     <div>
-                        <label class="block font-medium text-slate-400 mb-1">Memoria:</label>
+                        <label class="block font-medium text-slate-400 mb-1">Memoria / Almacenamiento:</label>
                         <input type="text" id="add-memoria" placeholder="Ej. 256GB / 8GB" class="w-full p-2.5 bg-slate-900 border border-slate-800 rounded-xl text-white">
                     </div>
                     <div>
@@ -92,30 +89,27 @@
                     </div>
                 </div>
                 <div class="border border-slate-800 p-3 rounded-xl bg-slate-900/50">
-                    <label class="block font-medium text-slate-400 mb-2">Foto real del equipo:</label>
+                    <label class="block font-medium text-slate-400 mb-2">Foto del equipo:</label>
                     <input type="file" id="add-foto-file" accept="image/*" class="w-full text-xs text-slate-500 cursor-pointer">
                     <input type="hidden" id="foto-base64">
                     <div class="mt-3 flex justify-center"><img id="preview-foto" class="hidden w-20 h-20 object-cover rounded-xl border border-slate-700 shadow-md"></div>
                 </div>
                 <div>
-                    <label class="block font-medium text-slate-400 mb-1">Características:</label>
+                    <label class="block font-medium text-slate-400 mb-1">Características breves:</label>
                     <input type="text" id="add-desc" placeholder="Ej. Cámara 108MP" class="w-full p-2.5 bg-slate-900 border border-slate-800 rounded-xl text-white">
                 </div>
-                <button onclick="guardarProductoNuevo()" id="btn-guardar" class="w-full bg-[#00a3e0] text-white p-3 rounded-xl font-bold mt-2 shadow-lg flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-cloud-arrow-up"></i> Guardar en Servidor Nube
+                <button onclick="guardarProductoNuevo()" class="w-full bg-[#00a3e0] text-white p-3 rounded-xl font-bold mt-2 shadow-lg flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-plus"></i> Añadir al Catálogo
                 </button>
             </div>
         </div>
 
-        <!-- CONTENIDO PRINCIPAL -->
         <main class="p-4 max-w-md mx-auto">
-            <!-- BUSCADOR -->
             <div class="mb-5 relative">
                 <input type="text" id="buscador" onkeyup="filtrarProductos()" placeholder="¿Qué modelo estás buscando hoy?..." class="w-full bg-white p-3.5 pl-11 rounded-2xl shadow-sm border border-slate-200/80 text-sm text-slate-800">
                 <i class="fa-solid fa-magnifying-glass absolute left-4 top-4.5 text-slate-400 text-sm"></i>
             </div>
 
-            <!-- FILTROS POR MARCA -->
             <div class="mb-6">
                 <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-2 px-1">Explorar por Marca</p>
                 <div class="flex gap-2 overflow-x-auto pb-2 no-scrollbar snap-x">
@@ -130,16 +124,12 @@
             </div>
 
             <div class="flex items-center justify-between mb-4 px-1">
-                <h2 class="text-slate-800 font-extrabold text-xs tracking-wider uppercase"><i class="fa-solid fa-layer-group text-[#00a3e0] mr-1"></i> Catálogo de Equipos</h2>
-                <span id="contador-productos" class="text-[10px] bg-blue-50 text-[#00a3e0] font-black px-2.5 py-0.5 rounded-full">Cargando...</span>
+                <h2 class="text-slate-800 font-extrabold text-xs tracking-wider uppercase"><i class="fa-solid fa-layer-group text-[#00a3e0] mr-1"></i> Vitrina de Equipos</h2>
+                <span id="contador-productos" class="text-[10px] bg-blue-50 text-[#00a3e0] font-black px-2.5 py-0.5 rounded-full">0 Disponibles</span>
             </div>
 
-            <!-- CONTENEDOR VITRINA -->
-            <div id="contenedor-productos" class="space-y-4">
-                <p class="text-center text-xs text-slate-400 py-10"><i class="fa-solid fa-spinner fa-spin text-[#00a3e0] mr-2"></i> Sincronizando con la nube...</p>
-            </div>
+            <div id="contenedor-productos" class="space-y-4"></div>
 
-            <!-- RESPALDO COMERCIAL -->
             <div class="mt-8 bg-white border border-slate-100 rounded-2xl p-4 shadow-sm space-y-4">
                 <h4 class="text-xs font-black text-slate-800 uppercase tracking-wider border-b border-slate-100 pb-2"><i class="fa-solid fa-circle-info text-[#00a3e0] mr-1"></i> Servicios Tucocel</h4>
                 <div class="flex items-start gap-3 text-xs"><div class="bg-blue-50 text-[#00a3e0] p-2 rounded-xl mt-0.5"><i class="fa-solid fa-store"></i></div><div><p class="font-bold text-slate-700">Tienda Física Segura</p><p class="text-slate-500 font-light text-[11px]">Todos los pedidos de equipos se retiran y comprueban en nuestro local en Cordero para tu total tranquilidad.</p></div></div>
@@ -157,7 +147,18 @@
         </main>
     </div>
 
-    <!-- MODAL DE REGISTRO PARA CLIENTES -->
+    <div id="barra-carrito" class="fixed bottom-4 left-4 right-4 bg-slate-900/95 backdrop-blur-md text-white p-4 shadow-2xl z-50 hidden max-w-sm mx-auto rounded-2xl border border-slate-800">
+        <div class="flex justify-between items-center">
+            <div>
+                <p class="text-[10px] text-slate-400 tracking-wider font-bold">TU PEDIDO (<span id="cant-articulos">0</span>)</p>
+                <p id="total-carrito" class="text-lg font-black text-emerald-400">$0.00 USD</p>
+            </div>
+            <button onclick="abrirModalPago()" class="bg-[#25D366] text-white px-5 py-3 rounded-xl font-bold text-xs shadow-lg flex items-center gap-2">
+                Continuar <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            </button>
+        </div>
+    </div>
+
     <div id="modal-pago" class="fixed inset-0 bg-slate-950/80 z-50 flex items-end justify-center hidden p-4 backdrop-blur-sm">
         <div class="bg-white w-full max-w-md rounded-t-3xl p-6 space-y-4 max-h-[85vh] overflow-y-auto">
             <div class="flex justify-between items-center border-b border-slate-100 pb-3">
@@ -170,219 +171,6 @@
                     <div><label class="block text-xs font-bold text-slate-600 mb-0.5">Teléfono *</label><input type="tel" id="cliente-telefono" class="w-full border border-slate-200 p-2 rounded-xl text-xs focus:outline-none focus:border-[#00a3e0]" placeholder="Ej. 04147350000"></div>
                     <div><label class="block text-xs font-bold text-slate-600 mb-0.5">Forma de Pago *</label><select id="cliente-pago" class="w-full border border-slate-200 p-2 rounded-xl text-xs focus:outline-none focus:border-[#00a3e0]"><option value="Pago Móvil">🇻🇪 Pago Móvil</option><option value="Binance Pay">🔶 Binance Pay</option><option value="Zinli">🔄 Zinli</option><option value="Nequi">🇨🇴 Nequi</option></select></div>
                 </div>
-                <div><label class="block text-xs font-bold text-slate-600 mb-0.5">Dirección de Habitación *</label><input type="text" id="cliente-direccion" class="w-full border border-slate-200 p-2 rounded-xl text-xs focus:outline-none focus:border-[#00a3e0]" placeholder="Ej. Calle Principal, Casa #4, Cordero"></div>
+                <div><label class="block text-xs font-bold text-slate-600 mb-0.5">Dirección de Entrega *</label><input type="text" id="cliente-direccion" class="w-full border border-slate-200 p-2 rounded-xl text-xs focus:outline-none focus:border-[#00a3e0]" placeholder="Ej. Calle Principal, Casa #4, Cordero"></div>
             </div>
-            <button onclick="enviarPedidoWhatsApp()" class="w-full bg-[#25D366] text-white p-3.5 rounded-xl font-bold flex items-center justify-center gap-2 text-sm shadow-xl">
-                <i class="fa-brands fa-whatsapp text-base"></i> Confirmar y Enviar Pedido
-            </button>
-        </div>
-    </div>
-
-    <!-- MOTOR LÓGICO COMPLETO Y CORREGIDO -->
-    <script>
-        const ADMIN_USER = "tucocel";
-        const ADMIN_PASS = "admin123"; 
-
-        const NUBE_API_URL = "https://api.jsonbin.io/v3/b/667f40cfacd3cb34a85ee3f4";
-        const NUBE_KEY = "$2a$10$vWfPqAWh8pCghh8wU/T.ueM5h2O6W8XfWp6Pbe/9hL/B3Iq.mC76m";
-
-        let PRODUCTOS = [];
-        let carrito = [];
-        let marcaSeleccionada = 'Todas';
-        let esAdminAutenticado = false;
-
-        document.getElementById('add-foto-file').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                const img = new Image();
-                img.onload = function() {
-                    const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d');
-                    canvas.width = 250; canvas.height = 250;
-                    ctx.drawImage(img, 0, 0, 250, 250);
-                    const base64Ligero = canvas.toDataURL('image/jpeg', 0.6);
-                    document.getElementById('foto-base64').value = base64Ligero;
-                    const preview = document.getElementById('preview-foto');
-                    preview.src = base64Ligero; preview.classList.remove('hidden');
-                };
-                img.src = event.target.result;
-            };
-            reader.readAsDataURL(file);
-        });
-
-        async function cargarInventarioNube() {
-            try {
-                const res = await fetch(NUBE_API_URL + "/latest", {
-                    headers: { "X-Master-Key": NUBE_KEY }
-                });
-                const data = await res.json();
-                PRODUCTOS = data.record || [];
-                ejecutarFiltroCombinado();
-            } catch (e) {
-                document.getElementById('contenedor-productos').innerHTML = "<p class='text-center text-xs text-red-400 py-10'>⚠️ Error de conexión. El botón de login (escudo) sigue disponible.</p>";
-            }
-        }
-
-        async function guardarInventarioNube() {
-            const btn = document.getElementById('btn-guardar');
-            if(btn) { btn.disabled = true; btn.innerText = "⏳ Sincronizando Nube..."; }
-            try {
-                await fetch(NUBE_API_URL, {
-                    method: "PUT",
-                    headers: { "Content-Type": "application/json", "X-Master-Key": NUBE_KEY },
-                    body: JSON.stringify(PRODUCTOS)
-                });
-            } catch (e) {
-                alert("Error al guardar en la nube.");
-            } finally {
-                if(btn) { btn.disabled = false; btn.innerText = "Guardar en Servidor Nube"; }
-            }
-        }
-
-        function ejecutarFiltroCombinado() {
-            const textoBuscador = document.getElementById('buscador').value.toLowerCase();
-            const filtrados = PRODUCTOS.filter(p => {
-                const coincideMarca = (marcaSeleccionada === 'Todas' || p.marca.toLowerCase() === marcaSeleccionada.toLowerCase());
-                const coincideTexto = p.modelo.toLowerCase().includes(textoBuscador) || p.marca.toLowerCase().includes(textoBuscador);
-                return coincideMarca && coincideTexto;
-            });
-            renderizarCatalogoHTML(filtrados);
-        }
-
-        function renderizarCatalogoHTML(lista) {
-            const contenedor = document.getElementById('contenedor-productos');
-            document.getElementById('contador-productos').innerText = `${lista.length} ${lista.length === 1 ? 'Disponible' : 'Disponibles'}`;
-            
-            if(lista.length === 0) { 
-                contenedor.innerHTML = '<div class="text-center py-12 text-slate-400 text-sm">No hay stock disponible.</div>'; 
-                return; 
-            }
-            
-            contenedor.innerHTML = '';
-            lista.forEach(prod => {
-                const fotoProd = prod.foto || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=200&auto=format&fit=crop&q=60';
-                const botonesEdicion = esAdminAutenticado ? `
-                    <button onclick="editarPrecio('${prod.id}')" class="text-blue-500 text-xs p-1 mt-1"><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button onclick="eliminarProducto('${prod.id}')" class="text-slate-300 hover:text-red-500 text-xs p-1"><i class="fa-solid fa-trash-can"></i></button>
-                ` : '';
-
-                contenedor.innerHTML += `
-                    <div class="bg-white rounded-2xl p-3.5 border border-slate-100 shadow-sm flex gap-3.5 items-center transition-all">
-                        <img src="${fotoProd}" class="w-20 h-20 object-cover rounded-xl bg-slate-50 border border-slate-100" onerror="this.src='https://via.placeholder.com/150'">
-                        <div class="flex-1 min-w-0">
-                            <span class="text-[9px] font-extrabold text-[#00a3e0] uppercase tracking-wider bg-blue-50/80 px-2 py-0.5 rounded-md inline-block mb-1">${prod.marca}</span>
-                            <h3 class="font-bold text-slate-800 text-sm truncate">${prod.modelo}</h3>
-                            <p class="text-[10px] text-slate-400 font-medium">${prod.memoria}</p>
-                            <p class="text-[11px] text-slate-500 font-light line-clamp-1 mt-0.5">${prod.desc}</p>
-                            <div class="flex items-baseline gap-1 mt-1.5">
-                                <span class="text-base font-black text-slate-900">$${prod.precio}</span> <span class="text-[9px] text-slate-400 font-bold">USD</span>
-                            </div>
-                        </div>
-                        <div class="flex flex-col items-center gap-2 pl-1 border-l border-slate-50">
-                            <button onclick="agregarAlCarrito('${prod.id}', this)" class="bg-slate-900 text-white w-9 h-9 rounded-xl flex items-center justify-center hover:bg-[#00a3e0] shadow-md">
-                                <i class="fa-solid fa-plus text-xs"></i>
-                            </button>
-                            ${botonesEdicion}
-                        </div>
-                    </div>`;
-            });
-        }
-
-        function abrirLoginAdmin() { 
-            if(esAdminAutenticado) { 
-                toggleAdminPanel(); 
-            } else { 
-                document.getElementById('modal-login').classList.remove('hidden'); 
-            }
-        }
-        function cerrarLoginAdmin() { document.getElementById('modal-login').classList.add('hidden'); }
-        
-        function autenticarAdmin() {
-            const user = document.getElementById('admin-user').value.trim();
-            const pass = document.getElementById('admin-pass').value.trim();
-            if(user === ADMIN_USER && pass === ADMIN_PASS) {
-                esAdminAutenticado = true;
-                cerrarLoginAdmin();
-                document.getElementById('panel-admin').classList.remove('hidden');
-                ejecutarFiltroCombinado();
-            } else {
-                alert('Usuario o contraseña incorrectos.');
-            }
-        }
-
-        function cerrarSesionAdmin() {
-            esAdminAutenticado = false;
-            document.getElementById('panel-admin').classList.add('hidden');
-            ejecutarFiltroCombinado();
-        }
-
-        async function guardarProductoNuevo() {
-            const marca = document.getElementById('add-marca').value;
-            const modelo = document.getElementById('add-modelo').value.trim();
-            const memoria = document.getElementById('add-memoria').value.trim();
-            const precio = parseInt(document.getElementById('add-precio').value.trim()) || 0;
-            const foto = document.getElementById('foto-base64').value;
-            const desc = document.getElementById('add-desc').value.trim();
-
-            if(!modelo || !precio) { alert('Llena modelo y precio.'); return; }
-
-            PRODUCTOS.unshift({ id: new Date().getTime().toString(), marca, modelo, memoria, precio, foto, desc });
-            await guardarInventarioNube();
-            ejecutarFiltroCombinado();
-
-            document.getElementById('add-modelo').value = ''; document.getElementById('add-memoria').value = '';
-            document.getElementById('add-precio').value = ''; document.getElementById('add-desc').value = '';
-            document.getElementById('add-foto-file').value = ''; document.getElementById('foto-base64').value = '';
-            document.getElementById('preview-foto').classList.add('hidden');
-        }
-
-        async function editarPrecio(id) {
-            const producto = PRODUCTOS.find(p => p.id === id);
-            if(!producto) return;
-            const nuevoPrecio = prompt(`Modificar precio para ${producto.modelo}:`, producto.precio);
-            if(nuevoPrecio !== null && !isNaN(nuevoPrecio) && nuevoPrecio.trim() !== '') {
-                producto.precio = parseInt(nuevoPrecio);
-                await guardarInventarioNube();
-                ejecutarFiltroCombinado();
-            }
-        }
-
-        async function eliminarProducto(id) {
-            if(confirm('¿Deseas borrar el producto de la nube?')) {
-                PRODUCTOS = PRODUCTOS.filter(p => p.id !== id);
-                await guardarInventarioNube();
-                ejecutarFiltroCombinado();
-            }
-        }
-
-        function agregarAlCarrito(id, boton) {
-            const item = PRODUCTOS.find(p => p.id === id);
-            if(!item) return;
-            carrito.push(item);
-            actualizarInterfazCarrito();
-            boton.className = "bg-emerald-500 text-white w-9 h-9 rounded-xl flex items-center justify-center";
-            boton.innerHTML = '<i class="fa-solid fa-check text-xs"></i>';
-            setTimeout(() => { boton.className = "bg-slate-900 text-white w-9 h-9 rounded-xl flex items-center justify-center hover:bg-[#00a3e0]"; boton.innerHTML = '<i class="fa-solid fa-plus text-xs"></i>'; }, 1000);
-        }
-
-        function actualizarInterfazCarrito() {
-            const barra = document.getElementById('barra-carrito');
-            if(carrito.length === 0) { barra.classList.add('hidden'); return; }
-            const total = carrito.reduce((sum, item) => sum + item.precio, 0);
-            document.getElementById('total-carrito').innerText = `$${total}.00 USD`;
-            document.getElementById('cant-articulos').innerText = carrito.length;
-            barra.classList.remove('hidden');
-        }
-
-        function abrirModalPago() { document.getElementById('modal-pago').classList.remove('hidden'); }
-        function cerrarModalPago() { document.getElementById('modal-pago').classList.add('hidden'); }
-        function toggleAdminPanel() { document.getElementById('panel-admin').classList.toggle('hidden'); }
-        function filtrarPorMarca(marca) { marcaSeleccionada = marca; const botones = document.querySelectorAll('.marca-btn'); botones.forEach(btn => { if (btn.innerText.includes(marca)) { btn.className = "marca-btn snap-start shrink-0 bg-[#001935] text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm"; } else { btn.className = "marca-btn snap-start shrink-0 bg-white text-slate-700 border border-slate-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm"; } }); ejecutarFiltroCombinado(); }
-        function filtrarProductos() { ejecutarFiltroCombinado(); }
-
-        function enviarPedidoWhatsApp() {
-            const nombre = document.getElementById('cliente-nombre').value.trim();
-            const telefono = document.getElementById('cliente-telefono').value.trim();
-            const pago = documentNormally I can help with things like this, but I don't seem to have access to that content. You can try again or ask me for something else.
+            <button onclick="enviarPedidoWhatsApp()" class="w-full bg-[#25D366] text-white
