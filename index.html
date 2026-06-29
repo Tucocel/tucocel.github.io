@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tucocel C.A. - Smart Vitrina</title>
+    <title>Tucocel C.A. - Smart Vitrina v2</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -22,7 +22,7 @@
 <body class="pb-32 min-h-screen flex flex-col justify-between">
 
     <div>
-        <!-- ENCABEZADO PREMIUM -->
+        <!-- ENCABEZADO -->
         <header class="glass-header text-white p-5 sticky top-0 z-40 shadow-xl border-b border-[#00a3e0]/30 max-w-md mx-auto rounded-b-3xl flex justify-between items-center">
             <div class="flex-1 text-center pl-8">
                 <div class="flex items-center justify-center gap-1.5">
@@ -30,25 +30,44 @@
                     <h1 class="text-xl font-black tracking-widest text-white">TUCOCEL C.A.</h1>
                 </div>
                 <p class="text-[10px] text-[#00a3e0] uppercase tracking-widest font-black mt-0.5">Agente Autorizado Movistar</p>
-                <p class="text-[10px] text-slate-400 mt-1 font-light"><i class="fa-solid fa-location-dot text-[#00a3e0] mr-1"></i> Av. Bolívar entre 12 y 13, Cordero</p>
             </div>
-            <button onclick="toggleAdminPanel()" class="text-slate-400 hover:text-[#00a3e0] transition-colors p-2 text-base">
-                <i class="fa-solid fa-sliders"></i>
+            <!-- Botón de Acceso para el Administrador -->
+            <button onclick="abrirLoginAdmin()" class="text-slate-400 hover:text-[#00a3e0] transition-colors p-2 text-base">
+                <i class="fa-solid fa-user-shield"></i>
             </button>
         </header>
 
-        <!-- PANEL DE ADMINISTRADOR -->
+        <!-- MODAL LOGIN ADMINISTRADOR -->
+        <div id="modal-login" class="fixed inset-0 bg-slate-950/80 z-50 flex items-center justify-center hidden p-4 backdrop-blur-sm">
+            <div class="bg-white p-6 rounded-2xl w-full max-w-xs space-y-3 shadow-2xl">
+                <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wider text-center">Acceso de Administración</h3>
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-500 mb-1">Usuario:</label>
+                    <input type="text" id="admin-user" class="w-full border border-slate-200 p-2 rounded-xl text-sm focus:outline-none focus:border-[#00a3e0]">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-500 mb-1">Contraseña:</label>
+                    <input type="password" id="admin-pass" class="w-full border border-slate-200 p-2 rounded-xl text-sm focus:outline-none focus:border-[#00a3e0]">
+                </div>
+                <div class="flex gap-2 pt-2">
+                    <button onclick="cerrarLoginAdmin()" class="w-1/2 bg-slate-100 text-slate-600 p-2 rounded-xl font-bold text-xs">Cancelar</button>
+                    <button onclick="autenticarAdmin()" class="w-1/2 bg-[#00a3e0] text-white p-2 rounded-xl font-bold text-xs shadow-md">Entrar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL DE CONTROL (SÓLO ADMITS TRAS LOGUEARSE) -->
         <div id="panel-admin" class="bg-slate-950 text-slate-100 p-5 hidden max-w-md mx-auto rounded-b-3xl shadow-2xl border-x border-b border-slate-800">
             <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-2">
-                <h3 class="text-xs font-bold uppercase text-amber-400 tracking-wider"><i class="fa-solid fa-database mr-1"></i> Control de Inventario</h3>
-                <button onclick="toggleAdminPanel()" class="text-slate-400 text-xs bg-slate-900 px-2.5 py-1 rounded-lg hover:bg-slate-800">Cerrar</button>
+                <h3 class="text-xs font-bold uppercase text-amber-400 tracking-wider"><i class="fa-solid fa-database mr-1"></i> Inventario Global en la Nube</h3>
+                <button onclick="cerrarSesionAdmin()" class="text-red-400 text-xs bg-red-950/30 px-2 py-1 rounded-lg">Salir ✕</button>
             </div>
             
             <div class="space-y-3 text-xs">
                 <div class="grid grid-cols-2 gap-2">
                     <div>
                         <label class="block font-medium text-slate-400 mb-1">Marca:</label>
-                        <select id="add-marca" class="w-full p-2.5 bg-slate-900 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-[#00a3e0]">
+                        <select id="add-marca" class="w-full p-2.5 bg-slate-900 border border-slate-800 rounded-xl text-white">
                             <option value="Tecno">Tecno</option>
                             <option value="Infinix">Infinix</option>
                             <option value="Samsung">Samsung</option>
@@ -60,121 +79,101 @@
                     </div>
                     <div>
                         <label class="block font-medium text-slate-400 mb-1">Modelo:</label>
-                        <input type="text" id="add-modelo" placeholder="Ej. Spark 20 Pro" class="w-full p-2.5 bg-slate-900 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-[#00a3e0]">
+                        <input type="text" id="add-modelo" placeholder="Ej. Spark 20 Pro" class="w-full p-2.5 bg-slate-900 border border-slate-800 rounded-xl text-white">
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-2">
                     <div>
                         <label class="block font-medium text-slate-400 mb-1">Memoria / Almacenamiento:</label>
-                        <input type="text" id="add-memoria" placeholder="Ej. 256GB / 8GB" class="w-full p-2.5 bg-slate-900 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-[#00a3e0]">
+                        <input type="text" id="add-memoria" placeholder="Ej. 256GB / 8GB" class="w-full p-2.5 bg-slate-900 border border-slate-800 rounded-xl text-white">
                     </div>
                     <div>
                         <label class="block font-medium text-slate-400 mb-1">Precio ($ USD):</label>
-                        <input type="number" id="add-precio" placeholder="Ej. 150" class="w-full p-2.5 bg-slate-900 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-[#00a3e0]">
+                        <input type="number" id="add-precio" placeholder="Ej. 150" class="w-full p-2.5 bg-slate-900 border border-slate-800 rounded-xl text-white">
                     </div>
                 </div>
-                
                 <div class="border border-slate-800 p-3 rounded-xl bg-slate-900/50">
                     <label class="block font-medium text-slate-400 mb-2">Foto real del equipo:</label>
-                    <input type="file" id="add-foto-file" accept="image/*" class="w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-[#00a3e0]/20 file:text-[#00a3e0] cursor-pointer">
+                    <input type="file" id="add-foto-file" accept="image/*" class="w-full text-xs text-slate-500 cursor-pointer">
                     <input type="hidden" id="foto-base64">
-                    <div class="mt-3 flex justify-center">
-                        <img id="preview-foto" class="hidden w-20 h-20 object-cover rounded-xl border border-slate-700 shadow-md">
-                    </div>
+                    <div class="mt-3 flex justify-center"><img id="preview-foto" class="hidden w-20 h-20 object-cover rounded-xl border border-slate-700 shadow-md"></div>
                 </div>
-
                 <div>
-                    <label class="block font-medium text-slate-400 mb-1">Características (Cámara, Batería, etc):</label>
-                    <input type="text" id="add-desc" placeholder="Ej. Cámara 108MP, Turbo Carga" class="w-full p-2.5 bg-slate-900 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-[#00a3e0]">
+                    <label class="block font-medium text-slate-400 mb-1">Características breves:</label>
+                    <input type="text" id="add-desc" placeholder="Ej. Cámara 108MP" class="w-full p-2.5 bg-slate-900 border border-slate-800 rounded-xl text-white">
                 </div>
-                <button onclick="guardarProductoNuevo()" class="w-full bg-[#00a3e0] text-white p-3 rounded-xl font-bold mt-2 shadow-lg shadow-[#00a3e0]/20 hover:bg-[#008ec4] transition-all flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-plus-circle"></i> Publicar en Vitrina
+                <button onclick="guardarProductoNuevo()" id="btn-guardar" class="w-full bg-[#00a3e0] text-white p-3 rounded-xl font-bold mt-2 shadow-lg flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Guardar en Servidor Nube
                 </button>
             </div>
         </div>
 
         <!-- CONTENIDO PRINCIPAL -->
         <main class="p-4 max-w-md mx-auto">
-            
-            <!-- BANNER DE BIENVENIDA EMPRESARIAL -->
-            <div class="mb-5 bg-gradient-to-br from-[#001935] to-[#003366] text-white p-4 rounded-2xl shadow-md relative overflow-hidden border border-[#00a3e0]/20">
-                <div class="relative z-10">
-                    <span class="text-[9px] bg-[#00a3e0] text-white font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider">Garantía Oficial</span>
-                    <h2 class="text-base font-black mt-1">Equipos Nuevos y Sellados</h2>
-                    <p class="text-[11px] text-slate-300 font-light mt-0.5">Retira directo en nuestro local. Recibimos múltiples métodos de pago.</p>
-                </div>
-                <i class="fa-solid fa-shield-halved absolute -right-4 -bottom-4 text-7xl text-white/5 pointer-events-none"></i>
-            </div>
-
-            <!-- BUSCADOR PREMIUM -->
+            <!-- BUSCADOR -->
             <div class="mb-5 relative">
-                <input type="text" id="buscador" onkeyup="filtrarProductos()" placeholder="¿Qué modelo estás buscando hoy?..." class="w-full bg-white p-3.5 pl-11 rounded-2xl shadow-sm border border-slate-200/80 focus:outline-none focus:border-[#00a3e0] text-sm text-slate-800 transition-all">
+                <input type="text" id="buscador" onkeyup="filtrarProductos()" placeholder="¿Qué modelo estás buscando hoy?..." class="w-full bg-white p-3.5 pl-11 rounded-2xl shadow-sm border border-slate-200/80 text-sm text-slate-800">
                 <i class="fa-solid fa-magnifying-glass absolute left-4 top-4.5 text-slate-400 text-sm"></i>
             </div>
 
-            <!-- FILTROS INTERACTIVOS POR MARCA -->
+            <!-- FILTROS POR MARCA -->
             <div class="mb-6">
                 <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-2 px-1">Explorar por Marca</p>
                 <div class="flex gap-2 overflow-x-auto pb-2 no-scrollbar snap-x">
-                    <button onclick="filtrarPorMarca('Todas')" class="marca-btn snap-start shrink-0 bg-[#001935] text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all">Todas</button>
-                    <button onclick="filtrarPorMarca('Tecno')" class="marca-btn snap-start shrink-0 bg-white text-slate-700 border border-slate-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">⚡ Tecno</button>
-                    <button onclick="filtrarPorMarca('Infinix')" class="marca-btn snap-start shrink-0 bg-white text-slate-700 border border-slate-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">🟢 Infinix</button>
-                    <button onclick="filtrarPorMarca('Samsung')" class="marca-btn snap-start shrink-0 bg-white text-slate-700 border border-slate-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">🪐 Samsung</button>
-                    <button onclick="filtrarPorMarca('Honor')" class="marca-btn snap-start shrink-0 bg-white text-slate-700 border border-slate-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">👑 Honor</button>
-                    <button onclick="filtrarPorMarca('Motorola')" class="marca-btn snap-start shrink-0 bg-white text-slate-700 border border-slate-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">🦇 Motorola</button>
-                    <button onclick="filtrarPorMarca('Xiaomi')" class="marca-btn snap-start shrink-0 bg-white text-slate-700 border border-slate-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">🟠 Xiaomi</button>
+                    <button onclick="filtrarPorMarca('Todas')" class="marca-btn snap-start shrink-0 bg-[#001935] text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm">Todas</button>
+                    <button onclick="filtrarPorMarca('Tecno')" class="marca-btn snap-start shrink-0 bg-white text-slate-700 border border-slate-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm">⚡ Tecno</button>
+                    <button onclick="filtrarPorMarca('Infinix')" class="marca-btn snap-start shrink-0 bg-white text-slate-700 border border-slate-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm">🟢 Infinix</button>
+                    <button onclick="filtrarPorMarca('Samsung')" class="marca-btn snap-start shrink-0 bg-white text-slate-700 border border-slate-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm">🪐 Samsung</button>
+                    <button onclick="filtrarPorMarca('Honor')" class="marca-btn snap-start shrink-0 bg-white text-slate-700 border border-slate-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm">👑 Honor</button>
+                    <button onclick="filtrarPorMarca('Motorola')" class="marca-btn snap-start shrink-0 bg-white text-slate-700 border border-slate-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm">🦇 Motorola</button>
+                    <button onclick="filtrarPorMarca('Xiaomi')" class="marca-btn snap-start shrink-0 bg-white text-slate-700 border border-slate-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm">🟠 Xiaomi</button>
                 </div>
             </div>
 
-            <!-- TITULO DE VITRINA -->
             <div class="flex items-center justify-between mb-4 px-1">
-                <h2 class="text-slate-800 font-extrabold text-xs tracking-wider uppercase flex items-center gap-2">
-                    <i class="fa-solid fa-layer-group text-[#00a3e0]"></i> Catálogo de Equipos
-                </h2>
-                <span id="contador-productos" class="text-[10px] bg-blue-50 text-[#00a3e0] font-black px-2.5 py-0.5 rounded-full">0 Disponibles</span>
+                <h2 class="text-slate-800 font-extrabold text-xs tracking-wider uppercase"><i class="fa-solid fa-layer-group text-[#00a3e0] mr-1"></i> Catálogo de Equipos</h2>
+                <span id="contador-productos" class="text-[10px] bg-blue-50 text-[#00a3e0] font-black px-2.5 py-0.5 rounded-full">Cargando...</span>
             </div>
 
-            <!-- CONTENEDOR DE TARJETAS MODERNA -->
+            <!-- CONTENEDOR VITRINA -->
             <div id="contenedor-productos" class="space-y-4"></div>
 
-            <!-- SECCIÓN INFORMATIVA DE RESPALDO COMERCIAL -->
+            <!-- RESPALDO COMERCIAL -->
             <div class="mt-8 bg-white border border-slate-100 rounded-2xl p-4 shadow-sm space-y-4">
-                <h4 class="text-xs font-black text-slate-800 uppercase tracking-wider border-b border-slate-100 pb-2"><i class="fa-solid fa-circle-info text-[#00a3e0] mr-1"></i> Información de Compra</h4>
+                <h4 class="text-xs font-black text-slate-800 uppercase tracking-wider border-b border-slate-100 pb-2"><i class="fa-solid fa-circle-info text-[#00a3e0] mr-1"></i> Servicios Tucocel</h4>
+                
                 <div class="flex items-start gap-3 text-xs">
                     <div class="bg-blue-50 text-[#00a3e0] p-2 rounded-xl mt-0.5"><i class="fa-solid fa-store"></i></div>
                     <div>
                         <p class="font-bold text-slate-700">Tienda Física Segura</p>
-                        <p class="text-slate-500 font-light text-[11px]">Todos los pedidos se retiran y comprueban en nuestro local en Cordero para tu total tranquilidad.</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-3 text-xs border-b border-slate-50 pb-3">
-                    <div class="bg-emerald-50 text-emerald-500 p-2 rounded-xl mt-0.5"><i class="fa-solid fa-calculator"></i></div>
-                    <div>
-                        <p class="font-bold text-slate-700">Tasa Oficial</p>
-                        <p class="text-slate-500 font-light text-[11px]">Los pagos recibidos en Bolívares se calculan estrictamente bajo la tasa oficial vigente del BCV.</p>
+                        <p class="text-slate-500 font-light text-[11px]">Todos los pedidos de equipos se retiran y comprueban en nuestro local en Cordero para tu total tranquilidad.</p>
                     </div>
                 </div>
 
-                <!-- NUEVA SECCIÓN COMPONENTES VISUALES DE MEDIOS DE PAGO -->
+                <div class="flex items-start gap-3 text-xs border-b border-slate-50 pb-4">
+                    <div class="bg-[#001935] text-[#00a3e0] p-2 rounded-xl mt-0.5"><i class="fa-solid fa-laptop-medical"></i></div>
+                    <div>
+                        <p class="font-bold text-slate-700">Soporte Técnico y Accesorios</p>
+                        <p class="text-slate-500 font-light text-[11px]">También puedes conseguir accesorios para teléfonos y computación. Ofrecemos **Servicio Técnico especializado** para teléfonos, computadoras, laptops e impresoras.</p>
+                    </div>
+                </div>
+
+                <!-- MEDIOS DE PAGO -->
                 <div class="pt-1 text-center">
                     <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-3">Métodos de Pago Aceptados</p>
                     <div class="grid grid-cols-4 gap-2">
-                        <!-- Pago Móvil -->
                         <div class="bg-slate-50 border border-slate-100 rounded-xl p-2.5 flex flex-col items-center justify-center">
                             <span class="text-lg text-red-600 font-black"><i class="fa-solid fa-building-columns"></i></span>
                             <span class="text-[8px] font-black text-slate-600 mt-1 uppercase text-center leading-tight">Pago<br>Móvil</span>
                         </div>
-                        <!-- Binance USDT -->
                         <div class="bg-slate-50 border border-slate-100 rounded-xl p-2.5 flex flex-col items-center justify-center">
                             <span class="text-lg text-amber-500 font-black"><i class="fa-solid fa-coins"></i></span>
                             <span class="text-[8px] font-black text-slate-600 mt-1 uppercase text-center leading-tight">Binance<br>USDT</span>
                         </div>
-                        <!-- Zinli -->
                         <div class="bg-slate-50 border border-slate-100 rounded-xl p-2.5 flex flex-col items-center justify-center">
                             <span class="text-lg text-purple-600 font-black"><i class="fa-solid fa-wallet"></i></span>
                             <span class="text-[8px] font-black text-slate-600 mt-1 uppercase text-center leading-tight">Zinli<br>USD</span>
                         </div>
-                        <!-- Nequi -->
                         <div class="bg-slate-50 border border-slate-100 rounded-xl p-2.5 flex flex-col items-center justify-center">
                             <span class="text-lg text-fuchsia-700 font-black"><i class="fa-solid fa-money-bill-transfer"></i></span>
                             <span class="text-[8px] font-black text-slate-600 mt-1 uppercase text-center leading-tight">Nequi<br>COP</span>
@@ -185,13 +184,9 @@
         </main>
     </div>
 
-    <!-- PIE DE PÁGINA EXCLUSIVO AGENCIA -->
+    <!-- PIE DE PÁGINA -->
     <footer class="text-center py-6 px-4 border-t border-slate-200/60 mt-12 max-w-md mx-auto">
-        <p class="text-[9px] uppercase tracking-widest text-slate-400 font-bold">Garantía y Respaldos Tucocel</p>
-        <div class="mt-1.5 text-[11px] text-slate-500 font-medium">
-            Web desarrollada por <a href="#" class="text-[#00a3e0] font-bold hover:underline">@publionlinemk</a>
-        </div>
-        <p class="text-[9px] text-slate-400 mt-0.5">Agencia de Publicidad de Tucocel C.A.</p>
+        <div class="text-[11px] text-slate-500 font-medium">Web desarrollada por <a href="#" class="text-[#00a3e0] font-bold">@publionlinemk</a></div>
     </footer>
 
     <!-- BANNER DE CARRITO -->
@@ -207,41 +202,61 @@
         </div>
     </div>
 
-    <!-- MODAL DE CHECKOUT -->
+    <!-- MODAL DE REGISTRO OBLIGATORIO PARA CLIENTES -->
     <div id="modal-pago" class="fixed inset-0 bg-slate-950/80 z-50 flex items-end justify-center hidden p-4 backdrop-blur-sm">
         <div class="bg-white w-full max-w-md rounded-t-3xl p-6 space-y-4 max-h-[85vh] overflow-y-auto">
             <div class="flex justify-between items-center border-b border-slate-100 pb-3">
-                <h3 class="text-base font-bold text-slate-800">Completar Pedido</h3>
-                <button onclick="cerrarModalPago()" class="text-slate-400 text-lg hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+                <h3 class="text-base font-bold text-slate-800">Registro de Compra</h3>
+                <button onclick="cerrarModalPago()" class="text-slate-400 text-lg"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-xs text-slate-700">
-                <p class="font-bold text-slate-400 mb-1.5 uppercase tracking-wider text-[10px]">Resumen de compra:</p>
-                <div id="lista-resumen" class="space-y-1 font-medium"></div>
-            </div>
-            <div>
-                <label class="block text-xs font-bold text-slate-600 mb-1">Nombre del Cliente:</label>
-                <input type="text" id="nombre-cliente" class="w-full border border-slate-200 p-2.5 rounded-xl text-sm focus:outline-none focus:border-[#00a3e0]" placeholder="Ej. Juan Díaz">
-            </div>
-            <div>
-                <label class="block text-xs font-bold text-slate-600 mb-2">Forma de Pago:</label>
-                <div class="space-y-2 text-xs font-semibold text-slate-700">
-                    <label class="flex items-center gap-3 p-3 border border-slate-100 rounded-xl bg-slate-50/50"><input type="radio" name="pago" value="Binance Pay" checked class="accent-[#00a3e0]"> 🔶 Binance Pay (USDT)</label>
-                    <label class="flex items-center gap-3 p-3 border border-slate-100 rounded-xl bg-slate-50/50"><input type="radio" name="pago" value="Zinli" class="accent-[#00a3e0]"> 🔄 Zinli (USD)</label>
-                    <label class="flex items-center gap-3 p-3 border border-slate-100 rounded-xl bg-slate-50/50"><input type="radio" name="pago" value="Pago Móvil" class="accent-[#00a3e0]"> 🇻🇪 Pago Móvil (Tasa Oficial)</label>
-                    <label class="flex items-center gap-3 p-3 border border-slate-100 rounded-xl bg-slate-50/50"><input type="radio" name="pago" value="Nequi" class="accent-[#00a3e0]"> 🇨🇴 Nequi (Colombia)</label>
+            
+            <div class="space-y-2.5 border-b pb-4 border-slate-100">
+                <p class="text-[10px] font-black text-slate-400 uppercase tracking-wider">Completa tus datos para procesar el pedido:</p>
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 mb-0.5">Nombre y Apellido *</label>
+                    <input type="text" id="cliente-nombre" class="w-full border border-slate-200 p-2 rounded-xl text-xs focus:outline-none focus:border-[#00a3e0]" placeholder="Ej. Juan Pérez">
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 mb-0.5">Teléfono de Contacto *</label>
+                        <input type="tel" id="cliente-telefono" class="w-full border border-slate-200 p-2 rounded-xl text-xs focus:outline-none focus:border-[#00a3e0]" placeholder="Ej. 04147350000">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 mb-0.5">Forma de Pago *</label>
+                        <select id="cliente-pago" class="w-full border border-slate-200 p-2 rounded-xl text-xs focus:outline-none focus:border-[#00a3e0]">
+                            <option value="Pago Móvil">🇻🇪 Pago Móvil</option>
+                            <option value="Binance Pay">🔶 Binance Pay</option>
+                            <option value="Zinli">🔄 Zinli</option>
+                            <option value="Nequi">🇨🇴 Nequi</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 mb-0.5">Dirección de Entrega / Habitación *</label>
+                    <input type="text" id="cliente-direccion" class="w-full border border-slate-200 p-2 rounded-xl text-xs focus:outline-none focus:border-[#00a3e0]" placeholder="Ej. Calle Principal, Casa #4, Cordero">
                 </div>
             </div>
-            <button onclick="enviarPedidoWhatsApp()" class="w-full bg-[#25D366] text-white p-3.5 rounded-xl font-bold flex items-center justify-center gap-2 text-sm">
-                <i class="fa-brands fa-whatsapp text-base"></i> Confirmar vía WhatsApp
+
+            <button onclick="enviarPedidoWhatsApp()" class="w-full bg-[#25D366] text-white p-3.5 rounded-xl font-bold flex items-center justify-center gap-2 text-sm shadow-xl shadow-green-500/10">
+                <i class="fa-brands fa-whatsapp text-base"></i> Confirmar y Enviar Pedido
             </button>
         </div>
     </div>
 
-    <!-- MOTOR LÓGICO INTEGRADO -->
+    <!-- MOTOR LÓGICO NUBE CENTRALIZADO -->
     <script>
+        // 🔐 TUS CREDENCIALES FIJAS DE ADMINISTRACIÓN
+        const ADMIN_USER = "tucocel";
+        const ADMIN_PASS = "admin123"; 
+
+        // Base de datos global en la nube de Google (JSONBin corporativo)
+        const NUBE_API_URL = "https://api.jsonbin.io/v3/b/667f40cfacd3cb34a85ee3f4";
+        const NUBE_KEY = "$2a$10$vWfPqAWh8pCghh8wU/T.ueM5h2O6W8XfWp6Pbe/9hL/B3Iq.mC76m";
+
         let PRODUCTOS = [];
         let carrito = [];
         let marcaSeleccionada = 'Todas';
+        let esAdminAutenticado = false;
 
         document.getElementById('add-foto-file').addEventListener('change', function(e) {
             const file = e.target.files[0];
@@ -252,32 +267,50 @@
                 img.onload = function() {
                     const canvas = document.createElement('canvas');
                     const ctx = canvas.getContext('2d');
-                    const MAX_WIDTH = 300;
-                    const MAX_HEIGHT = 300;
-                    let width = img.width;
-                    let height = img.height;
+                    const MAX_WIDTH = 250; const MAX_HEIGHT = 250;
+                    let width = img.width; let height = img.height;
                     if (width > height) { if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; } } 
                     else { if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; } }
                     canvas.width = width; canvas.height = height;
                     ctx.drawImage(img, 0, 0, width, height);
-                    const base64Ligero = canvas.toDataURL('image/jpeg', 0.7);
-                    document.getElementById('foto-base64').value = base64Ligero;
+                    document.getElementById('foto-base64').value = canvas.toDataURL('image/jpeg', 0.6);
                     const preview = document.getElementById('preview-foto');
-                    preview.src = base64Ligero; preview.classList.remove('hidden');
+                    preview.src = canvas.toDataURL('image/jpeg', 0.6); preview.classList.remove('hidden');
                 };
                 img.src = event.target.result;
             };
             reader.readAsDataURL(file);
         });
 
-        function cargarInventarioLocal() {
-            const guardado = localStorage.getItem('tucocel_premium_inv');
-            PRODUCTOS = guardado ? JSON.parse(guardado) : [];
-            ejecutarFiltroCombinado();
+        // OBTENER STOCK DESDE LA NUBE AL ENTRAR
+        async function cargarInventarioNube() {
+            try {
+                const res = await fetch(NUBE_API_URL + "/latest", {
+                    headers: { "X-Master-Key": NUBE_KEY }
+                });
+                const data = await res.json();
+                PRODUCTOS = data.record || [];
+                ejecutarFiltroCombinado();
+            } catch (e) {
+                document.getElementById('contenedor-productos').innerHTML = "<p class='text-center text-xs text-red-400 py-10'>Error al conectar con la nube.</p>";
+            }
         }
 
-        function guardarEnMemoriaDispositivo() {
-            localStorage.setItem('tucocel_premium_inv', JSON.stringify(PRODUCTOS));
+        // SALVAR INVENTARIO EN LA NUBE
+        async function guardarInventarioNube() {
+            const btn = document.getElementById('btn-guardar');
+            if(btn) { btn.disabled = true; btn.innerText = "⏳ Sincronizando Nube..."; }
+            try {
+                await fetch(NUBE_API_URL, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json", "X-Master-Key": NUBE_KEY },
+                    body: JSON.stringify(PRODUCTOS)
+                });
+            } catch (e) {
+                alert("Error al guardar.");
+            } finally {
+                if(btn) { btn.disabled = false; btn.innerText = "Guardar en Servidor Nube"; }
+            }
         }
 
         function ejecutarFiltroCombinado() {
@@ -287,62 +320,76 @@
                 const coincideTexto = p.modelo.toLowerCase().includes(textoBuscador) || p.marca.toLowerCase().includes(textoBuscador);
                 return coincideMarca && coincideTexto;
             });
-            cargarCatalogo(filtrados);
+            renderizarCatalogoHTML(filtrados);
         }
 
-        function filtrarPorMarca(marca) {
-            marcaSeleccionada = marca;
-            const botones = document.querySelectorAll('.marca-btn');
-            botones.forEach(btn => {
-                if (btn.innerText.includes(marca)) {
-                    btn.className = "marca-btn snap-start shrink-0 bg-[#001935] text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all";
-                } else {
-                    btn.className = "marca-btn snap-start shrink-0 bg-white text-slate-700 border border-slate-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1";
-                }
-            });
-            ejecutarFiltroCombinado();
-        }
-
-        function filtrarProductos() { ejecutarFiltroCombinado(); }
-
-        function cargarCatalogo(lista) {
+        function renderizarCatalogoHTML(lista) {
             const contenedor = document.getElementById('contenedor-productos');
-            document.getElementById('contador-productos').innerText = `${lista.length} ${lista.length === 1 ? 'Equipo' : 'Equipos'}`;
+            document.getElementById('contador-productos').innerText = `${lista.length} ${lista.length === 1 ? 'Disponible' : 'Disponibles'}`;
             
             if(lista.length === 0) { 
-                contenedor.innerHTML = '<div class="text-center py-12 text-slate-400 text-sm"><i class="fa-solid fa-box-open text-2xl mb-2 block text-slate-300"></i> No hay stock disponible en esta categoría.</div>'; 
+                contenedor.innerHTML = '<div class="text-center py-12 text-slate-400 text-sm">No hay stock disponible.</div>'; 
                 return; 
             }
             
             contenedor.innerHTML = '';
             lista.forEach(prod => {
                 const fotoProd = prod.foto || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=200&auto=format&fit=crop&q=60';
+                
+                // Botones admin visibles sólo si te autenticaste
+                const botonesEdicion = esAdminAutenticado ? `
+                    <button onclick="editarPrecio('${prod.id}')" class="text-blue-500 text-xs p-1 mt-1"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button onclick="eliminarProducto('${prod.id}')" class="text-slate-300 hover:text-red-500 text-xs p-1"><i class="fa-solid fa-trash-can"></i></button>
+                ` : '';
+
                 contenedor.innerHTML += `
-                    <div class="bg-white rounded-2xl p-3.5 border border-slate-100 shadow-sm flex gap-3.5 items-center transition-all hover:shadow-md">
-                        <img src="${fotoProd}" class="w-20 h-20 object-cover rounded-xl bg-slate-50 border border-slate-100" onerror="this.src='https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=200&auto=format&fit=crop&q=60'">
+                    <div class="bg-white rounded-2xl p-3.5 border border-slate-100 shadow-sm flex gap-3.5 items-center transition-all">
+                        <img src="${fotoProd}" class="w-20 h-20 object-cover rounded-xl bg-slate-50 border border-slate-100" onerror="this.src='https://via.placeholder.com/150'">
                         <div class="flex-1 min-w-0">
                             <span class="text-[9px] font-extrabold text-[#00a3e0] uppercase tracking-wider bg-blue-50/80 px-2 py-0.5 rounded-md inline-block mb-1">${prod.marca}</span>
                             <h3 class="font-bold text-slate-800 text-sm truncate">${prod.modelo}</h3>
                             <p class="text-[10px] text-slate-400 font-medium">${prod.memoria}</p>
                             <p class="text-[11px] text-slate-500 font-light line-clamp-1 mt-0.5">${prod.desc}</p>
                             <div class="flex items-baseline gap-1 mt-1.5">
-                                <span class="text-base font-black text-slate-900">$${prod.precio}</span>
-                                <span class="text-[9px] text-slate-400 font-bold uppercase tracking-wider">USD</span>
+                                <span class="text-base font-black text-slate-900">$${prod.precio}</span> <span class="text-[9px] text-slate-400 font-bold">USD</span>
                             </div>
                         </div>
-                        <div class="flex flex-col items-center gap-3 pl-1 border-l border-slate-50">
-                            <button onclick="agregarAlCarrito('${prod.id}', this)" class="bg-slate-900 text-white w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300 active:scale-90 hover:bg-[#00a3e0] shadow-md">
+                        <div class="flex flex-col items-center gap-2 pl-1 border-l border-slate-50">
+                            <button onclick="agregarAlCarrito('${prod.id}', this)" class="bg-slate-900 text-white w-9 h-9 rounded-xl flex items-center justify-center hover:bg-[#00a3e0] shadow-md">
                                 <i class="fa-solid fa-plus text-xs"></i>
                             </button>
-                            <button onclick="eliminarProducto('${prod.id}')" class="text-slate-300 hover:text-red-500 transition-colors text-xs p-1">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </button>
+                            ${botonesEdicion}
                         </div>
                     </div>`;
             });
         }
 
-        function guardarProductoNuevo() {
+        // SEGURIDAD LOGIN
+        function abrirLoginAdmin() { 
+            if(esAdminAutenticado) { toggleAdminPanel(); } else { document.getElementById('modal-login').classList.remove('hidden'); }
+        }
+        function cerrarLoginAdmin() { document.getElementById('modal-login').classList.add('hidden'); }
+        
+        function autenticarAdmin() {
+            const user = document.getElementById('admin-user').value.trim();
+            const pass = document.getElementById('admin-pass').value.trim();
+            if(user === ADMIN_USER && pass === ADMIN_PASS) {
+                esAdminAutenticado = true;
+                cerrarLoginAdmin();
+                document.getElementById('panel-admin').classList.remove('hidden');
+                ejecutarFiltroCombinado();
+            } else {
+                alert('Credenciales incorrectas.');
+            }
+        }
+
+        function cerrarSesionAdmin() {
+            esAdminAutenticado = false;
+            document.getElementById('panel-admin').classList.add('hidden');
+            ejecutarFiltroCombinado();
+        }
+
+        async function guardarProductoNuevo() {
             const marca = document.getElementById('add-marca').value;
             const modelo = document.getElementById('add-modelo').value.trim();
             const memoria = document.getElementById('add-memoria').value.trim();
@@ -350,37 +397,44 @@
             const foto = document.getElementById('foto-base64').value;
             const desc = document.getElementById('add-desc').value.trim();
 
-            if(!modelo || !precio) { alert('Completa el modelo y el precio del equipo.'); return; }
+            if(!modelo || !precio) { alert('Llena modelo y precio.'); return; }
 
             PRODUCTOS.unshift({ id: new Date().getTime().toString(), marca, modelo, memoria, precio, foto, desc });
-            try { guardarEnMemoriaDispositivo(); } catch(e) { alert('Memoria de almacenamiento al límite.'); PRODUCTOS.shift(); return; }
-
+            await guardarInventarioNube();
             ejecutarFiltroCombinado();
 
-            document.getElementById('add-modelo').value = '';
-            document.getElementById('add-memoria').value = '';
-            document.getElementById('add-precio').value = '';
-            document.getElementById('add-desc').value = '';
-            document.getElementById('add-foto-file').value = '';
-            document.getElementById('foto-base64').value = '';
+            document.getElementById('add-modelo').value = ''; document.getElementById('add-memoria').value = '';
+            document.getElementById('add-precio').value = ''; document.getElementById('add-desc').value = '';
+            document.getElementById('add-foto-file').value = ''; document.getElementById('foto-base64').value = '';
             document.getElementById('preview-foto').classList.add('hidden');
-            toggleAdminPanel();
         }
 
-        function eliminarProducto(id) {
-            if(confirm('¿Eliminar artículo permanentemente?')) {
-                PRODUCTOS = PRODUCTOS.filter(p => p.id !== id);
-                guardarEnMemoriaDispositivo();
+        async function editarPrecio(id) {
+            const producto = PRODUCTOS.find(p => p.id === id);
+            if(!producto) return;
+            const nuevoPrecio = prompt(`Modificar precio para ${producto.modelo}:`, producto.precio);
+            if(nuevoPrecio !== null && !isNaN(nuevoPrecio) && nuevoPrecio.trim() !== '') {
+                producto.precio = parseInt(nuevoPrecio);
+                await guardarInventarioNube();
                 ejecutarFiltroCombinado();
             }
         }
 
+        async function eliminarProducto(id) {
+            if(confirm('¿Borrar de la nube?')) {
+                PRODUCTOS = PRODUCTOS.filter(p => p.id !== id);
+                await guardarInventarioNube();
+                ejecutarFiltroCombinado();
+            }
+        }
+
+        // INTERFAZ DE CARRITO Y PEDIDOS DE WHATSAPP
         function agregarAlCarrito(id, boton) {
             const item = PRODUCTOS.find(p => p.id === id);
             if(!item) return;
             carrito.push(item);
             actualizarInterfazCarrito();
-            boton.className = "bg-emerald-500 text-white w-9 h-9 rounded-xl flex items-center justify-center scale-105 transition-all";
+            boton.className = "bg-emerald-500 text-white w-9 h-9 rounded-xl flex items-center justify-center";
             boton.innerHTML = '<i class="fa-solid fa-check text-xs"></i>';
             setTimeout(() => { boton.className = "bg-slate-900 text-white w-9 h-9 rounded-xl flex items-center justify-center hover:bg-[#00a3e0]"; boton.innerHTML = '<i class="fa-solid fa-plus text-xs"></i>'; }, 1000);
         }
@@ -392,23 +446,16 @@
             document.getElementById('total-carrito').innerText = `$${total}.00 USD`;
             document.getElementById('cant-articulos').innerText = carrito.length;
             barra.classList.remove('hidden');
-            document.getElementById('lista-resumen').innerHTML = carrito.map(item => `• ${item.marca} ${item.modelo} (<span class="text-slate-900 font-bold">$${item.precio}</span>)`).join('<br>');
         }
 
-        function toggleAdminPanel() { document.getElementById('panel-admin').classList.toggle('hidden'); }
         function abrirModalPago() { document.getElementById('modal-pago').classList.remove('hidden'); }
         function cerrarModalPago() { document.getElementById('modal-pago').classList.add('hidden'); }
+        function toggleAdminPanel() { document.getElementById('panel-admin').classList.toggle('hidden'); }
+        function filtrarPorMarca(marca) { marcaSeleccionada = marca; const botones = document.querySelectorAll('.marca-btn'); botones.forEach(btn => { if (btn.innerText.includes(marca)) { btn.className = "marca-btn snap-start shrink-0 bg-[#001935] text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm"; } else { btn.className = "marca-btn snap-start shrink-0 bg-white text-slate-700 border border-slate-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm"; } }); ejecutarFiltroCombinado(); }
+        function filtrarProductos() { ejecutarFiltroCombinado(); }
 
         function enviarPedidoWhatsApp() {
-            const n = document.getElementById('nombre-cliente').value.trim();
-            const m = document.querySelector('input[name="pago"]:checked').value;
-            if(!n) { alert('Ingresa tu nombre para el pedido.'); return; }
-            let list = ""; carrito.forEach((i, x) => { list += `${x+1}. *${i.marca} ${i.modelo}* - $${i.precio} USD\n`; });
-            const msg = `🛒 *NUEVO PEDIDO DESDE LA APP*\n\n👤 *Cliente:* ${n}\n\n📦 *Artículos:*\n${list}\n💰 *Total:* $${carrito.reduce((s,i)=>s+i.precio,0)}.00 USD\n💳 *Pago:* ${m}\n\n_Catálogo gestionado por @publionlinemk_`;
-            window.open(`https://wa.me/584247357549?text=${encodeURIComponent(msg)}`, '_blank');
-        }
-
-        window.onload = cargarInventarioLocal;
-    </script>
-</body>
-</html>
+            const nombre = document.getElementById('cliente-nombre').value.trim();
+            const telefono = document.getElementById('cliente-telefono').value.trim();
+            const pago = document.getElementById('cliente-pago').value;
+            const direccion =Normally I can help with things like this, but I don't seem to have access to that content. You can try again or ask me for something else.
