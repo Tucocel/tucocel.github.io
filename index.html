@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tucocel C.A. - Catálogo Premium</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { 
+            font-family: system-ui, -apple-system, sans-serif; 
+            background: radial-gradient(100% 100% at 50% 0%, #f8fafc 0%, #f1f5f9 100%);
+        }
+        .glass-header {
+            background: rgba(0, 25, 53, 0.95);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="pb-32 min-h-screen flex flex-col justify-between">
+
+    <div>
+        <!-- ENCABEZADO PREMIUM -->
+        <header class="glass-header text-white p-5 sticky top-0 z-40 shadow-lg border-b border-[#00a3e0]/20 max-w-md mx-auto rounded-b-2xl flex justify-between items-center">
+            <div class="flex-1 text-center pl-8">
+                <div class="flex items-center justify-center gap-1.5">
+                    <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#00a3e0] animate-pulse"></span>
+                    <h1 class="text-xl font-black tracking-wider text-white">TUCOCEL C.A.</h1>
+                </div>
+                <p class="text-[11px] text-[#00a3e0] uppercase tracking-widest font-bold mt-0.5">Agente Autorizado Movistar</p>
+                <p class="text-[10px] text-gray-400 mt-1 font-light"><i class="fa-solid fa-location-dot text-[#00a3e0] mr-1"></i> Av. Bolívar entre 12 y 13, Cordero</p>
+            </div>
+            <button onclick="toggleAdminPanel()" class="text-gray-500 hover:text-[#00a3e0] transition-colors p-2 text-base">
+                <i class="fa-solid fa-sliders"></i>
+            </button>
+        </header>
+
+        <!-- PANEL DE ADMINISTRADOR CON CARGA DE ARCHIVOS -->
+        <div id="panel-admin" class="bg-slate-900 text-slate-100 border-b border-slate-800 p-5 hidden max-w-md mx-auto rounded-b-2xl shadow-2xl">
+            <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-2">
+                <h3 class="text-xs font-bold uppercase text-amber-400 tracking-wider"><i class="fa-solid fa-database mr-1"></i> Control de Inventario</h3>
+                <button onclick="toggleAdminPanel()" class="text-slate-400 text-xs bg-slate-800 px-2.5 py-1 rounded-lg hover:bg-slate-700">Cerrar</button>
+            </div>
+            
+            <div class="space-y-3 text-xs">
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block font-medium text-slate-400 mb-1">Marca:</label>
+                        <input type="text" id="add-marca" placeholder="Ej. Honor" class="w-full p-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-[#00a3e0]">
+                    </div>
+                    <div>
+                        <label class="block font-medium text-slate-400 mb-1">Modelo:</label>
+                        <input type="text" id="add-modelo" placeholder="Ej. X8b" class="w-full p-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-[#00a3e0]">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block font-medium text-slate-400 mb-1">Almacenamiento:</label>
+                        <input type="text" id="add-memoria" placeholder="Ej. 256GB / 8GB" class="w-full p-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-[#00a3e0]">
+                    </div>
+                    <div>
+                        <label class="block font-medium text-slate-400 mb-1">Precio ($ USD):</label>
+                        <input type="number" id="add-precio" placeholder="Ej. 190" class="w-full p-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-[#00a3e0]">
+                    </div>
+                </div>
+                
+                <!-- NUEVA ZONA PARA SUBIR FOTOS DESDE EL TELÉFONO -->
+                <div class="border border-slate-700 p-3 rounded-xl bg-slate-800/50">
+                    <label class="block font-medium text-slate-400 mb-2">Foto del Producto (Galería o Cámara):</label>
+                    <input type="file" id="add-foto-file" accept="image/*" class="w-full text-xs text-slate-400 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-[#00a3e0]/20 file:text-[#00a3e0] hover:file:bg-[#00a3e0]/30 cursor-pointer">
+                    <!-- Campo oculto para guardar la imagen comprimida -->
+                    <input type="hidden" id="foto-base64">
+                    <!-- Vista previa de la foto seleccionada -->
+                    <div class="mt-3 flex justify-center">
+                        <img id="preview-foto" class="hidden w-20 h-20 object-cover rounded-xl border border-slate-600 shadow-md">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block font-medium text-slate-400 mb-1">Especificaciones breves:</label>
+                    <input type="text" id="add-desc" placeholder="Ej. Cámara 100MP, Carga rápida" class="w-full p-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-[#00a3e0]">
+                </div>
+                <button onclick="guardarProductoNuevo()" class="w-full bg-[#00a3e0] text-white p-3 rounded-xl font-bold mt-2 shadow-lg shadow-[#00a3e0]/20 hover:bg-[#008ec4] transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-plus-circle"></i> Agregar al Catálogo
+                </button>
+            </div>
+        </div>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="p-4 max-w-md mx-auto">
+            <div class="mb-6 relative">
+                <input type="text" id="buscador" onkeyup="filtrarProductos()" placeholder="Buscar equipo o accesorio..." class="w-full bg-white/80 backdrop-blur p-3.5 pl-11 rounded-2xl shadow-sm border border-slate-200/60 focus:outline-none focus:border-[#00a3e0] text-sm text-slate-800">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 top-4 text-slate-400 text-sm"></i>
+            </div>
+
+            <div class="flex items-center justify-between mb-4 px-1">
+                <h2 class="text-slate-800 font-extrabold text-xs tracking-wider uppercase flex items-center gap-2">
+                    <i class="fa-solid fa-mobile-screen-button text-[#00a3e0]"></i> Vitrina Digital
+                </h2>
+                <span id="contador-productos" class="text-[10px] bg-slate-200 text-slate-600 font-bold px-2 py-0.5 rounded-full">0 Equipos</span>
+            </div>
+
+            <div id="contenedor-productos" class="space-y-3.5"></div>
+        </main>
+    </div>
+
+    <!-- PIE DE PÁGINA AGENCIA -->
+    <footer class="text-center py-6 px-4 border-t border-slate-200/50 mt-10 max-w-md mx-auto">
+        <p class="text-[10px] uppercase tracking-widest text-slate-400 font-medium">Garantía y Respaldos Tucocel</p>
+        <div class="mt-2 text-[11px] text-slate-500 font-medium">
+            Web desarrollada por <a href="#" class="text-[#00a3e0] font-bold hover:underline">@publionlinemk</a>
+        </div>
+        <p class="text-[9px] text-slate-400/80 mt-1">Agencia de Publicidad de Tucocel C.A.</p>
+    </footer>
+
+    <!-- BANNER CARRITO -->
+    <div id="barra-carrito" class="fixed bottom-4 left-4 right-4 bg-slate-900/95 backdrop-blur-md text-white p-4 shadow-2xl z-50 hidden max-w-sm mx-auto rounded-2xl border border-slate-800">
+        <div class="flex justify-between items-center">
+            <div>
+                <p class="text-[10px] text-slate-400 tracking-wider font-bold">TU PEDIDO (<span id="cant-articulos">0</span>)</p>
+                <p id="total-carrito" class="text-lg font-black text-emerald-400">$0.00 USD</p>
+            </div>
+            <button onclick="abrirModalPago()" class="bg-[#25D366] text-white px-5 py-3 rounded-xl font-bold text-xs shadow-lg flex items-center gap-2">
+                Continuar <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL DE CHECKOUT -->
+    <div id="modal-pago" class="fixed inset-0 bg-slate-950/80 z-50 flex items-end justify-center hidden p-4 backdrop-blur-sm">
+        <div class="bg-white w-full max-w-md rounded-t-3xl p-6 space-y-4 max-h-[85vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                <h3 class="text-base font-bold text-slate-800">Completar Pedido</h3>
+                <button onclick="cerrarModalPago()" class="text-slate-400 text-lg hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-xs text-slate-700">
+                <p class="font-bold text-slate-400 mb-1.5 uppercase tracking-wider text-[10px]">Resumen de compra:</p>
+                <div id="lista-resumen" class="space-y-1 font-medium"></div>
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-slate-600 mb-1">Nombre del Cliente:</label>
+                <input type="text" id="nombre-cliente" class="w-full border border-slate-200 p-2.5 rounded-xl text-sm focus:outline-none focus:border-[#00a3e0]" placeholder="Ej. Juan Díaz">
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-slate-600 mb-2">Forma de Pago:</label>
+                <div class="space-y-2 text-xs font-semibold text-slate-700">
+                    <label class="flex items-center gap-3 p-3 border border-slate-100 rounded-xl bg-slate-50/50"><input type="radio" name="pago" value="Binance Pay" checked class="accent-[#00a3e0]"> 🔶 Binance Pay (USDT)</label>
+                    <label class="flex items-center gap-3 p-3 border border-slate-100 rounded-xl bg-slate-50/50"><input type="radio" name="pago" value="Zinli" class="accent-[#00a3e0]"> 🔄 Zinli (USD)</label>
+                    <label class="flex items-center gap-3 p-3 border border-slate-100 rounded-xl bg-slate-50/50"><input type="radio" name="pago" value="Pago Móvil" class="accent-[#00a3e0]"> 🇻🇪 Pago Móvil (Tasa Oficial)</label>
+                </div>
+            </div>
+            <button onclick="enviarPedidoWhatsApp()" class="w-full bg-[#25D366] text-white p-3.5 rounded-xl font-bold flex items-center justify-center gap-2 text-sm">
+                <i class="fa-brands fa-whatsapp text-base"></i> Confirmar vía WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- MOTOR LÓGICO -->
+    <script>
+        let PRODUCTOS = [];
+        let carrito = [];
+
+        // --- SISTEMA DE COMPRESIÓN DE IMÁGENES ---
+        document.getElementById('add-foto-file').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+
+                    // Achicar la imagen a máximo 300x300 píxeles para ahorrar memoria
+                    const MAX_WIDTH = 300;
+                    const MAX_HEIGHT = 300;
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > height) {
+                        if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
+                    } else {
+                        if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    // Convertir a JPEG calidad media y guardarla en el input oculto
+                    const base64Ligero = canvas.toDataURL('image/jpeg', 0.7);
+                    document.getElementById('foto-base64').value = base64Ligero;
+
+                    // Mostrar vista previa en miniatura
+                    const preview = document.getElementById('preview-foto');
+                    preview.src = base64Ligero;
+                    preview.classList.remove('hidden');
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+        // -----------------------------------------
+
+        function cargarInventarioLocal() {
+            const guardado = localStorage.getItem('tucocel_premium_inv');
+            if (guardado) {
+                PRODUCTOS = JSON.parse(guardado);
+            } else {
+                PRODUCTOS = []; // Inicia vacío por defecto
+            }
+            cargarCatalogo(PRODUCTOS);
+        }
+
+        function guardarEnMemoriaDispositivo() {
+            localStorage.setItem('tucocel_premium_inv', JSON.stringify(PRODUCTOS));
+        }
+
+        function cargarCatalogo(lista) {
+            const contenedor = document.getElementById('contenedor-productos');
+            document.getElementById('contador-productos').innerText = `${lista.length} ${lista.length === 1 ? 'Equipo' : 'Equipos'}`;
+            
+            if(lista.length === 0) { 
+                contenedor.innerHTML = '<div class="text-center py-12 text-slate-400 text-sm"><i class="fa-solid fa-box-open text-2xl mb-2 block text-slate-300"></i> No hay productos cargados aún.</div>'; 
+                return; 
+            }
+            
+            contenedor.innerHTML = '';
+            lista.forEach(prod => {
+                const fotoProd = prod.foto || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=200&auto=format&fit=crop&q=60';
+                contenedor.innerHTML += `
+                    <div class="bg-white rounded-2xl p-3.5 border border-slate-100 shadow-sm flex gap-3.5 items-center transition-all">
+                        <div class="relative">
+                            <img src="${fotoProd}" class="w-20 h-20 object-cover rounded-xl bg-slate-50 border border-slate-100" onerror="this.src='https://via.placeholder.com/150'">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <span class="text-[9px] font-extrabold text-[#00a3e0] uppercase tracking-wider bg-blue-50 px-2 py-0.5 rounded-md inline-block mb-1">${prod.marca}</span>
+                            <h3 class="font-bold text-slate-800 text-sm truncate">${prod.modelo}</h3>
+                            <p class="text-[10px] text-slate-400 font-medium">${prod.memoria}</p>
+                            <p class="text-[11px] text-slate-500 font-light line-clamp-1 mt-0.5">${prod.desc}</p>
+                            <div class="flex items-baseline gap-1 mt-1.5">
+                                <span class="text-sm font-black text-slate-800">$${prod.precio}</span>
+                                <span class="text-[9px] text-slate-400 font-bold uppercase tracking-wider">USD</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-center gap-3 pl-1 border-l border-slate-50">
+                            <button onclick="agregarAlCarrito('${prod.id}', this)" class="bg-slate-900 text-white w-9 h-9 rounded-xl flex items-center justify-center hover:bg-[#00a3e0] shadow-md">
+                                <i class="fa-solid fa-plus text-xs"></i>
+                            </button>
+                            <button onclick="eliminarProducto('${prod.id}')" class="text-slate-300 hover:text-red-500 transition-colors text-xs p-1">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        function guardarProductoNuevo() {
+            const marca = document.getElementById('add-marca').value.trim();
+            const modelo = document.getElementById('add-modelo').value.trim();
+            const memoria = document.getElementById('add-memoria').value.trim();
+            const precio = parseInt(document.getElementById('add-precio').value.trim()) || 0;
+            // Toma la foto comprimida que se guardó en el campo oculto
+            const foto = document.getElementById('foto-base64').value;
+            const desc = document.getElementById('add-desc').value.trim();
+
+            if(!marca || !modelo || !precio) { alert('Completa los campos principales (Marca, Modelo, Precio).'); return; }
+
+            PRODUCTOS.unshift({ id: new Date().getTime().toString(), marca, modelo, memoria, precio, foto, desc });
+            
+            try {
+                guardarEnMemoriaDispositivo();
+            } catch(e) {
+                alert('La memoria de la app está llena. Por favor, elimina productos viejos.');
+                PRODUCTOS.shift(); // Quita el producto que no cupo
+                return;
+            }
+
+            cargarCatalogo(PRODUCTOS);
+
+            // Limpiar formulario completo
+            document.getElementById('add-marca').value = '';
+            document.getElementById('add-modelo').value = '';
+            document.getElementById('add-memoria').value = '';
+            document.getElementById('add-precio').value = '';
+            document.getElementById('add-desc').value = '';
+            document.getElementById('add-foto-file').value = '';
+            document.getElementById('foto-base64').value = '';
+            document.getElementById('preview-foto').classList.add('hidden');
+            document.getElementById('preview-foto').src = '';
+            
+            toggleAdminPanel();
+        }
+
+        function eliminarProducto(id) {
+            if(confirm('¿Eliminar este artículo de la vitrina?')) {
+                PRODUCTOS = PRODUCTOS.filter(p => p.id !== id);
+                guardarEnMemoriaDispositivo();
+                cargarCatalogo(PRODUCTOS);
+            }
+        }
+
+        function agregarAlCarrito(id, boton) {
+            const item = PRODUCTOS.find(p => p.id === id);
+            if(!item) return;
+            carrito.push(item);
+            actualizarInterfazCarrito();
+            
+            boton.className = "bg-emerald-500 text-white w-9 h-9 rounded-xl flex items-center justify-center scale-105 transition-all";
+            boton.innerHTML = '<i class="fa-solid fa-check text-xs"></i>';
+            setTimeout(() => { boton.className = "bg-slate-900 text-white w-9 h-9 rounded-xl flex items-center justify-center hover:bg-[#00a3e0]"; boton.innerHTML = '<i class="fa-solid fa-plus text-xs"></i>'; }, 1000);
+        }
+
+        function actualizarInterfazCarrito() {
+            const barra = document.getElementById('barra-carrito');
+            if(carrito.length === 0) { barra.classList.add('hidden'); return; }
+            const total = carrito.reduce((sum, item) => sum + item.precio, 0);
+            document.getElementById('total-carrito').innerText = `$${total}.00 USD`;
+            document.getElementById('cant-articulos').innerText = carrito.length;
+            barra.classList.remove('hidden');
+            document.getElementById('lista-resumen').innerHTML = carrito.map(item => `• ${item.marca} ${item.modelo} (<span class="text-slate-900 font-bold">$${item.precio}</span>)`).join('<br>');
+        }
+
+        function toggleAdminPanel() { document.getElementById('panel-admin').classList.toggle('hidden'); }
+        function abrirModalPago() { document.getElementById('modal-pago').classList.remove('hidden'); }
+        function cerrarModalPago() { document.getElementById('modal-pago').classList.add('hidden'); }
+        
+        function filtrarProductos() { 
+            const t = document.getElementById('buscador').value.toLowerCase(); 
+            cargarCatalogo(PRODUCTOS.filter(p => p.modelo.toLowerCase().includes(t) || p.marca.toLowerCase().includes(t))); 
+        }
+
+        function enviarPedidoWhatsApp() {
+            const n = document.getElementById('nombre-cliente').value.trim();
+            const m = document.querySelector('input[name="pago"]:checked').value;
+            if(!n) { alert('Por favor ingresa tu nombre.'); return; }
+            let list = ""; carrito.forEach((i, x) => { list += `${x+1}. *${i.marca} ${i.modelo}* - $${i.precio} USD\n`; });
+            const msg = `🛒 *NUEVO PEDIDO DESDE LA APP*\n\n👤 *Cliente:* ${n}\n\n📦 *Artículos:*\n${list}\n💰 *Total:* $${carrito.reduce((s,i)=>s+i.precio,0)}.00 USD\n💳 *Pago:* ${m}\n\n_Catálogo gestionado por @publionlinemk_`;
+            window.open(`https://wa.me/584247357549?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        window.onload = cargarInventarioLocal;
+    </script>
+</body>
+  </html>
