@@ -79,8 +79,8 @@
     <div id="modal-login" class="fixed inset-0 bg-slate-950/80 z-50 flex items-center justify-center hidden p-4 backdrop-blur-sm">
         <div class="bg-white p-6 rounded-2xl w-full max-w-xs space-y-3 shadow-2xl">
             <h3 class="text-sm font-bold text-gray-800 uppercase tracking-wider text-center">Acceso de Administración</h3>
-            <input type="text" id="admin-user" placeholder="Usuario" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-sm focus:outline-none focus:border-blue-600 text-gray-900">
-            <input type="password" id="admin-pass" placeholder="Contraseña" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-sm focus:outline-none focus:border-blue-600 text-gray-900">
+            <input type="text" id="admin-user" placeholder="Usuario" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-sm focus:outline-none focus:border-blue-600 text-gray-900 font-bold">
+            <input type="password" id="admin-pass" placeholder="Contraseña" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-sm focus:outline-none focus:border-blue-600 text-gray-900 font-bold">
             <div class="flex gap-2 pt-2">
                 <button onclick="cerrarLoginAdmin()" class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-bold py-2.5 rounded-xl transition-colors">Cancelar</button>
                 <button onclick="autenticarAdmin()" class="w-1/2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2.5 rounded-xl transition-colors shadow-md">Ingresar</button>
@@ -91,14 +91,16 @@
     <!-- PANEL DE CONTROL ADMINISTRATIVO -->
     <div id="panel-admin" class="bg-slate-900 text-slate-100 p-5 hidden max-w-4xl mx-auto sm:mt-4 sm:rounded-2xl shadow-2xl border border-slate-800">
         <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-2">
-            <h3 class="text-xs font-bold uppercase text-amber-400 tracking-wider"><i class="fa-solid fa-database mr-1"></i> Inventario en la Nube de Google</h3>
-            <button onclick="cerrarSesionAdmin()" class="bg-red-500/10 text-red-400 hover:bg-red-500/20 text-[10px] font-bold px-3 py-1 rounded-lg transition-colors">Cerrar Sesión</button>
+            <h3 class="text-xs font-bold uppercase text-amber-400 tracking-wider"><i class="fa-solid fa-database mr-1"></i> Panel de Gestión Tucocel</h3>
+            <div class="flex gap-2">
+                <button onclick="exportarInventario()" class="bg-blue-600 hover:bg-blue-700 text-[10px] font-bold px-3 py-1 rounded-lg transition-colors text-white">☁️ Copiar Respaldo para Clientes</button>
+                <button onclick="cerrarSesionAdmin()" class="bg-red-500/10 text-red-400 hover:bg-red-500/20 text-[10px] font-bold px-3 py-1 rounded-lg transition-colors">Cerrar Sesión</button>
+            </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
             <div class="space-y-2">
                 <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Marca del Dispositivo</label>
-                <!-- CORREGIDO: Color de texto oscuro para que se vea claro al seleccionar -->
-                <select id="add-marca" class="w-full bg-white border border-slate-700 text-gray-900 p-2 rounded-xl text-xs focus:outline-none focus:border-amber-400 font-medium">
+                <select id="add-marca" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-amber-400 font-bold shadow-sm border border-gray-300">
                     <option value="Infinix">Infinix</option>
                     <option value="Tecno">Tecno</option>
                     <option value="Xiaomi">Xiaomi</option>
@@ -109,18 +111,17 @@
                     <option value="Otros">Otros</option>
                 </select>
                 <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block mt-2">Modelo</label>
-                <!-- CORREGIDO: Color de texto oscuro al escribir -->
-                <input type="text" id="add-modelo" placeholder="Ej: Hot 40 Pro / Note 40 Pro" class="w-full bg-white border border-slate-700 text-gray-900 p-2 rounded-xl text-xs focus:outline-none focus:border-amber-400 font-medium">
+                <input type="text" id="add-modelo" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-amber-400 font-bold shadow-sm border border-gray-300">
             </div>
             <div class="space-y-2">
                 <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Memoria (RAM/ROM)</label>
-                <input type="text" id="add-memoria" placeholder="Ej: 8GB + 256GB" class="w-full bg-white border border-slate-700 text-gray-900 p-2 rounded-xl text-xs focus:outline-none focus:border-amber-400 font-medium">
+                <input type="text" id="add-memoria" placeholder="Ej: 8GB + 256GB" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-amber-400 font-bold shadow-sm border border-gray-300">
                 <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block mt-2">Precio USD</label>
-                <input type="number" id="add-precio" placeholder="Ej: 150" class="w-full bg-white border border-slate-700 text-gray-900 p-2 rounded-xl text-xs focus:outline-none focus:border-amber-400 font-medium">
+                <input type="number" id="add-precio" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-amber-400 font-bold shadow-sm border border-gray-300">
             </div>
             <div class="space-y-2">
                 <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Descripción Breve</label>
-                <textarea id="add-desc" placeholder="Detalles o especificaciones adicionales..." class="w-full bg-white border border-slate-700 text-gray-900 p-2 rounded-xl text-xs focus:outline-none focus:border-amber-400 h-20 resize-none font-medium"></textarea>
+                <textarea id="add-desc" placeholder="Detalles o especificaciones adicionales..." class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-amber-400 h-24 resize-none font-bold shadow-sm border border-gray-300"></textarea>
             </div>
         </div>
         <div class="mt-4 pt-3 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
@@ -159,15 +160,13 @@
         <!-- CONTADOR DE EQUIPOS -->
         <div class="flex items-center justify-between mb-6 px-1">
             <h2 class="text-gray-900 font-extrabold text-sm tracking-wider uppercase"><i class="fa-solid fa-layer-group text-blue-600 mr-1"></i> Vitrina de Equipos</h2>
-            <span id="contador-productos" class="text-[10px] bg-blue-50 text-blue-600 font-black px-2.5 py-1 rounded-full">Cargando...</span>
+            <span id="contador-productos" class="text-[10px] bg-blue-50 text-blue-600 font-black px-2.5 py-1 rounded-full">0 Disponibles</span>
         </div>
 
         <!-- CUADRÍCULA DE PRODUCTOS -->
-        <div id="contenedor-productos" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <p class="col-span-full text-center text-xs text-gray-400 py-10"><i class="fa-solid fa-spinner fa-spin text-blue-600 mr-2"></i> Conectando de forma segura con la nube...</p>
-        </div>
+        <div id="contenedor-productos" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
 
-        <!-- RESPALDO COMERCIAL Y MÉTODOS DE PAGO -->
+        <!-- RESPALDO COMERCIAL -->
         <div class="mt-12 bg-white border border-gray-100 rounded-3xl p-6 shadow-sm space-y-5 max-w-4xl mx-auto sm:mx-0">
             <h4 class="text-xs font-black text-gray-900 uppercase tracking-wider border-b border-gray-100 pb-2"><i class="fa-solid fa-circle-info text-blue-600 mr-1"></i> Respaldo Comercial Tucocel</h4>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-b border-gray-50 pb-5">
@@ -196,7 +195,6 @@
     <footer class="bg-white border-t border-gray-100 mt-20 py-8 text-center text-xs text-gray-400">
         <div class="max-w-7xl mx-auto px-4 space-y-1">
             <p class="font-bold text-gray-600 text-sm">&copy; 2026 TUCOCEL C.A. Todos los derechos reservados.</p>
-            <p class="font-medium">Diseñado para la gestión eficiente de inventarios y atención inmediata vía WhatsApp.</p>
         </div>
     </footer>
 
@@ -238,15 +236,15 @@
             <div class="space-y-3">
                 <div>
                     <label class="text-[10px] font-bold uppercase text-gray-400 block mb-1">Nombre Completo *</label>
-                    <input type="text" id="cliente-nombre" placeholder="Ej: Juan Pérez" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-blue-500 text-gray-900">
+                    <input type="text" id="cliente-nombre" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-blue-500 text-gray-900 font-medium">
                 </div>
                 <div>
                     <label class="text-[10px] font-bold uppercase text-gray-400 block mb-1">Teléfono de Contacto *</label>
-                    <input type="text" id="cliente-telefono" placeholder="Ej: 04241234567" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-blue-500 text-gray-900">
+                    <input type="text" id="cliente-telefono" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-blue-500 text-gray-900 font-medium">
                 </div>
                 <div>
                     <label class="text-[10px] font-bold uppercase text-gray-400 block mb-1">Método de Pago Preferido</label>
-                    <select id="cliente-pago" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-blue-500 text-gray-900">
+                    <select id="cliente-pago" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-blue-500 text-gray-900 font-medium">
                         <option value="Efectivo Divisas">Efectivo Divisas (USD)</option>
                         <option value="Pago Móvil">Pago Móvil</option>
                         <option value="Pesos Colombianos">Pesos Colombianos (COP)</option>
@@ -255,7 +253,7 @@
                 </div>
                 <div>
                     <label class="text-[10px] font-bold uppercase text-gray-400 block mb-1">Dirección / Punto de Referencia *</label>
-                    <input type="text" id="cliente-direccion" placeholder="Ej: Cerca de la plaza, casa de rejas blancas..." class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-blue-500 text-gray-900">
+                    <input type="text" id="cliente-direccion" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs focus:outline-none focus:border-blue-500 text-gray-900 font-medium">
                 </div>
                 <button onclick="enviarPedidoWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-3 rounded-xl shadow-lg transition-colors text-xs uppercase tracking-wider flex items-center justify-center gap-2 mt-2">
                     <i class="fa-brands fa-whatsapp text-base"></i> Enviar Pedido a WhatsApp
@@ -281,28 +279,15 @@
         </button>
     </div>
 
-    <!-- CARGA DIRECTA DE LOS COMPONENTES EN VIVO DE GOOGLE FIREBASE -->
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-
-    <!-- MOTOR LÓGICO COMPLETO REESTRUCTURADO -->
+    <!-- SCRIPT DE CONTROL REPARADO -->
     <script>
         const ADMIN_USER = "tucocel";
         const ADMIN_PASS = "admin123"; 
         
-        // CONFIGURACIÓN DE TU BASE DE DATOS DE GOOGLE (PROPIA PARA TUCOCEL C.A.)
-        const firebaseConfig = {
-            apiKey: "AIzaSyAsbD1XclXzY2R6W8XfWp6Pbe9hL-B3IqM",
-            authDomain: "tucocel-vitrina.firebaseapp.com",
-            projectId: "tucocel-vitrina",
-            storageBucket: "tucocel-vitrina.appspot.com",
-            messagingSenderId: "1092837465",
-            appId: "1:1092837465:web:a1b2c3d4e5f6"
-        };
-        
-        // Inicialización segura del servidor
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
+        // ==========================================
+        // 🔴 PEGUE AQUÍ SU RESPALDO CUANDO LO TENGA
+        // ==========================================
+        const RESPALDO_FIJO_CLIENTES = []; 
         
         let PRODUCTOS = [];
         let carrito = [];
@@ -321,17 +306,15 @@
                         img.onload = function() {
                             const canvas = document.createElement('canvas');
                             const ctx = canvas.getContext('2d');
-                            // ALTA CALIDAD HD: Mantiene resolución nítida para los smartphones
+                            // ALTA CALIDAD HD SIN COMPRESIÓN AGRESIVA
                             canvas.width = 1200; canvas.height = 1200;
                             ctx.imageSmoothingEnabled = true;
                             ctx.imageSmoothingQuality = 'high';
                             ctx.drawImage(img, 0, 0, 1200, 1200);
                             
-                            const base64HD = canvas.toDataURL('image/jpeg', 0.90);
-                            const inputBase64 = document.getElementById('foto-base64');
+                            const base64HD = canvas.toDataURL('image/jpeg', 0.92);
+                            document.getElementById('foto-base64').value = base64HD;
                             const preview = document.getElementById('preview-foto');
-                            
-                            if(inputBase64) inputBase64.value = base64HD;
                             if(preview) { preview.src = base64HD; preview.classList.remove('hidden'); }
                         };
                         img.src = event.target.result;
@@ -339,41 +322,29 @@
                     reader.readAsDataURL(file);
                 });
             }
-            escucharInventarioNube();
+            inicializarCatalogoLocal();
         });
 
-        // FUNCIÓN EN VIVO: Sincroniza al instante con cualquier dispositivo en tiempo real
-        function escucharInventarioNube() {
-            db.collection("productos").orderBy("creado", "desc").onSnapshot((snapshot) => {
+        function inicializarCatalogoLocal() {
+            const guardadosLocales = localStorage.getItem('tucocel_inventario_v2');
+            
+            if (guardadosLocales) {
+                PRODUCTOS = JSON.parse(guardadosLocales);
+            } else if (RESPALDO_FIJO_CLIENTES.length > 0) {
+                PRODUCTOS = RESPALDO_FIJO_CLIENTES;
+                localStorage.setItem('tucocel_inventario_v2', JSON.stringify(PRODUCTOS));
+            } else {
                 PRODUCTOS = [];
-                snapshot.forEach((doc) => {
-                    let data = doc.data();
-                    data.id = doc.id; // Asigna el ID real del servidor de Google
-                    PRODUCTOS.push(data);
-                });
-                
-                // Actualiza la interfaz local de inmediato
-                localStorage.setItem('tucocel_inventario', JSON.stringify(PRODUCTOS));
-                ejecutarFiltroCombinado();
-                
-                const contador = document.getElementById('contador-productos');
-                if(contador) {
-                    contador.innerText = `${PRODUCTOS.length} ${PRODUCTOS.length === 1 ? 'Disponible' : 'Disponibles'}`;
-                }
-                
-                // Mantiene sesión si ya estaba activa
-                const sesionActiva = localStorage.getItem('tucocel_admin_sesion');
-                if (sesionActiva === 'true') {
-                    esAdminAutenticado = true;
-                    const panel = document.getElementById('panel-admin');
-                    if(panel) panel.classList.remove('hidden');
-                }
-            }, (error) => {
-                console.warn("Cargando modo offline por seguridad.");
-                const guardadosLocales = localStorage.getItem('tucocel_inventario');
-                PRODUCTOS = guardadosLocales ? JSON.parse(guardadosLocales) : [];
-                ejecutarFiltroCombinado();
-            });
+            }
+            
+            const sesionActiva = localStorage.getItem('tucocel_admin_sesion');
+            if (sesionActiva === 'true') {
+                esAdminAutenticado = true;
+                const panel = document.getElementById('panel-admin');
+                if(panel) panel.classList.remove('hidden');
+            }
+            
+            ejecutarFiltroCombinado();
         }
 
         function ejecutarFiltroCombinado() {
@@ -390,6 +361,11 @@
 
         function renderizarCatalogoHTML(lista) {
             const contenedor = document.getElementById('contenedor-productos');
+            const contador = document.getElementById('contador-productos');
+            
+            if(contador) {
+                contador.innerText = `${lista.length} ${lista.length === 1 ? 'Disponible' : 'Disponibles'}`;
+            }
             if(!contenedor) return;
             
             if(lista.length === 0) { 
@@ -418,7 +394,6 @@
                             <p class="text-xs text-gray-400 font-medium mt-0.5">${prod.memoria || 'Estándar'}</p>
                             <p class="text-xs text-gray-500 font-light line-clamp-2 mt-1.5 leading-relaxed">${prod.desc || 'Sin descripción adicional.'}</p>
                         </div>
-                        
                         <div class="mt-5">
                             <div class="flex items-center justify-between pt-3 border-t border-gray-50">
                                 <div>
@@ -438,7 +413,6 @@
         function abrirDetalleProducto(id) {
             const prod = PRODUCTOS.find(p => p.id === id);
             if (!prod) return;
-
             document.getElementById('detalle-foto').src = prod.foto || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80';
             document.getElementById('detalle-marca').innerText = prod.marca;
             document.getElementById('detalle-modelo').innerText = prod.modelo;
@@ -453,7 +427,6 @@
                     cerrarModalDetalle();
                 };
             }
-
             document.getElementById('modal-detalle').classList.remove('hidden');
         }
 
@@ -484,9 +457,7 @@
             ejecutarFiltroCombinado();
         }
 
-        // AGREGAR PRODUCTO: Sube directamente al servidor seguro de Google
-        async function guardarProductoNuevo() {
-            const btn = document.getElementById('btn-guardar');
+        function guardarProductoNuevo() {
             const marca = document.getElementById('add-marca').value;
             const modelo = document.getElementById('add-modelo').value.trim();
             const memoria = document.getElementById('add-memoria').value.trim();
@@ -494,66 +465,59 @@
             const foto = document.getElementById('foto-base64').value;
             const desc = document.getElementById('add-desc').value.trim();
 
-            if(!modelo || !precio) { alert('Por favor, rellene el modelo y el precio.'); return; }
-            if(btn) { btn.disabled = true; btn.innerText = "⏳ Guardando en Servidor Google..."; }
+            if(!modelo || !precio) { alert('Llena modelo y precio.'); return; }
             
-            try {
-                await db.collection("productos").add({
-                    marca,
-                    modelo,
-                    memoria,
-                    precio,
-                    foto,
-                    desc,
-                    creado: new Date().getTime()
-                });
+            const idUnico = (new Date().getTime() + Math.floor(Math.random() * 1000)).toString();
+            PRODUCTOS.unshift({ id: idUnico, marca, modelo, memoria, precio, foto, desc });
+            
+            // Guardado local asegurado al 100%
+            localStorage.setItem('tucocel_inventario_v2', JSON.stringify(PRODUCTOS));
+            ejecutarFiltroCombinado();
 
-                document.getElementById('add-modelo').value = ''; 
-                document.getElementById('add-memoria').value = '';
-                document.getElementById('add-precio').value = ''; 
-                document.getElementById('add-desc').value = '';
-                
-                const inputFile = document.getElementById('add-foto-file');
-                if(inputFile) inputFile.value = ''; 
-                if(document.getElementById('foto-base64')) document.getElementById('foto-base64').value = '';
-                
-                const preview = document.getElementById('preview-foto');
-                if(preview) preview.classList.add('hidden');
-                
-                alert('¡Equipo guardado con éxito y publicado para todos los dispositivos!');
-            } catch(error) {
-                alert('Error al conectar con la base de datos de Google.');
-                console.error(error);
-            } finally {
-                if(btn) { btn.disabled = false; btn.innerText = "Guardar en Inventario"; }
-            }
+            document.getElementById('add-modelo').value = ''; 
+            document.getElementById('add-memoria').value = '';
+            document.getElementById('add-precio').value = ''; 
+            document.getElementById('add-desc').value = '';
+            if(document.getElementById('add-foto-file')) document.getElementById('add-foto-file').value = ''; 
+            if(document.getElementById('foto-base64')) document.getElementById('foto-base64').value = '';
+            const preview = document.getElementById('preview-foto');
+            if(preview) preview.classList.add('hidden');
+            
+            alert('¡Equipo guardado localmente con éxito!');
         }
 
-        // MODIFICAR PRECIO: Cambia directamente el campo en la nube
-        async function editarPrecio(id) {
+        function editarPrecio(id) {
             const producto = PRODUCTOS.find(p => p.id === id);
             if(!producto) return;
             const nuevoPrecio = prompt(`Modificar precio para ${producto.modelo}:`, producto.precio);
             if(nuevoPrecio !== null && !isNaN(nuevoPrecio) && nuevoPrecio.trim() !== '') {
-                try {
-                    await db.collection("productos").doc(id).update({
-                        precio: parseInt(nuevoPrecio)
-                    });
-                } catch(e) {
-                    alert("No se pudo actualizar el precio en el servidor.");
-                }
+                producto.precio = parseInt(nuevoPrecio);
+                localStorage.setItem('tucocel_inventario_v2', JSON.stringify(PRODUCTOS));
+                ejecutarFiltroCombinado();
             }
         }
 
-        // ELIMINAR: Borra el registro del servidor de Google al instante
-        async function eliminarProducto(id) {
-            if(confirm('¿Deseas borrar el producto por completo del catálogo global?')) {
-                try {
-                    await db.collection("productos").doc(id).delete();
-                } catch(e) {
-                    alert("No se pudo eliminar el producto del servidor.");
-                }
+        function eliminarProducto(id) {
+            if(confirm('¿Deseas borrar el producto por completo?')) {
+                PRODUCTOS = PRODUCTOS.filter(p => p.id !== id);
+                localStorage.setItem('tucocel_inventario_v2', JSON.stringify(PRODUCTOS));
+                ejecutarFiltroCombinado();
             }
+        }
+
+        function exportarInventario() {
+            if(PRODUCTOS.length === 0) { alert("Aún no tienes productos guardados para respaldar."); return; }
+            const textoRespaldo = JSON.stringify(PRODUCTOS);
+            
+            // Crea un cuadro invisible para copiar automáticamente
+            const el = document.createElement('textarea');
+            el.value = textoRespaldo;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            
+            alert("¡Copia de respaldo generada! El texto se copió a tu portapapeles automáticamente. Pégalo en el chat con tu IA para fijarlo para los clientes.");
         }
 
         function agregarAlCarrito(id, boton) {
@@ -564,7 +528,6 @@
             
             const viejoTexto = boton.innerHTML;
             const viejoClass = boton.className;
-            
             const esBotonCatalogo = boton.classList.contains('w-9');
             
             if (esBotonCatalogo) {
@@ -574,11 +537,7 @@
                 boton.className = "bg-emerald-500 text-white px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-1.5 justify-center transition-colors";
                 boton.innerHTML = '<i class="fa-solid fa-check text-xs"></i> ¡Agregado!';
             }
-            
-            setTimeout(() => { 
-                boton.className = viejoClass; 
-                boton.innerHTML = viejoTexto; 
-            }, 1200);
+            setTimeout(() => { boton.className = viejoClass; boton.innerHTML = viejoTexto; }, 1200);
         }
 
         function actualizarInterfazCarrito() {
