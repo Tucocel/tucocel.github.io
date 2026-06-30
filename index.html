@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tucocel C.A. - Smart Vitrina v2</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome para Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
@@ -15,16 +17,21 @@
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased min-h-screen pb-32">
 
+    <!-- BARRA DE NAVEGACIÓN -->
     <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
+                <!-- Logo / Identidad -->
                 <div class="flex items-center gap-2">
-                    <div class="bg-blue-600 text-white p-2 rounded-xl font-bold text-xl tracking-wider shadow-md shadow-blue-200">TC</div>
+                    <div class="bg-blue-600 text-white p-2 rounded-xl font-bold text-xl tracking-wider shadow-md shadow-blue-200">
+                        TC
+                    </div>
                     <div>
                         <span class="font-black text-gray-900 text-base block tracking-tight">TUCOCEL C.A.</span>
                         <span class="text-[10px] text-blue-600 font-bold tracking-widest block -mt-1 uppercase">Agente Autorizado Movistar</span>
                     </div>
                 </div>
+                <!-- Botón de Administración -->
                 <div class="flex items-center gap-3">
                     <button onclick="abrirLoginAdmin()" class="text-gray-400 hover:text-blue-600 transition-colors p-2 text-lg" title="Acceso Administrativo">
                         <i class="fa-solid fa-user-shield"></i>
@@ -34,6 +41,7 @@
         </div>
     </nav>
 
+    <!-- ENCABEZADO / BANNER PRINCIPAL -->
     <header class="bg-gradient-to-r from-slate-900 to-blue-950 text-white py-12 px-4 shadow-inner relative overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
         <div class="max-w-7xl mx-auto text-center relative z-10">
@@ -43,6 +51,7 @@
         </div>
     </header>
 
+    <!-- SECCIÓN DE SERVICIOS Y ACCESORIOS -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         <div class="bg-white border border-gray-100 rounded-3xl p-5 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="flex items-center gap-4 p-2">
@@ -66,11 +75,12 @@
         </div>
     </section>
 
+    <!-- MODAL LOGIN ADMINISTRADOR -->
     <div id="modal-login" class="fixed inset-0 bg-slate-950/80 z-50 flex items-center justify-center hidden p-4 backdrop-blur-sm">
         <div class="bg-white p-6 rounded-2xl w-full max-w-xs space-y-3 shadow-2xl">
             <h3 class="text-sm font-bold text-gray-800 uppercase tracking-wider text-center">Acceso de Administración</h3>
-            <input type="text" id="admin-user" placeholder="Usuario" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-sm text-gray-900 font-bold">
-            <input type="password" id="admin-pass" placeholder="Contraseña" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-sm text-gray-900 font-bold">
+            <input type="text" id="admin-user" placeholder="Usuario" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-sm focus:outline-none focus:border-blue-600 text-gray-900 font-bold">
+            <input type="password" id="admin-pass" placeholder="Contraseña" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-sm focus:outline-none focus:border-blue-600 text-gray-900 font-bold">
             <div class="flex gap-2 pt-2">
                 <button onclick="cerrarLoginAdmin()" class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-bold py-2.5 rounded-xl">Cancelar</button>
                 <button onclick="autenticarAdmin()" class="w-1/2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2.5 rounded-xl shadow-md">Ingresar</button>
@@ -78,15 +88,17 @@
         </div>
     </div>
 
+    <!-- PANEL DE CONTROL ADMINISTRATIVO -->
     <div id="panel-admin" class="bg-slate-900 text-slate-100 p-5 hidden max-w-4xl mx-auto sm:mt-4 sm:rounded-2xl shadow-2xl border border-slate-800">
         <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-2">
-            <h3 class="text-xs font-bold uppercase text-amber-400 tracking-wider"><i class="fa-solid fa-database mr-1"></i> Panel de Gestión Global Tucocel</h3>
-            <button onclick="cerrarSesionAdmin()" class="bg-red-500/10 text-red-400 hover:bg-red-500/20 text-[10px] font-bold px-3 py-1 rounded-lg">Cerrar Sesión</button>
+            <h3 class="text-xs font-bold uppercase text-amber-400 tracking-wider"><i class="fa-solid fa-database mr-1"></i> Panel de Gestión Tucocel</h3>
+            <button onclick="cerrarSesionAdmin()" class="bg-red-500/10 text-red-400 hover:bg-red-500/20 text-[10px] font-bold px-3 py-1 rounded-lg transition-colors">Cerrar Sesión</button>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
             <div class="space-y-2">
                 <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Marca del Dispositivo</label>
-                <select id="add-marca" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300">
+                <!-- CORREGIDO: Fondo blanco y texto negro intenso para visibilidad perfecta -->
+                <select id="add-marca" class="w-full bg-white text-gray-900 p-2.5 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-amber-400 font-bold border border-gray-300">
                     <option value="Infinix">Infinix</option>
                     <option value="Tecno">Tecno</option>
                     <option value="Xiaomi">Xiaomi</option>
@@ -97,56 +109,62 @@
                     <option value="Otros">Otros</option>
                 </select>
                 <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block mt-2">Modelo</label>
-                <input type="text" id="add-modelo" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300">
+                <input type="text" id="add-modelo" class="w-full bg-white text-gray-900 p-2.5 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-amber-400 font-bold border border-gray-300">
             </div>
             <div class="space-y-2">
                 <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Memoria (RAM/ROM)</label>
-                <input type="text" id="add-memoria" placeholder="Ej: 8GB + 256GB" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300">
+                <input type="text" id="add-memoria" placeholder="Ej: 8GB + 256GB" class="w-full bg-white text-gray-900 p-2.5 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-amber-400 font-bold border border-gray-300">
                 <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block mt-2">Precio USD</label>
-                <input type="number" id="add-precio" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300">
+                <input type="number" id="add-precio" class="w-full bg-white text-gray-900 p-2.5 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-amber-400 font-bold border border-gray-300">
             </div>
             <div class="space-y-2">
                 <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Descripción Breve</label>
-                <textarea id="add-desc" placeholder="Especificaciones adicionales..." class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300 h-24 resize-none"></textarea>
+                <textarea id="add-desc" placeholder="Detalles o especificaciones adicionales..." class="w-full bg-white text-gray-900 p-2.5 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-amber-400 h-24 resize-none font-bold border border-gray-300"></textarea>
             </div>
         </div>
         <div class="mt-4 pt-3 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
             <div class="w-full sm:w-auto flex items-center gap-3">
                 <input type="file" id="add-foto-file" accept="image/*" class="hidden">
-                <button onclick="document.getElementById('add-foto-file').click()" class="bg-slate-800 hover:bg-slate-700 text-xs py-2 px-4 rounded-xl font-medium border border-slate-700 w-full sm:w-auto"><i class="fa-solid fa-camera mr-2"></i>Cargar Foto del Equipo</button>
+                <button onclick="document.getElementById('add-foto-file').click()" class="bg-slate-800 hover:bg-slate-700 text-xs py-2 px-4 rounded-xl font-medium transition-colors border border-slate-700 w-full sm:w-auto"><i class="fa-solid fa-camera mr-2"></i>Cargar Foto del Equipo</button>
                 <input type="hidden" id="foto-base64">
                 <img id="preview-foto" src="" class="w-9 h-9 object-cover rounded-lg bg-slate-800 border border-slate-700 hidden">
             </div>
-            <button id="btn-guardar" onclick="guardarProductoNuevo()" class="w-full sm:w-auto bg-amber-400 hover:bg-amber-500 text-slate-950 text-xs font-black px-6 py-2.5 rounded-xl shadow-lg">Guardar en Inventario</button>
+            <button id="btn-guardar" onclick="guardarProductoNuevo()" class="w-full sm:w-auto bg-amber-400 hover:bg-amber-500 text-slate-950 text-xs font-black px-6 py-2.5 rounded-xl shadow-lg transition-colors">Guardar en Inventario</button>
         </div>
     </div>
 
+    <!-- SECCIÓN DE FILTROS Y CATÁLOGO -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- BUSCADOR -->
         <div class="mb-6 relative max-w-md mx-auto sm:mx-0">
             <input type="text" id="buscador" onkeyup="filtrarProductos()" placeholder="¿Qué modelo estás buscando hoy?..." class="w-full bg-white p-3.5 pl-11 rounded-2xl shadow-sm border border-gray-200 text-sm text-gray-800 focus:outline-none focus:border-blue-500">
             <i class="fa-solid fa-magnifying-glass absolute left-4 top-4 text-gray-400 text-sm"></i>
         </div>
 
+        <!-- FILTROS POR MARCA -->
         <div class="mb-8">
             <p class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mb-2 px-1">Explorar por Marca</p>
             <div class="flex gap-2 overflow-x-auto pb-2 no-scrollbar snap-x">
-                <button onclick="filtrarPorMarca('Todas')" class="marca-btn snap-start shrink-0 bg-slate-900 text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm">Todas</button>
-                <button onclick="filtrarPorMarca('Infinix')" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm">Infinix</button>
-                <button onclick="filtrarPorMarca('Tecno')" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm">Tecno</button>
-                <button onclick="filtrarPorMarca('Xiaomi')" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm">Xiaomi</button>
-                <button onclick="filtrarPorMarca('Samsung')" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm">Samsung</button>
-                <button onclick="filtrarPorMarca('Apple')" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm">Apple</button>
-                <button onclick="filtrarPorMarca('Motorola')" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm">Motorola</button>
+                <button onclick="filtrarPorMarca('Todas')" class="marca-btn snap-start shrink-0 bg-slate-900 text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all">Todas</button>
+                <button onclick="filtrarPorMarca('Infinix')" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all">Infinix</button>
+                <button onclick="filtrarPorMarca('Tecno')" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all">Tecno</button>
+                <button onclick="filtrarPorMarca('Xiaomi')" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all">Xiaomi</button>
+                <button onclick="filtrarPorMarca('Samsung')" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all">Samsung</button>
+                <button onclick="filtrarPorMarca('Apple')" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all">Apple</button>
+                <button onclick="filtrarPorMarca('Motorola')" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all">Motorola</button>
             </div>
         </div>
 
+        <!-- CONTADOR DE EQUIPOS -->
         <div class="flex items-center justify-between mb-6 px-1">
             <h2 class="text-gray-900 font-extrabold text-sm tracking-wider uppercase"><i class="fa-solid fa-layer-group text-blue-600 mr-1"></i> Vitrina de Equipos</h2>
-            <span id="contador-productos" class="text-[10px] bg-blue-50 text-blue-600 font-black px-2.5 py-1 rounded-full">Cargando vitrina...</span>
+            <span id="contador-productos" class="text-[10px] bg-blue-50 text-blue-600 font-black px-2.5 py-1 rounded-full">Cargando...</span>
         </div>
 
+        <!-- CUADRÍCULA DE PRODUCTOS -->
         <div id="contenedor-productos" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
 
+        <!-- RESPALDO COMERCIAL -->
         <div class="mt-12 bg-white border border-gray-100 rounded-3xl p-6 shadow-sm space-y-5 max-w-4xl mx-auto sm:mx-0">
             <h4 class="text-xs font-black text-gray-900 uppercase tracking-wider border-b border-gray-100 pb-2"><i class="fa-solid fa-circle-info text-blue-600 mr-1"></i> Respaldo Comercial Tucocel</h4>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-b border-gray-50 pb-5">
@@ -171,12 +189,14 @@
         </div>
     </main>
 
+    <!-- PIE DE PÁGINA -->
     <footer class="bg-white border-t border-gray-100 mt-20 py-8 text-center text-xs text-gray-400">
         <div class="max-w-7xl mx-auto px-4 space-y-1">
             <p class="font-bold text-gray-600 text-sm">&copy; 2026 TUCOCEL C.A. Todos los derechos reservados.</p>
         </div>
     </footer>
 
+    <!-- MODAL DETALLE -->
     <div id="modal-detalle" class="fixed inset-0 bg-slate-950/80 z-50 flex items-center justify-center hidden p-4 backdrop-blur-sm">
         <div class="bg-white w-full max-w-sm rounded-3xl p-6 space-y-4 shadow-2xl relative max-h-[90vh] overflow-y-auto">
             <button onclick="cerrarModalDetalle()" class="absolute right-4 top-4 text-gray-400 hover:text-gray-700 text-2xl p-1 z-10"><i class="fa-solid fa-xmark"></i></button>
@@ -204,6 +224,7 @@
         </div>
     </div>
 
+    <!-- MODAL DE PAGO -->
     <div id="modal-pago" class="fixed inset-0 bg-slate-950/80 z-50 flex items-end justify-center hidden p-4 backdrop-blur-sm">
         <div class="bg-white w-full max-w-md rounded-t-3xl p-6 space-y-4 max-h-[85vh] overflow-y-auto">
             <div class="flex justify-between items-center border-b border-gray-100 pb-3">
@@ -239,6 +260,7 @@
         </div>
     </div>
 
+    <!-- BARRA DEL CARRITO -->
     <div id="barra-carrito" class="fixed bottom-4 inset-x-4 max-w-sm mx-auto bg-slate-950 text-white p-4 rounded-2xl shadow-2xl z-40 hidden border border-slate-800 flex justify-between items-center">
         <div class="flex items-center gap-3">
             <div class="bg-blue-600 w-9 h-9 rounded-xl flex items-center justify-center relative shadow-md">
@@ -255,12 +277,13 @@
         </button>
     </div>
 
+    <!-- MOTOR LÓGICO INDEPENDIENTE CON CONEXIÓN DIRECTA A INTERNET -->
     <script>
         const ADMIN_USER = "tucocel";
         const ADMIN_PASS = "admin123"; 
         
-        // CANAL GLOBAL DIRECTO DE CONEXIÓN REMOTA EN VIVO
-        const NUBE_API_URL = "https://api.v贴.net/v1/storage/tucocel-agente-cordero";
+        // CAJA FUERTE DIGITAL LIBRE ASIGNADA A TU TIENDA EN CORDERO
+        const SERVIDOR_URL = "https://kvdb.io/ANgWpAWh8pCghh8wUTue/tucocel_productos_v2";
         
         let PRODUCTOS = [];
         let carrito = [];
@@ -299,16 +322,16 @@
 
         async function cargarInventarioNube() {
             try {
-                const res = await fetch(NUBE_API_URL);
-                if (!res.ok) {
-                    PRODUCTOS = [];
-                } else {
+                const res = await fetch(SERVIDOR_URL);
+                if (res.ok) {
                     const data = await res.json();
                     PRODUCTOS = Array.isArray(data) ? data : [];
+                } else {
+                    PRODUCTOS = [];
                 }
-                localStorage.setItem('tucocel_cache', JSON.stringify(PRODUCTOS));
+                localStorage.setItem('tucocel_cache_local', JSON.stringify(PRODUCTOS));
             } catch (e) {
-                const local = localStorage.getItem('tucocel_cache');
+                const local = localStorage.getItem('tucocel_cache_local');
                 PRODUCTOS = local ? JSON.parse(local) : [];
             } finally {
                 const sesionActiva = localStorage.getItem('tucocel_admin_sesion');
@@ -321,15 +344,20 @@
             }
         }
 
-        async function sincronizarServidor() {
+        async function guardarInventarioNube() {
+            const btn = document.getElementById('btn-guardar');
+            if(btn) { btn.disabled = true; btn.innerText = "⏳ Guardando en la red..."; }
             try {
-                await fetch(NUBE_API_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
+                // Guarda en la caja fuerte de internet directamente
+                await fetch(SERVIDOR_URL, {
+                    method: "PUT",
                     body: JSON.stringify(PRODUCTOS)
                 });
+                localStorage.setItem('tucocel_cache_local', JSON.stringify(PRODUCTOS));
             } catch (e) {
-                console.warn("Actualizado localmente; sincronizará con la red al recuperar señal.");
+                console.error("Error al sincronizar con internet.");
+            } finally {
+                if(btn) { btn.disabled = false; btn.innerText = "Guardar en Inventario"; }
             }
         }
 
@@ -354,9 +382,9 @@
             }
             if(!contenedor) return;
             
-            if(lista.length === 0) {
-                contenedor.innerHTML = '<div class="text-center col-span-full py-12 text-gray-400 text-sm font-medium">No hay stock disponible en esta selección.</div>';
-                return;
+            if(lista.length === 0) { 
+                contenedor.innerHTML = '<div class="text-center col-span-full py-12 text-gray-400 text-sm font-medium">No hay stock disponible en esta selección.</div>'; 
+                return; 
             }
             
             contenedor.innerHTML = '';
@@ -444,7 +472,6 @@
         }
 
         async function guardarProductoNuevo() {
-            const btn = document.getElementById('btn-guardar');
             const marca = document.getElementById('add-marca').value;
             const modelo = document.getElementById('add-modelo').value.trim();
             const memoria = document.getElementById('add-memoria').value.trim();
@@ -453,14 +480,11 @@
             const desc = document.getElementById('add-desc').value.trim();
 
             if(!modelo || !precio) { alert('Llena modelo y precio.'); return; }
-            if(btn) { btn.disabled = true; btn.innerText = "⏳ Publicando en Internet..."; }
-
+            
             const idUnico = (new Date().getTime() + Math.floor(Math.random() * 1000)).toString();
             PRODUCTOS.unshift({ id: idUnico, marca, modelo, memoria, precio, foto, desc });
             
-            localStorage.setItem('tucocel_cache', JSON.stringify(PRODUCTOS));
-            
-            await sincronizarServidor();
+            await guardarInventarioNube();
             ejecutarFiltroCombinado();
 
             document.getElementById('add-modelo').value = ''; 
@@ -471,9 +495,8 @@
             if(document.getElementById('foto-base64')) document.getElementById('foto-base64').value = '';
             const preview = document.getElementById('preview-foto');
             if(preview) preview.classList.add('hidden');
-            if(btn) { btn.disabled = false; btn.innerText = "Guardar en Inventario"; }
             
-            alert('¡Equipo publicado exitosamente en la red!');
+            alert('¡Equipo publicado exitosamente en internet!');
         }
 
         async function editarPrecio(id) {
@@ -482,17 +505,15 @@
             const nuevoPrecio = prompt(`Modificar precio para ${producto.modelo}:`, producto.precio);
             if(nuevoPrecio !== null && !isNaN(nuevoPrecio) && nuevoPrecio.trim() !== '') {
                 producto.precio = parseInt(nuevoPrecio);
-                localStorage.setItem('tucocel_cache', JSON.stringify(PRODUCTOS));
-                await sincronizarServidor();
+                await guardarInventarioNube();
                 ejecutarFiltroCombinado();
             }
         }
 
         async function eliminarProducto(id) {
-            if(confirm('¿Deseas borrar el producto por completo?')) {
+            if(confirm('¿Deseas borrar el producto por completo del catálogo global?')) {
                 PRODUCTOS = PRODUCTOS.filter(p => p.id !== id);
-                localStorage.setItem('tucocel_cache', JSON.stringify(PRODUCTOS));
-                await sincronizarServidor();
+                await guardarInventarioNube();
                 ejecutarFiltroCombinado();
             }
         }
@@ -575,5 +596,6 @@
             cerrarModalPago();
         }
     </script>
+    <input type="hidden" id="foto-base64">
 </body>
-</html>
+                        </html>
