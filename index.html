@@ -1,79 +1,159 @@
-            carrito.push(item);
-            actualizarInterfazCarrito();
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tucocel C.A. - Smart Vitrina v2</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome para Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@@ -20,9 +22,11 @@
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased min-h-screen pb-32">
 
-            const viejoTexto = boton.innerHTML;
-            const viejoClass = boton.className;
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <!-- Logo / Identidad -->
+                <div class="flex items-center gap-2">
+                    <div class="bg-blue-600 text-white p-2 rounded-xl font-bold text-xl tracking-wider shadow-md shadow-blue-200">
+                        TC
+@@ -32,6 +36,7 @@
+                        <span class="text-[10px] text-blue-600 font-bold tracking-widest block -mt-1 uppercase">Agencia Autorizada Movistar</span>
+                    </div>
+                </div>
+                <!-- Botón de Administración Protegido -->
+                <div class="flex items-center gap-3">
+                    <button onclick="abrirLoginAdmin()" class="text-gray-400 hover:text-blue-600 transition-colors p-2 text-lg" title="Acceso Administrativo">
+                        <i class="fa-solid fa-user-shield"></i>
+@@ -41,6 +46,7 @@
+        </div>
+    </nav>
 
-            boton.className = "bg-emerald-500 text-white px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-1.5";
-            boton.innerHTML = '<i class="fa-solid fa-check text-xs"></i> ¡Agregado!';
+    <!-- ENCABEZADO / BANNER PRINCIPAL -->
+    <header class="bg-gradient-to-r from-slate-900 to-blue-950 text-white py-12 px-4 shadow-inner relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-7xl mx-auto text-center relative z-10">
+@@ -54,6 +60,31 @@ <h1 class="text-3xl md:text-4xl font-black mt-3 tracking-tight text-white">Encue
+        </div>
+    </header>
 
-            setTimeout(() => { 
-                boton.className = viejoClass; 
-                boton.innerHTML = viejoTexto; 
-            }, 1000);
-        }
+    <!-- SECCIÓN ADICIONAL: SERVICIOS Y ACCESORIOS (NUEVA) -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        <div class="bg-white border border-gray-100 rounded-3xl p-5 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="flex items-center gap-4 p-2">
+                <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-xl shrink-0">
+                    <i class="fa-solid fa-plug"></i>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-900 text-sm">Accesorios Premium</h4>
+                    <p class="text-gray-500 text-xs mt-0.5 leading-relaxed">También contamos con una amplia variedad de accesorios de alta calidad para celulares y computadoras.</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4 p-2 border-t md:border-t-0 md:border-l border-gray-100 pt-4 md:pt-2 md:pl-6">
+                <div class="w-12 h-12 bg-slate-900 text-blue-400 rounded-2xl flex items-center justify-center text-xl shrink-0">
+                    <i class="fa-solid fa-laptop-medical"></i>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-900 text-sm">Servicio Técnico Especializado</h4>
+                    <p class="text-gray-500 text-xs mt-0.5 leading-relaxed">Soporte y reparación profesional para teléfonos, computadoras, laptops e impresoras. ¡Dejamos tus equipos como nuevos!</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        function actualizarInterfazCarrito() {
-            const barra = document.getElementById('barra-carrito');
-            if(carrito.length === 0) { barra.classList.add('hidden'); return; }
-            const total = carrito.reduce((sum, item) => sum + item.precio, 0);
-            document.getElementById('total-carrito').innerText = `$${total}.00 USD`;
-            document.getElementById('cant-articulos').innerText = carrito.length;
-            barra.classList.remove('hidden');
-        }
+    <!-- MODAL LOGIN ADMINISTRADOR -->
+    <div id="modal-login" class="fixed inset-0 bg-slate-950/80 z-50 flex items-center justify-center hidden p-4 backdrop-blur-sm">
+        <div class="bg-white p-6 rounded-2xl w-full max-w-xs space-y-3 shadow-2xl">
+            <h3 class="text-sm font-bold text-gray-800 uppercase tracking-wider text-center">Acceso de Administración</h3>
+@@ -72,6 +103,7 @@ <h3 class="text-sm font-bold text-gray-800 uppercase tracking-wider text-center"
+        </div>
+    </div>
 
-        function abrirModalPago() { document.getElementById('modal-pago').classList.remove('hidden'); }
-        function cerrarModalPago() { document.getElementById('modal-pago').classList.add('hidden'); }
-        function toggleAdminPanel() { document.getElementById('panel-admin').classList.toggle('hidden'); }
-        function toggleAdminPanel() { document.getElementById('panel-admin').toggle('hidden'); }
+    <!-- PANEL DE CONTROL ADMINISTRATIVO -->
+    <div id="panel-admin" class="bg-slate-900 text-slate-100 p-5 hidden max-w-4xl mx-auto sm:mt-4 sm:rounded-2xl shadow-2xl border border-slate-800">
+        <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-2">
+            <h3 class="text-xs font-bold uppercase text-amber-400 tracking-wider"><i class="fa-solid fa-database mr-1"></i> Inventario en la Nube (Servicell)</h3>
+@@ -123,13 +155,16 @@ <h3 class="text-xs font-bold uppercase text-amber-400 tracking-wider"><i class="
+        </div>
+    </div>
 
-        function filtrarPorMarca(marca) { 
-            marcaSeleccionada = marca; 
-            const botones = document.querySelectorAll('.marca-btn'); 
-            botones.forEach(btn => { 
-                if (btn.innerText.includes(marca)) { 
-                    btn.className = "marca-btn snap-start shrink-0 bg-slate-900 text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all"; 
-                } else { 
-                    btn.className = "marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all"; 
-                } 
-            }); 
-            ejecutarFiltroCombinado(); 
-        }
+    <!-- SECCIÓN DE FILTROS Y CONTENIDO DEL CATÁLOGO -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-        function filtrarProductos() { ejecutarFiltroCombinado(); }
+        <!-- BUSCADOR -->
+        <div class="mb-6 relative max-w-md mx-auto sm:mx-0">
+            <input type="text" id="buscador" onkeyup="filtrarProductos()" placeholder="¿Qué modelo estás buscando hoy?..." class="w-full bg-white p-3.5 pl-11 rounded-2xl shadow-sm border border-gray-200 text-sm text-gray-800 focus:outline-none focus:border-blue-500">
+            <i class="fa-solid fa-magnifying-glass absolute left-4 top-4.5 text-gray-400 text-sm"></i>
+        </div>
 
-        function enviarPedidoWhatsApp() {
-            const nombre = document.getElementById('cliente-nombre').value.trim();
-            const telefono = document.getElementById('cliente-telefono').value.trim();
-            const pago = document.getElementById('cliente-pago').value;
-            const direccion = document.getElementById('cliente-direccion').value.trim();
+        <!-- FILTROS POR MARCA RESPONSIVOS -->
+        <div class="mb-8">
+            <p class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mb-2 px-1">Explorar por Marca</p>
+            <div class="flex gap-2 overflow-x-auto pb-2 no-scrollbar snap-x">
+@@ -143,15 +178,18 @@ <h3 class="text-xs font-bold uppercase text-amber-400 tracking-wider"><i class="
+            </div>
+        </div>
 
-            if(!nombre || !telefono || !direccion) { alert("Por favor complete todos los campos obligatorios (*)"); return; }
+        <!-- CONTADOR DE EQUIPOS -->
+        <div class="flex items-center justify-between mb-6 px-1">
+            <h2 class="text-gray-900 font-extrabold text-sm tracking-wider uppercase"><i class="fa-solid fa-layer-group text-blue-600 mr-1"></i> Vitrina de Equipos</h2>
+            <span id="contador-productos" class="text-[10px] bg-blue-50 text-blue-600 font-black px-2.5 py-1 rounded-full">Cargando...</span>
+        </div>
 
-            let mensaje = `*NUEVO PEDIDO - TUCOCEL C.A.*\n\n`;
-            mensaje += `*Cliente:* ${nombre}\n`;
-            mensaje += `*Teléfono:* ${telefono}\n`;
-            mensaje += `*Forma de Pago:* ${pago}\n`;
-            mensaje += `*Dirección:* ${direccion}\n\n`;
-            mensaje += `*Equipos Solicitados:*\n`;
+        <!-- CUADRÍCULA DE PRODUCTOS INTELIGENTE Y RESPONSIVA -->
+        <div id="contenedor-productos" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <p class="col-span-full text-center text-xs text-gray-400 py-10"><i class="fa-solid fa-spinner fa-spin text-blue-600 mr-2"></i> Conectando de forma segura con la nube de Servicell...</p>
+        </div>
 
-            carrito.forEach((item, index) => {
-                mensaje += `${index + 1}. ${item.marca} ${item.modelo} - $${item.precio} USD\n`;
-            });
+        <!-- RESPALDO COMERCIAL Y MÉTODOS DE PAGO -->
+        <div class="mt-12 bg-white border border-gray-100 rounded-3xl p-6 shadow-sm space-y-5 max-w-4xl mx-auto sm:mx-0">
+            <h4 class="text-xs font-black text-gray-900 uppercase tracking-wider border-b border-gray-100 pb-2"><i class="fa-solid fa-circle-info text-blue-600 mr-1"></i> Respaldo Comercial Tucocel</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-b border-gray-50 pb-5">
+@@ -177,6 +215,7 @@ <h4 class="text-xs font-black text-gray-900 uppercase tracking-wider border-b bo
+        </div>
+    </main>
 
-            const total = carrito.reduce((sum, item) => sum + item.precio, 0);
-            mensaje += `\n*TOTAL ESTIMADO:* $${total}.00 USD`;
+    <!-- PIE DE PÁGINA (FOOTER) -->
+    <footer class="bg-white border-t border-gray-100 mt-20 py-8 text-center text-xs text-gray-400">
+        <div class="max-w-7xl mx-auto px-4 space-y-1">
+            <p class="font-bold text-gray-600 text-sm">&copy; 2026 TUCOCEL C.A. Todos los derechos reservados.</p>
+@@ -185,6 +224,7 @@ <h4 class="text-xs font-black text-gray-900 uppercase tracking-wider border-b bo
+        </div>
+    </footer>
 
-            const linkWha = `https://wa.me/584140000000?text=${encodeURIComponent(mensaje)}`; // Aquí puedes cambiar por tu nro real de WhatsApp
-            const linkWha = `https://wa.me/584247357549?text=${encodeURIComponent(mensaje)}`; // Nro de WhatsApp de la tienda
-            window.open(linkWha, '_blank');
-            carrito = [];
-            actualizarInterfazCarrito();
-            cerrarModalPago();
-        }
+    <!-- MODAL DETALLE DE PRODUCTO -->
+    <div id="modal-detalle" class="fixed inset-0 bg-slate-950/80 z-50 flex items-center justify-center hidden p-4 backdrop-blur-sm">
+        <div class="bg-white w-full max-w-sm rounded-3xl p-6 space-y-4 shadow-2xl relative max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <button onclick="cerrarModalDetalle()" class="absolute right-4 top-4 text-gray-400 hover:text-gray-700 text-2xl p-1 z-10"><i class="fa-solid fa-xmark"></i></button>
+@@ -214,6 +254,7 @@ <h3 id="detalle-modelo" class="font-extrabold text-gray-900 text-xl tracking-tig
+        </div>
+    </div>
 
+    <!-- MODAL DE REGISTRO PARA CLIENTES -->
+    <div id="modal-pago" class="fixed inset-0 bg-slate-950/80 z-50 flex items-end justify-center hidden p-4 backdrop-blur-sm">
+        <div class="bg-white w-full max-w-md rounded-t-3xl p-6 space-y-4 max-h-[85vh] overflow-y-auto custom-scrollbar">
+            <div class="flex justify-between items-center border-b border-gray-100 pb-3">
+@@ -234,6 +275,7 @@ <h3 class="text-base font-bold text-gray-900">Registro de Compra Directa</h3>
+        </div>
+    </div>
+
+    <!-- BARRA FLOTANTE DEL CARRITO -->
+    <div id="barra-carrito" class="fixed bottom-4 inset-x-4 max-w-sm mx-auto bg-slate-950 text-white p-4 rounded-2xl shadow-2xl z-40 hidden border border-slate-800 flex justify-between items-center transition-all">
+        <div class="flex items-center gap-3">
+            <div class="bg-blue-600 w-9 h-9 rounded-xl flex items-center justify-center relative shadow-md">
+@@ -250,6 +292,7 @@ <h3 class="text-base font-bold text-gray-900">Registro de Compra Directa</h3>
+        </button>
+    </div>
+
+    <!-- MOTOR LÓGICO COMPLETO -->
+    <script>
+        const ADMIN_USER = "tucocel";
+        const ADMIN_PASS = "admin123"; 
+@@ -527,4 +570,4 @@ <h3 class="font-bold text-gray-900 text-base group-hover:text-blue-600 transitio
         window.onload = cargarInventarioNube;
     </script>
 </body>
-        </html>
+                        </html>
 </html>
