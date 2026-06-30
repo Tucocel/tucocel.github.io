@@ -279,15 +279,15 @@
         </button>
     </div>
 
-    <!-- SCRIPT DE CONTROL REPARADO -->
+    <!-- SCRIPT DE CONTROL OPERATIVO FIJO -->
     <script>
         const ADMIN_USER = "tucocel";
         const ADMIN_PASS = "admin123"; 
         
-        // ==========================================
-        // 🔴 PEGUE AQUÍ SU RESPALDO CUANDO LO TENGA
-        // ==========================================
-        const RESPALDO_FIJO_CLIENTES = []; 
+        // =======================================================
+        // INVENTARIO ACTUALIZADO RESPALDADO PARA TODOS LOS CLIENTES
+        // =======================================================
+        const RESPALDO_FIJO_CLIENTES = [{"id":"1782798303265","marca":"Infinix","modelo":"Jejeke","memoria":"Jwjjwjwje","precio":150,"foto":"","desc":"Jdjsjejeje"}]; 
         
         let PRODUCTOS = [];
         let carrito = [];
@@ -306,7 +306,6 @@
                         img.onload = function() {
                             const canvas = document.createElement('canvas');
                             const ctx = canvas.getContext('2d');
-                            // ALTA CALIDAD HD SIN COMPRESIÓN AGRESIVA
                             canvas.width = 1200; canvas.height = 1200;
                             ctx.imageSmoothingEnabled = true;
                             ctx.imageSmoothingQuality = 'high';
@@ -330,11 +329,9 @@
             
             if (guardadosLocales) {
                 PRODUCTOS = JSON.parse(guardadosLocales);
-            } else if (RESPALDO_FIJO_CLIENTES.length > 0) {
+            } else {
                 PRODUCTOS = RESPALDO_FIJO_CLIENTES;
                 localStorage.setItem('tucocel_inventario_v2', JSON.stringify(PRODUCTOS));
-            } else {
-                PRODUCTOS = [];
             }
             
             const sesionActiva = localStorage.getItem('tucocel_admin_sesion');
@@ -470,7 +467,6 @@
             const idUnico = (new Date().getTime() + Math.floor(Math.random() * 1000)).toString();
             PRODUCTOS.unshift({ id: idUnico, marca, modelo, memoria, precio, foto, desc });
             
-            // Guardado local asegurado al 100%
             localStorage.setItem('tucocel_inventario_v2', JSON.stringify(PRODUCTOS));
             ejecutarFiltroCombinado();
 
@@ -509,7 +505,6 @@
             if(PRODUCTOS.length === 0) { alert("Aún no tienes productos guardados para respaldar."); return; }
             const textoRespaldo = JSON.stringify(PRODUCTOS);
             
-            // Crea un cuadro invisible para copiar automáticamente
             const el = document.createElement('textarea');
             el.value = textoRespaldo;
             document.body.appendChild(el);
@@ -517,7 +512,7 @@
             document.execCommand('copy');
             document.body.removeChild(el);
             
-            alert("¡Copia de respaldo generada! El texto se copió a tu portapapeles automáticamente. Pégalo en el chat con tu IA para fijarlo para los clientes.");
+            alert("¡Copia de respaldo generada! Pégalo en el chat con tu IA para dejar fijos tus nuevos equipos.");
         }
 
         function agregarAlCarrito(id, boton) {
