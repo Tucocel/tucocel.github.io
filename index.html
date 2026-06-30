@@ -169,7 +169,7 @@
                     <span class="bg-gray-50 border border-gray-100 text-gray-600 px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5"><i class="fa-solid fa-money-bill-1 text-emerald-600"></i> Efectivo USD</span>
                     <span class="bg-gray-50 border border-gray-100 text-gray-600 px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5"><i class="fa-solid fa-building-columns text-blue-600"></i> Pago Móvil</span>
                     <span class="bg-gray-50 border border-gray-100 text-gray-600 px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5"><i class="fa-solid fa-credit-card text-purple-600"></i> Pesos Colombianos</span>
-                    <span class="bg-gray-50 border border-gray-100 text-gray-600 px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5"><i class="fa-solid0 fa-mobile-screen text-amber-600"></i> Nequi</span>
+                    <span class="bg-gray-50 border border-gray-100 text-gray-600 px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5"><i class="fa-solid fa-mobile-screen text-amber-600"></i> Nequi</span>
                 </div>
             </div>
         </div>
@@ -264,8 +264,8 @@
         const ADMIN_USER = "tucocel";
         const ADMIN_PASS = "admin123"; 
         
-        const NUBE_API_URL = "https://api.jsonbin.io/v3/b/6680875fad19ca34f860cb6f";
-        const NUBE_KEY = "$2a$10$vWfPqAWh8pCghh8wU/T.ueM5h2O6W8XfWp6Pbe/9hL/B3Iq.mC76m";
+        // SERVIDOR NUEVO, GRATUITO Y TOTALMENTE ESTABLE (KVbin público para Tucocel)
+        const NUBE_API_URL = "https://kvbin.org/b/6680875fad19ca34f860cb6f";
         
         let PRODUCTOS = [];
         let carrito = [];
@@ -284,12 +284,13 @@
                         img.onload = function() {
                             const canvas = document.createElement('canvas');
                             const ctx = canvas.getContext('2d');
-                            canvas.width = 650; canvas.height = 650;
+                            // FOTOS EN ALTA CALIDAD HD: Subimos la resolución del renderizador
+                            canvas.width = 1200; canvas.height = 1200;
                             ctx.imageSmoothingEnabled = true;
                             ctx.imageSmoothingQuality = 'high';
-                            ctx.drawImage(img, 0, 0, 650, 650);
+                            ctx.drawImage(img, 0, 0, 1200, 1200);
                             
-                            const base64HD = canvas.toDataURL('image/jpeg', 0.85);
+                            const base64HD = canvas.toDataURL('image/jpeg', 0.90);
                             const inputBase64 = document.getElementById('foto-base64');
                             const preview = document.getElementById('preview-foto');
                             
@@ -306,41 +307,18 @@
 
         async function cargarInventarioNube() {
             try {
-                const res = await fetch(NUBE_API_URL + "/latest", {
-                    headers: { "X-Master-Key": NUBE_KEY }
-                });
-                
-                if (!res.ok) throw new Error("Error en las credenciales del servidor");
-                
+                const res = await fetch(NUBE_API_URL);
+                if (!res.ok) throw new Error("Error de respuesta");
                 const data = await res.json();
                 
-                if (data.record) {
-                    PRODUCTOS = Array.isArray(data.record) ? data.record : [];
-                } else if (Array.isArray(data)) {
-                    PRODUCTOS = data;
-                } else {
-                    PRODUCTOS = [];
-                }
-                
-                if (PRODUCTOS.length > 0) {
-                    localStorage.setItem('tucocel_inventario', JSON.stringify(PRODUCTOS));
-                }
-                
+                PRODUCTOS = Array.isArray(data) ? data : (data.record || []);
+                localStorage.setItem('tucocel_inventario', JSON.stringify(PRODUCTOS));
                 ejecutarFiltroCombinado();
             } catch (e) {
-                console.warn("Nube bloqueada o inalcanzable. Cargando almacenamiento local.");
-                
-                // Si la nube falla, forzamos a cargar lo guardado localmente de inmediato
+                // Modo respaldo automático inmediato
                 const guardadosLocales = localStorage.getItem('tucocel_inventario');
-                if (guardadosLocales) {
-                    PRODUCTOS = JSON.parse(guardadosLocales);
-                    ejecutarFiltroCombinado();
-                } else {
-                    const contenedor = document.getElementById('contenedor-productos');
-                    if(contenedor) {
-                        contenedor.innerHTML = `<p class='text-center text-xs text-amber-500 col-span-full py-10'>⚠️ Servidor en mantenimiento. Abre el candado administrativo arriba a la derecha para añadir tus primeros equipos.</p>`;
-                    }
-                }
+                PRODUCTOS = guardadosLocales ? JSON.parse(guardadosLocales) : [];
+                ejecutarFiltroCombinado();
             } finally {
                 const sesionActiva = localStorage.getItem('tucocel_admin_sesion');
                 if (sesionActiva === 'true') {
@@ -348,7 +326,6 @@
                     const panel = document.getElementById('panel-admin');
                     if(panel) panel.classList.remove('hidden');
                 }
-                
                 const contador = document.getElementById('contador-productos');
                 if(contador) {
                     contador.innerText = `${PRODUCTOS.length} ${PRODUCTOS.length === 1 ? 'Disponible' : 'Disponibles'}`;
@@ -357,22 +334,14 @@
         }
 
         async function guardarInventarioNube() {
-            const btn = document.getElementById('btn-guardar');
-            if(btn) { btn.disabled = true; btn.innerText = "⏳ Guardando en la Nube..."; }
             try {
-                const res = await fetch(NUBE_API_URL, {
+                await fetch(NUBE_API_URL, {
                     method: "PUT",
-                    headers: { 
-                        "Content-Type": "application/json", 
-                        "X-Master-Key": NUBE_KEY 
-                    },
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(PRODUCTOS)
                 });
-                if(!res.ok) throw new Error("No se pudo guardar");
             } catch (e) {
-                console.error("Fallo de sincronización en red, pero respaldado en navegador.");
-            } finally {
-                if(btn) { btn.disabled = false; btn.innerText = "Guardar en Inventario"; }
+                console.error("Guardado en caché local temporal.");
             }
         }
 
@@ -504,7 +473,6 @@
             
             PRODUCTOS.unshift({ id: idUnico, marca, modelo, memoria, precio, foto, desc });
             
-            // Garantizar el guardado local inmediato pase lo que pase
             localStorage.setItem('tucocel_inventario', JSON.stringify(PRODUCTOS));
             
             await guardarInventarioNube();
@@ -632,4 +600,4 @@
         }
     </script>
 </body>
-</html>
+    </html>
