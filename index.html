@@ -156,7 +156,7 @@
                                     <span class="text-[9px] text-gray-400 block uppercase font-bold">Precio</span>
                                     <p class="text-base font-black text-gray-900">$${prod.precio} <span class="text-[10px] text-gray-400 font-bold">USD</span></p>
                                 </div>
-                                <button onclick="event.stopPropagation(); agregarAlCarrito('${prod.id}', this)" class="bg-slate-900 text-white w-9 h-9 rounded-xl flex items-center justify-center hover:bg-blue-600 shadow-md transition-colors">
+                                <button onclick="event.stopPropagation(); agregarAlCarrito('${prod.id}', this)" class="bg-slate-900 text-white w-9 h-9 rounded-xl flex items-center justify-center hover:bg-blue-600 shadow-md transition-colors btn-agregar-cat">
                                     <i class="fa-solid fa-plus text-xs"></i>
                                 </button>
                             </div>
@@ -221,7 +221,10 @@
 
             if(!modelo || !precio) { alert('Llena modelo y precio.'); return; }
             
-            PRODUCTOS.unshift({ id: new Date().getTime().toString(), marca, modelo, memoria, precio, foto, desc });
+            // ID único robusto combinando tiempo y un número aleatorio
+            const idUnico = (new Date().getTime() + Math.floor(Math.random() * 1000)).toString();
+            
+            PRODUCTOS.unshift({ id: idUnico, marca, modelo, memoria, precio, foto, desc });
             
             await guardarInventarioNube();
             ejecutarFiltroCombinado();
@@ -266,13 +269,23 @@
             const viejoTexto = boton.innerHTML;
             const viejoClass = boton.className;
             
-            boton.className = "bg-emerald-500 text-white px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-1.5";
-            boton.innerHTML = '<i class="fa-solid fa-check text-xs"></i> ¡Agregado!';
+            // Detecta si es el botón del catálogo usando su clase distintiva 'w-9'
+            const esBotonCatalogo = boton.classList.contains('w-9');
+            
+            if (esBotonCatalogo) {
+                // Cambia el fondo a verde y el icono a check sin cambiar las dimensiones fijas w-9 h-9
+                boton.className = "bg-emerald-500 text-white w-9 h-9 rounded-xl flex items-center justify-center shadow-md transition-colors";
+                boton.innerHTML = '<i class="fa-solid fa-check text-xs"></i>';
+            } else {
+                // Si es el botón del modal (grande) se adapta de forma fluida con texto
+                boton.className = "bg-emerald-500 text-white px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-1.5 justify-center transition-colors";
+                boton.innerHTML = '<i class="fa-solid fa-check text-xs"></i> ¡Agregado!';
+            }
             
             setTimeout(() => { 
                 boton.className = viejoClass; 
                 boton.innerHTML = viejoTexto; 
-            }, 1000);
+            }, 1200);
         }
 
         function actualizarInterfazCarrito() {
@@ -334,4 +347,4 @@
         }
 
         window.onload = cargarInventarioNube;
-    </script>
+                            </script>
