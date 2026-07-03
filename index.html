@@ -9,7 +9,7 @@
     <meta property="og:title" content="Tucocel C.A. - Smart Vitrina Digital">
     <meta property="og:description" content="Encuentra tu próximo smartphone nuevo y garantizado. Explora nuestro catálogo virtual y visítanos en Cordero.">
     <meta property="og:image" content="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80">
-    <meta property="og:url" content="https://tucocel.github.io/Cat-logo-Tucocel/">
+    <meta property="og:url" content="https://tucocel.github.io/">
     <meta property="og:type" content="website">
 
     <!-- Tailwind CSS CDN -->
@@ -23,7 +23,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;600;700;800&display=swap');
         
-        /* OPTIMIZACIÓN GLOBAL DE NITIDEZ Y SUAVIZADO EN PANTALLAS */
+        /* OPTIMIZACIÓN GLOBAL DE NITIDEZ Y SUAVIZADO EN PANTALLAS (PC Y MÓVIL) */
         html, body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             -webkit-font-smoothing: antialiased;
@@ -100,7 +100,7 @@
         </div>
     </div>
 
-    <!-- BARRA DE NAVEGACIÓN -->
+    <!-- BARRA DE NAVEGACIÓN (IDENTIDAD MOVISTAR PÚBLICA RESTAURADA) -->
     <nav class="bg-white border-b border-gray-100 sticky top-0 z-40 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
@@ -196,18 +196,31 @@
         </div>
     </div>
 
-    <!-- SECCIÓN DE FILTROS Y VITRINA PRINCIPAL -->
+    <!-- SECCIÓN DE CANAL DIRECTO DE ATENCIÓN Y VITRINA PRINCIPAL -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div class="mb-6 relative max-w-md mx-auto sm:mx-0">
-            <input type="text" id="buscador" placeholder="¿Qué modelo estás buscando hoy?..." class="w-full bg-white p-3.5 pl-11 rounded-2xl shadow-sm border border-gray-200 text-sm text-gray-800 focus:outline-none focus:border-blue-500">
-            <i class="fa-solid fa-magnifying-glass absolute left-4 top-4 text-gray-400 text-sm"></i>
+        
+        <!-- MÓDULO CORPORATIVO PREMIUM DE ATENCIÓN DIRECTA POR WHATSAPP (REEMPLAZA AL BUSCADOR) -->
+        <div class="mb-8 max-w-4xl mx-auto bg-gradient-to-r from-blue-600 to-blue-800 text-white p-6 rounded-2xl shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4 border border-blue-500">
+            <div class="flex items-center gap-4 text-center sm:text-left">
+                <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-2xl shrink-0">
+                    <i class="fa-solid fa-comments-dollar text-amber-300"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-sm md:text-base tracking-tight">¿Deseas preguntar por algún otro producto, teléfono o servicio?</h3>
+                    <p class="text-xs text-blue-100 mt-0.5 font-medium">Si no ves el modelo o accesorio que buscas, ¡te lo cotizamos al instante!</p>
+                </div>
+            </div>
+            <button onclick="window.open('https://wa.me/584247357549?text=' + encodeURIComponent('¡Hola, Tucocel! Estoy visitando su Vitrina Digital y me gustaría consultar por la disponibilidad de un producto o servicio en especial...'), '_blank')" class="bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs px-6 py-3 rounded-xl transition-all shadow-md flex items-center justify-center gap-2 uppercase tracking-wide shrink-0">
+                <i class="fa-brands fa-whatsapp text-sm"></i> Consultar aquí por WhatsApp
+            </button>
         </div>
 
-        <div class="bg-blue-50 border border-blue-100 rounded-2xl p-4 mb-6 max-w-7xl mx-auto flex items-start gap-3 shadow-sm">
-            <i class="fa-solid fa-circle-info text-blue-600 text-lg mt-0.5 shrink-0"></i>
-            <div class="text-xs md:text-sm text-blue-900 leading-relaxed font-medium">
+        <!-- RECUADRO INFORMATIVO DE STOCK CON ALINEACIÓN PERFECTA JUSTIFICADA -->
+        <div class="bg-blue-50 border border-blue-100 rounded-2xl p-5 mb-8 max-w-7xl mx-auto flex items-start gap-4 shadow-sm">
+            <i class="fa-solid fa-circle-info text-blue-600 text-xl mt-0.5 shrink-0"></i>
+            <div class="text-xs md:text-sm text-blue-900 leading-relaxed font-medium text-justify w-full">
                 <p>Todos los equipos publicados aquí se encuentran <span class="font-bold text-blue-950">disponibles en nuestra tienda física</span> para entrega inmediata.</p>
-                <p class="mt-1.5 text-blue-700">¿Buscas un modelo específico que no ves en el catálogo? <span class="font-bold text-blue-950">¡Te lo traemos por encargo!</span> Lo cancelas en tienda y en tan solo <span class="font-bold text-blue-950">2 horas</span> ya puedes pasar a retirarlo.</p>
+                <p class="mt-2 text-blue-700">¿Buscas un modelo específico que no ves en el catálogo? <span class="font-bold text-blue-950">¡Te lo traemos por encargo!</span> Lo cancelas en tienda y en tan solo <span class="font-bold text-blue-950">2 horas</span> ya puedes pasar a retirarlo.</p>
             </div>
         </div>
 
@@ -392,6 +405,7 @@
 
             </div>
 
+            <!-- HISTORIAL CON BOTÓN DE MENÚ INTERACTIVO (REIMPRIMIR / MANDAR AL WA) -->
             <div class="bg-slate-100 border-t border-gray-200 p-4 sm:p-5 space-y-3">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-200 pb-2">
                     <div class="flex items-center gap-1.5">
@@ -430,13 +444,12 @@
         </div>
     </div>
 
-    <!-- WRAPPER DE IMPRESIÓN AISLADO (EVITA LAS PÁGINAS EN BLANCO EN LA EPSON) -->
+    <!-- WRAPPER DE IMPRESIÓN AISLADO (FIJADO ESTRICTAMENTE A UNA HOJA CON CONTENEDORES SIMÉTRICOS PERFECTOS) -->
     <div id="wrapper-impresion-epson" style="display: none;">
-        <!-- CONTENEDOR OPTIMIZADO: DISEÑO CORPORATIVO EXACTO SEGÚN SCREENSHOT_20260701-192334.JPG -->
         <div id="contenedor-ticket-real" style="width: 15cm; height: 10cm; padding: 0.3cm; box-sizing: border-box; background-color: #fff; color: #000; font-family: Arial, sans-serif; font-size: 10px; line-height: 1.2; border: 1px solid #000; display: flex; flex-direction: column; justify-content: space-between;">
             <div style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
                 
-                <!-- Encabezado en Espejo Completamente Alineado -->
+                <!-- Encabezado en Espejo -->
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
                     <div style="width: 55%;">
                         <h2 style="margin: 0; font-size: 13px; font-weight: bold; letter-spacing: -0.3px; color: #000;">TUCOCEL C.A.</h2>
@@ -445,10 +458,10 @@
                         <p style="margin: 1px 0; font-size: 7.5px; color: #000; font-weight: bold;">WhatsApp: 0424-7357549</p>
                     </div>
                     <div style="width: 45%; display: flex; flex-direction: column; align-items: flex-end;">
-                        <!-- AJUSTADO A NOTA DE ENTREGA (SIN VALOR FISCAL) PARA SALVAGUARDAR MARCO REGULATORIO -->
-                        <div style="border: 1px solid #000; padding: 3px 8px; text-align: center; border-radius: 2px; min-width: 150px; background: #fff; box-shadow: inset 0 0 1px rgba(0,0,0,0.1);">
-                            <span style="display: block; font-size: 8px; font-weight: bold; color:#000; tracking-wide: 0.5px;">NOTA DE ENTREGA</span>
-                            <span style="display: block; font-size: 6.5px; font-weight: bold; color: #555; line-height: 1;">(SIN VALOR FISCAL)</span>
+                        <!-- SE LE DIO LÍNEA DE ENFOQUE PROPIA E INDEPENDIENTE CON MÁXIMO TAMAÑO AL AVISO DE CONTROL FISCAL -->
+                        <div style="border: 1px solid #000; padding: 4px 6px; text-align: center; border-radius: 2px; min-width: 155px; background: #fff;">
+                            <span style="display: block; font-size: 8.5px; font-weight: bold; color:#000; tracking-wide: 0.5px;">NOTA DE ENTREGA</span>
+                            <span style="display: block; font-size: 8px; font-weight: bold; color: #000; line-height: 1.1; margin-top: 1px;">(SIN VALOR FISCAL)</span>
                             <span style="display: block; font-size: 11px; font-weight: bold; color: #dc2626; margin-top: 2px;" id="tk-num-nota">N° 000000</span>
                         </div>
                         <p style="margin: 3px 0 0 0; font-size: 7.5px; font-weight: bold; color: #000;" id="tk-fecha">Fecha/Hora: --/--/---- --:--</p>
@@ -457,7 +470,7 @@
 
                 <!-- Bloque Datos de Cliente en Tabla de Dos Columnas Perfecta -->
                 <div style="margin: 3px 0; width: 100%;">
-                    <table style="width: 100%; border-collapse: collapse; font-size: 8px; border: 1px solid #000;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 8.5px; border: 1px solid #000;">
                         <tr style="border-bottom: 1px solid #000;">
                             <td style="padding: 3px; width: 50%; border-right: 1px solid #000;"><strong style="font-weight: bold; color: #000;">Cliente:</strong> <span id="tk-cliente-nombre" style="color: #000;">--------</span></td>
                             <td style="padding: 3px; width: 50%;"><strong style="font-weight: bold; color: #000;">Cédula/RIF:</strong> <span id="tk-cliente-cedula" style="color: #000;">--------</span></td>
@@ -471,7 +484,7 @@
 
                 <!-- Tabla de Artículos Estructurada con 4 Columnas e Inyección Limpia -->
                 <div style="flex-grow: 1; margin: 3px 0; overflow: hidden; max-height: 3.5cm;">
-                    <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 8px; border: 1px solid #000;">
+                    <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 8.5px; border: 1px solid #000;">
                         <thead>
                             <tr style="background: #f3f4f6; border-bottom: 1px solid #000; font-weight: bold; color: #000;">
                                 <th style="padding: 3px; border-right: 1px solid #000; width: 10%; text-align: center;">Cant.</th>
@@ -485,34 +498,34 @@
                     </table>
                 </div>
 
-                <!-- Bloque de Totales Completamente Cuadrado y Alineado a las Líneas del Contenedor -->
+                <!-- Bloque de Totales Completamente Cuadrado y Alineado Milimétricamente -->
                 <div style="display: flex; justify-content: space-between; align-items: flex-end; width: 100%; margin-top: 2px;">
                     <div style="width: 48%; padding-bottom: 2px;">
-                        <p style="margin: 1px 0; font-size: 8px; color: #000;"><strong style="font-weight: bold;">Forma de Pago:</strong> Multimoneda</p>
-                        <p style="margin: 1px 0; font-size: 8px; color: #000;"><strong style="font-weight: bold;">Estatus:</strong> Procesado e Inalterable</p>
+                        <p style="margin: 1px 0; font-size: 8.5px; color: #000;"><strong style="font-weight: bold;">Forma de Pago:</strong> Multimoneda</p>
+                        <p style="margin: 1px 0; font-size: 8.5px; color: #000;"><strong style="font-weight: bold;">Estatus:</strong> Procesado e Inalterable</p>
                     </div>
                     <div style="width: 52%;">
-                        <table style="width: 100%; border-collapse: collapse; font-size: 8px; border: 1px solid #000;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 8.5px; border: 1px solid #000;">
                             <tr style="border-bottom: 1px solid #000;">
-                                <td style="padding: 3px 4px; font-weight: bold; border-right: 1px solid #000; background: #f9fafb; width: 45%; color: #000;">Ref. Dólares:</td>
-                                <td style="padding: 3px 4px; text-align: right; font-weight: bold; font-family: monospace; width: 55%; color: #000;" id="tk-total-usd">$0</td>
+                                <td style="padding: 3px 5px; font-weight: bold; border-right: 1px solid #000; background: #f9fafb; width: 45%; color: #000;">Ref. Dólares:</td>
+                                <td style="padding: 3px 5px; text-align: right; font-weight: bold; font-family: monospace; width: 55%; color: #000;" id="tk-total-usd">$0</td>
                             </tr>
                             <tr style="border-bottom: 1px solid #000;">
-                                <td style="padding: 3px 4px; font-weight: bold; border-right: 1px solid #000; background: #f9fafb; color: #000;">Ref. Pesos:</td>
-                                <td style="padding: 3px 4px; text-align: right; font-weight: bold; font-family: monospace; color: #000;" id="tk-total-cop">0 COP</td>
+                                <td style="padding: 3px 5px; font-weight: bold; border-right: 1px solid #000; background: #f9fafb; color: #000;">Ref. Pesos:</td>
+                                <td style="padding: 3px 5px; text-align: right; font-weight: bold; font-family: monospace; color: #047857;" id="tk-total-cop">0 COP</td>
                             </tr>
                             <tr>
-                                <td style="padding: 3px 4px; font-weight: bold; border-right: 1px solid #000; background: #f9fafb; color: #000;">Ref. Bolívares:</td>
-                                <td style="padding: 3px 4px; text-align: right; font-weight: bold; font-family: monospace; color: #000;" id="tk-total-bs">0 Bs</td>
+                                <td style="padding: 3px 5px; font-weight: bold; border-right: 1px solid #000; background: #f9fafb; color: #000;">Ref. Bolívares:</td>
+                                <td style="padding: 3px 5px; text-align: right; font-weight: bold; font-family: monospace; color: #1d4ed8;" id="tk-total-bs">0 Bs</td>
                             </tr>
                         </table>
                     </div>
                 </div>
                 
-                <!-- Recuadro Legal con Borde de Líneas Punteadas Independientes -->
-                <div style="border: 1px dashed #000; padding: 4px; border-radius: 2px; text-align: center; margin-top: 4px; background: #fff;">
-                    <p style="margin: 0; font-size: 6.5px; text-align: justify; font-weight: 500; line-height: 1.1; color: #000;">
-                        <strong style="font-weight: bold;">Términos de Garantía:</strong> Garantía por defectos de fábrica de los equipos celulares: 2 meses. La garantía no cubre golpes, humedad, sellos rotos, sobrecargas eléctricas o alteración de software.
+                <!-- Recuadro Legal con Borde de Líneas Punteadas Grandes y Legibles -->
+                <div style="border: 1px dashed #000; padding: 5px; border-radius: 2px; text-align: center; margin-top: 4px; background: #fff;">
+                    <p style="margin: 0; font-size: 7.5px; text-align: justify; font-weight: bold; line-height: 1.1; color: #000;">
+                        TERMS DE GARANTÍA: Garantía por defectos de fábrica de los equipos celulares: 2 meses. La garantía no cubre golpes, humedad, sellos rotos, sobrecargas eléctricas o alteración de software.
                     </p>
                 </div>
 
@@ -665,7 +678,7 @@
         </div>
     </div>
 
-    <!-- NÚCLEO MOTOR LÓGICO INTEGRADO DE TUCOCEL -->
+    <!-- NÚCLEO MOTOR LÓGICO INTEGRADO -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, doc, setDoc, getDoc, collection, addDoc, getDocs, query, orderBy, limit, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -699,7 +712,6 @@
         window.addEventListener("DOMContentLoaded", async () => {
             document.getElementById('add-foto-file').addEventListener('change', procesarImagen);
             document.getElementById('btn-guardar').addEventListener('click', procesarGuardadoInventario);
-            document.getElementById('buscador').addEventListener('keyup', ejecutarFiltroCombinado);
             
             window.abrirLoginAdmin = abrirLoginAdmin;
             window.cerrarLoginAdmin = cerrarLoginAdmin;
@@ -806,12 +818,10 @@
         }
 
         function ejecutarFiltroCombinado() {
-            const textoBuscador = document.getElementById('buscador').value.toLowerCase();
             const telefonosFiltrados = PRODUCTOS.filter(p => {
                 const esTelefono = p.marca !== 'Otros Productos';
                 const coincideMarca = (marcaSeleccionada === 'Todas' || p.marca.toLowerCase() === marcaSeleccionada.toLowerCase());
-                const coincideTexto = p.modelo.toLowerCase().includes(textoBuscador) || p.marca.toLowerCase().includes(textoBuscador);
-                return esTelefono && coincideMarca && coincideTexto;
+                return esTelefono && coincideMarca;
             });
             const otrosFiltrados = PRODUCTOS.filter(p => p.marca === 'Otros Productos');
             renderizarCatalogoHTML(telefonosFiltrados);
@@ -842,7 +852,7 @@
                              `──────────────────────\n` +
                              `🛒 _Este equipo lo puedes conseguir a un súper precio especial en nuestra tienda física en Cordero._\n\n` +
                              `🌐 *VER VITRINA VIRTUAL COMPLETA AQUÍ:*\n` +
-                             `https://tucocel.github.io/Cat-logo-Tucocel/\n\n` +
+                             `https://tucocel.github.io/\n\n` +
                              `🏢 _Agente Autorizado Movistar Cordero_`;
             
             window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msgShare)}`, '_blank');
@@ -1249,20 +1259,9 @@
             }, 350);
         }
 
-        async function ejecutarBotonWhatsApp() {
-            if(ITEMS_VENTA_ACTIVA.length === 0) return alert("Ticket vacío.");
-            if (!verificarTasasEstablecidas()) return;
-            
-            let celTlf = document.getElementById('fact-cli-telefono').value.trim();
-            if(!celTlf) {
-                celTlf = prompt("Ingrese el número de WhatsApp del cliente:");
-                if(!celTlf) return;
-            }
-
-            const nota = await registrarNotaEnFirebase();
-            inyectarDatosAlTicketDOM(nota);
-
-            let tlfLimpio = celTlf.replace(/[^0-9]/g, '');
+        /* COMPARTIR COMPROBANTE DINÁMICO MANUAL O DESDE EL HISTORIAL */
+        function procesarEnvioWaObjeto(nota) {
+            let tlfLimpio = nota.telefono.replace(/[^0-9]/g, '');
             if(tlfLimpio.startsWith('0')) tlfLimpio = '58' + tlfLimpio.substring(1);
 
             let descArticulos = nota.items.map(i => {
@@ -1294,6 +1293,21 @@
                                      `Garantía por defectos de fábrica de los equipos celulares: 2 meses. La garantía no cubre golpes, humedad, sellos rotos, sobrecargas eléctricas o alteración de software.`;
 
             window.open(`https://wa.me/${tlfLimpio}?text=${encodeURIComponent(mensajeWhatsApp)}`, '_blank');
+        }
+
+        async function ejecutarBotonWhatsApp() {
+            if(ITEMS_VENTA_ACTIVA.length === 0) return alert("Ticket vacío.");
+            if (!verificarTasasEstablecidas()) return;
+            
+            let celTlf = document.getElementById('fact-cli-telefono').value.trim();
+            if(!celTlf) {
+                celTlf = prompt("Ingrese el número de WhatsApp del cliente:");
+                if(!celTlf) return;
+            }
+
+            const nota = await registrarNotaEnFirebase();
+            inyectarDatosAlTicketDOM(nota);
+            procesarEnvioWaObjeto(nota);
             limpiatFormularioFacturaCompleto();
         }
 
@@ -1315,18 +1329,23 @@
             }
         }
 
+        /* MENÚ DE ACCIÓN INTELIGENTE INTERACTIVO EN EL HISTORIAL DE COMPROBANTES */
         function reabrirNotaHistorialPorObjeto(index) {
             const nota = HISTORIAL_NOTAS[index];
             if(!nota) return;
             
-            document.getElementById('wrapper-impresion-epson').style.display = 'block';
-            inyectarDatosAlTicketDOM(nota);
+            const seleccion = prompt(`⚙️ CONTROL DE NOTA N° ${String(nota.numNota).padStart(6, '0')}\n\nEscriba el número de la acción que desea realizar:\n\n[1] Imprimir Nota física en Epson\n[2] Reenviar Comprobante escrito por WhatsApp\n\nPresione cancelar para salir.`);
             
-            alert(`Abriendo Nota N° ${String(nota.numNota).padStart(6, '0')} para la cola de impresión Epson física.`);
-            setTimeout(() => {
-                window.print();
-                document.getElementById('wrapper-impresion-epson').style.display = 'none';
-            }, 350);
+            if (seleccion === "1") {
+                document.getElementById('wrapper-impresion-epson').style.display = 'block';
+                inyectarDatosAlTicketDOM(nota);
+                setTimeout(() => {
+                    window.print();
+                    document.getElementById('wrapper-impresion-epson').style.display = 'none';
+                }, 350);
+            } else if (seleccion === "2") {
+                procesarEnvioWaObjeto(nota);
+            }
         }
 
         async function ejecutarCierreDeMes() {
@@ -1381,7 +1400,7 @@
                         <td class="p-2.5 text-right font-mono font-black text-gray-900">$${totalNotaFormateado}</td>
                         <td class="p-2.5 text-center">
                             <div class="flex items-center justify-center gap-1.5">
-                                <button onclick="reabrirNotaHistorialPorObjeto(${idx})" class="bg-blue-50 text-blue-600 p-2 rounded-lg font-bold hover:bg-blue-100" title="Ver e Imprimir"><i class="fa-solid fa-print"></i></button>
+                                <button onclick="reabrirNotaHistorialPorObjeto(${idx})" class="bg-blue-50 text-blue-600 p-2 rounded-lg font-bold hover:bg-blue-100" title="Controlar Nota"><i class="fa-solid fa-sliders"></i></button>
                                 <button onclick="eliminarNotaHistorialPorId('${n.id}')" class="bg-red-50 text-red-500 p-2 rounded-lg font-bold hover:bg-red-100" title="Eliminar"><i class="fa-solid fa-trash-can"></i></button>
                             </div>
                         </td>
