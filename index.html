@@ -45,10 +45,12 @@
 
         /* AISLAMIENTO CRÍTICO Y CONTROL DE IMPRESIÓN EXCLUSIVO PARA EPSON (15cm x 10cm Horizontal) */
         @media print {
+            /* Ocultar de raíz todos los elementos y contenedores semánticos de la web */
             body > *:not(#wrapper-impresion-epson) {
                 display: none !important;
                 visibility: hidden !important;
             }
+            /* Forzar visualización única del contenedor de aislamiento */
             #wrapper-impresion-epson, #contenedor-ticket-real, #contenedor-ticket-real * {
                 display: flex !important;
                 visibility: visible !important;
@@ -67,7 +69,7 @@
             #contenedor-ticket-real {
                 width: 15cm !important;
                 height: 10cm !important;
-                padding: 0.3cm !important;
+                padding: 0.4cm !important;
                 box-sizing: border-box !important;
                 border: 1px solid #000 !important;
                 background: #fff !important;
@@ -220,6 +222,7 @@
                 <button onclick="filtrarPorMarca('Apple', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all">Apple</button>
                 <button onclick="filtrarPorMarca('Motorola', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all">Motorola</button>
                 <button onclick="filtrarPorMarca('ZTE', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all">ZTE</button>
+                <!-- BOTÓN DE OTROS PRODUCTOS RESTAURADO CORRECTAMENTE -->
                 <button onclick="filtrarPorMarca('Otros Productos', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all">Otros Productos</button>
             </div>
         </div>
@@ -260,13 +263,12 @@
                 <div class="flex flex-wrap items-center gap-3 bg-slate-950 p-2 rounded-2xl border border-slate-800 text-xs">
                     <div class="flex items-center gap-1">
                         <span class="text-slate-400">1 USD =</span>
-                        <!-- ARRANCAN INICIALMENTE EN CERO PARA EVITAR DESCUIDOS -->
-                        <input type="number" id="tasa-cop" value="0" oninput="calcularTotalesFactura()" class="w-16 bg-slate-800 text-white border border-slate-700 px-1 rounded text-center font-mono focus:outline-none placeholder-gray-500" placeholder="0">
+                        <input type="number" id="tasa-cop" value="4000" oninput="calcularTotalesFactura()" class="w-16 bg-slate-800 text-white border border-slate-700 px-1 rounded text-center font-mono focus:outline-none">
                         <span class="text-emerald-400 font-bold text-[10px]">COP</span>
                     </div>
                     <div class="flex items-center gap-1">
                         <span class="text-slate-400">Dividir COP entre:</span>
-                        <input type="number" id="tasa-bs" value="0" oninput="calcularTotalesFactura()" class="w-12 bg-slate-800 text-white border border-slate-700 px-1 rounded text-center font-mono focus:outline-none placeholder-gray-500" placeholder="0">
+                        <input type="number" id="tasa-bs" value="4" oninput="calcularTotalesFactura()" class="w-12 bg-slate-800 text-white border border-slate-700 px-1 rounded text-center font-mono focus:outline-none">
                         <span class="text-blue-400 font-bold text-[10px]">Bs</span>
                     </div>
                     <button onclick="ejecutarCierreDeMes()" class="bg-purple-600 hover:bg-purple-700 text-white text-[10px] uppercase font-black px-3 py-1 rounded-xl transition-colors ml-2 shadow">
@@ -429,87 +431,50 @@
         </div>
     </div>
 
-    <!-- WRAPPER DE IMPRESIÓN AISLADO (EVITA LAS PÁGINAS EN BLANCO EN LA EPSON) -->
+    <!-- WRAPPER DE IMPRESIÓN ASILADO (EVITA LAS PÁGINAS EN BLANCO EN LA EPSON) -->
     <div id="wrapper-impresion-epson" style="display: none;">
-        <!-- CONTENEDOR RESTAURADO AL 100% DE ACUERDO A SCREENSHOT_20260701-192334.JPG -->
-        <div id="contenedor-ticket-real" style="width: 15cm; height: 10cm; padding: 0.3cm; box-sizing: border-box; background-color: #fff; color: #000; font-family: sans-serif; font-size: 10px; line-height: 1.2; border: 1px solid #000; display: flex; flex-direction: column; justify-content: space-between;">
-            <div style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+        <div id="contenedor-ticket-real" style="width: 15cm; height: 10cm; padding: 0.4cm; box-sizing: border-box; background-color: #fff; color: #000; font-family: sans-serif; font-size: 11px; line-height: 1.3; border: 1px solid #000; flex-direction: column; justify-content: space-between;">
+            <div style="width: 100%; display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
                 
-                <!-- Encabezado en Espejo -->
-                <div style="display: flex; justify-content: justify; items-start; width: 100%;">
-                    <div style="width: 55%;">
-                        <h2 style="margin: 0; font-size: 13px; font-weight: 900; letter-spacing: -0.3px;">TUCOCEL C.A.</h2>
-                        <p style="margin: 1px 0; font-size: 7.5px; color: #111; font-weight: 600;">RIF: J-31378837-6</p>
-                        <p style="margin: 1px 0; font-size: 7.5px; color: #111;">Av. Bolívar, Cordero, Táchira.</p>
-                        <p style="margin: 1px 0; font-size: 7.5px; color: #111; font-weight: 600;">WhatsApp: 0424-7357549</p>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid #000; padding-bottom: 4px;">
+                    <div>
+                        <h2 style="margin: 0; font-size: 14px; font-weight: 900; letter-spacing: -0.3px;">TUCOCEL C.A.</h2>
+                        <p style="margin: 2px 0 0 0; font-size: 8px; color: #333;">RIF: J-31378837-6 | Av. Bolívar, Cordero</p>
                     </div>
-                    <div style="width: 45%; display: flex; flex-direction: column; align-items: flex-end;">
-                        <div style="border: 1px solid #000; padding: 4px 12px; text-align: center; border-radius: 2px; min-width: 140px; background: #fff;">
-                            <span style="display: block; font-size: 8px; font-weight: bold; uppercase tracking-wide; color:#000;">NOTA DE ENTREGA</span>
-                            <span style="display: block; font-size: 11px; font-weight: 900; color: #dc2626; margin-top: 1px;" id="tk-num-nota">N° 000000</span>
-                        </div>
-                        <p style="margin: 3px 0 0 0; font-size: 7.5px; font-weight: 600; text-align: right;" id="tk-fecha">Fecha/Hora: --/--/---- --:--</p>
+                    <div style="text-align: right;">
+                        <p style="margin: 0; font-weight: bold; font-size: 10px;" id="tk-num-nota">NOTA: #0000</p>
+                        <p style="margin: 2px 0 0 0; font-size: 8px;" id="tk-fecha">Fecha: --/--/----</p>
                     </div>
                 </div>
 
-                <!-- Bloque Datos de Cliente en Tabla de Dos Columnas -->
-                <div style="margin: 3px 0; width: 100%;">
-                    <table style="width: 100%; border-collapse: collapse; font-size: 8px; border: 1px solid #ddd;">
-                        <tr style="border-bottom: 1px solid #ddd;">
-                            <td style="padding: 3px; width: 50%; border-right: 1px solid #ddd;"><strong style="font-weight:700;">Cliente:</strong> <span id="tk-cliente-nombre">--------</span></td>
-                            <td style="padding: 3px; width: 50%;"><strong style="font-weight:700;">Cédula/RIF:</strong> <span id="tk-cliente-cedula">--------</span></td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 3px; border-right: 1px solid #ddd;"><strong style="font-weight:700;">Dirección:</strong> <span id="tk-cliente-direccion">--------</span></td>
-                            <td style="padding: 3px;"><strong style="font-weight:700;">Teléfono:</strong> <span id="tk-cliente-telefono">--------</span></td>
-                        </tr>
-                    </table>
+                <div style="margin: 4px 0; background: #f9f9f9; padding: 4px; border-radius: 4px; font-size: 9px;">
+                    <span id="tk-cliente-datos" style="font-weight: bold;">CLIENTE: -------- | CI: -------- | TLF: --------</span>
                 </div>
 
-                <!-- Tabla de Artículos Estructurada con 4 Columnas -->
-                <div style="flex-grow: 1; margin: 3px 0; overflow: hidden;">
-                    <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 8px;">
+                <div style="flex-grow: 1; margin: 4px 0;">
+                    <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 9px;">
                         <thead>
-                            <tr style="background: #f3f4f6; border: 1px solid #000; font-weight: bold;">
-                                <th style="padding: 3px; border-right: 1px solid #000; width: 10%; text-align: center;">Cant.</th>
-                                <th style="padding: 3px; border-right: 1px solid #000; width: 60%;">Descripción / Artículo</th>
-                                <th style="padding: 3px; border-right: 1px solid #000; width: 15%; text-align: center;">Moneda Base</th>
-                                <th style="padding: 3px; width: 15%; text-align: right;">Total Neto</th>
+                            <tr style="border-bottom: 1px solid #000; font-weight: bold;">
+                                <th style="padding: 2px 0;">Descripción del Artículo</th>
+                                <th style="text-align: right; padding: 2px 0;">Precio (USD)</th>
                             </tr>
                         </thead>
-                        <tbody id="tk-items-tabla" style="border-left: 1px solid #000; border-right: 1px solid #000; border-bottom: 1px solid #000;">
-                        </tbody>
+                        <tbody id="tk-items-tabla"></tbody>
                     </table>
                 </div>
 
-                <!-- Bloque de Totales y Cierre Financiero Multi-Divisas -->
-                <div style="display: flex; justify-content: justify; items-end; width: 100%; margin-top: 2px;">
-                    <div style="width: 50%; display: flex; flex-direction: column; justify-content: center;">
-                        <p style="margin: 1px 0; font-size: 8px; color: #111;"><strong style="font-weight:700;">Forma de Pago:</strong> Multimoneda</p>
-                        <p style="margin: 1px 0; font-size: 8px; color: #111;"><strong style="font-weight:700;">Estatus:</strong> Procesado e Inalterable</p>
+                <div style="border-top: 1px solid #000; padding-top: 4px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                        <span style="font-size: 8px; color: #444;" id="tk-valores-conversiones">Tasas Ref: 1$ = ---- COP | Bs calculados div. entre ----</span>
+                        <div style="text-align: right;">
+                            <span style="font-size: 10px; font-weight: bold; margin-right: 10px;" id="tk-total-cop">COP: 0</span>
+                            <span style="font-size: 10px; font-weight: bold; margin-right: 10px;" id="tk-total-bs">Bs: 0.00</span>
+                            <span style="font-size: 12px; font-weight: 900; background: #000; color: #fff; padding: 1px 4px; border-radius: 3px;" id="tk-total-usd">TOTAL: $0.00</span>
+                        </div>
                     </div>
-                    <div style="width: 50%;">
-                        <table style="width: 100%; border-collapse: collapse; font-size: 8px; border: 1px solid #000;">
-                            <tr style="border-bottom: 1px solid #000;">
-                                <td style="padding: 2.5px 4px; font-weight: bold; border-right: 1px solid #000; background: #f9fafb; width: 45%;">Ref. Dólares:</td>
-                                <td style="padding: 2.5px 4px; text-align: right; font-weight: 900; font-mono; width: 55%;" id="tk-total-usd">$0.00</td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid #000;">
-                                <td style="padding: 2.5px 4px; font-weight: bold; border-right: 1px solid #000; background: #f9fafb;">Ref. Pesos:</td>
-                                <td style="padding: 2.5px 4px; text-align: right; font-weight: 700; font-mono; color: #047857;" id="tk-total-cop">0 COP</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 2.5px 4px; font-weight: bold; border-right: 1px solid #000; background: #f9fafb;">Ref. Bolívares:</td>
-                                <td style="padding: 2.5px 4px; text-align: right; font-weight: 700; font-mono; color: #1d4ed8;" id="tk-total-bs">0.00 Bs</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                
-                <!-- Recuadro Legal Delimitado por Líneas Punteadas -->
-                <div style="border: 1px dashed #444; padding: 4px; border-radius: 2px; text-align: center; margin-top: 4px; background: #fff;">
-                    <p style="margin: 0; font-size: 6.5px; text-align: justify; font-weight: 500; line-height: 1.1; color: #000;">
-                        <strong style="font-weight:700; uppercase">Términos de Garantía:</strong> Garantía por defectos de fábrica de los equipos celulares: 2 meses. La garantía no cubre golpes, humedad, sellos rotos, sobrecargas eléctricas o alteración de software.
+                    
+                    <p style="margin: 0; font-size: 7px; text-align: justify; border-top: 1px dashed #666; padding-top: 3px; font-weight: 500; line-height: 1.1;">
+                        <strong>Garantía por defectos de fábrica de los equipos celulares: 2 meses.</strong> La garantía no cubre golpes, humedad, sellos rotos, sobrecargas eléctricas o alteración de software.
                     </p>
                 </div>
 
@@ -564,6 +529,7 @@
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <div class="overflow-y-auto p-6 space-y-4 no-scrollbar">
+                <!-- CONTENEDOR CUADRADO HOMOGÉNEO PARA EVITAR DISTORSIÓN EN CELULARES -->
                 <div class="aspect-square w-full bg-white border border-gray-100 rounded-2xl p-4 flex justify-center items-center overflow-hidden">
                     <img id="modal-img" src="" class="max-h-full max-w-full object-contain filter drop-shadow-md">
                 </div>
@@ -750,6 +716,7 @@
             }, 3500);
         }
 
+        /* EQUILIBRIO DE COMPRESIÓN DE ALTA RESOLUCIÓN CRISTALINA SIN CARGA PESADA */
         function procesarImagen(e) {
             const file = e.target.files[0];
             if (!file) return;
@@ -759,8 +726,10 @@
                 img.onload = function() {
                     const canvas = document.createElement('canvas');
                     const ctx = canvas.getContext('2d');
+                    // Elevado de 500x500 a 900x900 para garantizar nitidez impecable en PC y Laptops
                     canvas.width = 900; canvas.height = 900;
                     ctx.drawImage(img, 0, 0, 900, 900);
+                    // Retención optimizada al 85% de pureza de color
                     const base64Str = canvas.toDataURL('image/jpeg', 0.85);
                     document.getElementById('foto-base64').value = base64Str;
                     const preview = document.getElementById('preview-foto');
@@ -815,6 +784,7 @@
             renderizarCarruselOtrosHTML(otrosFiltrados);
         }
 
+        /* LOGICA DE DETECCIÓN INTELIGENTE Y FICHA EJECUTIVA FORMAL PARA WHATSAPP */
         function compartirProductoPorId(id) {
             const prod = PRODUCTOS.find(p => p.id === id);
             if(!prod) return;
@@ -823,6 +793,7 @@
             let introduccionComercial = "*¡El smartphone ideal para ti!*";
             let etiquetaFicha = "DISPOSITIVO";
             
+            // Detección automática inteligente por descarte de categoría
             if(prod.marca === 'Otros Productos') {
                 encabezadoIcono = "🔌";
                 introduccionComercial = "*¡El artículo de tecnología ideal para ti!*";
@@ -895,6 +866,7 @@
                 contenedor.innerHTML += `
                     <div onclick="abrirModalProducto('${prod.id}')" class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex flex-col justify-between transition-all hover:shadow-xl cursor-pointer group">
                         <div>
+                            <!-- CONTENEDORES ESTÁNDAR CUADRADOS DE ALTA SIMETRÍA ANTI-DEFORMACIÓN -->
                             <div class="aspect-square w-full bg-white border border-gray-100 rounded-xl overflow-hidden mb-4 flex justify-center items-center p-2">
                                 <img src="${fotoProd}" class="max-h-full max-w-full object-contain filter drop-shadow-md">
                             </div>
@@ -944,6 +916,7 @@
                 carrusel.innerHTML += `
                     <div onclick="abrirModalProducto('${prod.id}')" class="snap-start shrink-0 w-44 bg-white rounded-2xl p-3 border border-gray-100 shadow-sm flex flex-col justify-between cursor-pointer select-none">
                         <div>
+                            <!-- CONTENEDOR REDONDO/CUADRADO SIMÉTRICO PARA EVITAR ENLARGAMIENTOS EN CUALQUIER SMARTPHONE -->
                             <div class="w-full aspect-square bg-gray-50 rounded-xl overflow-hidden mb-2 flex items-center justify-center p-2">
                                 <img src="${fotoProd}" class="max-h-full max-w-full object-contain">
                             </div>
@@ -1023,20 +996,7 @@
             }
         }
 
-        /* FILTRO DE SEGURIDAD PARA BLOQUEAR CARGAS SI LAS TASAS ESTÁN EN CERO */
-        function verificarTasasEstablecidas() {
-            const cop = parseFloat(document.getElementById('tasa-cop').value) || 0;
-            const bs = parseFloat(document.getElementById('tasa-bs').value) || 0;
-            if (cop === 0 || bs === 0) {
-                alert("⚠️ ATENCIÓN: Por favor, ingrese el valor de las Tasas del Día (COP y Bs) en la barra superior antes de continuar con la facturación.");
-                return false;
-            }
-            return true;
-        }
-
         function agregarItemALaVenta() {
-            if (!verificarTasasEstablecidas()) return;
-
             if(modoCargaFacturaActivo === 'manual') {
                 const modelo = document.getElementById('manual-modelo').value.trim();
                 const precio = parseInt(document.getElementById('manual-precio').value.trim()) || 0;
@@ -1048,7 +1008,7 @@
 
                 ITEMS_VENTA_ACTIVA.push({
                     id: "manual-" + new Date().getTime(),
-                    marca: checkImei ? "Celular" : "Otros Productos",
+                    marca: checkImei ? "Celular" : "Artículo Libre",
                     modelo: modelo,
                     memoria: "",
                     precio: precio,
@@ -1123,14 +1083,14 @@
         }
 
         function calcularTotalesFactura() {
-            const tCOP = parseFloat(document.getElementById('tasa-cop').value) || 0;
-            const tBS = parseFloat(document.getElementById('tasa-bs').value) || 0;
+            const tCOP = parseFloat(document.getElementById('tasa-cop').value) || 1;
+            const tBS = parseFloat(document.getElementById('tasa-bs').value) || 1;
             
             let totalUSD = 0;
             ITEMS_VENTA_ACTIVA.forEach(i => totalUSD += i.precio);
 
             const totalCOP = totalUSD * tCOP;
-            const totalBS = tBS > 0 ? totalCOP / tBS : 0;
+            const totalBS = totalCOP / tBS;
 
             document.getElementById('total-usd').innerHTML = `Neto: $${totalUSD.toFixed(2)}`;
             document.getElementById('total-cop-val').innerText = `${totalCOP.toLocaleString('es-CO')} COP`;
@@ -1140,7 +1100,6 @@
         async function registrarNotaEnFirebase() {
             const nombre = document.getElementById('fact-cli-nombre').value.trim() || 'Cliente General';
             const cedula = document.getElementById('fact-cli-cedula').value.trim() || 'N/A';
-            const direccion = document.getElementById('fact-cli-direccion').value.trim() || 'Cordero, Centro';
             const telefono = document.getElementById('fact-cli-telefono').value.trim() || 'N/A';
             
             let montoTotalUSD = 0;
@@ -1160,22 +1119,19 @@
                 }
             } catch(err) { console.error(err); }
 
-            // Fecha y hora formateadas de forma precisa
-            const ahora = new Date();
-            const fechaString = ahora.toLocaleDateString('es-VE') + ' ' + ahora.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit', hour12: true });
+            const fechaString = new Date().toLocaleDateString('es-VE');
 
             const objetoNota = {
                 numNota: siguienteNumeroNota,
                 fecha: fechaString,
                 cliente: nombre,
                 cedula: cedula,
-                direccion: direccion,
                 telefono: telefono,
                 items: ITEMS_VENTA_ACTIVA,
                 totalUSD: montoTotalUSD,
                 tasaCOP: document.getElementById('tasa-cop').value,
                 tasaBS: document.getElementById('tasa-bs').value,
-                timestamp: ahora.getTime()
+                timestamp: new Date().getTime()
             };
 
             try {
@@ -1188,51 +1144,40 @@
             }
         }
 
-        /* INYECCIÓN INTEGRAL RESPETANDO LOS MÁRGENES DE SCREENSHOT_20260701-192334.JPG */
         function inyectarDatosAlTicketDOM(nota) {
-            // Relleno de número de nota formateado con ceros a la izquierda
-            const numeroFormateado = String(nota.numNota).padStart(6, '0');
-            document.getElementById('tk-num-nota').innerText = `N° ${numeroFormateado}`;
-            document.getElementById('tk-fecha').innerText = `Fecha/Hora: ${nota.fecha}`;
-            
-            document.getElementById('tk-cliente-nombre').innerText = nota.cliente.toUpperCase();
-            document.getElementById('tk-cliente-cedula').innerText = nota.cedula;
-            document.getElementById('tk-cliente-direccion').innerText = nota.direccion;
-            document.getElementById('tk-cliente-telefono').innerText = nota.telefono;
+            document.getElementById('tk-num-nota').innerText = `NOTA: #${nota.numNota}`;
+            document.getElementById('tk-fecha').innerText = `Fecha: ${nota.fecha}`;
+            document.getElementById('tk-cliente-datos').innerText = `CLIENTE: ${nota.cliente.toUpperCase()} | ID: ${nota.cedula} | TLF: ${nota.telefono}`;
             
             const tabla = document.getElementById('tk-items-tabla');
             tabla.innerHTML = '';
-            
             nota.items.forEach(i => {
-                const imeiStr = i.imei ? `<br><span style="font-size:7px; color:#444; font-weight:600; padding-left:4px;">[IMEI: ...${i.imei}]</span>` : '';
-                const monedaBaseStr = i.marca === 'Otros Productos' ? 'COP' : 'USD';
-                
+                const imeiStr = i.imei ? ` (IMEI: ...${i.imei})` : '';
                 tabla.innerHTML += `
-                    <tr style="border-bottom: 1px solid #000;">
-                        <td style="padding: 4px; border-right: 1px solid #000; text-align: center; font-weight:600;">1</td>
-                        <td style="padding: 4px; border-right: 1px solid #000; font-weight:500;">${i.modelo}${imeiStr}</td>
-                        <td style="padding: 4px; border-right: 1px solid #000; text-align: center; font-weight:600;">${monedaBaseStr}</td>
-                        <td style="padding: 4px; text-align: right; font-family: monospace; font-weight:700;">$${i.precio.toFixed(2)}</td>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 3px 0;">${i.modelo}${imeiStr}</td>
+                        <td style="text-align: right; padding: 3px 0; font-family: monospace;">$${i.precio.toFixed(2)}</td>
                     </tr>`;
             });
 
             const totalCOP = nota.totalUSD * parseFloat(nota.tasaCOP);
-            const totalBS = parseFloat(nota.tasaBS) > 0 ? totalCOP / parseFloat(nota.tasaBS) : 0;
+            const totalBS = totalCOP / parseFloat(nota.tasaBS);
 
-            document.getElementById('tk-valores-conversiones').innerText = `Tasas Ref: 1$ = ${nota.tasaCOP} COP | Bs calculados div. entre ${nota.tasaBS}`;
-            document.getElementById('tk-total-usd').innerText = `$${nota.totalUSD.toFixed(2)}`;
-            document.getElementById('tk-total-cop').innerText = `${totalCOP.toLocaleString('es-CO')} COP`;
-            document.getElementById('tk-total-bs').innerText = `${totalBS.toLocaleString('es-VE')} Bs`;
+            document.getElementById('tk-valores-conversiones').innerText = `Tasas Ref Informativas: 1$ = ${nota.tasaCOP} COP | Bs divididos entre: ${nota.tasaBS}`;
+            document.getElementById('tk-total-cop').innerText = `COP: ${totalCOP.toLocaleString('es-CO')}`;
+            document.getElementById('tk-total-bs').innerText = `Bs: ${totalBS.toLocaleString('es-VE')}`;
+            document.getElementById('tk-total-usd').innerText = `Neto: $${nota.totalUSD.toFixed(2)}`;
         }
 
         async function ejecutarBotonImprimir() {
             if(ITEMS_VENTA_ACTIVA.length === 0) return alert("Ticket vacío.");
-            if (!verificarTasasEstablecidas()) return;
-            
             const nota = await registrarNotaEnFirebase();
+            
+            // Forzar el empaque e inyección de datos dentro del wrapper de aislamiento de impresión
             document.getElementById('wrapper-impresion-epson').style.display = 'block';
             inyectarDatosAlTicketDOM(nota);
             
+            // Disparar cola física nativa y limpiar formularios
             setTimeout(() => { 
                 window.print(); 
                 document.getElementById('wrapper-impresion-epson').style.display = 'none';
@@ -1242,7 +1187,6 @@
 
         async function ejecutarBotonWhatsApp() {
             if(ITEMS_VENTA_ACTIVA.length === 0) return alert("Ticket vacío.");
-            if (!verificarTasasEstablecidas()) return;
             
             let celTlf = document.getElementById('fact-cli-telefono').value.trim();
             if(!celTlf) {
@@ -1263,11 +1207,11 @@
             }).join('\n');
 
             const totalCOP = nota.totalUSD * parseFloat(nota.tasaCOP);
-            const totalBS = parseFloat(nota.tasaBS) > 0 ? totalCOP / parseFloat(nota.tasaBS) : 0;
+            const totalBS = totalCOP / parseFloat(nota.tasaBS);
 
             const mensajeWhatsApp = `*TUCOCEL C.A.* \n` +
                                      `*COMPROBANTE DE VENTA ELECTRÓNICO*\n\n` +
-                                     `*Nota N°:* #${String(nota.numNota).padStart(6, '0')}\n` +
+                                     `*Nota N°:* #${nota.numNota}\n` +
                                      `*Fecha:* ${nota.fecha}\n` +
                                      `*Cliente:* ${nota.cliente.toUpperCase()}\n` +
                                      `*Cédula/RIF:* ${nota.cedula}\n\n` +
@@ -1309,7 +1253,7 @@
             document.getElementById('wrapper-impresion-epson').style.display = 'block';
             inyectarDatosAlTicketDOM(nota);
             
-            alert(`Abriendo Nota N° ${String(nota.numNota).padStart(6, '0')} para la cola de impresión Epson física.`);
+            alert(`Abriendo Nota #${nota.numNota} para la cola de impresión Epson física.`);
             setTimeout(() => {
                 window.print();
                 document.getElementById('wrapper-impresion-epson').style.display = 'none';
@@ -1354,10 +1298,9 @@
             tabla.innerHTML = '';
             lista.forEach((n, idx) => {
                 let itemsTxt = n.items.map(i => i.modelo).join(', ');
-                const numFormateado = String(n.numNota).padStart(6, '0');
                 tabla.innerHTML += `
                     <tr class="hover:bg-gray-50 border-b border-gray-100">
-                        <td class="p-2.5 font-mono text-blue-600 font-bold">#${numFormateFormateado}</td>
+                        <td class="p-2.5 font-mono text-blue-600 font-bold">#${n.numNota}</td>
                         <td class="p-2.5 text-gray-500">${n.fecha}</td>
                         <td class="p-2.5">
                             <span class="block font-bold text-gray-900">${n.cliente}</span>
@@ -1387,7 +1330,7 @@
 
             const filtrados = HISTORIAL_NOTAS.filter(n => {
                 const coincideTxt = n.cliente.toLowerCase().includes(buscadorVal) || n.cedula.toLowerCase().includes(buscadorVal) || n.numNota.toString().includes(buscadorVal);
-                const coincideFecha = !fechaVal || n.fecha.includes(fechaFormateada);
+                const coincideFecha = !fechaVal || n.fecha === fechaFormateada;
                 return coincideTxt && coincideFecha;
             });
 
@@ -1404,7 +1347,7 @@
                 "Telefono": n.telefono,
                 "Total USD": n.totalUSD,
                 "Tasa COP": n.tasaCOP,
-                "Tasa](./Respaldo_Tucocel_2026.xlsx) Bs": n.tasaBS
+                "Tasa Bs": n.tasaBS
             }));
             const hoja = XLSX.utils.json_to_sheet(datosExcel);
             const libro = XLSX.utils.book_new();
@@ -1417,11 +1360,6 @@
             document.getElementById('fact-cli-nombre').value = '';
             document.getElementById('fact-cli-cedula').value = '';
             document.getElementById('fact-cli-telefono').value = '';
-            document.getElementById('fact-cli-direccion').value = '';
-            
-            // Reajuste automático de tasas a cero para seguridad de la próxima sesión
-            document.getElementById('tasa-cop').value = '0';
-            document.getElementById('tasa-bs').value = '0';
             
             document.getElementById('manual-modelo').value = '';
             document.getElementById('manual-precio').value = '';
@@ -1432,7 +1370,7 @@
             renderizarItemsVentaActiva();
         }
 
-        function督prepararEdicionArticulo(id) {
+        function prepararEdicionArticulo(id) {
             const prod = PRODUCTOS.find(p => p.id === id);
             if (!prod) return;
             idArticuloEnEdicion = id;
@@ -1526,7 +1464,7 @@
             const pago = document.getElementById('cli-pago').value;
             if(!nombre || !apellido || !direccion) return alert("Llene los datos.");
             const msg = `¡Hola Tucocel! Pedido:\nItem: ${productoSeleccionadoActual.modelo}\nCliente: ${nombre} ${apellido}\nPago: ${pago}`;
-            window.open("https://wa.me/584247357549?text=" + encodeURIComponent(msg), '_blank');
+            window.open(`https://wa.me/584247357549?text=${encodeURIComponent(msg)}`, '_blank');
             cerrarModalProducto();
         }
 
@@ -1541,7 +1479,7 @@
         function enviarConsultaGeneralWhatsApp() {
             const n = document.getElementById('con-nombre').value;
             const d = document.getElementById('con-detalles').value;
-            window.open("https://wa.me/584247357549?text=" + encodeURIComponent("Consulta de " + n + ": " + d), '_blank');
+            window.open(`https://wa.me/584247357549?text=${encodeURIComponent("Consulta de " + n + ": " + d)}`, '_blank');
             cerrarModalConsultaGeneral();
         }
 
@@ -1607,4 +1545,4 @@
         }
     </script>
 </body>
-                                                                                                                                                                                                                                </html>
+    </html>
