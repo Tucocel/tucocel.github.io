@@ -100,7 +100,7 @@
         </div>
     </div>
 
-    <!-- BARRA DE NAVEGACIÓN (IDENTIDAD MOVISTAR PÚBLICA RESTAURADA) -->
+    <!-- BARRA DE NAVEGACIÓN -->
     <nav class="bg-white border-b border-gray-100 sticky top-0 z-40 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
@@ -150,52 +150,6 @@
         </div>
     </section>
 
-    <!-- PANEL DE CONTROL ADMINISTRATIVO -->
-    <div id="panel-admin" class="bg-slate-900 text-slate-100 p-5 hidden max-w-4xl mx-auto sm:mt-4 sm:rounded-2xl shadow-2xl border border-slate-800">
-        <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-2">
-            <h3 id="panel-titulo" class="text-xs font-bold uppercase text-amber-400 tracking-wider"><i class="fa-solid fa-database mr-1"></i> Panel de Gestión Tucocel</h3>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <div class="space-y-2">
-                <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Categoría / Marca</label>
-                <select id="add-marca" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300">
-                    <option value="Infinix">Infinix</option>
-                    <option value="Tecno">Tecno</option>
-                    <option value="Xiaomi">Xiaomi</option>
-                    <option value="Samsung">Samsung</option>
-                    <option value="Apple">Apple</option>
-                    <option value="Motorola">Motorola</option>
-                    <option value="ZTE">ZTE</option>
-                    <option value="Otros Productos">Otros Productos</option>
-                </select>
-                <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block mt-2">Modelo o Nombre de Artículo</label>
-                <input type="text" id="add-modelo" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300">
-            </div>
-            <div class="space-y-2">
-                <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Memoria / Capacidad (Opcional)</label>
-                <input type="text" id="memoria" placeholder="Ej: 8GB + 256GB" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300">
-                <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block mt-2">Precio USD</label>
-                <input type="number" id="add-precio" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300">
-            </div>
-            <div class="space-y-2">
-                <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Descripción Breve / Características</label>
-                <textarea id="add-desc" placeholder="Detalles o especificaciones adicionales..." class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300 h-24 resize-none"></textarea>
-            </div>
-        </div>
-        <div class="mt-4 pt-3 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <div class="w-full sm:w-auto flex items-center gap-3">
-                <input type="file" id="add-foto-file" accept="image/*" class="hidden">
-                <button onclick="document.getElementById('add-foto-file').click()" class="bg-slate-800 hover:bg-slate-700 text-xs py-2 px-4 rounded-xl font-medium transition-colors border border-slate-700 w-full sm:w-auto"><i class="fa-solid fa-camera mr-2"></i>Cargar Foto del Artículo</button>
-                <input type="hidden" id="foto-base64">
-                <img id="preview-foto" src="" class="w-9 h-9 object-cover rounded-lg bg-slate-800 border border-slate-700 hidden">
-            </div>
-            <div class="flex gap-2 w-full sm:w-auto">
-                <button id="btn-cancelar-edicion" onclick="cancelarEdicionActiva()" class="hidden w-1/2 sm:w-auto bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors">Cancelar</button>
-                <button id="btn-guardar" class="w-full sm:w-auto bg-amber-400 hover:bg-amber-500 text-slate-950 text-xs font-black px-6 py-2.5 rounded-xl shadow-lg transition-colors">Guardar en Inventario</button>
-            </div>
-        </div>
-    </div>
-
     <!-- SECCIÓN DE CANAL DIRECTO DE ATENCIÓN Y VITRINA PRINCIPAL -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
@@ -224,18 +178,19 @@
             </div>
         </div>
 
+        <!-- BOTONERA DE MARCAS CON CENTRADO SIMÉTRICO PREMIUM -->
         <div class="mb-8">
             <p class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mb-2 px-1">Explorar Smartphone por Marca</p>
-            <div class="flex gap-2 overflow-x-auto pb-2 no-scrollbar snap-x">
-                <button onclick="filtrarPorMarca('Todas', this)" class="marca-btn snap-start shrink-0 bg-slate-900 text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all">Todas las Marcas</button>
-                <button onclick="filtrarPorMarca('Infinix', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all">Infinix</button>
-                <button onclick="filtrarPorMarca('Tecno', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all">Tecno</button>
-                <button onclick="filtrarPorMarca('Xiaomi', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all">Xiaomi</button>
-                <button onclick="filtrarPorMarca('Samsung', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all">Samsung</button>
-                <button onclick="filtrarPorMarca('Apple', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all">Apple</button>
-                <button onclick="filtrarPorMarca('Motorola', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all">Motorola</button>
-                <button onclick="filtrarPorMarca('ZTE', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all">ZTE</button>
-                <button onclick="filtrarPorMarca('Otros Productos', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all">Otros Productos</button>
+            <div class="flex gap-2 overflow-x-auto pb-2 no-scrollbar snap-x justify-start md:justify-center">
+                <button onclick="filtrarPorMarca('Todas', this)" class="marca-btn snap-start shrink-0 bg-slate-900 text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">Todas las Marcas</button>
+                <button onclick="filtrarPorMarca('Infinix', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">Infinix</button>
+                <button onclick="filtrarPorMarca('Tecno', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">Tecno</button>
+                <button onclick="filtrarPorMarca('Xiaomi', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">Xiaomi</button>
+                <button onclick="filtrarPorMarca('Samsung', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">Samsung</button>
+                <button onclick="filtrarPorMarca('Apple', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">Apple</button>
+                <button onclick="filtrarPorMarca('Motorola', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">Motorola</button>
+                <button onclick="filtrarPorMarca('ZTE', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">ZTE</button>
+                <button onclick="filtrarPorMarca('Otros Productos', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">Otros Productos</button>
             </div>
         </div>
 
@@ -405,7 +360,6 @@
 
             </div>
 
-            <!-- HISTORIAL RESPALDADO CON FILTRO SEGURO -->
             <div class="bg-slate-100 border-t border-gray-200 p-4 sm:p-5 space-y-3">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-200 pb-2">
                     <div class="flex items-center gap-1.5">
@@ -446,8 +400,7 @@
 
     <!-- WRAPPER DE IMPRESIÓN AISLADO (FIJADO ESTRICTAMENTE A UNA HOJA CON CONTENEDORES SIMÉTRICOS PERFECTOS) -->
     <div id="wrapper-impresion-epson" style="display: none;">
-        <!-- CONTENEDOR RESTAURADO CON LA ALINEACIÓN EXACTA DE SCREENSHOT_20260701-192334.JPG -->
-        <div id="contenedor-ticket-real" style="width: 15cm; height: 10cm; padding: 0.3cm; box-sizing: border-box; background-color: #fff; color: #000; font-family: Arial, sans-serif; font-size: 10px; line-height: 1.2; border: 1px solid #000; display: flex; flex-direction: column; justify-content: space-between;">
+        <div id="contenedor-ticket-real" style="width: 15cm; height: 10cm; padding: 0.3cm; box-sizing: border-box; background-color: #fff; color: #000; font-family: sans-serif; font-size: 10px; line-height: 1.2; border: 1px solid #000; display: flex; flex-direction: column; justify-content: space-between;">
             <div style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
                 
                 <!-- Encabezado en Espejo Completamente Ajustado -->
@@ -459,7 +412,7 @@
                         <p style="margin: 1px 0; font-size: 7.5px; color: #000; font-weight: bold;">WhatsApp: 0424-7357549</p>
                     </div>
                     <div style="width: 45%; display: flex; flex-direction: column; align-items: flex-end;">
-                        <!-- SE LE DIO LÍNEA DE ENFOQUE PROPIA E INDEPENDIENTE CON MÁXIMO TAMAÑO AL AVISO DE CONTROL FISCAL -->
+                        <!-- LÍNEA DE ENFOQUE PROPIA INDEPENDIENTE AL AVISO DE CONTROL FISCAL -->
                         <div style="border: 1px solid #000; padding: 4px 6px; text-align: center; border-radius: 2px; min-width: 155px; background: #fff;">
                             <span style="display: block; font-size: 8.5px; font-weight: bold; color:#000; tracking-wide: 0.5px;">NOTA DE ENTREGA</span>
                             <span style="display: block; font-size: 8px; font-weight: bold; color: #000; line-height: 1.1; margin-top: 1px;">(SIN VALOR FISCAL)</span>
@@ -1136,7 +1089,7 @@
                         </div>
                     </div>`;
             });
-            calcularTotalesFactura();
+            calendarTotalesFactura();
         }
 
         function calcularTotalesFactura() {
@@ -1419,7 +1372,7 @@
 
             const filtrados = HISTORIAL_NOTAS.filter(n => {
                 const coincideTxt = n.cliente.toLowerCase().includes(buscadorVal) || n.cedula.toLowerCase().includes(buscadorVal) || n.numNota.toString().includes(buscadorVal);
-                const coincideFecha = !fechaVal || n.fecha === fechaFormateada;
+                const coincideFecha = !fechaVal || n.fecha.includes(fechaFormateada);
                 return coincideTxt && coincideFecha;
             });
 
@@ -1631,9 +1584,9 @@
         function filtrarPorMarca(marca, boton) { 
             marcaSeleccionada = marca; 
             document.querySelectorAll('.marca-btn').forEach(b => { 
-                b.className = "marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all"; 
+                b.className = "marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center"; 
             }); 
-            boton.className = "marca-btn snap-start shrink-0 bg-slate-900 text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all";
+            boton.className = "marca-btn snap-start shrink-0 bg-slate-900 text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center";
             ejecutarFiltroCombinado(); 
         }
     </script>
