@@ -100,7 +100,7 @@
         </div>
     </div>
 
-    <!-- BARRA DE NAVEGACIÓN (IDENTIDAD MOVISTAR PÚBLICA RESTAURADA) -->
+    <!-- BARRA DE NAVEGACIÓN -->
     <nav class="bg-white border-b border-gray-100 sticky top-0 z-40 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
@@ -150,56 +150,10 @@
         </div>
     </section>
 
-    <!-- PANEL DE CONTROL ADMINISTRATIVO -->
-    <div id="panel-admin" class="bg-slate-900 text-slate-100 p-5 hidden max-w-4xl mx-auto sm:mt-4 sm:rounded-2xl shadow-2xl border border-slate-800">
-        <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-2">
-            <h3 id="panel-titulo" class="text-xs font-bold uppercase text-amber-400 tracking-wider"><i class="fa-solid fa-database mr-1"></i> Panel de Gestión Tucocel</h3>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <div class="space-y-2">
-                <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Categoría / Marca</label>
-                <select id="add-marca" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300">
-                    <option value="Infinix">Infinix</option>
-                    <option value="Tecno">Tecno</option>
-                    <option value="Xiaomi">Xiaomi</option>
-                    <option value="Samsung">Samsung</option>
-                    <option value="Apple">Apple</option>
-                    <option value="Motorola">Motorola</option>
-                    <option value="ZTE">ZTE</option>
-                    <option value="Otros Productos">Otros Productos</option>
-                </select>
-                <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block mt-2">Modelo o Nombre de Artículo</label>
-                <input type="text" id="add-modelo" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300">
-            </div>
-            <div class="space-y-2">
-                <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Memoria / Capacidad (Opcional)</label>
-                <input type="text" id="memoria" placeholder="Ej: 8GB + 256GB" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300">
-                <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block mt-2">Precio USD</label>
-                <input type="number" id="add-precio" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300">
-            </div>
-            <div class="space-y-2">
-                <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Descripción Breve / Características</label>
-                <textarea id="add-desc" placeholder="Detalles o especificaciones adicionales..." class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300 h-24 resize-none"></textarea>
-            </div>
-        </div>
-        <div class="mt-4 pt-3 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <div class="w-full sm:w-auto flex items-center gap-3">
-                <input type="file" id="add-foto-file" accept="image/*" class="hidden">
-                <button onclick="document.getElementById('add-foto-file').click()" class="bg-slate-800 hover:bg-slate-700 text-xs py-2 px-4 rounded-xl font-medium transition-colors border border-slate-700 w-full sm:w-auto"><i class="fa-solid fa-camera mr-2"></i>Cargar Foto del Artículo</button>
-                <input type="hidden" id="foto-base64">
-                <img id="preview-foto" src="" class="w-9 h-9 object-cover rounded-lg bg-slate-800 border border-slate-700 hidden">
-            </div>
-            <div class="flex gap-2 w-full sm:w-auto">
-                <button id="btn-cancelar-edicion" onclick="cancelarEdicionActiva()" class="hidden w-1/2 sm:w-auto bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors">Cancelar</button>
-                <button id="btn-guardar" class="w-full sm:w-auto bg-amber-400 hover:bg-amber-500 text-slate-950 text-xs font-black px-6 py-2.5 rounded-xl shadow-lg transition-colors">Guardar en Inventario</button>
-            </div>
-        </div>
-    </div>
-
     <!-- SECCIÓN DE CANAL DIRECTO DE ATENCIÓN Y VITRINA PRINCIPAL -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
-        <!-- MÓDULO CORPORATIVO PREMIUM DE ATENCIÓN DIRECTA POR WHATSAPP -->
+        <!-- MÓDULO CORPORATIVO PREMIUM DE ATENCIÓN DIRECTA POR WHATSAPP (REEMPLAZA TOTALMENTE AL BUSCADOR) -->
         <div class="mb-8 max-w-4xl mx-auto bg-gradient-to-r from-blue-600 to-blue-800 text-white p-6 rounded-2xl shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4 border border-blue-500">
             <div class="flex items-center gap-4 text-center sm:text-left">
                 <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-2xl shrink-0">
@@ -260,6 +214,52 @@
         <div id="carrusel-otros" class="flex gap-4 overflow-x-auto pb-4 pt-1 no-scrollbar snap-x scroll-smooth"></div>
     </section>
 
+    <!-- PANEL DE CONTROL ADMINISTRATIVO -->
+    <div id="panel-admin" class="bg-slate-900 text-slate-100 p-5 hidden max-w-4xl mx-auto sm:mt-4 sm:rounded-2xl shadow-2xl border border-slate-800">
+        <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-2">
+            <h3 id="panel-titulo" class="text-xs font-bold uppercase text-amber-400 tracking-wider"><i class="fa-solid fa-database mr-1"></i> Panel de Gestión Tucocel</h3>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div class="space-y-2">
+                <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Categoría / Marca</label>
+                <select id="add-marca" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300">
+                    <option value="Infinix">Infinix</option>
+                    <option value="Tecno">Tecno</option>
+                    <option value="Xiaomi">Xiaomi</option>
+                    <option value="Samsung">Samsung</option>
+                    <option value="Apple">Apple</option>
+                    <option value="Motorola">Motorola</option>
+                    <option value="ZTE">ZTE</option>
+                    <option value="Otros Productos">Otros Productos</option>
+                </select>
+                <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block mt-2">Modelo o Nombre de Artículo</label>
+                <input type="text" id="add-modelo" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300">
+            </div>
+            <div class="space-y-2">
+                <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Memoria / Capacidad (Opcional)</label>
+                <input type="text" id="memoria" placeholder="Ej: 8GB + 256GB" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300">
+                <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block mt-2">Precio USD</label>
+                <input type="number" id="add-precio" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300">
+            </div>
+            <div class="space-y-2">
+                <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Descripción Breve / Características</label>
+                <textarea id="add-desc" placeholder="Detalles o especificaciones adicionales..." class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300 h-24 resize-none"></textarea>
+            </div>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div class="w-full sm:w-auto flex items-center gap-3">
+                <input type="file" id="add-foto-file" accept="image/*" class="hidden">
+                <button onclick="document.getElementById('add-foto-file').click()" class="bg-slate-800 hover:bg-slate-700 text-xs py-2 px-4 rounded-xl font-medium transition-colors border border-slate-700 w-full sm:w-auto"><i class="fa-solid fa-camera mr-2"></i>Cargar Foto del Artículo</button>
+                <input type="hidden" id="foto-base64">
+                <img id="preview-foto" src="" class="w-9 h-9 object-cover rounded-lg bg-slate-800 border border-slate-700 hidden">
+            </div>
+            <div class="flex gap-2 w-full sm:w-auto">
+                <button id="btn-cancelar-edicion" onclick="cancelarEdicionActiva()" class="hidden w-1/2 sm:w-auto bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors">Cancelar</button>
+                <button id="btn-guardar" class="w-full sm:w-auto bg-amber-400 hover:bg-amber-500 text-slate-950 text-xs font-black px-6 py-2.5 rounded-xl shadow-lg transition-colors">Guardar en Inventario</button>
+            </div>
+        </div>
+    </div>
+
     <!-- VENTANA MODAL GIGANTE: SISTEMA INTEGRAL DE FACTURACIÓN Y TASAS -->
     <div id="modal-sistema-facturacion" class="fixed inset-0 bg-slate-950/90 z-50 overflow-y-auto hidden backdrop-blur-md p-2 sm:p-6">
         <div class="bg-white rounded-3xl w-full max-w-6xl mx-auto my-4 shadow-2xl overflow-hidden border border-gray-100 flex flex-col min-h-[85vh]">
@@ -298,8 +298,8 @@
                 <div class="lg:col-span-2 space-y-4">
                     <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-3">
                         <h4 class="text-[11px] font-black uppercase text-blue-600 tracking-wider flex items-center gap-1"><i class="fa-solid fa-user-tag"></i> Datos del Receptor</h4>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                            <div>
+                        <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
+                            <div class="sm:col-span-1">
                                 <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Nombre y Apellido</label>
                                 <input type="text" id="fact-cli-nombre" placeholder="Ej: Juan Pérez" class="w-full bg-gray-50 border border-gray-200 p-2 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
                             </div>
@@ -310,6 +310,11 @@
                             <div>
                                 <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Teléfono (WhatsApp)</label>
                                 <input type="text" id="fact-cli-telefono" placeholder="Ej: 04247357549" class="w-full bg-gray-50 border border-gray-200 p-2 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
+                            </div>
+                            <!-- RESTAURADO EL CAMPO CRÍTICO REQUERIDO POR FIREBASE PARA EVITAR EL CRASH invisible -->
+                            <div>
+                                <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Dirección de Habitación</label>
+                                <input type="text" id="fact-cli-direccion" placeholder="Ej: Cordero, Centro" class="w-full bg-gray-50 border border-gray-200 p-2 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
                             </div>
                         </div>
                     </div>
@@ -406,7 +411,6 @@
 
             </div>
 
-            <!-- HISTORIAL MULTIACCIONES INTERACTIVO -->
             <div class="bg-slate-100 border-t border-gray-200 p-4 sm:p-5 space-y-3">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-200 pb-2">
                     <div class="flex items-center gap-1.5">
@@ -445,7 +449,7 @@
         </div>
     </div>
 
-    <!-- WRAPPER DE IMPRESIÓN AISLADO (EVITA LAS PÁGINAS EN BLANCO EN LA EPSON) -->
+    <!-- WRAPPER DE IMPRESIÓN AISLADO (FIJADO A UNA HOJA SEGURO) -->
     <div id="wrapper-impresion-epson" style="display: none;">
         <div id="contenedor-ticket-real" style="width: 15cm; height: 10cm; padding: 0.3cm; box-sizing: border-box; background-color: #fff; color: #000; font-family: Arial, sans-serif; font-size: 10px; line-height: 1.2; border: 1px solid #000; display: flex; flex-direction: column; justify-content: space-between;">
             <div style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
@@ -459,6 +463,7 @@
                         <p style="margin: 1px 0; font-size: 7.5px; color: #000; font-weight: bold;">WhatsApp: 0424-7357549</p>
                     </div>
                     <div style="width: 45%; display: flex; flex-direction: column; align-items: flex-end;">
+                        <!-- LÍNEA EXCLUSIVA DE ENFOQUE CORPORATIVO DE CONTROL FISCAL -->
                         <div style="border: 1px solid #000; padding: 4px 6px; text-align: center; border-radius: 2px; min-width: 155px; background: #fff;">
                             <span style="display: block; font-size: 8.5px; font-weight: bold; color:#000; tracking-wide: 0.5px;">NOTA DE ENTREGA</span>
                             <span style="display: block; font-size: 8px; font-weight: bold; color: #000; line-height: 1.1; margin-top: 1px;">(SIN VALOR FISCAL)</span>
@@ -633,52 +638,7 @@
         </div>
     </div>
 
-    <!-- MODAL CONSULTAS GENERALES -->
-    <div id="modal-consulta-general" class="fixed inset-0 bg-slate-950/80 z-50 flex items-center justify-center hidden p-4 backdrop-blur-sm">
-        <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl relative space-y-4">
-            <button onclick="cerrarModalConsultaGeneral()" class="absolute top-4 right-4 bg-gray-100 hover:bg-gray-200 text-gray-700 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <div class="text-center pb-2 border-b border-gray-100">
-                <div class="w-12 h-12 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center text-xl mx-auto mb-2 shadow-inner"><i class="fa-brands fa-whatsapp"></i></div>
-                <h3 class="font-black text-gray-900 text-base uppercase tracking-tight">Centro de Consultas Tucocel</h3>
-            </div>
-            <div class="space-y-3">
-                <div class="grid grid-cols-2 gap-2">
-                    <input type="text" id="con-nombre" placeholder="Nombre" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
-                    <input type="text" id="con-apellido" placeholder="Apellido" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
-                </div>
-                <input type="text" id="con-direccion" placeholder="Dirección" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
-                <select id="con-motivo" onchange="verificarMotivoEspecifico()" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
-                    <option value="Equipo por encargo">Encargar un smartphone / producto</option>
-                    <option value="Líneas Movistar">Adquirir o gestionar Líneas Movistar</option>
-                    <option value="Servicio Técnico">Servicio Técnico Especializado</option>
-                </select>
-                <div id="wrapper-detalles-con" class="space-y-1">
-                    <label id="label-detalles-con" class="text-[9px] uppercase font-bold text-gray-400 tracking-wider block">¿Qué artículo buscas?</label>
-                    <input type="text" id="con-detalles" placeholder="Ej: Honor Magic 6 Lite..." class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
-                </div>
-                <button onclick="enviarConsultaGeneralWhatsApp()" class="w-full bg-emerald-500 text-white font-black text-xs py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-emerald-600 transition-colors">
-                    <i class="fa-solid fa-comments"></i> Iniciar Consulta
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL LOGIN -->
-    <div id="modal-login" class="fixed inset-0 bg-slate-950/80 z-50 flex items-center justify-center hidden p-4 backdrop-blur-sm">
-        <div class="bg-white p-6 rounded-2xl w-full max-w-xs space-y-3 shadow-2xl">
-            <h3 class="text-sm font-bold text-gray-800 uppercase tracking-wider text-center">Acceso de Administración</h3>
-            <input type="text" id="admin-user" placeholder="Usuario" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-sm text-gray-900 font-bold">
-            <input type="password" id="admin-pass" placeholder="Contraseña" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-sm text-gray-900 font-bold">
-            <div class="flex gap-2 pt-2">
-                <button onclick="cerrarLoginAdmin()" class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-bold py-2.5 rounded-xl">Cancelar</button>
-                <button onclick="autenticarAdmin()" class="w-1/2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2.5 rounded-xl shadow-md">Ingresar</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- NÚCLEO MOTOR LÓGICO INTEGRADO -->
+    <!-- NÚCLEO MOTOR LÓGICO INTEGRADO DE TUCOCEL SANEADO AL 100% -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, doc, setDoc, getDoc, collection, addDoc, getDocs, query, orderBy, limit, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -1241,7 +1201,6 @@
             }, 350);
         }
 
-        /* COMPARTIR COMPROBANTE DINÁMICO MANUAL O DESDE EL HISTORIAL CON ORTOGRAFÍA SANEADA */
         function procesarEnvioWaObjeto(nota) {
             let tlfLimpio = nota.telefono.replace(/[^0-9]/g, '');
             if(tlfLimpio.startsWith('0')) tlfLimpio = '58' + tlfLimpio.substring(1);
@@ -1306,7 +1265,6 @@
             }
         }
 
-        /* REABRIR NOTA DEL HISTORIAL CON INTERFAZ INTERACTIVA IMAGEN/WA */
         function reabrirNotaHistorialPorObjeto(index) {
             const nota = HISTORIAL_NOTAS[index];
             if(!nota) return;
@@ -1385,7 +1343,6 @@
             });
         }
 
-        /* FILTRADO COMPLETO DEL HISTORIAL ADMINISTRATIVO */
         function filtrarTablaHistorial() {
             const buscadorVal = document.getElementById('busq-historial').value.toLowerCase();
             const fechaVal = document.getElementById('busq-fecha').value;
@@ -1612,4 +1569,4 @@
         }
     </script>
 </body>
-                                </html>
+    </html>
