@@ -5,18 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tucocel C.A. — Telefonía Móvil y Computación</title>
 
-    <!-- METATAGS OPEN GRAPH (PREVISTA CORPORATIVA PREMIUM AL COMPARTIR EN WHATSAPP) -->
     <meta property="og:title" content="📱 TUCOCEL C.A. | Tu Vitrina Tecnológica Digital en Cordero">
     <meta property="og:description" content="🔥 ¡Explora nuestro catálogo en tiempo real! Encuentra smartphones de última generación con garantía, accesorios premium y el mejor servicio técnico especializado para teléfonos, computadoras e impresoras. ¡Visítanos en nuestra tienda física o cotiza al instante! 🚀">
     <meta property="og:image" content="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80">
     <meta property="og:url" content="https://tucocel.github.io/">
     <meta property="og:type" content="website">
 
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome para Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Librerías para Facturación Oculta (html2canvas y SheetJS) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     
@@ -99,7 +95,6 @@
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased min-h-screen pb-12 relative">
 
-    <!-- BARRA SUPERIOR DE ACCESOS ADMINISTRATIVOS -->
     <div id="barra-accesos-admin" class="bg-slate-950 text-white px-4 py-2.5 text-xs font-bold hidden border-b border-slate-800 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-2">
@@ -118,7 +113,6 @@
         </div>
     </div>
 
-    <!-- BARRA DE NAVEGACIÓN -->
     <nav class="bg-white border-b border-gray-100 sticky top-0 z-40 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
@@ -140,7 +134,6 @@
         </div>
     </nav>
 
-    <!-- ENCABEZADO / BANNER PRINCIPAL (ÚNICA SECCIÓN EDITABLE CON LAPICITOS ELEGANTES) -->
     <header class="bg-gradient-to-r from-slate-900 to-blue-950 text-white py-12 px-4 shadow-inner relative overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
         <div id="contenedor-textos-header" class="max-w-7xl mx-auto text-center relative z-10 space-y-3">
@@ -164,7 +157,6 @@
         </div>
     </header>
 
-    <!-- SECCIÓN DE SERVICIOS Y ACCESORIOS -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         <div class="bg-white border border-gray-100 rounded-3xl p-5 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="flex items-center gap-4 p-2">
@@ -184,9 +176,7 @@
         </div>
     </section>
 
-    <!-- SECCIÓN DE CANAL DIRECTO DE ATENCIÓN Y VITRINA PRINCIPAL -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <!-- MÓDULO CORPORATIVO PREMIUM DE ATENCIÓN DIRECTA POR WHATSAPP -->
         <div class="mb-8 max-w-4xl mx-auto bg-gradient-to-r from-blue-600 to-blue-800 text-white p-6 rounded-2xl shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4 border border-blue-500">
             <div class="flex items-center gap-4 text-center sm:text-left">
                 <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-2xl shrink-0">
@@ -202,7 +192,6 @@
             </button>
         </div>
 
-        <!-- RECUADRO INFORMATIVO DE STOCK REAJUSTADO CORPORATIVO -->
         <div class="bg-blue-50 border border-blue-100 rounded-2xl p-5 mb-8 max-w-4xl mx-auto flex items-start gap-4 shadow-sm">
             <i class="fa-solid fa-circle-info text-blue-600 text-xl mt-0.5 shrink-0"></i>
             <div class="text-xs md:text-sm text-blue-900 leading-relaxed text-justify w-full">
@@ -211,7 +200,6 @@
             </div>
         </div>
 
-        <!-- BOTONERA DE MARCAS CON CENTRADO SIMÉTRICO PREMIUM -->
         <div class="mb-8">
             <p class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mb-2 px-1">Explorar Smartphone por Marca</p>
             <div class="flex gap-2 overflow-x-auto pb-2 no-scrollbar snap-x justify-start md:justify-center">
@@ -236,7 +224,6 @@
         <div id="contenedor-productos" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
     </main>
 
-    <!-- AUTOMÁTICO DE OTROS PRODUCTOS / BAJO PEDIDO -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 border-t border-gray-100 mt-6">
         <div class="flex items-center justify-between mb-4 px-1">
             <div class="flex items-center gap-2">
@@ -248,7 +235,6 @@
         <div id="carrusel-otros" class="flex gap-4 overflow-x-auto pb-4 pt-1 no-scrollbar snap-x scroll-smooth"></div>
     </section>
 
-    <!-- PANEL DE CONTROL ADMINISTRATIVO -->
     <div id="panel-admin" class="bg-slate-900 text-slate-100 p-5 hidden max-w-4xl mx-auto sm:mt-4 sm:rounded-2xl shadow-2xl border border-slate-800">
         <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-2">
             <h3 id="panel-titulo" class="text-xs font-bold uppercase text-amber-400 tracking-wider"><i class="fa-solid fa-database mr-1"></i> Panel de Gestión Tucocel</h3>
@@ -294,11 +280,9 @@
         </div>
     </div>
 
-    <!-- VENTANA MODAL GIGANTE: SISTEMA INTEGRAL DE FACTURACIÓN Y TASAS -->
     <div id="modal-sistema-facturacion" class="fixed inset-0 bg-slate-950/90 z-50 overflow-y-auto hidden backdrop-blur-md p-2 sm:p-6">
         <div class="bg-white rounded-3xl w-full max-w-6xl mx-auto my-4 shadow-2xl overflow-hidden border border-gray-100 flex flex-col min-h-[85vh]">
             
-            <!-- Barra Superior Interna del Sistema -->
             <div class="bg-slate-900 text-white px-5 py-4 flex flex-col md:flex-row justify-between items-center gap-4 border-b border-slate-800">
                 <div class="flex items-center gap-2">
                     <i class="fa-solid fa-cash-register text-amber-400 text-xl"></i>
@@ -327,7 +311,6 @@
                 </button>
             </div>
 
-            <!-- Cuerpo del Sistema Dividido -->
             <div class="p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-3 gap-6 overflow-y-auto flex-grow bg-gray-50">
                 <div class="lg:col-span-2 space-y-4">
                     <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-3">
@@ -358,7 +341,6 @@
                             <button id="tab-inventario" onclick="cambiarModoCargaFactura('inventario')" class="text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1"><i class="fa-solid fa-boxes-stacked"></i> Jalar desde Catálogo</button>
                         </div>
 
-                        <!-- Panel de Carga Manual Libre -->
                         <div id="carga-manual-bloque" class="space-y-3">
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                                 <div class="sm:col-span-2">
@@ -381,7 +363,6 @@
                             </div>
                         </div>
 
-                        <!-- Panel de Carga desde Inventario Indexado -->
                         <div id="carga-inventario-bloque" class="space-y-3 hidden">
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <div>
@@ -482,12 +463,10 @@
         </div>
     </div>
 
-    <!-- WRAPPER DE IMPRESIÓN SANEADO COMPLETAMENTE AL 100% (EPSON 15x10) -->
     <div id="wrapper-impresion-epson" style="display: none;">
         <div id="contenedor-ticket-real" style="width: 15cm; height: 10cm; padding: 0.3cm; box-sizing: border-box; background-color: #fff; color: #000; font-family: Arial, sans-serif; font-size: 10px; line-height: 1.2; border: 1px solid #000; display: flex; flex-direction: column; justify-content: space-between;">
             <div style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
                 
-                <!-- Encabezado Estructurado -->
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
                     <div style="width: 55%;">
                         <h2 style="margin: 0; font-size: 13px; font-weight: bold; letter-spacing: -0.3px; color: #000;">TUCOCEL C.A.</h2>
@@ -505,7 +484,6 @@
                     </div>
                 </div>
 
-                <!-- Bloque Datos de Cliente Separados en Líneas Limpias -->
                 <div style="margin: 4px 0; width: 100%;">
                     <table style="width: 100%; border-collapse: collapse; font-size: 8.5px; border: 1px solid #000;">
                         <tr style="border-bottom: 1px solid #000;">
@@ -519,7 +497,6 @@
                     </table>
                 </div>
 
-                <!-- Tabla de Artículos de 3 Columnas Optimizada -->
                 <div style="flex-grow: 1; margin: 3px 0; overflow: hidden; max-height: 3.5cm;">
                     <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 8.5px; border: 1px solid #000;">
                         <thead>
@@ -534,7 +511,6 @@
                     </table>
                 </div>
 
-                <!-- Bloque de Totales y Estatus Alineado a la Perfección -->
                 <div style="display: flex; justify-content: space-between; align-items: flex-end; width: 100%; margin-top: 2px;">
                     <div style="width: 48%; padding-bottom: 2px;">
                         <p style="margin: 1px 0; font-size: 8.5px; color: #000;"><strong style="font-weight: bold;">Forma de Pago:</strong> Multimoneda</p>
@@ -558,7 +534,6 @@
                     </div>
                 </div>
                 
-                <!-- Recuadro Legal de Alerta Roja Reconfigurado Obligatorio -->
                 <div style="border: 1.5px solid #dc2626; padding: 5px; border-radius: 4px; text-align: center; margin-top: 5px; background: #fef2f2;">
                     <p style="margin: 0; font-size: 8.5px; text-align: justify; font-weight: 900; line-height: 1.2; color: #dc2626;">
                         TÉRMINOS DE GARANTÍA: Garantía por defectos de fábrica de los equipos celulares: 2 meses. La garantía NO cubre golpes, humedad, sellos rotos, sobrecargas eléctricas o alteración de software.
@@ -569,7 +544,6 @@
         </div>
     </div>
 
-    <!-- MODAL ADMINISTRATIVO: NOTIFICAR CLIENTE -->
     <div id="modal-notificar-cliente" class="fixed inset-0 bg-slate-950/80 z-50 p-4 backdrop-blur-sm hidden">
         <div class="flex items-center justify-center min-h-screen">
             <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl relative">
@@ -600,7 +574,6 @@
         </div>
     </div>
 
-    <!-- MODAL DE LOGIN ADMINISTRATIVO -->
     <div id="modal-login" class="fixed inset-0 bg-slate-950/80 z-50 p-4 backdrop-blur-sm hidden">
         <div class="flex items-center justify-center min-h-screen">
             <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl relative">
@@ -631,7 +604,6 @@
         </div>
     </div>
 
-    <!-- MODAL DE FORMULARIO PARA CONSULTA DEL BANNER AZUL -->
     <div id="modal-consulta-banner" class="fixed inset-0 bg-slate-950/80 z-50 p-4 backdrop-blur-sm hidden">
         <div class="flex items-center justify-center min-h-screen">
             <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl relative">
@@ -662,7 +634,6 @@
         </div>
     </div>
 
-    <!-- MODAL DE CONSULTA GENERAL DE WHATSAPP -->
     <div id="modal-consulta-general" class="fixed inset-0 bg-slate-950/80 z-50 p-4 backdrop-blur-sm hidden">
         <div class="flex items-center justify-center min-h-screen">
             <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl relative">
@@ -701,7 +672,40 @@
         </div>
     </div>
 
-    <!-- NÚCLEO MOTOR LÓGICO INTEGRADO, SANEADO Y SEGURO (SIN REFERENCE ERRORS) -->
+    <div id="modal-producto" class="fixed inset-0 bg-slate-950/80 z-50 p-4 backdrop-blur-md hidden flex items-center justify-center">
+        <div class="bg-white rounded-3xl w-full max-w-md p-6 shadow-2xl relative overflow-hidden max-h-[90vh] overflow-y-auto">
+            <button onclick="cerrarModalProducto()" class="absolute top-4 right-4 bg-gray-100 hover:bg-gray-200 text-gray-500 w-8 h-8 rounded-full flex items-center justify-center transition-colors z-20">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="aspect-square w-full bg-white border border-gray-100 rounded-2xl overflow-hidden mb-4 flex justify-center items-center p-4">
+                <img id="modal-img" src="" class="max-h-full max-w-full object-contain">
+            </div>
+            <div class="space-y-3">
+                <div class="flex justify-between items-center">
+                    <span id="modal-marca" class="text-[10px] font-extrabold text-blue-600 bg-blue-50 uppercase tracking-widest px-2.5 py-1 rounded-md">Marca</span>
+                    <button id="modal-btn-like" onclick="incrementarLikeActivo()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-colors text-xs font-bold">
+                        <i class="fa-solid fa-heart text-red-500"></i> Me gusta (<span id="modal-like-count">0</span>)
+                    </button>
+                </div>
+                <h2 id="modal-modelo" class="text-xl font-black text-gray-900 tracking-tight">Modelo del Teléfono</h2>
+                <p id="modal-memoria" class="text-xs font-mono text-gray-500 font-bold bg-gray-50 px-2 py-1 rounded-md inline-block">Capacidad</p>
+                <div class="border-t border-gray-100 pt-3">
+                    <h4 class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">Descripción General</h4>
+                    <p id="modal-desc" class="text-xs text-gray-600 leading-relaxed text-justify">Detalles del artículo.</p>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-2xl border border-gray-100 flex items-center justify-between mt-4">
+                    <div>
+                        <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-wider block">Precio de Contado</span>
+                        <span class="text-2xl font-black text-gray-900 font-mono">$<span id="modal-precio">0</span> <span class="text-xs text-gray-400 font-bold">USD</span></span>
+                    </div>
+                    <button onclick="compartirProductoActivoWa()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs px-5 py-3 rounded-xl shadow-md transition-colors flex items-center gap-1.5 uppercase tracking-wide">
+                        <i class="fa-brands fa-whatsapp text-sm"></i> Comprar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, doc, setDoc, getDoc, collection, addDoc, getDocs, query, orderBy, limit, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -733,7 +737,7 @@
         let modoCargaFacturaActivo = 'manual';
         let BASE_TEXTOS_WEB = {};
 
-        // FUNCIONES GLOBALES DEFINIDAS DIRECTAMENTE PARA EVITAR ERRORES DE CARGA EN HTML
+        // ASIGNACIÓN DIRECTA AL ÁMBITO WINDOW PARA EVITAR CONFLICTOS DE ENCAPSULAMIENTO MODULE
         window.abrirLoginAdmin = function() {
             if(esAdminAutenticado) { toggleAdminPanel(); } else { document.getElementById('modal-login').classList.remove('hidden'); }
         };
@@ -752,7 +756,7 @@
                 controlarVisibilidadModulosOcultos(true);
                 manejarVisibilidadLapicitosAdmin(true);
                 ejecutarFiltroCombinado();
-            } else { alert('Incorrecto.'); }
+            } else { alert('Credenciales incorrectas.'); }
         };
         
         window.cerrarSesionAdmin = function() {
@@ -797,9 +801,9 @@
             try { currentLikeState = localStorage.getItem(`like_tucocel_${prod.id}`) === 'true'; } catch(err) {}
             
             if(currentLikeState) {
-                document.getElementById('modal-btn-like').className = "bg-red-50 text-red-600 px-3 py-2 rounded-xl flex items-center gap-1.5 transition-colors";
+                document.getElementById('modal-btn-like').className = "bg-red-50 text-red-600 px-3 py-2 rounded-xl flex items-center gap-1.5 transition-colors text-xs font-bold";
             } else {
-                document.getElementById('modal-btn-like').className = "bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-xl flex items-center gap-1.5 transition-colors";
+                document.getElementById('modal-btn-like').className = "bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-xl flex items-center gap-1.5 transition-colors text-xs font-bold";
             }
             document.getElementById('modal-producto').classList.remove('hidden');
         };
@@ -832,9 +836,12 @@
             document.getElementById('label-detalles-con').innerText = m === 'Servicio Técnico' ? '¿Falla?' : '¿Artículo?';
         };
         window.enviarConsultaGeneralWhatsApp = function() {
-            const n = document.getElementById('con-nombre').value;
-            const d = document.getElementById('con-detalles').value;
-            window.open("https://wa.me/584247357549?text=" + encodeURIComponent("Consulta de " + n + ": " + d), '_blank');
+            const n = document.getElementById('con-nombre').value.trim();
+            const m = document.getElementById('con-motivo').value;
+            const d = document.getElementById('con-detalles').value.trim();
+            if(!n || !d) { alert("Por favor complete los datos."); return; }
+            const msg = `¡Hola, Tucocel! 👋\n\nDeseo realizar una consulta general:\n\n👤 *Nombre:* ${n}\n📌 *Motivo:* ${m}\n📋 *Detalles:* ${d}`;
+            window.open("https://wa.me/584247357549?text=" + encodeURIComponent(msg), '_blank');
             window.cerrarModalConsultaGeneral();
         };
 
@@ -847,10 +854,10 @@
         window.enviarMensajeRetiroWhatsApp = function() {
             const nombre = document.getElementById('notif-nombre').value.trim();
             let tlf = document.getElementById('notif-telefono').value.trim();
-            if(!nombre || !tlf) { alert("Complete los datos."); return; }
+            if(!nombre || !tlf) { alert("Complete los datos obligatorios."); return; }
             tlf = tlf.replace(/[^0-9]/g, '');
             if(tlf.startsWith('0')) tlf = '58' + tlf.substring(1);
-            const mensajeNotif = `¡Hola, Tucocel! 👋\n\nEstimado cliente *${nombre}*, le informamos de manera oficial que su equipo solicitado bajo pedido ya se encuentra disponible en nuestra tienda física listo para ser retirado. ¡Le esperamos! 🚀\n\nAv. Bolívar, entre calles 12 y 13, Cordero.`;
+            const mensajeNotif = `¡Hola! 👋\n\nEstimado cliente *${nombre}*, le informamos de manera oficial que su equipo solicitado bajo pedido ya se encuentra disponible en nuestra tienda física listo para ser retirado. ¡Le esperamos! 🚀\n\nAv. Bolívar, entre calles 12 y 13, Cordero.`;
             window.open(`https://wa.me/${tlf}?text=${encodeURIComponent(mensajeNotif)}`, '_blank');
             window.cerrarModalNotificarCliente();
         };
@@ -864,13 +871,13 @@
         window.cambiarModoCargaFactura = function(modo) {
             modoCargaFacturaActivo = modo;
             if(modo === 'manual') {
-                document.getElementById('tab-manual').className = "text-blue-600 border-b-2 border-blue-600 pb-2 px-1 flex items-center gap-1";
-                document.getElementById('tab-inventario').className = "text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1";
+                document.getElementById('tab-manual').className = "text-blue-600 border-b-2 border-blue-600 pb-2 px-1 flex items-center gap-1 font-bold";
+                document.getElementById('tab-inventario').className = "text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1 font-bold";
                 document.getElementById('carga-manual-bloque').classList.remove('hidden');
                 document.getElementById('carga-inventario-bloque').classList.add('hidden');
             } else {
-                document.getElementById('tab-manual').className = "text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1";
-                document.getElementById('tab-inventario').className = "text-blue-600 border-b-2 border-blue-600 pb-2 px-1 flex items-center gap-1";
+                document.getElementById('tab-manual').className = "text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1 font-bold";
+                document.getElementById('tab-inventario').className = "text-blue-600 border-b-2 border-blue-600 pb-2 px-1 flex items-center gap-1 font-bold";
                 document.getElementById('carga-manual-bloque').classList.add('hidden');
                 document.getElementById('carga-inventario-bloque').classList.remove('hidden');
                 actualizarSelectFacturacion();
@@ -899,13 +906,12 @@
         };
 
         window.agregarItemALaVenta = function() {
-            if (!verificarTasasEstablecidas()) return;
             if(modoCargaFacturaActivo === 'manual') {
                 const modelo = document.getElementById('manual-modelo').value.trim();
                 const precio = parseInt(document.getElementById('manual-precio').value.trim()) || 0;
                 const checkImei = document.getElementById('manual-check-imei').checked;
                 const imeiVal = document.getElementById('manual-imei').value.trim();
-                if(!modelo || !precio) { alert("Ingrese descripción y precio."); return; }
+                if(!modelo || !precio) { alert("Ingrese descripción y precio válido."); return; }
                 if(checkImei && imeiVal.length !== 4) { alert("Ingrese los últimos 4 dígitos del IMEI."); return; }
                 ITEMS_VENTA_ACTIVA.push({ id: "manual-" + new Date().getTime(), marca: checkImei ? "Celular" : "Otros Productos", modelo: modelo, memoria: "", precio: precio, imei: checkImei ? imeiVal : null });
                 document.getElementById('manual-modelo').value = ''; document.getElementById('manual-precio').value = '';
@@ -926,34 +932,147 @@
         };
 
         window.removerItemVenta = function(index) { ITEMS_VENTA_ACTIVA.splice(index, 1); renderizarItemsVentaActiva(); };
-        window.calcularTotalesFactura = calcularTotalesFactura;
-        window.filtrarTablaHistorial = filtrarTablaHistorial;
-        window.exportarHistorialExcel = exportarHistorialExcel;
-        window.prepararEdicionArticulo = prepararEdicionArticulo;
-        window.cancelarEdicionActiva = cancelarEdicionActiva;
-        window.eliminarProducto = eliminarProducto;
-        window.compartirProductoPorId = compartirProductoPorId;
-        window.incrementarLikeActivo = incrementarLikeActivo;
-        window.compartirProductoActivoWa = compartirProductoActivoWa;
-        window.ejecutarCierreDeMes = ejecutarCierreDeMes;
-        window.eliminarNotaHistorialPorId = eliminarNotaHistorialPorId;
-        window.reabrirNotaHistorialPorObjeto = reabrirNotaHistorialPorObjeto;
-        window.solicitarEdicionAvanzada = solicitarEdicionAvanzada;
+        
+        window.calcularTotalesFactura = function() {
+            const tCOP = parseFloat(document.getElementById('tasa-cop').value) || 0; 
+            const tBS = parseFloat(document.getElementById('tasa-bs').value) || 0;
+            let totalUSD = 0; ITEMS_VENTA_ACTIVA.forEach(i => totalUSD += i.precio);
+            document.getElementById('total-usd').innerText = `Neto: $${totalUSD}`;
+            document.getElementById('total-cop-val').innerText = `${(totalUSD * tCOP).toLocaleString('es-CO')} COP`;
+            document.getElementById('total-bs-val').innerText = `${(tBS > 0 ? (totalUSD * tCOP) / tBS : 0).toLocaleString('es-VE')} Bs`;
+        };
+
+        window.filtrarTablaHistorial = function() {
+            const val = document.getElementById('busq-historial').value.toLowerCase();
+            const f = HISTORIAL_NOTAS.filter(n => n.cliente.toLowerCase().includes(val) || n.cedula.includes(val) || n.numNota.toString().includes(val));
+            renderizarTablaHistorialHTML(f);
+        };
+
+        window.exportarHistorialExcel = function() {
+            if(HISTORIAL_NOTAS.length === 0) return alert("No hay datos para exportar.");
+            const sheet = XLSX.utils.json_to_sheet(HISTORIAL_NOTAS.map(n => ({ Nota: n.numNota, Fecha: n.fecha, Cliente: n.cliente, TotalUSD: n.totalUSD })));
+            const book = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(book, sheet, "Ventas"); XLSX.writeFile(book, "Respaldo_Tucocel.xlsx");
+        };
+
+        window.prepararEdicionArticulo = function(id) {
+            const prod = PRODUCTOS.find(p => p.id === id); if (!prod) return; idArticuloEnEdicion = id;
+            document.getElementById('add-marca').value = prod.marca; document.getElementById('add-modelo').value = prod.modelo;
+            document.getElementById('memoria').value = prod.memoria || ''; document.getElementById('add-precio').value = prod.precio;
+            document.getElementById('add-desc').value = prod.desc || ''; document.getElementById('foto-base64').value = prod.foto || '';
+            document.getElementById('panel-titulo').innerText = "✏️ Editando Artículo"; document.getElementById('btn-cancelar-edicion').classList.remove('hidden');
+            document.getElementById('panel-admin').scrollIntoView({ behavior: 'smooth' });
+        };
+
+        window.cancelarEdicionActiva = function() { 
+            idArticuloEnEdicion = null; 
+            limpiarFormularioPanel(); 
+            document.getElementById('panel-titulo').innerText = "Panel de Gestión"; 
+            document.getElementById('btn-cancelar-edicion').classList.add('hidden'); 
+        };
+
+        window.eliminarProducto = async function(id) { 
+            if(confirm('¿Está seguro de que desea eliminar este producto del catálogo?')) { 
+                PRODUCTOS = PRODUCTOS.filter(p => p.id !== id); 
+                await guardarInventarioFirebase(); 
+                ejecutarFiltroCombinado(); 
+            } 
+        };
+
+        window.incrementarLikeActivo = async function() {
+            if(!productoSeleccionadoActual) return;
+            const key = `like_tucocel_${productoSeleccionadoActual.id}`;
+            let yaDioLike = localStorage.getItem(key) === 'true';
+            
+            const idx = PRODUCTOS.findIndex(p => p.id === productoSeleccionadoActual.id);
+            if(idx === -1) return;
+
+            if(yaDioLike) {
+                PRODUCTOS[idx].likes = Math.max(0, (PRODUCTOS[idx].likes || 1) - 1);
+                localStorage.removeItem(key);
+            } else {
+                PRODUCTOS[idx].likes = (PRODUCTOS[idx].likes || 0) + 1;
+                localStorage.setItem(key, 'true');
+            }
+
+            productoSeleccionadoActual.likes = PRODUCTOS[idx].likes;
+            document.getElementById('modal-like-count').innerText = productoSeleccionadoActual.likes;
+            document.getElementById('modal-btn-like').className = !yaDioLike ? "bg-red-50 text-red-600 px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-colors text-xs font-bold" : "bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-colors text-xs font-bold";
+            
+            await guardarInventarioFirebase();
+            ejecutarFiltroCombinado();
+        };
+
+        window.compartirProductoActivoWa = function() {
+            if(!productoSeleccionadoActual) return;
+            const descSegura = (productoSeleccionadoActual.desc || '').toLowerCase();
+            let msg = `¡Hola, Tucocel! 👋\n\nEstoy interesado en adquirir el siguiente artículo de su vitrina digital:\n\n📱 *PRODUCTO:* ${productoSeleccionadoActual.modelo}\n💾 *CAPACIDAD:* ${productoSeleccionadoActual.memoria || 'N/A'}\n💰 *PRECIO:* $${productoSeleccionadoActual.precio} USD`;
+            
+            if(descSegura.includes('[bajo pedido]')) {
+                msg += `\n\n⏳ *Nota:* Entiendo que este artículo se trabaja Bajo Pedido y estará listo en 2 horas en tienda física.`;
+            }
+            window.open('https://wa.me/584247357549?text=' + encodeURIComponent(msg), '_blank');
+            window.cerrarModalProducto();
+        };
+
+        window.ejecutarCierreDeMes = function() {
+            if(confirm("¿Desea realizar el cierre de mes? Esto generará un archivo de respaldo de las notas actuales.")) {
+                window.exportarHistorialExcel();
+                alert("Cierre de mes procesado de forma exitosa. Guarde el archivo de Excel generado.");
+            }
+        };
+
+        window.reabrirNotaHistorialPorObjeto = function(index) { 
+            const n = HISTORIAL_NOTAS[index]; 
+            const s = prompt("Seleccione una opción:\n[1] Imprimir Nota de Entrega\n[2] Reenviar por WhatsApp"); 
+            if(s==="1") { 
+                document.getElementById('wrapper-impresion-epson').style.display = 'block'; 
+                inyectarDatosAlTicketDOM(n); 
+                window.print(); 
+                document.getElementById('wrapper-impresion-epson').style.display = 'none'; 
+            } else if(s==="2") { 
+                procesarEnvioWaObjeto(n); 
+            } 
+        };
+
+        window.solicitarEdicionAvanzada = async function(idElemento) {
+            if (!esAdminAutenticado) return;
+            const elemento = document.getElementById(idElemento);
+            if (!elemento) return;
+            const datosActuales = BASE_TEXTOS_WEB[idElemento] || { texto: elemento.innerText, alineacion: "1", estilo: "1" };
+            const nuevoTexto = prompt(`✏️ Modificar texto del banner:`, elemento.innerText.trim());
+            if (nuevoTexto === null || nuevoTexto.trim() === "") return;
+            const alignMenu = prompt(`📐 ALINEACIÓN:\n[1] Centrado\n[2] Izquierda\n[3] Derecha`, datosActuales.alineacion || "1");
+            const estiloMenu = prompt(`🔤 ESTILO:\n[1] Normal\n[2] Negrita\n[3] Itálica\n[4] Ambas`, datosActuales.estilo || "1");
+            
+            const alignVal = ["1","2","3"].includes(alignMenu) ? alignMenu : "1";
+            const estiloVal = ["1","2","3","4"].includes(estiloMenu) ? estiloMenu : "1";
+
+            elemento.innerText = nuevoTexto.trim();
+            aplicarEstilosClasesDOM(elemento, alignVal, estiloVal);
+            BASE_TEXTOS_WEB[idElemento] = { texto: nuevoTexto.trim(), alineacion: alignVal, estilo: estiloVal };
+            await sincronizarTextosFirebase();
+        };
 
         window.ejecutarBotonImprimir = async function() {
-            if(ITEMS_VENTA_ACTIVA.length === 0) return alert("Ticket vacío.");
-            if (!verificarTasasEstablecidas()) return;
+            if(ITEMS_VENTA_ACTIVA.length === 0) return alert("Agregue al menos un producto al ticket.");
             const nota = await registrarNotaEnFirebase();
             document.getElementById('wrapper-impresion-epson').style.display = 'block';
             inyectarDatosAlTicketDOM(nota);
-            setTimeout(() => { window.print(); document.getElementById('wrapper-impresion-epson').style.display = 'none'; limpiatFormularioFacturaCompleto(); }, 350);
+            setTimeout(() => { 
+                window.print(); 
+                document.getElementById('wrapper-impresion-epson').style.display = 'none'; 
+                limpiatFormularioFacturaCompleto(); 
+            }, 350);
         };
 
         window.ejecutarBotonWhatsApp = async function() {
-            if(ITEMS_VENTA_ACTIVA.length === 0) return alert("Ticket vacío.");
-            if (!verificarTasasEstablecidas()) return;
+            if(ITEMS_VENTA_ACTIVA.length === 0) return alert("Agregue al menos un producto al ticket.");
             let celTlf = document.getElementById('fact-cli-telefono').value.trim();
-            if(!celTlf) { celTlf = prompt("Ingrese el número de WhatsApp del cliente:"); if(!celTlf) return; }
+            if(!celTlf) { 
+                celTlf = prompt("Ingrese el número de WhatsApp del cliente:"); 
+                if(!celTlf) return;
+                document.getElementById('fact-cli-telefono').value = celTlf;
+            }
             const nota = await registrarNotaEnFirebase();
             inyectarDatosAlTicketDOM(nota);
             procesarEnvioWaObjeto(nota);
@@ -970,7 +1089,7 @@
         });
 
         /* ==========================================================================
-           LÓGICA DEL MOTOR DE TEXTOS Y FIREBASE PROTEGIDO
+           LÓGICA INTERNA DEL PROCESAMIENTO DE DATOS Y FIREBASE
            ========================================================================== */
         async function descargarTextosPersonalizados() {
             try {
@@ -991,26 +1110,7 @@
                         }
                     });
                 }
-            } catch(e) { console.error("Sin textos:", e); }
-        }
-
-        async function solicitarEdicionAvanzada(idElemento) {
-            if (!esAdminAutenticado) return;
-            const elemento = document.getElementById(idElemento);
-            if (!elemento) return;
-            const datosActuales = BASE_TEXTOS_WEB[idElemento] || { texto: elemento.innerText, alineacion: "1", estilo: "1" };
-            const nuevoTexto = prompt(`✏️ Modificar texto del banner:`, elemento.innerText.trim());
-            if (nuevoTexto === null || nuevoTexto.trim() === "") return;
-            const alignMenu = prompt(`📐 ALINEACIÓN:\n[1] Centrado\n[2] Izquierda\n[3] Derecha`, datosActuales.alineacion || "1");
-            const estiloMenu = prompt(`🔤 ESTILO:\n[1] Normal\n[2] Negrita\n[3] Itálica\n[4] Ambas`, datosActuales.estilo || "1");
-            
-            const alignVal = ["1","2","3"].includes(alignMenu) ? alignMenu : "1";
-            const estiloVal = ["1","2","3","4"].includes(estiloMenu) ? estiloMenu : "1";
-
-            elemento.innerText = nuevoTexto.trim();
-            aplicarEstilosClasesDOM(elemento, alignVal, estiloVal);
-            BASE_TEXTOS_WEB[idElemento] = { texto: nuevoTexto.trim(), alineacion: alignVal, estilo: estiloVal };
-            await sincronizarTextosFirebase();
+            } catch(e) { console.error("Sin textos personalizados:", e); }
         }
 
         function aplicarEstilosClasesDOM(elemento, align, estilo) {
@@ -1019,19 +1119,40 @@
             if (estilo === "2") elemento.classList.add('font-black'); else if (estilo === "3") elemento.classList.add('font-normal', 'italic'); else if (estilo === "4") elemento.classList.add('font-black', 'italic'); else elemento.classList.add('font-bold');
         }
 
-        async function sincronizarTextosFirebase() { try { await setDoc(doc(db, "configuraciones", "textos_web"), BASE_TEXTOS_WEB); } catch (e) {} }
-        function manejarVisibilidadLapicitosAdmin(mostrar) { document.querySelectorAll('.btn-editar-texto').forEach(l => l.style.display = mostrar ? 'inline-block' : 'none'); }
+        async function sincronizarTextosFirebase() { 
+            try { await setDoc(doc(db, "configuraciones", "textos_web"), BASE_TEXTOS_WEB); } catch (e) {} 
+        }
+        
+        function manejarVisibilidadLapicitosAdmin(mostrar) { 
+            document.querySelectorAll('.btn-editar-texto').forEach(l => l.style.display = mostrar ? 'inline-block' : 'none'); 
+        }
 
         async function cargarInventarioFirebase() {
             try {
                 const docSnap = await getDoc(doc(db, "inventario", "productos_tucocel"));
-                if (docSnap.exists()) { PRODUCTOS = docSnap.data().lista || []; PRODUCTOS.sort((a, b) => a.precio - b.precio); }
-            } catch (e) { console.error(e); } finally { verificarSesionLocal(); ejecutarFiltroCombinado(); }
+                if (docSnap.exists()) { 
+                    PRODUCTOS = docSnap.data().lista || []; 
+                    PRODUCTOS.sort((a, b) => a.precio - b.precio); 
+                }
+            } catch (e) { 
+                console.error("Error al descargar inventario:", e); 
+            } finally { 
+                verificarSesionLocal(); 
+                ejecutarFiltroCombinado(); 
+            }
         }
 
         async function guardarInventarioFirebase() {
-            const btn = document.getElementById('btn-guardar'); if(btn) { btn.disabled = true; btn.innerText = "⏳..."; }
-            try { PRODUCTOS.sort((a, b) => a.precio - b.precio); await setDoc(doc(db, "inventario", "productos_tucocel"), { lista: PRODUCTOS }); } catch (e) { alert("Error."); } finally { if(btn) { btn.disabled = false; btn.innerText = "Guardar en Inventario"; } }
+            const btn = document.getElementById('btn-guardar'); 
+            if(btn) { btn.disabled = true; btn.innerText = "Guardando..."; }
+            try { 
+                PRODUCTOS.sort((a, b) => a.precio - b.precio); 
+                await setDoc(doc(db, "inventario", "productos_tucocel"), { lista: PRODUCTOS }); 
+            } catch (e) { 
+                alert("Error al sincronizar con la base de datos."); 
+            } finally { 
+                if(btn) { btn.disabled = false; btn.innerText = "Guardar en Inventario"; } 
+            }
         }
 
         function ejecutarFiltroCombinado() {
@@ -1051,7 +1172,10 @@
             if(!contenedor) return;
             const contador = document.getElementById('contador-productos');
             if(contador) contador.innerText = `${lista.length} Disponibles`;
-            if(lista.length === 0) { contenedor.innerHTML = '<div class="text-center col-span-full py-12 text-gray-400 text-sm font-medium">No hay artículos disponibles.</div>'; return; }
+            if(lista.length === 0) { 
+                contenedor.innerHTML = '<div class="text-center col-span-full py-12 text-gray-400 text-sm font-medium">No hay smartphones disponibles en esta marca en este momento.</div>'; 
+                return; 
+            }
             contenedor.innerHTML = '';
             lista.forEach(prod => {
                 const fotoProd = prod.foto || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80';
@@ -1108,30 +1232,66 @@
         }
 
         function renderizarItemsVentaActiva() {
-            const contenedor = document.getElementById('fact-lista-items'); document.getElementById('fact-items-count').innerText = `${ITEMS_VENTA_ACTIVA.length} items`;
-            if(ITEMS_VENTA_ACTIVA.length === 0) { contenedor.innerHTML = '<p class="text-center text-slate-500 text-xs py-6">Ticket vacío.</p>'; calcularTotalesFactura(); return; }
+            const contenedor = document.getElementById('fact-lista-items'); 
+            document.getElementById('fact-items-count').innerText = `${ITEMS_VENTA_ACTIVA.length} items`;
+            if(ITEMS_VENTA_ACTIVA.length === 0) { 
+                contenedor.innerHTML = '<p class="text-center text-slate-500 text-xs py-6">No hay artículos añadidos todavía.</p>'; 
+                window.calcularTotalesFactura(); 
+                return; 
+            }
             contenedor.innerHTML = '';
             ITEMS_VENTA_ACTIVA.forEach((item, index) => {
                 contenedor.innerHTML += `<div class="bg-slate-950 p-2 rounded-xl border border-slate-800 flex justify-between text-white text-xs"><div><p class="font-bold truncate max-w-[150px]">${item.modelo}</p>${item.imei ? `<span class="text-[10px] text-amber-400 font-mono">IMEI: ...${item.imei}</span>` : ''}</div><div class="flex items-center gap-2"><span>$${item.precio}</span><button onclick="removerItemVenta(${index})" class="text-red-400 font-bold"><i class="fa-solid fa-square-xmark"></i></button></div></div>`;
             });
-            calcularTotalesFactura();
+            window.calcularTotalesFactura();
         }
 
-        function calcularTotalesFactura() {
-            const tCOP = parseFloat(document.getElementById('tasa-cop').value) || 0; const tBS = parseFloat(document.getElementById('tasa-bs').value) || 0;
-            let totalUSD = 0; ITEMS_VENTA_ACTIVA.forEach(i => totalUSD += i.precio);
-            document.getElementById('total-usd').innerText = `Neto: $${totalUSD}`;
-            document.getElementById('total-cop-val').innerText = `${(totalUSD * tCOP).toLocaleString('es-CO')} COP`;
-            document.getElementById('total-bs-val').innerText = `${(tBS > 0 ? (totalUSD * tCOP) / tBS : 0).toLocaleString('es-VE')} Bs`;
+        function actualizarSelectFacturacion() {
+            const select = document.getElementById('fact-select-producto');
+            if(!select) return;
+            select.innerHTML = '<option value="">-- Seleccione un producto --</option>';
+            PRODUCTOS.forEach(p => {
+                select.innerHTML += `<option value="${p.id}">${p.modelo} (${p.marca}) - $${p.precio}</option>`;
+            });
         }
 
         async function registrarNotaEnFirebase() {
             let siguienteNumeroNota = 1; let maxNota = 0;
-            try { const snap = await getDocs(collection(db, "notas_ventas")); snap.forEach(d => { const num = parseInt(d.data().numNota) || 0; if(num > maxNota) maxNota = num; }); siguienteNumeroNota = maxNota + 1; } catch(e) {}
-            const ahora = new Date(); const fechaString = ahora.toLocaleDateString('es-VE') + ' ' + ahora.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' });
+            try { 
+                const snap = await getDocs(collection(db, "notas_ventas")); 
+                snap.forEach(d => { 
+                    const num = parseInt(d.data().numNota) || 0; 
+                    if(num > maxNota) maxNota = num; 
+                }); 
+                siguienteNumeroNota = maxNota + 1; 
+            } catch(e) {}
+            
+            const ahora = new Date(); 
+            const fechaString = ahora.toLocaleDateString('es-VE') + ' ' + ahora.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' });
             let montoTotalUSD = 0; ITEMS_VENTA_ACTIVA.forEach(i => montoTotalUSD += i.precio);
-            const objetoNota = { numNota: siguienteNumeroNota, fecha: fechaString, cliente: document.getElementById('fact-cli-nombre').value.trim() || 'Cliente General', cedula: document.getElementById('fact-cli-cedula').value.trim() || 'N/A', direccion: document.getElementById('fact-cli-direccion').value.trim() || 'Cordero', telefono: document.getElementById('fact-cli-telefono').value.trim() || 'N/A', items: ITEMS_VENTA_ACTIVA, totalUSD: montoTotalUSD, tasaCOP: document.getElementById('tasa-cop').value, tasaBS: document.getElementById('tasa-bs').value, timestamp: ahora.getTime() };
-            try { const docRef = await addDoc(collection(db, "notas_ventas"), objetoNota); ultimaNotaIdFirebase = docRef.id; await cargarHistorialFirebase(); return { ...objetoNota, id: docRef.id }; } catch(e) { return objetoNota; }
+            
+            const objetoNota = { 
+                numNota: siguienteNumeroNota, 
+                fecha: fechaString, 
+                cliente: document.getElementById('fact-cli-nombre').value.trim() || 'Cliente General', 
+                cedula: document.getElementById('fact-cli-cedula').value.trim() || 'N/A', 
+                direccion: document.getElementById('fact-cli-direccion').value.trim() || 'Cordero', 
+                telefono: document.getElementById('fact-cli-telefono').value.trim() || 'N/A', 
+                items: ITEMS_VENTA_ACTIVA, 
+                totalUSD: montoTotalUSD, 
+                tasaCOP: document.getElementById('tasa-cop').value, 
+                tasaBS: document.getElementById('tasa-bs').value, 
+                timestamp: ahora.getTime() 
+            };
+            
+            try { 
+                const docRef = await addDoc(collection(db, "notas_ventas"), objetoNota); 
+                ultimaNotaIdFirebase = docRef.id; 
+                await cargarHistorialFirebase(); 
+                return { ...objetoNota, id: docRef.id }; 
+            } catch(e) { 
+                return objetoNota; 
+            }
         }
 
         function inyectarDatosAlTicketDOM(nota) {
@@ -1153,62 +1313,123 @@
 
         function procesarEnvioWaObjeto(nota) {
             let desc = nota.items.map(i => `• ${i.modelo} -> $${i.precio} ${i.imei ? `(IMEI: ...${i.imei})` : ''}`).join('\n');
-            const msg = `*TUCOCEL C.A.*\n*Nota N°:* #${nota.numNota}\n*Cliente:* ${nota.cliente}\n*Detalle:*\n${desc}\n*Total:* $${nota.totalUSD} USD`;
+            const msg = `*TUCOCEL C.A.*\n*Nota de Entrega:* N° ${String(nota.numNota).padStart(6, '0')}\n*Fecha:* ${nota.fecha}\n\n👤 *Cliente:* ${nota.cliente}\n💳 *Cédula/RIF:* ${nota.cedula}\n\n📦 *Detalle de compra:*\n${desc}\n\n💵 *Total General:* $${nota.totalUSD} USD`;
             window.open(`https://wa.me/${nota.telefono.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
         async function cargarHistorialFirebase() {
-            try { const snap = await getDocs(query(collection(db, "notas_ventas"), orderBy("timestamp", "desc"), limit(50))); HISTORIAL_NOTAS = []; snap.forEach(d => HISTORIAL_NOTAS.push({ ...d.data(), id: d.id })); renderizarTablaHistorialHTML(HISTORIAL_NOTAS); } catch(e) {}
+            try { 
+                const snap = await getDocs(query(collection(db, "notas_ventas"), orderBy("timestamp", "desc"), limit(50))); 
+                HISTORIAL_NOTAS = []; 
+                snap.forEach(d => HISTORIAL_NOTAS.push({ ...d.data(), id: d.id })); 
+                renderizarTablaHistorialHTML(HISTORIAL_NOTAS); 
+            } catch(e) {
+                console.error("Error al cargar historial:", e);
+            }
         }
 
         function renderizarTablaHistorialHTML(lista) {
             const tabla = document.getElementById('tabla-historial-cuerpo'); if(!tabla) return;
-            if(lista.length === 0) { tabla.innerHTML = '<tr><td colspan="6" class="p-3 text-center">Sin notas.</td></tr>'; return; }
+            if(lista.length === 0) { tabla.innerHTML = '<tr><td colspan="6" class="p-3 text-center text-gray-400">Ningún registro cargado.</td></tr>'; return; }
             tabla.innerHTML = '';
             lista.forEach((n, idx) => {
-                tabla.innerHTML += `<tr class="border-b"><td class="p-2 font-mono">#${n.numNota}</td><td class="p-2 text-gray-500">${n.fecha}</td><td class="p-2 font-bold">${n.cliente}</td><td class="p-2 truncate max-w-xs">${n.items.map(i => i.modelo).join(', ')}</td><td class="p-2 text-right font-mono font-black">$${n.totalUSD}</td><td class="p-2 text-center"><button onclick="reabrirNotaHistorialPorObjeto(${idx})" class="text-blue-600 bg-blue-50 p-1 rounded"><i class="fa-solid fa-sliders"></i></button></td></tr>`;
+                tabla.innerHTML += `<tr class="border-b hover:bg-gray-50"><td class="p-2.5 font-mono">#${String(n.numNota).padStart(6, '0')}</td><td class="p-2.5 text-gray-500">${n.fecha}</td><td class="p-2.5 font-bold">${n.cliente}</td><td class="p-2.5 truncate max-w-xs">${n.items.map(i => i.modelo).join(', ')}</td><td class="p-2.5 text-right font-mono font-black text-gray-900">$${n.totalUSD}</td><td class="p-2.5 text-center"><button onclick="reabrirNotaHistorialPorObjeto(${idx})" class="text-blue-600 bg-blue-50 hover:bg-blue-100 p-1 rounded-xl transition-colors text-xs px-2"><i class="fa-solid fa-sliders"></i> Gestionar</button></td></tr>`;
             });
         }
 
-        function filtrarTablaHistorial() {
-            const val = document.getElementById('busq-historial').value.toLowerCase();
-            const f = HISTORIAL_NOTAS.filter(n => n.cliente.toLowerCase().includes(val) || n.cedula.includes(val) || n.numNota.toString().includes(val));
-            renderizarTablaHistorialHTML(f);
+        function limpiarFormularioPanel() { 
+            document.getElementById('add-modelo').value = ''; 
+            document.getElementById('memoria').value = ''; 
+            document.getElementById('add-precio').value = ''; 
+            document.getElementById('add-desc').value = ''; 
+            document.getElementById('foto-base64').value = ''; 
+            document.getElementById('preview-foto').src = '';
+            document.getElementById('preview-foto').classList.add('hidden');
         }
 
-        function exportarHistorialExcel() {
-            const sheet = XLSX.utils.json_to_sheet(HISTORIAL_NOTAS.map(n => ({ Nota: n.numNota, Fecha: n.fecha, Cliente: n.cliente, TotalUSD: n.totalUSD })));
-            const book = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(book, sheet, "Ventas"); XLSX.writeFile(book, "Respaldo_Tucocel.xlsx");
+        function limpiatFormularioFacturaCompleto() {
+            document.getElementById('fact-cli-nombre').value = '';
+            document.getElementById('fact-cli-cedula').value = '';
+            document.getElementById('fact-cli-telefono').value = '';
+            document.getElementById('fact-cli-direccion').value = '';
+            ITEMS_VENTA_ACTIVA = [];
+            renderizarItemsVentaActiva();
         }
-
-        function prepararEdicionArticulo(id) {
-            const prod = PRODUCTOS.find(p => p.id === id); if (!prod) return; idArticuloEnEdicion = id;
-            document.getElementById('add-marca').value = prod.marca; document.getElementById('add-modelo').value = prod.modelo;
-            document.getElementById('memoria').value = prod.memoria || ''; document.getElementById('add-precio').value = prod.precio;
-            document.getElementById('add-desc').value = prod.desc || ''; document.getElementById('foto-base64').value = prod.foto || '';
-            document.getElementById('panel-titulo').innerText = "✏️ Editando Artículo"; document.getElementById('btn-cancelar-edicion').classList.remove('hidden');
-            document.getElementById('panel-admin').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function cancelarEdicionActiva() { idArticuloEnEdicion = null; limpiarFormularioPanel(); document.getElementById('panel-titulo').innerText = "Panel de Gestión"; document.getElementById('btn-cancelar-edicion').classList.add('hidden'); }
-        function limpiarFormularioPanel() { document.getElementById('add-modelo').value = ''; document.getElementById('memoria').value = ''; document.getElementById('add-precio').value = ''; document.getElementById('add-desc').value = ''; document.getElementById('foto-base64').value = ''; }
 
         async function procesarGuardadoInventario() {
-            const marca = document.getElementById('add-marca').value; const modelo = document.getElementById('add-modelo').value.trim(); const memoriaVal = document.getElementById('memoria').value.trim(); const precio = parseInt(document.getElementById('add-precio').value.trim()) || 0; const foto = document.getElementById('foto-base64').value; const desc = document.getElementById('add-desc').value.trim();
-            if(!modelo || !precio) return;
-            if (idArticuloEnEdicion) { const idx = PRODUCTOS.findIndex(p => p.id === idArticuloEnEdicion); if (idx !== -1) PRODUCTOS[idx] = { id: idArticuloEnEdicion, marca, modelo, memoria: memoriaVal, precio, foto, desc, likes: PRODUCTOS[idx].likes || 0 }; cancelarEdicionActiva(); }
-            else { PRODUCTOS.unshift({ id: (new Date().getTime()).toString(), marca, modelo, memoria: memoriaVal, precio, foto, desc, likes: 0 }); limpiarFormularioPanel(); }
-            await guardarInventarioFirebase(); ejecutarFiltroCombinado(); actualizarSelectFacturacion();
+            const marca = document.getElementById('add-marca').value; 
+            const modelo = document.getElementById('add-modelo').value.trim(); 
+            const memoriaVal = document.getElementById('memoria').value.trim(); 
+            const precio = parseInt(document.getElementById('add-precio').value.trim()) || 0; 
+            const foto = document.getElementById('foto-base64').value; 
+            const desc = document.getElementById('add-desc').value.trim();
+            
+            if(!modelo || !precio) { alert("Complete modelo y precio."); return; }
+            
+            if (idArticuloEnEdicion) { 
+                const idx = PRODUCTOS.findIndex(p => p.id === idArticuloEnEdicion); 
+                if (idx !== -1) PRODUCTOS[idx] = { id: idArticuloEnEdicion, marca, modelo, memoria: memoriaVal, precio, foto, desc, likes: PRODUCTOS[idx].likes || 0 }; 
+                cancelarEdicionActiva(); 
+            } else { 
+                PRODUCTOS.unshift({ id: (new Date().getTime()).toString(), marca, modelo, memoria: memoriaVal, precio, foto, desc, likes: 0 }); 
+                limpiarFormularioPanel(); 
+            }
+            await guardarInventarioFirebase(); 
+            ejecutarFiltroCombinado(); 
+            actualizarSelectFacturacion();
         }
 
-        function procesarImagen(e) { const file = e.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = function(event) { const img = new Image(); img.onload = function() { const canvas = document.createElement('canvas'); const ctx = canvas.getContext('2d'); canvas.width = 900; canvas.height = 900; ctx.drawImage(img, 0, 0, 900, 900); const base64Str = canvas.toDataURL('image/jpeg', 0.85); document.getElementById('foto-base64').value = base64Str; }; img.src = event.target.result; }; reader.readAsDataURL(file); }
-        function procesarPedidoWhatsApp() { const msg = `¡Hola Tucocel! Pedido:\nItem: ${productoSeleccionadoActual.modelo}\nCliente: ${document.getElementById('cli-nombre').value}`; window.open("https://wa.me/584247357549?text=" + encodeURIComponent(msg), '_blank'); cerrarModalProducto(); }
-        function verificarSesionLocal() { let s = false; try { s = localStorage.getItem('tucocel_admin_sesion') === 'true'; } catch(e) {} if (s) { esAdminAutenticado = true; document.getElementById('panel-admin').classList.remove('hidden'); controlarVisibilidadModulosOcultos(true); manejarVisibilidadLapicitosAdmin(true); } }
-        function controlarVisibilidadModulosOcultos(m) { document.getElementById('barra-accesos-admin').classList.toggle('hidden', !m); }
-        function toggleAdminPanel() { document.getElementById('panel-admin').classList.toggle('hidden'); }
-        async function eliminarProducto(id) { if(confirm('¿Borrar?')) { PRODUCTOS = PRODUCTOS.filter(p => p.id !== id); await guardarInventarioFirebase(); ejecutarFiltroCombinado(); } }
-        async function eliminarNotaHistorialPorId(id) { if(confirm('¿Borrar?')) { await deleteDoc(doc(db, "notas_ventas", id)); await cargarHistorialFirebase(); } }
-        function reabrirNotaHistorialPorObjeto(index) { const n = HISTORIAL_NOTAS[index]; const s = prompt("[1] Imprimir [2] WhatsApp"); if(s==="1") { document.getElementById('wrapper-impresion-epson').style.display = 'block'; inyectarDatosAlTicketDOM(n); window.print(); document.getElementById('wrapper-impresion-epson').style.display = 'none'; } else if(s==="2") { procesarEnvioWaObjeto(n); } }
+        function procesarImagen(e) { 
+            const file = e.target.files[0]; 
+            if (!file) return; 
+            const reader = new FileReader(); 
+            reader.onload = function(event) { 
+                const img = new Image(); 
+                img.onload = function() { 
+                    const canvas = document.createElement('canvas'); 
+                    const ctx = canvas.getContext('2d'); 
+                    canvas.width = 600; 
+                    canvas.height = 600; 
+                    ctx.drawImage(img, 0, 0, 600, 600); 
+                    const base64Str = canvas.toDataURL('image/jpeg', 0.85); 
+                    document.getElementById('foto-base64').value = base64Str;
+                    document.getElementById('preview-foto').src = base64Str;
+                    document.getElementById('preview-foto').classList.remove('hidden');
+                }; 
+                img.src = event.target.result; 
+            }; 
+            reader.readAsDataURL(file); 
+        }
+
+        function verificarSesionLocal() { 
+            let s = false; 
+            try { s = localStorage.getItem('tucocel_admin_sesion') === 'true'; } catch(e) {} 
+            if (s) { 
+                esAdminAutenticado = true; 
+                document.getElementById('panel-admin').classList.remove('hidden'); 
+                controlarVisibilidadModulosOcultos(true); 
+                manejarVisibilidadLapicitosAdmin(true); 
+            } 
+        }
+
+        function controlarVisibilidadModulosOcultos(m) { 
+            document.getElementById('barra-accesos-admin').classList.toggle('hidden', !m); 
+        }
+        
+        function toggleAdminPanel() { 
+            document.getElementById('panel-admin').classList.toggle('hidden'); 
+        }
+
+        function inicializarScrollAutomaticoCarrusel() {
+            const c = document.getElementById('carrusel-otros');
+            if(!c) return;
+            let dir = 1;
+            setInterval(() => {
+                if(c.scrollLeft >= (c.scrollWidth - c.clientWidth) - 10) dir = -1;
+                else if(c.scrollLeft <= 10) dir = 1;
+                c.scrollBy({ left: 35 * dir, behavior: 'smooth' });
+            }, 4000);
+        }
     </script>
 </body>
-                            </html>
+    </html>
