@@ -311,7 +311,6 @@
                                 <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Teléfono (WhatsApp)</label>
                                 <input type="text" id="fact-cli-telefono" placeholder="Ej: 04247357549" class="w-full bg-gray-50 border border-gray-200 p-2 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
                             </div>
-                            <!-- RESTAURADO EL CAMPO CRÍTICO REQUERIDO POR FIREBASE PARA EVITAR EL CRASH invisible -->
                             <div>
                                 <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Dirección de Habitación</label>
                                 <input type="text" id="fact-cli-direccion" placeholder="Ej: Cordero, Centro" class="w-full bg-gray-50 border border-gray-200 p-2 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
@@ -634,6 +633,72 @@
                         </button>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- INYECTADO: MODAL DE LOGIN ADMINISTRATIVO -->
+    <div id="modal-login" class="fixed inset-0 bg-slate-950/80 z-50 flex items-center justify-center hidden p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl relative">
+            <button onclick="cerrarLoginAdmin()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="text-center mb-5">
+                <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-xl mx-auto mb-2 shadow-sm">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h3 class="font-black text-gray-900 text-base uppercase">Acceso de Administrador</h3>
+                <p class="text-xs text-gray-400 font-medium mt-0.5">Introduce tus credenciales para gestionar el inventario.</p>
+            </div>
+            <div class="space-y-3">
+                <div>
+                    <label class="text-[10px] text-gray-400 uppercase font-bold tracking-wider block mb-1">Usuario</label>
+                    <input type="text" id="admin-user" placeholder="Escribe tu usuario" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
+                </div>
+                <div>
+                    <label class="text-[10px] text-gray-400 uppercase font-bold tracking-wider block mb-1">Contraseña</label>
+                    <input type="password" id="admin-pass" placeholder="••••••••" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
+                </div>
+                <button onclick="autenticarAdmin()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black text-xs py-2.5 rounded-xl shadow-md transition-colors mt-2 uppercase">
+                    Iniciar Sesión
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- INYECTADO: MODAL DE CONSULTA GENERAL DE WHATSAPP -->
+    <div id="modal-consulta-general" class="fixed inset-0 bg-slate-950/80 z-50 flex items-center justify-center hidden p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl relative">
+            <button onclick="cerrarModalConsultaGeneral()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="text-center mb-5">
+                <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-xl mx-auto mb-2 shadow-sm">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </div>
+                <h3 class="font-black text-gray-900 text-base uppercase">Atención Inmediata</h3>
+                <p class="text-xs text-gray-400 font-medium mt-0.5">¿No encuentras lo que buscas? Consúltanos directamente.</p>
+            </div>
+            <div class="space-y-3">
+                <div>
+                    <label class="text-[10px] text-gray-400 uppercase font-bold tracking-wider block mb-1">Tu Nombre</label>
+                    <input type="text" id="con-nombre" placeholder="Ej: Carlos Silva" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
+                </div>
+                <div>
+                    <label class="text-[10px] text-gray-400 uppercase font-bold tracking-wider block mb-1">Motivo de Consulta</label>
+                    <select id="con-motivo" onchange="verificarMotivoEspecifico()" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
+                        <option value="Disponibilidad de Smartphone">Disponibilidad de Smartphone</option>
+                        <option value="Accesorios / Otros">Accesorios o Tecnología</option>
+                        <option value="Servicio Técnico">Servicio Técnico Especializado</option>
+                    </select>
+                </div>
+                <div>
+                    <label id="label-detalles-con" class="text-[10px] text-gray-400 uppercase font-bold tracking-wider block mb-1">¿Artículo?</label>
+                    <textarea id="con-detalles" placeholder="Escribe detalles del modelo, accesorio o falla aquí..." class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-medium text-gray-900 h-20 resize-none focus:bg-white focus:outline-blue-500"></textarea>
+                </div>
+                <button onclick="enviarConsultaGeneralWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-2.5 rounded-xl shadow-md transition-colors mt-2 uppercase flex items-center justify-center gap-1.5">
+                    <i class="fa-brands fa-whatsapp text-sm"></i> Enviar a WhatsApp
+                </button>
             </div>
         </div>
     </div>
@@ -983,7 +1048,7 @@
             PRODUCTOS.forEach(p => {
                 const precioFormateado = p.precio % 1 === 0 ? p.precio : p.precio.toFixed(2);
                 const labelCompleto = p.marca === 'Otros Productos' ? `[Accesorio] ${p.modelo} ($${precioFormateado})` : `[${p.marca}] ${p.modelo} ${p.memoria || ''} ($${precioFormateado})`;
-                select.innerHTML += `<option value="${p.id}">${labelCompleto}</option>';`;
+                select.innerHTML += `<option value="${p.id}">${labelCompleto}</option>`;
             });
         }
 
@@ -1397,6 +1462,13 @@
             renderizarItemsVentaActiva();
         }
 
+        function ajustarModalesAlCerrarTodo() {
+            cerrarLoginAdmin();
+            cerrarModalConsultaGeneral();
+            cerrarModalProducto();
+            cerrarModalSistemaFacturacion();
+        }
+
         function prepararEdicionArticulo(id) {
             const prod = PRODUCTOS.find(p => p.id === id);
             if (!prod) return;
@@ -1474,7 +1546,7 @@
                 document.getElementById('modal-btn-like').className = "bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-xl flex items-center gap-1.5 transition-colors";
             }
             document.getElementById('modal-producto').classList.remove('hidden');
-        }
+        </div>
 
         function cerrarModalProducto() {
             document.getElementById('modal-producto').classList.add('hidden');
