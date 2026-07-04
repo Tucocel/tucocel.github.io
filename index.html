@@ -43,15 +43,19 @@
             100% { transform: scale(1); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4); }
         }
 
+        /* DISEÑO DE LÁPICES DEL BANNER OPTIMIZADOS (ELEGANTES Y DISCRETOS) */
         .btn-editar-texto {
             display: none;
             cursor: pointer;
-            margin-left: 0.5rem;
+            margin-left: 0.6rem;
             color: #fbbf24;
-            transition: transform 0.2s;
+            font-size: 14px !important;
+            vertical-align: middle;
+            transition: all 0.2s ease-in-out;
         }
         .btn-editar-texto:hover {
             transform: scale(1.2);
+            color: #f59e0b;
         }
 
         /* AISLAMIENTO CRÍTICO Y CONTROL DE IMPRESIÓN EXCLUSIVO PARA EPSON (15cm x 10cm Horizontal) */
@@ -121,7 +125,6 @@
                         <span class="font-black text-gray-900 text-sm block tracking-tight">TUCOCEL C.A.</span>
                         <span class="text-[9px] text-blue-600 font-extrabold tracking-widest inline-flex items-center gap-1 -mt-1 uppercase">
                             <span id="txt-nav-sub">Agente Autorizado Movistar Cordero</span>
-                            <i class="fa-solid fa-pen btn-editar-texto text-[8px]" onclick="solicitarEdicionTexto('txt-nav-sub')"></i>
                         </span>
                     </div>
                 </div>
@@ -134,22 +137,31 @@
         </div>
     </nav>
 
-    <!-- ENCABEZADO / BANNER PRINCIPAL -->
+    <!-- ENCABEZADO / BANNER PRINCIPAL (ÚNICA SECCIÓN EDITABLE CON LAPICITOS) -->
     <header class="bg-gradient-to-r from-slate-900 to-blue-950 text-white py-12 px-4 shadow-inner relative overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
-        <div class="max-w-7xl mx-auto text-center relative z-10">
-            <span class="bg-blue-500/10 text-blue-400 border border-blue-500/20 text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full inline-flex items-center gap-1.5">
-                <span id="txt-header-tag">Vitrina Tecnológica Digital</span>
-                <i class="fa-solid fa-pen btn-editar-texto text-[9px]" onclick="solicitarEdicionTexto('txt-header-tag')"></i>
-            </span>
-            <h1 class="text-3xl md:text-4xl font-black mt-3 tracking-tight text-white flex items-center justify-center gap-2">
-                <span id="txt-header-titulo">Encuentra tu próximo smartphone</span>
-                <i class="fa-solid fa-pen btn-editar-texto text-xs" onclick="solicitarEdicionTexto('txt-header-titulo')"></i>
-            </h1>
-            <p class="text-slate-400 text-xs md:text-sm mt-2 max-w-md mx-auto font-medium flex items-center justify-center gap-2">
-                <span id="txt-header-desc">Equipos nuevos, garantizados y con la mejor asesoría comercial de la zona.</span>
-                <i class="fa-solid fa-pen btn-editar-texto text-xs" onclick="solicitarEdicionTexto('txt-header-desc')"></i>
-            </p>
+        <div id="contenedor-textos-header" class="max-w-7xl mx-auto text-center relative z-10 space-y-3">
+            
+            <div class="w-full flex items-center justify-center">
+                <span class="bg-blue-500/10 text-blue-400 border border-blue-500/20 text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full">
+                    Vitrina Tecnológica Digital
+                </span>
+            </div>
+
+            <div class="w-full flex items-center justify-center">
+                <h1 id="txt-header-titulo" class="text-3xl md:text-4xl font-black tracking-tight text-white transition-all">
+                    Encuentra tu próximo smartphone
+                </h1>
+                <i class="fa-solid fa-pen btn-editar-texto" onclick="solicitarEdicionAvanzada('txt-header-titulo')"></i>
+            </div>
+
+            <div class="w-full flex items-center justify-center">
+                <p id="txt-header-desc" class="text-slate-400 text-xs md:text-sm max-w-2xl font-medium transition-all">
+                    Equipos nuevos, garantizados y con la mejor asesoría comercial de la zona.
+                </p>
+                <i class="fa-solid fa-pen btn-editar-texto" onclick="solicitarEdicionAvanzada('txt-header-desc')"></i>
+            </div>
+
         </div>
     </header>
 
@@ -159,27 +171,15 @@
             <div class="flex items-center gap-4 p-2">
                 <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-plug"></i></div>
                 <div>
-                    <h4 class="font-bold text-gray-900 text-sm inline-flex items-center gap-1">
-                        <span id="txt-serv1-titulo">Accesorios Premium</span>
-                        <i class="fa-solid fa-pen btn-editar-texto text-[10px]" onclick="solicitarEdicionTexto('txt-serv1-titulo')"></i>
-                    </h4>
-                    <p class="text-gray-500 text-xs mt-0.5 leading-relaxed inline-flex items-center gap-1">
-                        <span id="txt-serv1-desc">También contamos con una amplia variedad de accesorios de alta calidad para celulares y computadoras.</span>
-                        <i class="fa-solid fa-pen btn-editar-texto text-[10px]" onclick="solicitarEdicionTexto('txt-serv1-desc')"></i>
-                    </p>
+                    <h4 class="font-bold text-gray-900 text-sm">Accesorios Premium</h4>
+                    <p class="text-gray-500 text-xs mt-0.5 leading-relaxed">También contamos con una amplia variedad de accesorios de alta calidad para celulares y computadoras.</p>
                 </div>
             </div>
             <div class="flex items-center gap-4 p-2 border-t md:border-t-0 md:border-l border-gray-100 pt-4 md:pt-2 md:pl-6">
                 <div class="w-12 h-12 bg-slate-900 text-blue-400 rounded-2xl flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-laptop-medical"></i></div>
                 <div>
-                    <h4 class="font-bold text-gray-900 text-sm inline-flex items-center gap-1">
-                        <span id="txt-serv2-titulo">Servicio Técnico Especializado</span>
-                        <i class="fa-solid fa-pen btn-editar-texto text-[10px]" onclick="solicitarEdicionTexto('txt-serv2-titulo')"></i>
-                    </h4>
-                    <p class="text-gray-500 text-xs mt-0.5 leading-relaxed inline-flex items-center gap-1">
-                        <span id="txt-serv2-desc">Soporte y reparación profesional para teléfonos, computadoras, laptops e impresoras. ¡Dejamos tus equipos como nuevos!</span>
-                        <i class="fa-solid fa-pen btn-editar-texto text-[10px]" onclick="solicitarEdicionTexto('txt-serv2-desc')"></i>
-                    </p>
+                    <h4 class="font-bold text-gray-900 text-sm">Servicio Técnico Especializado</h4>
+                    <p class="text-gray-500 text-xs mt-0.5 leading-relaxed">Soporte y reparación profesional para teléfonos, computadoras, laptops e impresoras. ¡Dejamos tus equipos como nuevos!</p>
                 </div>
             </div>
         </div>
@@ -204,16 +204,13 @@
             </button>
         </div>
 
-        <!-- RECUADRO INFORMATIVO DE STOCK CON ALINEACIÓN PERFECTA JUSTIFICADA -->
-        <div class="bg-blue-50 border border-blue-100 rounded-2xl p-5 mb-8 max-w-7xl mx-auto flex items-start gap-4 shadow-sm relative">
+        <!-- RECUADRO INFORMATIVO DE STOCK ESTÁTICO -->
+        <div class="bg-blue-50 border border-blue-100 rounded-2xl p-5 mb-8 max-w-7xl mx-auto flex items-start gap-4 shadow-sm">
             <i class="fa-solid fa-circle-info text-blue-600 text-xl mt-0.5 shrink-0"></i>
-            <div class="text-xs md:text-sm text-blue-900 leading-relaxed font-medium text-justify w-full pr-6">
-                <div id="txt-info-stock">
-                    <p>Todos los equipos publicados aquí se encuentran <span class="font-bold text-blue-950">disponibles en nuestra tienda física</span> para entrega inmediata.</p>
-                    <p class="mt-2 text-blue-700">¿Buscas un modelo específico que no ves en el catálogo? <span class="font-bold text-blue-950">¡Te lo traemos por encargo!</span> Lo cancelas en tienda y en tan solo <span class="font-bold text-blue-950">2 horas</span> ya puedes pasar a retirarlo.</p>
-                </div>
+            <div class="text-xs md:text-sm text-blue-900 leading-relaxed font-medium text-justify w-full">
+                <p>Todos los equipos publicados aquí se encuentran <span class="font-bold text-blue-950">disponibles en nuestra tienda física</span> para entrega inmediata.</p>
+                <p class="mt-2 text-blue-700">¿Buscas un modelo específico que no ves en el catálogo? <span class="font-bold text-blue-950">¡Te lo traemos por encargo!</span> Lo cancelas en tienda y en tan solo <span class="font-bold text-blue-950">2 horas</span> ya puedes pasar a retirarlo.</p>
             </div>
-            <i class="fa-solid fa-pen btn-editar-texto text-xs absolute top-5 right-5" onclick="solicitarEdicionTextoHTML('txt-info-stock')"></i>
         </div>
 
         <!-- BOTONERA DE MARCAS CON CENTRADO SIMÉTRICO PREMIUM -->
@@ -238,7 +235,7 @@
         </div>
 
         <div id="contenedor-productos" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
-    </main>
+    </nav>
 
     <!-- AUTOMÁTICO DE OTROS PRODUCTOS -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 border-t border-gray-100 mt-6">
@@ -275,7 +272,7 @@
             </div>
             <div class="space-y-2">
                 <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Memoria / Capacidad (Opcional)</label>
-                <input type="text" id="memoria" placeholder="Ej: 8GB + 256GB" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300">
+                <input type="text" id="memoria" placeholder="Ej: 8GB + 256GB" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold text-gray-900 border border-gray-300">
                 <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block mt-2">Precio USD</label>
                 <input type="number" id="add-precio" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300">
             </div>
@@ -504,7 +501,7 @@
                         <div style="border: 1px solid #000; padding: 4px 6px; text-align: center; border-radius: 2px; min-width: 155px; background: #fff;">
                             <span style="display: block; font-size: 8.5px; font-weight: bold; color:#000; tracking-wide: 0.5px;">NOTA DE ENTREGA</span>
                             <span style="display: block; font-size: 8px; font-weight: bold; color: #000; line-height: 1.1; margin-top: 1px;">(SIN VALOR FISCAL)</span>
-                            <span style="display: block; font-size: 11px; font-weight: bold; color: #dc2626; margin-top: 2px;" id="tk-num-nota">N° 000000</span>
+                            <span style="display: block; font-size: 11px; font-weight: bold; color: #000; margin-top: 2px;" id="tk-num-nota">N° 000000</span>
                         </div>
                         <p style="margin: 3px 0 0 0; font-size: 7.5px; font-weight: bold; color: #000;" id="tk-fecha">Fecha/Hora: --/--/---- --:--</p>
                     </div>
@@ -590,7 +587,7 @@
         </div>
     </section>
 
-    <!-- PIE DE PÁGINA (CON REDES SOCIALES OFICIALES ACTUALIZADAS) -->
+    <!-- PIE DE PÁGINA -->
     <footer class="bg-slate-900 text-slate-400 py-10 px-4 mt-16 border-t border-slate-800 text-xs font-medium">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
             <div class="space-y-1.5">
@@ -819,7 +816,6 @@
         let ultimaNotaIdFirebase = null;
         let modoCargaFacturaActivo = 'manual';
         
-        // Memoria local para almacenar los textos personalizados cargados desde Firebase
         let BASE_TEXTOS_WEB = {};
 
         window.addEventListener("DOMContentLoaded", async () => {
@@ -866,19 +862,15 @@
             window.cerrarModalConsultaBanner = cerrarModalConsultaBanner;
             window.enviarConsultaBannerWhatsApp = enviarConsultaBannerWhatsApp;
             
-            // Asignar funciones de edición en vivo al mapa global de ejecución
-            window.solicitarEdicionTexto = solicitarEdicionTexto;
-            window.solicitarEdicionTextoHTML = solicitarEdicionTextoHTML;
+            window.solicitarEdicionAvanzada = solicitarEdicionAvanzada;
 
-            // 1. Cargar textos dinámicos desde la nube antes que el catálogo
             await descargarTextosPersonalizados();
-            // 2. Cargar productos desde Firebase
             await cargarInventarioFirebase();
             inicializarScrollAutomaticoCarrusel();
         });
 
         /* ==========================================================================
-           SISTEMA DE EDICIÓN DE TEXTOS COMERCIALES EN TIEMPO REAL
+           SISTEMA DE EDICIÓN CONFIGURABLE: TEXTO, ALINEACIÓN Y DISEÑO
            ========================================================================== */
         async function descargarTextosPersonalizados() {
             try {
@@ -886,11 +878,16 @@
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
                     BASE_TEXTOS_WEB = docSnap.data() || {};
-                    // Reemplazar dinámicamente cada campo si existe en la base de datos
                     Object.keys(BASE_TEXTOS_WEB).forEach(idElemento => {
                         const elementoDOM = document.getElementById(idElemento);
                         if (elementoDOM) {
-                            elementoDOM.innerHTML = BASE_TEXTOS_WEB[idElemento];
+                            const dataObjeto = BASE_TEXTOS_WEB[idElemento];
+                            if (typeof dataObjeto === 'object') {
+                                elementoDOM.innerText = dataObjeto.texto || "";
+                                aplicarEstilosClasesDOM(elementoDOM, dataObjeto.alineacion, dataObjeto.estilo);
+                            } else {
+                                elementoDOM.innerText = dataObjeto;
+                            }
                         }
                     });
                 }
@@ -899,33 +896,58 @@
             }
         }
 
-        async function solicitarEdicionTexto(idElemento) {
+        async function solicitarEdicionAvanzada(idElemento) {
             if (!esAdminAutenticado) return;
             const elemento = document.getElementById(idElemento);
             if (!elemento) return;
             
+            const datosActuales = BASE_TEXTOS_WEB[idElemento] || { texto: elemento.innerText, alineacion: "1", estilo: "1" };
             const textoActual = elemento.innerText.trim();
-            const nuevoTexto = prompt(`✏️ Editar texto del elemento [${idElemento}]:`, textoActual);
             
-            if (nuevoTexto !== null && nuevoTexto.trim() !== "") {
-                elemento.innerText = nuevoTexto.trim();
-                BASE_TEXTOS_WEB[idElemento] = nuevoTexto.trim();
-                await sincronizarTextosFirebase();
-            }
+            // 1. Preguntar por el nuevo texto comercial
+            const nuevoTexto = prompt(`✏️ Modificar texto del banner:`, textoActual);
+            if (nuevoTexto === null || nuevoTexto.trim() === "") return;
+            
+            // 2. Preguntar por la alineación del bloque en pantalla
+            const alignMenu = prompt(`📐 ALINEACIÓN DEL TEXTO:\n\nEscribe el número de la opción:\n[1] Centrado\n[2] Alineado a la Izquierda\n[3] Alineado a la Derecha`, datosActuales.alineacion || "1");
+            const alignVal = (alignMenu === "1" || alignMenu === "2" || alignMenu === "3") ? alignMenu : "1";
+            
+            // 3. Preguntar por el estilo tipográfico
+            const estiloMenu = prompt(`🔤 ESTILO TIPOGRÁFICO:\n\nEscribe el número de la opción:\n[1] Normal\n[2] Gruesita (Negrita)\n[3] Semiacostada (Itálica)\n[4] Gruesita y Semiacostada`, datosActuales.estilo || "1");
+            const estiloVal = (estiloMenu === "1" || estiloMenu === "2" || estiloMenu === "3" || estiloMenu === "4") ? estiloMenu : "1";
+
+            // Actualizar interfaz del navegador de inmediato
+            elemento.innerText = nuevoTexto.trim();
+            aplicarEstilosClasesDOM(elemento, alignVal, estiloVal);
+            
+            // Estructurar el objeto seguro para la base de datos de Firebase
+            BASE_TEXTOS_WEB[idElemento] = {
+                texto: nuevoTexto.trim(),
+                alineacion: alignVal,
+                estilo: estiloVal
+            };
+            
+            await sincronizarTextosFirebase();
         }
 
-        async function solicitarEdicionTextoHTML(idElemento) {
-            if (!esAdminAutenticado) return;
-            const elemento = document.getElementById(idElemento);
-            if (!elemento) return;
+        function aplicarEstilosClasesDOM(elemento, align, estilo) {
+            // Limpiar clases anteriores de alineación y tipografía para evitar solapamientos
+            elemento.classList.remove('text-center', 'text-left', 'text-right', 'font-normal', 'font-black', 'font-bold', 'italic');
             
-            const textoActual = elemento.innerHTML.trim();
-            const nuevoTexto = prompt(`✏️ Editar bloque HTML o texto del elemento [${idElemento}]:\n\n(Puedes usar etiquetas de negrita o saltos si lo deseas)`, textoActual);
+            // Inyectar clase de Alineación segun opción elegida
+            if (align === "2") elemento.classList.add('text-left');
+            else if (align === "3") elemento.classList.add('text-right');
+            else elemento.classList.add('text-center');
             
-            if (nuevoTexto !== null && nuevoTexto.trim() !== "") {
-                elemento.innerHTML = nuevoTexto.trim();
-                BASE_TEXTOS_WEB[idElemento] = nuevoTexto.trim();
-                await sincronizarTextosFirebase();
+            // Inyectar clase de Estilo de letra según opción elegida
+            if (estilo === "2") {
+                elemento.classList.add('font-black');
+            } else if (estilo === "3") {
+                elemento.classList.add('font-normal', 'italic');
+            } else if (estilo === "4") {
+                elemento.classList.add('font-black', 'italic');
+            } else {
+                elemento.classList.add('font-bold');
             }
         }
 
@@ -949,9 +971,6 @@
             });
         }
 
-        /* ==========================================================================
-           LÓGICA ANTERIOR SANEADA Y BLINDADA CON CAPAS DE SEGURIDAD TRY-CATCH
-           ========================================================================== */
         function inicializarScrollAutomaticoCarrusel() {
             const carrusel = document.getElementById('carrusel-otros');
             if(!carrusel) return;
@@ -1414,7 +1433,7 @@
             nota.items.forEach(i => {
                 const imeiStr = i.imei ? `<br><span style="font-size:7px; color:#444; font-weight:600; padding-left:4px;">[IMEI: ...${i.imei}]</span>` : '';
                 const monedaBaseStr = i.marca === 'Otros Productos' ? 'COP' : 'USD';
-                const precioItemFormateado = i.precio % 1 === 0 ? i.precio : i.precio.toFixed(2);
+                const precioItemFormateado = i.precio % 1 === 0 ? i.precio : i.toFixed(2);
                 
                 tabla.innerHTML += `
                     <tr style="border-bottom: 1px solid #000;">
@@ -1844,4 +1863,4 @@
         }
     </script>
 </body>
-                        </html>
+    </html>
