@@ -43,6 +43,7 @@
             100% { transform: scale(1); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4); }
         }
 
+        /* DISEÑO DE LÁPICES DEL BANNER OPTIMIZADOS (ELEGANTES Y DISCRETOS) */
         .btn-editar-texto {
             display: none;
             cursor: pointer;
@@ -524,7 +525,7 @@
                         <thead>
                             <tr style="background: #f3f4f6; border-bottom: 1px solid #000; font-weight: bold; color: #000;">
                                 <th style="padding: 4px; border-right: 1px solid #000; width: 10%; text-align: center;">Cant.</th>
-                                <th style="padding: 4px; border-right: 1px solid #000; width: 60%;">Descripción / Artículo</th>
+                                <th style="padding: 4px; border-right: 1px solid #000; width: 70%;">Descripción / Artículo</th>
                                 <th style="padding: 4px; width: 30%; text-align: right; padding-right: 5px;">Total Neto</th>
                             </tr>
                         </thead>
@@ -653,7 +654,7 @@
                         <label class="text-[10px] text-gray-400 uppercase font-bold tracking-wider block mb-1">Dirección de Habitación / Referencia</label>
                         <input type="text" id="banner-con-direccion" placeholder="Ej: Cordero, Centro" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
                     </div>
-                    <button onclick="enviarConsultaBannerWhatsApp()" class="w-full bg-emerald-50 hover:bg-emerald-600 text-white font-black text-xs py-2.5 rounded-xl shadow-md transition-colors mt-2 uppercase flex items-center justify-center gap-1.5">
+                    <button onclick="enviarConsultaBannerWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-2.5 rounded-xl shadow-md transition-colors mt-2 uppercase flex items-center justify-center gap-1.5">
                         <i class="fa-brands fa-whatsapp text-sm"></i> Iniciar Consulta en WhatsApp
                     </button>
                 </div>
@@ -700,7 +701,7 @@
         </div>
     </div>
 
-    <!-- NÚCLEO MOTOR ORIGINAL INTEGRADO CON ENLACE DE MÓDULO SÓLIDO (100% SEGURO) -->
+    <!-- NÚCLEO MOTOR LÓGICO INTEGRADO, SANEADO Y SEGURO (SIN REFERENCE ERRORS) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, doc, setDoc, getDoc, collection, addDoc, getDocs, query, orderBy, limit, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -730,14 +731,17 @@
         let productoSeleccionadoActual = null;
         let ultimaNotaIdFirebase = null;
         let modoCargaFacturaActivo = 'manual';
-        
         let BASE_TEXTOS_WEB = {};
 
-        // MAPEADO DIRECTO E INMEDIATO AL ENTORNO GLOBAL PARA EVITAR ERRORES REFERENCE-ERROR
+        // FUNCIONES GLOBALES DEFINIDAS DIRECTAMENTE PARA EVITAR ERRORES DE CARGA EN HTML
         window.abrirLoginAdmin = function() {
             if(esAdminAutenticado) { toggleAdminPanel(); } else { document.getElementById('modal-login').classList.remove('hidden'); }
         };
-        window.cerrarLoginAdmin = function() { document.getElementById('modal-login').classList.add('hidden'); };
+        
+        window.cerrarLoginAdmin = function() {
+            document.getElementById('modal-login').classList.add('hidden');
+        };
+        
         window.autenticarAdmin = function() {
             const u = document.getElementById('admin-user').value.trim();
             const p = document.getElementById('admin-pass').value.trim();
@@ -750,6 +754,7 @@
                 ejecutarFiltroCombinado();
             } else { alert('Incorrecto.'); }
         };
+        
         window.cerrarSesionAdmin = function() {
             esAdminAutenticado = false;
             try { localStorage.removeItem('tucocel_admin_sesion'); } catch(err) {}
@@ -779,11 +784,10 @@
             document.getElementById('modal-memoria').innerText = prod.memoria || '';
             document.getElementById('modal-precio').innerText = prod.precio;
             
-            const descripcionSegura = (prod.desc || '').toLowerCase();
-            const esEncargo = descripcionSegura.includes('[bajo pedido]');
-            if(esEncargo) {
-                const descLimpia = prod.desc.replace('[BAJO PEDIDO]', '').replace('[bajo pedido]', '').trim();
-                document.getElementById('modal-desc').innerHTML = `${descLimpia}<br><br><span class="block p-2 bg-amber-50 text-amber-800 border border-amber-200 font-bold rounded-xl text-[11px]">⚠️ CONDICIÓN DE COMPRA: Este equipo se trabaja bajo pedido. Lo cancelas en nuestra tienda física y en tan solo 2 horas serás notificado para pasar a retirarlo.</span>`;
+            const descLimpia = (prod.desc || '').toLowerCase();
+            if(descLimpia.includes('[bajo pedido]')) {
+                const textoMostrar = (prod.desc || '').replace(/\[BAJO PEDIDO\]/gi, '').trim();
+                document.getElementById('modal-desc').innerHTML = `${textoMostrar}<br><br><span class="block p-2 bg-amber-50 text-amber-800 border border-amber-200 font-bold rounded-xl text-[11px]">⚠️ CONDICIÓN DE COMPRA: Este equipo se trabaja bajo pedido. Lo cancelas en nuestra tienda física y en tan solo 2 horas serás notificado para pasar a retirarlo.</span>`;
             } else {
                 document.getElementById('modal-desc').innerText = prod.desc || 'Sin descripción.';
             }
@@ -823,15 +827,15 @@
 
         window.abrirModalConsultaGeneral = function() { document.getElementById('modal-consulta-general').classList.remove('hidden'); };
         window.cerrarModalConsultaGeneral = function() { document.getElementById('modal-consulta-general').classList.add('hidden'); };
+        window.verificarMotivoEspecifico = function() {
+            const m = document.getElementById('con-motivo').value;
+            document.getElementById('label-detalles-con').innerText = m === 'Servicio Técnico' ? '¿Falla?' : '¿Artículo?';
+        };
         window.enviarConsultaGeneralWhatsApp = function() {
             const n = document.getElementById('con-nombre').value;
             const d = document.getElementById('con-detalles').value;
             window.open("https://wa.me/584247357549?text=" + encodeURIComponent("Consulta de " + n + ": " + d), '_blank');
             window.cerrarModalConsultaGeneral();
-        };
-        window.verificarMotivoEspecifico = function() {
-            const m = document.getElementById('con-motivo').value;
-            document.getElementById('label-detalles-con').innerText = m === 'Servicio Técnico' ? '¿Falla?' : '¿Artículo?';
         };
 
         window.abrirModalNotificarCliente = function() { document.getElementById('modal-notificar-cliente').classList.remove('hidden'); };
@@ -856,6 +860,7 @@
             cargarHistorialFirebase();
         };
         window.cerrarModalSistemaFacturacion = function() { document.getElementById('modal-sistema-facturacion').classList.add('hidden'); };
+        
         window.cambiarModoCargaFactura = function(modo) {
             modoCargaFacturaActivo = modo;
             if(modo === 'manual') {
@@ -871,16 +876,26 @@
                 actualizarSelectFacturacion();
             }
         };
+
         window.toggleManualImeiView = function() {
             const check = document.getElementById('manual-check-imei').checked;
-            document.getElementById('wrapper-manual-imei').classList.toggle('hidden', !check);
-            if(!check) document.getElementById('manual-imei').value = '';
+            if(check) {
+                document.getElementById('wrapper-manual-imei').classList.remove('hidden');
+            } else {
+                document.getElementById('wrapper-manual-imei').classList.add('hidden');
+                document.getElementById('manual-imei').value = '';
+            }
         };
+
         window.verificarTipoArticuloFactura = function() {
             const id = document.getElementById('fact-select-producto').value;
             const prod = PRODUCTOS.find(p => p.id === id);
-            document.getElementById('wrapper-fact-imei').classList.toggle('hidden', !(prod && prod.marca !== 'Otros Productos'));
-            if(!prod || prod.marca === 'Otros Productos') document.getElementById('fact-imei').value = '';
+            if(prod && prod.marca !== 'Otros Productos') {
+                document.getElementById('wrapper-fact-imei').classList.remove('hidden');
+            } else {
+                document.getElementById('wrapper-fact-imei').classList.add('hidden');
+                document.getElementById('fact-imei').value = '';
+            }
         };
 
         window.agregarItemALaVenta = function() {
@@ -923,7 +938,6 @@
         window.ejecutarCierreDeMes = ejecutarCierreDeMes;
         window.eliminarNotaHistorialPorId = eliminarNotaHistorialPorId;
         window.reabrirNotaHistorialPorObjeto = reabrirNotaHistorialPorObjeto;
-
         window.solicitarEdicionAvanzada = solicitarEdicionAvanzada;
 
         window.ejecutarBotonImprimir = async function() {
@@ -946,7 +960,7 @@
             limpiatFormularioFacturaCompleto();
         };
 
-        // INICIALIZADOR PRINCIPAL SEGURO
+        // INICIALIZADOR PRINCIPAL SEGURO (SE EJECUTA AL CARGAR LA PÁGINA)
         window.addEventListener("DOMContentLoaded", async () => {
             document.getElementById('add-foto-file').addEventListener('change', procesarImagen);
             document.getElementById('btn-guardar').addEventListener('click', procesarGuardadoInventario);
@@ -977,7 +991,7 @@
                         }
                     });
                 }
-            } catch(e) { console.error(e); }
+            } catch(e) { console.error("Sin textos:", e); }
         }
 
         async function solicitarEdicionAvanzada(idElemento) {
@@ -1025,7 +1039,7 @@
                 const descSegura = (p.desc || '').toLowerCase();
                 const esTelefonoNormal = p.marca !== 'Otros Productos' && !descSegura.includes('[bajo pedido]');
                 if(marcaSeleccionada === 'Bajo Pedido') return descSegura.includes('[bajo pedido]');
-                return esTelefonoNormal && (marcaSeleccionada === 'Todas' || p.marca.toLowerCase() === marcaSeleccionada.toLowerCase());
+                return esTelefonoNormal && (marcaSeleccionada === 'Todas' || (p.marca || '').toLowerCase() === marcaSeleccionada.toLowerCase());
             });
             const otrosFiltrados = PRODUCTOS.filter(p => p.marca === 'Otros Productos' || (p.desc || '').toLowerCase().includes('[bajo pedido]'));
             renderizarCatalogoHTML(telefonosFiltrados);
@@ -1046,7 +1060,8 @@
                 try { lockStatus = localStorage.getItem(`like_tucocel_${prod.id}`) === 'true'; } catch(e) {}
                 const heartClass = lockStatus ? 'fa-solid fa-heart text-red-500' : 'fa-regular fa-heart text-gray-400';
                 const precioTxt = prod.precio % 1 === 0 ? prod.precio : prod.precio.toFixed(2);
-                const esEncargo = (prod.desc || '').toLowerCase().includes('[bajo pedido]');
+                const descSegura = (prod.desc || '').toLowerCase();
+                const esEncargo = descSegura.includes('[bajo pedido]');
 
                 contenedor.innerHTML += `
                     <div onclick="abrirModalProducto('${prod.id}')" class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex flex-col justify-between transition-all hover:shadow-xl cursor-pointer group">
@@ -1078,7 +1093,8 @@
             lista.forEach(prod => {
                 const fotoProd = prod.foto || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80';
                 const precioTxt = prod.precio % 1 === 0 ? prod.precio : prod.precio.toFixed(2);
-                const esEncargo = (prod.desc || '').toLowerCase().includes('[bajo pedido]');
+                const descSegura = (prod.desc || '').toLowerCase();
+                const esEncargo = descSegura.includes('[bajo pedido]');
                 carrusel.innerHTML += `
                     <div onclick="abrirModalProducto('${prod.id}')" class="snap-start shrink-0 w-44 bg-white rounded-2xl p-3 border border-gray-100 shadow-sm flex flex-col justify-between cursor-pointer">
                         <div>
@@ -1110,7 +1126,7 @@
         }
 
         async function registrarNotaEnFirebase() {
-            let siguienteNumeroNota = 1;
+            let siguienteNumeroNota = 1; let maxNota = 0;
             try { const snap = await getDocs(collection(db, "notas_ventas")); snap.forEach(d => { const num = parseInt(d.data().numNota) || 0; if(num > maxNota) maxNota = num; }); siguienteNumeroNota = maxNota + 1; } catch(e) {}
             const ahora = new Date(); const fechaString = ahora.toLocaleDateString('es-VE') + ' ' + ahora.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' });
             let montoTotalUSD = 0; ITEMS_VENTA_ACTIVA.forEach(i => montoTotalUSD += i.precio);
@@ -1195,4 +1211,4 @@
         function reabrirNotaHistorialPorObjeto(index) { const n = HISTORIAL_NOTAS[index]; const s = prompt("[1] Imprimir [2] WhatsApp"); if(s==="1") { document.getElementById('wrapper-impresion-epson').style.display = 'block'; inyectarDatosAlTicketDOM(n); window.print(); document.getElementById('wrapper-impresion-epson').style.display = 'none'; } else if(s==="2") { procesarEnvioWaObjeto(n); } }
     </script>
 </body>
-    </html>
+                                                                                                                                                                                                                                                                                        </html>
