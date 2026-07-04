@@ -95,24 +95,24 @@
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased min-h-screen pb-12 relative">
 
+    <!-- BARRA SUPERIOR DE ACCESOS ADMINISTRATIVOS OPTIMIZADA -->
     <div id="barra-accesos-admin" class="bg-slate-950 text-white px-4 py-2.5 text-xs font-bold hidden border-b border-slate-800 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-2">
+        <div class="max-w-7xl mx-auto flex justify-between items-center gap-2">
+            <div class="flex items-center gap-2 shrink-0">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                <span class="text-slate-400">SESIÓN: <span class="text-amber-400 uppercase tracking-wider">ADMINISTRADOR TUCOCEL</span></span>
+                <span class="text-slate-400 hidden sm:inline">SESIÓN: <span class="text-amber-400 uppercase tracking-wider">ADMIN</span></span>
+                <span class="text-amber-400 uppercase tracking-wider text-[10px] sm:hidden">ADMIN 🔒</span>
             </div>
             <div class="flex items-center gap-2">
-                <button onclick="abrirModalNotificarCliente()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3.5 py-1.5 rounded-xl transition-all shadow-md flex items-center gap-1.5 font-extrabold mr-1">
-                    <i class="fa-solid fa-bell text-sm"></i> Notificar Equipo Listo
+                <button onclick="abrirModalSistemaFacturacion()" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-xl transition-all shadow-md flex items-center gap-1.5 font-extrabold text-[11px] sm:text-xs">
+                    <i class="fa-solid fa-file-invoice-dollar"></i> <span class="hidden sm:inline">Abrir Sistema de</span> Facturación
                 </button>
-                <button onclick="abrirModalSistemaFacturacion()" class="bg-blue-600 hover:bg-blue-700 text-white px-3.5 py-1.5 rounded-xl transition-all shadow-md flex items-center gap-1.5 font-extrabold">
-                    <i class="fa-solid fa-file-invoice-dollar text-sm"></i> Abrir Sistema de Facturación
-                </button>
-                <button onclick="cerrarSesionAdmin()" class="bg-red-500/20 text-red-400 hover:bg-red-500/30 px-3 py-1.5 rounded-xl transition-colors ml-2">Cerrar Sesión</button>
+                <button onclick="cerrarSesionAdmin()" class="bg-red-500/20 text-red-400 hover:bg-red-500/30 px-2.5 py-1.5 rounded-xl transition-colors text-[11px] sm:text-xs">Salir</button>
             </div>
         </div>
     </div>
 
+    <!-- BARRA DE NAVEGACIÓN -->
     <nav class="bg-white border-b border-gray-100 sticky top-0 z-40 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
@@ -134,6 +134,7 @@
         </div>
     </nav>
 
+    <!-- ENCABEZADO / BANNER PRINCIPAL -->
     <header class="bg-gradient-to-r from-slate-900 to-blue-950 text-white py-12 px-4 shadow-inner relative overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
         <div id="contenedor-textos-header" class="max-w-7xl mx-auto text-center relative z-10 space-y-3">
@@ -157,6 +158,7 @@
         </div>
     </header>
 
+    <!-- SECCIÓN DE SERVICIOS Y ACCESORIOS -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         <div class="bg-white border border-gray-100 rounded-3xl p-5 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="flex items-center gap-4 p-2">
@@ -176,6 +178,7 @@
         </div>
     </section>
 
+    <!-- MAIN VITRINA -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="mb-8 max-w-4xl mx-auto bg-gradient-to-r from-blue-600 to-blue-800 text-white p-6 rounded-2xl shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4 border border-blue-500">
             <div class="flex items-center gap-4 text-center sm:text-left">
@@ -196,11 +199,11 @@
             <i class="fa-solid fa-circle-info text-blue-600 text-xl mt-0.5 shrink-0"></i>
             <div class="text-xs md:text-sm text-blue-900 leading-relaxed text-justify w-full">
                 <p>Todos los equipos publicados aquí se encuentran <span class="font-bold text-blue-950">disponibles en nuestra tienda física</span> para entrega inmediata.</p>
-                <p class="mt-2 text-blue-700">¿Buscas un modelo específico que no ves en el catálogo? <span class="font-bold text-blue-950">¡Te lo traemos en preventa!</span> Lo cancelas en tienda y en tan solo <span class="font-bold text-blue-950">2 horas</span> ya puedes pasar a retirarlo.</p>
+                <p class="mt-2 text-blue-700">¿Buscas un modelo específico que no ves en el catálogo? <span class="font-bold text-blue-950">¡Te lo traemos en preventa!</span> Lo cancelas en tienda y en tiempo récord ya puedes pasar a retirarlo.</p>
             </div>
         </div>
 
-        <!-- MEJORA: BOTONERA DE MARCAS CON DESPLAZAMIENTO HORIZONTAL SUAVE EN MÓVIL -->
+        <!-- BOTONERA DE MARCAS CON DESPLAZAMIENTO HORIZONTAL EN MÓVIL -->
         <div class="mb-8 w-full overflow-hidden">
             <p class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mb-2 px-1">Explorar Smartphone por Marca</p>
             <div class="flex gap-2 overflow-x-auto pb-3 pt-1 px-1 no-scrollbar snap-x justify-start md:justify-center w-full">
@@ -223,8 +226,9 @@
         </div>
 
         <div id="contenedor-productos" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
-    </main>
+    </nav>
 
+    <!-- CARRUSEL DE PREVENTA / ACCESORIOS -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 border-t border-gray-100 mt-6">
         <div class="flex items-center justify-between mb-4 px-1">
             <div class="flex items-center gap-2">
@@ -255,7 +259,6 @@
                     <option value="Otros Productos">Otros Productos / Accesorios</option>
                 </select>
                 
-                <!-- UNIFICADO: SOLO VITRINA O PREVENTA -->
                 <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block mt-2">Modalidad de Carga</label>
                 <select id="add-modalidad" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300">
                     <option value="vitrina">⚡ Entrega Inmediata (Vitrina)</option>
@@ -289,12 +292,12 @@
         </div>
     </div>
 
-    <!-- VENTANA MODAL RESPONSIVA MEJORADA AL 100% PARA SISTEMA DE FACTURACIÓN (MOVIL Y PC) -->
+    <!-- VENTANA MODAL RESPONSIVA MEJORADA AL 100% PARA SISTEMA DE FACTURACIÓN -->
     <div id="modal-sistema-facturacion" class="fixed inset-0 bg-slate-950/90 z-50 overflow-y-auto backdrop-blur-md p-2 sm:p-4 lg:p-6 hidden">
         <div class="bg-white rounded-3xl w-full max-w-6xl mx-auto my-2 md:my-4 shadow-2xl overflow-hidden border border-gray-100 flex flex-col md:h-[90vh]">
             
             <!-- Barra Superior Interna -->
-            <div class="bg-slate-900 text-white px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4 border-b border-slate-800 shrink-0">
+            <div class="bg-slate-900 text-white px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4 border-b border-slate-800 shrink-0 relative">
                 <div class="flex items-center gap-2.5 w-full md:w-auto">
                     <i class="fa-solid fa-cash-register text-amber-400 text-xl"></i>
                     <div>
@@ -359,7 +362,7 @@
                                 <div class="sm:col-span-2">
                                     <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Descripción / Nombre del Producto</label>
                                     <input type="text" id="manual-modelo" placeholder="Ej: Redmi Note 13 Pro 4G..." class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
-                                </div>
+                                end    </div>
                                 <div>
                                     <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Precio Unitario ($ USD)</label>
                                     <input type="number" id="manual-precio" placeholder="0" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
@@ -440,12 +443,17 @@
 
             </div>
 
-            <!-- Historial -->
+            <!-- Historial de Operaciones con Botonera de Notificación Integrada -->
             <div class="bg-slate-100 border-t border-gray-200 p-3 sm:p-4 lg:p-5 space-y-3 shrink-0">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-200 pb-2">
-                    <div class="flex items-center gap-1.5">
-                        <i class="fa-solid fa-clock-rotate-left text-gray-700"></i>
-                        <h4 class="font-extrabold text-xs text-gray-900 uppercase">Historial de Operaciones y Respaldo</h4>
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-3 w-full sm:w-auto">
+                        <div class="flex items-center gap-1.5">
+                            <i class="fa-solid fa-clock-rotate-left text-gray-700"></i>
+                            <h4 class="font-extrabold text-xs text-gray-900 uppercase">Historial de Operaciones</h4>
+                        </div>
+                        <button onclick="abrirModalNotificarCliente()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] uppercase font-black px-2.5 py-1 rounded-xl transition-all shadow flex items-center justify-center gap-1 w-full sm:w-auto">
+                            <i class="fa-solid fa-bell"></i> Notificar Equipo Listo (Móvil)
+                        </button>
                     </div>
                     <button onclick="exportarHistorialExcel()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-bold px-3.5 py-1.5 rounded-xl transition-colors flex items-center justify-center gap-1 w-full sm:w-auto">
                         <i class="fa-solid fa-file-excel"></i> Exportar Respaldo a Excel
@@ -561,33 +569,31 @@
         </div>
     </div>
 
-    <!-- MODAL DE NOTIFICACIÓN DE RETIRO -->
-    <div id="modal-notificar-cliente" class="fixed inset-0 bg-slate-950/80 z-50 p-4 backdrop-blur-sm hidden">
-        <div class="flex items-center justify-center min-h-screen">
-            <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl relative">
-                <button onclick="cerrarModalNotificarCliente()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
-                    <i class="fa-solid fa-xmark text-lg"></i>
+    <!-- MODAL DE NOTIFICACIÓN DE RETIRO DE PREVENTA -->
+    <div id="modal-notificar-cliente" class="fixed inset-0 bg-slate-950/80 z-50 p-4 backdrop-blur-sm hidden flex items-center justify-center">
+        <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl relative">
+            <button onclick="cerrarModalNotificarCliente()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="text-center mb-5">
+                <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-xl mx-auto mb-2 shadow-sm">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </div>
+                <h3 class="font-black text-gray-900 text-base uppercase">Aviso de Equipo Listo</h3>
+                <p class="text-xs text-gray-400 font-medium mt-0.5">Notifica al cliente que ya puede retirar por tienda física.</p>
+            </div>
+            <div class="space-y-3">
+                <div>
+                    <label class="text-[10px] text-gray-400 uppercase font-bold tracking-wider block mb-1">Nombre del Cliente</label>
+                    <input type="text" id="notif-nombre" placeholder="Ej: Juan Pérez" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
+                </div>
+                <div>
+                    <label class="text-[10px] text-gray-400 uppercase font-bold tracking-wider block mb-1">Número de WhatsApp</label>
+                    <input type="text" id="notif-telefono" placeholder="Ej: 04247357549" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
+                </div>
+                <button onclick="enviarMensajeRetiroWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-2.5 rounded-xl shadow-md transition-colors mt-2 uppercase flex items-center justify-center gap-1.5">
+                    <i class="fa-brands fa-whatsapp text-sm"></i> Enviar Notificación por Preventa
                 </button>
-                <div class="text-center mb-5">
-                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-xl mx-auto mb-2 shadow-sm">
-                        <i class="fa-solid fa-paper-plane"></i>
-                    </div>
-                    <h3 class="font-black text-gray-900 text-base uppercase">Aviso de Equipo Listo</h3>
-                    <p class="text-xs text-gray-400 font-medium mt-0.5">Notifica al cliente que ya puede retirar por tienda física.</p>
-                </div>
-                <div class="space-y-3">
-                    <div>
-                        <label class="text-[10px] text-gray-400 uppercase font-bold tracking-wider block mb-1">Nombre del Cliente</label>
-                        <input type="text" id="notif-nombre" placeholder="Ej: Juan Pérez" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
-                    </div>
-                    <div>
-                        <label class="text-[10px] text-gray-400 uppercase font-bold tracking-wider block mb-1">Número de WhatsApp</label>
-                        <input type="text" id="notif-telefono" placeholder="Ej: 04247357549" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
-                    </div>
-                    <button onclick="enviarMensajeRetiroWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-2.5 rounded-xl shadow-md transition-colors mt-2 uppercase flex items-center justify-center gap-1.5">
-                        <i class="fa-brands fa-whatsapp text-sm"></i> Enviar Notificación por Preventa
-                    </button>
-                </div>
             </div>
         </div>
     </div>
@@ -623,7 +629,7 @@
         </div>
     </div>
 
-    <!-- OTROS MODALES DE CONSULTA -->
+    <!-- MODALES DE SOPORTE -->
     <div id="modal-consulta-banner" class="fixed inset-0 bg-slate-950/80 z-50 p-4 backdrop-blur-sm hidden">
         <div class="flex items-center justify-center min-h-screen">
             <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl relative">
@@ -726,7 +732,7 @@
         </div>
     </div>
 
-    <!-- MOTOR LÓGICO CENTRAL FIREBASE -->
+    <!-- MOTOR LÓGICO DE LA BASE DE DATOS -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, doc, setDoc, getDoc, collection, addDoc, getDocs, query, orderBy, limit, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -809,7 +815,7 @@
             document.getElementById('modal-precio').innerText = prod.precio;
             
             if(prod.modalidad === 'preventa') {
-                document.getElementById('modal-desc').innerHTML = `${prod.desc || ''}<br><br><span class="block p-2 bg-amber-50 text-amber-800 border border-amber-200 font-bold rounded-xl text-[11px]">🔮 PREVENTA: Este equipo (teléfono, laptop o pc) se trabaja bajo preventa prepagada. Lo reservas en tienda y se te asigna de inmediato.</span>`;
+                document.getElementById('modal-desc').innerHTML = `${prod.desc || ''}<br><br><span class="block p-2 bg-amber-50 text-amber-800 border border-amber-200 font-bold rounded-xl text-[11px]">🔮 PREVENTA: Este equipo se trabaja bajo la modalidad de preventa prepagada. Lo reservas en tienda y se te asigna de inmediato.</span>`;
             } else {
                 document.getElementById('modal-desc').innerText = prod.desc || 'Sin descripción.';
             }
@@ -869,8 +875,6 @@
             document.getElementById('notif-nombre').value = '';
             document.getElementById('notif-telefono').value = '';
         };
-        
-        // UNIFICADO: MENSAJE EXCLUSIVO PARA RETIRO DE PREVENTAS
         window.enviarMensajeRetiroWhatsApp = function() {
             const nombre = document.getElementById('notif-nombre').value.trim();
             let tlf = document.getElementById('notif-telefono').value.trim();
@@ -1030,7 +1034,7 @@
             let msg = `¡Hola, Tucocel! 👋\n\nEstoy interesado en adquirir el siguiente artículo de su vitrina digital:\n\n📱 *PRODUCTO:* ${productoSeleccionadoActual.modelo}\n💾 *CAPACIDAD:* ${productoSeleccionadoActual.memoria || 'N/A'}\n💰 *PRECIO:* $${productoSeleccionadoActual.precio} USD`;
             
             if(productoSeleccionadoActual.modalidad === 'preventa') {
-                msg += `\n\n⏳ *Nota:* Entiendo que este producto corresponde a una modalidad de *Preventa tecnológica*.`;
+                msg += `\n\n⏳ *Nota:* Entiendo que este producto corresponde a una modalidad de Preventa tecnológica.`;
             }
             window.open('https://wa.me/584247357549?text=' + encodeURIComponent(msg), '_blank');
             window.cerrarModalProducto();
@@ -1039,7 +1043,7 @@
         window.ejecutarCierreDeMes = function() {
             if(confirm("¿Desea realizar el cierre de mes? Esto generará un archivo de respaldo de las notas actuales.")) {
                 window.exportarHistorialExcel();
-                alert("Cierre de mes procesado de forma exitosa. Guarde el archivo de Excel generado.");
+                alert("Cierre de mes processed.");
             }
         };
 
@@ -1056,7 +1060,7 @@
             } 
         };
 
-        window.solicitarEdicionAvanzada = async function(idElemento) {
+        window.solicitarEdicionAvanzed = async function(idElemento) {
             if (!esAdminAutenticado) return;
             const elemento = document.getElementById(idElemento);
             if (!elemento) return;
@@ -1164,12 +1168,11 @@
             try { 
                 PRODUCTOS.sort((a, b) => a.precio - b.precio); 
                 await setDoc(doc(db, "inventario", "productos_tucocel"), { lista: PRODUCTOS }); 
-            } catch (e) { alert("Error al sincronizar."); } finally { 
+            } catch (e) { alert("Error."); } finally { 
                 if(btn) { btn.disabled = false; btn.innerText = "Guardar en Inventario"; } 
             }
         }
 
-        // LÓGICA DE FILTRADO UNIFICADA: MODALIDAD VITRINA O PREVENTA
         function ejecutarFiltroCombinado() {
             const telefonosFiltrados = PRODUCTOS.filter(p => {
                 const mod = p.modalidad || 'vitrina';
@@ -1259,13 +1262,8 @@
         }
 
         function renderizarItemsVentaActiva() {
-            const contenedor = document.getElementById('fact-lista-items'); 
-            document.getElementById('fact-items-count').innerText = `${ITEMS_VENTA_ACTIVA.length} items`;
-            if(ITEMS_VENTA_ACTIVA.length === 0) { 
-                contenedor.innerHTML = '<p class="text-center text-slate-500 text-xs py-6">No hay artículos añadidos todavía.</p>'; 
-                window.calcularTotalesFactura(); 
-                return; 
-            }
+            const contenedor = document.getElementById('fact-lista-items'); document.getElementById('fact-items-count').innerText = `${ITEMS_VENTA_ACTIVA.length} items`;
+            if(ITEMS_VENTA_ACTIVA.length === 0) { contenedor.innerHTML = '<p class="text-center text-slate-500 text-xs py-6">No hay artículos añadidos todavía.</p>'; window.calcularTotalesFactura(); return; }
             contenedor.innerHTML = '';
             ITEMS_VENTA_ACTIVA.forEach((item, index) => {
                 contenedor.innerHTML += `<div class="bg-slate-950 p-2 rounded-xl border border-slate-800 flex justify-between text-white text-xs"><div><p class="font-bold truncate max-w-[150px]">${item.modelo}</p>${item.imei ? `<span class="text-[10px] text-amber-400 font-mono">IMEI: ...${item.imei}</span>` : ''}</div><div class="flex items-center gap-2"><span>$${item.precio}</span><button onclick="removerItemVenta(${index})" class="text-red-400 font-bold"><i class="fa-solid fa-square-xmark"></i></button></div></div>`;
@@ -1284,39 +1282,11 @@
 
         async function registrarNotaEnFirebase() {
             let siguienteNumeroNota = 1; let maxNota = 0;
-            try { 
-                const snap = await getDocs(collection(db, "notas_ventas")); 
-                snap.forEach(d => { 
-                    const num = parseInt(d.data().numNota) || 0; 
-                    if(num > maxNota) maxNota = num; 
-                }); 
-                siguienteNumeroNota = maxNota + 1; 
-            } catch(e) {}
-            
-            const ahora = new Date(); 
-            const fechaString = ahora.toLocaleDateString('es-VE') + ' ' + ahora.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' });
+            try { const snap = await getDocs(collection(db, "notas_ventas")); snap.forEach(d => { const num = parseInt(d.data().numNota) || 0; if(num > maxNota) maxNota = num; }); siguienteNumeroNota = maxNota + 1; } catch(e) {}
+            const ahora = new Date(); const fechaString = ahora.toLocaleDateString('es-VE') + ' ' + ahora.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' });
             let montoTotalUSD = 0; ITEMS_VENTA_ACTIVA.forEach(i => montoTotalUSD += i.precio);
-            
-            const objetoNota = { 
-                numNota: siguienteNumeroNota, 
-                fecha: fechaString, 
-                cliente: document.getElementById('fact-cli-nombre').value.trim() || 'Cliente General', 
-                cedula: document.getElementById('fact-cli-cedula').value.trim() || 'N/A', 
-                direccion: document.getElementById('fact-cli-direccion').value.trim() || 'Cordero', 
-                telefono: document.getElementById('fact-cli-telefono').value.trim() || 'N/A', 
-                items: ITEMS_VENTA_ACTIVA, 
-                totalUSD: montoTotalUSD, 
-                tasaCOP: document.getElementById('tasa-cop').value, 
-                tasaBS: document.getElementById('tasa-bs').value, 
-                timestamp: ahora.getTime() 
-            };
-            
-            try { 
-                const docRef = await addDoc(collection(db, "notas_ventas"), objetoNota); 
-                ultimaNotaIdFirebase = docRef.id; 
-                await cargarHistorialFirebase(); 
-                return { ...objetoNota, id: docRef.id }; 
-            } catch(e) { return objetoNota; }
+            const objetoNota = { numNota: siguienteNumeroNota, fecha: fechaString, cliente: document.getElementById('fact-cli-nombre').value.trim() || 'Cliente General', cedula: document.getElementById('fact-cli-cedula').value.trim() || 'N/A', direccion: document.getElementById('fact-cli-direccion').value.trim() || 'Cordero', telefono: document.getElementById('fact-cli-telefono').value.trim() || 'N/A', items: ITEMS_VENTA_ACTIVA, totalUSD: montoTotalUSD, tasaCOP: document.getElementById('tasa-cop').value, tasaBS: document.getElementById('tasa-bs').value, timestamp: ahora.getTime() };
+            try { const docRef = await addDoc(collection(db, "notas_ventas"), objetoNota); ultimaNotaIdFirebase = docRef.id; await cargarHistorialFirebase(); return { ...objetoNota, id: docRef.id }; } catch(e) { return objetoNota; }
         }
 
         function inyectarDatosAlTicketDOM(nota) {
@@ -1336,20 +1306,17 @@
             document.getElementById('tk-total-bs').innerText = `${(parseFloat(nota.tasaBS) > 0 ? totalCOP / parseFloat(nota.tasaBS) : 0).toLocaleString('es-VE')} Bs`;
         }
 
-        // MENSAJE DE WHATSAPP PREMIUM DIRECTO CON EMOJIS
+        // ACTUALIZACIÓN COMPLETA REQUERIDA CON TEXTO LEGAL E INFORMACIÓN COMPLETA
         function procesarEnvioWaObjeto(nota) {
             let desc = nota.items.map(i => `• ${i.modelo} -> $${i.precio} ${i.imei ? `(IMEI: ...${i.imei})` : ''}`).join('\n');
-            const msg = `*TUCOCEL C.A.*\n*Nota de Entrega:* N° ${String(nota.numNota).padStart(6, '0')}\n*Fecha:* ${nota.fecha}\n\n👤 *Cliente:* ${nota.cliente}\n💳 *Cédula/RIF:* ${nota.cedula}\n\n📦 *Detalle de compra:*\n${desc}\n\n💵 *Total General:* $${nota.totalUSD} USD`;
+            
+            const msg = `*TUCOCEL C.A.*\n*Nota de Entrega:* N° ${String(nota.numNota).padStart(6, '0')}\n*Fecha:* ${nota.fecha}\n👤 *Cliente:* ${nota.cliente}\n\n💳 *Cédula/RIF:* ${nota.cedula}\n📦 *Detalle de compra:*\n${desc}\n\n💵 *Total General:* $${nota.totalUSD} USD\n\n_Valores informativos calculados a la tasa del día._\n\n*TÉRMINOS DE GARANTÍA:*\nGarantía por defectos de fábrica de los equipos celulares: 2 meses. La garantía no cubre golpes, humedad, sellos rotos, sobrecargas eléctricas o alteración de software.`;
+            
             window.open(`https://wa.me/${nota.telefono.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
         async function cargarHistorialFirebase() {
-            try { 
-                const snap = await getDocs(query(collection(db, "notas_ventas"), orderBy("timestamp", "desc"), limit(50))); 
-                HISTORIAL_NOTAS = []; 
-                snap.forEach(d => HISTORIAL_NOTAS.push({ ...d.data(), id: d.id })); 
-                renderizarTablaHistorialHTML(HISTORIAL_NOTAS); 
-            } catch(e) { console.error(e); }
+            try { const snap = await getDocs(query(collection(db, "notas_ventas"), orderBy("timestamp", "desc"), limit(50))); HISTORIAL_NOTAS = []; snap.forEach(d => HISTORIAL_NOTAS.push({ ...d.data(), id: d.id })); renderizarTablaHistorialHTML(HISTORIAL_NOTAS); } catch(e) { console.error(e); }
         }
 
         function renderizarTablaHistorialHTML(lista) {
@@ -1458,4 +1425,4 @@
         }
     </script>
 </body>
-        </html>
+                                                                                                                 </html>
