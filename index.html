@@ -127,7 +127,7 @@
                     <div>
                         <span class="font-black text-gray-900 text-sm block tracking-tight">TUCOCEL C.A.</span>
                         <span class="text-[9px] text-blue-600 font-extrabold tracking-widest inline-flex items-center gap-1 -mt-1 uppercase">
-                            <span id="txt-nav-sub">Agente Authorized Movistar Cordero</span>
+                            <span id="txt-nav-sub">Agente Autorizado Movistar Cordero</span>
                         </span>
                     </div>
                 </div>
@@ -574,7 +574,7 @@
         </div>
     </div>
 
-    <!-- MODAL ADMINISTRATIVO: NOTIFICAR CLIENTE (NUEVO BOTÓN) -->
+    <!-- MODAL ADMINISTRATIVO: NOTIFICAR CLIENTE -->
     <div id="modal-notificar-cliente" class="fixed inset-0 bg-slate-950/80 z-50 p-4 backdrop-blur-sm hidden">
         <div class="flex items-center justify-center min-h-screen">
             <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl relative">
@@ -783,7 +783,6 @@
             window.cerrarModalConsultaBanner = cerrarModalConsultaBanner;
             window.enviarConsultaBannerWhatsApp = enviarConsultaBannerWhatsApp;
             
-            // Asignación de las funciones del botón de notificaciones del administrador
             window.abrirModalNotificarCliente = abrirModalNotificarCliente;
             window.cerrarModalNotificarCliente = cerrarModalNotificarCliente;
             window.enviarMensajeRetiroWhatsApp = enviarMensajeRetiroWhatsApp;
@@ -890,7 +889,7 @@
         }
 
         /* ==========================================================================
-           LÓGICA DEL NUEVO SISTEMA DE NOTIFICACIONES ADMINISTRATIVAS
+           LÓGICA DEL SISTEMA DE NOTIFICACIONES ADMINISTRATIVAS
            ========================================================================== */
         function abrirModalNotificarCliente() {
             document.getElementById('modal-notificar-cliente').classList.remove('hidden');
@@ -914,7 +913,7 @@
         }
 
         /* ==========================================================================
-           SISTEMA DE INVENTARIO Y CATÁLOGO PREMIUM
+           SISTEMA DE INVENTARIO Y CATÁLOGO PREMIUM SANEADO CONTRA CAMPOS NULOS
            ========================================================================== */
         function inicializarScrollAutomaticoCarrusel() {
             const carrusel = document.getElementById('carrusel-otros');
@@ -981,20 +980,22 @@
         }
 
         function ejecutarFiltroCombinado() {
-            // Filtro exclusivo para la botonera principal de teléfonos en stock
             const telefonosFiltrados = PRODUCTOS.filter(p => {
-                const esTelefonoNormal = p.marca !== 'Otros Productos' && !p.desc.toLowerCase().includes('[bajo pedido]');
+                // BLINDAJE CRÍTICO CONTRA CAMPOS DE DESCRIPCIÓN VACÍOS EN TU FIREBASE HISTÓRICO
+                const descripcionSegura = (p.desc || '').toLowerCase();
+                const esTelefonoNormal = p.marca !== 'Otros Productos' && !descripcionSegura.includes('[bajo pedido]');
                 const coincideMarca = (marcaSeleccionada === 'Todas' || p.marca.toLowerCase() === marcaSeleccionada.toLowerCase());
                 
-                // Si la marca es "Bajo Pedido", jalamos los de encargo
                 if(marcaSeleccionada === 'Bajo Pedido') {
-                    return p.desc.toLowerCase().includes('[bajo pedido]');
+                    return descripcionSegura.includes('[bajo pedido]');
                 }
                 return esTelefonoNormal && coincideMarca;
             });
             
-            // El carrusel inferior ahora une accesorios y artículos bajo pedido de forma ejecutiva
-            const otrosFiltrados = PRODUCTOS.filter(p => p.marca === 'Otros Productos' || p.desc.toLowerCase().includes('[bajo pedido]'));
+            const otrosFiltrados = PRODUCTOS.filter(p => {
+                const descripcionSegura = (p.desc || '').toLowerCase();
+                return p.marca === 'Otros Productos' || descripcionSegura.includes('[bajo pedido]');
+            });
             
             renderizarCatalogoHTML(telefonosFiltrados);
             renderizarCarruselOtrosHTML(otrosFiltrados);
@@ -1019,7 +1020,8 @@
                 const heartClass = lockStatus ? 'fa-solid fa-heart text-red-500' : 'fa-regular fa-heart text-gray-400 hover:text-red-500';
                 const precioTxt = prod.precio % 1 === 0 ? prod.precio : prod.precio.toFixed(2);
                 
-                const esEncargo = prod.desc.toLowerCase().includes('[bajo pedido]');
+                const descripcionSegura = (prod.desc || '').toLowerCase();
+                const esEncargo = descripcionSegura.includes('[bajo pedido]');
                 const etiquetaMarca = esEncargo ? "ENCARGO" : prod.marca;
 
                 const botonesEdicion = esAdminAutenticado ? `
@@ -1074,7 +1076,8 @@
                 const heartClass = lockStatus ? 'fa-solid fa-heart text-red-500' : 'fa-regular fa-heart text-gray-400';
                 const precioTxt = prod.precio % 1 === 0 ? prod.precio : prod.precio.toFixed(2);
                 
-                const esEncargo = prod.desc.toLowerCase().includes('[bajo pedido]');
+                const descripcionSegura = (prod.desc || '').toLowerCase();
+                const esEncargo = descripcionSegura.includes('[bajo pedido]');
                 const textoTag = esEncargo ? "Bajo Pedido" : "Accesorio";
                 const colorTag = esEncargo ? "text-amber-600 bg-amber-50" : "text-blue-500 bg-blue-50";
 
@@ -1144,6 +1147,17 @@
             }
         }
 
+        function actualizarSelectFacturacion() {
+            const select = document.getElementById('fact-select-producto');
+            if(!select) return;
+            select.innerHTML = '<option value="">-- Seleccione del stock --</option>';
+            PRODUCTOS.forEach(p => {
+                const precioFormateado = p.precio % 1 === 0 ? p.precio : p.precio.toFixed(2);
+                const labelCompleto = p.marca === 'Otros Productos' ? `[Accesorio] ${p.modelo} ($${precioFormateado})` : `[${p.marca}] ${p.modelo} ${p.memoria || ''} ($${precioFormateado})`;
+                select.innerHTML += `<option value="${p.id}">${labelCompleto}</option>`;
+            });
+        }
+
         function verificarTipoArticuloFactura() {
             const id = document.getElementById('fact-select-producto').value;
             const wrapper = document.getElementById('wrapper-fact-imei');
@@ -1156,16 +1170,6 @@
             }
         }
 
-        function verificarTasasEstablecidas() {
-            const cop = parseFloat(document.getElementById('tasa-cop').value) || 0;
-            const bs = parseFloat(document.getElementById('tasa-bs').value) || 0;
-            if (cop === 0 || bs === 0) {
-                alert("⚠️ ATENCIÓN: Por favor, ingrese el valor de las Tasas del Día (COP y Bs) en la barra superior antes de continuar con la facturación.");
-                return false;
-            }
-            return true;
-        }
-
         function abrirModalProducto(id) {
             const prod = PRODUCTOS.find(p => p.id === id);
             if (!prod) return;
@@ -1176,8 +1180,8 @@
             document.getElementById('modal-memoria').innerText = prod.memoria || '';
             document.getElementById('modal-precio').innerText = prod.precio;
             
-            // Inyectar términos claros dinámicos en la descripción si es bajo pedido
-            const esEncargo = prod.desc.toLowerCase().includes('[bajo pedido]');
+            const descripcionSegura = (prod.desc || '').toLowerCase();
+            const esEncargo = descripcionSegura.includes('[bajo pedido]');
             if(esEncargo) {
                 const descLimpia = prod.desc.replace('[BAJO PEDIDO]', '').replace('[bajo pedido]', '').trim();
                 document.getElementById('modal-desc').innerHTML = `${descLimpia}<br><br><span class="block p-2 bg-amber-50 text-amber-800 border border-amber-200 font-bold rounded-xl text-[11px]">⚠️ CONDICIÓN DE COMPRA: Este equipo se trabaja bajo pedido. Lo cancelas en nuestra tienda física y en tan solo 2 horas serás notificado para pasar a retirarlo.</span>`;
@@ -1256,6 +1260,24 @@
             }
         }
 
+        function controlarVisibilidadModulosOcultos(mostrar) {
+            if(mostrar) {
+                document.getElementById('barra-accesos-admin').classList.remove('hidden');
+            } else {
+                document.getElementById('barra-accesos-admin').classList.add('hidden');
+                cerrarModalSistemaFacturacion();
+            }
+        }
+
+        async function eliminarProducto(id) {
+            if(confirm('¿Borrar producto?')) {
+                PRODUCTOS = PRODUCTOS.filter(p => p.id !== id);
+                await guardarInventarioFirebase();
+                ejecutarFiltroCombinado();
+                actualizarSelectFacturacion();
+            }
+        }
+
         function toggleAdminPanel() { document.getElementById('panel-admin').classList.toggle('hidden'); }
         
         function filtrarPorMarca(marca, boton) { 
@@ -1268,4 +1290,4 @@
         }
     </script>
 </body>
-    </html>
+                </html>
