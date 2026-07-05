@@ -305,7 +305,7 @@
                         <input type="number" id="tasa-bs" value="0" oninput="calcularTotalesFactura()" class="w-full sm:w-16 bg-slate-800 text-white border border-slate-700 px-2 py-1 rounded-lg text-center font-mono focus:outline-none placeholder-gray-500" placeholder="0">
                         <span class="text-blue-400 font-bold text-[10px] shrink-0">Bs</span>
                     </div>
-                    <button onclick="ejecutarCierreDeMes()" class="bg-purple-600 hover:bg-purple-700 text-white text-[10px] uppercase font-black px-4 py-1.5 rounded-xl transition-colors w-full md:w-auto shadow mt-1 sm:mt-0">
+                    <button onclick="ejecutarCierreDeMes()" class="bg-purple-600 hover:bg-purple-700 text-white text-[10px] uppercase font-black px-4 py-1.5 rounded-xl transition-colors w-full sm:w-auto shadow mt-1 sm:mt-0">
                         <i class="fa-solid fa-calendar-check"></i> Cierre de Mes
                     </button>
                 </div>
@@ -758,7 +758,7 @@
                 esAdminAutenticado = true;
                 try { localStorage.setItem('tucocel_admin_sesion', 'true'); } catch(err) {}
                 window.cerrarLoginAdmin();
-                controlarVisibilidadModulos Ocultos(true);
+                controlarVisibilidadModulosOcultos(true);
                 manejarVisibilidadLapicitosAdmin(true);
                 ejecutarFiltroCombinado();
             } else { alert('Credenciales incorrectas.'); }
@@ -794,7 +794,7 @@
             document.getElementById('modal-precio').innerText = prod.precio;
             
             if(prod.modalidad === 'preventa') {
-                document.getElementById('modal-desc').innerHTML = `${prod.desc || ''}<br><br><span class="block p-2 bg-amber-50 text-amber-800 border border-amber-200 font-bold rounded-xl text-[11px]">🔮 PREVENTA: Este equipo (teléfono, laptop o pc) se trabaja bajo preventa prepagada. Lo reservas en tienda y se te asigna de inmediato.</span>`;
+                document.getElementById('modal-desc').innerHTML = `${prod.desc || ''}<br><br><span class="block p-2 bg-amber-50 text-amber-800 border border-amber-200 font-bold rounded-xl text-[11px]">🔮 PREVENTA: Este equipo se trabaja bajo la modalidad de preventa prepagada. Lo reservas en tienda y se te asigna de inmediato.</span>`;
             } else {
                 document.getElementById('modal-desc').innerText = prod.desc || 'Sin descripción.';
             }
@@ -854,7 +854,6 @@
             document.getElementById('notif-nombre').value = '';
             document.getElementById('notif-telefono').value = '';
         };
-        
         window.enviarMensajeRetiroWhatsApp = function() {
             const nombre = document.getElementById('notif-nombre').value.trim();
             let tlf = document.getElementById('notif-telefono').value.trim();
@@ -1023,7 +1022,7 @@
         window.ejecutarCierreDeMes = function() {
             if(confirm("¿Desea realizar el cierre de mes? Esto generará un archivo de respaldo de las notas actuales.")) {
                 window.exportarHistorialExcel();
-                alert("Cierre de mes processed.");
+                alert("Cierre de mes procesado de forma exitosa. Guarde el archivo de Excel generado.");
             }
         };
 
@@ -1286,6 +1285,14 @@
             document.getElementById('tk-total-bs').innerText = `${(parseFloat(nota.tasaBS) > 0 ? totalCOP / parseFloat(nota.tasaBS) : 0).toLocaleString('es-VE')} Bs`;
         }
 
+        function controlarVisibilidadModulosOcultos(m) { 
+            document.getElementById('barra-accesos-admin').classList.toggle('hidden', !m); 
+        }
+
+        function toggleAdminPanel() { 
+            document.getElementById('panel-admin').classList.toggle('hidden'); 
+        }
+
         function procesarEnvioWaObjeto(nota) {
             let desc = nota.items.map(i => `• ${i.modelo} -> $${i.precio} ${i.imei ? `(IMEI: ...${i.imei})` : ''}`).join('\n');
             const msg = `*TUCOCEL C.A.*\n*Nota de Entrega:* N° ${String(nota.numNota).padStart(6, '0')}\n*Fecha:* ${nota.fecha}\n👤 *Cliente:* ${nota.cliente}\n\n💳 *Cédula/RIF:* ${nota.cedula}\n📦 *Detalle de compra:*\n${desc}\n\n💵 *Total General:* $${nota.totalUSD} USD\n\n_Valores informativos calculados a la tasa del día._\n\n*TÉRMINOS DE GARANTÍA:*\nGarantía por defectos de fábrica de los equipos celulares: 2 meses. La garantía no cubre golpes, humedad, sellos rotos, sobrecargas eléctricas o alteración de software.\n\n🌐 *Visita nuestra Vitrina Digital:*\nhttps://tucocel.github.io`;
@@ -1382,14 +1389,6 @@
             } 
         }
 
-        function controlarVisibilidadModulosOcultos(m) { 
-            document.getElementById('barra-accesos-admin').classList.toggle('hidden', !m); 
-        }
-        
-        function toggleAdminPanel() { 
-            document.getElementById('panel-admin').classList.toggle('hidden'); 
-        }
-
         function inicializarScrollAutomaticoCarrusel() {
             const c = document.getElementById('carrusel-otros');
             if(!c) return;
@@ -1402,4 +1401,4 @@
         }
     </script>
 </body>
-    </html>
+                        </html>
