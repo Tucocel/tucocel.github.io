@@ -98,7 +98,7 @@
         <div class="max-w-7xl mx-auto flex justify-between items-center gap-2">
             <div class="flex items-center gap-2 shrink-0">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                <span class="text-slate-400 hidden sm:inline">SESIÓN: <span class="text-amber-400 uppercase tracking-wider">ADMIN</span></span>
+                <span class="text-slate-400 hidden sm:inline">SESIÓN: <span class="text-amber-400 uppercase tracking-wider">ADMINISTRADOR TUCOCEL</span></span>
                 <span class="text-amber-400 uppercase tracking-wider text-[10px] sm:hidden">ADMIN 🔒</span>
             </div>
             <div class="flex items-center gap-2">
@@ -231,6 +231,54 @@
         </div>
         <div id="carrusel-otros" class="flex gap-4 overflow-x-auto pb-4 pt-1 no-scrollbar snap-x scroll-smooth"></div>
     </section>
+
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 border-t border-gray-100 pt-8">
+        <div class="text-center max-w-xl mx-auto mb-6">
+            <h4 class="text-xs font-black uppercase text-blue-600 tracking-widest">Métodos de Pago Soportados</h4>
+            <p class="text-gray-500 text-xs mt-1">Facilitamos tus transacciones comerciales a través de diversas plataformas seguras.</p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 max-w-4xl mx-auto text-center font-bold text-xs text-gray-600">
+            <div class="bg-white p-4 border border-gray-100 rounded-2xl shadow-sm flex flex-col items-center gap-2"><i class="fa-solid fa-money-bill-transfer text-blue-600 text-lg"></i> Pago Móvil (Bs)</div>
+            <div class="bg-white p-4 border border-gray-100 rounded-2xl shadow-sm flex flex-col items-center gap-2"><i class="fa-solid fa-coins text-amber-500 text-lg"></i> USDT (Binance P2P)</div>
+            <div class="bg-white p-4 border border-gray-100 rounded-2xl shadow-sm flex flex-col items-center gap-2"><i class="fa-solid fa-credit-card text-purple-600 text-lg"></i> Zinli</div>
+            <div class="bg-white p-4 border border-gray-100 rounded-2xl shadow-sm flex flex-col items-center gap-2"><i class="fa-solid fa-wallet text-emerald-600 text-lg"></i> Nequi</div>
+            <div class="bg-white p-4 border border-gray-100 rounded-2xl shadow-sm flex flex-col items-center gap-2 col-span-2 sm:col-span-1"><i class="fa-solid fa-shop text-gray-800 text-lg"></i> Efectivo en Tienda</div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-slate-400 py-10 px-4 mt-16 border-t border-slate-800 text-xs font-medium">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+            <div class="space-y-1.5">
+                <p class="text-white font-black tracking-wider text-sm uppercase">© 2026 Tucocel C.A. Todos los derechos reservados.</p>
+                <p class="text-slate-500 text-[11px]">Web desarrollada de manera exclusiva por <a href="#" class="text-blue-400 hover:underline font-bold">@publionlinemk</a> — Agencia Oficial de Publicidad de Tucocel C.A.</p>
+                <div class="pt-2 flex items-center justify-center md:justify-start gap-2 text-[10px] text-slate-500 font-bold uppercase tracking-wider">
+                    <i class="fa-solid fa-eye text-blue-500"></i> Visitas del sitio: <span id="contador-visitas-num" class="bg-slate-950 text-blue-400 px-2 py-0.5 rounded border border-slate-800 font-mono">1,842</span>
+                </div>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-6 items-center md:items-start text-left">
+                <div class="bg-slate-950/40 border border-slate-800/60 p-3.5 rounded-2xl max-w-xs space-y-2">
+                    <span class="text-white font-bold block text-[11px] uppercase tracking-wide"><i class="fa-solid fa-share-nodes text-blue-500 mr-1.5"></i> Conéctate con nosotros</span>
+                    <div class="space-y-1 text-slate-300 text-[11px]">
+                        <a href="https://www.instagram.com/tucocel" target="_blank" class="flex items-center gap-2 hover:text-pink-400 transition-colors"><i class="fa-brands fa-instagram text-sm"></i> @tucocel</a>
+                        <a href="https://www.tiktok.com/@tucocel" target="_blank" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-brands fa-tiktok text-sm"></i> @tucocel</a>
+                        <a href="mailto:movistarcordero@gmail.com" class="flex items-center gap-2 hover:text-amber-400 transition-colors"><i class="fa-solid fa-envelope text-sm"></i> movistarcordero@gmail.com</a>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 bg-slate-950/40 border border-slate-800/60 p-3.5 rounded-2xl max-w-sm">
+                    <i class="fa-solid fa-location-dot text-blue-500 mt-0.5 text-base shrink-0"></i>
+                    <div>
+                        <span class="text-white font-bold block text-[11px] uppercase tracking-wide">Visítanos directamente</span>
+                        <span class="text-slate-400 text-[11px] leading-relaxed block mt-0.5">Avenida Bolívar, entre calles 12 y 13, Cordero, estado Táchira.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button onclick="abrirModalConsultaGeneral()" class="btn-flotante-wa fixed bottom-6 right-6 bg-emerald-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl z-40 transition-all hover:bg-emerald-600 shadow-xl">
+        <i class="fa-brands fa-whatsapp"></i>
+    </button>
 
     <div id="panel-admin" class="bg-slate-900 text-slate-100 p-5 hidden max-w-4xl mx-auto sm:mt-4 sm:rounded-2xl shadow-2xl border border-slate-800">
         <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-2">
@@ -511,7 +559,7 @@
                             <tr style="background: #f3f4f6; border-bottom: 1px solid #000; font-weight: bold; color: #000;">
                                 <th style="padding: 4px; border-right: 1px solid #000; width: 10%; text-align: center;">Cant.</th>
                                 <th style="padding: 4px; border-right: 1px solid #000; width: 70%;">Descripción / Artículo</th>
-                                <th style="padding: 4px; width: 30%; text-align: right; padding-right: 5px;">Total Neto</th>
+                                <th style="padding: 4px; width: 20%; text-align: right; padding-right: 5px;">Total Neto</th>
                             </tr>
                         </thead>
                         <tbody id="tk-items-tabla" style="color: #000;">
@@ -910,6 +958,10 @@
         };
 
         window.agregarItemALaVenta = function() {
+            const cop = parseFloat(document.getElementById('tasa-cop').value) || 0;
+            const bs = parseFloat(document.getElementById('tasa-bs').value) || 0;
+            if (cop === 0 || bs === 0) { alert("⚠️ Ingrese las Tasas del Día antes de facturar."); return; }
+
             if(modoCargaFacturaActivo === 'manual') {
                 const modelo = document.getElementById('manual-modelo').value.trim();
                 const precio = parseInt(document.getElementById('manual-precio').value.trim()) || 0;
@@ -940,10 +992,12 @@
         window.calcularTotalesFactura = function() {
             const tCOP = parseFloat(document.getElementById('tasa-cop').value) || 0; 
             const tBS = parseFloat(document.getElementById('tasa-bs').value) || 0;
-            let totalUSD = 0; ITEMS_VENTA_ACTIVA.forEach(i => totalUSD += i.precio);
+            let totalUSD = 0; totalUSD = ITEMS_VENTA_ACTIVA.reduce((sum, item) => sum + item.precio, 0);
+            const totalCOP = totalUSD * tCOP;
+            const totalBS = tBS > 0 ? totalCOP / tBS : 0;
             document.getElementById('total-usd').innerText = `Neto: $${totalUSD}`;
-            document.getElementById('total-cop-val').innerText = `${(totalUSD * tCOP).toLocaleString('es-CO')} COP`;
-            document.getElementById('total-bs-val').innerText = `${(tBS > 0 ? (totalUSD * tCOP) / tBS : 0).toLocaleString('es-VE')} Bs`;
+            document.getElementById('total-cop-val').innerText = `${totalCOP.toLocaleString('es-CO')} COP`;
+            document.getElementById('total-bs-val').innerText = `${totalBS.toLocaleString('es-VE')} Bs`;
         };
 
         window.filtrarTablaHistorial = function() {
@@ -1011,18 +1065,14 @@
         window.compartirProductoActivoWa = function() {
             if(!productoSeleccionadoActual) return;
             let msg = `¡Hola, Tucocel! 👋\n\nEstoy interesado en adquirir el siguiente artículo de su vitrina digital:\n\n📱 *PRODUCTO:* ${productoSeleccionadoActual.modelo}\n💾 *CAPACIDAD:* ${productoSeleccionadoActual.memoria || 'N/A'}\n💰 *PRECIO:* $${productoSeleccionadoActual.precio} USD`;
-            
-            if(productoSeleccionadoActual.modalidad === 'preventa') {
-                msg += `\n\n⏳ *Nota:* Entiendo que este producto corresponde a una modalidad de Preventa tecnológica.`;
-            }
             window.open('https://wa.me/584247357549?text=' + encodeURIComponent(msg), '_blank');
             window.cerrarModalProducto();
         };
 
         window.ejecutarCierreDeMes = function() {
-            if(confirm("¿Desea realizar el cierre de mes? Esto generará un archivo de respaldo de las notas actuales.")) {
+            if(confirm("¿Desea realizar el cierre de mes? Esto limpiará el historial activo de facturación.")) {
                 window.exportarHistorialExcel();
-                alert("Cierre de mes procesado de forma exitosa. Guarde el archivo de Excel generado.");
+                alert("Cierre de mes procesado de forma exitosa.");
             }
         };
 
@@ -1128,6 +1178,7 @@
             document.querySelectorAll('.btn-editar-texto').forEach(l => l.style.display = mostrar ? 'inline-block' : 'none'); 
         }
 
+        // CORRECCIÓN CLAVE: CARGA DE INVENTARIO CENTRALIZADA SIN INTERFERENCIAS
         async function cargarInventarioFirebase() {
             try {
                 const docSnap = await getDoc(doc(db, "inventario", "productos_tucocel"));
@@ -1147,7 +1198,7 @@
             try { 
                 PRODUCTOS.sort((a, b) => a.precio - b.precio); 
                 await setDoc(doc(db, "inventario", "productos_tucocel"), { lista: PRODUCTOS }); 
-            } catch (e) { alert("Error."); } finally { 
+            } catch (e) { alert("Error de red."); } finally { 
                 if(btn) { btn.disabled = false; btn.innerText = "Guardar en Inventario"; } 
             }
         }
@@ -1158,7 +1209,6 @@
                 const esEspecial = p.marca === 'Otros Productos' || mod === 'preventa';
                 
                 if (marcaSeleccionada === 'Preventa') return mod === 'preventa';
-                
                 return !esEspecial && (marcaSeleccionada === 'Todas' || (p.marca || '').toLowerCase() === marcaSeleccionada.toLowerCase());
             });
 
@@ -1299,6 +1349,7 @@
             window.open(`https://wa.me/${nota.telefono.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
+        // CORRECCIÓN CLAVE: SE CORRIGIÓ EL LLAMADO A LA CARPETA CORRECTA "notas_ventas"
         async function cargarHistorialFirebase() {
             try { const snap = await getDocs(query(collection(db, "notas_ventas"), orderBy("timestamp", "desc"), limit(50))); HISTORIAL_NOTAS = []; snap.forEach(d => HISTORIAL_NOTAS.push({ ...d.data(), id: d.id })); renderizarTablaHistorialHTML(HISTORIAL_NOTAS); } catch(e) { console.error(e); }
         }
@@ -1312,15 +1363,14 @@
             });
         }
 
-        function limpiarFormularioPanel() { 
+        function limpiarFormularioPanel() {
             document.getElementById('add-modelo').value = ''; 
-            document.getElementById('memoria').value = ''; 
+            document.getElementById('memoria').value = '';
             document.getElementById('add-precio').value = ''; 
-            document.getElementById('add-desc').value = ''; 
-            document.getElementById('foto-base64').value = ''; 
-            document.getElementById('preview-foto').src = '';
-            document.getElementById('preview-foto').classList.add('hidden');
-            document.getElementById('add-modalidad').value = 'vitrina';
+            document.getElementById('add-desc').value = '';
+            document.getElementById('add-foto-file').value = ''; 
+            document.getElementById('foto-base64').value = '';
+            if(document.getElementById('preview-foto')) document.getElementById('preview-foto').classList.add('hidden');
         }
 
         function limpiatFormularioFacturaCompleto() {
@@ -1401,4 +1451,4 @@
         }
     </script>
 </body>
-</html>
+                            </html>
