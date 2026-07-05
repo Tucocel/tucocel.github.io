@@ -39,7 +39,6 @@
             100% { transform: scale(1); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4); }
         }
 
-        /* DISEÑO DE LÁPICES DEL BANNER OPTIMIZADOS (ELEGANTES Y DISCRETOS) */
         .btn-editar-texto {
             display: none;
             cursor: pointer;
@@ -95,7 +94,6 @@
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased min-h-screen pb-12 relative">
 
-    <!-- BARRA SUPERIOR DE ACCESOS ADMINISTRATIVOS OPTIMIZADA -->
     <div id="barra-accesos-admin" class="bg-slate-950 text-white px-4 py-2.5 text-xs font-bold hidden border-b border-slate-800 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex justify-between items-center gap-2">
             <div class="flex items-center gap-2 shrink-0">
@@ -112,7 +110,6 @@
         </div>
     </div>
 
-    <!-- BARRA DE NAVEGACIÓN -->
     <nav class="bg-white border-b border-gray-100 sticky top-0 z-40 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
@@ -134,7 +131,6 @@
         </div>
     </nav>
 
-    <!-- ENCABEZADO / BANNER PRINCIPAL -->
     <header class="bg-gradient-to-r from-slate-900 to-blue-950 text-white py-12 px-4 shadow-inner relative overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
         <div id="contenedor-textos-header" class="max-w-7xl mx-auto text-center relative z-10 space-y-3">
@@ -158,7 +154,6 @@
         </div>
     </header>
 
-    <!-- SECCIÓN DE SERVICIOS Y ACCESORIOS -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         <div class="bg-white border border-gray-100 rounded-3xl p-5 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="flex items-center gap-4 p-2">
@@ -178,7 +173,6 @@
         </div>
     </section>
 
-    <!-- MAIN VITRINA -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="mb-8 max-w-4xl mx-auto bg-gradient-to-r from-blue-600 to-blue-800 text-white p-6 rounded-2xl shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4 border border-blue-500">
             <div class="flex items-center gap-4 text-center sm:text-left">
@@ -203,7 +197,6 @@
             </div>
         </div>
 
-        <!-- BOTONERA DE MARCAS CON DESPLAZAMIENTO HORIZONTAL EN MÓVIL -->
         <div class="mb-8 w-full overflow-hidden">
             <p class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mb-2 px-1">Explorar Smartphone por Marca</p>
             <div class="flex gap-2 overflow-x-auto pb-3 pt-1 px-1 no-scrollbar snap-x justify-start md:justify-center w-full">
@@ -226,9 +219,8 @@
         </div>
 
         <div id="contenedor-productos" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
-    </nav>
+    </main>
 
-    <!-- CARRUSEL DE PREVENTA / ACCESORIOS -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 border-t border-gray-100 mt-6">
         <div class="flex items-center justify-between mb-4 px-1">
             <div class="flex items-center gap-2">
@@ -240,7 +232,6 @@
         <div id="carrusel-otros" class="flex gap-4 overflow-x-auto pb-4 pt-1 no-scrollbar snap-x scroll-smooth"></div>
     </section>
 
-    <!-- PANEL DE CONTROL ADMINISTRATIVO -->
     <div id="panel-admin" class="bg-slate-900 text-slate-100 p-5 hidden max-w-4xl mx-auto sm:mt-4 sm:rounded-2xl shadow-2xl border border-slate-800">
         <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-2">
             <h3 id="panel-titulo" class="text-xs font-bold uppercase text-amber-400 tracking-wider"><i class="fa-solid fa-database mr-1"></i> Panel de Gestión Tucocel</h3>
@@ -292,11 +283,9 @@
         </div>
     </div>
 
-    <!-- VENTANA MODAL RESPONSIVA MEJORADA AL 100% PARA SISTEMA DE FACTURACIÓN -->
     <div id="modal-sistema-facturacion" class="fixed inset-0 bg-slate-950/90 z-50 overflow-y-auto backdrop-blur-md p-2 sm:p-4 lg:p-6 hidden">
         <div class="bg-white rounded-3xl w-full max-w-6xl mx-auto my-2 md:my-4 shadow-2xl overflow-hidden border border-gray-100 flex flex-col md:h-[90vh]">
             
-            <!-- Barra Superior Interna -->
             <div class="bg-slate-900 text-white px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4 border-b border-slate-800 shrink-0 relative">
                 <div class="flex items-center gap-2.5 w-full md:w-auto">
                     <i class="fa-solid fa-cash-register text-amber-400 text-xl"></i>
@@ -316,7 +305,7 @@
                         <input type="number" id="tasa-bs" value="0" oninput="calcularTotalesFactura()" class="w-full sm:w-16 bg-slate-800 text-white border border-slate-700 px-2 py-1 rounded-lg text-center font-mono focus:outline-none placeholder-gray-500" placeholder="0">
                         <span class="text-blue-400 font-bold text-[10px] shrink-0">Bs</span>
                     </div>
-                    <button onclick="ejecutarCierreDeMes()" class="bg-purple-600 hover:bg-purple-700 text-white text-[10px] uppercase font-black px-4 py-1.5 rounded-xl transition-colors w-full sm:w-auto shadow mt-1 sm:mt-0">
+                    <button onclick="ejecutarCierreDeMes()" class="bg-purple-600 hover:bg-purple-700 text-white text-[10px] uppercase font-black px-4 py-1.5 rounded-xl transition-colors w-full md:w-auto shadow mt-1 sm:mt-0">
                         <i class="fa-solid fa-calendar-check"></i> Cierre de Mes
                     </button>
                 </div>
@@ -325,7 +314,6 @@
                 </button>
             </div>
 
-            <!-- Cuerpo Dividido Re-estructurado en Grid Flexible -->
             <div class="p-3 sm:p-4 md:p-6 grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 overflow-y-auto flex-grow bg-gray-50">
                 <div class="lg:col-span-2 space-y-4">
                     <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-3">
@@ -356,13 +344,12 @@
                             <button id="tab-inventario" onclick="cambiarModoCargaFactura('inventario')" class="text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1 font-bold"><i class="fa-solid fa-boxes-stacked"></i> Jalar desde Catálogo</button>
                         </div>
 
-                        <!-- Panel Manual Libre -->
                         <div id="carga-manual-bloque" class="space-y-3">
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                                 <div class="sm:col-span-2">
                                     <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Descripción / Nombre del Producto</label>
                                     <input type="text" id="manual-modelo" placeholder="Ej: Redmi Note 13 Pro 4G..." class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
-                                end    </div>
+                                </div>
                                 <div>
                                     <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Precio Unitario ($ USD)</label>
                                     <input type="number" id="manual-precio" placeholder="0" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
@@ -379,7 +366,6 @@
                             </div>
                         </div>
 
-                        <!-- Panel Catálogo -->
                         <div id="carga-inventario-bloque" class="space-y-3 hidden">
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <div>
@@ -403,7 +389,6 @@
                     </div>
                 </div>
 
-                <!-- Resumen Lateral Adaptable -->
                 <div class="bg-slate-900 text-white p-4 sm:p-5 rounded-3xl flex flex-col justify-between shadow-xl min-h-[360px] lg:h-auto">
                     <div>
                         <h4 class="text-[11px] font-black uppercase tracking-wider text-amber-400 border-b border-slate-800 pb-2 mb-3 flex justify-between items-center">
@@ -443,7 +428,6 @@
 
             </div>
 
-            <!-- Historial de Operaciones con Botonera de Notificación Integrada -->
             <div class="bg-slate-100 border-t border-gray-200 p-3 sm:p-4 lg:p-5 space-y-3 shrink-0">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-200 pb-2">
                     <div class="flex flex-col sm:flex-row sm:items-center gap-3 w-full sm:w-auto">
@@ -487,7 +471,6 @@
         </div>
     </div>
 
-    <!-- WRAPPER IMPRESIÓN EPSON 15x10 -->
     <div id="wrapper-impresion-epson" style="display: none;">
         <div id="contenedor-ticket-real" style="width: 15cm; height: 10cm; padding: 0.3cm; box-sizing: border-box; background-color: #fff; color: #000; font-family: Arial, sans-serif; font-size: 10px; line-height: 1.2; border: 1px solid #000; display: flex; flex-direction: column; justify-content: space-between;">
             <div style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
@@ -569,7 +552,6 @@
         </div>
     </div>
 
-    <!-- MODAL DE NOTIFICACIÓN DE RETIRO DE PREVENTA -->
     <div id="modal-notificar-cliente" class="fixed inset-0 bg-slate-950/80 z-50 p-4 backdrop-blur-sm hidden flex items-center justify-center">
         <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl relative">
             <button onclick="cerrarModalNotificarCliente()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
@@ -598,7 +580,6 @@
         </div>
     </div>
 
-    <!-- MODAL DE LOGIN -->
     <div id="modal-login" class="fixed inset-0 bg-slate-950/80 z-50 p-4 backdrop-blur-sm hidden">
         <div class="flex items-center justify-center min-h-screen">
             <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl relative">
@@ -629,7 +610,6 @@
         </div>
     </div>
 
-    <!-- MODALES DE SOPORTE -->
     <div id="modal-consulta-banner" class="fixed inset-0 bg-slate-950/80 z-50 p-4 backdrop-blur-sm hidden">
         <div class="flex items-center justify-center min-h-screen">
             <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl relative">
@@ -732,7 +712,6 @@
         </div>
     </div>
 
-    <!-- MOTOR LÓGICO DE LA BASE DE DATOS -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, doc, setDoc, getDoc, collection, addDoc, getDocs, query, orderBy, limit, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -779,7 +758,7 @@
                 esAdminAutenticado = true;
                 try { localStorage.setItem('tucocel_admin_sesion', 'true'); } catch(err) {}
                 window.cerrarLoginAdmin();
-                controlarVisibilidadModulosOcultos(true);
+                controlarVisibilidadModulos Ocultos(true);
                 manejarVisibilidadLapicitosAdmin(true);
                 ejecutarFiltroCombinado();
             } else { alert('Credenciales incorrectas.'); }
@@ -815,7 +794,7 @@
             document.getElementById('modal-precio').innerText = prod.precio;
             
             if(prod.modalidad === 'preventa') {
-                document.getElementById('modal-desc').innerHTML = `${prod.desc || ''}<br><br><span class="block p-2 bg-amber-50 text-amber-800 border border-amber-200 font-bold rounded-xl text-[11px]">🔮 PREVENTA: Este equipo se trabaja bajo la modalidad de preventa prepagada. Lo reservas en tienda y se te asigna de inmediato.</span>`;
+                document.getElementById('modal-desc').innerHTML = `${prod.desc || ''}<br><br><span class="block p-2 bg-amber-50 text-amber-800 border border-amber-200 font-bold rounded-xl text-[11px]">🔮 PREVENTA: Este equipo (teléfono, laptop o pc) se trabaja bajo preventa prepagada. Lo reservas en tienda y se te asigna de inmediato.</span>`;
             } else {
                 document.getElementById('modal-desc').innerText = prod.desc || 'Sin descripción.';
             }
@@ -875,6 +854,7 @@
             document.getElementById('notif-nombre').value = '';
             document.getElementById('notif-telefono').value = '';
         };
+        
         window.enviarMensajeRetiroWhatsApp = function() {
             const nombre = document.getElementById('notif-nombre').value.trim();
             let tlf = document.getElementById('notif-telefono').value.trim();
@@ -1060,7 +1040,7 @@
             } 
         };
 
-        window.solicitarEdicionAvanzed = async function(idElemento) {
+        window.solicitarEdicionAvanzada = async function(idElemento) {
             if (!esAdminAutenticado) return;
             const elemento = document.getElementById(idElemento);
             if (!elemento) return;
@@ -1306,12 +1286,9 @@
             document.getElementById('tk-total-bs').innerText = `${(parseFloat(nota.tasaBS) > 0 ? totalCOP / parseFloat(nota.tasaBS) : 0).toLocaleString('es-VE')} Bs`;
         }
 
-        // ACTUALIZACIÓN COMPLETA REQUERIDA CON TEXTO LEGAL E INFORMACIÓN COMPLETA
         function procesarEnvioWaObjeto(nota) {
             let desc = nota.items.map(i => `• ${i.modelo} -> $${i.precio} ${i.imei ? `(IMEI: ...${i.imei})` : ''}`).join('\n');
-            
-            const msg = `*TUCOCEL C.A.*\n*Nota de Entrega:* N° ${String(nota.numNota).padStart(6, '0')}\n*Fecha:* ${nota.fecha}\n👤 *Cliente:* ${nota.cliente}\n\n💳 *Cédula/RIF:* ${nota.cedula}\n📦 *Detalle de compra:*\n${desc}\n\n💵 *Total General:* $${nota.totalUSD} USD\n\n_Valores informativos calculados a la tasa del día._\n\n*TÉRMINOS DE GARANTÍA:*\nGarantía por defectos de fábrica de los equipos celulares: 2 meses. La garantía no cubre golpes, humedad, sellos rotos, sobrecargas eléctricas o alteración de software.`;
-            
+            const msg = `*TUCOCEL C.A.*\n*Nota de Entrega:* N° ${String(nota.numNota).padStart(6, '0')}\n*Fecha:* ${nota.fecha}\n👤 *Cliente:* ${nota.cliente}\n\n💳 *Cédula/RIF:* ${nota.cedula}\n📦 *Detalle de compra:*\n${desc}\n\n💵 *Total General:* $${nota.totalUSD} USD\n\n_Valores informativos calculados a la tasa del día._\n\n*TÉRMINOS DE GARANTÍA:*\nGarantía por defectos de fábrica de los equipos celulares: 2 meses. La garantía no cubre golpes, humedad, sellos rotos, sobrecargas eléctricas o alteración de software.\n\n🌐 *Visita nuestra Vitrina Digital:*\nhttps://tucocel.github.io`;
             window.open(`https://wa.me/${nota.telefono.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
@@ -1425,4 +1402,4 @@
         }
     </script>
 </body>
-                                                                                                                 </html>
+    </html>
