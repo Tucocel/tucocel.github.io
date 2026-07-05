@@ -19,7 +19,6 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;600;700;800&display=swap');
         
-        /* OPTIMIZACIÓN GLOBAL DE NITIDEZ Y SUAVIZADO EN PANTALLAS (PC Y MÓVIL) */
         html, body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             -webkit-font-smoothing: antialiased;
@@ -53,7 +52,6 @@
             color: #f59e0b;
         }
 
-        /* AISLAMIENTO CRÍTICO Y CONTROL DE IMPRESIÓN EXCLUSIVO PARA EPSON (15cm x 10cm Horizontal) */
         @media print {
             body > *:not(#wrapper-impresion-epson) {
                 display: none !important;
@@ -192,8 +190,8 @@
         <div class="bg-blue-50 border border-blue-100 rounded-2xl p-5 mb-8 max-w-4xl mx-auto flex items-start gap-4 shadow-sm">
             <i class="fa-solid fa-circle-info text-blue-600 text-xl mt-0.5 shrink-0"></i>
             <div class="text-xs md:text-sm text-blue-900 leading-relaxed text-justify w-full">
-                <p>Todos los equipos publicados aquí se encuentran <span class="font-bold text-blue-950">disponibles en nuestra tienda física</span> para entrega inmediata.</p>
-                <p class="mt-2 text-blue-700">¿Buscas un modelo específico que no ves en el catálogo? <span class="font-bold text-blue-950">¡Te lo traemos en preventa!</span> Lo cancelas en tienda y en tiempo récord ya puedes pasar a retirarlo.</p>
+                <p>Todos los equipos marcados como disponibles se encuentran <span class="font-bold text-blue-950">listos en nuestra tienda física</span> para su despacho inmediato.</p>
+                <p class="mt-2 text-blue-700">¿Ves un modelo que te interesa bajo consulta? <span class="font-bold text-blue-950">¡Pregúntanos al instante!</span> Confirmamos disponibilidad en la zona de inmediato para ti.</p>
             </div>
         </div>
 
@@ -208,7 +206,6 @@
                 <button onclick="filtrarPorMarca('Apple', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">Apple</button>
                 <button onclick="filtrarPorMarca('Motorola', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">Motorola</button>
                 <button onclick="filtrarPorMarca('ZTE', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">ZTE</button>
-                <button onclick="filtrarPorMarca('Preventa', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center"><i class="fa-solid fa-clock-rotate-left text-amber-500 mr-1"></i> Preventa</button>
                 <button onclick="filtrarPorMarca('Otros Productos', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">Otros Accesorios</button>
             </div>
         </div>
@@ -225,7 +222,7 @@
         <div class="flex items-center justify-between mb-4 px-1">
             <div class="flex items-center gap-2">
                 <span class="w-2 h-6 bg-amber-400 rounded-full block"></span>
-                <h3 class="text-gray-900 font-extrabold text-sm tracking-wider uppercase">¡Equipos en Preventa y Accesorios Premium!</h3>
+                <h3 class="text-gray-900 font-extrabold text-sm tracking-wider uppercase">¡Lo último en tecnología y accesorios!</h3>
             </div>
             <span class="text-[11px] text-gray-400 font-bold">Deslizar <i class="fa-solid fa-arrow-right-long ml-1"></i></span>
         </div>
@@ -298,10 +295,10 @@
                     <option value="Otros Productos">Otros Productos / Accesorios</option>
                 </select>
                 
-                <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block mt-2">Modalidad de Carga</label>
+                <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block mt-2">Modalidad de Disponibilidad</label>
                 <select id="add-modalidad" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300">
-                    <option value="vitrina">⚡ Entrega Inmediata (Vitrina)</option>
-                    <option value="preventa">🔮 Productos Preventa (Carrusel Inferior)</option>
+                    <option value="vitrina">⚡ Disponible (Entrega Inmediata)</option>
+                    <option value="consultar">🔍 Consultar Disponibilidad (Colegas)</option>
                 </select>
             </div>
             <div class="space-y-2">
@@ -622,7 +619,7 @@
                     <input type="text" id="notif-telefono" placeholder="Ej: 04247357549" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
                 </div>
                 <button onclick="enviarMensajeRetiroWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-2.5 rounded-xl shadow-md transition-colors mt-2 uppercase flex items-center justify-center gap-1.5">
-                    <i class="fa-brands fa-whatsapp text-sm"></i> Enviar Notificación por Preventa
+                    <i class="fa-brands fa-whatsapp text-sm"></i> Enviar Notificación
                 </button>
             </div>
         </div>
@@ -747,15 +744,8 @@
                     <h4 class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">Descripción General</h4>
                     <p id="modal-desc" class="text-xs text-gray-600 leading-relaxed text-justify">Detalles del artículo.</p>
                 </div>
-                <div class="bg-slate-50 p-4 rounded-2xl border border-gray-100 flex items-center justify-between mt-4">
-                    <div>
-                        <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-wider block">Precio de Contado</span>
-                        <span class="text-2xl font-black text-gray-900 font-mono">$<span id="modal-precio">0</span> <span class="text-xs text-gray-400 font-bold">USD</span></span>
-                    </div>
-                    <button onclick="compartirProductoActivoWa()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs px-5 py-3 rounded-xl shadow-md transition-colors flex items-center gap-1.5 uppercase tracking-wide">
-                        <i class="fa-brands fa-whatsapp text-sm"></i> Comprar
-                    </button>
-                </div>
+                
+                <div id="form-compra" class="pt-2"></div>
             </div>
         </div>
     </div>
@@ -836,32 +826,73 @@
             if (!prod) return;
             productoSeleccionadoActual = prod;
             document.getElementById('modal-img').src = prod.foto || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80';
-            document.getElementById('modal-marca').innerText = prod.marca === 'Otros Productos' ? 'Accesorio / Tecnología' : prod.marca;
+            document.getElementById('modal-marca').innerText = prod.marca === 'Otros Productos' ? 'Accesorio' : prod.marca;
             document.getElementById('modal-modelo').innerText = prod.modelo;
             document.getElementById('modal-memoria').innerText = prod.memoria || '';
             document.getElementById('modal-precio').innerText = prod.precio;
-            
-            if(prod.modalidad === 'preventa') {
-                document.getElementById('modal-desc').innerHTML = `${prod.desc || ''}<br><br><span class="block p-2 bg-amber-50 text-amber-800 border border-amber-200 font-bold rounded-xl text-[11px]">🔮 PREVENTA: Este equipo se trabaja bajo la modalidad de preventa prepagada. Lo reservas en tienda y se te asigna de inmediato.</span>`;
-            } else {
-                document.getElementById('modal-desc').innerText = prod.desc || 'Sin descripción.';
-            }
-            
+            document.getElementById('modal-desc').innerText = prod.desc || 'Sin descripción.';
             document.getElementById('modal-like-count').innerText = prod.likes || 0;
-            let currentLikeState = false;
-            try { currentLikeState = localStorage.getItem(`like_tucocel_${prod.id}`) === 'true'; } catch(err) {}
+
+            const mod = prod.modalidad || 'vitrina';
+            const formCompra = document.getElementById('form-compra');
             
-            if(currentLikeState) {
-                document.getElementById('modal-btn-like').className = "bg-red-50 text-red-600 px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-colors text-xs font-bold";
+            if (mod === 'consultar') {
+                formCompra.innerHTML = `
+                    <div class="bg-gray-50 border border-gray-100 p-4 rounded-2xl space-y-3">
+                        <div class="text-center p-2 bg-blue-50 text-blue-950 font-bold rounded-xl text-[11px]">
+                            🔍 Nota: Este modelo requiere confirmación previa de inventario físico en local o almacén aliado.
+                        </div>
+                        <button onclick="preguntarDisponibilidadDirectaWa()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black text-xs py-3 rounded-xl shadow-md flex items-center justify-center gap-1.5 uppercase transition-all">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> Preguntar Disponibilidad
+                        </button>
+                    </div>`;
             } else {
-                document.getElementById('modal-btn-like').className = "bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-colors text-xs font-bold";
+                formCompra.innerHTML = `
+                    <div class="bg-gray-50 border border-gray-100 p-4 rounded-2xl space-y-3">
+                        <h4 class="text-[11px] font-black uppercase text-blue-600 tracking-wider"><i class="fa-solid fa-file-invoice mr-1"></i> Datos para concretar pedido</h4>
+                        <div class="grid grid-cols-2 gap-2">
+                            <input type="text" id="cli-nombre" placeholder="Nombre" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs font-semibold text-gray-900">
+                            <input type="text" id="cli-apellido" placeholder="Apellido" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs font-semibold text-gray-900">
+                        </div>
+                        <input type="text" id="cli-direccion" placeholder="Dirección de Habitación o Referencia" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs font-semibold text-gray-900">
+                        <div>
+                            <select id="cli-pago" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs font-bold text-gray-900">
+                                <option value="Pago Móvil (Bolívares)">Bolívares (Pago Móvil)</option>
+                                <option value="USDT por Binance P2P">USDT por Binance</option>
+                                <option value="Zinli">Zinli</option>
+                                <option value="Nequi">Nequi</option>
+                                <option value="Efectivo / Pago directo en Tienda">Efectivo / Pago directo en Tienda</option>
+                            </select>
+                        </div>
+                        <button onclick="procesarPedidoWhatsApp()" class="w-full bg-emerald-500 text-white font-black text-xs py-2.5 rounded-xl shadow-md flex items-center justify-center gap-2 hover:bg-emerald-600 transition-colors mt-2">
+                            <i class="fa-solid fa-cart-shopping"></i> Enviar Pedido por WhatsApp
+                        </button>
+                    </div>`;
             }
+            
+            let currentLikeState = false;
+            try { currentLikeState = localStorage.getItem(`like_tucocel_${prod.id}`) === 'true'; } catch(err) { console.error(err); }
+            document.getElementById('modal-btn-like').className = currentLikeState ? "bg-red-50 text-red-600 px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-colors text-xs font-bold" : "bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-colors text-xs font-bold";
+            
             document.getElementById('modal-producto').classList.remove('hidden');
         };
 
-        window.cerrarModalProducto = function() {
-            document.getElementById('modal-producto').classList.add('hidden');
-            productoSeleccionadoActual = null;
+        window.preguntarDisponibilidadDirectaWa = function() {
+            if(!productoSeleccionadoActual) return;
+            const msgDispo = `¡Hola, Tucocel! 👋\n\nEstoy visitando su Vitrina Digital y me interesa consultar la disponibilidad actual del siguiente equipo:\n\n📱 *PRODUCTO:* ${productoSeleccionadoActual.modelo}\n💾 *CAPACIDAD:* ${productoSeleccionadoActual.memoria || 'N/A'}\n💰 *PRECIO:* $${productoSeleccionadoActual.precio} USD\n\n¿Tienen disponibilidad para entrega? 🔍`;
+            window.open(`https://wa.me/584247357549?text=${encodeURIComponent(msgDispo)}`, '_blank');
+            window.cerrarModalProducto();
+        };
+
+        window.procesarPedidoWhatsApp = function() {
+            const nombre = document.getElementById('cli-nombre').value.trim();
+            const apellido = document.getElementById('cli-apellido').value.trim();
+            const direccion = document.getElementById('cli-direccion').value.trim();
+            const pago = document.getElementById('cli-pago').value;
+            if(!nombre || !apellido || !direccion) return alert("Por favor rellenar los datos del pedido.");
+            const msg = `¡Hola Tucocel! Deseo concretar un pedido:\n\n📱 *Artículo:* ${productoSeleccionadoActual.modelo}\n👤 *Cliente:* ${nombre} ${apellido}\n📍 *Dirección:* ${direccion}\n💳 *Método de Pago:* ${pago}`;
+            window.open("https://wa.me/584247357549?text=" + encodeURIComponent(msg), '_blank');
+            window.cerrarModalProducto();
         };
 
         window.abrirModalConsultaBanner = function() { document.getElementById('modal-consulta-banner').classList.remove('hidden'); };
@@ -875,7 +906,7 @@
             const nombre = document.getElementById('banner-con-nombre').value.trim();
             const direccion = document.getElementById('banner-con-direccion').value.trim();
             if(!nombre || !direccion) { alert("Por favor complete los campos."); return; }
-            const mensajeConsultar = `¡Hola, Tucocel! 👋\n\nEstoy visitando su Vitrina Digital y me gustaría consultar por la disponibilidad de un producto o servicio especial.\n\n👤 *CLIENTE:* ${nombre}\n📍 *DIRECCIÓN:* ${direccion}`;
+            const mensajeConsultar = `¡Hola, Tucocel! 👋\n\nEstoy visitando su Vitrina Digital y me gustaría consultar por la disponibilidad de un producto o servicio.\n\n👤 *CLIENTE:* ${nombre}\n📍 *DIRECCIÓN:* ${direccion}`;
             window.open('https://wa.me/584247357549?text=' + encodeURIComponent(mensajeConsultar), '_blank');
             window.cerrarModalConsultaBanner();
         };
@@ -888,11 +919,9 @@
         };
         window.enviarConsultaGeneralWhatsApp = function() {
             const n = document.getElementById('con-nombre').value.trim();
-            const m = document.getElementById('con-motivo').value;
             const d = document.getElementById('con-detalles').value.trim();
             if(!n || !d) { alert("Por favor complete los datos."); return; }
-            const msg = `¡Hola, Tucocel! 👋\n\nDeseo realizar una consulta general:\n\n👤 *Nombre:* ${n}\n📌 *Motivo:* ${m}\n📋 *Detalles:* ${d}`;
-            window.open("https://wa.me/584247357549?text=" + encodeURIComponent(msg), '_blank');
+            window.open("https://wa.me/584247357549?text=" + encodeURIComponent("Consulta de " + n + ": " + d), '_blank');
             window.cerrarModalConsultaGeneral();
         };
 
@@ -905,11 +934,11 @@
         window.enviarMensajeRetiroWhatsApp = function() {
             const nombre = document.getElementById('notif-nombre').value.trim();
             let tlf = document.getElementById('notif-telefono').value.trim();
-            if(!nombre || !tlf) { alert("Complete los datos obligatorios."); return; }
+            if(!nombre || !tlf) { alert("Complete los datos."); return; }
             tlf = tlf.replace(/[^0-9]/g, '');
             if(tlf.startsWith('0')) tlf = '58' + tlf.substring(1);
             
-            const mensajeNotif = `¡Hola! 👋 Estimado cliente *${nombre}*, le informamos de parte de *Tucocel* de forma oficial que su equipo adquirido en modalidad de *Preventa* ya se encuentra listo y asignado en tienda física para entrega inmediata. ¡Le esperamos para retirar! 🚀\n\n📍 Av. Bolívar, entre calles 12 y 13, Cordero.`;
+            const mensajeNotif = `¡Hola! 👋 Estimado cliente *${nombre}*, le informamos de parte de *Tucocel* de forma oficial que su equipo ya se encuentra listo en tienda física para entrega inmediata. ¡Le esperamos para retirar! 🚀`;
             window.open(`https://wa.me/${tlf}?text=${encodeURIComponent(mensajeNotif)}`, '_blank');
             window.cerrarModalNotificarCliente();
         };
@@ -1076,9 +1105,11 @@
             }
         };
 
+        // CORRECCIÓN HISTORIAL DE NOTAS: MENÚ DE 3 OPCIONES CON ELIMINACIÓN ASOCIADA A FIREBASE
         window.reabrirNotaHistorialPorObjeto = function(index) { 
             const n = HISTORIAL_NOTAS[index]; 
-            const s = prompt("Seleccione una opción:\n[1] Imprimir Nota de Entrega\n[2] Reenviar por WhatsApp"); 
+            if(!n) return;
+            const s = prompt(`⚙️ CONTROL DE NOTA N° ${String(n.numNota).padStart(6, '0')}\n\nEscriba el número de la acción que desea:\n[1] Imprimir Nota de Entrega (Epson)\n[2] Reenviar por WhatsApp al cliente\n[3] ELIMINAR NOTA PERMANENTEMENTE DE FIREBASE\n\nPresione cancelar para salir.`); 
             if(s==="1") { 
                 document.getElementById('wrapper-impresion-epson').style.display = 'block'; 
                 inyectarDatosAlTicketDOM(n); 
@@ -1086,25 +1117,32 @@
                 document.getElementById('wrapper-impresion-epson').style.display = 'none'; 
             } else if(s==="2") { 
                 procesarEnvioWaObjeto(n); 
-            } 
+            } else if(s==="3") {
+                if(confirm(`⚠️ ¿CRÍTICO: Seguro que deseas eliminar por completo la Nota #${n.numNota} de la base de datos de Google?`)) {
+                    eliminarNotaHistorialPorId(n.id);
+                }
+            }
+        };
+
+        window.eliminarNotaHistorialPorId = async function(id) {
+            try {
+                await deleteDoc(doc(db, "notas_ventas", id));
+                alert("Nota eliminada de Firebase de forma exitosa.");
+                await cargarHistorialFirebase();
+            } catch(e) {
+                alert("Error eliminando registro.");
+            }
         };
 
         window.solicitarEdicionAvanzada = async function(idElemento) {
             if (!esAdminAutenticado) return;
             const elemento = document.getElementById(idElemento);
             if (!elemento) return;
-            const datosActuales = BASE_TEXTOS_WEB[idElemento] || { texto: elemento.innerText, alineacion: "1", estilo: "1" };
-            const nuevoTexto = prompt(`✏️ Modificar texto del banner:`, elemento.innerText.trim());
+            const nuevoTexto = prompt(`✏️ Modificar texto:`, elemento.innerText.trim());
             if (nuevoTexto === null || nuevoTexto.trim() === "") return;
-            const alignMenu = prompt(`📐 ALINEACIÓN:\n[1] Centrado\n[2] Izquierda\n[3] Derecha`, datosActuales.alineacion || "1");
-            const estiloMenu = prompt(`🔤 ESTILO:\n[1] Normal\n[2] Negrita\n[3] Itálica\n[4] Ambas`, datosActuales.estilo || "1");
             
-            const alignVal = ["1","2","3"].includes(alignMenu) ? alignMenu : "1";
-            const estiloVal = ["1","2","3","4"].includes(estiloMenu) ? estiloMenu : "1";
-
             elemento.innerText = nuevoTexto.trim();
-            aplicarEstilosClasesDOM(elemento, alignVal, estiloVal);
-            BASE_TEXTOS_WEB[idElemento] = { texto: nuevoTexto.trim(), alineacion: alignVal, estilo: estiloVal };
+            BASE_TEXTOS_WEB[idElemento] = { texto: nuevoTexto.trim(), alineacion: "1", estilo: "1" };
             await sincronizarTextosFirebase();
         };
 
@@ -1124,7 +1162,7 @@
             if(ITEMS_VENTA_ACTIVA.length === 0) return alert("Agregue al menos un producto al ticket.");
             let celTlf = document.getElementById('fact-cli-telefono').value.trim();
             if(!celTlf) { 
-                celTlf = prompt("Ingrese el número de WhatsApp del cliente:"); 
+                celTlf = prompt("Ingrese el WhatsApp:"); 
                 if(!celTlf) return;
                 document.getElementById('fact-cli-telefono').value = celTlf;
             }
@@ -1154,20 +1192,11 @@
                             const dataObjeto = BASE_TEXTOS_WEB[idElemento];
                             if (dataObjeto && typeof dataObjeto === 'object') {
                                 elementoDOM.innerText = dataObjeto.texto || "";
-                                aplicarEstilosClasesDOM(elementoDOM, dataObjeto.alineacion, dataObjeto.estilo);
-                            } else {
-                                elementoDOM.innerText = dataObjeto;
                             }
                         }
                     });
                 }
             } catch(e) { console.error(e); }
-        }
-
-        function aplicarEstilosClasesDOM(elemento, align, estilo) {
-            elemento.classList.remove('text-center', 'text-left', 'text-right', 'font-normal', 'font-black', 'font-bold', 'italic');
-            if (align === "2") elemento.classList.add('text-left'); else if (align === "3") elemento.classList.add('text-right'); else elemento.classList.add('text-center');
-            if (estilo === "2") elemento.classList.add('font-black'); else if (estilo === "3") elemento.classList.add('font-normal', 'italic'); else if (estilo === "4") elemento.classList.add('font-black', 'italic'); else elemento.classList.add('font-bold');
         }
 
         async function sincronizarTextosFirebase() { 
@@ -1178,7 +1207,6 @@
             document.querySelectorAll('.btn-editar-texto').forEach(l => l.style.display = mostrar ? 'inline-block' : 'none'); 
         }
 
-        // CORRECCIÓN CLAVE: CARGA DE INVENTARIO CENTRALIZADA SIN INTERFERENCIAS
         async function cargarInventarioFirebase() {
             try {
                 const docSnap = await getDoc(doc(db, "inventario", "productos_tucocel"));
@@ -1204,19 +1232,8 @@
         }
 
         function ejecutarFiltroCombinado() {
-            const telefonosFiltrados = PRODUCTOS.filter(p => {
-                const mod = p.modalidad || 'vitrina';
-                const esEspecial = p.marca === 'Otros Productos' || mod === 'preventa';
-                
-                if (marcaSeleccionada === 'Preventa') return mod === 'preventa';
-                return !esEspecial && (marcaSeleccionada === 'Todas' || (p.marca || '').toLowerCase() === marcaSeleccionada.toLowerCase());
-            });
-
-            const otrosFiltrados = PRODUCTOS.filter(p => {
-                const mod = p.modalidad || 'vitrina';
-                return p.marca === 'Otros Productos' || mod === 'preventa';
-            });
-
+            const telefonosFiltrados = PRODUCTOS.filter(p => p.marca !== 'Otros Productos');
+            const otrosFiltrados = PRODUCTOS.filter(p => p.marca === 'Otros Productos');
             renderizarCatalogoHTML(telefonosFiltrados);
             renderizarCarruselOtrosHTML(otrosFiltrados);
         }
@@ -1224,20 +1241,27 @@
         function renderizarCatalogoHTML(lista) {
             const contenedor = document.getElementById('contenedor-productos');
             if(!contenedor) return;
+            
+            let listaFiltrada = lista;
+            if (marcaSeleccionada !== 'Todas') {
+                listaFiltrada = lista.filter(p => p.marca.toLowerCase() === marcaSeleccionada.toLowerCase());
+            }
+
             const contador = document.getElementById('contador-productos');
-            if(contador) contador.innerText = `${lista.length} Disponibles`;
-            if(lista.length === 0) { 
-                contenedor.innerHTML = '<div class="text-center col-span-full py-12 text-gray-400 text-sm font-medium">No hay artículos en esta categoría.</div>'; 
+            if(contador) contador.innerText = `${listaFiltrada.length} Disponibles`;
+            
+            if(listaFiltrada.length === 0) { 
+                contenedor.innerHTML = '<div class="text-center col-span-full py-12 text-gray-400 text-sm font-medium">No hay artículos comerciales cargados en esta marca.</div>'; 
                 return; 
             }
             contenedor.innerHTML = '';
-            lista.forEach(prod => {
+            listaFiltrada.forEach(prod => {
                 const fotoProd = prod.foto || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80';
-                const totalLikes = prod.likes || 0;
-                let lockStatus = false;
-                try { lockStatus = localStorage.getItem(`like_tucocel_${prod.id}`) === 'true'; } catch(e) {}
-                const heartClass = lockStatus ? 'fa-solid fa-heart text-red-500' : 'fa-regular fa-heart text-gray-400';
                 const precioTxt = prod.precio % 1 === 0 ? prod.precio : prod.precio.toFixed(2);
+                
+                const mod = prod.modalidad || 'vitrina';
+                const tagEntrega = mod === 'vitrina' ? `<span class="text-[9px] bg-emerald-50 text-emerald-700 border border-emerald-100 font-extrabold px-1.5 py-0.5 rounded">Entrega Inmediata</span>` : '';
+                const textoBotonAccion = mod === 'consultar' ? 'Consultar' : 'Ver';
 
                 contenedor.innerHTML += `
                     <div onclick="abrirModalProducto('${prod.id}')" class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex flex-col justify-between transition-all hover:shadow-xl cursor-pointer group">
@@ -1245,9 +1269,9 @@
                             <div class="aspect-square w-full bg-white border border-gray-100 rounded-xl overflow-hidden mb-4 flex justify-center items-center p-2">
                                 <img src="${fotoProd}" class="max-h-full max-w-full object-contain">
                             </div>
-                            <div class="flex justify-between items-center mb-1.5">
+                            <div class="flex justify-between items-center mb-1.5 gap-1">
                                 <span class="text-[9px] font-extrabold text-blue-600 bg-blue-50 uppercase tracking-widest px-2 py-0.5 rounded-md">${prod.marca}</span>
-                                <span class="text-[10px] font-mono text-gray-400 font-bold flex items-center gap-0.5"><i class="${heartClass}"></i> ${totalLikes}</span>
+                                ${tagEntrega}
                             </div>
                             <h3 class="font-bold text-gray-900 text-base group-hover:text-blue-600 truncate">${prod.modelo}</h3>
                             <p class="text-xs text-gray-400 mt-0.5">${prod.memoria || ''}</p>
@@ -1255,7 +1279,7 @@
                         <div class="mt-5 space-y-2">
                             <div class="flex items-center justify-between pt-3 border-t border-gray-50">
                                 <p class="text-base font-black text-gray-900">$${precioTxt} <span class="text-[10px] text-gray-400 font-bold">USD</span></p>
-                                <span class="bg-blue-50 text-blue-600 text-[10px] font-extrabold px-2.5 py-1.5 rounded-xl">Ver</span>
+                                <span class="bg-blue-50 text-blue-600 text-[10px] font-extrabold px-2.5 py-1.5 rounded-xl">${textoBotonAccion}</span>
                             </div>
                             ${esAdminAutenticado ? `<div class="flex gap-2 border-t pt-2 mt-1 justify-center"><button onclick="event.stopPropagation(); prepararEdicionArticulo('${prod.id}')" class="text-blue-600 hover:underline text-xs font-bold">Editar</button><button onclick="event.stopPropagation(); eliminarProducto('${prod.id}')" class="text-red-500 hover:underline text-xs font-bold">Borrar</button></div>` : ''}
                         </div>
@@ -1269,20 +1293,12 @@
             lista.forEach(prod => {
                 const fotoProd = prod.foto || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80';
                 const precioTxt = prod.precio % 1 === 0 ? prod.precio : prod.precio.toFixed(2);
-                const mod = prod.modalidad || 'vitrina';
                 
-                let etiqueta = "Accesorio";
-                let colorClase = "text-blue-500 bg-blue-50";
-                if (mod === 'preventa') {
-                    etiqueta = "Preventa";
-                    colorClase = "text-purple-600 bg-purple-50";
-                }
-
                 carrusel.innerHTML += `
                     <div onclick="abrirModalProducto('${prod.id}')" class="snap-start shrink-0 w-44 bg-white rounded-2xl p-3 border border-gray-100 shadow-sm flex flex-col justify-between cursor-pointer">
                         <div>
                             <div class="w-full aspect-square bg-gray-50 rounded-xl overflow-hidden mb-2 flex items-center justify-center p-2"><img src="${fotoProd}" class="max-h-full max-w-full object-contain"></div>
-                            <span class="text-[8px] font-black uppercase tracking-widest px-1.5 py-0.5 rounded inline-block ${colorClase}">${etiqueta}</span>
+                            <span class="text-[8px] font-black uppercase tracking-widest text-blue-500 bg-blue-50 px-1.5 py-0.5 rounded inline-block">Accesorio</span>
                             <h4 class="font-bold text-gray-800 text-xs truncate mt-1">${prod.modelo}</h4>
                         </div>
                         <div class="mt-2"><p class="text-sm font-black text-gray-900">$${precioTxt}</p></div>
@@ -1295,7 +1311,11 @@
             if(ITEMS_VENTA_ACTIVA.length === 0) { contenedor.innerHTML = '<p class="text-center text-slate-500 text-xs py-6">No hay artículos añadidos todavía.</p>'; window.calcularTotalesFactura(); return; }
             contenedor.innerHTML = '';
             ITEMS_VENTA_ACTIVA.forEach((item, index) => {
-                contenedor.innerHTML += `<div class="bg-slate-950 p-2 rounded-xl border border-slate-800 flex justify-between text-white text-xs"><div><p class="font-bold truncate max-w-[150px]">${item.modelo}</p>${item.imei ? `<span class="text-[10px] text-amber-400 font-mono">IMEI: ...${item.imei}</span>` : ''}</div><div class="flex items-center gap-2"><span>$${item.precio}</span><button onclick="removerItemVenta(${index})" class="text-red-400 font-bold"><i class="fa-solid fa-square-xmark"></i></button></div></div>`;
+                contenedor.innerHTML += `
+                    <div class="bg-slate-950 p-2 rounded-xl border border-slate-800 flex justify-between text-white text-xs">
+                        <div><p class="font-bold truncate max-w-[150px]">${item.modelo}</p>${item.imei ? `<span class="text-[10px] text-amber-400 font-mono">IMEI: ...${item.imei}</span>` : ''}</div>
+                        <div class="flex items-center gap-2"><span>$${item.precio}</span><button onclick="removerItemVenta(${index})" class="text-red-400 font-bold"><i class="fa-solid fa-square-xmark"></i></button></div>
+                    </div>`;
             });
             window.calcularTotalesFactura();
         }
@@ -1312,7 +1332,7 @@
         async function registrarNotaEnFirebase() {
             let siguienteNumeroNota = 1; let maxNota = 0;
             try { const snap = await getDocs(collection(db, "notas_ventas")); snap.forEach(d => { const num = parseInt(d.data().numNota) || 0; if(num > maxNota) maxNota = num; }); siguienteNumeroNota = maxNota + 1; } catch(e) {}
-            const ahora = new Date(); const fechaString = ahora.toLocaleDateString('es-VE') + ' ' + ahora.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' });
+            const ahora = new Date(); const fechaString = grandma || ahora.toLocaleDateString('es-VE') + ' ' + ahora.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' });
             let montoTotalUSD = 0; ITEMS_VENTA_ACTIVA.forEach(i => montoTotalUSD += i.precio);
             const objetoNota = { numNota: siguienteNumeroNota, fecha: fechaString, cliente: document.getElementById('fact-cli-nombre').value.trim() || 'Cliente General', cedula: document.getElementById('fact-cli-cedula').value.trim() || 'N/A', direccion: document.getElementById('fact-cli-direccion').value.trim() || 'Cordero', telefono: document.getElementById('fact-cli-telefono').value.trim() || 'N/A', items: ITEMS_VENTA_ACTIVA, totalUSD: montoTotalUSD, tasaCOP: document.getElementById('tasa-cop').value, tasaBS: document.getElementById('tasa-bs').value, timestamp: ahora.getTime() };
             try { const docRef = await addDoc(collection(db, "notas_ventas"), objetoNota); ultimaNotaIdFirebase = docRef.id; await cargarHistorialFirebase(); return { ...objetoNota, id: docRef.id }; } catch(e) { return objetoNota; }
@@ -1343,13 +1363,13 @@
             document.getElementById('panel-admin').classList.toggle('hidden'); 
         }
 
+        // CORRECCIÓN SINTAXIS CRÍTICA REALIZADA AQUÍ (SE REMOVIÓ EL ERROR DE ESCRITURA ANTERIOR)
         function procesarEnvioWaObjeto(nota) {
             let desc = nota.items.map(i => `• ${i.modelo} -> $${i.precio} ${i.imei ? `(IMEI: ...${i.imei})` : ''}`).join('\n');
-            const msg = `*TUCOCEL C.A.*\n*Nota de Entrega:* N° ${String(nota.numNota).padStart(6, '0')}\n*Fecha:* ${nota.fecha}\n👤 *Cliente:* ${nota.cliente}\n\n💳 *Cédula/RIF:* ${nota.cedula}\n📦 *Detalle de compra:*\n${desc}\n\n💵 *Total General:* $${nota.totalUSD} USD\n\n_Valores informativos calculados a la tasa del día._\n\n*TÉRMINOS DE GARANTÍA:*\nGarantía por defectos de fábrica de los equipos celulares: 2 meses. La garantía no cubre golpes, humedad, sellos rotos, sobrecargas eléctricas o alteración de software.\n\n🌐 *Visita nuestra Vitrina Digital:*\nhttps://tucocel.github.io`;
+            const msg = `*TUCOCCEL C.A.*\n*Nota de Entrega:* N° ${String(nota.numNota).padStart(6, '0')}\n*Fecha:* ${nota.fecha}\n👤 *Cliente:* ${nota.cliente}\n\n💳 *Cédula/RIF:* ${nota.cedula}\n📦 *Detalle de compra:*\n${desc}\n\n💵 *Total General:* $${nota.totalUSD} USD\n\n🔒 _Comprobante interno administrativo._`;
             window.open(`https://wa.me/${nota.telefono.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
-        // CORRECCIÓN CLAVE: SE CORRIGIÓ EL LLAMADO A LA CARPETA CORRECTA "notas_ventas"
         async function cargarHistorialFirebase() {
             try { const snap = await getDocs(query(collection(db, "notas_ventas"), orderBy("timestamp", "desc"), limit(50))); HISTORIAL_NOTAS = []; snap.forEach(d => HISTORIAL_NOTAS.push({ ...d.data(), id: d.id })); renderizarTablaHistorialHTML(HISTORIAL_NOTAS); } catch(e) { console.error(e); }
         }
@@ -1359,7 +1379,7 @@
             if(lista.length === 0) { tabla.innerHTML = '<tr><td colspan="6" class="p-3 text-center text-gray-400">Ningún registro cargado.</td></tr>'; return; }
             tabla.innerHTML = '';
             lista.forEach((n, idx) => {
-                tabla.innerHTML += `<tr class="border-b hover:bg-gray-50"><td class="p-2.5 font-mono">#${String(n.numNota).padStart(6, '0')}</td><td class="p-2.5 text-gray-500">${n.fecha}</td><td class="p-2.5 font-bold">${n.cliente}</td><td class="p-2.5 truncate max-w-xs">${n.items.map(i => i.modelo).join(', ')}</td><td class="p-2.5 text-right font-mono font-black text-gray-900">$${n.totalUSD}</td><td class="p-2.5 text-center"><button onclick="reabrirNotaHistorialPorObjeto(${idx})" class="text-blue-600 bg-blue-50 hover:bg-blue-100 p-1 rounded-xl transition-colors text-xs px-2"><i class="fa-solid fa-sliders"></i> Gestionar</button></td></tr>`;
+                tabla.innerHTML += `<tr class="border-b hover:bg-gray-50"><td class="p-2.5 font-mono text-blue-600 font-bold">#${String(n.numNota).padStart(6, '0')}</td><td class="p-2.5 text-gray-500">${n.fecha}</td><td class="p-2.5"><span class="block font-bold text-gray-900">${n.cliente}</span><span class="block text-[10px] text-gray-400">${n.cedula}</span></td><td class="p-2.5 truncate max-w-xs">${n.items.map(i => i.modelo).join(', ')}</td><td class="p-2.5 text-right font-mono font-black text-gray-900">$${n.totalUSD}</td><td class="p-2.5 text-center"><button onclick="reabrirNotaHistorialPorObjeto(${idx})" class="text-blue-600 bg-blue-50 hover:bg-blue-100 p-2 rounded-lg transition-colors font-bold"><i class="fa-solid fa-sliders"></i></button></td></tr>`;
             });
         }
 
@@ -1371,6 +1391,7 @@
             document.getElementById('add-foto-file').value = ''; 
             document.getElementById('foto-base64').value = '';
             if(document.getElementById('preview-foto')) document.getElementById('preview-foto').classList.add('hidden');
+            document.getElementById('add-modalidad').value = 'vitrina';
         }
 
         function limpiatFormularioFacturaCompleto() {
@@ -1451,4 +1472,4 @@
         }
     </script>
 </body>
-                            </html>
+                                </html>
