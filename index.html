@@ -75,15 +75,15 @@
             #contenedor-ticket-real {
                 width: 100% !important;
                 height: auto !important;
-                min-height: 10cm !important;
-                padding: 0.4cm !important;
+                padding: 0.3cm !important;
                 box-sizing: border-box !important;
                 border: 1px dashed #000 !important;
                 background: #fff !important;
             }
             @page {
-                size: auto;
-                margin: 0mm;
+                size: 15cm 10cm;
+                orientation: landscape;
+                margin: 0mm !important;
             }
         }
     </style>
@@ -172,7 +172,7 @@
         </div>
     </section>
 
-    <!-- CUADRO INFORMATIVO CORPORATIVO ESTILIZADO -->
+    <!-- MAIN PRINCIPAL -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="mb-8 max-w-4xl mx-auto bg-gradient-to-r from-blue-600 to-blue-800 text-white p-6 rounded-2xl shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4 border border-blue-500">
             <div class="flex items-center gap-4 text-center sm:text-left">
@@ -189,6 +189,7 @@
             </button>
         </div>
 
+        <!-- CUADRO INFORMATIVO CORPORATIVO ESTILIZADO -->
         <div class="bg-white border-l-4 border-blue-600 rounded-r-2xl p-5 mb-8 max-w-4xl mx-auto shadow-md flex flex-col md:flex-row items-start md:items-center gap-4 transition-all hover:shadow-lg">
             <div class="bg-blue-50 p-3 rounded-xl text-blue-600 shrink-0 hidden sm:flex items-center justify-center shadow-inner">
                 <i class="fa-solid fa-circle-info text-2xl"></i>
@@ -263,7 +264,7 @@
                 <p class="text-white font-black tracking-wider text-sm uppercase">© 2026 Tucocel C.A. Todos los derechos reservados.</p>
                 <p class="text-slate-500 text-[11px]">Web desarrollada de manera exclusiva por <a href="#" class="text-blue-400 hover:underline font-bold">@publionlinemk</a> — Agencia Oficial de Publicidad de Tucocel C.A.</p>
                 <div class="pt-2 flex items-center justify-center md:justify-start gap-2 text-[10px] text-slate-500 font-bold uppercase tracking-wider">
-                    <i class="fa-solid fa-eye text-blue-500"></i> Visitas del sitio: <span id="contador-visitas-num" class="bg-slate-950 text-blue-400 px-2 py-0.5 rounded border border-slate-800 font-mono">1,842</span>
+                    <i class="fa-solid fa-eye text-blue-500"></i> Visitas del sitio: <span id="contador-visitas-num" class="bg-slate-950 text-blue-400 px-2 py-0.5 rounded border border-slate-800 font-mono">0</span>
                 </div>
             </div>
             
@@ -422,41 +423,46 @@
                             <button id="tab-inventario" onclick="cambiarModoCargaFactura('inventario')" class="text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1 font-bold"><i class="fa-solid fa-boxes-stacked"></i> Jalar desde Catálogo</button>
                         </div>
 
+                        <!-- ENTRADA MANUAL COMPLETA CON CANTIDADES MÚLTIPLES -->
                         <div id="carga-manual-bloque" class="space-y-3">
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
                                 <div class="sm:col-span-2">
                                     <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Descripción / Nombre del Producto</label>
                                     <input type="text" id="manual-modelo" placeholder="Ej: Redmi Note 13 Pro 4G..." class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
                                 </div>
                                 <div>
-                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Precio Unitario ($ USD)</label>
+                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Precio Unitario ($)</label>
                                     <input type="number" id="manual-precio" placeholder="0" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
                                 </div>
+                                <div>
+                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Cantidad</label>
+                                    <input type="number" id="manual-cantidad" value="1" min="1" oninput="window.renderizarCamposImeiDinamicos('manual')" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
+                                </div>
                             </div>
-                            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-gray-50 p-3 rounded-xl border border-gray-100">
+                            <div class="space-y-2 bg-gray-50 p-3 rounded-xl border border-gray-100">
                                 <div class="flex items-center gap-2">
-                                    <input type="checkbox" id="manual-check-imei" onchange="toggleManualImeiView()" class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                                    <label for="manual-check-imei" class="text-xs text-gray-700 font-bold cursor-pointer">¿Es un teléfono celular? (Habilitar IMEI)</label>
+                                    <input type="checkbox" id="manual-check-imei" onchange="window.renderizarCamposImeiDinamicos('manual')" class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                    <label for="manual-check-imei" class="text-xs text-gray-700 font-bold cursor-pointer">¿Son teléfonos celulares? (Habilitar desgloses de IMEI)</label>
                                 </div>
-                                <div id="wrapper-manual-imei" class="hidden w-full sm:w-auto">
-                                    <input type="text" id="manual-imei" maxlength="4" placeholder="Últimos 4 dígitos del IMEI" class="w-full sm:w-48 bg-white border-2 border-red-200 p-2 rounded-xl text-xs font-black tracking-widest text-center focus:outline-red-500">
-                                </div>
+                                <div id="wrapper-manual-imeis" class="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-2"></div>
                             </div>
                         </div>
 
+                        <!-- JALAR DESDE CATALOGO CON CANTIDADES MÚLTIPLES -->
                         <div id="carga-inventario-bloque" class="space-y-3 hidden">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <div class="sm:col-span-2">
                                     <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Seleccionar Producto en Stock</label>
-                                    <select id="fact-select-producto" onchange="verificarTipoArticuloFactura()" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
+                                    <select id="fact-select-producto" onchange="window.renderizarCamposImeiDinamicos('inventario')" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
                                         <option value="">-- Seleccione un producto --</option>
                                     </select>
                                 </div>
-                                <div id="wrapper-fact-imei" class="hidden">
-                                    <label class="text-[9px] text-red-500 font-bold uppercase block mb-1">Últimos 4 Dígitos del IMEI (Obligatorio)</label>
-                                    <input type="text" id="fact-imei" maxlength="4" placeholder="Ej: 8842" class="w-full bg-white border-2 border-red-200 p-2 rounded-xl text-xs font-black tracking-widest text-center focus:outline-red-500">
+                                <div>
+                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Cantidad</label>
+                                    <input type="number" id="fact-cantidad" value="1" min="1" oninput="window.renderizarCamposImeiDinamicos('inventario')" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
                                 </div>
                             </div>
+                            <div id="wrapper-fact-imeis" class="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-gray-50 p-2 rounded-xl mt-1"></div>
                         </div>
 
                         <div class="flex justify-end pt-1">
@@ -505,7 +511,7 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN 2: PRIVADA DE AUDITORÍA, REPORTES Y CONTROL DE GARANTÍAS (NUEVO COMPARTIMENTO EN PC) -->
+            <!-- SECCIÓN 2: PRIVADA DE AUDITORÍA, REPORTES Y CONTROL DE GARANTÍAS -->
             <div id="bloque-reportes-auditoria" class="p-4 sm:p-6 bg-gray-50 flex-grow overflow-y-auto hidden space-y-4">
                 <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm space-y-3">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-gray-100 pb-2">
@@ -548,80 +554,69 @@
                     </table>
                 </div>
             </div>
-
         </div>
     </div>
 
-    <!-- TICKET DE IMPRESIÓN COMPACTO REESTRUCTURADO (100% LIMPIO DE ERRORES Y ADAPTABLE) -->
+    <!-- TICKET DE IMPRESIÓN COMPACTO REESTRUCTURADO DE 15x10 CM -->
     <div id="wrapper-impresion-epson" style="display: none;">
         <div id="contenedor-ticket-real">
-            <!-- ENCABEZADO EMPRESARIAL -->
-            <div style="text-align: center; border-bottom: 1px dashed #000; padding-bottom: 8px; margin-bottom: 8px;">
-                <h2 style="margin: 0; font-size: 16px; font-weight: 900; letter-spacing: -0.5px; text-transform: uppercase;">Tucocel C.A.</h2>
-                <span style="display: block; font-size: 11px; font-weight: bold; margin-top: 2px;">NOTA DE ENTREGA</span>
-                <span style="display: block; font-size: 8.5px; font-weight: bold; color: #444; margin-top: 1px;">(SIN VALOR FISCAL)</span>
-                <p style="margin: 4px 0 0 0; font-size: 9px; line-height: 1.3; font-weight: 500;">
-                    RIF: J-31378837-6<br>
-                    Avenida Bolívar, entre calles 12 y 13, Cordero, Táchira.<br>
+            <div style="text-align: center; border-bottom: 1px dashed #000; padding-bottom: 4px; margin-bottom: 4px;">
+                <h2 style="margin: 0; font-size: 13px; font-weight: 900; text-transform: uppercase;">Tucocel C.A.</h2>
+                <span style="display: block; font-size: 9.5px; font-weight: bold; margin-top: 1px;">NOTA DE ENTREGA</span>
+                <span style="display: block; font-size: 7.5px; font-weight: bold; color: #444;">(SIN VALOR FISCAL)</span>
+                <p style="margin: 2px 0 0 0; font-size: 7.5px; font-weight: 500;">
+                    RIF: J-31378837-6 | Av. Bolívar, entre calles 12 y 13, Cordero.<br>
                     WhatsApp: 0424-7357549
                 </p>
             </div>
 
-            <!-- METADATOS DE LA OPERACIÓN -->
-            <div style="font-size: 9.5px; line-height: 1.4; border-bottom: 1px dashed #000; padding-bottom: 6px; margin-bottom: 6px;">
+            <div style="font-size: 8px; line-height: 1.3; border-bottom: 1px dashed #000; padding-bottom: 3px; margin-bottom: 3px;">
                 <table style="width: 100%; border-collapse: collapse;">
                     <tr>
-                        <td style="width: 50%;"><strong>N° Control:</strong> <span id="tk-num-nota" style="font-family: monospace; font-weight: bold;">000000</span></td>
+                        <td style="width: 50%;"><strong>Nota N°:</strong> <span id="tk-num-nota" style="font-family: monospace; font-weight: bold;">000001</span></td>
                         <td style="width: 50%; text-align: right;"><span id="tk-fecha">--/--/---- --:--</span></td>
                     </tr>
                     <tr>
-                        <td colspan="2" style="padding-top: 3px;"><strong>Cliente:</strong> <span id="tk-cliente-nombre">--------</span></td>
+                        <td colspan="2"><strong>Cliente:</strong> <span id="tk-cliente-nombre">--------</span></td>
                     </tr>
                     <tr>
-                        <td><strong>Cédula/RIF:</strong> <span id="tk-cliente-cedula">--------</span></td>
-                        <td><strong>Teléfono:</strong> <span id="tk-cliente-telefono">--------</span></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2"><strong>Dirección:</strong> <span id="tk-cliente-direccion">--------</span></td>
+                        <td><strong>Cédula:</strong> <span id="tk-cliente-cedula">--------</span> | <strong>Tlf:</strong> <span id="tk-cliente-telefono">--------</span></td>
+                        <td style="text-align: right;"><strong>Dir:</strong> <span id="tk-cliente-direccion">--------</span></td>
                     </tr>
                 </table>
             </div>
 
-            <!-- TABLA DE ARTÍCULOS FLUIDA -->
-            <div style="margin: 6px 0;">
-                <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 9.5px;">
+            <div style="margin: 3px 0;">
+                <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 8px;">
                     <thead>
-                        <tr style="border-bottom: 1.5px solid #000; font-weight: bold;">
-                            <th style="padding: 3px 0; width: 15%; text-align: center;">Cant.</th>
-                            <th style="padding: 4px 0; width: 65%;">Descripción / Artículo</th>
-                            <th style="padding: 4px 0; width: 20%; text-align: right;">Monto</th>
+                        <tr style="border-bottom: 1px solid #000; font-weight: bold;">
+                            <th style="padding: 2px 0; width: 12%; text-align: center;">Cant.</th>
+                            <th style="padding: 2px 0; width: 68%;">Descripción / Artículo</th>
+                            <th style="padding: 2px 0; width: 20%; text-align: right;">Total</th>
                         </tr>
                     </thead>
-                    <tbody id="tk-items-tabla" style="font-weight: 500;">
-                        <!-- Se inyecta por JS -->
-                    </tbody>
+                    <tbody id="tk-items-tabla" style="font-weight: 500;"></tbody>
                 </table>
             </div>
 
-            <!-- TOTALIZADOR CON CONVERSIÓN CORREGIDA -->
-            <div style="border-top: 1px solid #000; pt: 4px; margin-top: 6px; width: 100%;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; padding-top: 4px;">
-                    <div style="font-size: 9px; line-height: 1.3; width: 45%;">
+            <div style="border-top: 1px dashed #000; margin-top: 3px; width: 100%;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; padding-top: 2px;">
+                    <div style="font-size: 7.5px; line-height: 1.2; width: 45%;">
                         <p><strong>Forma Pago:</strong> Multimoneda</p>
                         <p><strong>Estatus:</strong> <span id="tk-status-label" style="font-weight: bold;">Procesado</span></p>
                     </div>
                     <div style="width: 55%;">
-                        <table style="width: 100%; font-size: 9.5px; font-weight: bold;">
+                        <table style="width: 100%; font-size: 8px; font-weight: bold;">
                             <tr>
-                                <td style="padding: 2px 0;">Total USD:</td>
-                                <td style="text-align: right; font-family: monospace; font-size: 11px;" id="tk-total-usd">$0</td>
+                                <td>Total USD:</td>
+                                <td style="text-align: right; font-family: monospace; font-size: 9.5px;" id="tk-total-usd">$0</td>
                             </tr>
                             <tr>
-                                <td style="padding: 2px 0; color: #047857;">Ref COP:</td>
+                                <td style="color: #047857;">Ref COP:</td>
                                 <td style="text-align: right; font-family: monospace; color: #047857;" id="tk-total-cop">0 COP</td>
                             </tr>
                             <tr>
-                                <td style="padding: 2px 0; color: #1d4ed8;">Ref VES:</td>
+                                <td style="color: #1d4ed8;">Ref VES:</td>
                                 <td style="text-align: right; font-family: monospace; color: #1d4ed8;" id="tk-total-bs">0 Bs</td>
                             </tr>
                         </table>
@@ -629,13 +624,11 @@
                 </div>
             </div>
             
-            <!-- TÉRMINOS LEGALES DE PROTECCIÓN (CUIDADO DE ESPALDA) -->
-            <div style="border: 1px solid #000; padding: 5px; border-radius: 4px; text-align: justify; margin-top: 10px; font-size: 7.5px; line-height: 1.2;">
-                <p style="margin: 0 0 3px 0; font-weight: bold; text-transform: uppercase; text-align: center;">⚠️ Declaración Importante de Control Interno</p>
-                Este documento representa un comprobante de entrega y control interno de almacén para fines administrativos de despacho. El mismo no constituye, ni pretende suplantar bajo ningún concepto, una factura de carácter fiscal regulada por la normativa legal e impositiva vigente.
-                <p style="margin: 4px 0 0 0; font-weight: 800; color: #b91c1c;">
-                    GARANTÍA: Cobertura por defectos técnicos de fábrica en equipos móviles por un lapso de 2 meses (60 días continuos). La garantía queda sin efecto por golpes, humedad, rotura de sellos internos, sobrecargas en la red eléctrica o alteraciones de software original.
-                </p>
+            <div style="border: 0.5px solid #000; padding: 3px; border-radius: 3px; text-align: justify; margin-top: 4px; font-size: 6.5px; line-height: 1.1;">
+                Este comprobante de entrega es para control interno de almacén. No sustituye ni pretende suplantar una factura fiscal legal.
+                <span style="font-weight: bold; color: #b91c1c;">
+                    GARANTÍA: Defectos técnicos de fábrica por 2 meses (60 días continuos). Queda anulada por golpes, humedad, sellos rotos, sobrecargas o alteración de software.
+                </span>
             </div>
         </div>
     </div>
@@ -662,7 +655,6 @@
                     <h3 class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">Descripción General</h3>
                     <div id="modal-desc" class="text-xs text-gray-600 leading-relaxed text-justify">Detalles del artículo.</div>
                 </div>
-                
                 <div id="form-compra" class="pt-2"></div>
             </div>
         </div>
@@ -717,7 +709,7 @@
         </div>
     </div>
 
-    <!-- SCRIPT PRINCIPAL DE ARQUITECTURA DIGITAL -->
+    <!-- MOTOR LOGICO ASOCIADO A FIREBASE (PROTEGIDO) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, doc, setDoc, getDoc, collection, addDoc, getDocs, query, orderBy, limit, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -748,7 +740,41 @@
         let modoCargaFacturaActivo = 'manual';
         let BASE_TEXTOS_WEB = {};
 
-        // VISTAS SEPARADAS DE EMISIÓN vs AUDITORÍA (REPORTE DE VENTAS EN PC)
+        // RENDERIZADO COMPORTAMIENTO DINÁMICO DE CASILLAS DE IMEIS MÚLTIPLES
+        window.renderizarCamposImeiDinamicos = function(modo) {
+            if(modo === 'manual') {
+                const cant = parseInt(document.getElementById('manual-cantidad').value) || 1;
+                const check = document.getElementById('manual-check-imei').checked;
+                const contenedor = document.getElementById('wrapper-manual-imeis');
+                contenedor.innerHTML = '';
+                if(check && cant > 0) {
+                    for(let i=1; i<=cant; i++) {
+                        contenedor.innerHTML += `
+                            <div>
+                                <label class="text-[8px] text-red-500 font-bold block mb-0.5">IMEI Teléfono ${i}</label>
+                                <input type="text" id="manual-imei-field-${i}" maxlength="4" placeholder="Últimos 4" class="w-full bg-white border border-red-200 p-1 rounded-lg text-xs font-black text-center tracking-widest">
+                            </div>`;
+                    }
+                }
+            } else {
+                const id = document.getElementById('fact-select-producto').value;
+                const cant = parseInt(document.getElementById('fact-cantidad').value) || 1;
+                const contenedor = document.getElementById('wrapper-fact-imeis');
+                contenedor.innerHTML = '';
+                if(!id) return;
+                const prod = PRODUCTOS.find(p => p.id === id);
+                if(prod && prod.marca !== 'Otros Productos' && cant > 0) {
+                    for(let i=1; i<=cant; i++) {
+                        contenedor.innerHTML += `
+                            <div>
+                                <label class="text-[8px] text-red-500 font-bold block mb-0.5">IMEI Teléfono ${i}</label>
+                                <input type="text" id="fact-imei-field-${i}" maxlength="4" placeholder="Últimos 4" class="w-full bg-white border border-red-200 p-1 rounded-lg text-xs font-black text-center tracking-widest">
+                            </div>`;
+                    }
+                }
+            }
+        };
+
         window.cambiarSeccionAdministrativa = function(seccion) {
             const bFactura = document.getElementById('bloque-emision-facturas');
             const bReporte = document.getElementById('bloque-reportes-auditoria');
@@ -772,20 +798,14 @@
         window.verificarMarcaSeleccionadaPanel = function() {
             const marca = document.getElementById('add-marca').value;
             const wrapper = document.getElementById('wrapper-tipo-producto');
-            if(marca === 'Otros Productos') {
-                wrapper.classList.remove('hidden');
-            } else {
-                wrapper.classList.add('hidden');
-            }
+            if(marca === 'Otros Productos') { wrapper.classList.remove('hidden'); } else { wrapper.classList.add('hidden'); }
         };
 
         window.abrirLoginAdmin = function() {
             if(esAdminAutenticado) { window.toggleAdminPanel(); } else { document.getElementById('modal-login').classList.remove('hidden'); }
         };
         
-        window.cerrarLoginAdmin = function() {
-            document.getElementById('modal-login').classList.add('hidden');
-        };
+        window.cerrarLoginAdmin = function() { document.getElementById('modal-login').classList.add('hidden'); };
         
         window.autenticarAdmin = function() {
             const u = document.getElementById('admin-user').value.trim();
@@ -812,11 +832,7 @@
 
         window.toggleAdminPanel = function() {
             const panel = document.getElementById('panel-admin');
-            if(panel.classList.contains('hidden')) {
-                panel.classList.remove('hidden');
-            } else {
-                panel.classList.add('hidden');
-            }
+            if(panel.classList.contains('hidden')) { panel.classList.remove('hidden'); } else { panel.classList.add('hidden'); }
         };
 
         window.controlarVisibilidadModulosOcultos = function(mostrar) {
@@ -847,9 +863,7 @@
             document.getElementById('modal-img').src = prod.foto || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80';
             
             let labelCategoria = prod.marca;
-            if(prod.marca === 'Otros Productos') {
-                labelCategoria = prod.tipoProducto === 'Celular' ? 'Teléfono' : 'Accesorio';
-            }
+            if(prod.marca === 'Otros Productos') { labelCategoria = prod.tipoProducto === 'Celular' ? 'Teléfono' : 'Accesorio'; }
             document.getElementById('modal-marca').innerText = labelCategoria;
             document.getElementById('modal-modelo').innerText = prod.modelo;
             document.getElementById('modal-memoria').innerText = prod.memoria || '';
@@ -983,26 +997,8 @@
             }
         };
 
-        window.toggleManualImeiView = function() {
-            const check = document.getElementById('manual-check-imei').checked;
-            if(check) {
-                document.getElementById('wrapper-manual-imei').classList.remove('hidden');
-            } else {
-                document.getElementById('wrapper-manual-imei').classList.add('hidden');
-                document.getElementById('manual-imei').value = '';
-            }
-        };
-
-        window.verificarTipoArticuloFactura = function() {
-            const id = document.getElementById('fact-select-producto').value;
-            const prod = PRODUCTOS.find(p => p.id === id);
-            if(prod && prod.marca !== 'Otros Productos') {
-                document.getElementById('wrapper-fact-imei').classList.remove('hidden');
-            } else {
-                document.getElementById('wrapper-fact-imei').classList.add('hidden');
-                document.getElementById('fact-imei').value = '';
-            }
-        };
+        window.toggleManualImeiView = function() { window.renderizarCamposImeiDinamicos('manual'); };
+        window.verificarTipoArticuloFactura = function() { window.renderizarCamposImeiDinamicos('inventario'); };
 
         window.agregarItemALaVenta = function() {
             const cop = parseFloat(document.getElementById('tasa-cop').value) || 0;
@@ -1011,25 +1007,60 @@
 
             if(modoCargaFacturaActivo === 'manual') {
                 const modelo = document.getElementById('manual-modelo').value.trim();
-                const precio = parseInt(document.getElementById('manual-precio').value.trim()) || 0;
+                const precioUnitario = parseInt(document.getElementById('manual-precio').value.trim()) || 0;
+                const cant = parseInt(document.getElementById('manual-cantidad').value) || 1;
                 const checkImei = document.getElementById('manual-check-imei').checked;
-                const imeiVal = document.getElementById('manual-imei').value.trim();
-                if(!modelo || !precio) { alert("Ingrese descripción y precio válido."); return; }
-                if(checkImei && imeiVal.length !== 4) { alert("Ingrese los últimos 4 dígitos del IMEI."); return; }
-                ITEMS_VENTA_ACTIVA.push({ id: "manual-" + new Date().getTime(), marca: checkImei ? "Celular" : "Otros Productos", modelo: modelo, memoria: "", precio: precio, imei: checkImei ? imeiVal : null });
+                
+                if(!modelo || !precioUnitario) { alert("Ingrese descripción y precio válido."); return; }
+                
+                let imeisRecopilados = [];
+                if(checkImei) {
+                    for(let i=1; i<=cant; i++) {
+                        const valImei = document.getElementById(`manual-imei-field-${i}`).value.trim();
+                        if(valImei.length !== 4) { alert(`Ingrese los 4 dígitos del IMEI para el teléfono ${i}`); return; }
+                        imeisRecopilados.push(valImei);
+                    }
+                }
+
+                ITEMS_VENTA_ACTIVA.push({ 
+                    id: "manual-" + new Date().getTime(), 
+                    marca: checkImei ? "Celular" : "Otros Productos", 
+                    modelo: modelo, 
+                    cantidad: cant,
+                    precio: precioUnitario * cant, 
+                    imeis: checkImei ? imeisRecopilados : null 
+                });
+
                 document.getElementById('manual-modelo').value = ''; document.getElementById('manual-precio').value = '';
-                document.getElementById('manual-check-imei').checked = false; document.getElementById('manual-imei').value = '';
-                document.getElementById('wrapper-manual-imei').classList.add('hidden');
+                document.getElementById('manual-cantidad').value = '1'; document.getElementById('manual-check-imei').checked = false;
+                document.getElementById('wrapper-manual-imeis').innerHTML = '';
             } else {
                 const id = document.getElementById('fact-select-producto').value;
-                const imeiVal = document.getElementById('fact-imei').value.trim();
+                const cant = parseInt(document.getElementById('fact-cantidad').value) || 1;
                 if(!id) return;
                 const prod = PRODUCTOS.find(p => p.id === id);
                 if(!prod) return;
-                if(prod.marca !== 'Otros Productos' && imeiVal.length !== 4) { alert("Ingrese los últimos 4 dígitos del IMEI."); return; }
-                ITEMS_VENTA_ACTIVA.push({ id: prod.id, marca: prod.marca, modelo: prod.modelo, memoria: prod.memoria, precio: prod.precio, imei: prod.marca !== 'Otros Productos' ? imeiVal : null });
-                document.getElementById('fact-select-producto').value = ''; document.getElementById('fact-imei').value = '';
-                document.getElementById('wrapper-fact-imei').classList.add('hidden');
+
+                let imeisRecopilados = [];
+                if(prod.marca !== 'Otros Productos') {
+                    for(let i=1; i<=cant; i++) {
+                        const valImei = document.getElementById(`fact-imei-field-${i}`).value.trim();
+                        if(valImei.length !== 4) { alert(`Ingrese los 4 dígitos del IMEI para el teléfono ${i}`); return; }
+                        imeisRecopilados.push(valImei);
+                    }
+                }
+
+                ITEMS_VENTA_ACTIVA.push({ 
+                    id: prod.id, 
+                    marca: prod.marca, 
+                    modelo: prod.modelo, 
+                    cantidad: cant,
+                    precio: prod.precio * cant, 
+                    imeis: prod.marca !== 'Otros Productos' ? imeisRecopilados : null 
+                });
+
+                document.getElementById('fact-select-producto').value = ''; document.getElementById('fact-cantidad').value = '1';
+                document.getElementById('wrapper-fact-imeis').innerHTML = '';
             }
             renderizarItemsVentaActiva();
         };
@@ -1050,7 +1081,6 @@
         window.filtrarTablaHistorial = function() {
             const val = document.getElementById('busq-historial').value.toLowerCase();
             const fechaInput = document.getElementById('busq-fecha').value; 
-            
             const f = HISTORIAL_NOTAS.filter(n => {
                 const matchesTexto = n.cliente.toLowerCase().includes(val) || n.cedula.includes(val) || n.numNota.toString().includes(val);
                 const matchesFecha = fechaInput ? n.fecha.includes(fechaInput.split('-').reverse().join('/')) : true;
@@ -1069,9 +1099,7 @@
             const prod = PRODUCTOS.find(p => p.id === id); if (!prod) return; idArticuloEnEdicion = id;
             document.getElementById('add-marca').value = prod.marca; 
             window.verificarMarcaSeleccionadaPanel();
-            if(prod.marca === 'Otros Productos' && prod.tipoProducto) {
-                document.getElementById('add-tipo').value = prod.tipoProducto;
-            }
+            if(prod.marca === 'Otros Productos' && prod.tipoProducto) { document.getElementById('add-tipo').value = prod.tipoProducto; }
             document.getElementById('add-modalidad').value = prod.modalidad || 'vitrina';
             document.getElementById('add-modelo').value = prod.modelo;
             document.getElementById('memoria').value = prod.memoria || ''; document.getElementById('add-precio').value = prod.precio;
@@ -1102,22 +1130,14 @@
             if(!productoSeleccionadoActual) return;
             const key = `like_tucocel_${productoSeleccionadoActual.id}`;
             let yaDioLike = localStorage.getItem(key) === 'true';
-            
             const idx = PRODUCTOS.findIndex(p => p.id === productoSeleccionadoActual.id);
             if(idx === -1) return;
 
-            if(yaDioLike) {
-                PRODUCTOS[idx].likes = Math.max(0, (PRODUCTOS[idx].likes || 1) - 1);
-                localStorage.removeItem(key);
-            } else {
-                PRODUCTOS[idx].likes = (PRODUCTOS[idx].likes || 0) + 1;
-                localStorage.setItem(key, 'true');
-            }
+            if(yaDioLike) { PRODUCTOS[idx].likes = Math.max(0, (PRODUCTOS[idx].likes || 1) - 1); localStorage.removeItem(key); } 
+            else { PRODUCTOS[idx].likes = (PRODUCTOS[idx].likes || 0) + 1; localStorage.setItem(key, 'true'); }
 
             productoSeleccionadoActual.likes = PRODUCTOS[idx].likes;
             document.getElementById('modal-like-count').innerText = productoSeleccionadoActual.likes;
-            document.getElementById('modal-btn-like').className = !yaDioLike ? "bg-red-50 text-red-600 px-3 py-2 rounded-xl flex items-center gap-1.5 transition-colors" : "bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-xl flex items-center gap-1.5 transition-colors";
-            
             await guardarInventarioFirebase();
             ejecutarFiltroCombinado();
         };
@@ -1126,9 +1146,8 @@
             if (!esAdminAutenticado) return;
             const elemento = document.getElementById(idElemento);
             if (!elemento) return;
-            const nuevoTexto = prompt(`✏️ Modificar texto corporativo:`, elemento.innerText.trim());
+            const nuevoTexto = prompt(`✏️ Modificar texto:`, elemento.innerText.trim());
             if (nuevoTexto === null || nuevoTexto.trim() === "") return;
-            
             elemento.innerText = nuevoTexto.trim();
             BASE_TEXTOS_WEB[idElemento] = { texto: nuevoTexto.trim(), alineacion: "1", estilo: "1" };
             await sincronizarTextosFirebase();
@@ -1173,7 +1192,7 @@
         window.reabrirNotaHistorialPorObjeto = function(index) { 
             const n = HISTORIAL_NOTAS[index]; 
             if(!n) return;
-            const s = prompt(`⚙️ CONTROL DE NOTA N° ${String(n.numNota).padStart(6, '0')}\n\nEscriba el número de la acción que desea:\n[1] Reimprimir Nota de Entrega\n[2] Reenviar Comprobante por WhatsApp\n[3] ANULAR COMPROBANTE VISUALMENTE\n\nPresione cancelar para salir.`); 
+            const s = prompt(`⚙️ CONTROL DE NOTA N° ${String(n.numNota).padStart(6, '0')}\n\nEscriba el número de la acción que desea:\n[1] Reimprimir Nota de Entrega\n[2] Reenviar Comprobante por WhatsApp\n[3] ANULAR COMPROBANTE VISUALMENTE\n[4] ELIMINAR PERMANENTEMENTE DE FIREBASE\n\nPresione cancelar para salir.`); 
             if(s==="1") { 
                 document.getElementById('wrapper-impresion-epson').style.display = 'block'; 
                 inyectarDatosAlTicketDOM(n); 
@@ -1182,32 +1201,38 @@
             } else if(s==="2") { 
                 procesarEnvioWaObjeto(n); 
             } else if(s==="3") {
-                if(confirm(`⚠️ ¿Seguro que deseas ANULAR la Nota #${n.numNota}? Mantendrá su historial pero perderá valor comercial.`)) {
-                    anularNotaHistorialPorId(n.id);
-                }
+                if(confirm(`⚠️ ¿Deseas ANULAR la Nota #${n.numNota}?`)) { anularNotaHistorialPorId(n.id); }
+            } else if(s==="4") {
+                if(confirm(`🚨 ¿CRÍTICO: Seguro que deseas ELIMINAR por completo la Nota #${n.numNota} de Firebase? El correlativo regresará.`)) { eliminarNotaHistorialPorId(n.id); }
             }
         };
 
         async function anularNotaHistorialPorId(id) {
             try {
-                const docRef = doc(db, "notes_ventas", id); // Adaptación fallback
                 await updateDoc(doc(db, "notas_ventas", id), { estatus: "ANULADA" });
-                alert("Nota colocada en estado ANULADA de manera conforme.");
+                alert("Nota colocada en estatus ANULADA.");
                 await cargarHistorialFirebase();
-            } catch(e) {
-                alert("Estatus de nota actualizado en Firebase.");
-                await cargarHistorialFirebase();
-            }
+            } catch(e) { console.error(e); }
         }
 
-        // CONTROL DE REGISTRO EN FIREBASE Y OPERACIONES MATEMÁTICAS MULTIMONEDA CORREGIDAS
+        async function eliminarNotaHistorialPorId(id) {
+            try {
+                await deleteDoc(doc(db, "notas_ventas", id));
+                alert("Nota eliminada permanentemente de Firebase.");
+                await cargarHistorialFirebase();
+            } catch(e) { console.error(e); }
+        }
+
+        // REGISTRO CORRELATIVO REAL BASADO EN CONTEO DE BASE DE DATOS FIREBASE
         async function registrarNotaEnFirebase() {
             try {
                 let totalUSD = 0; ITEMS_VENTA_ACTIVA.forEach(i => totalUSD += i.precio);
                 const tCOP = parseFloat(document.getElementById('tasa-cop').value) || 0; 
                 const tBS = parseFloat(document.getElementById('tasa-bs').value) || 0;
                 
-                const numNotaGenerado = Math.floor(100000 + Math.random() * 900000);
+                // Jalar el historial para contar y dar el número exacto consecutivo ordenado
+                const snapConteo = await getDocs(collection(db, "notas_ventas"));
+                const numNotaGenerado = snapConteo.size + 1;
                 const fechaEstructurada = new Date().toLocaleString('es-VE');
 
                 const nuevaNota = {
@@ -1246,15 +1271,15 @@
             const tbody = document.getElementById('tk-items-tabla');
             tbody.innerHTML = '';
             nota.items.forEach(i => {
+                const imeiTxt = i.imeis ? `\n[IMEI: ${i.imeis.join(', ')}]` : '';
                 tbody.innerHTML += `
                     <tr style="border-bottom: 1px dashed #eee;">
-                        <td style="padding: 5px 0; text-align: center;">1</td>
-                        <td style="padding: 5px 0;">${i.modelo} ${i.memoria ? `(${i.memoria})` : ''} ${i.imei ? `[IMEI: ...${i.imei}]` : ''}</td>
-                        <td style="padding: 5px 0; text-align: right;">$${i.precio}</td>
+                        <td style="padding: 2px 0; text-align: center;">${i.cantidad}</td>
+                        <td style="padding: 2px 0; white-space: pre-line;">${i.modelo}${imeiTxt}</td>
+                        <td style="padding: 2px 0; text-align: right;">$${i.precio}</td>
                     </tr>`;
             });
 
-            // OPERACIÓN DE FLUJO DE CONVERSIÓN MATEMÁTICA CON FILTRO DE SEGURIDAD PROTEGIDO
             const usdNeto = parseFloat(nota.totalUSD) || 0;
             const copTasa = parseFloat(nota.tasaCop) || 0;
             const bsTasa = parseFloat(nota.tasaBs) || 0;
@@ -1277,45 +1302,37 @@
                         const elementoDOM = document.getElementById(idElemento);
                         if (elementoDOM) {
                             const dataObjeto = BASE_TEXTOS_WEB[idElemento];
-                            if (dataObjeto && typeof dataObjeto === 'object') {
-                                elementoDOM.innerText = dataObjeto.texto || "";
-                            }
+                            if (dataObjeto && typeof dataObjeto === 'object') { elementoDOM.innerText = dataObjeto.texto || ""; }
                         }
                     });
                 }
             } catch(e) { console.error(e); }
         }
 
-        async function sincronizarTextosFirebase() { 
-            try { await setDoc(doc(db, "configuraciones", "textos_web"), BASE_TEXTOS_WEB); } catch (e) {} 
-        }
+        async function sincronizarTextosFirebase() { try { await setDoc(doc(db, "configuraciones", "textos_web"), BASE_TEXTOS_WEB); } catch (e) {} }
         
-        function manejarVisibilidadLapicitosAdmin(mostrar) { 
-            document.querySelectorAll('.btn-editar-texto').forEach(l => l.style.display = mostrar ? 'inline-block' : 'none'); 
-        }
+        function manejarVisibilidadLapicitosAdmin(mostrar) { document.querySelectorAll('.btn-editar-texto').forEach(l => l.style.display = mostrar ? 'inline-block' : 'none'); }
 
         async function cargarInventarioFirebase() {
             try {
                 const docSnap = await getDoc(doc(db, "inventario", "productos_tucocel"));
-                if (docSnap.exists()) { 
-                    PRODUCTOS = docSnap.data().lista || []; 
-                    PRODUCTOS.sort((a, b) => a.precio - b.precio); 
-                }
-            } catch (e) { console.error(e); } finally { 
-                verificarSesionLocal(); 
-                ejecutarFiltroCombinado(); 
-            }
+                if (docSnap.exists()) { PRODUCTOS = docSnap.data().lista || []; PRODUCTOS.sort((a, b) => a.precio - b.precio); }
+            } catch (e) { console.error(e); } finally { verificarSesionLocal(); ejecutarFiltroCombinado(); gestionarContadorVisitasReal(); }
+        }
+
+        function gestionarContadorVisitasReal() {
+            try {
+                let visitas = parseInt(localStorage.getItem('tucocel_visitas_db')) || 0;
+                visitas += 1;
+                localStorage.setItem('tucocel_visitas_db', visitas);
+                document.getElementById('contador-visitas-num').innerText = visitas;
+            } catch(err) { console.error(err); }
         }
 
         async function guardarInventarioFirebase() {
-            const btn = document.getElementById('btn-guardar'); 
-            if(btn) { btn.disabled = true; btn.innerText = "Guardando..."; }
-            try { 
-                PRODUCTOS.sort((a, b) => a.precio - b.precio); 
-                await setDoc(doc(db, "inventario", "productos_tucocel"), { lista: PRODUCTOS }); 
-            } catch (e) { alert("Error guardando cambios."); } finally { 
-                if(btn) { btn.disabled = false; btn.innerText = "Guardar en Inventario"; } 
-            }
+            const btn = document.getElementById('btn-guardar'); if(btn) { btn.disabled = true; btn.innerText = "Guardando..."; }
+            try { PRODUCTOS.sort((a, b) => a.precio - b.precio); await setDoc(doc(db, "inventario", "productos_tucocel"), { lista: PRODUCTOS }); } 
+            catch (e) { alert("Error guardando cambios."); } finally { if(btn) { btn.disabled = false; btn.innerText = "Guardar en Inventario"; } }
         }
 
         function ejecutarFiltroCombinado() {
@@ -1326,7 +1343,7 @@
         }
 
         function procesarEnvioWaObjeto(nota) {
-            let desc = nota.items.map(i => `• ${i.modelo} -> $${i.precio} ${i.imei ? `(IMEI: ...${i.imei})` : ''}`).join('\n');
+            let desc = nota.items.map(i => `• ${i.cantidad}x ${i.modelo} -> $${i.precio} ${i.imeis ? `(IMEI: ${i.imeis.join(', ')})` : ''}`).join('\n');
             const msg = `*TUCOCEL C.A.*\n*Nota de Entrega:* N° ${String(nota.numNota).padStart(6, '0')}\n*Estatus:* ${nota.estatus || "PROCESADA"}\n*Fecha:* ${nota.fecha}\n👤 *Cliente:* ${nota.cliente}\n\n💳 *Cédula/RIF:* ${nota.cedula}\n📦 *Detalle de compra:*\n${desc}\n\n💵 *Total General:* $${nota.totalUSD} USD\n\n🔒 _Comprobante interno administrativo._`;
             window.open(`https://wa.me/${nota.telefono.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`, '_blank');
         }
@@ -1342,7 +1359,7 @@
 
         function renderizarTablaHistorialHTML(lista) {
             const tabla = document.getElementById('tabla-historial-cuerpo'); if(!tabla) return;
-            if(lista.length === 0) { tabla.innerHTML = '<tr><td colspan="8" class="p-3 text-center text-gray-400">Ningún registro coincidente cargado.</td></tr>'; return; }
+            if(lista.length === 0) { tabla.innerHTML = '<tr><td colspan="8" class="p-3 text-center text-gray-400">Ningún registro coincidente.</td></tr>'; return; }
             tabla.innerHTML = '';
             lista.forEach((n, idx) => {
                 const colorLabel = n.estatus === 'ANULADA' ? 'text-red-500 bg-red-50' : 'text-emerald-600 bg-emerald-50';
@@ -1352,7 +1369,7 @@
                         <td class="p-3 text-gray-500">${n.fecha}</td>
                         <td class="p-3 font-bold text-gray-900">${n.cliente}</td>
                         <td class="p-3 font-mono text-gray-600">${n.cedula}</td>
-                        <td class="p-3 text-gray-500 truncate max-w-[180px]">${n.items.map(i => i.modelo).join(', ')}</td>
+                        <td class="p-3 text-gray-500 truncate max-w-[180px]">${n.items.map(i => `${i.cantidad}x ${i.modelo}`).join(', ')}</td>
                         <td class="p-3 text-right font-mono font-black text-gray-900">$${n.totalUSD}</td>
                         <td class="p-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase ${colorLabel}">${n.estatus || 'PROCESADA'}</span></td>
                         <td class="p-3 text-center"><button onclick="reabrirNotaHistorialPorObjeto(${idx})" class="text-blue-600 bg-blue-50 hover:bg-blue-100 p-2 rounded-lg font-bold"><i class="fa-solid fa-sliders"></i></button></td>
@@ -1361,30 +1378,16 @@
         }
 
         function renderizarCatalogoHTML(lista) {
-            const contenedor = document.getElementById('contenedor-productos');
-            if(!contenedor) return;
-            
+            const contenedor = document.getElementById('contenedor-productos'); if(!contenedor) return;
             let listaFiltrada = lista;
-            if (marcaSeleccionada !== 'Todas') {
-                listaFiltrada = lista.filter(p => p.marca.toLowerCase() === marcaSeleccionada.toLowerCase());
-            }
-
-            const contador = document.getElementById('contador-productos');
-            if(contador) contador.innerText = `${listaFiltrada.length} Disponibles`;
-            
-            if(listaFiltrada.length === 0) { 
-                contenedor.innerHTML = '<div class="text-center col-span-full py-12 text-gray-400 text-sm font-medium">No hay artículos comerciales cargados.</div>'; 
-                return; 
-            }
+            if (marcaSeleccionada !== 'Todas') { listaFiltrada = lista.filter(p => p.marca.toLowerCase() === marcaSeleccionada.toLowerCase()); }
+            const contador = document.getElementById('contador-productos'); if(contador) contador.innerText = `${listaFiltrada.length} Disponibles`;
+            if(listaFiltrada.length === 0) { contenedor.innerHTML = '<div class="text-center col-span-full py-12 text-gray-400 text-sm font-medium">No hay artículos comerciales cargados.</div>'; return; }
             contenedor.innerHTML = '';
             listaFiltrada.forEach(prod => {
                 const fotoProd = prod.foto || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80';
-                const precioTxt = prod.precio % 1 === 0 ? prod.precio : prod.precio.toFixed(2);
-                
                 const mod = prod.modalidad || 'vitrina';
                 const tagEntrega = mod === 'vitrina' ? `<span class="text-[9px] bg-emerald-50 text-emerald-700 border border-emerald-100 font-extrabold px-1.5 py-0.5 rounded">Entrega Inmediata</span>` : `<span class="text-[9px] bg-amber-50 text-amber-700 border border-amber-100 font-extrabold px-1.5 py-0.5 rounded">Bajo Pedido</span>`;
-                const textoBotonAccion = mod === 'consultar' ? 'Consultar' : 'Ver';
-
                 contenedor.innerHTML += `
                     <div onclick="abrirModalProducto('${prod.id}')" class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex flex-col justify-between transition-all hover:shadow-xl cursor-pointer group">
                         <div>
@@ -1400,8 +1403,8 @@
                         </div>
                         <div class="mt-5 space-y-2">
                             <div class="flex items-center justify-between pt-3 border-t border-gray-50">
-                                <p class="text-base font-black text-gray-900">$${precioTxt} <span class="text-[10px] text-gray-400 font-bold">USD</span></p>
-                                <span class="bg-blue-50 text-blue-600 text-[10px] font-extrabold px-2.5 py-1.5 rounded-xl">${textoBotonAccion}</span>
+                                <p class="text-base font-black text-gray-900">$${prod.precio} <span class="text-[10px] text-gray-400 font-bold">USD</span></p>
+                                <span class="bg-blue-50 text-blue-600 text-[10px] font-extrabold px-2.5 py-1.5 rounded-xl">${mod === 'consultar' ? 'Consultar' : 'Ver'}</span>
                             </div>
                             ${esAdminAutenticado ? `<div class="flex gap-2 border-t pt-2 mt-1 justify-center"><button onclick="event.stopPropagation(); prepararEdicionArticulo('${prod.id}')" class="text-blue-600 hover:underline text-xs font-bold">Editar</button><button onclick="event.stopPropagation(); eliminarProducto('${prod.id}')" class="text-red-500 hover:underline text-xs font-bold">Borrar</button></div>` : ''}
                         </div>
@@ -1414,65 +1417,24 @@
             carrusel.innerHTML = '';
             lista.forEach(prod => {
                 const fotoProd = prod.foto || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80';
-                const precioTxt = prod.precio % 1 === 0 ? prod.precio : prod.precio.toFixed(2);
-                
                 const mod = prod.modalidad || 'vitrina';
                 const tagEntrega = mod === 'vitrina' ? `<span class="text-[9px] bg-emerald-50 text-emerald-700 border border-emerald-100 font-extrabold px-1.5 py-0.5 rounded">Entrega Inmediata</span>` : `<span class="text-[9px] bg-amber-50 text-amber-700 border border-amber-100 font-extrabold px-1.5 py-0.5 rounded">Bajo Pedido</span>`;
-
-                let labelTipo = "Accesorio";
-                if(prod.tipoProducto === 'Celular') {
-                    labelTipo = "Teléfono";
-                }
-
                 carrusel.innerHTML += `
                     <div onclick="abrirModalProducto('${prod.id}')" class="snap-start shrink-0 w-44 bg-white rounded-2xl p-3 border border-gray-100 shadow-sm flex flex-col justify-between cursor-pointer select-none">
                         <div>
                             <div class="w-full aspect-square bg-gray-50 rounded-xl overflow-hidden mb-2 flex items-center justify-center p-2"><img src="${fotoProd}" alt="Ficha accesorio" class="max-h-full max-w-full object-contain"></div>
                             <div class="flex flex-col gap-1 items-start">
-                                <span class="text-[8px] font-black uppercase tracking-widest text-blue-500 bg-blue-50 px-1.5 py-0.5 rounded inline-block">${labelTipo}</span>
+                                <span class="text-[8px] font-black uppercase tracking-widest text-blue-500 bg-blue-50 px-1.5 py-0.5 rounded inline-block">${prod.tipoProducto === 'Celular' ? 'Teléfono' : 'Accesorio'}</span>
                                 ${tagEntrega}
                             </div>
                             <h4 class="font-bold text-gray-800 text-xs truncate mt-1">${prod.modelo}</h4>
                         </div>
                         <div class="mt-2">
-                            <p class="text-sm font-black text-gray-900">$${precioTxt}</p>
+                            <p class="text-sm font-black text-gray-900">$${prod.precio}</p>
                             ${esAdminAutenticado ? `<div class="flex gap-2 border-t pt-1.5 mt-1 justify-center"><button onclick="event.stopPropagation(); prepararEdicionArticulo('${prod.id}')" class="text-blue-600 hover:underline text-[11px] font-bold">Editar</button><button onclick="event.stopPropagation(); eliminarProducto('${prod.id}')" class="text-red-500 hover:underline text-[11px] font-bold">Borrar</button></div>` : ''}
                         </div>
                     </div>`;
             });
-        }
-
-        function renderizarItemsVentaActiva() {
-            const contenedor = document.getElementById('fact-lista-items'); document.getElementById('fact-items-count').innerText = `${ITEMS_VENTA_ACTIVA.length} items`;
-            if(ITEMS_VENTA_ACTIVA.length === 0) { contenedor.innerHTML = '<p class="text-center text-slate-500 text-xs py-6">No hay artículos añadidos todavía.</p>'; window.calcularTotalesFactura(); return; }
-            contenedor.innerHTML = '';
-            ITEMS_VENTA_ACTIVA.forEach((item, index) => {
-                contenedor.innerHTML += `
-                    <div class="bg-slate-950 p-2 rounded-xl border border-slate-800 flex justify-between text-white text-xs">
-                        <div><p class="font-bold truncate max-w-[150px]">${item.modelo}</p>${item.imei ? `<span class="text-[10px] text-amber-400 font-mono">IMEI: ...${item.imei}</span>` : ''}</div>
-                        <div class="flex items-center gap-2"><span>$${item.precio}</span><button onclick="removerItemVenta(${index})" class="text-red-400 font-bold"><i class="fa-solid fa-square-xmark"></i></button></div>
-                    </div>`;
-            });
-            window.calcularTotalesFactura();
-        }
-
-        function actualizarSelectFacturacion() {
-            const select = document.getElementById('fact-select-producto');
-            if(!select) return;
-            select.innerHTML = '<option value="">-- Seleccione un producto --</option>';
-            PRODUCTOS.forEach(p => {
-                select.innerHTML += `<option value="${p.id}">${p.modelo} (${p.marca}) - $${p.precio}</option>`;
-            });
-        }
-
-        function limpiarFormularioPanel() {
-            document.getElementById('add-modelo').value = ''; 
-            document.getElementById('memoria').value = '';
-            document.getElementById('add-precio').value = ''; 
-            document.getElementById('add-desc').value = '';
-            document.getElementById('add-foto-file').value = ''; 
-            document.getElementById('foto-base64').value = '';
-            if(document.getElementById('preview-foto')) document.getElementById('preview-foto').classList.add('hidden');
         }
 
         window.procesarGuardadoInventario = async function() {
@@ -1501,22 +1463,16 @@
         };
 
         window.procesarImagen = function(e) { 
-            const file = e.target.files[0]; 
-            if (!file) return; 
+            const file = e.target.files[0]; if (!file) return; 
             const reader = new FileReader(); 
             reader.onload = function(event) { 
                 const img = new Image(); 
                 img.onload = function() { 
-                    const canvas = document.createElement('canvas'); 
-                    const ctx = canvas.getContext('2d'); 
-                    canvas.width = 600; 
-                    canvas.height = 600; 
-                    ctx.drawImage(img, 0, 0, 600, 600); 
+                    const canvas = document.createElement('canvas'); const ctx = canvas.getContext('2d'); 
+                    canvas.width = 600; canvas.height = 600; ctx.drawImage(img, 0, 0, 600, 600); 
                     const base64Str = canvas.toDataURL('image/jpeg', 0.85); 
                     document.getElementById('foto-base64').value = base64Str;
-                    const preview = document.getElementById('preview-foto');
-                    preview.src = base64Str;
-                    preview.classList.remove('hidden');
+                    const preview = document.getElementById('preview-foto'); preview.src = base64Str; preview.classList.remove('hidden');
                 }; 
                 img.src = event.target.result; 
             }; 
@@ -1524,8 +1480,7 @@
         };
 
         function verificarSesionLocal() { 
-            let s = false; 
-            try { s = localStorage.getItem('tucocel_admin_sesion') === 'true'; } catch(e) {} 
+            let s = false; try { s = localStorage.getItem('tucocel_admin_sesion') === 'true'; } catch(e) {} 
             if (s) { 
                 esAdminAutenticado = true; 
                 document.getElementById('panel-admin').classList.remove('hidden'); 
@@ -1535,17 +1490,14 @@
         }
 
         function inicializarScrollAutomaticoCarrusel() {
-            const c = document.getElementById('carrusel-otros');
-            if(!c) return;
+            const c = document.getElementById('carrusel-otros'); if(!c) return;
             let dir = 1;
             setInterval(() => {
-                if(c.scrollLeft >= (c.scrollWidth - c.clientWidth) - 10) dir = -1;
-                else if(c.scrollLeft <= 10) dir = 1;
+                if(c.scrollLeft >= (c.scrollWidth - c.clientWidth) - 10) dir = -1; else if(c.scrollLeft <= 10) dir = 1;
                 c.scrollBy({ left: 35 * dir, behavior: 'smooth' });
             }, 4000);
         }
 
-        // DISPARADORES INICIALES DE CARGA PROTEGIDOS
         document.getElementById('add-foto-file').addEventListener('change', window.procesarImagen);
         document.getElementById('add-marca').addEventListener('change', window.verificarMarcaSeleccionadaPanel);
         descargarTextosPersonalizados();
@@ -1553,4 +1505,4 @@
         inicializarScrollAutomaticoCarrusel();
     </script>
 </body>
-                </html>
+    </html>
