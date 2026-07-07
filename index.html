@@ -96,12 +96,11 @@
         <div class="max-w-7xl mx-auto flex justify-between items-center gap-2">
             <div class="flex items-center gap-2 shrink-0">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                <span class="text-slate-400 hidden sm:inline">SESIÓN: <span class="text-amber-400 uppercase tracking-wider">ADMINISTRADOR TUCOCEL</span></span>
-                <span class="text-amber-400 uppercase tracking-wider text-[10px] sm:hidden">ADMIN 🔒</span>
+                <span class="text-slate-400">SESIÓN: <span class="text-amber-400 uppercase tracking-wider">ADMINISTRADOR TUCOCEL</span></span>
             </div>
             <div class="flex items-center gap-2">
                 <button onclick="abrirModalSistemaFacturacion()" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-xl transition-all shadow-md flex items-center gap-1.5 font-extrabold text-[11px] sm:text-xs">
-                    <i class="fa-solid fa-file-invoice-dollar"></i> <span class="hidden sm:inline">Abrir Sistema de</span> Facturación
+                    <i class="fa-solid fa-file-invoice-dollar text-sm"></i> Abrir Sistema de Facturación
                 </button>
                 <button onclick="cerrarSesionAdmin()" class="bg-red-500/20 text-red-400 hover:bg-red-500/30 px-2.5 py-1.5 rounded-xl transition-colors text-[11px] sm:text-xs">Salir</button>
             </div>
@@ -319,7 +318,7 @@
                 <input type="file" id="add-foto-file" accept="image/*" class="hidden">
                 <button onclick="document.getElementById('add-foto-file').click()" class="bg-slate-800 hover:bg-slate-700 text-xs py-2 px-4 rounded-xl font-medium transition-colors border border-slate-700 w-full sm:w-auto"><i class="fa-solid fa-camera mr-2"></i>Cargar Foto del Artículo</button>
                 <input type="hidden" id="foto-base64">
-                <img id="preview-foto" src="" class="w-9 h-9 object-cover rounded-lg bg-slate-800 border border-slate-700 hidden">
+                <img id="preview-foto" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="w-9 h-9 object-cover rounded-lg bg-slate-800 border border-slate-700 hidden">
             </div>
             <div class="flex gap-2 w-full sm:w-auto">
                 <button id="btn-cancelar-edicion" onclick="cancelarEdicionActiva()" class="hidden w-1/2 sm:w-auto bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors">Cancelar</button>
@@ -576,7 +575,6 @@
                                 <td style="padding: 3px 5px; text-align: right; font-weight: bold; font-family: monospace; width: 55%;" id="tk-total-usd">$0</td>
                             </tr>
                             <tr style="border-bottom: 1px solid #000;">
-                                <td style="padding: 3px 5px; font-weight: bold; border-right: 1px solid #000; background: #f9fafb;">Ref. Pesos:</td>
                                 <td style="padding: 3px 5px; text-align: right; font-weight: bold; font-family: monospace; color: #047857;" id="tk-total-cop">0 COP</td>
                             </tr>
                             <tr>
@@ -597,139 +595,13 @@
         </div>
     </div>
 
-    <div id="modal-notificar-cliente" class="fixed inset-0 bg-slate-950/80 z-50 p-4 backdrop-blur-sm hidden flex items-center justify-center">
-        <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl relative">
-            <button onclick="cerrarModalNotificarCliente()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-            <div class="text-center mb-5">
-                <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-xl mx-auto mb-2 shadow-sm">
-                    <i class="fa-solid fa-paper-plane"></i>
-                </div>
-                <h3 class="font-black text-gray-900 text-base uppercase">Aviso de Equipo Listo</h3>
-                <p class="text-xs text-gray-400 font-medium mt-0.5">Notifica al cliente que ya puede retirar por tienda física.</p>
-            </div>
-            <div class="space-y-3">
-                <div>
-                    <label class="text-[10px] text-gray-400 uppercase font-bold tracking-wider block mb-1">Nombre del Cliente</label>
-                    <input type="text" id="notif-nombre" placeholder="Ej: Juan Pérez" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
-                </div>
-                <div>
-                    <label class="text-[10px] text-gray-400 uppercase font-bold tracking-wider block mb-1">Número de WhatsApp</label>
-                    <input type="text" id="notif-telefono" placeholder="Ej: 04247357549" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
-                </div>
-                <button onclick="enviarMensajeRetiroWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-2.5 rounded-xl shadow-md transition-colors mt-2 uppercase flex items-center justify-center gap-1.5">
-                    <i class="fa-brands fa-whatsapp text-sm"></i> Enviar Notificación
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div id="modal-login" class="fixed inset-0 bg-slate-950/80 z-50 p-4 backdrop-blur-sm hidden">
-        <div class="flex items-center justify-center min-h-screen">
-            <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl relative">
-                <button onclick="cerrarLoginAdmin()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
-                <div class="text-center mb-5">
-                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-xl mx-auto mb-2 shadow-sm">
-                        <i class="fa-solid fa-user-shield"></i>
-                    </div>
-                    <h3 class="font-black text-gray-900 text-base uppercase">Acceso de Administrador</h3>
-                    <p class="text-xs text-gray-400 font-medium mt-0.5">Introduce tus credenciales para gestionar el inventario.</p>
-                </div>
-                <div class="space-y-3">
-                    <div>
-                        <label class="text-[10px] text-gray-400 uppercase font-bold tracking-wider block mb-1">Usuario</label>
-                        <input type="text" id="admin-user" placeholder="Escribe tu usuario" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
-                    </div>
-                    <div>
-                        <label class="text-[10px] text-gray-400 uppercase font-bold tracking-wider block mb-1">Contraseña</label>
-                        <input type="password" id="admin-pass" placeholder="••••••••" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
-                    </div>
-                    <button onclick="autenticarAdmin()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black text-xs py-2.5 rounded-xl shadow-md transition-colors mt-2 uppercase">
-                        Iniciar Sesión
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="modal-consulta-banner" class="fixed inset-0 bg-slate-950/80 z-50 p-4 backdrop-blur-sm hidden">
-        <div class="flex items-center justify-center min-h-screen">
-            <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl relative">
-                <button onclick="cerrarModalConsultaBanner()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
-                <div class="text-center mb-5">
-                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-xl mx-auto mb-2 shadow-sm">
-                        <i class="fa-solid fa-comments-dollar"></i>
-                    </div>
-                    <h3 class="font-black text-gray-900 text-base uppercase">Consultar Disponibilidad</h3>
-                    <p class="text-xs text-gray-400 font-medium mt-0.5">Por favor déjanos tus datos para brindarte una mejor asesoría.</p>
-                </div>
-                <div class="space-y-3">
-                    <div>
-                        <label class="text-[10px] text-gray-400 uppercase font-bold tracking-wider block mb-1">Nombre Completo</label>
-                        <input type="text" id="banner-con-nombre" placeholder="Ej: Juan Pérez" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
-                    </div>
-                    <div>
-                        <label class="text-[10px] text-gray-400 uppercase font-bold tracking-wider block mb-1">Dirección de Habitación / Referencia</label>
-                        <input type="text" id="banner-con-direccion" placeholder="Ej: Cordero, Centro" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
-                    </div>
-                    <button onclick="enviarConsultaBannerWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-2.5 rounded-xl shadow-md transition-colors mt-2 uppercase flex items-center justify-center gap-1.5">
-                        <i class="fa-brands fa-whatsapp text-sm"></i> Iniciar Consulta en WhatsApp
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="modal-consulta-general" class="fixed inset-0 bg-slate-950/80 z-50 p-4 backdrop-blur-sm hidden">
-        <div class="flex items-center justify-center min-h-screen">
-            <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl relative">
-                <button onclick="cerrarModalConsultaGeneral()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
-                <div class="text-center mb-5">
-                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-xl mx-auto mb-2 shadow-sm">
-                        <i class="fa-brands fa-whatsapp"></i>
-                    </div>
-                    <h3 class="font-black text-gray-900 text-base uppercase">Atención Inmediata</h3>
-                    <p class="text-xs text-gray-400 font-medium mt-0.5">¿No encuentras lo que buscas? Consúltanos directamente.</p>
-                </div>
-                <div class="space-y-3">
-                    <div>
-                        <label class="text-[10px] text-gray-400 uppercase font-bold tracking-wider block mb-1">Tu Nombre</label>
-                        <input type="text" id="con-nombre" placeholder="Ej: Carlos Silva" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
-                    </div>
-                    <div>
-                        <label class="text-[10px] text-gray-400 uppercase font-bold tracking-wider block mb-1">Motivo de Consulta</label>
-                        <select id="con-motivo" onchange="verificarMotivoEspecifico()" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
-                            <option value="Disponibilidad de Smartphone">Disponibilidad de Smartphone</option>
-                            <option value="Accesorios / Otros">Accesorios o Tecnología</option>
-                            <option value="Servicio Técnico">Servicio Técnico Especializado</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label id="label-detalles-con" class="text-[10px] text-gray-400 uppercase font-bold tracking-wider block mb-1">¿Artículo?</label>
-                        <textarea id="con-detalles" placeholder="Escribe detalles del modelo, accesorio o falla aquí..." class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-medium text-gray-900 h-20 resize-none focus:bg-white focus:outline-blue-500"></textarea>
-                    </div>
-                    <button onclick="enviarConsultaGeneralWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-2.5 rounded-xl shadow-md transition-colors mt-2 uppercase flex items-center justify-center gap-1.5">
-                        <i class="fa-brands fa-whatsapp text-sm"></i> Enviar a WhatsApp
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div id="modal-producto" class="fixed inset-0 bg-slate-950/80 z-50 p-4 backdrop-blur-md hidden flex items-center justify-center">
         <div class="bg-white rounded-3xl w-full max-w-md p-6 shadow-2xl relative overflow-hidden max-h-[90vh] overflow-y-auto">
             <button onclick="cerrarModalProducto()" class="absolute top-4 right-4 bg-gray-100 hover:bg-gray-200 text-gray-500 w-8 h-8 rounded-full flex items-center justify-center transition-colors z-20">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <div class="aspect-square w-full bg-white border border-gray-100 rounded-2xl overflow-hidden mb-4 flex justify-center items-center p-4">
-                <img id="modal-img" src="" class="max-h-full max-w-full object-contain">
+                <img id="modal-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="max-h-full max-w-full object-contain">
             </div>
             <div class="space-y-3">
                 <div class="flex justify-between items-center">
@@ -830,13 +702,12 @@
             document.getElementById('modal-modelo').innerText = prod.modelo;
             document.getElementById('modal-memoria').innerText = prod.memoria || '';
             document.getElementById('modal-precio').innerText = prod.precio;
-            document.getElementById('modal-desc').innerText = prod.desc || 'Sin descripción.';
-            document.getElementById('modal-like-count').innerText = prod.likes || 0;
-
+            
             const mod = prod.modalidad || 'vitrina';
             const formCompra = document.getElementById('form-compra');
             
-            if (mod === 'consultar') {
+            if(mod === 'consultar') {
+                document.getElementById('modal-desc').innerHTML = `${prod.desc || ''}<br><br><span class="block p-2 bg-blue-50 text-blue-950 border border-blue-200 font-bold rounded-xl text-[11px]">🔮 PREVENTA: Este equipo se trabaja bajo la modalidad de preventa prepagada. Consulta disponibilidad, vas a la tienda, cancelas y, después de cancelado, en 2 horas ya vas a retirarlo, lo cual será notificado.</span>`;
                 formCompra.innerHTML = `
                     <div class="bg-gray-50 border border-gray-100 p-4 rounded-2xl space-y-3">
                         <div class="text-center p-2 bg-blue-50 text-blue-950 font-bold rounded-xl text-[11px]">
@@ -847,6 +718,7 @@
                         </button>
                     </div>`;
             } else {
+                document.getElementById('modal-desc').innerText = prod.desc || 'Sin descripción.';
                 formCompra.innerHTML = `
                     <div class="bg-gray-50 border border-gray-100 p-4 rounded-2xl space-y-3">
                         <h4 class="text-[11px] font-black uppercase text-blue-600 tracking-wider"><i class="fa-solid fa-file-invoice mr-1"></i> Datos para concretar pedido</h4>
@@ -875,6 +747,11 @@
             document.getElementById('modal-btn-like').className = currentLikeState ? "bg-red-50 text-red-600 px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-colors text-xs font-bold" : "bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-colors text-xs font-bold";
             
             document.getElementById('modal-producto').classList.remove('hidden');
+        };
+
+        window.cerrarModalProducto = function() {
+            document.getElementById('modal-producto').classList.add('hidden');
+            productoSeleccionadoActual = null;
         };
 
         window.preguntarDisponibilidadDirectaWa = function() {
@@ -918,29 +795,10 @@
             document.getElementById('label-detalles-con').innerText = m === 'Servicio Técnico' ? '¿Falla?' : '¿Artículo?';
         };
         window.enviarConsultaGeneralWhatsApp = function() {
-            const n = document.getElementById('con-nombre').value.trim();
-            const d = document.getElementById('con-detalles').value.trim();
-            if(!n || !d) { alert("Por favor complete los datos."); return; }
+            const n = document.getElementById('con-nombre').value;
+            const d = document.getElementById('con-detalles').value;
             window.open("https://wa.me/584247357549?text=" + encodeURIComponent("Consulta de " + n + ": " + d), '_blank');
             window.cerrarModalConsultaGeneral();
-        };
-
-        window.abrirModalNotificarCliente = function() { document.getElementById('modal-notificar-cliente').classList.remove('hidden'); };
-        window.cerrarModalNotificarCliente = function() {
-            document.getElementById('modal-notificar-cliente').classList.add('hidden');
-            document.getElementById('notif-nombre').value = '';
-            document.getElementById('notif-telefono').value = '';
-        };
-        window.enviarMensajeRetiroWhatsApp = function() {
-            const nombre = document.getElementById('notif-nombre').value.trim();
-            let tlf = document.getElementById('notif-telefono').value.trim();
-            if(!nombre || !tlf) { alert("Complete los datos."); return; }
-            tlf = tlf.replace(/[^0-9]/g, '');
-            if(tlf.startsWith('0')) tlf = '58' + tlf.substring(1);
-            
-            const mensajeNotif = `¡Hola! 👋 Estimado cliente *${nombre}*, le informamos de parte de *Tucocel* de forma oficial que su equipo ya se encuentra listo en tienda física para entrega inmediata. ¡Le esperamos para retirar! 🚀`;
-            window.open(`https://wa.me/${tlf}?text=${encodeURIComponent(mensajeNotif)}`, '_blank');
-            window.cerrarModalNotificarCliente();
         };
 
         window.abrirModalSistemaFacturacion = function() {
@@ -1021,7 +879,7 @@
         window.calcularTotalesFactura = function() {
             const tCOP = parseFloat(document.getElementById('tasa-cop').value) || 0; 
             const tBS = parseFloat(document.getElementById('tasa-bs').value) || 0;
-            let totalUSD = 0; totalUSD = ITEMS_VENTA_ACTIVA.reduce((sum, item) => sum + item.precio, 0);
+            let totalUSD = 0; ITEMS_VENTA_ACTIVA.forEach(i => totalUSD += i.precio);
             const totalCOP = totalUSD * tCOP;
             const totalBS = tBS > 0 ? totalCOP / tBS : 0;
             document.getElementById('total-usd').innerText = `Neto: $${totalUSD}`;
@@ -1036,9 +894,9 @@
         };
 
         window.exportarHistorialExcel = function() {
-            if(HISTORIAL_NOTAS.length === 0) return alert("No hay datos para exportar.");
+            if(HISTORIAL_NOTAS.length === 0) return alert("No hay datos.");
             const sheet = XLSX.utils.json_to_sheet(HISTORIAL_NOTAS.map(n => ({ Nota: n.numNota, Fecha: n.fecha, Cliente: n.cliente, TotalUSD: n.totalUSD })));
-            const book = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(book, sheet, "Ventas"); XLSX.writeFile(book, "Respaldo_Tucocel.xlsx");
+            const book = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(book, sheet, "Ventas"); XLSX.writeFile(book, "Respaldo_Tucocel_2026.xlsx");
         };
 
         window.prepararEdicionArticulo = function(id) {
@@ -1060,7 +918,7 @@
         };
 
         window.eliminarProducto = async function(id) { 
-            if(confirm('¿Está seguro de que desea eliminar este producto del catálogo?')) { 
+            if(confirm('¿Borrar producto?')) { 
                 PRODUCTOS = PRODUCTOS.filter(p => p.id !== id); 
                 await guardarInventarioFirebase(); 
                 ejecutarFiltroCombinado(); 
@@ -1085,53 +943,10 @@
 
             productoSeleccionadoActual.likes = PRODUCTOS[idx].likes;
             document.getElementById('modal-like-count').innerText = productoSeleccionadoActual.likes;
-            document.getElementById('modal-btn-like').className = !yaDioLike ? "bg-red-50 text-red-600 px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-colors text-xs font-bold" : "bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-colors text-xs font-bold";
+            document.getElementById('modal-btn-like').className = !yaDioLike ? "bg-red-50 text-red-600 px-3 py-2 rounded-xl flex items-center gap-1.5 transition-colors" : "bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-xl flex items-center gap-1.5 transition-colors";
             
             await guardarInventarioFirebase();
             ejecutarFiltroCombinado();
-        };
-
-        window.compartirProductoActivoWa = function() {
-            if(!productoSeleccionadoActual) return;
-            let msg = `¡Hola, Tucocel! 👋\n\nEstoy interesado en adquirir el siguiente artículo de su vitrina digital:\n\n📱 *PRODUCTO:* ${productoSeleccionadoActual.modelo}\n💾 *CAPACIDAD:* ${productoSeleccionadoActual.memoria || 'N/A'}\n💰 *PRECIO:* $${productoSeleccionadoActual.precio} USD`;
-            window.open('https://wa.me/584247357549?text=' + encodeURIComponent(msg), '_blank');
-            window.cerrarModalProducto();
-        };
-
-        window.ejecutarCierreDeMes = function() {
-            if(confirm("¿Desea realizar el cierre de mes? Esto limpiará el historial activo de facturación.")) {
-                window.exportarHistorialExcel();
-                alert("Cierre de mes procesado de forma exitosa.");
-            }
-        };
-
-        // CORRECCIÓN HISTORIAL DE NOTAS: MENÚ DE 3 OPCIONES CON ELIMINACIÓN ASOCIADA A FIREBASE
-        window.reabrirNotaHistorialPorObjeto = function(index) { 
-            const n = HISTORIAL_NOTAS[index]; 
-            if(!n) return;
-            const s = prompt(`⚙️ CONTROL DE NOTA N° ${String(n.numNota).padStart(6, '0')}\n\nEscriba el número de la acción que desea:\n[1] Imprimir Nota de Entrega (Epson)\n[2] Reenviar por WhatsApp al cliente\n[3] ELIMINAR NOTA PERMANENTEMENTE DE FIREBASE\n\nPresione cancelar para salir.`); 
-            if(s==="1") { 
-                document.getElementById('wrapper-impresion-epson').style.display = 'block'; 
-                inyectarDatosAlTicketDOM(n); 
-                window.print(); 
-                document.getElementById('wrapper-impresion-epson').style.display = 'none'; 
-            } else if(s==="2") { 
-                procesarEnvioWaObjeto(n); 
-            } else if(s==="3") {
-                if(confirm(`⚠️ ¿CRÍTICO: Seguro que deseas eliminar por completo la Nota #${n.numNota} de la base de datos de Google?`)) {
-                    eliminarNotaHistorialPorId(n.id);
-                }
-            }
-        };
-
-        window.eliminarNotaHistorialPorId = async function(id) {
-            try {
-                await deleteDoc(doc(db, "notas_ventas", id));
-                alert("Nota eliminada de Firebase de forma exitosa.");
-                await cargarHistorialFirebase();
-            } catch(e) {
-                alert("Error eliminando registro.");
-            }
         };
 
         window.solicitarEdicionAvanzada = async function(idElemento) {
@@ -1172,13 +987,40 @@
             limpiatFormularioFacturaCompleto();
         };
 
-        window.addEventListener("DOMContentLoaded", async () => {
-            document.getElementById('add-foto-file').addEventListener('change', procesarImagen);
-            document.getElementById('btn-guardar').addEventListener('click', procesarGuardadoInventario);
-            await descargarTextosPersonalizados();
-            await cargarInventarioFirebase();
-            inicializarScrollAutomaticoCarrusel();
-        });
+        window.reabrirNotaHistorialPorObjeto = function(index) { 
+            const n = HISTORIAL_NOTAS[index]; 
+            if(!n) return;
+            const s = prompt(`⚙️ CONTROL DE NOTA N° ${String(n.numNota).padStart(6, '0')}\n\nEscriba el número de la acción que desea:\n[1] Imprimir Nota de Entrega\n[2] Reenviar por WhatsApp\n[3] ELIMINAR NOTA PERMANENTEMENTE DE FIREBASE\n\nPresione cancelar para salir.`); 
+            if(s==="1") { 
+                document.getElementById('wrapper-impresion-epson').style.display = 'block'; 
+                inyectarDatosAlTicketDOM(n); 
+                window.print(); 
+                document.getElementById('wrapper-impresion-epson').style.display = 'none'; 
+            } else if(s==="2") { 
+                procesarEnvioWaObjeto(n); 
+            } else if(s==="3") {
+                if(confirm(`⚠️ ¿Seguro que deseas eliminar por completo la Nota #${n.numNota} de Firebase?`)) {
+                    eliminarNotaHistorialPorId(n.id);
+                }
+            }
+        };
+
+        window.eliminarNotaHistorialPorId = async function(id) {
+            try {
+                await deleteDoc(doc(db, "notas_ventas", id));
+                alert("Nota eliminada de Firebase con éxito.");
+                await cargarHistorialFirebase();
+            } catch(e) {
+                alert("Error.");
+            }
+        };
+
+        window.ejecutarCierreDeMes = function() {
+            if(confirm("¿Seguro que deseas realizar el Cierre de Mes?")) {
+                window.exportarHistorialExcel();
+                alert("Cierre de mes procesado.");
+            }
+        };
 
         async function descargarTextosPersonalizados() {
             try {
@@ -1226,7 +1068,7 @@
             try { 
                 PRODUCTOS.sort((a, b) => a.precio - b.precio); 
                 await setDoc(doc(db, "inventario", "productos_tucocel"), { lista: PRODUCTOS }); 
-            } catch (e) { alert("Error de red."); } finally { 
+            } catch (e) { alert("Error."); } finally { 
                 if(btn) { btn.disabled = false; btn.innerText = "Guardar en Inventario"; } 
             }
         }
@@ -1236,6 +1078,25 @@
             const otrosFiltrados = PRODUCTOS.filter(p => p.marca === 'Otros Productos');
             renderizarCatalogoHTML(telefonosFiltrados);
             renderizarCarruselOtrosHTML(otrosFiltrados);
+        }
+
+        function procesarEnvioWaObjeto(nota) {
+            let desc = nota.items.map(i => `• ${i.modelo} -> $${i.precio} ${i.imei ? `(IMEI: ...${i.imei})` : ''}`).join('\n');
+            const msg = `*TUCOCCEL C.A.*\n*Nota de Entrega:* N° ${String(nota.numNota).padStart(6, '0')}\n*Fecha:* ${nota.fecha}\n👤 *Cliente:* ${nota.cliente}\n\n💳 *Cédula/RIF:* ${nota.cedula}\n📦 *Detalle de compra:*\n${desc}\n\n💵 *Total General:* $${nota.totalUSD} USD\n\n🔒 _Comprobante interno administrativo._`;
+            window.open(`https://wa.me/${nota.telefono.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        async function cargarHistorialFirebase() {
+            try { const snap = await getDocs(query(collection(db, "notas_ventas"), orderBy("timestamp", "desc"), limit(50))); HISTORIAL_NOTAS = []; snap.forEach(d => HISTORIAL_NOTAS.push({ ...d.data(), id: d.id })); renderizarTablaHistorialHTML(HISTORIAL_NOTAS); } catch(e) { console.error(e); }
+        }
+
+        function renderizarTablaHistorialHTML(lista) {
+            const tabla = document.getElementById('tabla-historial-cuerpo'); if(!tabla) return;
+            if(lista.length === 0) { tabla.innerHTML = '<tr><td colspan="6" class="p-3 text-center text-gray-400">Ningún registro cargado.</td></tr>'; return; }
+            tabla.innerHTML = '';
+            lista.forEach((n, idx) => {
+                tabla.innerHTML += `<tr class="border-b hover:bg-gray-50"><td class="p-2.5 font-mono text-blue-600 font-bold">#${String(n.numNota).padStart(6, '0')}</td><td class="p-2.5 text-gray-500">${n.fecha}</td><td class="p-2.5 font-bold">${n.cliente}</td><td class="p-2.5 text-gray-500 truncate max-w-xs">${n.items.map(i => i.modelo).join(', ')}</td><td class="p-2.5 text-right font-mono font-black text-gray-900">$${n.totalUSD}</td><td class="p-2.5 text-center"><button onclick="reabrirNotaHistorialPorObjeto(${idx})" class="text-blue-600 bg-blue-50 hover:bg-blue-100 p-2 rounded-lg font-bold hover:bg-blue-100"><i class="fa-solid fa-sliders"></i></button></td></tr>`;
+            });
         }
 
         function renderizarCatalogoHTML(lista) {
@@ -1251,7 +1112,7 @@
             if(contador) contador.innerText = `${listaFiltrada.length} Disponibles`;
             
             if(listaFiltrada.length === 0) { 
-                contenedor.innerHTML = '<div class="text-center col-span-full py-12 text-gray-400 text-sm font-medium">No hay artículos comerciales cargados en esta marca.</div>'; 
+                contenedor.innerHTML = '<div class="text-center col-span-full py-12 text-gray-400 text-sm font-medium">No hay artículos comerciales cargados.</div>'; 
                 return; 
             }
             contenedor.innerHTML = '';
@@ -1267,7 +1128,7 @@
                     <div onclick="abrirModalProducto('${prod.id}')" class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex flex-col justify-between transition-all hover:shadow-xl cursor-pointer group">
                         <div>
                             <div class="aspect-square w-full bg-white border border-gray-100 rounded-xl overflow-hidden mb-4 flex justify-center items-center p-2">
-                                <img src="${fotoProd}" class="max-h-full max-w-full object-contain">
+                                <img src="${fotoProd}" class="max-h-full max-w-full object-contain filter drop-shadow-md">
                             </div>
                             <div class="flex justify-between items-center mb-1.5 gap-1">
                                 <span class="text-[9px] font-extrabold text-blue-600 bg-blue-50 uppercase tracking-widest px-2 py-0.5 rounded-md">${prod.marca}</span>
@@ -1295,7 +1156,7 @@
                 const precioTxt = prod.precio % 1 === 0 ? prod.precio : prod.precio.toFixed(2);
                 
                 carrusel.innerHTML += `
-                    <div onclick="abrirModalProducto('${prod.id}')" class="snap-start shrink-0 w-44 bg-white rounded-2xl p-3 border border-gray-100 shadow-sm flex flex-col justify-between cursor-pointer">
+                    <div onclick="abrirModalProducto('${prod.id}')" class="snap-start shrink-0 w-44 bg-white rounded-2xl p-3 border border-gray-100 shadow-sm flex flex-col justify-between cursor-pointer select-none">
                         <div>
                             <div class="w-full aspect-square bg-gray-50 rounded-xl overflow-hidden mb-2 flex items-center justify-center p-2"><img src="${fotoProd}" class="max-h-full max-w-full object-contain"></div>
                             <span class="text-[8px] font-black uppercase tracking-widest text-blue-500 bg-blue-50 px-1.5 py-0.5 rounded inline-block">Accesorio</span>
@@ -1326,60 +1187,6 @@
             select.innerHTML = '<option value="">-- Seleccione un producto --</option>';
             PRODUCTOS.forEach(p => {
                 select.innerHTML += `<option value="${p.id}">${p.modelo} (${p.marca}) - $${p.precio}</option>`;
-            });
-        }
-
-        async function registrarNotaEnFirebase() {
-            let siguienteNumeroNota = 1; let maxNota = 0;
-            try { const snap = await getDocs(collection(db, "notas_ventas")); snap.forEach(d => { const num = parseInt(d.data().numNota) || 0; if(num > maxNota) maxNota = num; }); siguienteNumeroNota = maxNota + 1; } catch(e) {}
-            const ahora = new Date(); const fechaString = grandma || ahora.toLocaleDateString('es-VE') + ' ' + ahora.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit' });
-            let montoTotalUSD = 0; ITEMS_VENTA_ACTIVA.forEach(i => montoTotalUSD += i.precio);
-            const objetoNota = { numNota: siguienteNumeroNota, fecha: fechaString, cliente: document.getElementById('fact-cli-nombre').value.trim() || 'Cliente General', cedula: document.getElementById('fact-cli-cedula').value.trim() || 'N/A', direccion: document.getElementById('fact-cli-direccion').value.trim() || 'Cordero', telefono: document.getElementById('fact-cli-telefono').value.trim() || 'N/A', items: ITEMS_VENTA_ACTIVA, totalUSD: montoTotalUSD, tasaCOP: document.getElementById('tasa-cop').value, tasaBS: document.getElementById('tasa-bs').value, timestamp: ahora.getTime() };
-            try { const docRef = await addDoc(collection(db, "notas_ventas"), objetoNota); ultimaNotaIdFirebase = docRef.id; await cargarHistorialFirebase(); return { ...objetoNota, id: docRef.id }; } catch(e) { return objetoNota; }
-        }
-
-        function inyectarDatosAlTicketDOM(nota) {
-            document.getElementById('tk-num-nota').innerText = `N° ${String(nota.numNota).padStart(6, '0')}`;
-            document.getElementById('tk-fecha').innerText = `Fecha/Hora: ${nota.fecha}`;
-            document.getElementById('tk-cliente-nombre').innerText = nota.cliente.toUpperCase();
-            document.getElementById('tk-cliente-cedula').innerText = nota.cedula;
-            document.getElementById('tk-cliente-direccion').innerText = nota.direccion;
-            document.getElementById('tk-cliente-telefono').innerText = nota.telefono;
-            const tabla = document.getElementById('tk-items-tabla'); tabla.innerHTML = '';
-            nota.items.forEach(i => {
-                tabla.innerHTML += `<tr style="border-bottom: 1px solid #000;"><td style="padding: 4px; text-align: center; font-weight:bold;">1</td><td style="padding: 4px;">${i.modelo}${i.imei ? `<br><span style="font-size:7px;color:#333;">[IMEI: ...${i.imei}]</span>` : ''}</td><td style="padding: 4px; text-align: right; font-weight:bold;">$${i.precio}</td></tr>`;
-            });
-            const totalCOP = nota.totalUSD * parseFloat(nota.tasaCOP);
-            document.getElementById('tk-total-usd').innerText = `$${nota.totalUSD}`;
-            document.getElementById('tk-total-cop').innerText = `${totalCOP.toLocaleString('es-CO')} COP`;
-            document.getElementById('tk-total-bs').innerText = `${(parseFloat(nota.tasaBS) > 0 ? totalCOP / parseFloat(nota.tasaBS) : 0).toLocaleString('es-VE')} Bs`;
-        }
-
-        function controlarVisibilidadModulosOcultos(m) { 
-            document.getElementById('barra-accesos-admin').classList.toggle('hidden', !m); 
-        }
-
-        function toggleAdminPanel() { 
-            document.getElementById('panel-admin').classList.toggle('hidden'); 
-        }
-
-        // CORRECCIÓN SINTAXIS CRÍTICA REALIZADA AQUÍ (SE REMOVIÓ EL ERROR DE ESCRITURA ANTERIOR)
-        function procesarEnvioWaObjeto(nota) {
-            let desc = nota.items.map(i => `• ${i.modelo} -> $${i.precio} ${i.imei ? `(IMEI: ...${i.imei})` : ''}`).join('\n');
-            const msg = `*TUCOCCEL C.A.*\n*Nota de Entrega:* N° ${String(nota.numNota).padStart(6, '0')}\n*Fecha:* ${nota.fecha}\n👤 *Cliente:* ${nota.cliente}\n\n💳 *Cédula/RIF:* ${nota.cedula}\n📦 *Detalle de compra:*\n${desc}\n\n💵 *Total General:* $${nota.totalUSD} USD\n\n🔒 _Comprobante interno administrativo._`;
-            window.open(`https://wa.me/${nota.telefono.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`, '_blank');
-        }
-
-        async function cargarHistorialFirebase() {
-            try { const snap = await getDocs(query(collection(db, "notas_ventas"), orderBy("timestamp", "desc"), limit(50))); HISTORIAL_NOTAS = []; snap.forEach(d => HISTORIAL_NOTAS.push({ ...d.data(), id: d.id })); renderizarTablaHistorialHTML(HISTORIAL_NOTAS); } catch(e) { console.error(e); }
-        }
-
-        function renderizarTablaHistorialHTML(lista) {
-            const tabla = document.getElementById('tabla-historial-cuerpo'); if(!tabla) return;
-            if(lista.length === 0) { tabla.innerHTML = '<tr><td colspan="6" class="p-3 text-center text-gray-400">Ningún registro cargado.</td></tr>'; return; }
-            tabla.innerHTML = '';
-            lista.forEach((n, idx) => {
-                tabla.innerHTML += `<tr class="border-b hover:bg-gray-50"><td class="p-2.5 font-mono text-blue-600 font-bold">#${String(n.numNota).padStart(6, '0')}</td><td class="p-2.5 text-gray-500">${n.fecha}</td><td class="p-2.5"><span class="block font-bold text-gray-900">${n.cliente}</span><span class="block text-[10px] text-gray-400">${n.cedula}</span></td><td class="p-2.5 truncate max-w-xs">${n.items.map(i => i.modelo).join(', ')}</td><td class="p-2.5 text-right font-mono font-black text-gray-900">$${n.totalUSD}</td><td class="p-2.5 text-center"><button onclick="reabrirNotaHistorialPorObjeto(${idx})" class="text-blue-600 bg-blue-50 hover:bg-blue-100 p-2 rounded-lg transition-colors font-bold"><i class="fa-solid fa-sliders"></i></button></td></tr>`;
             });
         }
 
@@ -1472,4 +1279,4 @@
         }
     </script>
 </body>
-                                </html>
+                    </html>
