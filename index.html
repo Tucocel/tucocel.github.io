@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tucocel C.A. — Telefonía Móvil y Computación</title>
 
+    <!-- METATAGS OPEN GRAPH -->
     <meta property="og:title" content="📱 TUCOCEL C.A. | Tu Vitrina Tecnológica Digital en Cordero">
     <meta property="og:description" content="🔥 ¡Explora nuestro catálogo en tiempo real! Encuentra smartphones de última generación con garantía, accesorios premium y el mejor servicio técnico especializado para teléfonos, computadoras e impresoras. ¡Visítanos en nuestra tienda física o cotiza al instante! 🚀">
     <meta property="og:image" content="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80">
@@ -84,7 +85,8 @@
                 overflow: hidden !important;
             }
             @page {
-                size: 15cm 10cm landscape;
+                size: 15cm 10cm;
+                orientation: landscape;
                 margin: 0 !important;
             }
         }
@@ -92,6 +94,7 @@
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased min-h-screen pb-12 relative">
 
+    <!-- BARRA SUPERIOR DE ACCESOS ADMINISTRATIVOS -->
     <div id="barra-accesos-admin" class="bg-slate-950 text-white px-4 py-2.5 text-xs font-bold hidden border-b border-slate-800 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex justify-between items-center gap-2">
             <div class="flex items-center gap-2 shrink-0">
@@ -107,6 +110,7 @@
         </div>
     </div>
 
+    <!-- BARRA DE NAVEGACIÓN -->
     <nav class="bg-white border-b border-gray-100 sticky top-0 z-40 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
@@ -128,6 +132,7 @@
         </div>
     </nav>
 
+    <!-- ENCABEZADO / BANNER PRINCIPAL -->
     <header class="bg-gradient-to-r from-slate-900 to-blue-950 text-white py-12 px-4 shadow-inner relative overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
         <div id="contenedor-textos-header" class="max-w-7xl mx-auto text-center relative z-10 space-y-3">
@@ -151,25 +156,27 @@
         </div>
     </header>
 
+    <!-- SECCIÓN DE SERVICIOS Y ACCESORIOS -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         <div class="bg-white border border-gray-100 rounded-3xl p-5 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="flex items-center gap-4 p-2">
                 <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-plug"></i></div>
                 <div>
-                    <h4 class="font-bold text-gray-900 text-sm">Accesorios Premium</h4>
+                    <h2 class="font-bold text-gray-900 text-sm">Accesorios Premium</h2>
                     <p class="text-gray-500 text-xs mt-0.5 leading-relaxed">También contamos con una amplia variedad de accesorios de alta calidad para celulares y computadoras.</p>
                 </div>
             </div>
             <div class="flex items-center gap-4 p-2 border-t md:border-t-0 md:border-l border-gray-100 pt-4 md:pt-2 md:pl-6">
                 <div class="w-12 h-12 bg-slate-900 text-blue-400 rounded-2xl flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-laptop-medical"></i></div>
                 <div>
-                    <h4 class="font-bold text-gray-900 text-sm">Servicio Técnico Especializado</h4>
+                    <h2 class="font-bold text-gray-900 text-sm">Servicio Técnico Especializado</h2>
                     <p class="text-gray-500 text-xs mt-0.5 leading-relaxed">Soporte y reparación profesional para teléfonos, computadoras, laptops e impresoras. ¡Dejamos tus equipos como nuevos!</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- SECCIÓN DE CANAL DIRECTO DE ATENCIÓN Y VITRINA PRINCIPAL -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="mb-8 max-w-4xl mx-auto bg-gradient-to-r from-blue-600 to-blue-800 text-white p-6 rounded-2xl shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4 border border-blue-500">
             <div class="flex items-center gap-4 text-center sm:text-left">
@@ -228,9 +235,10 @@
         <div id="carrusel-otros" class="flex gap-4 overflow-x-auto pb-4 pt-1 no-scrollbar snap-x scroll-smooth"></div>
     </section>
 
+    <!-- MÉTODOS DE PAGO DISPONIBLES -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 border-t border-gray-100 pt-8">
         <div class="text-center max-w-xl mx-auto mb-6">
-            <h4 class="text-xs font-black uppercase text-blue-600 tracking-widest">Métodos de Pago Soportados</h4>
+            <h3 class="text-xs font-black uppercase text-blue-600 tracking-widest">Métodos de Pago Soportados</h3>
             <p class="text-gray-500 text-xs mt-1">Facilitamos tus transacciones comerciales a través de diversas plataformas seguras.</p>
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 max-w-4xl mx-auto text-center font-bold text-xs text-gray-600">
@@ -242,6 +250,7 @@
         </div>
     </section>
 
+    <!-- PIE DE PÁGINA CORPORATIVO -->
     <footer class="bg-slate-900 text-slate-400 py-10 px-4 mt-16 border-t border-slate-800 text-xs font-medium">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
             <div class="space-y-1.5">
@@ -272,10 +281,12 @@
         </div>
     </footer>
 
+    <!-- BOTÓN FLOTANTE DE WHATSAPP -->
     <button onclick="abrirModalConsultaGeneral()" class="btn-flotante-wa fixed bottom-6 right-6 bg-emerald-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl z-40 transition-all hover:bg-emerald-600 shadow-xl">
         <i class="fa-brands fa-whatsapp"></i>
     </button>
 
+    <!-- PANEL DE CONTROL ADMINISTRATIVO -->
     <div id="panel-admin" class="bg-slate-900 text-slate-100 p-5 hidden max-w-4xl mx-auto sm:mt-4 sm:rounded-2xl shadow-2xl border border-slate-800">
         <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-2">
             <h3 id="panel-titulo" class="text-xs font-bold uppercase text-amber-400 tracking-wider"><i class="fa-solid fa-database mr-1"></i> Panel de Gestión Tucocel</h3>
@@ -318,7 +329,7 @@
                 <input type="file" id="add-foto-file" accept="image/*" class="hidden">
                 <button onclick="document.getElementById('add-foto-file').click()" class="bg-slate-800 hover:bg-slate-700 text-xs py-2 px-4 rounded-xl font-medium transition-colors border border-slate-700 w-full sm:w-auto"><i class="fa-solid fa-camera mr-2"></i>Cargar Foto del Artículo</button>
                 <input type="hidden" id="foto-base64">
-                <img id="preview-foto" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="w-9 h-9 object-cover rounded-lg bg-slate-800 border border-slate-700 hidden">
+                <img id="preview-foto" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Vista previa de carga de imagen" class="w-9 h-9 object-cover rounded-lg bg-slate-800 border border-slate-700 hidden">
             </div>
             <div class="flex gap-2 w-full sm:w-auto">
                 <button id="btn-cancelar-edicion" onclick="cancelarEdicionActiva()" class="hidden w-1/2 sm:w-auto bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors">Cancelar</button>
@@ -327,6 +338,7 @@
         </div>
     </div>
 
+    <!-- MODAL INTEGRAL DE FACTURACIÓN -->
     <div id="modal-sistema-facturacion" class="fixed inset-0 bg-slate-950/90 z-50 overflow-y-auto backdrop-blur-md p-2 sm:p-4 lg:p-6 hidden">
         <div class="bg-white rounded-3xl w-full max-w-6xl mx-auto my-2 md:my-4 shadow-2xl overflow-hidden border border-gray-100 flex flex-col md:h-[90vh]">
             
@@ -515,6 +527,7 @@
         </div>
     </div>
 
+    <!-- TICKET EPSON -->
     <div id="wrapper-impresion-epson" style="display: none;">
         <div id="contenedor-ticket-real" style="width: 15cm; height: 10cm; padding: 0.3cm; box-sizing: border-box; background-color: #fff; color: #000; font-family: Arial, sans-serif; font-size: 10px; line-height: 1.2; border: 1px solid #000; display: flex; flex-direction: column; justify-content: space-between;">
             <div style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
@@ -595,13 +608,14 @@
         </div>
     </div>
 
+    <!-- MODAL DETALLE DE PRODUCTO PÚBLICO -->
     <div id="modal-producto" class="fixed inset-0 bg-slate-950/80 z-50 p-4 backdrop-blur-md hidden flex items-center justify-center">
         <div class="bg-white rounded-3xl w-full max-w-md p-6 shadow-2xl relative overflow-hidden max-h-[90vh] overflow-y-auto">
             <button onclick="cerrarModalProducto()" class="absolute top-4 right-4 bg-gray-100 hover:bg-gray-200 text-gray-500 w-8 h-8 rounded-full flex items-center justify-center transition-colors z-20">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <div class="aspect-square w-full bg-white border border-gray-100 rounded-2xl overflow-hidden mb-4 flex justify-center items-center p-4">
-                <img id="modal-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="max-h-full max-w-full object-contain">
+                <img id="modal-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Imagen detallada del smartphone" class="max-h-full max-w-full object-contain">
             </div>
             <div class="space-y-3">
                 <div class="flex justify-between items-center">
@@ -613,8 +627,8 @@
                 <h2 id="modal-modelo" class="text-xl font-black text-gray-900 tracking-tight">Modelo del Teléfono</h2>
                 <p id="modal-memoria" class="text-xs font-mono text-gray-500 font-bold bg-gray-50 px-2 py-1 rounded-md inline-block">Capacidad</p>
                 <div class="border-t border-gray-100 pt-3">
-                    <h4 class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">Descripción General</h4>
-                    <p id="modal-desc" class="text-xs text-gray-600 leading-relaxed text-justify">Detalles del artículo.</p>
+                    <h3 class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">Descripción General</h3>
+                    <div id="modal-desc" class="text-xs text-gray-600 leading-relaxed text-justify">Detalles del artículo.</div>
                 </div>
                 
                 <div id="form-compra" class="pt-2"></div>
@@ -622,6 +636,7 @@
         </div>
     </div>
 
+    <!-- NÚCLEO MOTOR LOGICO ASOCIADO A FIREBASE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, doc, setDoc, getDoc, collection, addDoc, getDocs, query, orderBy, limit, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -649,7 +664,6 @@
         let marcaSeleccionada = 'Todas';
         let esAdminAutenticado = false;
         let productoSeleccionadoActual = null;
-        let ultimaNotaIdFirebase = null;
         let modoCargaFacturaActivo = 'manual';
         let BASE_TEXTOS_WEB = {};
 
@@ -741,9 +755,10 @@
                         </button>
                     </div>`;
             }
-            
+
+            document.getElementById('modal-like-count').innerText = prod.likes || 0;
             let currentLikeState = false;
-            try { currentLikeState = localStorage.getItem(`like_tucocel_${prod.id}`) === 'true'; } catch(err) { console.error(err); }
+            try { currentLikeState = localStorage.getItem(`like_tucocel_${prod.id}`) === 'true'; } catch(err) {}
             document.getElementById('modal-btn-like').className = currentLikeState ? "bg-red-50 text-red-600 px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-colors text-xs font-bold" : "bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-colors text-xs font-bold";
             
             document.getElementById('modal-producto').classList.remove('hidden');
@@ -1095,7 +1110,7 @@
             if(lista.length === 0) { tabla.innerHTML = '<tr><td colspan="6" class="p-3 text-center text-gray-400">Ningún registro cargado.</td></tr>'; return; }
             tabla.innerHTML = '';
             lista.forEach((n, idx) => {
-                tabla.innerHTML += `<tr class="border-b hover:bg-gray-50"><td class="p-2.5 font-mono text-blue-600 font-bold">#${String(n.numNota).padStart(6, '0')}</td><td class="p-2.5 text-gray-500">${n.fecha}</td><td class="p-2.5 font-bold">${n.cliente}</td><td class="p-2.5 text-gray-500 truncate max-w-xs">${n.items.map(i => i.modelo).join(', ')}</td><td class="p-2.5 text-right font-mono font-black text-gray-900">$${n.totalUSD}</td><td class="p-2.5 text-center"><button onclick="reabrirNotaHistorialPorObjeto(${idx})" class="text-blue-600 bg-blue-50 hover:bg-blue-100 p-2 rounded-lg font-bold hover:bg-blue-100"><i class="fa-solid fa-sliders"></i></button></td></tr>`;
+                tabla.innerHTML += `<tr class="border-b hover:bg-gray-50"><td class="p-2.5 font-mono text-blue-600 font-bold">#${String(n.numNota).padStart(6, '0')}</td><td class="p-2.5 text-gray-500">${n.fecha}</td><td class="p-2.5 font-bold">${n.cliente}</td><td class="p-2.5 text-gray-500 truncate max-w-xs">${n.items.map(i => i.modelo).join(', ')}</td><td class="p-2.5 text-right font-mono font-black text-gray-900">$${n.totalUSD}</td><td class="p-2.5 text-center"><button onclick="reabrirNotaHistorialPorObjeto(${idx})" class="text-blue-600 bg-blue-50 hover:bg-blue-100 p-2 rounded-lg font-bold"><i class="fa-solid fa-sliders"></i></button></td></tr>`;
             });
         }
 
@@ -1128,7 +1143,7 @@
                     <div onclick="abrirModalProducto('${prod.id}')" class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex flex-col justify-between transition-all hover:shadow-xl cursor-pointer group">
                         <div>
                             <div class="aspect-square w-full bg-white border border-gray-100 rounded-xl overflow-hidden mb-4 flex justify-center items-center p-2">
-                                <img src="${fotoProd}" class="max-h-full max-w-full object-contain filter drop-shadow-md">
+                                <img src="${fotoProd}" alt="Ficha del smartphone" class="max-h-full max-w-full object-contain filter drop-shadow-md">
                             </div>
                             <div class="flex justify-between items-center mb-1.5 gap-1">
                                 <span class="text-[9px] font-extrabold text-blue-600 bg-blue-50 uppercase tracking-widest px-2 py-0.5 rounded-md">${prod.marca}</span>
@@ -1158,7 +1173,7 @@
                 carrusel.innerHTML += `
                     <div onclick="abrirModalProducto('${prod.id}')" class="snap-start shrink-0 w-44 bg-white rounded-2xl p-3 border border-gray-100 shadow-sm flex flex-col justify-between cursor-pointer select-none">
                         <div>
-                            <div class="w-full aspect-square bg-gray-50 rounded-xl overflow-hidden mb-2 flex items-center justify-center p-2"><img src="${fotoProd}" class="max-h-full max-w-full object-contain"></div>
+                            <div class="w-full aspect-square bg-gray-50 rounded-xl overflow-hidden mb-2 flex items-center justify-center p-2"><img src="${fotoProd}" alt="Ficha del accesorio" class="max-h-full max-w-full object-contain"></div>
                             <span class="text-[8px] font-black uppercase tracking-widest text-blue-500 bg-blue-50 px-1.5 py-0.5 rounded inline-block">Accesorio</span>
                             <h4 class="font-bold text-gray-800 text-xs truncate mt-1">${prod.modelo}</h4>
                         </div>
@@ -1279,4 +1294,4 @@
         }
     </script>
 </body>
-                    </html>
+</html>
