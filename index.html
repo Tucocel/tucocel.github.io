@@ -288,7 +288,7 @@
         </div>
     </footer>
 
-    <!-- BOTON WA -->
+    <!-- BOTON FLOTANTE WA -->
     <button onclick="abrirModalConsultaGeneral()" class="btn-flotante-wa fixed bottom-6 right-6 bg-emerald-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl z-40 transition-all hover:bg-emerald-600 shadow-xl">
         <i class="fa-brands fa-whatsapp"></i>
     </button>
@@ -709,7 +709,7 @@
         </div>
     </div>
 
-    <!-- MOTOR LOGICO ASOCIADO A FIREBASE (PROTEGIDO) -->
+    <!-- NÚCLEO MOTOR LOGICO ASOCIADO A FIREBASE (100% FIABLE) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, doc, setDoc, getDoc, collection, addDoc, getDocs, query, orderBy, limit, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -740,19 +740,20 @@
         let modoCargaFacturaActivo = 'manual';
         let BASE_TEXTOS_WEB = {};
 
-        // RENDERIZADO COMPORTAMIENTO DINÁMICO DE CASILLAS DE IMEIS MÚLTIPLES
+        // RE-EXPOSICIÓN COMPLETA Y ORDENADA DE LAS FUNCIONES GLOBALES WINDOW
         window.renderizarCamposImeiDinamicos = function(modo) {
             if(modo === 'manual') {
                 const cant = parseInt(document.getElementById('manual-cantidad').value) || 1;
                 const check = document.getElementById('manual-check-imei').checked;
                 const contenedor = document.getElementById('wrapper-manual-imeis');
+                if(!contenedor) return;
                 contenedor.innerHTML = '';
                 if(check && cant > 0) {
                     for(let i=1; i<=cant; i++) {
                         contenedor.innerHTML += `
                             <div>
-                                <label class="text-[8px] text-red-500 font-bold block mb-0.5">IMEI Teléfono ${i}</label>
-                                <input type="text" id="manual-imei-field-${i}" maxlength="4" placeholder="Últimos 4" class="w-full bg-white border border-red-200 p-1 rounded-lg text-xs font-black text-center tracking-widest">
+                                <label class="text-[8px] text-red-500 font-bold block mb-0.5">IMEI Celular ${i}</label>
+                                <input type="text" id="manual-imei-field-${i}" maxlength="4" placeholder="Últimos 4" class="w-full bg-white border border-gray-300 p-1 rounded-lg text-xs font-black text-center tracking-widest">
                             </div>`;
                     }
                 }
@@ -760,6 +761,7 @@
                 const id = document.getElementById('fact-select-producto').value;
                 const cant = parseInt(document.getElementById('fact-cantidad').value) || 1;
                 const contenedor = document.getElementById('wrapper-fact-imeis');
+                if(!contenedor) return;
                 contenedor.innerHTML = '';
                 if(!id) return;
                 const prod = PRODUCTOS.find(p => p.id === id);
@@ -767,8 +769,8 @@
                     for(let i=1; i<=cant; i++) {
                         contenedor.innerHTML += `
                             <div>
-                                <label class="text-[8px] text-red-500 font-bold block mb-0.5">IMEI Teléfono ${i}</label>
-                                <input type="text" id="fact-imei-field-${i}" maxlength="4" placeholder="Últimos 4" class="w-full bg-white border border-red-200 p-1 rounded-lg text-xs font-black text-center tracking-widest">
+                                <label class="text-[8px] text-red-500 font-bold block mb-0.5">IMEI Celular ${i}</label>
+                                <input type="text" id="fact-imei-field-${i}" maxlength="4" placeholder="Últimos 4" class="w-full bg-white border border-gray-300 p-1 rounded-lg text-xs font-black text-center tracking-widest">
                             </div>`;
                     }
                 }
@@ -782,22 +784,23 @@
             const tabAuditoria = document.getElementById('btn-vista-auditoria');
 
             if(seccion === 'cajero') {
-                bFactura.classList.remove('hidden');
-                bReporte.classList.add('hidden');
-                tabCajero.className = "text-blue-600 border-b-2 border-blue-600 pb-1";
-                tabAuditoria.className = "text-gray-500 hover:text-gray-700 pb-1";
+                if(bFactura) bFactura.classList.remove('hidden');
+                if(bReporte) bReporte.classList.add('hidden');
+                if(tabCajero) tabCajero.className = "text-blue-600 border-b-2 border-blue-600 pb-1";
+                if(tabAuditoria) tabAuditoria.className = "text-gray-500 hover:text-gray-700 pb-1";
             } else {
-                bFactura.classList.add('hidden');
-                bReporte.classList.remove('hidden');
-                tabCajero.className = "text-gray-500 hover:text-gray-700 pb-1";
-                tabAuditoria.className = "text-blue-600 border-b-2 border-blue-600 pb-1";
-                cargarHistorialFirebase();
+                if(bFactura) bFactura.classList.add('hidden');
+                if(bReporte) bReporte.classList.remove('hidden');
+                if(tabCajero) tabCajero.className = "text-gray-500 hover:text-gray-700 pb-1";
+                if(tabAuditoria) tabAuditoria.className = "text-blue-600 border-b-2 border-blue-600 pb-1";
+                window.cargarHistorialFirebase();
             }
         };
 
         window.verificarMarcaSeleccionadaPanel = function() {
             const marca = document.getElementById('add-marca').value;
             const wrapper = document.getElementById('wrapper-tipo-producto');
+            if(!wrapper) return;
             if(marca === 'Otros Productos') { wrapper.classList.remove('hidden'); } else { wrapper.classList.add('hidden'); }
         };
 
@@ -815,8 +818,8 @@
                 try { localStorage.setItem('tucocel_admin_sesion', 'true'); } catch(err) {}
                 window.cerrarLoginAdmin();
                 window.controlarVisibilidadModulosOcultos(true);
-                manejarVisibilidadLapicitosAdmin(true);
-                ejecutarFiltroCombinado();
+                window.manejarVisibilidadLapicitosAdmin(true);
+                window.ejecutarFiltroCombinado();
             } else { alert('Credenciales incorrectas.'); }
         };
         
@@ -825,13 +828,14 @@
             try { localStorage.removeItem('tucocel_admin_sesion'); } catch(err) {}
             document.getElementById('panel-admin').classList.add('hidden');
             window.controlarVisibilidadModulosOcultos(false);
-            manejarVisibilidadLapicitosAdmin(false);
-            cancelarEdicionActiva();
-            ejecutarFiltroCombinado();
+            window.manejarVisibilidadLapicitosAdmin(false);
+            window.cancelarEdicionActiva();
+            window.ejecutarFiltroCombinado();
         };
 
         window.toggleAdminPanel = function() {
             const panel = document.getElementById('panel-admin');
+            if(!panel) return;
             if(panel.classList.contains('hidden')) { panel.classList.remove('hidden'); } else { panel.classList.add('hidden'); }
         };
 
@@ -853,7 +857,7 @@
                 b.className = "marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center"; 
             }); 
             boton.className = "marca-btn snap-start shrink-0 bg-slate-900 text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center";
-            ejecutarFiltroCombinado(); 
+            window.ejecutarFiltroCombinado(); 
         };
 
         window.abrirModalProducto = function(id) {
@@ -876,6 +880,7 @@
             
             const mod = prod.modalidad || 'vitrina';
             const formCompra = document.getElementById('form-compra');
+            if(!formCompra) return;
             
             if(mod === 'consultar') {
                 document.getElementById('modal-desc').innerHTML = `${prod.desc || ''}<br><br><span class="block p-2.5 bg-blue-50 text-blue-950 border border-blue-200 font-bold rounded-xl text-xs text-justify leading-relaxed">🔮 <strong>Nota de Preventa:</strong> La modalidad de venta para este artículo es única y exclusivamente bajo pedido. Es un producto que no se encuentra disponible para despacho inmediato en tienda. Lo cancelas en nuestra oficina, y en un lapso de 2 horas el equipo estará listo en el local para ser retirado, lo cual te será notificado de inmediato vía WhatsApp.</span>`;
@@ -993,7 +998,7 @@
                 document.getElementById('tab-inventario').className = "text-blue-600 border-b-2 border-blue-600 pb-2 px-1 flex items-center gap-1 font-bold";
                 document.getElementById('carga-manual-bloque').classList.add('hidden');
                 document.getElementById('carga-inventario-bloque').classList.remove('hidden');
-                actualizarSelectFacturacion();
+                window.actualizarSelectFacturacion();
             }
         };
 
@@ -1062,10 +1067,10 @@
                 document.getElementById('fact-select-producto').value = ''; document.getElementById('fact-cantidad').value = '1';
                 document.getElementById('wrapper-fact-imeis').innerHTML = '';
             }
-            renderizarItemsVentaActiva();
+            window.renderizarItemsVentaActiva();
         };
 
-        window.removerItemVenta = function(index) { ITEMS_VENTA_ACTIVA.splice(index, 1); renderizarItemsVentaActiva(); };
+        window.removerItemVenta = function(index) { ITEMS_VENTA_ACTIVA.splice(index, 1); window.renderizarItemsVentaActiva(); };
         
         window.calcularTotalesFactura = function() {
             const tCOP = parseFloat(document.getElementById('tasa-cop').value) || 0; 
@@ -1086,7 +1091,7 @@
                 const matchesFecha = fechaInput ? n.fecha.includes(fechaInput.split('-').reverse().join('/')) : true;
                 return matchesTexto && matchesFecha;
             });
-            renderizarTablaHistorialHTML(f);
+            window.renderizarTablaHistorialHTML(f);
         };
 
         window.exportarHistorialExcel = function() {
@@ -1105,14 +1110,14 @@
             document.getElementById('memoria').value = prod.memoria || ''; document.getElementById('add-precio').value = prod.precio;
             document.getElementById('add-desc').value = prod.desc || ''; document.getElementById('foto-base64').value = prod.foto || '';
             const preview = document.getElementById('preview-foto');
-            if (prod.foto) { preview.src = prod.foto; preview.classList.remove('hidden'); }
+            if (prod.foto && preview) { preview.src = prod.foto; preview.classList.remove('hidden'); }
             document.getElementById('panel-titulo').innerText = "✏️ Editando Artículo"; document.getElementById('btn-cancelar-edicion').classList.remove('hidden');
             document.getElementById('panel-admin').scrollIntoView({ behavior: 'smooth' });
         };
 
         window.cancelarEdicionActiva = function() { 
             idArticuloEnEdicion = null; 
-            limpiarFormularioPanel(); 
+            window.limpiarFormularioPanel(); 
             document.getElementById('panel-titulo').innerText = "Panel de Gestión"; 
             document.getElementById('btn-cancelar-edicion').classList.add('hidden'); 
             document.getElementById('wrapper-tipo-producto').classList.add('hidden');
@@ -1121,8 +1126,8 @@
         window.eliminarProducto = async function(id) { 
             if(confirm('¿Borrar producto permanentemente?')) { 
                 PRODUCTOS = PRODUCTOS.filter(p => p.id !== id); 
-                await guardarInventarioFirebase(); 
-                ejecutarFiltroCombinado(); 
+                await window.guardarInventarioFirebase(); 
+                window.ejecutarFiltroCombinado(); 
             } 
         };
 
@@ -1138,8 +1143,8 @@
 
             productoSeleccionadoActual.likes = PRODUCTOS[idx].likes;
             document.getElementById('modal-like-count').innerText = productoSeleccionadoActual.likes;
-            await guardarInventarioFirebase();
-            ejecutarFiltroCombinado();
+            await window.guardarInventarioFirebase();
+            window.ejecutarFiltroCombinado();
         };
 
         window.solicitarEdicionAvanzada = async function(idElemento) {
@@ -1150,7 +1155,7 @@
             if (nuevoTexto === null || nuevoTexto.trim() === "") return;
             elemento.innerText = nuevoTexto.trim();
             BASE_TEXTOS_WEB[idElemento] = { texto: nuevoTexto.trim(), alineacion: "1", estilo: "1" };
-            await sincronizarTextosFirebase();
+            await window.sincronizarTextosFirebase();
         };
 
         window.abrirModalNotificarCliente = function() {
@@ -1163,14 +1168,14 @@
 
         window.ejecutarBotonImprimir = async function() {
             if(ITEMS_VENTA_ACTIVA.length === 0) return alert("Agregue al menos un producto al ticket.");
-            const nota = await registrarNotaEnFirebase();
+            const nota = await window.registrarNotaEnFirebase();
             if(!nota) return;
             document.getElementById('wrapper-impresion-epson').style.display = 'block';
-            inyectarDatosAlTicketDOM(nota);
+            window.inyectarDatosAlTicketDOM(nota);
             setTimeout(() => { 
                 window.print(); 
                 document.getElementById('wrapper-impresion-epson').style.display = 'none'; 
-                limpiatFormularioFacturaCompleto(); 
+                window.limpiatFormularioFacturaCompleto(); 
             }, 350);
         };
 
@@ -1182,11 +1187,11 @@
                 if(!celTlf) return;
                 document.getElementById('fact-cli-telefono').value = celTlf;
             }
-            const nota = await registrarNotaEnFirebase();
+            const nota = await window.registrarNotaEnFirebase();
             if(!nota) return;
-            inyectarDatosAlTicketDOM(nota);
-            procesarEnvioWaObjeto(nota);
-            limpiatFormularioFacturaCompleto();
+            window.inyectarDatosAlTicketDOM(nota);
+            window.procesarEnvioWaObjeto(nota);
+            window.limpiatFormularioFacturaCompleto();
         };
 
         window.reabrirNotaHistorialPorObjeto = function(index) { 
@@ -1195,42 +1200,40 @@
             const s = prompt(`⚙️ CONTROL DE NOTA N° ${String(n.numNota).padStart(6, '0')}\n\nEscriba el número de la acción que desea:\n[1] Reimprimir Nota de Entrega\n[2] Reenviar Comprobante por WhatsApp\n[3] ANULAR COMPROBANTE VISUALMENTE\n[4] ELIMINAR PERMANENTEMENTE DE FIREBASE\n\nPresione cancelar para salir.`); 
             if(s==="1") { 
                 document.getElementById('wrapper-impresion-epson').style.display = 'block'; 
-                inyectarDatosAlTicketDOM(n); 
+                window.inyectarDatosAlTicketDOM(n); 
                 window.print(); 
                 document.getElementById('wrapper-impresion-epson').style.display = 'none'; 
             } else if(s==="2") { 
-                procesarEnvioWaObjeto(n); 
+                window.procesarEnvioWaObjeto(n); 
             } else if(s==="3") {
-                if(confirm(`⚠️ ¿Deseas ANULAR la Nota #${n.numNota}?`)) { anularNotaHistorialPorId(n.id); }
+                if(confirm(`⚠️ ¿Deseas ANULAR la Nota #${n.numNota}?`)) { window.anularNotaHistorialPorId(n.id); }
             } else if(s==="4") {
-                if(confirm(`🚨 ¿CRÍTICO: Seguro que deseas ELIMINAR por completo la Nota #${n.numNota} de Firebase? El correlativo regresará.`)) { eliminarNotaHistorialPorId(n.id); }
+                if(confirm(`🚨 ¿CRÍTICO: Seguro que deseas ELIMINAR por completo la Nota #${n.numNota} de Firebase? El correlativo regresará.`)) { window.eliminarNotaHistorialPorId(n.id); }
             }
         };
 
-        async function anularNotaHistorialPorId(id) {
+        window.anularNotaHistorialPorId = async function(id) {
             try {
                 await updateDoc(doc(db, "notas_ventas", id), { estatus: "ANULADA" });
                 alert("Nota colocada en estatus ANULADA.");
-                await cargarHistorialFirebase();
+                await window.cargarHistorialFirebase();
             } catch(e) { console.error(e); }
-        }
+        };
 
-        async function eliminarNotaHistorialPorId(id) {
+        window.eliminarNotaHistorialPorId = async function(id) {
             try {
                 await deleteDoc(doc(db, "notas_ventas", id));
                 alert("Nota eliminada permanentemente de Firebase.");
-                await cargarHistorialFirebase();
+                await window.cargarHistorialFirebase();
             } catch(e) { console.error(e); }
-        }
+        };
 
-        // REGISTRO CORRELATIVO REAL BASADO EN CONTEO DE BASE DE DATOS FIREBASE
-        async function registrarNotaEnFirebase() {
+        window.registrarNotaEnFirebase = async function() {
             try {
                 let totalUSD = 0; ITEMS_VENTA_ACTIVA.forEach(i => totalUSD += i.precio);
                 const tCOP = parseFloat(document.getElementById('tasa-cop').value) || 0; 
                 const tBS = parseFloat(document.getElementById('tasa-bs').value) || 0;
                 
-                // Jalar el historial para contar y dar el número exacto consecutivo ordenado
                 const snapConteo = await getDocs(collection(db, "notas_ventas"));
                 const numNotaGenerado = snapConteo.size + 1;
                 const fechaEstructurada = new Date().toLocaleString('es-VE');
@@ -1251,15 +1254,15 @@
                 };
 
                 await addDoc(collection(db, "notas_ventas"), nuevaNota);
-                await cargarHistorialFirebase();
+                await window.cargarHistorialFirebase();
                 return nuevaNota;
             } catch(err) {
                 alert("Error guardando el registro.");
                 return null;
             }
-        }
+        };
 
-        function inyectarDatosAlTicketDOM(nota) {
+        window.inyectarDatosAlTicketDOM = function(nota) {
             document.getElementById('tk-num-nota').innerText = String(nota.numNota).padStart(6, '0');
             document.getElementById('tk-fecha').innerText = `Fecha: ${nota.fecha}`;
             document.getElementById('tk-cliente-nombre').innerText = nota.cliente;
@@ -1269,6 +1272,7 @@
             document.getElementById('tk-status-label').innerText = nota.estatus || "PROCESADA";
 
             const tbody = document.getElementById('tk-items-tabla');
+            if(!tbody) return;
             tbody.innerHTML = '';
             nota.items.forEach(i => {
                 const imeiTxt = i.imeis ? `\n[IMEI: ${i.imeis.join(', ')}]` : '';
@@ -1290,9 +1294,9 @@
             document.getElementById('tk-total-usd').innerText = `$${usdNeto.toFixed(2)}`;
             document.getElementById('tk-total-cop').innerText = copTasa > 0 ? `${Math.round(totalEnCop).toLocaleString('es-CO')} COP` : '0 COP';
             document.getElementById('tk-total-bs').innerText = bsTasa > 0 ? `${totalEnBs.toFixed(2).toLocaleString('es-VE')} Bs` : '0 Bs';
-        }
+        };
 
-        async function descargarTextosPersonalizados() {
+        window.descargarTextosPersonalizados = async function() {
             try {
                 const docRef = doc(db, "configuraciones", "textos_web");
                 const docSnap = await getDoc(docRef);
@@ -1307,57 +1311,62 @@
                     });
                 }
             } catch(e) { console.error(e); }
-        }
+        };
 
-        async function sincronizarTextosFirebase() { try { await setDoc(doc(db, "configuraciones", "textos_web"), BASE_TEXTOS_WEB); } catch (e) {} }
+        window.sincronizarTextosFirebase = async function() { 
+            try { await setDoc(doc(db, "configuraciones", "textos_web"), BASE_TEXTOS_WEB); } catch (e) {} 
+        };
         
-        function manejarVisibilidadLapicitosAdmin(mostrar) { document.querySelectorAll('.btn-editar-texto').forEach(l => l.style.display = mostrar ? 'inline-block' : 'none'); }
+        window.manejarVisibilidadLapicitosAdmin = function(mostrar) { 
+            document.querySelectorAll('.btn-editar-texto').forEach(l => l.style.display = mostrar ? 'inline-block' : 'none'); 
+        };
 
-        async function cargarInventarioFirebase() {
+        window.cargarInventarioFirebase = async function() {
             try {
                 const docSnap = await getDoc(doc(db, "inventario", "productos_tucocel"));
                 if (docSnap.exists()) { PRODUCTOS = docSnap.data().lista || []; PRODUCTOS.sort((a, b) => a.precio - b.precio); }
-            } catch (e) { console.error(e); } finally { verificarSesionLocal(); ejecutarFiltroCombinado(); gestionarContadorVisitasReal(); }
-        }
+            } catch (e) { console.error(e); } finally { window.verificarSesionLocal(); window.ejecutarFiltroCombinado(); window.gestionarContadorVisitasReal(); }
+        };
 
-        function gestionarContadorVisitasReal() {
+        window.gestionarContadorVisitasReal = function() {
             try {
                 let visitas = parseInt(localStorage.getItem('tucocel_visitas_db')) || 0;
                 visitas += 1;
                 localStorage.setItem('tucocel_visitas_db', visitas);
-                document.getElementById('contador-visitas-num').innerText = visitas;
+                const el = document.getElementById('contador-visitas-num');
+                if(el) el.innerText = visitas;
             } catch(err) { console.error(err); }
-        }
+        };
 
-        async function guardarInventarioFirebase() {
+        window.guardarInventarioFirebase = async function() {
             const btn = document.getElementById('btn-guardar'); if(btn) { btn.disabled = true; btn.innerText = "Guardando..."; }
             try { PRODUCTOS.sort((a, b) => a.precio - b.precio); await setDoc(doc(db, "inventario", "productos_tucocel"), { lista: PRODUCTOS }); } 
             catch (e) { alert("Error guardando cambios."); } finally { if(btn) { btn.disabled = false; btn.innerText = "Guardar en Inventario"; } }
-        }
+        };
 
-        function ejecutarFiltroCombinado() {
+        window.ejecutarFiltroCombinado = function() {
             const telefonosFiltrados = PRODUCTOS.filter(p => p.marca !== 'Otros Productos');
             const otrosFiltrados = PRODUCTOS.filter(p => p.marca === 'Otros Productos');
-            renderizarCatalogoHTML(telefonosFiltrados);
-            renderizarCarruselOtrosHTML(otrosFiltrados);
-        }
+            window.renderizarCatalogoHTML(telefonosFiltrados);
+            window.renderizarCarruselOtrosHTML(otrosFiltrados);
+        };
 
-        function procesarEnvioWaObjeto(nota) {
+        window.procesarEnvioWaObjeto = function(nota) {
             let desc = nota.items.map(i => `• ${i.cantidad}x ${i.modelo} -> $${i.precio} ${i.imeis ? `(IMEI: ${i.imeis.join(', ')})` : ''}`).join('\n');
             const msg = `*TUCOCEL C.A.*\n*Nota de Entrega:* N° ${String(nota.numNota).padStart(6, '0')}\n*Estatus:* ${nota.estatus || "PROCESADA"}\n*Fecha:* ${nota.fecha}\n👤 *Cliente:* ${nota.cliente}\n\n💳 *Cédula/RIF:* ${nota.cedula}\n📦 *Detalle de compra:*\n${desc}\n\n💵 *Total General:* $${nota.totalUSD} USD\n\n🔒 _Comprobante interno administrativo._`;
             window.open(`https://wa.me/${nota.telefono.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`, '_blank');
-        }
+        };
 
-        async function cargarHistorialFirebase() {
+        window.cargarHistorialFirebase = async function() {
             try { 
                 const snap = await getDocs(query(collection(db, "notas_ventas"), orderBy("timestamp", "desc"), limit(50))); 
                 HISTORIAL_NOTAS = []; 
                 snap.forEach(d => HISTORIAL_NOTAS.push({ ...d.data(), id: d.id })); 
-                renderizarTablaHistorialHTML(HISTORIAL_NOTAS); 
+                window.renderizarTablaHistorialHTML(HISTORIAL_NOTAS); 
             } catch(e) { console.error(e); }
-        }
+        };
 
-        function renderizarTablaHistorialHTML(lista) {
+        window.renderizarTablaHistorialHTML = function(lista) {
             const tabla = document.getElementById('tabla-historial-cuerpo'); if(!tabla) return;
             if(lista.length === 0) { tabla.innerHTML = '<tr><td colspan="8" class="p-3 text-center text-gray-400">Ningún registro coincidente.</td></tr>'; return; }
             tabla.innerHTML = '';
@@ -1375,9 +1384,9 @@
                         <td class="p-3 text-center"><button onclick="reabrirNotaHistorialPorObjeto(${idx})" class="text-blue-600 bg-blue-50 hover:bg-blue-100 p-2 rounded-lg font-bold"><i class="fa-solid fa-sliders"></i></button></td>
                     </tr>`;
             });
-        }
+        };
 
-        function renderizarCatalogoHTML(lista) {
+        window.renderizarCatalogoHTML = function(lista) {
             const contenedor = document.getElementById('contenedor-productos'); if(!contenedor) return;
             let listaFiltrada = lista;
             if (marcaSeleccionada !== 'Todas') { listaFiltrada = lista.filter(p => p.marca.toLowerCase() === marcaSeleccionada.toLowerCase()); }
@@ -1410,9 +1419,9 @@
                         </div>
                     </div>`;
             });
-        }
+        };
 
-        function renderizarCarruselOtrosHTML(lista) {
+        window.renderizarCarruselOtrosHTML = function(lista) {
             const carrusel = document.getElementById('carrusel-otros'); if(!carrusel) return;
             carrusel.innerHTML = '';
             lista.forEach(prod => {
@@ -1435,7 +1444,48 @@
                         </div>
                     </div>`;
             });
-        }
+        };
+
+        window.renderizarItemsVentaActiva = function() {
+            const contenedor = document.getElementById('fact-lista-items'); document.getElementById('fact-items-count').innerText = `${ITEMS_VENTA_ACTIVA.length} items`;
+            if(ITEMS_VENTA_ACTIVA.length === 0) { contenedor.innerHTML = '<p class="text-center text-slate-500 text-xs py-6">No hay artículos añadidos todavía.</p>'; window.calcularTotalesFactura(); return; }
+            contenedor.innerHTML = '';
+            ITEMS_VENTA_ACTIVA.forEach((item, index) => {
+                const imeiLabel = item.imeis ? `<span class="text-[10px] text-amber-400 font-mono block">IMEIs: ${item.imeis.join(', ')}</span>` : '';
+                contenedor.innerHTML += `
+                    <div class="bg-slate-950 p-2 rounded-xl border border-slate-800 flex justify-between text-white text-xs">
+                        <div><p class="font-bold truncate max-w-[140px]">${item.cantidad}x ${item.modelo}</p>${imeiLabel}</div>
+                        <div class="flex items-center gap-2"><span>$${item.precio}</span><button onclick="removerItemVenta(${index})" class="text-red-400 font-bold"><i class="fa-solid fa-square-xmark"></i></button></div>
+                    </div>`;
+            });
+            window.calcularTotalesFactura();
+        };
+
+        window.actualizarSelectFacturacion = function() {
+            const select = document.getElementById('fact-select-producto');
+            if(!select) return;
+            select.innerHTML = '<option value="">-- Seleccione un producto --</option>';
+            PRODUCTOS.forEach(p => { select.innerHTML += `<option value="${p.id}">${p.modelo} (${p.marca}) - $${p.precio}</option>`; });
+        };
+
+        window.limpiarFormularioPanel = function() {
+            document.getElementById('add-modelo').value = ''; 
+            document.getElementById('memoria').value = '';
+            document.getElementById('add-precio').value = ''; 
+            document.getElementById('add-desc').value = '';
+            document.getElementById('add-foto-file').value = ''; 
+            document.getElementById('foto-base64').value = '';
+            const p = document.getElementById('preview-foto'); if(p) p.classList.add('hidden');
+        };
+
+        window.limpiatFormularioFacturaCompleto = function() {
+            document.getElementById('fact-cli-nombre').value = '';
+            document.getElementById('fact-cli-cedula').value = '';
+            document.getElementById('fact-cli-telefono').value = '';
+            document.getElementById('fact-cli-direccion').value = '';
+            ITEMS_VENTA_ACTIVA = [];
+            window.renderizarItemsVentaActiva();
+        };
 
         window.procesarGuardadoInventario = async function() {
             const marca = document.getElementById('add-marca').value; 
@@ -1452,14 +1502,14 @@
             if (idArticuloEnEdicion) { 
                 const idx = PRODUCTOS.findIndex(p => p.id === idArticuloEnEdicion); 
                 if (idx !== -1) PRODUCTOS[idx] = { id: idArticuloEnEdicion, marca, modalidad: mod, modelo, memoria: memoriaVal, precio, foto, desc, tipoProducto: tipoProductoVal, likes: PRODUCTOS[idx].likes || 0 }; 
-                cancelarEdicionActiva(); 
+                window.cancelarEdicionActiva(); 
             } else { 
                 PRODUCTOS.unshift({ id: (new Date().getTime()).toString(), marca, modalidad: mod, modelo, memoria: memoriaVal, precio, foto, desc, tipoProducto: tipoProductoVal, likes: 0 }); 
-                limpiarFormularioPanel(); 
+                window.limpiarFormularioPanel(); 
             }
-            await guardarInventarioFirebase(); 
-            ejecutarFiltroCombinado(); 
-            actualizarSelectFacturacion();
+            await window.guardarInventarioFirebase(); 
+            window.ejecutarFiltroCombinado(); 
+            window.actualizarSelectFacturacion();
         };
 
         window.procesarImagen = function(e) { 
@@ -1472,37 +1522,42 @@
                     canvas.width = 600; canvas.height = 600; ctx.drawImage(img, 0, 0, 600, 600); 
                     const base64Str = canvas.toDataURL('image/jpeg', 0.85); 
                     document.getElementById('foto-base64').value = base64Str;
-                    const preview = document.getElementById('preview-foto'); preview.src = base64Str; preview.classList.remove('hidden');
+                    const preview = document.getElementById('preview-foto'); if(preview) { preview.src = base64Str; preview.classList.remove('hidden'); }
                 }; 
                 img.src = event.target.result; 
             }; 
             reader.readAsDataURL(file); 
         };
 
-        function verificarSesionLocal() { 
+        window.verificarSesionLocal = function() { 
             let s = false; try { s = localStorage.getItem('tucocel_admin_sesion') === 'true'; } catch(e) {} 
             if (s) { 
                 esAdminAutenticado = true; 
-                document.getElementById('panel-admin').classList.remove('hidden'); 
+                const p = document.getElementById('panel-admin'); if(p) p.classList.remove('hidden'); 
                 window.controlarVisibilidadModulosOcultos(true); 
-                manejarVisibilidadLapicitosAdmin(true); 
+                window.manejarVisibilidadLapicitosAdmin(true); 
             } 
-        }
+        };
 
-        function inicializarScrollAutomaticoCarrusel() {
+        window.inicializarScrollAutomaticoCarrusel = function() {
             const c = document.getElementById('carrusel-otros'); if(!c) return;
             let dir = 1;
             setInterval(() => {
                 if(c.scrollLeft >= (c.scrollWidth - c.clientWidth) - 10) dir = -1; else if(c.scrollLeft <= 10) dir = 1;
                 c.scrollBy({ left: 35 * dir, behavior: 'smooth' });
             }, 4000);
-        }
+        };
 
-        document.getElementById('add-foto-file').addEventListener('change', window.procesarImagen);
-        document.getElementById('add-marca').addEventListener('change', window.verificarMarcaSeleccionadaPanel);
-        descargarTextosPersonalizados();
-        cargarInventarioFirebase();
-        inicializarScrollAutomaticoCarrusel();
+        // ENLACE DE EVENTOS DIRECTO AL INICIAR EL MÓDULO
+        const inputFoto = document.getElementById('add-foto-file');
+        if(inputFoto) inputFoto.addEventListener('change', window.procesarImagen);
+        
+        const selectMarca = document.getElementById('add-marca');
+        if(selectMarca) selectMarca.addEventListener('change', window.verificarMarcaSeleccionadaPanel);
+
+        window.descargarTextosPersonalizados();
+        window.cargarInventarioFirebase();
+        window.inicializarScrollAutomaticoCarrusel();
     </script>
 </body>
     </html>
