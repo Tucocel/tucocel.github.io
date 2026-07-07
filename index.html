@@ -66,24 +66,30 @@
                 position: absolute !important;
                 left: 0 !important;
                 top: 0 !important;
-                width: 100% !important;
-                max-width: 15cm !important;
-                margin: 0 auto !important;
+                width: 10cm !important;
+                height: 15cm !important;
+                margin: 0 !important;
                 padding: 0 !important;
+                box-sizing: border-box !important;
                 background: #fff !important;
+                overflow: hidden !important;
             }
             #contenedor-ticket-real {
-                width: 100% !important;
-                height: auto !important;
-                padding: 0.3cm !important;
+                width: 10cm !important;
+                height: 15cm !important;
+                padding: 0.4cm !important;
                 box-sizing: border-box !important;
-                border: 1px dashed #000 !important;
                 background: #fff !important;
+                color: #000 !important;
+                overflow: hidden !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: space-between !important;
             }
             @page {
-                size: 15cm 10cm;
-                orientation: landscape;
-                margin: 0mm !important;
+                size: 10cm 15cm;
+                orientation: portrait;
+                margin: 0 !important;
             }
         }
     </style>
@@ -377,19 +383,16 @@
                         <input type="number" id="tasa-bs" value="0" oninput="calcularTotalesFactura()" class="w-full sm:w-16 bg-slate-800 text-white border border-slate-700 px-2 py-1 rounded-lg text-center font-mono focus:outline-none placeholder-gray-500" placeholder="0">
                         <span class="text-blue-400 font-bold text-[10px] shrink-0">Bs</span>
                     </div>
-                    <button onclick="ejecutarCierreDeMes()" class="bg-purple-600 hover:bg-purple-700 text-white text-[10px] uppercase font-black px-4 py-1.5 rounded-xl transition-colors w-full sm:w-auto shadow mt-1 sm:mt-0">
-                        <i class="fa-solid fa-calendar-check"></i> Cierre de Mes
-                    </button>
                 </div>
                 <button onclick="cerrarModalSistemaFacturacion()" class="bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white w-9 h-9 rounded-xl flex items-center justify-center transition-colors absolute top-4 right-4 md:relative md:top-0 md:right-0">
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
             </div>
 
-            <!-- MENU DE PESTAÑAS INTERNAS PARA CORREGIR ESPACIO EN COMPUTADORA -->
+            <!-- MENU DE PESTAÑAS INTERNAS CORRECTO -->
             <div class="bg-slate-100 border-b border-gray-200 px-6 py-2 flex gap-4 text-xs font-bold uppercase shrink-0">
-                <button id="btn-vista-cajero" onclick="cambiarSeccionAdministrativa('cajero')" class="text-blue-600 border-b-2 border-blue-600 pb-1"><i class="fa-solid fa-calculator mr-1"></i> Facturar Venta</button>
-                <button id="btn-vista-auditoria" onclick="cambiarSeccionAdministrativa('auditoria')" class="text-gray-500 hover:text-gray-700 pb-1"><i class="fa-solid fa-chart-line mr-1"></i> Reportes e Historial (Garantías)</button>
+                <button id="btn-vista-cajero" onclick="window.cambiarSeccionAdministrativa('cajero')" class="text-blue-600 border-b-2 border-blue-600 pb-1"><i class="fa-solid fa-calculator mr-1"></i> Facturar Venta</button>
+                <button id="btn-vista-auditoria" onclick="window.cambiarSeccionAdministrativa('auditoria')" class="text-gray-500 hover:text-gray-700 pb-1"><i class="fa-solid fa-chart-line mr-1"></i> Reportes e Historial (Garantías)</button>
             </div>
 
             <!-- SECCIÓN 1: PANEL DE EMISIÓN DE FACTURAS -->
@@ -487,7 +490,7 @@
                     <div class="mt-6 border-t border-slate-800 pt-3 space-y-2">
                         <div class="flex justify-between items-center">
                             <span class="text-xs text-slate-400 font-bold">Total:</span>
-                            <span class="text-base font-black text-white font-mono" id="total-usd">Neto: $0</span>
+                            <span class="text-base font-black text-white font-mono" id="total-usd">Total Neto: $0</span>
                         </div>
                         <div class="grid grid-cols-2 gap-2 text-[11px] font-bold border-t border-slate-800/60 pt-2 text-slate-300">
                             <div class="bg-slate-950 p-2 rounded-xl border border-slate-800 font-mono text-center">
@@ -557,79 +560,73 @@
         </div>
     </div>
 
-    <!-- TICKET DE IMPRESIÓN COMPACTO REESTRUCTURADO DE 15x10 CM -->
+    <!-- TICKET DE IMPRESIÓN COMPACTO HORIZONTAL REESTRUCTURADO EN BASE A LA FOTO (10x15 CM VERTICAL) -->
     <div id="wrapper-impresion-epson" style="display: none;">
-        <div id="contenedor-ticket-real">
-            <div style="text-align: center; border-bottom: 1px dashed #000; padding-bottom: 4px; margin-bottom: 4px;">
-                <h2 style="margin: 0; font-size: 13px; font-weight: 900; text-transform: uppercase;">Tucocel C.A.</h2>
-                <span style="display: block; font-size: 9.5px; font-weight: bold; margin-top: 1px;">NOTA DE ENTREGA</span>
-                <span style="display: block; font-size: 7.5px; font-weight: bold; color: #444;">(SIN VALOR FISCAL)</span>
-                <p style="margin: 2px 0 0 0; font-size: 7.5px; font-weight: 500;">
-                    RIF: J-31378837-6 | Av. Bolívar, entre calles 12 y 13, Cordero.<br>
-                    WhatsApp: 0424-7357549
-                </p>
+        <div id="contenedor-ticket-real" style="font-family: Arial, sans-serif; font-size: 11px; color: #000; line-height: 1.3; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+            
+            <!-- BLOQUE SUPERIOR ENCABEZADO -->
+            <div style="text-align: center; border-bottom: 1px dashed #000000; padding-bottom: 6px; margin-bottom: 6px;">
+                <h2 style="margin: 0; font-size: 16px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px;">TUCOCEL C.A.</h2>
+                <h3 style="margin: 2px 0 0 0; font-size: 12px; font-weight: bold; tracking-spacing: 0.5px;">NOTA DE ENTREGA</h3>
+                <span style="display: block; font-size: 8.5px; font-weight: bold; color: #444;">(SIN VALOR FISCAL)</span>
+                <p style="margin: 2px 0 0 0; font-size: 10px; font-weight: bold;">RIF: J-31378837-6</p>
+                <p style="margin: 1px 0 0 0; font-size: 9px; color: #222;">Avenida Bolívar, entre calles 12 y 13, Cordero, Táchira.</p>
+                <p style="margin: 1px 0 0 0; font-size: 9px; font-weight: bold;">WhatsApp: 0424-7357549</p>
             </div>
 
-            <div style="font-size: 8px; line-height: 1.3; border-bottom: 1px dashed #000; padding-bottom: 3px; margin-bottom: 3px;">
-                <table style="width: 100%; border-collapse: collapse;">
-                    <tr>
-                        <td style="width: 50%;"><strong>Nota N°:</strong> <span id="tk-num-nota" style="font-family: monospace; font-weight: bold;">000001</span></td>
-                        <td style="width: 50%; text-align: right;"><span id="tk-fecha">--/--/---- --:--</span></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2"><strong>Cliente:</strong> <span id="tk-cliente-nombre">--------</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Cédula:</strong> <span id="tk-cliente-cedula">--------</span> | <strong>Tlf:</strong> <span id="tk-cliente-telefono">--------</span></td>
-                        <td style="text-align: right;"><strong>Dir:</strong> <span id="tk-cliente-direccion">--------</span></td>
-                    </tr>
-                </table>
+            <!-- BLOQUE DE DATOS CLIENTE -->
+            <div style="position: relative; font-size: 10.5px; margin-bottom: 6px; line-height: 1.4;">
+                <div style="position: absolute; right: 0; top: 0; text-align: right;">
+                    <span style="display: block; font-weight: bold; font-size: 11px; color: #1d4ed8;">N° Control: <span id="tk-num-nota">973878</span></span>
+                    <span style="display: block; font-size: 8.5px; color: #333; margin-top: 2px;" id="tk-fecha">Fecha: --/--/----</span>
+                </div>
+                
+                <p style="margin: 0;"><strong>Cliente:</strong> <span id="tk-cliente-nombre" style="font-weight: bold;">--------</span></p>
+                <p style="margin: 2px 0 0 0;"><strong>Cédula/RIF:</strong> <span id="tk-cliente-cedula" style="font-family: monospace;">--------</span></p>
+                <p style="margin: 2px 0 0 0;"><strong>Teléfono:</strong> <span id="tk-cliente-telefono">--------</span></p>
+                <p style="margin: 2px 0 0 0;"><strong>Dirección:</strong> <span id="tk-cliente-direccion">--------</span></p>
             </div>
 
-            <div style="margin: 3px 0;">
-                <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 8px;">
+            <!-- CUADRÍCULA DE ARTÍCULOS FLUIDA -->
+            <div style="flex-grow: 1; min-height: 4.5cm; max-height: 5.5cm; overflow: hidden; border-top: 1px solid #000000; border-bottom: 1px solid #000000; margin-bottom: 6px; padding-top: 2px;">
+                <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 11px;">
                     <thead>
-                        <tr style="border-bottom: 1px solid #000; font-weight: bold;">
-                            <th style="padding: 2px 0; width: 12%; text-align: center;">Cant.</th>
-                            <th style="padding: 2px 0; width: 68%;">Descripción / Artículo</th>
-                            <th style="padding: 2px 0; width: 20%; text-align: right;">Total</th>
+                        <tr style="border-bottom: 1px solid #000000; font-weight: bold;">
+                            <th style="padding: 3px 2px; width: 12%; text-align: center;">Cant.</th>
+                            <th style="padding: 3px 4px; width: 68%;">Descripción / Artículo</th>
+                            <th style="padding: 3px 2px; width: 20%; text-align: right;">Monto</th>
                         </tr>
                     </thead>
-                    <tbody id="tk-items-tabla" style="font-weight: 500;"></tbody>
+                    <tbody id="tk-items-tabla"></tbody>
                 </table>
             </div>
 
-            <div style="border-top: 1px dashed #000; margin-top: 3px; width: 100%;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; padding-top: 2px;">
-                    <div style="font-size: 7.5px; line-height: 1.2; width: 45%;">
-                        <p><strong>Forma Pago:</strong> Multimoneda</p>
-                        <p><strong>Estatus:</strong> <span id="tk-status-label" style="font-weight: bold;">Procesado</span></p>
-                    </div>
-                    <div style="width: 55%;">
-                        <table style="width: 100%; font-size: 8px; font-weight: bold;">
-                            <tr>
-                                <td>Total USD:</td>
-                                <td style="text-align: right; font-family: monospace; font-size: 9.5px;" id="tk-total-usd">$0</td>
-                            </tr>
-                            <tr>
-                                <td style="color: #047857;">Ref COP:</td>
-                                <td style="text-align: right; font-family: monospace; color: #047857;" id="tk-total-cop">0 COP</td>
-                            </tr>
-                            <tr>
-                                <td style="color: #1d4ed8;">Ref VES:</td>
-                                <td style="text-align: right; font-family: monospace; color: #1d4ed8;" id="tk-total-bs">0 Bs</td>
-                            </tr>
-                        </table>
+            <!-- INFERIOR TOTALES MULTIMONEDA Y GARANTÍA -->
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 6px; margin-top: auto;">
+                <div style="width: 50%; font-size: 9.5px; line-height: 1.3;">
+                    <p style="margin: 0;"><strong>Forma Pago:</strong> <span style="font-weight: bold;">Multimoneda</span></p>
+                    <p style="margin: 2px 0 0 0;"><strong>Estatus:</strong> <span id="tk-status-label" style="font-weight: bold; color: #137333;">PROCESADA</span></p>
+                </div>
+                
+                <!-- RECUADRO DE TOTALES A LA DERECHA -->
+                <div style="width: 48%; text-align: right; font-size: 11px; font-weight: bold; line-height: 1.4;">
+                    <p style="margin: 0;">Total USD: <span id="tk-total-usd" style="font-family: monospace; font-size: 12px; margin-left: 4px;">$0.00</span></p>
+                    <p style="margin: 2px 0 0 0; color: #047857;">Ref COP: <span id="tk-total-cop" style="font-family: monospace; margin-left: 4px;">0 COP</span></p>
+                    <p style="margin: 2px 0 0 0; color: #1d4ed8;">Ref VES: <span id="tk-total-bs" style="font-family: monospace; margin-left: 4px;">0 Bs</span></p>
+                </div>
+            </div>
+
+            <!-- MARCO DE LEYENDAS Y COBERTURA DE GARANTÍA FIJO AL PIE -->
+            <div style="margin-top: 6px;">
+                <div style="border: 1px solid #000000; padding: 4px; border-radius: 4px; text-align: justify; font-size: 7.5px; font-weight: bold; line-height: 1.2; background: #fff;">
+                    <div style="text-align: center; text-transform: uppercase; margin-bottom: 2px; font-size: 8px;">⚠️ DECLARACIÓN IMPORTANTE DE CONTROL INTERNO</div>
+                    Este documento representa un comprobante de entrega y control interno de almacén para fines administrativos de despacho. El mismo no constituye, ni pretende suplantar bajo ningún concepto, una factura de carácter fiscal regulada por la normativa legal e impositiva vigente. Los montos en COP y VES están basados en la tasa del día.
+                    <div style="color: #b91c1c; border-top: 1px dashed #b91c1c; margin-top: 3px; padding-top: 2px;">
+                        GARANTÍA: Cobertura por defectos técnicos de fábrica en equipos móviles por un lapso de 2 meses (60 días continuos). La garantía queda sin efecto por golpes, humedad, rotura de sellos internos, sobrecargas en la red eléctrica o alteraciones de software original.
                     </div>
                 </div>
             </div>
-            
-            <div style="border: 0.5px solid #000; padding: 3px; border-radius: 3px; text-align: justify; margin-top: 4px; font-size: 6.5px; line-height: 1.1;">
-                Este comprobante de entrega es para control interno de almacén. No sustituye ni pretende suplantar una factura fiscal legal.
-                <span style="font-weight: bold; color: #b91c1c;">
-                    GARANTÍA: Defectos técnicos de fábrica por 2 meses (60 días continuos). Queda anulada por golpes, humedad, sellos rotos, sobrecargas o alteración de software.
-                </span>
-            </div>
+
         </div>
     </div>
 
@@ -639,8 +636,8 @@
             <button onclick="cerrarModalProducto()" class="absolute top-4 right-4 bg-gray-100 hover:bg-gray-200 text-gray-500 w-8 h-8 rounded-full flex items-center justify-center transition-colors z-20">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <div class="aspect-square w-full bg-white border border-gray-100 rounded-2xl overflow-hidden mb-4 flex justify-center items-center p-4">
-                <img id="modal-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Imagen smartphone" class="max-h-full max-w-full object-contain filter drop-shadow-md">
+            <div class="w-full h-64 bg-white border border-gray-100 rounded-2xl overflow-hidden mb-4 flex justify-center items-center p-2">
+                <img id="modal-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Imagen smartphone" class="max-w-full max-h-full object-contain filter drop-shadow-md">
             </div>
             <div class="space-y-3">
                 <div class="flex justify-between items-center">
@@ -709,7 +706,7 @@
         </div>
     </div>
 
-    <!-- NÚCLEO MOTOR LOGICO ASOCIADO A FIREBASE (100% FIABLE) -->
+    <!-- NÚCLEO MOTOR LOGICO ASOCIADO A FIREBASE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, doc, setDoc, getDoc, collection, addDoc, getDocs, query, orderBy, limit, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -740,7 +737,6 @@
         let modoCargaFacturaActivo = 'manual';
         let BASE_TEXTOS_WEB = {};
 
-        // RE-EXPOSICIÓN COMPLETA Y ORDENADA DE LAS FUNCIONES GLOBALES WINDOW
         window.renderizarCamposImeiDinamicos = function(modo) {
             if(modo === 'manual') {
                 const cant = parseInt(document.getElementById('manual-cantidad').value) || 1;
@@ -1078,7 +1074,7 @@
             let totalUSD = 0; ITEMS_VENTA_ACTIVA.forEach(i => totalUSD += i.precio);
             const totalCOP = totalUSD * tCOP;
             const totalBS = tBS > 0 ? totalCOP / tBS : 0;
-            document.getElementById('total-usd').innerText = `Neto: $${totalUSD}`;
+            document.getElementById('total-usd').innerText = `Total Neto: $${totalUSD}`;
             document.getElementById('total-cop-val').innerText = `${totalCOP.toLocaleString('es-CO')} COP`;
             document.getElementById('total-bs-val').innerText = `${totalBS.toLocaleString('es-VE')} Bs`;
         };
@@ -1201,8 +1197,10 @@
             if(s==="1") { 
                 document.getElementById('wrapper-impresion-epson').style.display = 'block'; 
                 window.inyectarDatosAlTicketDOM(n); 
-                window.print(); 
-                document.getElementById('wrapper-impresion-epson').style.display = 'none'; 
+                setTimeout(() => {
+                    window.print(); 
+                    document.getElementById('wrapper-impresion-epson').style.display = 'none'; 
+                }, 350);
             } else if(s==="2") { 
                 window.procesarEnvioWaObjeto(n); 
             } else if(s==="3") {
@@ -1264,7 +1262,7 @@
 
         window.inyectarDatosAlTicketDOM = function(nota) {
             document.getElementById('tk-num-nota').innerText = String(nota.numNota).padStart(6, '0');
-            document.getElementById('tk-fecha').innerText = `Fecha: ${nota.fecha}`;
+            document.getElementById('tk-fecha').innerText = `Fecha: ${nota.fecha.split(' ')[0]}`;
             document.getElementById('tk-cliente-nombre').innerText = nota.cliente;
             document.getElementById('tk-cliente-cedula').innerText = nota.cedula;
             document.getElementById('tk-cliente-direccion').innerText = nota.direccion;
@@ -1275,12 +1273,12 @@
             if(!tbody) return;
             tbody.innerHTML = '';
             nota.items.forEach(i => {
-                const imeiTxt = i.imeis ? `\n[IMEI: ${i.imeis.join(', ')}]` : '';
+                const imeiTxt = i.imeis ? `\n<span style="font-size: 9px; color: #b91c1c;">[IMEI: ${i.imeis.join(', ')}]</span>` : '';
                 tbody.innerHTML += `
-                    <tr style="border-bottom: 1px dashed #eee;">
-                        <td style="padding: 2px 0; text-align: center;">${i.cantidad}</td>
-                        <td style="padding: 2px 0; white-space: pre-line;">${i.modelo}${imeiTxt}</td>
-                        <td style="padding: 2px 0; text-align: right;">$${i.precio}</td>
+                    <tr style="border-bottom: 1px dashed #cccccc;">
+                        <td style="padding: 4px 2px; text-align: center; vertical-align: top; font-weight: bold;">${i.cantidad}</td>
+                        <td style="padding: 4px 4px; vertical-align: top;"><strong>${i.modelo}</strong>${imeiTxt}</td>
+                        <td style="padding: 4px 2px; text-align: right; vertical-align: top; font-weight: bold; padding-right: 4px;">$${i.precio.toFixed(2)}</td>
                     </tr>`;
             });
 
@@ -1352,8 +1350,14 @@
         };
 
         window.procesarEnvioWaObjeto = function(nota) {
-            let desc = nota.items.map(i => `• ${i.cantidad}x ${i.modelo} -> $${i.precio} ${i.imeis ? `(IMEI: ${i.imeis.join(', ')})` : ''}`).join('\n');
-            const msg = `*TUCOCEL C.A.*\n*Nota de Entrega:* N° ${String(nota.numNota).padStart(6, '0')}\n*Estatus:* ${nota.estatus || "PROCESADA"}\n*Fecha:* ${nota.fecha}\n👤 *Cliente:* ${nota.cliente}\n\n💳 *Cédula/RIF:* ${nota.cedula}\n📦 *Detalle de compra:*\n${desc}\n\n💵 *Total General:* $${nota.totalUSD} USD\n\n🔒 _Comprobante interno administrativo._`;
+            let desc = nota.items.map(i => `• ${i.cantidad}x ${i.modelo} -> $${i.precio} ${i.imeis ? `\n📱 *IMEI:* ${i.imeis.join(', ')}` : ''}`).join('\n');
+            const usdNeto = parseFloat(nota.totalUSD) || 0;
+            const copTasa = parseFloat(nota.tasaCop) || 0;
+            const bsTasa = parseFloat(nota.tasaBs) || 0;
+            const totalEnCop = usdNeto * copTasa;
+            const totalEnBs = bsTasa > 0 ? totalEnCop / bsTasa : 0;
+
+            const msg = `*TUCOCEL C.A.*\n*Nota de Entrega:* N° ${String(nota.numNota).padStart(6, '0')}\n*Fecha:* ${nota.fecha}\n\n👥 *Cliente:* ${nota.cliente}\n💳 *Cédula/RIF:* ${nota.cedula}\n📞 *Teléfono:* ${nota.telefono}\n📍 *Dirección:* ${nota.direccion}\n\n📦 *Detalle de compra:*\n${desc}\n\n💵 *Total General:* $${usdNeto.toFixed(2)} USD\n*Ref COP:* ${Math.round(totalEnCop).toLocaleString('es-CO')} COP\n*Ref VES:* ${totalEnBs.toFixed(2).toLocaleString('es-VE')} Bs\n_Valores informativos calculados a la tasa del día._\n\n--------------------------------------------------\n🔒 *CONTROL INTERNO (NO FISCAL)*\n_Este documento es un comprobante de entrega administrativo. No constituye, ni pretende sustituir a una factura fiscal regulada por la ley._\n\n--------------------------------------------------\n🛡️ *TÉRMINOS DE GARANTÍA (60 DÍAS)*\n_Garantía por defectos de fábrica de los equipos celulares: 2 meses. La garantía no cubre golpes, humedad, sellos rotos, sobrecargas eléctricas o alteración de software._\n\n--------------------------------------------------\n🚀 *¡Gracias por confiar en tu compra!*\n🌐 *Visita nuestra Vitrina Digital:* https://tucocel.github.io/`;
             window.open(`https://wa.me/${nota.telefono.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`, '_blank');
         };
 
@@ -1400,8 +1404,8 @@
                 contenedor.innerHTML += `
                     <div onclick="abrirModalProducto('${prod.id}')" class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex flex-col justify-between transition-all hover:shadow-xl cursor-pointer group">
                         <div>
-                            <div class="aspect-square w-full bg-white border border-gray-100 rounded-xl overflow-hidden mb-4 flex justify-center items-center p-2">
-                                <img src="${fotoProd}" alt="Ficha smartphone" class="max-h-full max-w-full object-contain filter drop-shadow-md">
+                            <div class="w-full h-64 bg-white border border-gray-50 rounded-xl overflow-hidden mb-4 flex justify-center items-center p-1">
+                                <img src="${fotoProd}" alt="Ficha smartphone" class="max-w-full max-h-full object-contain filter drop-shadow-md">
                             </div>
                             <div class="flex justify-between items-center mb-1.5 gap-1">
                                 <span class="text-[9px] font-extrabold text-blue-600 bg-blue-50 uppercase tracking-widest px-2 py-0.5 rounded-md">${prod.marca}</span>
@@ -1431,7 +1435,9 @@
                 carrusel.innerHTML += `
                     <div onclick="abrirModalProducto('${prod.id}')" class="snap-start shrink-0 w-44 bg-white rounded-2xl p-3 border border-gray-100 shadow-sm flex flex-col justify-between cursor-pointer select-none">
                         <div>
-                            <div class="w-full aspect-square bg-gray-50 rounded-xl overflow-hidden mb-2 flex items-center justify-center p-2"><img src="${fotoProd}" alt="Ficha accesorio" class="max-h-full max-w-full object-contain"></div>
+                            <div class="w-full h-36 bg-white border border-gray-50 rounded-xl overflow-hidden mb-2 flex items-center justify-center p-2">
+                                <img src="${fotoProd}" alt="Ficha accesorio" class="max-w-full max-h-full object-contain">
+                            </div>
                             <div class="flex flex-col gap-1 items-start">
                                 <span class="text-[8px] font-black uppercase tracking-widest text-blue-500 bg-blue-50 px-1.5 py-0.5 rounded inline-block">${prod.tipoProducto === 'Celular' ? 'Teléfono' : 'Accesorio'}</span>
                                 ${tagEntrega}
@@ -1462,8 +1468,7 @@
         };
 
         window.actualizarSelectFacturacion = function() {
-            const select = document.getElementById('fact-select-producto');
-            if(!select) return;
+            const select = document.getElementById('fact-select-producto'); if(!select) return;
             select.innerHTML = '<option value="">-- Seleccione un producto --</option>';
             PRODUCTOS.forEach(p => { select.innerHTML += `<option value="${p.id}">${p.modelo} (${p.marca}) - $${p.precio}</option>`; });
         };
@@ -1548,12 +1553,8 @@
             }, 4000);
         };
 
-        // ENLACE DE EVENTOS DIRECTO AL INICIAR EL MÓDULO
-        const inputFoto = document.getElementById('add-foto-file');
-        if(inputFoto) inputFoto.addEventListener('change', window.procesarImagen);
-        
-        const selectMarca = document.getElementById('add-marca');
-        if(selectMarca) selectMarca.addEventListener('change', window.verificarMarcaSeleccionadaPanel);
+        const inputFoto = document.getElementById('add-foto-file'); if(inputFoto) inputFoto.addEventListener('change', window.procesarImagen);
+        const selectMarca = document.getElementById('add-marca'); if(selectMarca) selectMarca.addEventListener('change', window.verificarMarcaSeleccionadaPanel);
 
         window.descargarTextosPersonalizados();
         window.cargarInventarioFirebase();
