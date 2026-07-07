@@ -193,11 +193,20 @@
             </button>
         </div>
 
-        <div class="bg-blue-50 border border-blue-100 rounded-2xl p-5 mb-8 max-w-4xl mx-auto flex items-start gap-4 shadow-sm">
-            <i class="fa-solid fa-circle-info text-blue-600 text-xl mt-0.5 shrink-0"></i>
-            <div class="text-xs md:text-sm text-blue-900 leading-relaxed text-justify w-full">
-                <p>Todos los equipos marcados como disponibles se encuentran <span class="font-bold text-blue-950">listos en nuestra tienda física</span> para su despacho inmediato.</p>
-                <p class="mt-2 text-blue-700">¿Ves un modelo que te interesa bajo consulta? <span class="font-bold text-blue-950">¡Pregúntanos al instante!</span> Confirmamos disponibilidad en la zona de inmediato para ti.</p>
+        <!-- REESTRUCTURACIÓN COMPLETA Y CORPORATIVA DEL CUADRO INFORMATIVO (PRIMERA IMAGEN COREGIDA) -->
+        <div class="bg-white border-l-4 border-blue-600 rounded-r-2xl p-5 mb-8 max-w-4xl mx-auto shadow-md flex flex-col md:flex-row items-start md:items-center gap-4 transition-all hover:shadow-lg">
+            <div class="bg-blue-50 p-3 rounded-xl text-blue-600 shrink-0 hidden sm:flex items-center justify-center shadow-inner">
+                <i class="fa-solid fa-circle-info text-2xl"></i>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full divide-y md:divide-y-0 md:divide-x divide-gray-100">
+                <div class="text-xs md:text-sm text-gray-700 leading-relaxed space-y-1 pr-0 md:pr-4">
+                    <span class="font-bold text-blue-600 uppercase tracking-wider text-[10px] block"><i class="fa-solid fa-bolt mr-1"></i> Stock Físico Local</span>
+                    <p>Todos los equipos marcados como disponibles se encuentran <span class="font-bold text-gray-950 underline decoration-blue-500 decoration-2">listos en nuestra tienda física</span> para su despacho y entrega inmediata.</p>
+                </div>
+                <div class="text-xs md:text-sm text-gray-700 leading-relaxed space-y-1 pt-3 md:pt-0 md:pl-5">
+                    <span class="font-bold text-amber-500 uppercase tracking-wider text-[10px] block"><i class="fa-solid fa-magnifying-glass mr-1"></i> Equipos bajo Consulta</span>
+                    <p>¿Buscas un modelo específico? <span class="font-bold text-gray-950">¡Pregúntanos al instante!</span> Confirmamos su disponibilidad en tiempo real con nuestros almacenes aliados.</p>
+                </div>
             </div>
         </div>
 
@@ -797,7 +806,7 @@
             const formCompra = document.getElementById('form-compra');
             
             if(mod === 'consultar') {
-                document.getElementById('modal-desc').innerHTML = `${prod.desc || ''}<br><br><span class="block p-2 bg-blue-50 text-blue-950 border border-blue-200 font-bold rounded-xl text-[11px]">🔮 PREVENTA: Este equipo se trabaja bajo la modalidad de preventa prepagada. Consulta disponibilidad, vas a la tienda, cancelas y, después de cancelado, en 2 hours ya vas a retirarlo, lo cual será notificado.</span>`;
+                document.getElementById('modal-desc').innerHTML = `${prod.desc || ''}<br><br><span class="block p-2 bg-blue-50 text-blue-950 border border-blue-200 font-bold rounded-xl text-[11px]">🔮 PREVENTA: Este equipo se trabaja bajo la modalidad de preventa prepagada. Consulta disponibilidad, vas a la tienda, cancelas y, después de cancelado, en 2 horas ya vas a retirarlo, lo cual será notificado.</span>`;
                 formCompra.innerHTML = `
                     <div class="bg-gray-50 border border-gray-100 p-4 rounded-2xl space-y-3">
                         <div class="text-center p-2 bg-blue-50 text-blue-950 font-bold rounded-xl text-[11px]">
@@ -1311,6 +1320,7 @@
             });
         }
 
+        // FUNCIÓN DEL CARRUSEL INFERIOR ACTUALIZADA (SEGUNDA IMAGEN COREGIDA)
         function renderizarCarruselOtrosHTML(lista) {
             const carrusel = document.getElementById('carrusel-otros'); if(!carrusel) return;
             carrusel.innerHTML = '';
@@ -1325,7 +1335,10 @@
                             <span class="text-[8px] font-black uppercase tracking-widest text-blue-500 bg-blue-50 px-1.5 py-0.5 rounded inline-block">Accesorio</span>
                             <h4 class="font-bold text-gray-800 text-xs truncate mt-1">${prod.modelo}</h4>
                         </div>
-                        <div class="mt-2"><p class="text-sm font-black text-gray-900">$${precioTxt}</p></div>
+                        <div class="mt-2">
+                            <p class="text-sm font-black text-gray-900">$${precioTxt}</p>
+                            ${esAdminAutenticado ? `<div class="flex gap-2 border-t pt-1.5 mt-1 justify-center"><button onclick="event.stopPropagation(); prepararEdicionArticulo('${prod.id}')" class="text-blue-600 hover:underline text-[11px] font-bold">Editar</button><button onclick="event.stopPropagation(); eliminarProducto('${prod.id}')" class="text-red-500 hover:underline text-[11px] font-bold">Borrar</button></div>` : ''}
+                        </div>
                     </div>`;
             });
         }
@@ -1448,4 +1461,4 @@
         inicializarScrollAutomaticoCarrusel();
     </script>
 </body>
-    </html>
+        </html>
