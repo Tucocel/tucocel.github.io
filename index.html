@@ -53,163 +53,168 @@
             color: #f59e0b;
         }
 
+        /* DISEÑO DE FACTURA PREMIUM E IMPRESIÓN REQUERIDO */
+        #wrapper-impresion-epson {
+            width: 100mm;
+            background: #ffffff;
+            margin: 0 auto;
+            padding: 4mm;
+            box-sizing: border-box;
+        }
+
+        .ticket-header-title {
+            color: #003366;
+            font-size: 18px;
+            font-weight: 800;
+            text-align: center;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+        .ticket-doc-type {
+            color: #cc3333;
+            font-size: 13px;
+            font-weight: 800;
+            text-align: center;
+            letter-spacing: 1px;
+            margin: 3px 0 1px 0;
+        }
+        .ticket-sub-text {
+            font-size: 8.5px;
+            color: #4b5563;
+            text-align: center;
+            line-height: 1.3;
+            margin: 0;
+        }
+        .ticket-info-box {
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 8px 10px;
+            margin: 10px 0;
+            background-color: #f8fafc;
+        }
+        .ticket-info-table {
+            width: 100%;
+            font-size: 10px;
+            line-height: 1.4;
+            color: #1e293b;
+        }
+        .ticket-info-table td {
+            vertical-align: top;
+            padding: 1px 0;
+        }
+        .ticket-control-no {
+            color: #cc3333;
+            font-weight: 700;
+        }
+        .ticket-items-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10px;
+            margin: 10px 0;
+        }
+        .ticket-items-table th {
+            background-color: #003366;
+            color: #ffffff;
+            font-weight: 700;
+            padding: 5px 6px;
+            font-size: 9px;
+            text-transform: uppercase;
+            border: none;
+        }
+        .ticket-items-table td {
+            padding: 7px 6px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #334155;
+            vertical-align: top;
+        }
+        .ticket-footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 8px;
+            gap: 8px;
+        }
+        .ticket-status-box {
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 8px;
+            width: 46%;
+            font-size: 9px;
+            background-color: #ffffff;
+            box-sizing: border-box;
+        }
+        .ticket-status-badge {
+            display: inline-block;
+            background-color: #16a34a;
+            color: #ffffff;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 8.5px;
+            margin-top: 4px;
+            text-align: center;
+        }
+        .ticket-totals-box {
+            width: 52%;
+            box-sizing: border-box;
+        }
+        .ticket-totals-table {
+            width: 100%;
+            font-size: 10px;
+        }
+        .ticket-totals-table td {
+            padding: 2px 0;
+        }
+        .ticket-total-row {
+            font-size: 12px;
+            font-weight: 800;
+            color: #003366;
+            border-top: 1.5px double #003366;
+        }
+        .ticket-currency-ref {
+            font-size: 9.5px;
+            font-style: italic;
+            font-weight: 600;
+        }
+        .ticket-legal-box {
+            margin-top: 10px;
+            border: 1px solid #475569;
+            padding: 6px;
+            border-radius: 8px;
+            font-size: 7.5px;
+            text-align: justify;
+            line-height: 1.2;
+            color: #334155;
+        }
+
         @media print {
+            body {
+                background: #ffffff !important;
+            }
             body > *:not(#wrapper-impresion-epson) {
                 display: none !important;
                 visibility: hidden !important;
             }
-            #wrapper-impresion-epson, #contenedor-ticket-real, #contenedor-ticket-real * {
+            #wrapper-impresion-epson {
                 display: block !important;
                 visibility: visible !important;
-            }
-            #wrapper-impresion-epson {
                 position: absolute !important;
                 left: 0 !important;
                 top: 0 !important;
                 width: 100mm !important;
                 height: auto !important;
-                min-height: 150mm !important;
                 margin: 0 !important;
-                padding: 0 !important;
+                padding: 4mm !important;
                 box-sizing: border-box !important;
-                background: #fff !important;
                 overflow: visible !important;
             }
-            #contenedor-ticket-real {
-                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
-                width: 100mm !important;
-                height: auto !important;
-                min-height: 150mm !important;
-                padding: 5mm !important;
-                box-sizing: border-box !important;
-                background: #fff !important;
-                color: #333333 !important;
-                overflow: visible !important;
-                display: flex !important;
-                flex-direction: column !important;
-                justify-content: flex-start !important;
-                line-height: 1.2 !important;
-            }
-            .header, .info-grid, .items-table, .footer-grid, .legal-box {
+            .header, .ticket-info-box, .ticket-items-table, .ticket-footer-container, .ticket-legal-box {
                 page-break-inside: avoid !important;
             }
             @page {
                 size: 100mm auto;
                 margin: 0 !important;
             }
-        }
-
-        /* ESTILOS DEL TICKET RETROCOMPATIBLES CON TU IMAGEN REQUERIDA */
-        .ticket-header-title {
-            color: #003366;
-            font-size: 16px;
-            font-weight: 900;
-            text-align: center;
-            letter-spacing: 0.5px;
-            margin-bottom: 2px;
-        }
-        .ticket-doc-type {
-            color: #b91c1c;
-            font-size: 12px;
-            font-weight: 800;
-            text-align: center;
-            letter-spacing: 1px;
-            margin-top: 4px;
-        }
-        .ticket-sub-text {
-            font-size: 8px;
-            color: #555555;
-            text-align: center;
-            line-height: 1.3;
-        }
-        .ticket-info-grid {
-            display: flex;
-            justify-content: space-between;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            padding: 6px 8px;
-            margin-top: 8px;
-            margin-bottom: 10px;
-            background-color: #f8fafc;
-            font-size: 9px;
-        }
-        .ticket-info-box p {
-            margin: 2px 0;
-        }
-        .ticket-control-no {
-            color: #b91c1c;
-            font-weight: bold;
-        }
-        .ticket-items-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 9px;
-            margin-bottom: 10px;
-        }
-        .ticket-items-table th {
-            background-color: #003366;
-            color: #ffffff;
-            font-weight: 700;
-            padding: 5px 4px;
-            text-transform: uppercase;
-            font-size: 8.5px;
-        }
-        .ticket-items-table td {
-            padding: 6px 4px;
-            border-bottom: 1px solid #e2e8f0;
-            vertical-align: top;
-        }
-        .ticket-footer-grid {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-top: 5px;
-        }
-        .ticket-status-box {
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            padding: 6px;
-            width: 45%;
-            font-size: 8.5px;
-        }
-        .ticket-status-badge {
-            display: inline-block;
-            background-color: #10b981;
-            color: white;
-            font-weight: 800;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 8px;
-            margin-top: 2px;
-        }
-        .ticket-totals-box {
-            width: 50%;
-        }
-        .ticket-totals-table {
-            width: 100%;
-            font-size: 9px;
-        }
-        .ticket-totals-table td {
-            padding: 2px 0;
-        }
-        .ticket-total-row {
-            font-size: 11px;
-            font-weight: bold;
-            color: #003366;
-            border-top: 1px double #003366;
-        }
-        .ticket-currency-ref {
-            font-size: 8px;
-            font-style: italic;
-        }
-        .ticket-legal-box {
-            margin-top: 8px;
-            border: 1px solid #333333;
-            padding: 5px;
-            border-radius: 6px;
-            font-size: 7px;
-            text-align: justify;
-            line-height: 1.15;
         }
     </style>
 </head>
@@ -602,97 +607,97 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="bg-slate-900 text-white p-4 sm:p-5 rounded-3xl flex flex-col justify-between shadow-xl min-h-[320px] lg:h-auto">
-                <div>
-                    <h4 class="text-[11px] font-black uppercase tracking-wider text-amber-400 border-b border-slate-800 pb-2 mb-3 flex justify-between items-center">
-                        <span>Resumen de Venta Activa</span>
-                        <span id="fact-items-count" class="bg-slate-800 text-white text-[9px] px-2 py-0.5 rounded-full font-mono">0 items</span>
-                    </h4>
-                    <div id="fact-lista-items" class="space-y-2 max-h-48 lg:max-h-[32vh] overflow-y-auto no-scrollbar pr-1">
-                        <p class="text-center text-slate-500 text-xs py-6">No hay artículos añadidos todavía.</p>
-                    </div>
-                </div>
-
-                <div class="mt-6 border-t border-slate-800 pt-3 space-y-2">
-                    <div class="flex justify-between items-center">
-                        <span class="text-xs text-slate-400 font-bold">Total:</span>
-                        <span class="text-base font-black text-white font-mono" id="total-usd">Total Neto: $0</span>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2 text-[11px] font-bold border-t border-slate-800/60 pt-2 text-slate-300">
-                        <div class="bg-slate-950 p-2 rounded-xl border border-slate-800 font-mono text-center">
-                            <span class="block text-[8px] text-slate-500 uppercase font-bold tracking-wider">Ref COP</span>
-                            <span id="total-cop-val" class="text-emerald-400 font-extrabold">0 COP</span>
-                        </div>
-                        <div class="bg-slate-950 p-2 rounded-xl border border-slate-800 font-mono text-center">
-                            <span class="block text-[8px] text-slate-500 uppercase font-bold tracking-wider">Ref Bs</span>
-                            <span id="total-bs-val" class="text-blue-400 font-extrabold">0 Bs</span>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2 pt-3">
-                        <button onclick="ejecutarBotonImprimir()" class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-xs py-3 rounded-xl transition-all shadow-md flex items-center justify-center gap-1.5 uppercase">
-                            <i class="fa-solid fa-print text-sm"></i> Imprimir
-                        </button>
-                        <button onclick="ejecutarBotonWhatsApp()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-3 rounded-xl transition-all shadow-md flex items-center justify-center gap-1.5 uppercase">
-                            <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SECCIÓN 2: PRIVADA DE AUDITORÍA, REPORTES Y CONTROL DE GARANTÍAS -->
-        <div id="bloque-reportes-auditoria" class="p-4 sm:p-6 bg-gray-50 flex-grow overflow-y-auto hidden space-y-4">
-            <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm space-y-3">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-gray-100 pb-2">
+                <div class="bg-slate-900 text-white p-4 sm:p-5 rounded-3xl flex flex-col justify-between shadow-xl min-h-[320px] lg:h-auto">
                     <div>
-                        <h4 class="font-extrabold text-xs text-gray-900 uppercase flex items-center gap-1"><i class="fa-solid fa-shield-halved text-blue-600"></i> Módulo de Auditoría y Verificación de Historial</h4>
-                        <p class="text-[10px] text-gray-400 mt-0.5">Filtra y busca clientes por cédula para validar estados de facturas y los 2 meses (60 días) de garantía.</p>
+                        <h4 class="text-[11px] font-black uppercase tracking-wider text-amber-400 border-b border-slate-800 pb-2 mb-3 flex justify-between items-center">
+                            <span>Resumen de Venta Activa</span>
+                            <span id="fact-items-count" class="bg-slate-800 text-white text-[9px] px-2 py-0.5 rounded-full font-mono">0 items</span>
+                        </h4>
+                        <div id="fact-lista-items" class="space-y-2 max-h-48 lg:max-h-[32vh] overflow-y-auto no-scrollbar pr-1">
+                            <p class="text-center text-slate-500 text-xs py-6">No hay artículos añadidos todavía.</p>
+                        </div>
                     </div>
-                    <button onclick="exportarHistorialExcel()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3.5 py-1.5 rounded-xl transition-colors flex items-center gap-1 shadow-sm w-full sm:w-auto justify-center">
-                        <i class="fa-solid fa-file-excel"></i> Exportar Respaldo Excel
-                    </button>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <input type="text" id="busq-historial" onkeyup="filtrarTablaHistorial()" placeholder="🔍 Buscar por Cédula, Nombre o Nota..." class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs font-semibold focus:outline-blue-500 shadow-sm">
-                    <input type="date" id="busq-fecha" onchange="filtrarTablaHistorial()" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs font-semibold text-gray-700 focus:outline-blue-500 shadow-sm">
-                    <div class="flex items-center justify-center bg-slate-100 rounded-xl px-3 py-2 border border-gray-200 font-bold text-[10px] text-slate-600 uppercase tracking-wider shadow-inner">
-                        🔒 Registros protegidos contra alteración
+
+                    <div class="mt-6 border-t border-slate-800 pt-3 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-slate-400 font-bold">Total:</span>
+                            <span class="text-base font-black text-white font-mono" id="total-usd">Total Neto: $0</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 text-[11px] font-bold border-t border-slate-800/60 pt-2 text-slate-300">
+                            <div class="bg-slate-950 p-2 rounded-xl border border-slate-800 font-mono text-center">
+                                <span class="block text-[8px] text-slate-500 uppercase font-bold tracking-wider">Ref COP</span>
+                                <span id="total-cop-val" class="text-emerald-400 font-extrabold">0 COP</span>
+                            </div>
+                            <div class="bg-slate-950 p-2 rounded-xl border border-slate-800 font-mono text-center">
+                                <span class="block text-[8px] text-slate-500 uppercase font-bold tracking-wider">Ref Bs</span>
+                                <span id="total-bs-val" class="text-blue-400 font-extrabold">0 Bs</span>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 pt-3">
+                            <button onclick="ejecutarBotonImprimir()" class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-xs py-3 rounded-xl transition-all shadow-md flex items-center justify-center gap-1.5 uppercase">
+                                <i class="fa-solid fa-print text-sm"></i> Imprimir
+                            </button>
+                            <button onclick="ejecutarBotonWhatsApp()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-3 rounded-xl transition-all shadow-md flex items-center justify-center gap-1.5 uppercase">
+                                <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="overflow-x-auto border border-gray-200 bg-white rounded-xl shadow-sm max-h-[42vh] scroll-smooth">
-                <table class="w-full text-left text-[11px] border-collapse min-w-[750px]">
-                    <thead>
-                        <tr class="bg-gray-100 text-gray-600 font-black uppercase border-b border-gray-200 sticky top-0 z-10 text-[10px] tracking-wide">
-                            <th class="p-3">N° Nota</th>
-                            <th class="p-3">Fecha / Hora</th>
-                            <th class="p-3">Cliente</th>
-                            <th class="p-3">Cédula / RIF</th>
-                            <th class="p-3">Artículos Comprados</th>
-                            <th class="p-3 text-right">Monto USD</th>
-                            <th class="p-3 text-center">Estatus</th>
-                            <th class="p-3 text-center">Gestión</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tabla-historial-cuerpo" class="divide-y divide-gray-100 font-medium text-gray-700">
-                        <tr>
-                            <td colspan="8" class="p-4 text-center text-gray-400">Ningún registro cargado de Firebase.</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <!-- SECCIÓN 2: PRIVADA DE AUDITORÍA, REPORTES Y CONTROL DE GARANTÍAS -->
+            <div id="bloque-reportes-auditoria" class="p-4 sm:p-6 bg-gray-50 flex-grow overflow-y-auto hidden space-y-4">
+                <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm space-y-3">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-gray-100 pb-2">
+                        <div>
+                            <h4 class="font-extrabold text-xs text-gray-900 uppercase flex items-center gap-1"><i class="fa-solid fa-shield-halved text-blue-600"></i> Módulo de Auditoría y Verificación de Historial</h4>
+                            <p class="text-[10px] text-gray-400 mt-0.5">Filtra y busca clientes por cédula para validar estados de facturas y los 2 meses (60 días) de garantía.</p>
+                        </div>
+                        <button onclick="exportarHistorialExcel()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3.5 py-1.5 rounded-xl transition-colors flex items-center gap-1 shadow-sm w-full sm:w-auto justify-center">
+                            <i class="fa-solid fa-file-excel"></i> Exportar Respaldo Excel
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <input type="text" id="busq-historial" onkeyup="filtrarTablaHistorial()" placeholder="🔍 Buscar por Cédula, Nombre o Nota..." class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs font-semibold focus:outline-blue-500 shadow-sm">
+                        <input type="date" id="busq-fecha" onchange="filtrarTablaHistorial()" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs font-semibold text-gray-700 focus:outline-blue-500 shadow-sm">
+                        <div class="flex items-center justify-center bg-slate-100 rounded-xl px-3 py-2 border border-gray-200 font-bold text-[10px] text-slate-600 uppercase tracking-wider shadow-inner">
+                            🔒 Registros protegidos contra alteración
+                        </div>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto border border-gray-200 bg-white rounded-xl shadow-sm max-h-[42vh] scroll-smooth">
+                    <table class="w-full text-left text-[11px] border-collapse min-w-[750px]">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-600 font-black uppercase border-b border-gray-200 sticky top-0 z-10 text-[10px] tracking-wide">
+                                <th class="p-3">N° Nota</th>
+                                <th class="p-3">Fecha / Hora</th>
+                                <th class="p-3">Cliente</th>
+                                <th class="p-3">Cédula / RIF</th>
+                                <th class="p-3">Artículos Comprados</th>
+                                <th class="p-3 text-right">Monto USD</th>
+                                <th class="p-3 text-center">Estatus</th>
+                                <th class="p-3 text-center">Gestión</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-historial-cuerpo" class="divide-y divide-gray-100 font-medium text-gray-700">
+                            <tr>
+                                <td colspan="8" class="p-4 text-center text-gray-400">Ningún registro cargado de Firebase.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- TICKET DE IMPRESIÓN COMPACTO VERTICAL DE GAMA ALTA (100% DINÁMICO Y ADAPTABLE) -->
+    <!-- TICKET DE IMPRESIÓN COMPACTO VERTICAL DE GAMA ALTA (100% FIEL A TU SEGUNDO FORMATO 10x15 CM) -->
     <div id="wrapper-impresion-epson" style="display: none;">
         <div id="contenedor-ticket-real">
             
             <!-- Encabezado Corporativo -->
-            <div class="header text-center">
+            <div class="header">
                 <h1 class="ticket-header-title">TUCOCEL C.A.</h1>
                 <div class="ticket-doc-type">NOTA DE ENTREGA</div>
                 <div class="ticket-sub-text">(SIN VALOR FISCAL)</div>
@@ -702,37 +707,44 @@
             </div>
 
             <!-- Información del Cliente y Factura -->
-            <div class="ticket-info-grid">
-                <div class="ticket-info-box" style="width: 55%;">
-                    <p><strong>Cliente:</strong> <span id="tk-cliente-nombre">--------</span></p>
-                    <p><strong>Cédula/RIF:</strong> <span id="tk-cliente-cedula">--------</span></p>
-                    <p><strong>Teléf:</strong> <span id="tk-cliente-telefono">--------</span></p>
-                    <p><strong>Dir:</strong> <span id="tk-cliente-direccion">--------</span></p>
-                </div>
-                <div class="ticket-info-box text-right" style="width: 40%;">
-                    <p><strong>N° Control:</strong> <span class="ticket-control-no" id="tk-num-nota">000000</span></p>
-                    <p><strong>Fecha:</strong> <span id="tk-fecha">--/--/----</span></p>
-                </div>
+            <div class="ticket-info-box">
+                <table class="ticket-info-table">
+                    <tr>
+                        <td style="width: 60%;"><strong>Cliente:</strong> <span id="tk-cliente-nombre">--------</span></td>
+                        <td style="width: 40%; text-align: right;"><strong>N° Control:</strong> <span class="ticket-control-no" id="tk-num-nota">000000</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cédula/RIF:</strong> <span id="tk-cliente-cedula">--------</span></td>
+                        <td style="text-align: right;"><strong>Fecha:</strong> <span id="tk-fecha">--/--/----</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Teléf:</strong> <span id="tk-cliente-telefono">--------</span></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><strong>Dir:</strong> <span id="tk-cliente-direccion">--------</span></td>
+                    </tr>
+                </table>
             </div>
 
-            <!-- Tabla de Productos Flujo Automático Libre -->
+            <!-- Tabla de Productos Flujo Libre Estilo Foto 1 -->
             <table class="ticket-items-table">
                 <thead>
                     <tr>
-                        <th style="width: 15%; text-align: center;">Cant</th>
-                        <th style="width: 60%; text-align: left;">Descripción / Artículo</th>
-                        <th style="width: 25%; text-align: right;">Monto</th>
+                        <th style="width: 12%; text-align: center;">CANT</th>
+                        <th style="width: 63%; text-align: left;">DESCRIPCIÓN / ARTÍCULO</th>
+                        <th style="width: 25%; text-align: right;">MONTO</th>
                     </tr>
                 </thead>
                 <tbody id="tk-items-tabla"></tbody>
             </table>
 
-            <!-- Pie de página con Totales, Estado -->
-            <div class="ticket-footer-grid">
+            <!-- Pie de página con Totales, Estado y Textos Fieles a la Foto 1 -->
+            <div class="ticket-footer-container">
                 <div class="ticket-status-box">
-                    <p style="margin: 0 0 2px 0;"><strong>Forma de Pago:</strong></p>
-                    <p style="margin: 0 0 4px 0; color: #555; font-size: 8px;">Multimoneda</p>
-                    <p style="margin: 0 0 2px 0;"><strong>Estatus:</strong></p>
+                    <p style="margin: 0 0 2px 0; font-weight: bold; color: #1e293b;">Forma de Pago:</p>
+                    <p style="margin: 0 0 4px 0; color: #475569; font-size: 8.5px;">Multimoneda</p>
+                    <p style="margin: 0 0 2px 0; font-weight: bold; color: #1e293b;">Estatus:</p>
                     <span class="ticket-status-badge" id="tk-status-label">PROCESADA</span>
                 </div>
                 <div class="ticket-totals-box">
@@ -753,18 +765,18 @@
                 </div>
             </div>
             
-            <div style="font-size: 7.5px; color: #555555; text-align: center; margin-top: 6px; font-style: italic;">
+            <div style="font-size: 7.5px; color: #475569; text-align: center; margin-top: 6px; font-style: italic;">
                 Los montos en COP y VES están basados en la tasa del día.
             </div>
 
-            <!-- Recuadro Legal y Cobertura Protegida -->
+            <!-- Recuadro Legal y de Cobertura Rediseñado Súper Limpio -->
             <div class="ticket-legal-box">
-                <strong style="display: block; text-align: center; font-size: 8px; margin-bottom: 3px;">🔒 CONTROL INTERNO (NO FISCAL)</strong>
+                <strong style="display: block; text-align: center; font-size: 8.5px; margin-bottom: 2px; color: #0f172a;">🔒 CONTROL INTERNO (NO FISCAL)</strong>
                 Este documento representa un comprobante de entrega administrativo. No constituye, ni pretende sustituir a una factura fiscal regulada por la ley.
-                <div style="color: #b91c1c; border-top: 1px dashed #b91c1c; margin-top: 4px; padding-top: 3px; font-weight: bold;">
+                <div style="color: #b91c1c; border-top: 1px dashed #cbd5e1; margin-top: 4px; padding-top: 3px; font-weight: 700;">
                     🛡️ TÉRMINOS DE GARANTÍA (60 DÍAS): Cobertura por defectos técnicos de fábrica en equipos móviles por un lapso de 2 meses (60 días continuos). Queda sin efecto por golpes, marcas de humedad, sellos rotos, sobrecargas eléctricas o alteración del software original.
                 </div>
-                <div style="text-align: center; border-top: 1px dashed #333333; margin-top: 4px; padding-top: 3px; font-weight: bold; color: #003366; font-size: 8px;">
+                <div style="text-align: center; border-top: 1px dashed #cbd5e1; margin-top: 4px; padding-top: 3px; font-weight: 800; color: #003366;">
                     🚀 ¡Gracias por confiar en tu compra! — Tucocel C.A.
                 </div>
             </div>
@@ -1294,7 +1306,7 @@
             const nuevoTexto = prompt(`✏️ Modificar texto:`, elemento.innerText.trim());
             if (nuevoTexto === null || nuevoTexto.trim() === "") return;
             elemento.innerText = nuevoTexto.trim();
-            BASE_TEXTOS_WEB = docSnap.data() || {};
+            BASE_TEXTOS_WEB[idElemento] = { texto: nuevoTexto.trim(), alineacion: "1", estilo: "1" };
             await window.sincronizarTextosFirebase();
         };
 
@@ -1418,7 +1430,7 @@
             tbody.innerHTML = '';
             
             nota.items.forEach(item => {
-                const imeiTxt = item.imeis ? `<br><span class="imei" style="color: #b91c1c; font-size: 7.5px; display: block; margin-top: 2px; font-weight: bold;">[IMEI: ${item.imeis.join(', ')}]</span>` : '';
+                const imeiTxt = item.imeis ? `<br><span class="imei" style="color: #b91c1c; font-size: 8px; display: block; margin-top: 2px; font-weight: bold;">[IMEI: ${item.imeis.join(', ')}]</span>` : '';
                 tbody.innerHTML += `
                     <tr>
                         <td style="text-align: center;">${item.cantidad}</td>
