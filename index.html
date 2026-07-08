@@ -6,8 +6,8 @@
     <title>Tucocel C.A. — Telefonía Móvil y Computación</title>
 
     <!-- METATAGS OPEN GRAPH (EL BOOM VISUAL AL COMPARTIR LA WEB) -->
-    <meta property="og:title" content="📱 TUCOCEL C.A. | Tu Vitrina Tecnológica Digital">
-    <meta property="og:description" content="🔥 ¡Catálogo en tiempo real! Visita la vitrina de Tucocel, Agente Autorizado Movistar en Cordero. ✨ SERVICIOS: 📲 Venta de Líneas Movistar • 📱 Celulares con Garantía • 🔌 Accesorios Premium • 🛠️ Servicio Técnico Especializado • 📸 Servicio Fotográfico. ¡Entra ya y cotiza al instante! 🚀">
+    <meta property="og:title" content="📱 TUCOCEL C.A. | Vitrina Tecnológica Digital">
+    <meta property="og:description" content="🔥 ¡Explora nuestro stock en tiempo real! Conéctate con la evolución tecnológica y cotiza al instante desde cualquier lugar del mundo. 🚀">
     <meta property="og:image" content="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80">
     <meta property="og:url" content="https://tucocel.github.io/">
     <meta property="og:type" content="website">
@@ -304,7 +304,7 @@
 
     <!-- MAIN PRINCIPAL -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div class="m-8 max-w-4xl mx-auto bg-gradient-to-r from-blue-600 to-blue-800 text-white p-6 rounded-2xl shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4 border border-blue-500">
+        <div class="mb-8 max-w-4xl mx-auto bg-gradient-to-r from-blue-600 to-blue-800 text-white p-6 rounded-2xl shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4 border border-blue-500">
             <div class="flex items-center gap-4 text-center sm:text-left">
                 <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-2xl shrink-0">
                     <i class="fa-solid fa-comments-dollar text-amber-300"></i>
@@ -601,7 +601,7 @@
                         </div>
 
                         <div class="flex justify-end pt-1">
-                            <button onclick="ejecutarBotonAgregarItem()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white text-xs font-black px-5 py-2.5 rounded-xl shadow-md transition-colors flex items-center justify-center gap-1">
+                            <button onclick="window.ejecutarBotonAgregarItem()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white text-xs font-black px-5 py-2.5 rounded-xl shadow-md transition-colors flex items-center justify-center gap-1">
                                 <i class="fa-solid fa-circle-plus"></i> Añadir Línea al Ticket
                             </button>
                         </div>
@@ -1454,7 +1454,7 @@
         };
 
         window.compartirVitrinaGeneralWa = function() {
-            const msg = `🔥 ¡Catálogo en tiempo real! Visita la vitrina de Tucocel, Agente Autorizado Movistar en Cordero. ¡Entra ya y cotiza al instante! 🚀\n\n✨ *NUESTROS SERVICIOS:*\n📲 Venta de Líneas Movistar\n📱 Smartphones Nuevos con Garantía de 60 Días\n🔌 Accesorios Premium para Celulares y Computación\n🛠️ Servicio Técnico Especializado (Celulares, Laptops e Impresoras)\n📸 Servicio Fotográfico Profesional\n\n👇 _¡Haz clic aquí abajo y descubre los precios de hoy!_ 👇\nhttps://tucocel.github.io/`;
+            const msg = `🌍 ¡TUCOCEL EVOLUCIONA! Lanzamos oficialmente nuestra Vitrina Tecnológica Digital para conectar contigo desde cualquier rincón del mundo. 🚀\n\n🔥 Explora nuestro stock disponible en tiempo real, cotiza al instante y haz tu compra online de forma rápida y segura.\n\n✨ NUESTROS SERVICIOS:\n📲 Venta de Líneas Movistar, Recuperación de Chip y eSIM\n📱 Smartphones de Última Generación con Garantía Real\n🔌 Accesorios Premium para Celulares y Computación\n🛠️ Servicio Técnico de Telefonía, Computación e Impresoras\n📸 Estudio Fotográfico (Foto Estudiantil, Fotocarnet e Impresiones)\n💼 Servicio de Publicidad Impresa y Digital\n\n👇 ¡Ingresa a la vitrina oficial con un clic aquí abajo! 👇\nhttps://tucocel.github.io/`;
             window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
         };
 
@@ -1526,7 +1526,7 @@
             const totalEnCop = usdNeto * copTasa;
             const totalEnBs = bsTasa > 0 ? totalEnCop / bsTasa : 0;
 
-            const msg = `*TUCOCEL C.A.*\n*Nota de Entrega:* N° ${String(nota.numNota).padStart(6, '0')}\n*Fecha:* ${nota.fecha}\n\n👤 *Cliente:* ${nota.cliente}\n💳 *Cédula/RIF:* ${nota.cedula}\n📞 *Teléfono:* ${nota.telefono}\n📍 *Dirección:* ${nota.direccion}\n\n📦 *Detalle de compra:*\n${desc}\n\n💵 *Total General:* $${usdNeto.toFixed(2)} USD\n*Ref COP:* ${Math.round(totalEnCop).toLocaleString('es-CO')} COP\n*Ref VES:* ${totalEnBs.toFixed(2).toLocaleString('es-VE')} Bs\n_Valores informativos calculados a la tasa del día._\n\n================================\n🔒 *CONTROL INTERNO (NO FISCAL)*\n_Este documento es un comprobante de entrega administrativo. No constituye, ni pretende sustituir a una factura fiscal regulada por la ley._\n\n================================\n🛡️ *TÉRMINOS DE GARANTÍA (60 DÍAS)*\n_Garantía por defectos de fábrica de los equipos celulares: 2 meses. La garantía no cubre golpes, humedad, sellos rotos, sobrecargas eléctricas o alteración de software._\n\n================================\n🚀 *¡Gracias por confiar en tu compra!*\n🌐 *Visita nuestra Vitrina Digital:* https://tucocel.github.io/`;
+            const msg = `*TUCOCEL C.A.*\n*Nota de Entrega:* N° ${String(nota.numNota).padStart(6, '0')}\n*Fecha:* ${nota.fecha}\n\n👤 *Cliente:* ${nota.cliente}\n💳 *Cédula/RIF:* ${nota.cedula}\n📞 *Teléfono:* ${nota.telefono}\n📍 *DIrección:* ${nota.direccion}\n\n📦 *Detalle de compra:*\n${desc}\n\n💵 *Total General:* $${usdNeto.toFixed(2)} USD\n*Ref COP:* ${Math.round(totalEnCop).toLocaleString('es-CO')} COP\n*Ref VES:* ${totalEnBs.toFixed(2).toLocaleString('es-VE')} Bs\n_Valores informativos calculados a la tasa del día._\n\n================================\n🔒 *CONTROL INTERNO (NO FISCAL)*\n_Este documento es un comprobante de entrega administrativo. No constituye, ni pretende sustituir a una factura fiscal regulada por la ley._\n\n================================\n🛡️ *TÉRMINOS DE GARANTÍA (60 DÍAS)*\n_Garantía por defectos de fábrica de los equipos celulares: 2 meses. La garantía no cubre golpes, humedad, sellos rotos, sobrecargas eléctricas o alteración de software._\n\n================================\n🚀 *¡Gracias por confiar en tu compra!*\n🌐 *Visita nuestra Vitrina Digital:* https://tucocel.github.io/`;
             window.open(`https://wa.me/${nota.telefono.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`, '_blank');
         };
 
@@ -1740,4 +1740,4 @@
         window.inicializarScrollAutomaticoCarrusel();
     </script>
 </body>
-                        </html>
+                                                                                                                                                                                         </html>
