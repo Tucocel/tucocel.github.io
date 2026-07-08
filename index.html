@@ -304,7 +304,7 @@
 
     <!-- MAIN PRINCIPAL -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div class="mb-8 max-w-4xl mx-auto bg-gradient-to-r from-blue-600 to-blue-800 text-white p-6 rounded-2xl shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4 border border-blue-500">
+        <div class="m-8 max-w-4xl mx-auto bg-gradient-to-r from-blue-600 to-blue-800 text-white p-6 rounded-2xl shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4 border border-blue-500">
             <div class="flex items-center gap-4 text-center sm:text-left">
                 <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-2xl shrink-0">
                     <i class="fa-solid fa-comments-dollar text-amber-300"></i>
@@ -601,7 +601,7 @@
                         </div>
 
                         <div class="flex justify-end pt-1">
-                            <button onclick="agregarItemALaVenta()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white text-xs font-black px-5 py-2.5 rounded-xl shadow-md transition-colors flex items-center justify-center gap-1">
+                            <button onclick="ejecutarBotonAgregarItem()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white text-xs font-black px-5 py-2.5 rounded-xl shadow-md transition-colors flex items-center justify-center gap-1">
                                 <i class="fa-solid fa-circle-plus"></i> Añadir Línea al Ticket
                             </button>
                         </div>
@@ -692,7 +692,7 @@
         </div>
     </div>
 
-    <!-- TICKET DE IMPRESIÓN COMPACTO VERTICAL DE GAMA ALTA (100% FIEL A TU SEGUNDO FORMATO 10x15 CM) -->
+    <!-- TICKET DE IMPRESIÓN COMPACTO VERTICAL DE GAMA ALTA -->
     <div id="wrapper-impresion-epson" style="display: none;">
         <div id="contenedor-ticket-real">
             
@@ -739,7 +739,7 @@
                 <tbody id="tk-items-tabla"></tbody>
             </table>
 
-            <!-- Pie de página con Totales, Estado y Textos Fieles a la Foto 1 -->
+            <!-- Pie de página con Totales, Estado -->
             <div class="ticket-footer-container">
                 <div class="ticket-status-box">
                     <p style="margin: 0 0 2px 0; font-weight: bold; color: #1e293b;">Forma de Pago:</p>
@@ -1155,7 +1155,7 @@
         window.toggleManualImeiView = function() { window.renderizarCamposImeiDinamicos('manual'); };
         window.verificarTipoArticuloFactura = function() { window.renderizarCamposImeiDinamicos('inventario'); };
 
-        window.agregarItemALaVenta = function() {
+        window.ejecutarBotonAgregarItem = function() {
             const cop = parseFloat(document.getElementById('tasa-cop').value) || 0;
             const bs = parseFloat(document.getElementById('tasa-bs').value) || 0;
             if (cop === 0 || bs === 0) { alert("⚠️ Ingrese las Tasas del Día antes de facturar."); return; }
@@ -1519,14 +1519,14 @@
         };
 
         window.procesarEnvioWaObjeto = function(nota) {
-            let desc = nota.items.map(i => `• ${i.cantidad}x ${i.modelo} -> $${i.precio} ${i.imeis ? `\n📱 *IMEI:* ${i.imeis.join(', ')}` : ''}`).join('\n');
+            let desc = nota.items.map(i => `  • ${i.cantidad}x ${i.modelo} -> $${i.precio} ${i.imeis ? `\n    📱 IMEI: ${i.imeis.join(', ')}` : ''}`).join('\n');
             const usdNeto = parseFloat(nota.totalUSD) || 0;
             const copTasa = parseFloat(nota.tasaCop) || 0;
             const bsTasa = parseFloat(nota.tasaBs) || 0;
             const totalEnCop = usdNeto * copTasa;
             const totalEnBs = bsTasa > 0 ? totalEnCop / bsTasa : 0;
 
-            const msg = `*TUCOCEL C.A.*\n*Nota de Entrega:* N° ${String(nota.numNota).padStart(6, '0')}\n*Fecha:* ${nota.fecha}\n\n👥 *Cliente:* ${nota.cliente}\n💳 *Cédula/RIF:* ${nota.cedula}\n📞 *Teléfono:* ${nota.telefono}\n📍 *Dirección:* ${nota.direccion}\n\n📦 *Detalle de compra:*\n${desc}\n\n💵 *Total General:* $${usdNeto.toFixed(2)} USD\n*Ref COP:* ${Math.round(totalEnCop).toLocaleString('es-CO')} COP\n*Ref VES:* ${totalEnBs.toFixed(2).toLocaleString('es-VE')} Bs\n_Valores informativos calculados a la tasa del día._\n\n--------------------------------------------------\n🔒 *CONTROL INTERNO (NO FISCAL)*\n_Este documento es un comprobante de entrega administrativo. No constituye, ni pretende sustituir a una factura fiscal regulada por la ley._\n\n--------------------------------------------------\n🛡️ *TÉRMINOS DE GARANTÍA (60 DÍAS)*\n_Garantía por defectos de fábrica de los equipos celulares: 2 meses. La garantía no cubre golpes, humedad, sellos rotos, sobrecargas eléctricas o alteración de software._\n\n--------------------------------------------------\n🚀 *¡Gracias por confiar en tu compra!*\n🌐 *Visita nuestra Vitrina Digital:* https://tucocel.github.io/`;
+            const msg = `*TUCOCEL C.A.*\n*Nota de Entrega:* N° ${String(nota.numNota).padStart(6, '0')}\n*Fecha:* ${nota.fecha}\n\n👤 *Cliente:* ${nota.cliente}\n💳 *Cédula/RIF:* ${nota.cedula}\n📞 *Teléfono:* ${nota.telefono}\n📍 *Dirección:* ${nota.direccion}\n\n📦 *Detalle de compra:*\n${desc}\n\n💵 *Total General:* $${usdNeto.toFixed(2)} USD\n*Ref COP:* ${Math.round(totalEnCop).toLocaleString('es-CO')} COP\n*Ref VES:* ${totalEnBs.toFixed(2).toLocaleString('es-VE')} Bs\n_Valores informativos calculados a la tasa del día._\n\n================================\n🔒 *CONTROL INTERNO (NO FISCAL)*\n_Este documento es un comprobante de entrega administrativo. No constituye, ni pretende sustituir a una factura fiscal regulada por la ley._\n\n================================\n🛡️ *TÉRMINOS DE GARANTÍA (60 DÍAS)*\n_Garantía por defectos de fábrica de los equipos celulares: 2 meses. La garantía no cubre golpes, humedad, sellos rotos, sobrecargas eléctricas o alteración de software._\n\n================================\n🚀 *¡Gracias por confiar en tu compra!*\n🌐 *Visita nuestra Vitrina Digital:* https://tucocel.github.io/`;
             window.open(`https://wa.me/${nota.telefono.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`, '_blank');
         };
 
@@ -1740,4 +1740,4 @@
         window.inicializarScrollAutomaticoCarrusel();
     </script>
 </body>
-    </html>
+                        </html>
