@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tucocel C.A. — Telefonía Móvil y Computación</title>
 
-    <!-- METATAGS OPEN GRAPH -->
+    <!-- METATAGS OPEN GRAPH (EL BOOM VISUAL AL COMPARTIR LA WEB) -->
     <meta property="og:title" content="📱 TUCOCEL C.A. | Tu Vitrina Tecnológica Digital">
     <meta property="og:description" content="🔥 ¡Catálogo en tiempo real! Visita la vitrina de Tucocel, Agente Autorizado Movistar en Cordero. ✨ SERVICIOS: 📲 Venta de Líneas Movistar • 📱 Celulares con Garantía • 🔌 Accesorios Premium • 🛠️ Servicio Técnico Especializado • 📸 Servicio Fotográfico. ¡Entra ya y cotiza al instante! 🚀">
     <meta property="og:image" content="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80">
@@ -53,86 +53,168 @@
             color: #f59e0b;
         }
 
-        /* ESTILOS DE IMPRESIÓN Y DISEÑO FIEL A TU FOTO */
+        /* DISEÑO DE FACTURA PREMIUM E IMPRESIÓN REQUERIDO */
+        #wrapper-impresion-epson {
+            width: 100mm;
+            background: #ffffff;
+            margin: 0 auto;
+            padding: 4mm;
+            box-sizing: border-box;
+        }
+
+        .ticket-header-title {
+            color: #003366;
+            font-size: 18px;
+            font-weight: 800;
+            text-align: center;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+        .ticket-doc-type {
+            color: #cc3333;
+            font-size: 13px;
+            font-weight: 800;
+            text-align: center;
+            letter-spacing: 1px;
+            margin: 3px 0 1px 0;
+        }
+        .ticket-sub-text {
+            font-size: 8.5px;
+            color: #4b5563;
+            text-align: center;
+            line-height: 1.3;
+            margin: 0;
+        }
+        .ticket-info-box {
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 8px 10px;
+            margin: 10px 0;
+            background-color: #f8fafc;
+        }
+        .ticket-info-table {
+            width: 100%;
+            font-size: 10px;
+            line-height: 1.4;
+            color: #1e293b;
+        }
+        .ticket-info-table td {
+            vertical-align: top;
+            padding: 1px 0;
+        }
+        .ticket-control-no {
+            color: #cc3333;
+            font-weight: 700;
+        }
+        .ticket-items-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10px;
+            margin: 10px 0;
+        }
+        .ticket-items-table th {
+            background-color: #003366;
+            color: #ffffff;
+            font-weight: 700;
+            padding: 5px 6px;
+            font-size: 9px;
+            text-transform: uppercase;
+            border: none;
+        }
+        .ticket-items-table td {
+            padding: 7px 6px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #334155;
+            vertical-align: top;
+        }
+        .ticket-footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 8px;
+            gap: 8px;
+        }
+        .ticket-status-box {
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 8px;
+            width: 46%;
+            font-size: 9px;
+            background-color: #ffffff;
+            box-sizing: border-box;
+        }
+        .ticket-status-badge {
+            display: inline-block;
+            background-color: #16a34a;
+            color: #ffffff;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 8.5px;
+            margin-top: 4px;
+            text-align: center;
+        }
+        .ticket-totals-box {
+            width: 52%;
+            box-sizing: border-box;
+        }
+        .ticket-totals-table {
+            width: 100%;
+            font-size: 10px;
+        }
+        .ticket-totals-table td {
+            padding: 2px 0;
+        }
+        .ticket-total-row {
+            font-size: 12px;
+            font-weight: 800;
+            color: #003366;
+            border-top: 1.5px double #003366;
+        }
+        .ticket-currency-ref {
+            font-size: 9.5px;
+            font-style: italic;
+            font-weight: 600;
+        }
+        .ticket-legal-box {
+            margin-top: 10px;
+            border: 1px solid #475569;
+            padding: 6px;
+            border-radius: 8px;
+            font-size: 7.5px;
+            text-align: justify;
+            line-height: 1.2;
+            color: #334155;
+        }
+
         @media print {
+            body {
+                background: #ffffff !important;
+            }
             body > *:not(#wrapper-impresion-epson) {
                 display: none !important;
                 visibility: hidden !important;
             }
-            #wrapper-impresion-epson, #contenedor-ticket-real, #contenedor-ticket-real * {
+            #wrapper-impresion-epson {
                 display: block !important;
                 visibility: visible !important;
-            }
-            #wrapper-impresion-epson {
                 position: absolute !important;
                 left: 0 !important;
                 top: 0 !important;
-                width: 210mm !important; /* Adaptable a formato media carta / ticket extendido */
+                width: 100mm !important;
+                height: auto !important;
                 margin: 0 !important;
-                padding: 0 !important;
+                padding: 4mm !important;
                 box-sizing: border-box !important;
-                background: #fff !important;
+                overflow: visible !important;
             }
-        }
-
-        /* CONTENEDOR IDÉNTICO A LA IMPRESIÓN REAL */
-        #contenedor-ticket-real {
-            width: 190mm;
-            margin: 0 auto;
-            padding: 10mm;
-            background-color: #ffffff;
-            color: #333333;
-            font-family: Arial, sans-serif;
-            font-size: 13px;
-            line-height: 1.4;
-        }
-        .company-name { color: #2563eb; font-size: 26px; font-weight: 800; text-align: center; letter-spacing: 0.5px; margin-bottom: 2px; text-transform: uppercase; }
-        .doc-type { color: #ef4444; font-size: 18px; font-weight: 800; text-align: center; letter-spacing: 1px; margin-top: 4px; }
-        .sub-text { font-size: 11px; color: #555555; text-align: center; line-height: 1.3; }
-        
-        /* CUADRO DE DATOS CLIENTE CON BORDE REDONDEADO GRIS */
-        .info-grid-real { 
-            display: flex; 
-            justify-content: space-between; 
-            border: 1px solid #e2e8f0; 
-            border-radius: 16px; 
-            padding: 14px 20px; 
-            margin-top: 15px; 
-            margin-bottom: 20px; 
-            background-color: #f8fafc; 
-        }
-        .info-box-left p, .info-box-right p { margin: 3px 0; }
-        .control-no { color: #ef4444; font-weight: bold; }
-        
-        /* TABLA DE PRODUCTOS COMPACTA */
-        .items-table-real { width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 15px; }
-        .items-table-real th { text-align: left; color: #1e293b; font-weight: 700; padding: 10px 6px; border-bottom: 2px solid #e2e8f0; text-transform: uppercase; font-size: 12px; }
-        .items-table-real td { padding: 12px 6px; border-bottom: 1px solid #f1f5f9; vertical-align: top; }
-        
-        /* DISTRIBUCIÓN INFERIOR DE TOTALES Y PAGOS */
-        .footer-grid-real { display: flex; justify-content: space-between; align-items: flex-start; margin-top: 15px; }
-        .status-box-real { border: 1px solid #e2e8f0; border-radius: 16px; padding: 15px; width: 45%; background-color: #f8fafc; }
-        .status-box-real p { margin: 4px 0; }
-        .status-badge-real { display: inline-block; font-weight: 800; font-size: 14px; color: #1e293b; margin-top: 4px; letter-spacing: 0.5px; }
-        
-        .totals-box-real { width: 50%; }
-        .totals-table-real { width: 100%; border-collapse: collapse; }
-        .totals-table-real td { padding: 4px 0; }
-        .total-row-real { font-size: 18px; font-weight: bold; color: #1e3a8a; border-top: 3px solid #2563eb; }
-        .total-row-real td { padding-top: 8px; }
-        .currency-ref-cop { font-size: 14px; color: #16a34a; font-weight: 700; }
-        .currency-ref-ves { font-size: 14px; color: #2563eb; font-weight: 700; }
-        
-        /* CUADRO INFERIOR DE GARANTÍA FIEL */
-        .legal-box-real { 
-            margin-top: 25px; 
-            border: 1px solid #94a3b8; 
-            padding: 12px 16px; 
-            border-radius: 16px; 
-            font-size: 11px; 
-            text-align: justify; 
-            line-height: 1.4; 
-            background-color: #f8fafc;
+            .header, .ticket-info-box, .ticket-items-table, .ticket-footer-container, .ticket-legal-box {
+                page-break-inside: avoid !important;
+            }
+            @page {
+                size: 100mm auto;
+                margin: 0 !important;
+            }
         }
     </style>
 </head>
@@ -249,7 +331,7 @@
                 </div>
                 <div class="text-xs md:text-sm text-gray-700 leading-relaxed space-y-1 pt-3 md:pt-0 md:pl-5">
                     <span class="font-bold text-amber-500 uppercase tracking-wider text-[10px] block"><i class="fa-solid fa-magnifying-glass mr-1"></i> Equipos bajo Consulta</span>
-                    <p>¿Buscas un modelo específico? <span class="font-bold text-gray-950">¡Pregúntanos al instante!</span> Confirmamos su disponibilidad en tiempo real con nuestra almacenes aliados.</p>
+                    <p>¿Buscas un modelo específico? <span class="font-bold text-gray-950">¡Pregúntanos al instante!</span> Confirmamos su disponibilidad en tiempo real con nuestros almacenes aliados.</p>
                 </div>
             </div>
         </div>
@@ -368,6 +450,7 @@
                     <option value="Otros Productos">Otros Productos</option>
                 </select>
                 
+                <!-- CASILLA INTELIGENTE DINÁMICA -->
                 <div id="wrapper-tipo-producto" class="hidden space-y-1.5 mt-2">
                     <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block">Tipo de Artículo</label>
                     <select id="add-tipo" class="w-full bg-white text-gray-950 p-2 rounded-xl text-xs font-bold border border-gray-300">
@@ -400,7 +483,7 @@
                 <input type="file" id="add-foto-file" accept="image/*" class="hidden">
                 <button onclick="document.getElementById('add-foto-file').click()" class="bg-slate-800 hover:bg-slate-700 text-xs py-2 px-4 rounded-xl font-medium transition-colors border border-slate-700 w-full sm:w-auto"><i class="fa-solid fa-camera mr-2"></i>Cargar Foto del Artículo</button>
                 <input type="hidden" id="foto-base64">
-                <img id="preview-foto" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Vista previa" class="w-9 h-9 object-cover rounded-lg bg-slate-800 border border-slate-700 hidden">
+                <img id="preview-foto" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Vista previa de carga de imagen" class="w-9 h-9 object-cover rounded-lg bg-slate-800 border border-slate-700 hidden">
             </div>
             <div class="flex gap-2 w-full sm:w-auto">
                 <button id="btn-cancelar-edicion" onclick="cancelarEdicionActiva()" class="hidden w-1/2 sm:w-auto bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors">Cancelar</button>
@@ -409,7 +492,7 @@
         </div>
     </div>
 
-    <!-- MODAL INTEGRAL DE FACTURACIÓN -->
+    <!-- MODAL INTEGRAL DE FACTURACIÓN Y PRIVADA AUDITORÍA -->
     <div id="modal-sistema-facturacion" class="fixed inset-0 bg-slate-950/90 z-50 overflow-y-auto backdrop-blur-md p-2 sm:p-4 lg:p-6 hidden">
         <div class="bg-white rounded-3xl w-full max-w-6xl mx-auto my-2 md:my-4 shadow-2xl overflow-hidden border border-gray-100 flex flex-col md:h-[90vh]">
             
@@ -424,12 +507,12 @@
                 <div class="flex flex-col sm:flex-row flex-wrap items-center gap-3 bg-slate-950 p-2.5 rounded-2xl border border-slate-800 text-xs w-full md:w-auto">
                     <div class="flex items-center justify-between w-full sm:w-auto gap-2">
                         <span class="text-slate-400 shrink-0">1 USD =</span>
-                        <input type="number" id="tasa-cop" value="0" oninput="calcularTotalesFactura()" class="w-full sm:w-20 bg-slate-800 text-white border border-slate-700 px-2 py-1 rounded-lg text-center font-mono focus:outline-none" placeholder="0">
+                        <input type="number" id="tasa-cop" value="0" oninput="calcularTotalesFactura()" class="w-full sm:w-20 bg-slate-800 text-white border border-slate-700 px-2 py-1 rounded-lg text-center font-mono focus:outline-none placeholder-gray-500" placeholder="0">
                         <span class="text-emerald-400 font-bold text-[10px] shrink-0">COP</span>
                     </div>
                     <div class="flex items-center justify-between w-full sm:w-auto gap-2">
                         <span class="text-slate-400 shrink-0">Dividir COP entre:</span>
-                        <input type="number" id="tasa-bs" value="0" oninput="calcularTotalesFactura()" class="w-full sm:w-16 bg-slate-800 text-white border border-slate-700 px-2 py-1 rounded-lg text-center font-mono focus:outline-none" placeholder="0">
+                        <input type="number" id="tasa-bs" value="0" oninput="calcularTotalesFactura()" class="w-full sm:w-16 bg-slate-800 text-white border border-slate-700 px-2 py-1 rounded-lg text-center font-mono focus:outline-none placeholder-gray-500" placeholder="0">
                         <span class="text-blue-400 font-bold text-[10px] shrink-0">Bs</span>
                     </div>
                 </div>
@@ -438,12 +521,13 @@
                 </button>
             </div>
 
+            <!-- MENU DE PESTAÑAS INTERNAS CORRECTO -->
             <div class="bg-slate-100 border-b border-gray-200 px-6 py-2 flex gap-4 text-xs font-bold uppercase shrink-0">
                 <button id="btn-vista-cajero" onclick="window.cambiarSeccionAdministrativa('cajero')" class="text-blue-600 border-b-2 border-blue-600 pb-1"><i class="fa-solid fa-calculator mr-1"></i> Facturar Venta</button>
                 <button id="btn-vista-auditoria" onclick="window.cambiarSeccionAdministrativa('auditoria')" class="text-gray-500 hover:text-gray-700 pb-1"><i class="fa-solid fa-chart-line mr-1"></i> Reportes e Historial (Garantías)</button>
             </div>
 
-            <!-- PANEL DE EMISIÓN DE FACTURAS -->
+            <!-- SECCIÓN 1: PANEL DE EMISIÓN DE FACTURAS -->
             <div id="bloque-emision-facturas" class="p-3 sm:p-4 md:p-6 grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 overflow-y-auto flex-grow bg-gray-50">
                 <div class="lg:col-span-2 space-y-4">
                     <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-3">
@@ -474,7 +558,7 @@
                             <button id="tab-inventario" onclick="cambiarModoCargaFactura('inventario')" class="text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1 font-bold"><i class="fa-solid fa-boxes-stacked"></i> Jalar desde Catálogo</button>
                         </div>
 
-                        <!-- ENTRADA MANUAL -->
+                        <!-- ENTRADA MANUAL COMPLETA -->
                         <div id="carga-manual-bloque" class="space-y-3">
                             <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
                                 <div class="sm:col-span-2">
@@ -550,20 +634,19 @@
                                 <span id="total-bs-val" class="text-blue-400 font-extrabold">0 Bs</span>
                             </div>
                         </div>
-                        
                         <div class="grid grid-cols-2 gap-2 pt-3">
                             <button onclick="ejecutarBotonImprimir()" class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-xs py-3 rounded-xl transition-all shadow-md flex items-center justify-center gap-1.5 uppercase">
-                                <i class="fa-solid fa-print text-sm"></i> Imprimir (Epson PC)
+                                <i class="fa-solid fa-print text-sm"></i> Imprimir
                             </button>
                             <button onclick="ejecutarBotonWhatsApp()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-3 rounded-xl transition-all shadow-md flex items-center justify-center gap-1.5 uppercase">
-                                <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp (Business)
+                                <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- PRIVADA DE AUDITORÍA -->
+            <!-- SECCIÓN 2: PRIVADA DE AUDITORÍA, REPORTES Y CONTROL DE GARANTÍAS -->
             <div id="bloque-reportes-auditoria" class="p-4 sm:p-6 bg-gray-50 flex-grow overflow-y-auto hidden space-y-4">
                 <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm space-y-3">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-gray-100 pb-2">
@@ -609,87 +692,91 @@
         </div>
     </div>
 
-    <!-- TICKET DE IMPRESIÓN REDISEÑADO AL 100% IDÉNTICO A TU DOCUMENTO REAL -->
+    <!-- TICKET DE IMPRESIÓN COMPACTO VERTICAL DE GAMA ALTA (100% FIEL A TU SEGUNDO FORMATO 10x15 CM) -->
     <div id="wrapper-impresion-epson" style="display: none;">
         <div id="contenedor-ticket-real">
             
-            <div class="text-center">
-                <h1 class="company-name">TUCOCEL C.A.</h1>
-                <div class="doc-type">NOTA DE ENTREGA</div>
-                <div class="sub-text" style="font-weight: bold;">(SIN VALOR FISCAL)</div>
-                <div class="sub-text">RIF: J-31378837-6</div>
-                <div class="sub-text">Av. Bolívar, entre calles 12 y 13, Cordero, Táchira.</div>
-                <div class="sub-text">WhatsApp: 0424-7357549</div>
+            <!-- Encabezado Corporativo -->
+            <div class="header">
+                <h1 class="ticket-header-title">TUCOCEL C.A.</h1>
+                <div class="ticket-doc-type">NOTA DE ENTREGA</div>
+                <div class="ticket-sub-text">(SIN VALOR FISCAL)</div>
+                <div class="ticket-sub-text">RIF: J-31378837-6</div>
+                <div class="ticket-sub-text">Av. Bolívar, entre calles 12 y 13, Cordero, Táchira.</div>
+                <div class="ticket-sub-text">WhatsApp: 0424-7357549</div>
             </div>
 
-            <!-- CUADRO DE INFORMACIÓN ESTILO TU COMPROBANTE FISICO -->
-            <div class="info-grid-real">
-                <div class="info-box-left">
-                    <p><strong>Cliente:</strong> <span id="tk-cliente-nombre">Monica jaimes</span></p>
-                    <p><strong>Cédula/RIF:</strong> <span id="tk-cliente-cedula">19664983</span></p>
-                    <p><strong>Teléf:</strong> <span id="tk-cliente-telefono">04147357548</span></p>
-                    <p><strong>Dir:</strong> <span id="tk-cliente-direccion">Cordero</span></p>
-                </div>
-                <div class="info-box-right" style="text-align: right;">
-                    <p><strong>N° Control:</strong> <span class="control-no" id="tk-num-nota">000001</span></p>
-                    <p><strong>Fecha:</strong> <span id="tk-fecha">8/7/2026</span></p>
-                </div>
+            <!-- Información del Cliente y Factura -->
+            <div class="ticket-info-box">
+                <table class="ticket-info-table">
+                    <tr>
+                        <td style="width: 60%;"><strong>Cliente:</strong> <span id="tk-cliente-nombre">--------</span></td>
+                        <td style="width: 40%; text-align: right;"><strong>N° Control:</strong> <span class="ticket-control-no" id="tk-num-nota">000000</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cédula/RIF:</strong> <span id="tk-cliente-cedula">--------</span></td>
+                        <td style="text-align: right;"><strong>Fecha:</strong> <span id="tk-fecha">--/--/----</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Teléf:</strong> <span id="tk-cliente-telefono">--------</span></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><strong>Dir:</strong> <span id="tk-cliente-direccion">--------</span></td>
+                    </tr>
+                </table>
             </div>
 
-            <table class="items-table-real">
+            <!-- Tabla de Productos Flujo Libre Estilo Foto 1 -->
+            <table class="ticket-items-table">
                 <thead>
                     <tr>
-                        <th style="width: 10%;">CANT</th>
-                        <th style="width: 70%;">DESCRIPCIÓN / ARTÍCULO</th>
-                        <th style="width: 20%; text-align: right;">MONTO</th>
+                        <th style="width: 12%; text-align: center;">CANT</th>
+                        <th style="width: 63%; text-align: left;">DESCRIPCIÓN / ARTÍCULO</th>
+                        <th style="width: 25%; text-align: right;">MONTO</th>
                     </tr>
                 </thead>
-                <tbody id="tk-items-tabla">
-                    <!-- Se inyecta dinámicamente -->
-                </tbody>
+                <tbody id="tk-items-tabla"></tbody>
             </table>
 
-            <div class="footer-grid-real">
-                <div class="status-box-real">
-                    <p><strong>Forma de Pago:</strong></p>
-                    <p style="color: #64748b;">Multimoneda</p>
-                    <p style="margin-top: 8px;"><strong>Estatus:</strong></p>
-                    <div class="status-badge-real" id="tk-status-label">PROCESADA</div>
+            <!-- Pie de página con Totales, Estado y Textos Fieles a la Foto 1 -->
+            <div class="ticket-footer-container">
+                <div class="ticket-status-box">
+                    <p style="margin: 0 0 2px 0; font-weight: bold; color: #1e293b;">Forma de Pago:</p>
+                    <p style="margin: 0 0 4px 0; color: #475569; font-size: 8.5px;">Multimoneda</p>
+                    <p style="margin: 0 0 2px 0; font-weight: bold; color: #1e293b;">Estatus:</p>
+                    <span class="ticket-status-badge" id="tk-status-label">PROCESADA</span>
                 </div>
-                <div class="totals-box-real">
-                    <table class="totals-table-real">
-                        <tr class="total-row-real">
-                            <td style="font-size: 16px;">Total USD:</td>
-                            <td style="text-align: right; font-size: 18px;" id="tk-total-usd">$155.00</td>
+                <div class="ticket-totals-box">
+                    <table class="ticket-totals-table">
+                        <tr class="ticket-total-row">
+                            <td>Total USD:</td>
+                            <td class="text-right" id="tk-total-usd">$0.00</td>
                         </tr>
-                        <tr>
-                            <td class="currency-ref-cop">Ref COP:</td>
-                            <td style="text-align: right;" class="currency-ref-cop" id="tk-total-cop">620.000 COP</td>
+                        <tr class="ticket-currency-ref" style="color: #047857;">
+                            <td>Ref COP:</td>
+                            <td class="text-right" id="tk-total-cop">0 COP</td>
                         </tr>
-                        <tr>
-                            <td class="currency-ref-ves">Ref VES:</td>
-                            <td style="text-align: right;" class="currency-ref-ves" id="tk-total-bs">103333.33 Bs</td>
+                        <tr class="ticket-currency-ref" style="color: #1d4ed8;">
+                            <td>Ref VES:</td>
+                            <td class="text-right" id="tk-total-bs">0 Bs</td>
                         </tr>
                     </table>
                 </div>
             </div>
             
-            <div style="font-size: 11px; color: #64748b; text-align: center; margin-top: 15px; font-style: italic;">
+            <div style="font-size: 7.5px; color: #475569; text-align: center; margin-top: 6px; font-style: italic;">
                 Los montos en COP y VES están basados en la tasa del día.
             </div>
 
-            <!-- CUADRO GRIS REDONDEADO INFERIOR DE GARANTÍA -->
-            <div class="legal-box-real">
-                <div style="font-weight: bold; text-align: center; font-size: 12px; margin-bottom: 5px;">
-                    🔒 CONTROL INTERNO (NO FISCAL)
-                </div>
-                <div style="color: #475569; margin-bottom: 8px; text-align: justify;">
-                    Este documento representa un comprobante de entrega administrativo. No constituye, ni pretende sustituir a una factura fiscal regulada por la ley.
-                </div>
-                <div style="color: #dc2626; font-weight: bold; border-top: 1px dashed #cbd5e1; padding-top: 6px; text-align: justify;">
+            <!-- Recuadro Legal y de Cobertura Rediseñado Súper Limpio -->
+            <div class="ticket-legal-box">
+                <strong style="display: block; text-align: center; font-size: 8.5px; margin-bottom: 2px; color: #0f172a;">🔒 CONTROL INTERNO (NO FISCAL)</strong>
+                Este documento representa un comprobante de entrega administrativo. No constituye, ni pretende sustituir a una factura fiscal regulada por la ley.
+                <div style="color: #b91c1c; border-top: 1px dashed #cbd5e1; margin-top: 4px; padding-top: 3px; font-weight: 700;">
                     🛡️ TÉRMINOS DE GARANTÍA (60 DÍAS): Cobertura por defectos técnicos de fábrica en equipos móviles por un lapso de 2 meses (60 días continuos). Queda sin efecto por golpes, marcas de humedad, sellos rotos, sobrecargas eléctricas o alteración del software original.
                 </div>
-                <div style="text-align: center; font-weight: bold; color: #2563eb; margin-top: 8px; font-size: 12px;">
+                <div style="text-align: center; border-top: 1px dashed #cbd5e1; margin-top: 4px; padding-top: 3px; font-weight: 800; color: #003366;">
                     🚀 ¡Gracias por confiar en tu compra! — Tucocel C.A.
                 </div>
             </div>
@@ -704,7 +791,7 @@
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <div class="w-full h-64 bg-white border border-gray-100 rounded-2xl overflow-hidden mb-4 flex justify-center items-center p-2">
-                <img id="modal-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Smartphone" class="max-w-full max-h-full object-contain filter drop-shadow-md">
+                <img id="modal-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Imagen smartphone" class="max-w-full max-h-full object-contain filter drop-shadow-md">
             </div>
             <div class="space-y-3">
                 <div class="flex justify-between items-center">
@@ -713,11 +800,11 @@
                         <i class="fa-solid fa-heart text-red-500"></i> Me gusta (<span id="modal-like-count">0</span>)
                     </button>
                 </div>
-                <h2 id="modal-modelo" class="text-xl font-black text-gray-900 tracking-tight">Modelo</h2>
+                <h2 id="modal-modelo" class="text-xl font-black text-gray-900 tracking-tight">Modelo del Teléfono</h2>
                 <p id="modal-memoria" class="text-xs font-mono text-gray-500 font-bold bg-gray-50 px-2 py-1 rounded-md inline-block">Capacidad</p>
                 <div class="border-t border-gray-100 pt-3">
                     <h3 class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">Descripción General</h3>
-                    <div id="modal-desc" class="text-xs text-gray-600 leading-relaxed text-justify">Detalles.</div>
+                    <div id="modal-desc" class="text-xs text-gray-600 leading-relaxed text-justify">Detalles del artículo.</div>
                 </div>
                 <div id="form-compra" class="pt-2"></div>
             </div>
@@ -727,12 +814,12 @@
     <!-- MODAL DE ACCESO / LOGIN -->
     <div id="modal-login" class="fixed inset-0 bg-slate-950/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm hidden">
         <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-xl border border-gray-100 relative">
-            <button onclick="cerrarLoginAdmin()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-user-shield"></i></button>
+            <button onclick="cerrarLoginAdmin()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
             <h3 class="text-sm font-black uppercase text-slate-900 tracking-wider mb-4 text-center"><i class="fa-solid fa-lock mr-1 text-blue-600"></i> Autenticación Privada</h3>
             <div class="space-y-3">
-                <input type="text" id="admin-user" placeholder="Usuario" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
-                <input type="password" id="admin-pass" placeholder="Contraseña" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
-                <button onclick="autenticarAdmin()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black text-xs py-2.5 rounded-xl shadow-md uppercase">Acceder</button>
+                <input type="text" id="admin-user" placeholder="Usuario administrador" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
+                <input type="password" id="admin-pass" placeholder="Contraseña de seguridad" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
+                <button onclick="autenticarAdmin()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black text-xs py-2.5 rounded-xl shadow-md transition-colors uppercase tracking-wide">Acceder al Sistema</button>
             </div>
         </div>
     </div>
@@ -744,15 +831,15 @@
             <h3 class="text-xs font-black uppercase text-slate-900 tracking-wider mb-4"><i class="fa-brands fa-whatsapp text-emerald-500 mr-1 text-base"></i> Cotización Directa</h3>
             <div class="space-y-3">
                 <input type="text" id="banner-con-nombre" placeholder="Tu Nombre Completo" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
-                <input type="text" id="banner-con-direccion" placeholder="Tu Ubicación" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
-                <button onclick="enviarConsultaBannerWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-2.5 rounded-xl shadow-md uppercase flex items-center justify-center gap-2">
+                <input type="text" id="banner-con-direccion" placeholder="Tu Ubicación o Referencia" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
+                <button onclick="enviarConsultaBannerWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-2.5 rounded-xl shadow-md uppercase tracking-wide flex items-center justify-center gap-2">
                     <i class="fa-brands fa-whatsapp text-sm"></i> Consultar Disponibilidad
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL CONSULTA GENERAL -->
+    <!-- MODAL CONSULTA GENERAL / BOTÓN WA -->
     <div id="modal-consulta-general" class="fixed inset-0 bg-slate-950/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm hidden">
         <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-xl border border-gray-100 relative">
             <button onclick="cerrarModalConsultaGeneral()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -765,15 +852,15 @@
                     <option value="Accesorios / Otros">Accesorios o Consumibles</option>
                 </select>
                 <label id="label-detalles-con" class="text-[10px] text-gray-400 font-bold uppercase block -mb-1">¿Artículo o Requerimiento?</label>
-                <textarea id="con-detalles" placeholder="Escribe tu consulta aquí..." class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 h-20 resize-none"></textarea>
-                <button onclick="enviarConsultaGeneralWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-2.5 rounded-xl shadow-md uppercase flex items-center justify-center gap-2">
-                    <i class="fa-brands fa-whatsapp text-sm"></i> Enviar a Oficina
+                <textarea id="con-detalles" placeholder="Escribe los detalles de tu consulta aquí..." class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 h-20 resize-none"></textarea>
+                <button onclick="enviarConsultaGeneralWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-2.5 rounded-xl shadow-md uppercase tracking-wide flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-sm"></i> Enviar a Oficina WhatsApp
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- NÚCLEO MOTOR LOGICO ASOCIADO A FIREBASE Y PARCHADO -->
+    <!-- NÚCLEO MOTOR LOGICO ASOCIADO A FIREBASE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, doc, setDoc, getDoc, collection, addDoc, getDocs, query, orderBy, limit, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -803,32 +890,6 @@
         let productoSeleccionadoActual = null;
         let modoCargaFacturaActivo = 'manual';
         let BASE_TEXTOS_WEB = {};
-
-        // PARCHE: FUNCIÓN PROCESAR IMAGEN COMPLETA EN BASE64
-        window.procesarImagen = function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onloadend = function() {
-                document.getElementById('foto-base64').value = reader.result;
-                const preview = document.getElementById('preview-foto');
-                if (preview) {
-                    preview.src = reader.result;
-                    preview.classList.remove('hidden');
-                }
-            }
-            reader.readAsDataURL(file);
-        };
-
-        // PARCHE: FUNCIÓN SELECT PARA LECTURA DE INVENTARIO EN FACTURAS
-        window.actualizarSelectFacturacion = function() {
-            const select = document.getElementById('fact-select-producto');
-            if (!select) return;
-            select.innerHTML = '<option value="">-- Seleccione un producto --</option>';
-            PRODUCTOS.forEach(p => {
-                select.innerHTML += `<option value="${p.id}">${p.modelo} - $${p.precio}</option>`;
-            });
-        };
 
         window.renderizarCamposImeiDinamicos = function(modo) {
             if(modo === 'manual') {
@@ -904,6 +965,7 @@
             const p = document.getElementById('admin-pass').value.trim();
             if(u === ADMIN_USER && p === ADMIN_PASS) {
                 esAdminAutenticado = true;
+                try { localStorage.setItem('tucocel_admin_sesion', 'true'); } catch(err) {}
                 window.cerrarLoginAdmin();
                 window.controlarVisibilidadModulosOcultos(true);
                 window.manejarVisibilidadLapicitosAdmin(true);
@@ -913,6 +975,7 @@
         
         window.cerrarSesionAdmin = function() {
             esAdminAutenticado = false;
+            try { localStorage.removeItem('tucocel_admin_sesion'); } catch(err) {}
             document.getElementById('panel-admin').classList.add('hidden');
             window.controlarVisibilidadModulosOcultos(false);
             window.manejarVisibilidadLapicitosAdmin(false);
@@ -959,32 +1022,46 @@
             document.getElementById('modal-modelo').innerText = prod.modelo;
             document.getElementById('modal-memoria').innerText = prod.memoria || '';
             
+            const dynamicPriceElement = document.createElement('p');
+            dynamicPriceElement.id = 'modal-precio';
+            dynamicPriceElement.className = 'hidden';
+            dynamicPriceElement.innerText = prod.precio;
+            document.getElementById('modal-producto').appendChild(dynamicPriceElement);
+            
             const mod = prod.modalidad || 'vitrina';
             const formCompra = document.getElementById('form-compra');
             if(!formCompra) return;
             
             if(mod === 'consultar') {
-                document.getElementById('modal-desc').innerHTML = `${prod.desc || ''}<br><br><span class="block p-2.5 bg-blue-50 text-blue-950 border border-blue-200 font-bold rounded-xl text-xs text-justify leading-relaxed">🔮 <strong>Nota de Preventa:</strong> La modalidad de venta para este artículo es bajo pedido. No se encuentra para despacho inmediato. Lo cancelas en oficina, y en 2 horas estará listo.</span>`;
+                document.getElementById('modal-desc').innerHTML = `${prod.desc || ''}<br><br><span class="block p-2.5 bg-blue-50 text-blue-950 border border-blue-200 font-bold rounded-xl text-xs text-justify leading-relaxed">🔮 <strong>Nota de Preventa:</strong> La modalidad de venta para este artículo es única y exclusivamente bajo pedido. Es un producto que no se encuentra disponible para despacho inmediato en tienda. Lo cancelas en nuestra oficina, y en un lapso de 2 horas el equipo estará listo en el local para ser retirado, lo cual te será notificado de inmediato vía WhatsApp.</span>`;
                 formCompra.innerHTML = `
-                    <button onclick="preguntarDisponibilidadDirectaWa()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black text-xs py-3 rounded-xl shadow-md flex items-center justify-center gap-1.5 uppercase transition-all">
-                        <i class="fa-brands fa-whatsapp text-sm"></i> Preguntar Disponibilidad
-                    </button>`;
+                    <div class="bg-gray-50 border border-gray-100 p-4 rounded-2xl space-y-3">
+                        <div class="text-center p-2 bg-amber-50 text-amber-900 border border-amber-200 font-bold rounded-xl text-[11px]">
+                            🔍 Nota: Este artículo requiere confirmación y abono previo en oficina física.
+                        </div>
+                        <button onclick="preguntarDisponibilidadDirectaWa()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black text-xs py-3 rounded-xl shadow-md flex items-center justify-center gap-1.5 uppercase transition-all">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> Preguntar Disponibilidad
+                        </button>
+                    </div>`;
             } else {
                 document.getElementById('modal-desc').innerText = prod.desc || 'Sin descripción.';
                 formCompra.innerHTML = `
                     <div class="bg-gray-50 border border-gray-100 p-4 rounded-2xl space-y-3">
+                        <h4 class="text-[11px] font-black uppercase text-blue-600 tracking-wider"><i class="fa-solid fa-file-invoice mr-1"></i> Datos para concretar pedido</h4>
                         <div class="grid grid-cols-2 gap-2">
                             <input type="text" id="cli-nombre" placeholder="Nombre" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs font-semibold text-gray-900">
                             <input type="text" id="cli-apellido" placeholder="Apellido" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs font-semibold text-gray-900">
                         </div>
-                        <input type="text" id="cli-direccion" placeholder="Dirección o Referencia" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs font-semibold text-gray-900">
-                        <select id="cli-pago" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs font-bold text-gray-900">
-                            <option value="Pago Móvil (Bolívares)">Bolívares (Pago Móvil)</option>
-                            <option value="USDT por Binance P2P">USDT por Binance</option>
-                            <option value="Zinli">Zinli</option>
-                            <option value="Nequi">Nequi</option>
-                            <option value="Efectivo / Pago directo en Tienda">Efectivo / Pago directo en Tienda</option>
-                        </select>
+                        <input type="text" id="cli-direccion" placeholder="Dirección de Habitación o Referencia" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs font-semibold text-gray-900">
+                        <div>
+                            <select id="cli-pago" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs font-bold text-gray-900">
+                                <option value="Pago Móvil (Bolívares)">Bolívares (Pago Móvil)</option>
+                                <option value="USDT por Binance P2P">USDT por Binance</option>
+                                <option value="Zinli">Zinli</option>
+                                <option value="Nequi">Nequi</option>
+                                <option value="Efectivo / Pago directo en Tienda">Efectivo / Pago directo en Tienda</option>
+                            </select>
+                        </div>
                         <button onclick="procesarPedidoWhatsApp()" class="w-full bg-emerald-500 text-white font-black text-xs py-2.5 rounded-xl shadow-md flex items-center justify-center gap-2 hover:bg-emerald-600 transition-colors mt-2">
                             <i class="fa-solid fa-cart-shopping"></i> Enviar Pedido por WhatsApp
                         </button>
@@ -992,18 +1069,24 @@
             }
 
             document.getElementById('modal-like-count').innerText = prod.likes || 0;
+            let currentLikeState = false;
+            try { currentLikeState = localStorage.getItem(`like_tucocel_${prod.id}`) === 'true'; } catch(err) {}
+            document.getElementById('modal-btn-like').className = currentLikeState ? "bg-red-50 text-red-600 px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-colors text-xs font-bold" : "bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-colors text-xs font-bold";
+            
             document.getElementById('modal-producto').classList.remove('hidden');
         };
 
         window.cerrarModalProducto = function() {
             document.getElementById('modal-producto').classList.add('hidden');
+            const targetEl = document.getElementById('modal-precio');
+            if(targetEl) targetEl.remove();
             productoSeleccionadoActual = null;
         };
 
         window.preguntarDisponibilidadDirectaWa = function() {
             if(!productoSeleccionadoActual) return;
-            const msgDispo = `📱 *¡Hola, Tucocel!* 👋%0A%0AEstoy visitando su Vitrina Digital y me interesa consultar la disponibilidad del artículo:%0A%0A📦 *ARTÍCULO:* ${productoSeleccionadoActual.modelo}%0A💵 *PRECIO:* $${Math.round(productoSeleccionadoActual.precio)} USD`;
-            window.open(`https://api.whatsapp.com/send?text=${msgDispo}`, '_blank');
+            const msgDispo = `¡Hola, Tucocel! 👋\n\nEstoy visitando su Vitrina Digital y me interesa consultar la disponibilidad para preventa del siguiente artículo:\n\n📦 *ARTÍCULO:* ${productoSeleccionadoActual.modelo}\n💰 *PRECIO:* $${productoSeleccionadoActual.precio} USD\n\n¿Tienen disponibilidad de almacén para gestionarlo bajo pedido? 🔍`;
+            window.open(`https://wa.me/584247357549?text=${encodeURIComponent(msgDispo)}`, '_blank');
             window.cerrarModalProducto();
         };
 
@@ -1013,22 +1096,24 @@
             const direccion = document.getElementById('cli-direccion').value.trim();
             const pago = document.getElementById('cli-pago').value;
             if(!nombre || !apellido || !direccion) return alert("Por favor rellenar los datos del pedido.");
-            const msg = `📦 *¡Hola Tucocel! Deseo concretar un pedido:*%0A%0A📱 *Artículo:* ${productoSeleccionadoActual.modelo}%0A👤 *Cliente:* ${nombre} ${apellido}%0A📍 *Dirección:* ${direccion}%0A💳 *Método de Pago:* ${pago}`;
-            window.open("https://api.whatsapp.com/send?text=" + msg, '_blank');
+            const msg = `¡Hola Tucocel! Deseo concretar un pedido:\n\n📱 *Artículo:* ${productoSeleccionadoActual.modelo}\n👤 *Cliente:* ${nombre} ${apellido}\n📍 *Dirección:* ${direccion}\n💳 *Método de Pago:* ${pago}`;
+            window.open("https://wa.me/584247357549?text=" + encodeURIComponent(msg), '_blank');
             window.cerrarModalProducto();
         };
 
         window.abrirModalConsultaBanner = function() { document.getElementById('modal-consulta-banner').classList.remove('hidden'); };
         window.cerrarModalConsultaBanner = function() {
             document.getElementById('modal-consulta-banner').classList.add('hidden');
+            document.getElementById('banner-con-nombre').value = '';
+            document.getElementById('banner-con-direccion').value = '';
         };
 
         window.enviarConsultaBannerWhatsApp = function() {
             const nombre = document.getElementById('banner-con-nombre').value.trim();
             const direccion = document.getElementById('banner-con-direccion').value.trim();
             if(!nombre || !direccion) { alert("Por favor complete los campos."); return; }
-            const mensajeConsultar = `👋 *¡Hola, Tucocel!*%0A%0AEstoy visitando su Vitrina Digital.%0A%0A👤 *CLIENTE:* ${nombre}%0A📍 *DIRECCIÓN:* ${direccion}`;
-            window.open('https://api.whatsapp.com/send?text=' + mensajeConsultar, '_blank');
+            const mensajeConsultar = `¡Hola, Tucocel! 👋\n\nEstoy visitando su Vitrina Digital y me gustaría consultar por la disponibilidad de un producto o servicio.\n\n👤 *CLIENTE:* ${nombre}\n📍 *DIRECCIÓN:* ${direccion}`;
+            window.open('https://wa.me/584247357549?text=' + encodeURIComponent(mensajeConsultar), '_blank');
             window.cerrarModalConsultaBanner();
         };
 
@@ -1041,7 +1126,7 @@
         window.enviarConsultaGeneralWhatsApp = function() {
             const n = document.getElementById('con-nombre').value;
             const d = document.getElementById('con-detalles').value;
-            window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent("Consulta de " + n + ": " + d), '_blank');
+            window.open("https://wa.me/584247357549?text=" + encodeURIComponent("Consulta de " + n + ": " + d), '_blank');
             window.cerrarModalConsultaGeneral();
         };
 
@@ -1066,6 +1151,9 @@
                 window.actualizarSelectFacturacion();
             }
         };
+
+        window.toggleManualImeiView = function() { window.renderizarCamposImeiDinamicos('manual'); };
+        window.verificarTipoArticuloFactura = function() { window.renderizarCamposImeiDinamicos('inventario'); };
 
         window.agregarItemALaVenta = function() {
             const cop = parseFloat(document.getElementById('tasa-cop').value) || 0;
@@ -1093,6 +1181,7 @@
                     id: "manual-" + new Date().getTime(), 
                     marca: checkImei ? "Celular" : "Otros Productos", 
                     modelo: modelo, 
+                    amount: cant,
                     cantidad: cant,
                     precio: precioUnitario * cant, 
                     imeis: checkImei ? imeisRecopilados : null 
@@ -1121,6 +1210,7 @@
                     id: prod.id, 
                     marca: prod.marca, 
                     modelo: prod.modelo, 
+                    amount: cant,
                     cantidad: cant,
                     precio: prod.precio * cant, 
                     imeis: prod.marca !== 'Otros Productos' ? imeisRecopilados : null 
@@ -1132,33 +1222,6 @@
             window.renderizarItemsVentaActiva();
         };
 
-        window.renderizarItemsVentaActiva = function() {
-            const contenedor = document.getElementById('fact-lista-items');
-            if(!contenedor) return;
-            contenedor.innerHTML = '';
-            if(ITEMS_VENTA_ACTIVA.length === 0) {
-                contenedor.innerHTML = '<p class="text-center text-slate-500 text-xs py-6">No hay artículos añadidos todavía.</p>';
-                document.getElementById('fact-items-count').innerText = "0 items";
-                window.calcularTotalesFactura();
-                return;
-            }
-            document.getElementById('fact-items-count').innerText = `${ITEMS_VENTA_ACTIVA.length} items`;
-            ITEMS_VENTA_ACTIVA.forEach((item, idx) => {
-                contenedor.innerHTML += `
-                    <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex justify-between items-center text-xs">
-                        <div>
-                            <p class="font-bold text-white">${item.cantidad}x ${item.modelo}</p>
-                            ${item.imeis ? `<p class="text-[10px] text-red-400">IMEI: ${item.imeis.join(', ')}</p>` : ''}
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <span class="font-mono text-amber-400 font-bold">$${item.precio}</span>
-                            <button onclick="window.removerItemVenta(${idx})" class="text-red-400 p-1"><i class="fa-solid fa-trash"></i></button>
-                        </div>
-                    </div>`;
-            });
-            window.calcularTotalesFactura();
-        };
-
         window.removerItemVenta = function(index) { ITEMS_VENTA_ACTIVA.splice(index, 1); window.renderizarItemsVentaActiva(); };
         
         window.calcularTotalesFactura = function() {
@@ -1167,10 +1230,9 @@
             let totalUSD = 0; ITEMS_VENTA_ACTIVA.forEach(i => totalUSD += i.precio);
             const totalCOP = totalUSD * tCOP;
             const totalBS = tBS > 0 ? totalCOP / tBS : 0;
-            
-            document.getElementById('total-usd').innerText = `Total Neto: $${Math.round(totalUSD)}`;
-            document.getElementById('total-cop-val').innerText = `${Math.round(totalCOP).toLocaleString('es-CO')} COP`;
-            document.getElementById('total-bs-val').innerText = `${totalBS.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs`;
+            document.getElementById('total-usd').innerText = `Total Neto: $${totalUSD}`;
+            document.getElementById('total-cop-val').innerText = `${totalCOP.toLocaleString('es-CO')} COP`;
+            document.getElementById('total-bs-val').innerText = `${totalBS.toLocaleString('es-VE')} Bs`;
         };
 
         window.filtrarTablaHistorial = function() {
@@ -1186,7 +1248,7 @@
 
         window.exportarHistorialExcel = function() {
             if(HISTORIAL_NOTAS.length === 0) return alert("No hay datos para exportar.");
-            const sheet = XLSX.utils.json_to_sheet(HISTORIAL_NOTAS.map(n => ({ Nota: n.numNota, Fecha: n.fecha, Cliente: n.cliente, Cedula: n.cedula, TotalUSD: Math.round(n.totalUSD), Estatus: n.estatus || "PROCESADA" })));
+            const sheet = XLSX.utils.json_to_sheet(HISTORIAL_NOTAS.map(n => ({ Nota: n.numNota, Fecha: n.fecha, Cliente: n.cliente, Cedula: n.cedula, TotalUSD: n.totalUSD, Estatus: n.estatus || "PROCESADA" })));
             const book = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(book, sheet, "Ventas"); XLSX.writeFile(book, "Respaldo_Tucocel_2026.xlsx");
         };
 
@@ -1207,12 +1269,7 @@
 
         window.cancelarEdicionActiva = function() { 
             idArticuloEnEdicion = null; 
-            document.getElementById('add-modelo').value = '';
-            document.getElementById('add-precio').value = '';
-            document.getElementById('add-desc').value = '';
-            document.getElementById('memoria').value = '';
-            document.getElementById('foto-base64').value = '';
-            if(document.getElementById('preview-foto')) document.getElementById('preview-foto').classList.add('hidden');
+            window.limpiarFormularioPanel(); 
             document.getElementById('panel-titulo').innerText = "Panel de Gestión"; 
             document.getElementById('btn-cancelar-edicion').classList.add('hidden'); 
             document.getElementById('wrapper-tipo-producto').classList.add('hidden');
@@ -1228,9 +1285,14 @@
 
         window.incrementarLikeActivo = async function() {
             if(!productoSeleccionadoActual) return;
+            const key = `like_tucocel_${productoSeleccionadoActual.id}`;
+            let yaDioLike = localStorage.getItem(key) === 'true';
             const idx = PRODUCTOS.findIndex(p => p.id === productoSeleccionadoActual.id);
             if(idx === -1) return;
-            PRODUCTOS[idx].likes = (PRODUCTOS[idx].likes || 0) + 1;
+
+            if(yaDioLike) { PRODUCTOS[idx].likes = Math.max(0, (PRODUCTOS[idx].likes || 1) - 1); localStorage.removeItem(key); } 
+            else { PRODUCTOS[idx].likes = (PRODUCTOS[idx].likes || 0) + 1; localStorage.setItem(key, 'true'); }
+
             productoSeleccionadoActual.likes = PRODUCTOS[idx].likes;
             document.getElementById('modal-like-count').innerText = productoSeleccionadoActual.likes;
             await window.guardarInventarioFirebase();
@@ -1245,7 +1307,15 @@
             if (nuevoTexto === null || nuevoTexto.trim() === "") return;
             elemento.innerText = nuevoTexto.trim();
             BASE_TEXTOS_WEB[idElemento] = { texto: nuevoTexto.trim(), alineacion: "1", estilo: "1" };
-            await setDoc(doc(db, "configuraciones", "textos_web"), BASE_TEXTOS_WEB);
+            await window.sincronizarTextosFirebase();
+        };
+
+        window.abrirModalNotificarCliente = function() {
+            const tlf = prompt("Ingrese el WhatsApp del cliente:");
+            const equipo = prompt("Nombre del equipo/servicio listo:");
+            if(!tlf || !equipo) return;
+            const msg = `¡Hola! 👋 Te saludamos de *TUCOCEL C.A.* Le informamos que su equipo (${equipo}) ya se encuentra listo y verificado por nuestro departamento de servicio técnico. Puede pasar a retirarlo por nuestra oficina física en el horario habitual. 🚀`;
+            window.open(`https://wa.me/${tlf.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`, '_blank');
         };
 
         window.ejecutarBotonImprimir = async function() {
@@ -1276,35 +1346,30 @@
             window.limpiarFormularioFacturaCompleto();
         };
 
-        window.limpiarFormularioFacturaCompleto = function() {
-            ITEMS_VENTA_ACTIVA = [];
-            document.getElementById('fact-cli-nombre').value = '';
-            document.getElementById('fact-cli-cedula').value = '';
-            document.getElementById('fact-cli-telefono').value = '';
-            document.getElementById('fact-cli-direccion').value = '';
-            window.renderizarItemsVentaActiva();
-        };
-
         window.reabrirNotaHistorialPorObjeto = function(index) { 
             const n = HISTORIAL_NOTAS[index]; 
             if(!n) return;
-            const s = prompt(`⚙️ CONTROL DE NOTA N° ${String(n.numNota).padStart(6, '0')}\n\n[1] Reimprimir Nota\n[2] Reenviar WhatsApp\n[3] Anular Nota\n[4] Eliminar Nota`); 
+            const s = prompt(`⚙️ CONTROL DE NOTA N° ${String(n.numNota).padStart(6, '0')}\n\nEscriba el número de la acción que desea:\n[1] Reimprimir Nota de Entrega\n[2] Reenviar Comprobante por WhatsApp\n[3] ANULAR COMPROBANTE VISUALMENTE\n[4] ELIMINAR PERMANENTEMENTE DE FIREBASE\n\nPresione cancelar para salir.`); 
             if(s==="1") { 
                 document.getElementById('wrapper-impresion-epson').style.display = 'block'; 
                 window.inyectarDatosAlTicketDOM(n); 
-                setTimeout(() => { window.print(); document.getElementById('wrapper-impresion-epson').style.display = 'none'; }, 400);
+                setTimeout(() => {
+                    window.print(); 
+                    document.getElementById('wrapper-impresion-epson').style.display = 'none'; 
+                }, 400);
             } else if(s==="2") { 
                 window.procesarEnvioWaObjeto(n); 
             } else if(s==="3") {
-                window.anularNotaHistorialPorId(n.id);
+                if(confirm(`⚠️ ¿Deseas ANULAR la Nota #${n.numNota}?`)) { window.anularNotaHistorialPorId(n.id); }
             } else if(s==="4") {
-                window.eliminarNotaHistorialPorId(n.id);
+                if(confirm(`🚨 ¿CRÍTICO: Seguro que deseas ELIMINAR por completo la Nota #${n.numNota} de Firebase? El correlativo regresará.`)) { window.eliminarNotaHistorialPorId(n.id); }
             }
         };
 
         window.anularNotaHistorialPorId = async function(id) {
             try {
                 await updateDoc(doc(db, "notas_ventas", id), { estatus: "ANULADA" });
+                alert("Nota colocada en estatus ANULADA.");
                 await window.cargarHistorialFirebase();
             } catch(e) { console.error(e); }
         };
@@ -1312,6 +1377,7 @@
         window.eliminarNotaHistorialPorId = async function(id) {
             try {
                 await deleteDoc(doc(db, "notas_ventas", id));
+                alert("Nota eliminada permanentemente de Firebase.");
                 await window.cargarHistorialFirebase();
             } catch(e) { console.error(e); }
         };
@@ -1324,7 +1390,7 @@
                 
                 const snapConteo = await getDocs(collection(db, "notas_ventas"));
                 const numNotaGenerado = snapConteo.size + 1;
-                const fechaEstructurada = new Date().toLocaleDateString('es-VE');
+                const fechaEstructurada = new Date().toLocaleString('es-VE');
 
                 const nuevaNota = {
                     numNota: numNotaGenerado,
@@ -1352,7 +1418,7 @@
 
         window.inyectarDatosAlTicketDOM = function(nota) {
             document.getElementById('tk-num-nota').innerText = String(nota.numNota).padStart(6, '0');
-            document.getElementById('tk-fecha').innerText = nota.fecha;
+            document.getElementById('tk-fecha').innerText = `${nota.fecha.split(' ')[0]}`;
             document.getElementById('tk-cliente-nombre').innerText = nota.cliente;
             document.getElementById('tk-cliente-cedula').innerText = nota.cedula;
             document.getElementById('tk-cliente-direccion').innerText = nota.direccion;
@@ -1364,12 +1430,14 @@
             tbody.innerHTML = '';
             
             nota.items.forEach(item => {
-                const imeiTxt = item.imeis ? `<br><span style="color: #ef4444; font-size: 11px; font-weight: bold;">[IMEI: ${item.imeis.join(', ')}]</span>` : '';
+                const imeiTxt = item.imeis ? `<br><span class="imei" style="color: #b91c1c; font-size: 8px; display: block; margin-top: 2px; font-weight: bold;">[IMEI: ${item.imeis.join(', ')}]</span>` : '';
                 tbody.innerHTML += `
                     <tr>
-                        <td>${item.cantidad}</td>
-                        <td><strong>${item.modelo}</strong>${imeiTxt}</td>
-                        <td style="text-align: right; font-weight: bold;">$${item.precio}.00</td>
+                        <td style="text-align: center;">${item.cantidad}</td>
+                        <td>
+                            <strong>${item.modelo}</strong>${imeiTxt}
+                        </td>
+                        <td style="text-align: right; font-weight: bold;">$${item.precio.toFixed(2)}</td>
                     </tr>`;
             });
 
@@ -1380,21 +1448,42 @@
             const totalEnCop = usdNeto * copTasa;
             const totalEnBs = bsTasa > 0 ? totalEnCop / bsTasa : 0;
 
-            document.getElementById('tk-total-usd').innerText = `$${usdNeto}.00`;
+            document.getElementById('tk-total-usd').innerText = `$${usdNeto.toFixed(2)}`;
             document.getElementById('tk-total-cop').innerText = copTasa > 0 ? `${Math.round(totalEnCop).toLocaleString('es-CO')} COP` : '0 COP';
-            document.getElementById('tk-total-bs').innerText = bsTasa > 0 ? `${totalEnBs.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs` : '0 Bs';
+            document.getElementById('tk-total-bs').innerText = bsTasa > 0 ? `${totalEnBs.toFixed(2).toLocaleString('es-VE')} Bs` : '0 Bs';
         };
 
         window.compartirVitrinaGeneralWa = function() {
-            const msg = `🔥 *¡Catálogo en tiempo real!* Visita la vitrina de *TUCOCEL C.A.* https://tucocel.github.io/`;
-            window.open(`https://api.whatsapp.com/send?text=${msg}`, '_blank');
+            const msg = `🔥 ¡Catálogo en tiempo real! Visita la vitrina de Tucocel, Agente Autorizado Movistar en Cordero. ¡Entra ya y cotiza al instante! 🚀\n\n✨ *NUESTROS SERVICIOS:*\n📲 Venta de Líneas Movistar\n📱 Smartphones Nuevos con Garantía de 60 Días\n🔌 Accesorios Premium para Celulares y Computación\n🛠️ Servicio Técnico Especializado (Celulares, Laptops e Impresoras)\n📸 Servicio Fotográfico Profesional\n\n👇 _¡Haz clic aquí abajo y descubre los precios de hoy!_ 👇\nhttps://tucocel.github.io/`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
         };
 
         window.compartirProductoEspecificoWa = function(modelo, precio) {
-            const msg = `📱 *¡Mira este equipo en la Vitrina Digital!*%0A%0A📦 *PRODUCTO:* ${modelo}%0A💵 *PRECIO:* $${Math.round(precio)} USD`;
-            window.open(`https://api.whatsapp.com/send?text=${msg}`, '_blank');
+            const msg = `📱 *¡Mira este equipo en la Vitrina Digital de TUCOCEL C.A.!*\n\n📦 *PRODUCTO:* ${modelo}\n💵 *PRECIO:* $${precio} USD\n🛡️ Garantía de 60 días y stock físico disponible.\n\n🌐 _Ver detalles aquí:_ https://tucocel.github.io/`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
         };
 
+        window.descargarTextosPersonalizados = async function() {
+            try {
+                const docRef = doc(db, "configuraciones", "textos_web");
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    BASE_TEXTOS_WEB = docSnap.data() || {};
+                    Object.keys(BASE_TEXTOS_WEB).forEach(idElemento => {
+                        const elementoDOM = document.getElementById(idElemento);
+                        if (elementoDOM) {
+                            const dataObjeto = BASE_TEXTOS_WEB[idElemento];
+                            if (dataObjeto && typeof dataObjeto === 'object') { elementoDOM.innerText = dataObjeto.texto || ""; }
+                        }
+                    });
+                }
+            } catch(e) { console.error(e); }
+        };
+
+        window.sincronizarTextosFirebase = async function() { 
+            try { await setDoc(doc(db, "configuraciones", "textos_web"), BASE_TEXTOS_WEB); } catch (e) {} 
+        };
+        
         window.manejarVisibilidadLapicitosAdmin = function(mostrar) { 
             document.querySelectorAll('.btn-editar-texto').forEach(l => l.style.display = mostrar ? 'inline-block' : 'none'); 
         };
@@ -1402,16 +1491,26 @@
         window.cargarInventarioFirebase = async function() {
             try {
                 const docSnap = await getDoc(doc(db, "inventario", "productos_tucocel"));
-                if (docSnap.exists()) { PRODUCTOS = docSnap.data().lista || []; }
-            } catch (e) { console.error(e); } finally { window.ejecutarFiltroCombinado(); }
+                if (docSnap.exists()) { PRODUCTOS = docSnap.data().lista || []; PRODUCTOS.sort((a, b) => a.precio - b.precio); }
+            } catch (e) { console.error(e); } finally { window.verificarSesionLocal(); window.ejecutarFiltroCombinado(); window.gestionarContadorVisitasReal(); }
+        };
+
+        window.gestionarContadorVisitasReal = function() {
+            try {
+                let visitas = parseInt(localStorage.getItem('tucocel_visitas_db')) || 0;
+                visitas += 1;
+                localStorage.setItem('tucocel_visitas_db', visitas);
+                const el = document.getElementById('contador-visitas-num');
+                if(el) el.innerText = visitas;
+            } catch(err) { console.error(err); }
         };
 
         window.guardarInventarioFirebase = async function() {
-            try { await setDoc(doc(db, "inventario", "productos_tucocel"), { lista: PRODUCTOS }); } 
-            catch (e) { alert("Error guardando cambios."); }
+            const btn = document.getElementById('btn-guardar'); if(btn) { btn.disabled = true; btn.innerText = "Guardando..."; }
+            try { PRODUCTOS.sort((a, b) => a.precio - b.precio); await setDoc(doc(db, "inventario", "productos_tucocel"), { lista: PRODUCTOS }); } 
+            catch (e) { alert("Error guardando cambios."); } finally { if(btn) { btn.disabled = false; btn.innerText = "Guardar en Inventario"; } }
         };
 
-        // PARCHE: SE CORRIGIÓ EL COHETE "telefonos Filtrados" CON ESPACIO QUE ROMPÍA EL SISTEMA
         window.ejecutarFiltroCombinado = function() {
             const telefonosFiltrados = PRODUCTOS.filter(p => p.marca !== 'Otros Productos');
             const otrosFiltrados = PRODUCTOS.filter(p => p.marca === 'Otros Productos');
@@ -1420,15 +1519,15 @@
         };
 
         window.procesarEnvioWaObjeto = function(nota) {
-            let desc = nota.items.map(i => `• ${i.cantidad}x ${i.modelo} -> $${Math.round(i.precio)} ${i.imeis ? `\n📱 *IMEI:* ${i.imeis.join(', ')}` : ''}`).join('\n');
+            let desc = nota.items.map(i => `• ${i.cantidad}x ${i.modelo} -> $${i.precio} ${i.imeis ? `\n📱 *IMEI:* ${i.imeis.join(', ')}` : ''}`).join('\n');
             const usdNeto = parseFloat(nota.totalUSD) || 0;
             const copTasa = parseFloat(nota.tasaCop) || 0;
             const bsTasa = parseFloat(nota.tasaBs) || 0;
             const totalEnCop = usdNeto * copTasa;
             const totalEnBs = bsTasa > 0 ? totalEnCop / bsTasa : 0;
 
-            const txtFinal = `*TUCOCEL C.A.* 📱\n*Nota de Entrega:* N° ${String(nota.numNota).padStart(6, '0')}\n\n👥 *Cliente:* ${nota.cliente}\n💵 *Total General:* $${Math.round(usdNeto)} USD\n*Ref COP:* ${Math.round(totalEnCop).toLocaleString('es-CO')} COP\n*Ref VES:* ${totalEnBs.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs`;
-            window.open(`https://api.whatsapp.com/send?phone=${nota.telefono.replace(/[^0-9]/g, '')}&text=${encodeURIComponent(txtFinal)}`, '_blank');
+            const msg = `*TUCOCEL C.A.*\n*Nota de Entrega:* N° ${String(nota.numNota).padStart(6, '0')}\n*Fecha:* ${nota.fecha}\n\n👥 *Cliente:* ${nota.cliente}\n💳 *Cédula/RIF:* ${nota.cedula}\n📞 *Teléfono:* ${nota.telefono}\n📍 *Dirección:* ${nota.direccion}\n\n📦 *Detalle de compra:*\n${desc}\n\n💵 *Total General:* $${usdNeto.toFixed(2)} USD\n*Ref COP:* ${Math.round(totalEnCop).toLocaleString('es-CO')} COP\n*Ref VES:* ${totalEnBs.toFixed(2).toLocaleString('es-VE')} Bs\n_Valores informativos calculados a la tasa del día._\n\n--------------------------------------------------\n🔒 *CONTROL INTERNO (NO FISCAL)*\n_Este documento es un comprobante de entrega administrativo. No constituye, ni pretende sustituir a una factura fiscal regulada por la ley._\n\n--------------------------------------------------\n🛡️ *TÉRMINOS DE GARANTÍA (60 DÍAS)*\n_Garantía por defectos de fábrica de los equipos celulares: 2 meses. La garantía no cubre golpes, humedad, sellos rotos, sobrecargas eléctricas o alteración de software._\n\n--------------------------------------------------\n🚀 *¡Gracias por confiar en tu compra!*\n🌐 *Visita nuestra Vitrina Digital:* https://tucocel.github.io/`;
+            window.open(`https://wa.me/${nota.telefono.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`, '_blank');
         };
 
         window.cargarHistorialFirebase = async function() {
@@ -1447,15 +1546,15 @@
             lista.forEach((n, idx) => {
                 const colorLabel = n.estatus === 'ANULADA' ? 'text-red-500 bg-red-50' : 'text-emerald-600 bg-emerald-50';
                 tabla.innerHTML += `
-                    <tr class="border-b hover:bg-gray-50 text-[11px]">
+                    <tr class="border-b hover:bg-gray-50">
                         <td class="p-3 font-mono text-blue-600 font-bold">#${String(n.numNota).padStart(6, '0')}</td>
                         <td class="p-3 text-gray-500">${n.fecha}</td>
                         <td class="p-3 font-bold text-gray-900">${n.cliente}</td>
                         <td class="p-3 font-mono text-gray-600">${n.cedula}</td>
-                        <td class="p-3 text-gray-500">${n.items.map(i => `${i.cantidad}x ${i.modelo}`).join(', ')}</td>
-                        <td class="p-3 text-right font-mono font-black text-gray-900">$${Math.round(n.totalUSD)}</td>
-                        <td class="p-3 text-center"><span class="px-2 py-0.5 rounded-full uppercase ${colorLabel}">${n.estatus || 'PROCESADA'}</span></td>
-                        <td class="p-3 text-center"><button onclick="reabrirNotaHistorialPorObjeto(${idx})" class="text-blue-600 bg-blue-50 p-2 rounded-lg"><i class="fa-solid fa-sliders"></i></button></td>
+                        <td class="p-3 text-gray-500 truncate max-w-[180px]">${n.items.map(i => `${i.cantidad}x ${i.modelo}`).join(', ')}</td>
+                        <td class="p-3 text-right font-mono font-black text-gray-900">$${n.totalUSD}</td>
+                        <td class="p-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase ${colorLabel}">${n.estatus || 'PROCESADA'}</span></td>
+                        <td class="p-3 text-center"><button onclick="reabrirNotaHistorialPorObjeto(${idx})" class="text-blue-600 bg-blue-50 hover:bg-blue-100 p-2 rounded-lg font-bold"><i class="fa-solid fa-sliders"></i></button></td>
                     </tr>`;
             });
         };
@@ -1464,7 +1563,7 @@
             const contenedor = document.getElementById('contenedor-productos'); if(!contenedor) return;
             let listaFiltrada = lista;
             if (marcaSeleccionada !== 'Todas') { listaFiltrada = lista.filter(p => p.marca.toLowerCase() === marcaSeleccionada.toLowerCase()); }
-            if(document.getElementById('contador-productos')) document.getElementById('contador-productos').innerText = `${listaFiltrada.length} Disponibles`;
+            const contador = document.getElementById('contador-productos'); if(contador) contador.innerText = `${listaFiltrada.length} Disponibles`;
             if(listaFiltrada.length === 0) { contenedor.innerHTML = '<div class="text-center col-span-full py-12 text-gray-400 text-sm font-medium">No hay artículos comerciales cargados.</div>'; return; }
             contenedor.innerHTML = '';
             listaFiltrada.forEach(prod => {
@@ -1475,7 +1574,7 @@
                     <div onclick="abrirModalProducto('${prod.id}')" class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex flex-col justify-between transition-all hover:shadow-xl cursor-pointer group">
                         <div>
                             <div class="w-full h-64 bg-white border border-gray-50 rounded-xl overflow-hidden mb-4 flex justify-center items-center p-1">
-                                <img src="${fotoProd}" alt="Smartphone" class="max-w-full max-h-full object-contain filter drop-shadow-md">
+                                <img src="${fotoProd}" alt="Ficha smartphone" class="max-w-full max-h-full object-contain filter drop-shadow-md">
                             </div>
                             <div class="flex justify-between items-center mb-1.5 gap-1">
                                 <span class="text-[9px] font-extrabold text-blue-600 bg-blue-50 uppercase tracking-widest px-2 py-0.5 rounded-md">${prod.marca}</span>
@@ -1486,8 +1585,11 @@
                         </div>
                         <div class="mt-5 space-y-2">
                             <div class="flex items-center justify-between pt-3 border-t border-gray-50">
-                                <p class="text-base font-black text-gray-900">$${Math.round(prod.precio)} <span class="text-[10px] text-gray-400 font-bold">USD</span></p>
+                                <p class="text-base font-black text-gray-900">$${prod.precio} <span class="text-[10px] text-gray-400 font-bold">USD</span></p>
                                 <div class="flex gap-1.5">
+                                    <button onclick="event.stopPropagation(); window.compartirProductoEspecificoWa('${prod.modelo}', ${prod.precio})" class="bg-emerald-50 text-emerald-600 p-2 rounded-xl text-xs hover:bg-emerald-100 transition-colors" title="Compartir en WhatsApp">
+                                        <i class="fa-brands fa-whatsapp"></i>
+                                    </button>
                                     <span class="bg-blue-50 text-blue-600 text-[10px] font-extrabold px-2.5 py-1.5 rounded-xl">${mod === 'consultar' ? 'Consultar' : 'Ver'}</span>
                                 </div>
                             </div>
@@ -1502,53 +1604,140 @@
             carrusel.innerHTML = '';
             lista.forEach(prod => {
                 const fotoProd = prod.foto || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80';
+                const mod = prod.modalidad || 'vitrina';
+                const tagEntrega = mod === 'vitrina' ? `<span class="text-[9px] bg-emerald-50 text-emerald-700 border border-emerald-100 font-extrabold px-1.5 py-0.5 rounded">Entrega Inmediata</span>` : `<span class="text-[9px] bg-amber-50 text-amber-700 border border-amber-100 font-extrabold px-1.5 py-0.5 rounded">Bajo Pedido</span>`;
                 carrusel.innerHTML += `
                     <div onclick="abrirModalProducto('${prod.id}')" class="snap-start shrink-0 w-44 bg-white rounded-2xl p-3 border border-gray-100 shadow-sm flex flex-col justify-between cursor-pointer select-none">
                         <div>
                             <div class="w-full h-36 bg-white border border-gray-50 rounded-xl overflow-hidden mb-2 flex items-center justify-center p-2">
-                                <img src="${fotoProd}" alt="Accesorio" class="max-w-full max-h-full object-contain">
+                                <img src="${fotoProd}" alt="Ficha accesorio" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <div class="flex flex-col gap-1 items-start">
+                                <span class="text-[8px] font-black uppercase tracking-widest text-blue-500 bg-blue-50 px-1.5 py-0.5 rounded inline-block">${prod.tipoProducto === 'Celular' ? 'Teléfono' : 'Accesorio'}</span>
+                                ${tagEntrega}
                             </div>
                             <h4 class="font-bold text-gray-800 text-xs truncate mt-1">${prod.modelo}</h4>
                         </div>
                         <div class="mt-2">
-                            <p class="text-sm font-black text-gray-900">$${Math.round(prod.precio)}</p>
+                            <div class="flex justify-between items-center">
+                                <p class="text-sm font-black text-gray-900">$${prod.precio}</p>
+                                <button onclick="event.stopPropagation(); window.compartirProductoEspecificoWa('${prod.modelo}', ${prod.precio})" class="text-emerald-500 hover:text-emerald-600 text-xs" title="Compartir">
+                                    <i class="fa-brands fa-whatsapp text-sm"></i>
+                                </button>
+                            </div>
                             ${esAdminAutenticado ? `<div class="flex gap-2 border-t pt-1.5 mt-1 justify-center"><button onclick="event.stopPropagation(); prepararEdicionArticulo('${prod.id}')" class="text-blue-600 hover:underline text-[11px] font-bold">Editar</button><button onclick="event.stopPropagation(); eliminarProducto('${prod.id}')" class="text-red-500 hover:underline text-[11px] font-bold">Borrar</button></div>` : ''}
                         </div>
                     </div>`;
             });
         };
 
+        window.renderizarItemsVentaActiva = function() {
+            const contenedor = document.getElementById('fact-lista-items'); document.getElementById('fact-items-count').innerText = `${ITEMS_VENTA_ACTIVA.length} items`;
+            if(ITEMS_VENTA_ACTIVA.length === 0) { contenedor.innerHTML = '<p class="text-center text-slate-500 text-xs py-6">No hay artículos añadidos todavía.</p>'; window.calcularTotalesFactura(); return; }
+            contenedor.innerHTML = '';
+            ITEMS_VENTA_ACTIVA.forEach((item, index) => {
+                const imeiLabel = item.imeis ? `<span class="text-[10px] text-amber-400 font-mono block">IMEIs: ${item.imeis.join(', ')}</span>` : '';
+                contenedor.innerHTML += `
+                    <div class="bg-slate-950 p-2 rounded-xl border border-slate-800 flex justify-between text-white text-xs">
+                        <div><p class="font-bold truncate max-w-[140px]">${item.cantidad}x ${item.modelo}</p>${imeiLabel}</div>
+                        <div class="flex items-center gap-2"><span>$${item.precio}</span><button onclick="removerItemVenta(${index})" class="text-red-400 font-bold"><i class="fa-solid fa-square-xmark"></i></button></div>
+                    </div>`;
+            });
+            window.calcularTotalesFactura();
+        };
+
+        window.actualizarSelectFacturacion = function() {
+            const select = document.getElementById('fact-select-producto'); if(!select) return;
+            select.innerHTML = '<option value="">-- Seleccione un producto --</option>';
+            PRODUCTOS.forEach(p => { select.innerHTML += `<option value="${p.id}">${p.modelo} (${p.marca}) - $${p.precio}</option>`; });
+        };
+
+        window.limpiarFormularioPanel = function() {
+            document.getElementById('add-modelo').value = ''; 
+            document.getElementById('memoria').value = '';
+            document.getElementById('add-precio').value = ''; 
+            document.getElementById('add-desc').value = '';
+            document.getElementById('add-foto-file').value = ''; 
+            document.getElementById('foto-base64').value = '';
+            const p = document.getElementById('preview-foto'); if(p) p.classList.add('hidden');
+        };
+
+        window.limpiarFormularioFacturaCompleto = function() {
+            document.getElementById('fact-cli-nombre').value = '';
+            document.getElementById('fact-cli-cedula').value = '';
+            document.getElementById('fact-cli-telefono').value = '';
+            document.getElementById('fact-cli-direccion').value = '';
+            ITEMS_VENTA_ACTIVA = [];
+            window.renderizarItemsVentaActiva();
+        };
+
         window.procesarGuardadoInventario = async function() {
-            const marca = document.getElementById('add-marca').value;
-            const modelo = document.getElementById('add-modelo').value.trim();
-            const precio = parseInt(document.getElementById('add-precio').value) || 0;
-            const desc = document.getElementById('add-desc').value.trim();
-            const memo = document.getElementById('memoria').value.trim();
-            const foto = document.getElementById('foto-base64').value;
+            const marca = document.getElementById('add-marca').value; 
             const mod = document.getElementById('add-modalidad').value;
-            const tipo = document.getElementById('add-tipo').value;
-
-            if(!modelo || !precio) return alert("Por favor complete modelo y precio.");
-
-            if(idArticuloEnEdicion) {
-                const idx = PRODUCTOS.findIndex(p => p.id === idArticuloEnEdicion);
-                if(idx !== -1) {
-                    PRODUCTOS[idx] = { id: idArticuloEnEdicion, marca, modelo, precio, desc, memoria: memo, foto, modalidad: mod, tipoProducto: tipo, likes: PRODUCTOS[idx].likes || 0 };
-                }
-                idArticuloEnEdicion = null;
-            } else {
-                PRODUCTOS.push({ id: "prod-" + new Date().getTime(), marca, modelo, precio, desc, memoria: memo, foto, modalidad: mod, tipoProducto: tipo, likes: 0 });
+            const modelo = document.getElementById('add-modelo').value.trim(); 
+            const memoriaVal = document.getElementById('memoria').value.trim(); 
+            const precio = parseInt(document.getElementById('add-precio').value.trim()) || 0; 
+            const foto = document.getElementById('foto-base64').value; 
+            const desc = document.getElementById('add-desc').value.trim();
+            const tipoProductoVal = marca === 'Otros Productos' ? document.getElementById('add-tipo').value : 'Celular';
+            
+            if(!modelo || !precio) { alert("Complete modelo y precio."); return; }
+            
+            if (idArticuloEnEdicion) { 
+                const idx = PRODUCTOS.findIndex(p => p.id === idArticuloEnEdicion); 
+                if (idx !== -1) PRODUCTOS[idx] = { id: idArticuloEnEdicion, marca, modalidad: mod, modelo, memoria: memoriaVal, precio, foto, desc, tipoProducto: tipoProductoVal, likes: PRODUCTOS[idx].likes || 0 }; 
+                window.cancelarEdicionActiva(); 
+            } else { 
+                PRODUCTOS.unshift({ id: (new Date().getTime()).toString(), marca, modalidad: mod, modelo, memoria: memoriaVal, precio, foto, desc, tipoProducto: tipoProductoVal, likes: 0 }); 
+                window.limpiarFormularioPanel(); 
             }
+            await window.guardarInventarioFirebase(); 
+            window.ejecutarFiltroCombinado(); 
+            window.actualizarSelectFacturacion();
+        };
 
-            await window.guardarInventarioFirebase();
-            cancelarEdicionActiva();
-            window.ejecutarFiltroCombinado();
+        window.procesarImagen = function(e) { 
+            const file = e.target.files[0]; if (!file) return; 
+            const reader = new FileReader(); 
+            reader.onload = function(event) { 
+                const img = new Image(); 
+                img.onload = function() { 
+                    const canvas = document.createElement('canvas'); const ctx = canvas.getContext('2d'); 
+                    canvas.width = 600; canvas.height = 600; ctx.drawImage(img, 0, 0, 600, 600); 
+                    const base64Str = canvas.toDataURL('image/jpeg', 0.85); 
+                    document.getElementById('foto-base64').value = base64Str;
+                    const preview = document.getElementById('preview-foto'); if(preview) { preview.src = base64Str; preview.classList.remove('hidden'); }
+                }; 
+                img.src = event.target.result; 
+            }; 
+            reader.readAsDataURL(file); 
+        };
+
+        window.verificarSesionLocal = function() { 
+            let s = false; try { s = localStorage.getItem('tucocel_admin_sesion') === 'true'; } catch(e) {} 
+            if (s) { 
+                esAdminAutenticado = true; 
+                const p = document.getElementById('panel-admin'); if(p) p.classList.remove('hidden'); 
+                window.controlarVisibilidadModulosOcultos(true); 
+                window.manejarVisibilidadLapicitosAdmin(true); 
+            } 
+        };
+
+        window.inicializarScrollAutomaticoCarrusel = function() {
+            const c = document.getElementById('carrusel-otros'); if(!c) return;
+            let dir = 1;
+            setInterval(() => {
+                if(c.scrollLeft >= (c.scrollWidth - c.clientWidth) - 10) dir = -1; else if(c.scrollLeft <= 10) dir = 1;
+                c.scrollBy({ left: 35 * dir, behavior: 'smooth' });
+            }, 4000);
         };
 
         const inputFoto = document.getElementById('add-foto-file'); if(inputFoto) inputFoto.addEventListener('change', window.procesarImagen);
         const selectMarca = document.getElementById('add-marca'); if(selectMarca) selectMarca.addEventListener('change', window.verificarMarcaSeleccionadaPanel);
 
+        window.descargarTextosPersonalizados();
         window.cargarInventarioFirebase();
+        window.inicializarScrollAutomaticoCarrusel();
     </script>
 </body>
     </html>
