@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tucocel C.A. — Telefonía Móvil y Computación</title>
 
-    <!-- METATAGS OPEN GRAPH (EL BOOM VISUAL AL COMPARTIR LA WEB) -->
+    <!-- METATAGS OPEN GRAPH -->
     <meta property="og:title" content="📱 TUCOCEL C.A. | Vitrina Tecnológica Digital">
     <meta property="og:description" content="🔥 ¡Explora nuestro stock en tiempo real! Conéctate con la evolución tecnológica y cotiza al instante desde cualquier lugar del mundo. 🚀">
     <meta property="og:image" content="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80">
@@ -14,11 +14,10 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
         
         html, body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -53,9 +52,11 @@
             color: #f59e0b;
         }
 
-        /* DISEÑO DE FACTURA PREMIUM E IMPRESIÓN REQUERIDO */
+        /* FORMATO DE IMPRESIÓN EPSON AJUSTABLE (10x15 CM) */
         #wrapper-impresion-epson {
             width: 100mm;
+            min-height: 150mm;
+            height: auto;
             background: #ffffff;
             margin: 0 auto;
             padding: 4mm;
@@ -64,38 +65,38 @@
 
         .ticket-header-title {
             color: #003366;
-            font-size: 18px;
-            font-weight: 800;
+            font-size: 17px;
+            font-weight: 900;
             text-align: center;
             letter-spacing: 0.5px;
             margin: 0;
         }
         .ticket-doc-type {
             color: #cc3333;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 800;
             text-align: center;
             letter-spacing: 1px;
-            margin: 3px 0 1px 0;
+            margin: 2px 0;
         }
         .ticket-sub-text {
-            font-size: 8.5px;
+            font-size: 8px;
             color: #4b5563;
             text-align: center;
-            line-height: 1.3;
+            line-height: 1.25;
             margin: 0;
         }
         .ticket-info-box {
             border: 1px solid #cbd5e1;
-            border-radius: 10px;
-            padding: 8px 10px;
-            margin: 10px 0;
+            border-radius: 8px;
+            padding: 6px 8px;
+            margin: 6px 0;
             background-color: #f8fafc;
         }
         .ticket-info-table {
             width: 100%;
-            font-size: 10px;
-            line-height: 1.4;
+            font-size: 9px;
+            line-height: 1.35;
             color: #1e293b;
         }
         .ticket-info-table td {
@@ -104,25 +105,25 @@
         }
         .ticket-control-no {
             color: #cc3333;
-            font-weight: 700;
+            font-weight: 800;
         }
         .ticket-items-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 10px;
-            margin: 10px 0;
+            font-size: 9px;
+            margin: 6px 0;
         }
         .ticket-items-table th {
             background-color: #003366;
             color: #ffffff;
             font-weight: 700;
-            padding: 5px 6px;
-            font-size: 9px;
+            padding: 4px 5px;
+            font-size: 8px;
             text-transform: uppercase;
             border: none;
         }
         .ticket-items-table td {
-            padding: 7px 6px;
+            padding: 5px 4px;
             border-bottom: 1px solid #e2e8f0;
             color: #334155;
             vertical-align: top;
@@ -131,15 +132,15 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-top: 8px;
-            gap: 8px;
+            margin-top: 6px;
+            gap: 6px;
         }
         .ticket-status-box {
             border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            padding: 8px;
-            width: 46%;
-            font-size: 9px;
+            border-radius: 6px;
+            padding: 6px;
+            width: 45%;
+            font-size: 8px;
             background-color: #ffffff;
             box-sizing: border-box;
         }
@@ -148,40 +149,40 @@
             background-color: #16a34a;
             color: #ffffff;
             font-weight: 800;
-            padding: 3px 8px;
-            border-radius: 5px;
-            font-size: 8.5px;
-            margin-top: 4px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 8px;
+            margin-top: 3px;
             text-align: center;
         }
         .ticket-totals-box {
-            width: 52%;
+            width: 53%;
             box-sizing: border-box;
         }
         .ticket-totals-table {
             width: 100%;
-            font-size: 10px;
+            font-size: 9px;
         }
         .ticket-totals-table td {
-            padding: 2px 0;
+            padding: 1.5px 0;
         }
         .ticket-total-row {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 800;
             color: #003366;
             border-top: 1.5px double #003366;
         }
         .ticket-currency-ref {
-            font-size: 9.5px;
+            font-size: 8.5px;
             font-style: italic;
             font-weight: 600;
         }
         .ticket-legal-box {
-            margin-top: 10px;
+            margin-top: 8px;
             border: 1px solid #475569;
-            padding: 6px;
-            border-radius: 8px;
-            font-size: 7.5px;
+            padding: 5px;
+            border-radius: 6px;
+            font-size: 7px;
             text-align: justify;
             line-height: 1.2;
             color: #334155;
@@ -202,6 +203,7 @@
                 left: 0 !important;
                 top: 0 !important;
                 width: 100mm !important;
+                min-height: 150mm !important;
                 height: auto !important;
                 margin: 0 !important;
                 padding: 4mm !important;
@@ -212,14 +214,15 @@
                 page-break-inside: avoid !important;
             }
             @page {
-                size: 100mm;
+                size: 100mm 150mm;
                 margin: 0 !important;
             }
         }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased min-h-screen pb-12 relative">
-    <!-- MODAL VISUAL DE CONEXIÓN AL SERVIDOR / SINCRONIZACIÓN -->
+
+    <!-- MODAL DE CONEXIÓN CON EL SERVIDOR -->
     <div id="modal-conexion-nube-supremo" class="fixed inset-0 bg-slate-950/95 backdrop-blur-md z-[99999] flex items-center justify-center p-4 transition-all duration-500">
         <div class="bg-slate-900 border border-blue-500/40 rounded-3xl p-6 max-w-sm w-full text-center space-y-4 shadow-[0_0_50px_rgba(59,130,246,0.3)] relative overflow-hidden">
             <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.1),transparent_70%)]"></div>
@@ -236,7 +239,7 @@
         </div>
     </div>
 
-    <!-- BARRA SUPERIOR DE ACCESOS ADMINISTRATIVOS ADAPTABLE -->
+    <!-- BARRA SUPERIOR ADMINISTRATIVA -->
     <div id="barra-accesos-admin" class="bg-slate-950 text-white px-4 py-2 text-xs font-bold hidden border-b border-slate-800 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
             <div class="flex items-center gap-2 shrink-0 justify-center w-full sm:w-auto">
@@ -252,29 +255,33 @@
         </div>
     </div>
 
-    <!-- BARRA DE NAVEGACIÓN -->
+    <!-- BARRA DE NAVEGACIÓN LIMPIA Y PROFESIONAL -->
     <nav class="bg-white border-b border-gray-100 sticky top-0 z-40 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center gap-3">
-                    <div class="bg-blue-600 text-white w-10 h-10 rounded-xl font-bold text-lg tracking-wider flex items-center justify-center shadow-md shadow-blue-200">TC</div>
+                    <div class="bg-blue-600 text-white w-10 h-10 rounded-xl font-bold text-lg tracking-wider flex items-center justify-center shadow-md shadow-blue-200 shrink-0">TC</div>
                     <div>
-                        <span class="font-black text-gray-900 text-sm block tracking-tight">TUCOCEL C.A.</span>
-                        <span class="text-[9px] text-blue-600 font-extrabold tracking-widest inline-flex items-center gap-1 -mt-1 uppercase">
+                        <span class="font-black text-gray-900 text-base sm:text-lg block tracking-tight leading-tight">TUCOCEL C.A.</span>
+                        <span class="text-[9.5px] sm:text-[10px] text-blue-600 font-extrabold tracking-wider block uppercase">
                             <span id="txt-nav-sub">Agente Autorizado Movistar Cordero</span>
                         </span>
                     </div>
                 </div>
-                <div class="flex items-center gap-3">
-                    <button onclick="abrirLoginAdmin()" class="text-gray-400 hover:text-blue-600 transition-colors p-2 text-lg" title="Acceso Administrativo">
-                        <i class="fa-solid fa-user-shield"></i>
+
+                <div class="flex items-center gap-2.5">
+                    <button onclick="window.instalarAppDispositivo()" class="bg-slate-900 hover:bg-slate-800 text-amber-400 border border-slate-700 px-3.5 py-2 rounded-xl font-black text-[11px] flex items-center gap-1.5 shadow-sm active:scale-95 transition-all">
+                        <i class="fa-solid fa-mobile-screen-button text-xs"></i> <span class="hidden sm:inline">Instalar</span> App
+                    </button>
+                    <button onclick="abrirLoginAdmin()" class="w-10 h-10 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl flex items-center justify-center transition-colors shadow-sm" title="Acceso Administrativo">
+                        <i class="fa-solid fa-user-shield text-base"></i>
                     </button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- ENCABEZADO / BANNER PRINCIPAL -->
+    <!-- HEADER / BANNER PRINCIPAL -->
     <header class="bg-gradient-to-r from-slate-900 to-blue-950 text-white py-12 px-4 shadow-inner relative overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
         <div id="contenedor-textos-header" class="max-w-7xl mx-auto text-center relative z-10 space-y-3">
@@ -305,14 +312,14 @@
                 <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-plug"></i></div>
                 <div>
                     <h2 class="font-bold text-gray-900 text-sm">Accesorios Premium</h2>
-                    <p class="text-gray-500 text-xs mt-0.5 leading-relaxed">También contamos con una amplia variedad de accesorios de alta calidad para celulares y computadoras.</p>
+                    <p class="text-gray-500 text-xs mt-0.5 leading-relaxed">Variedad de accesorios de alta calidad para celulares y computadoras.</p>
                 </div>
             </div>
             <div class="flex items-center gap-4 p-2 border-t md:border-t-0 md:border-l border-gray-100 pt-4 md:pt-2 md:pl-6">
                 <div class="w-12 h-12 bg-slate-900 text-blue-400 rounded-2xl flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-laptop-medical"></i></div>
                 <div>
                     <h2 class="font-bold text-gray-900 text-sm">Servicio Técnico Especializado</h2>
-                    <p class="text-gray-500 text-xs mt-0.5 leading-relaxed">Soporte y reparación profesional para teléfonos, computadoras, laptops e impresoras. ¡Dejamos tus equipos como nuevos!</p>
+                    <p class="text-gray-500 text-xs mt-0.5 leading-relaxed">Soporte y reparación profesional para teléfonos, computadoras, laptops e impresoras.</p>
                 </div>
             </div>
         </div>
@@ -331,11 +338,11 @@
                 </div>
             </div>
             <button onclick="abrirModalConsultaBanner()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs px-6 py-3 rounded-xl transition-all shadow-md flex items-center justify-center gap-2 uppercase tracking-wide shrink-0">
-                <i class="fa-brands fa-whatsapp text-sm"></i> Consultar aquí por WhatsApp
+                <i class="fa-brands fa-whatsapp text-sm"></i> Consultar por WhatsApp
             </button>
         </div>
 
-        <!-- CUADRO INFORMATIVO CORPORATIVO ESTILIZADO -->
+        <!-- CUADRO INFORMATIVO CORPORATIVO -->
         <div class="bg-white border-l-4 border-blue-600 rounded-r-2xl p-5 mb-8 max-w-4xl mx-auto shadow-md flex flex-col md:flex-row items-start md:items-center gap-4 transition-all hover:shadow-lg">
             <div class="bg-blue-50 p-3 rounded-xl text-blue-600 shrink-0 hidden sm:flex items-center justify-center shadow-inner">
                 <i class="fa-solid fa-circle-info text-2xl"></i>
@@ -343,7 +350,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full divide-y md:divide-y-0 md:divide-x divide-gray-100">
                 <div class="text-xs md:text-sm text-gray-700 leading-relaxed space-y-1 pr-0 md:pr-4">
                     <span class="font-bold text-blue-600 uppercase tracking-wider text-[10px] block"><i class="fa-solid fa-bolt mr-1"></i> Stock Físico Local</span>
-                    <p>Todos los equipos marcados como disponibles se encuentran <span class="font-bold text-gray-950 underline decoration-blue-500 decoration-2">listos en nuestra tienda física</span> para su despacho y entrega inmediata.</p>
+                    <p>Todos los equipos marcados como disponibles se encuentran <span class="font-bold text-gray-950 underline decoration-blue-500 decoration-2">listos en nuestra tienda física</span> para despacho y entrega inmediata.</p>
                 </div>
                 <div class="text-xs md:text-sm text-gray-700 leading-relaxed space-y-1 pt-3 md:pt-0 md:pl-5">
                     <span class="font-bold text-amber-500 uppercase tracking-wider text-[10px] block"><i class="fa-solid fa-magnifying-glass mr-1"></i> Equipos bajo Consulta</span>
@@ -352,7 +359,7 @@
             </div>
         </div>
 
-        <!-- FILTROS POR MARCA Y BOTÓN DE COMPARTIR VITRINA -->
+        <!-- FILTROS POR MARCA -->
         <div class="mb-8 w-full overflow-hidden space-y-4">
             <div>
                 <p class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mb-2 px-1">Explorar Smartphone por Marca</p>
@@ -381,10 +388,11 @@
             <span id="contador-productos" class="text-[10px] bg-blue-50 text-blue-600 font-black px-2.5 py-1 rounded-full">Cargando...</span>
         </div>
 
+        <!-- GRID DE SMARTPHONES CON DISEÑO ORIGINAL RESTAURADO -->
         <div id="contenedor-productos" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
     </main>
 
-    <!-- CARRUSEL DE OTROS PRODUCTOS -->
+    <!-- CARRUSEL OTROS PRODUCTOS -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 border-t border-gray-100 mt-6">
         <div class="flex items-center justify-between mb-4 px-1">
             <div class="flex items-center gap-2">
@@ -396,7 +404,7 @@
         <div id="carrusel-otros" class="flex gap-4 overflow-x-auto pb-4 pt-1 no-scrollbar snap-x scroll-smooth"></div>
     </section>
 
-    <!-- METODOS DE PAGO -->
+    <!-- SECCIÓN DE MÉTODOS DE PAGO RESTAURADA -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 border-t border-gray-100 pt-8">
         <div class="text-center max-w-xl mx-auto mb-6">
             <h3 class="text-xs font-black uppercase text-blue-600 tracking-widest">Métodos de Pago Soportados</h3>
@@ -411,11 +419,13 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- FOOTER ORIGINAL RESTAURADO CON 3 COLUMNAS Y RIF EN LÍNEA FLUIDA -->
     <footer class="bg-slate-900 text-slate-400 py-10 px-4 mt-16 border-t border-slate-800 text-xs font-medium">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
             <div class="space-y-1.5">
-                <p class="text-white font-black tracking-wider text-sm uppercase">© 2026 Tucocel C.A. Todos los derechos reservados.</p>
+                <p class="text-white font-black tracking-wider text-sm uppercase whitespace-nowrap">
+                    © 2026 TUCOCEL C.A. — RIF: J-31378837-6
+                </p>
                 <p class="text-slate-500 text-[11px]">Web desarrollada de manera exclusiva por <a href="#" class="text-blue-400 hover:underline font-bold">@publionlinemk</a> — Agencia Oficial de Publicidad de Tucocel C.A.</p>
                 <div class="pt-2 flex items-center justify-center md:justify-start gap-2 text-[10px] text-slate-500 font-bold uppercase tracking-wider">
                     <i class="fa-solid fa-eye text-blue-500"></i> Visitas del sitio: <span id="contador-visitas-num" class="bg-slate-950 text-blue-400 px-2 py-0.5 rounded border border-slate-800 font-mono">0</span>
@@ -442,12 +452,12 @@
         </div>
     </footer>
 
-    <!-- BOTON FLOTANTE WA -->
+    <!-- BOTÓN FLOTANTE WA -->
     <button onclick="abrirModalConsultaGeneral()" class="btn-flotante-wa fixed bottom-6 right-6 bg-emerald-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl z-40 transition-all hover:bg-emerald-600 shadow-xl">
         <i class="fa-brands fa-whatsapp"></i>
     </button>
 
-    <!-- PANEL DE CONTROL ADMINISTRATIVO -->
+    <!-- PANEL ADMIN INVENTARIO -->
     <div id="panel-admin" class="bg-slate-900 text-slate-100 p-5 hidden max-w-4xl mx-auto sm:mt-4 sm:rounded-2xl shadow-2xl border border-slate-800">
         <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-2">
             <h3 id="panel-titulo" class="text-xs font-bold uppercase text-amber-400 tracking-wider"><i class="fa-solid fa-database mr-1"></i> Panel de Gestión Tucocel</h3>
@@ -465,8 +475,6 @@
                     <option value="ZTE">ZTE</option>
                     <option value="Otros Productos">Otros Productos</option>
                 </select>
-                
-                <!-- CASILLA INTELIGENTE DINÁMICA -->
                 <div id="wrapper-tipo-producto" class="hidden space-y-1.5 mt-2">
                     <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block">Tipo de Artículo</label>
                     <select id="add-tipo" class="w-full bg-white text-gray-950 p-2 rounded-xl text-xs font-bold border border-gray-300">
@@ -474,7 +482,6 @@
                         <option value="Celular">📱 Es un Teléfono Celular</option>
                     </select>
                 </div>
-
                 <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block mt-2">Modalidad de Disponibilidad</label>
                 <select id="add-modalidad" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300">
                     <option value="vitrina">⚡ Disponible (Entrega Inmediata)</option>
@@ -508,7 +515,7 @@
         </div>
     </div>
 
-    <!-- MODAL INTEGRAL DE FACTURACIÓN Y PRIVADA AUDITORÍA -->
+    <!-- MODAL INTEGRAL DE FACTURACIÓN, APARTADOS Y CIERRES -->
     <div id="modal-sistema-facturacion" class="fixed inset-0 bg-slate-950/90 z-50 overflow-y-auto backdrop-blur-md p-2 sm:p-4 lg:p-6 hidden">
         <div class="bg-white rounded-3xl w-full max-w-6xl mx-auto my-2 md:my-4 shadow-2xl overflow-hidden border border-gray-100 flex flex-col md:h-[90vh]">
             
@@ -516,19 +523,19 @@
                 <div class="flex items-center gap-2.5 w-full md:w-auto">
                     <i class="fa-solid fa-cash-register text-amber-400 text-xl"></i>
                     <div>
-                        <h3 class="font-black text-sm tracking-wide uppercase">Facturación y Cierre de Ventas</h3>
+                        <h3 class="font-black text-sm tracking-wide uppercase">Facturación & Control Gerencial</h3>
                         <p class="text-[10px] text-slate-400 font-medium">TUCOCEL C.A. — Panel Privado de Control</p>
                     </div>
                 </div>
                 <div class="flex flex-col sm:flex-row flex-wrap items-center gap-3 bg-slate-950 p-2.5 rounded-2xl border border-slate-800 text-xs w-full md:w-auto">
                     <div class="flex items-center justify-between w-full sm:w-auto gap-2">
                         <span class="text-slate-400 shrink-0">1 USD =</span>
-                        <input type="number" id="tasa-cop" value="0" oninput="calcularTotalesFactura()" class="w-full sm:w-20 bg-slate-800 text-white border border-slate-700 px-2 py-1 rounded-lg text-center font-mono focus:outline-none placeholder-gray-500" placeholder="0">
+                        <input type="number" id="tasa-cop" value="3600" oninput="calcularTotalesFactura()" class="w-full sm:w-20 bg-slate-800 text-white border border-slate-700 px-2 py-1 rounded-lg text-center font-mono focus:outline-none">
                         <span class="text-emerald-400 font-bold text-[10px] shrink-0">COP</span>
                     </div>
                     <div class="flex items-center justify-between w-full sm:w-auto gap-2">
                         <span class="text-slate-400 shrink-0">Dividir COP entre:</span>
-                        <input type="number" id="tasa-bs" value="0" oninput="calcularTotalesFactura()" class="w-full sm:w-16 bg-slate-800 text-white border border-slate-700 px-2 py-1 rounded-lg text-center font-mono focus:outline-none placeholder-gray-500" placeholder="0">
+                        <input type="number" step="0.1" id="tasa-bs" value="3.3" oninput="calcularTotalesFactura()" class="w-full sm:w-16 bg-slate-800 text-white border border-slate-700 px-2 py-1 rounded-lg text-center font-mono focus:outline-none">
                         <span class="text-blue-400 font-bold text-[10px] shrink-0">Bs</span>
                     </div>
                 </div>
@@ -537,13 +544,15 @@
                 </button>
             </div>
 
-            <!-- MENU DE PESTAÑAS INTERNAS CORRECTO -->
-            <div class="bg-slate-100 border-b border-gray-200 px-6 py-2 flex gap-4 text-xs font-bold uppercase shrink-0">
-                <button id="btn-vista-cajero" onclick="window.cambiarSeccionAdministrativa('cajero')" class="text-blue-600 border-b-2 border-blue-600 pb-1"><i class="fa-solid fa-calculator mr-1"></i> Facturar Venta</button>
-                <button id="btn-vista-auditoria" onclick="window.cambiarSeccionAdministrativa('auditoria')" class="text-gray-500 hover:text-gray-700 pb-1"><i class="fa-solid fa-chart-line mr-1"></i> Reportes e Historial (Garantías)</button>
+            <!-- PESTAÑAS ADMINISTRATIVAS -->
+            <div class="bg-slate-100 border-b border-gray-200 px-4 sm:px-6 py-2 flex gap-4 text-xs font-bold uppercase shrink-0 overflow-x-auto no-scrollbar">
+                <button id="btn-vista-cajero" onclick="window.cambiarSeccionAdministrativa('cajero')" class="text-blue-600 border-b-2 border-blue-600 pb-1 whitespace-nowrap font-bold"><i class="fa-solid fa-calculator mr-1"></i> Facturar Venta</button>
+                <button id="btn-vista-apartados" onclick="window.cambiarSeccionAdministrativa('apartados')" class="text-gray-500 hover:text-gray-700 pb-1 whitespace-nowrap"><i class="fa-solid fa-hand-holding-dollar mr-1"></i> Equipos Apartados</button>
+                <button id="btn-vista-auditoria" onclick="window.cambiarSeccionAdministrativa('auditoria')" class="text-gray-500 hover:text-gray-700 pb-1 whitespace-nowrap"><i class="fa-solid fa-clock-rotate-left mr-1"></i> Historial de Ventas</button>
+                <button id="btn-vista-cierre-mes" onclick="window.cambiarSeccionAdministrativa('cierre-mes')" class="text-gray-500 hover:text-gray-700 pb-1 whitespace-nowrap"><i class="fa-solid fa-chart-pie mr-1"></i> Cierre de Mes</button>
             </div>
 
-            <!-- SECCIÓN 1: PANEL DE EMISIÓN DE FACTURAS -->
+            <!-- PESTAÑA 1: FACTURAR VENTA (POS) CON CALCULADORA DE VUELTO -->
             <div id="bloque-emision-facturas" class="p-3 sm:p-4 md:p-6 grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 overflow-y-auto flex-grow bg-gray-50">
                 <div class="lg:col-span-2 space-y-4">
                     <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-3">
@@ -551,110 +560,124 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
                             <div>
                                 <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Nombre y Apellido</label>
-                                <input type="text" id="fact-cli-nombre" placeholder="Ej: Juan Pérez" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
+                                <input type="text" id="fact-cli-nombre" placeholder="Ej: Juan Pérez" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white">
                             </div>
                             <div>
                                 <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Cédula / RIF</label>
-                                <input type="text" id="fact-cli-cedula" placeholder="Ej: V-12345678" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
+                                <input type="text" id="fact-cli-cedula" placeholder="Ej: V-12345678" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white">
                             </div>
                             <div>
                                 <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Teléfono (WhatsApp)</label>
-                                <input type="text" id="fact-cli-telefono" placeholder="Ej: 04247357549" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
+                                <input type="text" id="fact-cli-telefono" placeholder="Ej: 04247357549" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white">
                             </div>
                             <div>
-                                <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Dirección de Habitación</label>
-                                <input type="text" id="fact-cli-direccion" placeholder="Ej: Cordero, Centro" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
+                                <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Dirección</label>
+                                <input type="text" id="fact-cli-direccion" placeholder="Ej: Cordero, Centro" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white">
                             </div>
                         </div>
                     </div>
 
                     <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-4">
                         <div class="flex border-b border-gray-100 gap-4 text-xs font-bold uppercase pb-1 flex-wrap">
-                            <button id="tab-manual" onclick="cambiarModoCargaFactura('manual')" class="text-blue-600 border-b-2 border-blue-600 pb-2 px-1 flex items-center gap-1 font-bold"><i class="fa-solid fa-keyboard"></i> Entrada Manual Libre</button>
-                            <button id="tab-inventario" onclick="cambiarModoCargaFactura('inventario')" class="text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1 font-bold"><i class="fa-solid fa-boxes-stacked"></i> Jalar desde Catálogo</button>
+                            <button id="tab-manual" onclick="cambiarModoCargaFactura('manual')" class="text-blue-600 border-b-2 border-blue-600 pb-2 px-1 flex items-center gap-1 font-bold"><i class="fa-solid fa-keyboard"></i> Manual Libre</button>
+                            <button id="tab-inventario" onclick="cambiarModoCargaFactura('inventario')" class="text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1 font-bold"><i class="fa-solid fa-boxes-stacked"></i> Desde Catálogo</button>
                         </div>
 
-                        <!-- ENTRADA MANUAL COMPLETA -->
                         <div id="carga-manual-bloque" class="space-y-3">
                             <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
                                 <div class="sm:col-span-2">
-                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Descripción / Nombre del Producto</label>
-                                    <input type="text" id="manual-modelo" placeholder="Ej: Redmi Note 13 Pro 4G..." class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
+                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Descripción / Modelo</label>
+                                    <input type="text" id="manual-modelo" placeholder="Ej: Redmi Note 13 Pro..." class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
                                 </div>
                                 <div>
                                     <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Precio Unitario ($)</label>
-                                    <input type="number" id="manual-precio" placeholder="0" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
+                                    <input type="number" id="manual-precio" placeholder="0" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
                                 </div>
                                 <div>
                                     <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Cantidad</label>
-                                    <input type="number" id="manual-cantidad" value="1" min="1" oninput="window.renderizarCamposImeiDinamicos('manual')" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
+                                    <input type="number" id="manual-cantidad" value="1" min="1" oninput="window.renderizarCamposImeiDinamicos('manual')" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
                                 </div>
                             </div>
                             <div class="space-y-2 bg-gray-50 p-3 rounded-xl border border-gray-100">
                                 <div class="flex items-center gap-2">
-                                    <input type="checkbox" id="manual-check-imei" onchange="window.renderizarCamposImeiDinamicos('manual')" class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                                    <label for="manual-check-imei" class="text-xs text-gray-700 font-bold cursor-pointer">¿Son teléfonos celulares? (Habilitar desgloses de IMEI)</label>
+                                    <input type="checkbox" id="manual-check-imei" onchange="window.renderizarCamposImeiDinamicos('manual')" class="w-4 h-4 text-blue-600 rounded">
+                                    <label for="manual-check-imei" class="text-xs text-gray-700 font-bold cursor-pointer">¿Es celular? (Desglosar 4 dígitos de IMEI)</label>
                                 </div>
                                 <div id="wrapper-manual-imeis" class="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-2"></div>
                             </div>
                         </div>
 
-                        <!-- JALAR DESDE CATALOGO -->
                         <div id="carga-inventario-bloque" class="space-y-3 hidden">
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                                 <div class="sm:col-span-2">
-                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Seleccionar Producto en Stock</label>
-                                    <select id="fact-select-producto" onchange="window.renderizarCamposImeiDinamicos('inventario')" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
+                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Seleccionar Producto</label>
+                                    <select id="fact-select-producto" onchange="window.renderizarCamposImeiDinamicos('inventario')" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
                                         <option value="">-- Seleccione un producto --</option>
                                     </select>
                                 </div>
                                 <div>
                                     <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Cantidad</label>
-                                    <input type="number" id="fact-cantidad" value="1" min="1" oninput="window.renderizarCamposImeiDinamicos('inventario')" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
+                                    <input type="number" id="fact-cantidad" value="1" min="1" oninput="window.renderizarCamposImeiDinamicos('inventario')" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
                                 </div>
                             </div>
                             <div id="wrapper-fact-imeis" class="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-gray-50 p-2 rounded-xl mt-1"></div>
                         </div>
 
                         <div class="flex justify-end pt-1">
-                            <button onclick="window.ejecutarBotonAgregarItem()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white text-xs font-black px-5 py-2.5 rounded-xl shadow-md transition-colors flex items-center justify-center gap-1">
-                                <i class="fa-solid fa-circle-plus"></i> Añadir Línea al Ticket
+                            <button onclick="window.ejecutarBotonAgregarItem()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white text-xs font-black px-5 py-2.5 rounded-xl shadow-md flex items-center justify-center gap-1">
+                                <i class="fa-solid fa-circle-plus"></i> Añadir al Ticket
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-slate-900 text-white p-4 sm:p-5 rounded-3xl flex flex-col justify-between shadow-xl min-h-[320px] lg:h-auto">
+                <!-- RESUMEN DE VENTA Y CALCULADORA DE VUELTO EN CALIENTE -->
+                <div class="bg-slate-900 text-white p-4 sm:p-5 rounded-3xl flex flex-col justify-between shadow-xl min-h-[360px]">
                     <div>
                         <h4 class="text-[11px] font-black uppercase tracking-wider text-amber-400 border-b border-slate-800 pb-2 mb-3 flex justify-between items-center">
-                            <span>Resumen de Venta Activa</span>
+                            <span>Resumen de Venta</span>
                             <span id="fact-items-count" class="bg-slate-800 text-white text-[9px] px-2 py-0.5 rounded-full font-mono">0 items</span>
                         </h4>
-                        <div id="fact-lista-items" class="space-y-2 max-h-48 lg:max-h-[32vh] overflow-y-auto no-scrollbar pr-1">
-                            <p class="text-center text-slate-500 text-xs py-6">No hay artículos añadidos todavía.</p>
+                        <div id="fact-lista-items" class="space-y-2 max-h-36 overflow-y-auto no-scrollbar pr-1">
+                            <p class="text-center text-slate-500 text-xs py-4">No hay artículos añadidos todavía.</p>
                         </div>
                     </div>
 
-                    <div class="mt-6 border-t border-slate-800 pt-3 space-y-2">
+                    <div class="mt-4 border-t border-slate-800 pt-3 space-y-3">
                         <div class="flex justify-between items-center">
-                            <span class="text-xs text-slate-400 font-bold">Total:</span>
-                            <span class="text-base font-black text-white font-mono" id="total-usd">Total Neto: $0</span>
+                            <span class="text-xs text-slate-400 font-bold">Total a Cobrar:</span>
+                            <span class="text-lg font-black text-white font-mono" id="total-usd">Total: $0.00</span>
                         </div>
-                        <div class="grid grid-cols-2 gap-2 text-[11px] font-bold border-t border-slate-800/60 pt-2 text-slate-300">
-                            <div class="bg-slate-950 p-2 rounded-xl border border-slate-800 font-mono text-center">
-                                <span class="block text-[8px] text-slate-500 uppercase font-bold tracking-wider">Ref COP</span>
-                                <span id="total-cop-val" class="text-emerald-400 font-extrabold">0 COP</span>
+
+                        <!-- CALCULADORA DE VUELTO MULTIMONEDA -->
+                        <div class="bg-slate-950 p-3 rounded-2xl border border-blue-500/30 space-y-2 text-xs font-mono">
+                            <span class="text-[9.5px] font-black text-blue-400 uppercase tracking-wider block">Calculadora de Vuelto en Caliente</span>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div>
+                                    <label class="text-[8px] text-slate-400 uppercase block">Moneda de Pago</label>
+                                    <select id="vuelto-moneda-pago" onchange="calcularVueltoPOS()" class="w-full bg-slate-800 text-white border border-slate-700 p-1.5 rounded-lg text-xs font-bold">
+                                        <option value="USD">💵 Dólares ($)</option>
+                                        <option value="COP">🇨🇴 Pesos (COP)</option>
+                                        <option value="BS">🇻🇪 Bolívares (Bs)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="text-[8px] text-slate-400 uppercase block">Monto Entregado</label>
+                                    <input type="number" id="vuelto-monto-recibido" oninput="calcularVueltoPOS()" placeholder="0.00" class="w-full bg-slate-800 text-amber-400 border border-slate-700 p-1.5 rounded-lg text-xs font-black">
+                                </div>
                             </div>
-                            <div class="bg-slate-950 p-2 rounded-xl border border-slate-800 font-mono text-center">
-                                <span class="block text-[8px] text-slate-500 uppercase font-bold tracking-wider">Ref Bs</span>
-                                <span id="total-bs-val" class="text-blue-400 font-extrabold">0 Bs</span>
+                            <div class="border-t border-slate-800 pt-1.5 text-[10px] space-y-0.5">
+                                <div class="flex justify-between text-emerald-400 font-bold"><span>Vuelto USD:</span> <span id="vuelto-val-usd">$0.00</span></div>
+                                <div class="flex justify-between text-slate-300"><span>Vuelto COP:</span> <span id="vuelto-val-cop">0 COP</span></div>
+                                <div class="flex justify-between text-blue-400"><span>Vuelto Bs:</span> <span id="vuelto-val-bs">0,00 Bs</span></div>
                             </div>
                         </div>
-                        <div class="grid grid-cols-2 gap-2 pt-3">
-                            <button onclick="ejecutarBotonImprimir()" class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-xs py-3 rounded-xl transition-all shadow-md flex items-center justify-center gap-1.5 uppercase">
-                                <i class="fa-solid fa-print text-sm"></i> Imprimir
+
+                        <div class="grid grid-cols-2 gap-2 pt-1">
+                            <button onclick="ejecutarBotonImprimir()" class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-xs py-3 rounded-xl shadow-md flex items-center justify-center gap-1.5 uppercase">
+                                <i class="fa-solid fa-print"></i> Imprimir 10x15
                             </button>
-                            <button onclick="ejecutarBotonWhatsApp()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-3 rounded-xl transition-all shadow-md flex items-center justify-center gap-1.5 uppercase">
+                            <button onclick="ejecutarBotonWhatsApp()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-3 rounded-xl shadow-md flex items-center justify-center gap-1.5 uppercase">
                                 <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
                             </button>
                         </div>
@@ -662,24 +685,166 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN 2: PRIVADA DE AUDITORÍA, REPORTES Y CONTROL DE GARANTÍAS -->
+            <!-- PESTAÑA 2: MÓDULO DE EQUIPOS APARTADOS CON ACORDEÓN DESPLEGABLE COMPACTO Y BUSCADOR POR CÉDULA -->
+            <div id="bloque-equipos-apartados" class="p-3 sm:p-4 md:p-6 grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 overflow-y-auto flex-grow bg-gray-50 items-start">
+                <div class="lg:col-span-2 space-y-4">
+                    <!-- DATOS DEL CLIENTE APARTADO -->
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-3">
+                        <h4 class="text-[11px] font-black uppercase text-blue-600 tracking-wider flex items-center gap-1">
+                            <i class="fa-solid fa-user-tag"></i> Datos del Cliente (Apartado)
+                        </h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+                            <div>
+                                <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Nombre y Apellido *</label>
+                                <input type="text" id="apt-nombre" placeholder="Ej: Pedro Morales" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white">
+                            </div>
+                            <div>
+                                <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Cédula / RIF *</label>
+                                <input type="text" id="apt-cedula" placeholder="Ej: V-12345678" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white font-mono">
+                            </div>
+                            <div>
+                                <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Teléfono (WhatsApp) *</label>
+                                <input type="tel" id="apt-telefono" placeholder="Ej: 04247357549" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white font-mono">
+                            </div>
+                            <div>
+                                <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Dirección / Ref</label>
+                                <input type="text" id="apt-direccion" placeholder="Ej: Cordero" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MÓDULO DE CARGA DE PRODUCTO (DOBLE ENTRADA: MANUAL O CATÁLOGO) -->
+                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-4">
+                        <div class="flex border-b border-gray-100 gap-4 text-xs font-bold uppercase pb-1 flex-wrap">
+                            <button id="tab-apt-manual" onclick="cambiarModoCargaApartado('manual')" class="text-blue-600 border-b-2 border-blue-600 pb-2 px-1 flex items-center gap-1 font-bold">
+                                <i class="fa-solid fa-keyboard"></i> Entrada Manual Libre
+                            </button>
+                            <button id="tab-apt-inventario" onclick="cambiarModoCargaApartado('inventario')" class="text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1 font-bold">
+                                <i class="fa-solid fa-boxes-stacked"></i> Jalar desde Catálogo / Vitrina
+                            </button>
+                        </div>
+
+                        <!-- 1. ENTRADA MANUAL LIBRE APARTADO -->
+                        <div id="carga-apt-manual-bloque" class="space-y-3">
+                            <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
+                                <div class="sm:col-span-2">
+                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Descripción / Modelo *</label>
+                                    <input type="text" id="apt-manual-modelo" placeholder="Ej: Xiaomi Redmi Note 13 Pro 256GB..." class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
+                                </div>
+                                <div>
+                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Precio Total Pactado ($) *</label>
+                                    <input type="number" id="apt-manual-precio" oninput="calcularSaldosApartado()" placeholder="0.00" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 text-blue-600 font-mono font-black">
+                                </div>
+                                <div>
+                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Cantidad</label>
+                                    <input type="number" id="apt-manual-cantidad" value="1" min="1" oninput="window.renderizarCamposImeiApartado('manual')" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
+                                </div>
+                            </div>
+                            <div class="space-y-2 bg-gray-50 p-3 rounded-xl border border-gray-100">
+                                <div class="flex items-center gap-2">
+                                    <input type="checkbox" id="apt-manual-check-imei" checked onchange="window.renderizarCamposImeiApartado('manual')" class="w-4 h-4 text-blue-600 rounded">
+                                    <label for="apt-manual-check-imei" class="text-xs text-gray-700 font-bold cursor-pointer">¿Es teléfono celular? (Asignar 4 dígitos de IMEI)</label>
+                                </div>
+                                <div id="wrapper-apt-manual-imeis" class="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-2">
+                                    <div>
+                                        <label class="text-[8px] text-red-500 font-bold block mb-0.5">IMEI Celular 1</label>
+                                        <input type="text" id="apt-manual-imei-field-1" maxlength="4" placeholder="4 dígitos" class="w-full bg-white border border-gray-300 p-1 rounded-lg text-xs font-black text-center font-mono">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2. JALAR DESDE CATÁLOGO APARTADO -->
+                        <div id="carga-apt-inventario-bloque" class="space-y-3 hidden">
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <div class="sm:col-span-2">
+                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Seleccionar Equipo en Vitrina / Stock *</label>
+                                    <select id="apt-select-producto" onchange="window.alSeleccionarProductoApartadoCatalogo()" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
+                                        <option value="">-- Seleccionar Equipo en Stock --</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Cantidad</label>
+                                    <input type="number" id="apt-cat-cantidad" value="1" min="1" oninput="window.renderizarCamposImeiApartado('inventario')" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
+                                </div>
+                            </div>
+                            <div id="wrapper-apt-fact-imeis" class="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-gray-50 p-2 rounded-xl mt-1"></div>
+                        </div>
+
+                        <!-- ABONOS Y SALDOS DINÁMICOS -->
+                        <div class="bg-blue-50/70 p-4 rounded-2xl border border-blue-200 space-y-3">
+                            <span class="text-[10px] font-black uppercase text-blue-900 tracking-wider block">
+                                <i class="fa-solid fa-calculator mr-1"></i> Desglose de Abono Inicial y Saldo
+                            </span>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono font-bold">
+                                <div>
+                                    <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Precio Pactado ($)</label>
+                                    <input type="number" id="apt-display-total" readonly value="0.00" class="w-full bg-white border p-2.5 rounded-xl text-slate-900 font-black">
+                                </div>
+                                <div>
+                                    <label class="text-[8.5px] text-emerald-700 uppercase block mb-1">Abono Inicial Recibido ($) *</label>
+                                    <input type="number" id="apt-abono-inicial" oninput="calcularSaldosApartado()" placeholder="0.00" class="w-full bg-white border-2 border-emerald-500 p-2.5 rounded-xl text-emerald-600 font-black">
+                                </div>
+                                <div>
+                                    <label class="text-[8.5px] text-red-700 uppercase block mb-1">Saldo Restante por Pagar ($)</label>
+                                    <input type="number" id="apt-saldo-pendiente" readonly value="0.00" class="w-full bg-red-50 border border-red-200 p-2.5 rounded-xl text-red-600 font-black">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end pt-1">
+                            <button onclick="window.guardarNuevoApartadoFirebase()" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black px-6 py-3 rounded-xl shadow-md flex items-center justify-center gap-1.5 uppercase transition-all">
+                                <i class="fa-solid fa-lock text-sm"></i> Guardar y Bloquear Equipo Apartado
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COLUMNA DERECHA: ACORDEÓN DESPLEGABLE COMPACTO SIN ESPACIOS NEGROS FORZADOS -->
+                <div class="bg-slate-900 text-white p-4 rounded-3xl shadow-xl border border-slate-800 transition-all duration-300">
+                    <!-- ENCABEZADO CLICKABLE -->
+                    <div onclick="window.toggleAcordeonApartados()" class="flex justify-between items-center cursor-pointer select-none py-1">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-hand-holding-dollar text-amber-400"></i>
+                            <h4 class="text-[11px] font-black uppercase tracking-wider text-amber-400">Apartados en Curso</h4>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span id="cnt-apartados-badge" class="bg-slate-800 text-amber-400 text-[9px] px-2 py-0.5 rounded-full font-mono font-bold">0 cuentas</span>
+                            <i id="icono-acordeon-apartados" class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300 -rotate-90"></i>
+                        </div>
+                    </div>
+
+                    <!-- CUERPO DESPLEGABLE OCULTO POR DEFECTO -->
+                    <div id="cuerpo-acordeon-apartados" class="hidden space-y-3 pt-3 border-t border-slate-800 mt-2">
+                        <!-- BUSCADOR POR CÉDULA O NOMBRE -->
+                        <div class="relative">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+                            <input type="text" id="busq-apartados-input" onkeyup="window.filtrarListaApartados()" placeholder="Buscar por Cédula o Cliente..." class="w-full bg-slate-950 border border-slate-800 pl-8 pr-3 py-2 rounded-xl text-xs font-mono text-white placeholder-slate-500 focus:outline-blue-500">
+                        </div>
+
+                        <!-- LISTA DE APARTADOS -->
+                        <div id="contenedor-lista-apartados" class="space-y-2 max-h-80 overflow-y-auto no-scrollbar pr-1">
+                            <p class="text-center text-slate-500 text-xs py-3">Sin apartados registrados.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PESTAÑA 3: HISTORIAL DE VENTAS CON HOJA BLANCA -->
             <div id="bloque-reportes-auditoria" class="p-4 sm:p-6 bg-gray-50 flex-grow overflow-y-auto hidden space-y-4">
                 <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm space-y-3">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-gray-100 pb-2">
                         <div>
-                            <h4 class="font-extrabold text-xs text-gray-900 uppercase flex items-center gap-1"><i class="fa-solid fa-shield-halved text-blue-600"></i> Módulo de Auditoría y Verificación de Historial</h4>
-                            <p class="text-[10px] text-gray-400 mt-0.5">Filtra y busca clientes por cédula para validar estados de facturas y los 2 meses (60 días) de garantía.</p>
+                            <h4 class="font-extrabold text-xs text-gray-900 uppercase flex items-center gap-1"><i class="fa-solid fa-clock-rotate-left text-blue-600"></i> Historial General de Notas</h4>
+                            <p class="text-[10px] text-gray-400 mt-0.5">Control de garantías (60 días continuos) y consulta de comprobantes.</p>
                         </div>
                         <button onclick="exportarHistorialExcel()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3.5 py-1.5 rounded-xl transition-colors flex items-center gap-1 shadow-sm w-full sm:w-auto justify-center">
-                            <i class="fa-solid fa-file-excel"></i> Exportar Respaldo Excel
+                            <i class="fa-solid fa-file-excel"></i> Exportar Excel
                         </button>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <input type="text" id="busq-historial" onkeyup="filtrarTablaHistorial()" placeholder="🔍 Buscar por Cédula, Nombre o Nota..." class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs font-semibold focus:outline-blue-500 shadow-sm">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <input type="text" id="busq-historial" onkeyup="filtrarTablaHistorial()" placeholder="🔍 Buscar por Cédula, Nombre o N° Nota..." class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs font-semibold focus:outline-blue-500 shadow-sm">
                         <input type="date" id="busq-fecha" onchange="filtrarTablaHistorial()" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs font-semibold text-gray-700 focus:outline-blue-500 shadow-sm">
-                        <div class="flex items-center justify-center bg-slate-100 rounded-xl px-3 py-2 border border-gray-200 font-bold text-[10px] text-slate-600 uppercase tracking-wider shadow-inner">
-                            🔒 Registros protegidos contra alteración
-                        </div>
                     </div>
                 </div>
 
@@ -688,41 +853,70 @@
                         <thead>
                             <tr class="bg-gray-100 text-gray-600 font-black uppercase border-b border-gray-200 sticky top-0 z-10 text-[10px] tracking-wide">
                                 <th class="p-3">N° Nota</th>
-                                <th class="p-3">Fecha / Hora</th>
+                                <th class="p-3">Fecha</th>
                                 <th class="p-3">Cliente</th>
-                                <th class="p-3">Cédula / RIF</th>
-                                <th class="p-3">Artículos Comprados</th>
-                                <th class="p-3 text-right">Monto USD</th>
+                                <th class="p-3">Cédula</th>
+                                <th class="p-3">Productos</th>
+                                <th class="p-3 text-right">Total USD</th>
                                 <th class="p-3 text-center">Estatus</th>
-                                <th class="p-3 text-center">Gestión</th>
+                                <th class="p-3 text-center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody id="tabla-historial-cuerpo" class="divide-y divide-gray-100 font-medium text-gray-700">
                             <tr>
-                                <td colspan="8" class="p-4 text-center text-gray-400">Ningún registro cargado de Firebase.</td>
+                                <td colspan="8" class="p-4 text-center text-gray-400">Cargando registros...</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+
+            <!-- PESTAÑA 4: CIERRE DE MES GERENCIAL E INTERMENSUAL -->
+            <div id="bloque-cierre-mes-gerencial" class="p-4 sm:p-6 bg-gray-50 flex-grow overflow-y-auto hidden space-y-4">
+                <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex flex-wrap justify-between items-center gap-3">
+                    <div class="flex items-center gap-2">
+                        <label class="text-xs font-bold uppercase text-slate-600">Mes:</label>
+                        <select id="cierre-mes-select" onchange="generarCierreMesGerencial()" class="bg-gray-50 border p-2 rounded-xl text-xs font-bold">
+                            <option value="1">Enero</option>
+                            <option value="2">Febrero</option>
+                            <option value="3">Marzo</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Mayo</option>
+                            <option value="6">Junio</option>
+                            <option value="7">Julio</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Septiembre</option>
+                            <option value="10">Octubre</option>
+                            <option value="11">Noviembre</option>
+                            <option value="12">Diciembre</option>
+                        </select>
+                        <label class="text-xs font-bold uppercase text-slate-600 ml-2">Año:</label>
+                        <input type="number" id="cierre-anio-input" value="2026" onchange="generarCierreMesGerencial()" class="w-20 bg-gray-50 border p-2 rounded-xl text-xs font-bold text-center">
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="imprimirCierreMesHojaBlanca()" class="bg-slate-900 text-white font-bold text-xs px-4 py-2 rounded-xl flex items-center gap-1.5"><i class="fa-solid fa-print"></i> Imprimir Informe</button>
+                        <button onclick="enviarCierreMesWhatsApp()" class="bg-emerald-600 text-white font-bold text-xs px-4 py-2 rounded-xl flex items-center gap-1.5"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
+                    </div>
+                </div>
+
+                <div id="contenedor-metricas-cierre-mes" class="space-y-4"></div>
+            </div>
+
         </div>
     </div>
 
-    <!-- TICKET DE IMPRESIÓN COMPACTO VERTICAL DE GAMA ALTA -->
+    <!-- TICKET DE IMPRESIÓN EPSON (10x15 CM) -->
     <div id="wrapper-impresion-epson" style="display: none;">
         <div id="contenedor-ticket-real">
-            
-            <!-- Encabezado Corporativo -->
             <div class="header">
                 <h1 class="ticket-header-title">TUCOCEL C.A.</h1>
                 <div class="ticket-doc-type">NOTA DE ENTREGA</div>
                 <div class="ticket-sub-text">(SIN VALOR FISCAL)</div>
-                <div class="ticket-sub-text">RIF: J-31378837-6</div>
+                <div class="ticket-sub-text"><strong>RIF: J-31378837-6</strong></div>
                 <div class="ticket-sub-text">Av. Bolívar, entre calles 12 y 13, Cordero, Táchira.</div>
                 <div class="ticket-sub-text">WhatsApp: 0424-7357549</div>
             </div>
 
-            <!-- Información del Cliente y Factura -->
             <div class="ticket-info-box">
                 <table class="ticket-info-table">
                     <tr>
@@ -743,7 +937,6 @@
                 </table>
             </div>
 
-            <!-- Tabla de Productos Flujo Libre Estilo Foto 1 -->
             <table class="ticket-items-table">
                 <thead>
                     <tr>
@@ -755,11 +948,10 @@
                 <tbody id="tk-items-tabla"></tbody>
             </table>
 
-            <!-- Pie de página con Totales, Estado -->
             <div class="ticket-footer-container">
                 <div class="ticket-status-box">
                     <p style="margin: 0 0 2px 0; font-weight: bold; color: #1e293b;">Forma de Pago:</p>
-                    <p style="margin: 0 0 4px 0; color: #475569; font-size: 8.5px;">Multimoneda</p>
+                    <p style="margin: 0 0 4px 0; color: #475569; font-size: 8px;">Multimoneda</p>
                     <p style="margin: 0 0 2px 0; font-weight: bold; color: #1e293b;">Estatus:</p>
                     <span class="ticket-status-badge" id="tk-status-label">PROCESADA</span>
                 </div>
@@ -781,22 +973,20 @@
                 </div>
             </div>
             
-            <div style="font-size: 7.5px; color: #475569; text-align: center; margin-top: 6px; font-style: italic;">
-                Los montos en COP y VES están basados en la tasa del día.
+            <div style="font-size: 7px; color: #475569; text-align: center; margin-top: 5px; font-style: italic;">
+                Montos en COP y VES calculados con la tasa del día.
             </div>
 
-            <!-- Recuadro Legal y de Cobertura Rediseñado Súper Limpio -->
             <div class="ticket-legal-box">
-                <strong style="display: block; text-align: center; font-size: 8.5px; margin-bottom: 2px; color: #0f172a;">🔒 CONTROL INTERNO (NO FISCAL)</strong>
-                Este documento representa un comprobante de entrega administrativo. No constituye, ni pretende sustituir a una factura fiscal regulada por la ley.
-                <div style="color: #b91c1c; border-top: 1px dashed #cbd5e1; margin-top: 4px; padding-top: 3px; font-weight: 700;">
-                    🛡️ TÉRMINOS DE GARANTÍA (60 DÍAS): Cobertura por defectos técnicos de fábrica en equipos móviles por un lapso de 2 meses (60 días continuos). Queda sin efecto por golpes, marcas de humedad, sellos rotos, sobrecargas eléctricas o alteración del software original.
+                <strong style="display: block; text-align: center; font-size: 8px; margin-bottom: 2px; color: #0f172a;">🔒 CONTROL INTERNO (NO FISCAL)</strong>
+                Comprobante administrativo interno. No sustituye la factura fiscal legal.
+                <div style="color: #b91c1c; border-top: 1px dashed #cbd5e1; margin-top: 3px; padding-top: 2px; font-weight: 700;">
+                    🛡️ GARANTÍA (60 DÍAS): 2 meses continuos en defectos técnicos de fábrica. Queda sin efecto por golpes, humedad, sellos rotos o alteración de software.
                 </div>
-                <div style="text-align: center; border-top: 1px dashed #cbd5e1; margin-top: 4px; padding-top: 3px; font-weight: 800; color: #003366;">
-                    🚀 ¡Gracias por confiar en tu compra! — Tucocel C.A.
+                <div style="text-align: center; border-top: 1px dashed #cbd5e1; margin-top: 3px; padding-top: 2px; font-weight: 800; color: #003366;">
+                    🚀 ¡Gracias por su preferencia! — Tucocel C.A.
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -807,7 +997,7 @@
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <div class="w-full h-64 bg-white border border-gray-100 rounded-2xl overflow-hidden mb-4 flex justify-center items-center p-2">
-                <img id="modal-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Imagen smartphone" class="max-w-full max-h-full object-contain filter drop-shadow-md">
+                <img id="modal-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Smartphone" class="max-w-full max-h-full object-contain filter drop-shadow-md">
             </div>
             <div class="space-y-3">
                 <div class="flex justify-between items-center">
@@ -816,26 +1006,26 @@
                         <i class="fa-solid fa-heart text-red-500"></i> Me gusta (<span id="modal-like-count">0</span>)
                     </button>
                 </div>
-                <h2 id="modal-modelo" class="text-xl font-black text-gray-900 tracking-tight">Modelo del Teléfono</h2>
+                <h2 id="modal-modelo" class="text-xl font-black text-gray-900 tracking-tight">Modelo</h2>
                 <p id="modal-memoria" class="text-xs font-mono text-gray-500 font-bold bg-gray-50 px-2 py-1 rounded-md inline-block">Capacidad</p>
                 <div class="border-t border-gray-100 pt-3">
-                    <h3 class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">Descripción General</h3>
-                    <div id="modal-desc" class="text-xs text-gray-600 leading-relaxed text-justify">Detalles del artículo.</div>
+                    <h3 class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">Descripción</h3>
+                    <div id="modal-desc" class="text-xs text-gray-600 leading-relaxed text-justify"></div>
                 </div>
                 <div id="form-compra" class="pt-2"></div>
             </div>
         </div>
     </div>
 
-    <!-- MODAL DE ACCESO / LOGIN -->
+    <!-- MODAL DE ACCESO ADMIN -->
     <div id="modal-login" class="fixed inset-0 bg-slate-950/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm hidden">
         <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-xl border border-gray-100 relative">
             <button onclick="cerrarLoginAdmin()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
             <h3 class="text-sm font-black uppercase text-slate-900 tracking-wider mb-4 text-center"><i class="fa-solid fa-lock mr-1 text-blue-600"></i> Autenticación Privada</h3>
             <div class="space-y-3">
-                <input type="text" id="admin-user" placeholder="Usuario administrador" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
-                <input type="password" id="admin-pass" placeholder="Contraseña de seguridad" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
-                <button onclick="autenticarAdmin()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black text-xs py-2.5 rounded-xl shadow-md transition-colors uppercase tracking-wide">Acceder al Sistema</button>
+                <input type="text" id="admin-user" placeholder="Usuario" class="w-full bg-gray-50 border p-2.5 rounded-xl text-xs font-bold text-gray-900">
+                <input type="password" id="admin-pass" placeholder="Contraseña" class="w-full bg-gray-50 border p-2.5 rounded-xl text-xs font-bold text-gray-900">
+                <button onclick="autenticarAdmin()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black text-xs py-2.5 rounded-xl shadow-md uppercase">Acceder</button>
             </div>
         </div>
     </div>
@@ -846,49 +1036,49 @@
             <button onclick="cerrarModalConsultaBanner()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
             <h3 class="text-xs font-black uppercase text-slate-900 tracking-wider mb-4"><i class="fa-brands fa-whatsapp text-emerald-500 mr-1 text-base"></i> Cotización Directa</h3>
             <div class="space-y-3">
-                <input type="text" id="banner-con-nombre" placeholder="Tu Nombre Completo" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
-                <input type="text" id="banner-con-direccion" placeholder="Tu Ubicación o Referencia" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
-                <button onclick="enviarConsultaBannerWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-2.5 rounded-xl shadow-md uppercase tracking-wide flex items-center justify-center gap-2">
-                    <i class="fa-brands fa-whatsapp text-sm"></i> Consultar Disponibilidad
+                <input type="text" id="banner-con-nombre" placeholder="Tu Nombre Completo" class="w-full bg-gray-50 border p-2.5 rounded-xl text-xs font-bold">
+                <input type="text" id="banner-con-direccion" placeholder="Tu Ubicación o Referencia" class="w-full bg-gray-50 border p-2.5 rounded-xl text-xs font-bold">
+                <button onclick="enviarConsultaBannerWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-2.5 rounded-xl uppercase flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-sm"></i> Consultar
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL CONSULTA GENERAL / BOTÓN WA -->
+    <!-- MODAL CONSULTA GENERAL -->
     <div id="modal-consulta-general" class="fixed inset-0 bg-slate-950/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm hidden">
         <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-xl border border-gray-100 relative">
             <button onclick="cerrarModalConsultaGeneral()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
             <h3 class="text-xs font-black uppercase text-slate-900 tracking-wider mb-4"><i class="fa-solid fa-headset text-blue-600 mr-1"></i> Soporte de Atención</h3>
             <div class="space-y-3">
-                <input type="text" id="con-nombre" placeholder="Tu Nombre" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
-                <select id="con-motivo" onchange="verificarMotivoEspecifico()" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
+                <input type="text" id="con-nombre" placeholder="Tu Nombre" class="w-full bg-gray-50 border p-2.5 rounded-xl text-xs font-bold">
+                <select id="con-motivo" onchange="verificarMotivoEspecifico()" class="w-full bg-gray-50 border p-2.5 rounded-xl text-xs font-bold">
                     <option value="Compra de Smartphone">Comprar Smartphone</option>
-                    <option value="Servicio Técnico">Servicio Técnico Profesional</option>
-                    <option value="Accesorios / Otros">Accesorios o Consumibles</option>
+                    <option value="Servicio Técnico">Servicio Técnico</option>
+                    <option value="Accesorios / Otros">Accesorios</option>
                 </select>
-                <label id="label-detalles-con" class="text-[10px] text-gray-400 font-bold uppercase block -mb-1">¿Artículo o Requerimiento?</label>
-                <textarea id="con-detalles" placeholder="Escribe los detalles de tu consulta aquí..." class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 h-20 resize-none"></textarea>
-                <button onclick="enviarConsultaGeneralWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-2.5 rounded-xl shadow-md uppercase tracking-wide flex items-center justify-center gap-2">
-                    <i class="fa-brands fa-whatsapp text-sm"></i> Enviar a Oficina WhatsApp
+                <label id="label-detalles-con" class="text-[10px] text-gray-400 font-bold uppercase block -mb-1">¿Requerimiento?</label>
+                <textarea id="con-detalles" placeholder="Detalles..." class="w-full bg-gray-50 border p-2.5 rounded-xl text-xs font-bold h-20 resize-none"></textarea>
+                <button onclick="enviarConsultaGeneralWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-2.5 rounded-xl uppercase flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-sm"></i> Enviar a WhatsApp
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- NÚCLEO MOTOR LOGICO ASOCIADO A FIREBASE -->
+    <!-- SCRIPT PRINCIPAL ÍNTEGRO -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, doc, setDoc, getDoc, collection, addDoc, getDocs, query, orderBy, limit, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
-          apiKey: "AIzaSyDytP_5UQyyRUT7wPC2bDIYz5t70z_pQV4",
+          apiKey: "AIzaSyDytP_5UQyyRUT7wFC2bDIYz5t70z_pQV4",
           authDomain: "tucocel-vitrina.firebaseapp.com",
           projectId: "tucocel-vitrina",
           storageBucket: "tucocel-vitrina.firebasestorage.app",
           messagingSenderId: "1033621613862",
           appId: "1:1033621613862:web:c279d663418a5cb0c5e5e7",
-          measurementId: "G-B1T7B1R1HB"
+          measurementId: "G-B1T781R1HB"
         };
 
         const app = initializeApp(firebaseConfig);
@@ -900,13 +1090,16 @@
         let PRODUCTOS = [];
         let ITEMS_VENTA_ACTIVA = [];
         let HISTORIAL_NOTAS = [];
+        let APARTADOS = [];
         let idArticuloEnEdicion = null;
         let marcaSeleccionada = 'Todas';
         let esAdminAutenticado = false;
         let productoSeleccionadoActual = null;
         let modoCargaFacturaActivo = 'manual';
+        let modoCargaApartadoActivo = 'manual';
         let BASE_TEXTOS_WEB = {};
         let deferredPrompt = null;
+
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
@@ -915,61 +1108,557 @@
         window.instalarAppDispositivo = async function() {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                if (outcome === 'accepted') {
-                    console.log('App instalada');
-                }
                 deferredPrompt = null;
             } else {
-                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-                if (isIOS) {
-                    alert("📲 Para instalar en tu iPhone / iPad (Safari):\n1. Toca el botón de Compartir en la barra inferior.\n2. Selecciona 'Agregar a Inicio'.");
-                } else {
-                    alert("📲 Para instalar en tu dispositivo:\n• Abre el menú del navegador (3 puntos arriba a la derecha).\n• Selecciona 'Instalar aplicación' o 'Agregar a la pantalla principal'.");
-                }
+                alert("📲 Para instalar:\n• Android (Chrome): Menú (⋮) -> Instalar aplicación\n• iOS (Safari): Compartir -> Agregar a pantalla de inicio");
             }
         };
 
         window.verificarConexionNubeInicial = async function() {
+            const modalConexion = document.getElementById('modal-conexion-nube-supremo');
             const spinner = document.getElementById('icon-nube-spinner');
             const chulito = document.getElementById('icon-nube-chulito');
             const titulo = document.getElementById('lbl-estado-conexion-titulo');
             const desc = document.getElementById('lbl-estado-conexion-desc');
-            const modalConexion = document.getElementById('modal-conexion-nube-supremo');
 
-            const cerrarModalSuave = (esExito) => {
+            try {
+                await getDoc(doc(db, "inventario", "productos_tucocel"));
                 if (spinner) spinner.classList.add('hidden');
-                if (esExito) {
-                    if (chulito) chulito.classList.remove('hidden');
-                    if (titulo) titulo.innerText = "¡Conexión Segura!";
-                    if (desc) desc.innerText = "Sincronizado con Google Firebase Firestore en la nube.";
-                } else {
-                    if (titulo) titulo.innerText = "Modo Local / Conectado";
-                    if (desc) desc.innerText = "Operando con respaldo en caché local de forma segura.";
-                }
+                if (chulito) chulito.classList.remove('hidden');
+                if (titulo) titulo.innerText = "¡Conexión Segura!";
+                if (desc) desc.innerText = "Sincronizado con Google Firebase Firestore en la nube.";
+            } catch(err) {
+                if (spinner) spinner.classList.add('hidden');
+                if (titulo) titulo.innerText = "Modo Local / Conectado";
+                if (desc) desc.innerText = "Operando con respaldo en caché de forma segura.";
+            } finally {
                 setTimeout(() => {
                     if (modalConexion) {
-                        modalConexion.style.transition = 'opacity 0.4s ease';
                         modalConexion.style.opacity = '0';
                         setTimeout(() => modalConexion.remove(), 400);
                     }
-                }, 700);
-            };
-
-            const timeoutSeguridad = setTimeout(() => {
-                cerrarModalSuave(true);
-            }, 1200);
-
-            try {
-                const docSnap = await getDoc(doc(db, "inventario", "productos_tucocel"));
-                clearTimeout(timeoutSeguridad);
-                cerrarModalSuave(true);
-            } catch(err) {
-                clearTimeout(timeoutSeguridad);
-                cerrarModalSuave(false);
+                }, 600);
             }
         };
 
+        // --- CALCULADORA DE VUELTO EN CALIENTE ---
+        window.calcularVueltoPOS = function() {
+            let totalUSD = 0; 
+            ITEMS_VENTA_ACTIVA.forEach(i => totalUSD += i.precio);
+
+            const tCOP = parseFloat(document.getElementById('tasa-cop').value) || 3600;
+            const tBS = parseFloat(document.getElementById('tasa-bs').value) || 3.3;
+
+            const monedaPago = document.getElementById('vuelto-moneda-pago').value;
+            const montoEntregado = parseFloat(document.getElementById('vuelto-monto-recibido').value) || 0;
+
+            let entregadoEnUSD = 0;
+            if (monedaPago === 'USD') entregadoEnUSD = montoEntregado;
+            else if (monedaPago === 'COP') entregadoEnUSD = tCOP > 0 ? (montoEntregado / tCOP) : 0;
+            else if (monedaPago === 'BS') entregadoEnUSD = (tCOP > 0 && tBS > 0) ? ((montoEntregado * tBS) / tCOP) : 0;
+
+            const vueltoUSD = Math.max(0, entregadoEnUSD - totalUSD);
+            const vueltoCOP = vueltoUSD * tCOP;
+            const vueltoBS = tBS > 0 ? (vueltoCOP / tBS) : 0;
+
+            document.getElementById('vuelto-val-usd').innerText = `$${vueltoUSD.toFixed(2)}`;
+            document.getElementById('vuelto-val-cop').innerText = `${Math.round(vueltoCOP).toLocaleString('es-CO')} COP`;
+            document.getElementById('vuelto-val-bs').innerText = `${vueltoBS.toFixed(2).toLocaleString('es-VE')} Bs`;
+        };
+
+        // --- NAVEGACIÓN ADMINISTRATIVA ---
+        window.cambiarSeccionAdministrativa = function(seccion) {
+            const bFactura = document.getElementById('bloque-emision-facturas');
+            const bApartados = document.getElementById('bloque-equipos-apartados');
+            const bReporte = document.getElementById('bloque-reportes-auditoria');
+            const bCierreMes = document.getElementById('bloque-cierre-mes-gerencial');
+
+            const tabCajero = document.getElementById('btn-vista-cajero');
+            const tabApartados = document.getElementById('btn-vista-apartados');
+            const tabAuditoria = document.getElementById('btn-vista-auditoria');
+            const tabCierreMes = document.getElementById('btn-vista-cierre-mes');
+
+            [bFactura, bApartados, bReporte, bCierreMes].forEach(el => el && el.classList.add('hidden'));
+            [tabCajero, tabApartados, tabAuditoria, tabCierreMes].forEach(el => el && (el.className = "text-gray-500 hover:text-gray-700 pb-1 whitespace-nowrap"));
+
+            if(seccion === 'cajero') {
+                if(bFactura) bFactura.classList.remove('hidden');
+                if(tabCajero) tabCajero.className = "text-blue-600 border-b-2 border-blue-600 pb-1 whitespace-nowrap font-bold";
+            } else if(seccion === 'apartados') {
+                if(bApartados) bApartados.classList.remove('hidden');
+                if(tabApartados) tabApartados.className = "text-blue-600 border-b-2 border-blue-600 pb-1 whitespace-nowrap font-bold";
+                window.actualizarSelectApartados();
+                window.cargarApartadosFirebase();
+            } else if(seccion === 'auditoria') {
+                if(bReporte) bReporte.classList.remove('hidden');
+                if(tabAuditoria) tabAuditoria.className = "text-blue-600 border-b-2 border-blue-600 pb-1 whitespace-nowrap font-bold";
+                window.cargarHistorialFirebase();
+            } else if(seccion === 'cierre-mes') {
+                if(bCierreMes) bCierreMes.classList.remove('hidden');
+                if(tabCierreMes) tabCierreMes.className = "text-blue-600 border-b-2 border-blue-600 pb-1 whitespace-nowrap font-bold";
+                window.generarCierreMesGerencial();
+            }
+        };
+
+        // --- ACORDEÓN DESPLEGABLE Y FILTRO DE APARTADOS ---
+        window.toggleAcordeonApartados = function() {
+            const cuerpo = document.getElementById('cuerpo-acordeon-apartados');
+            const icono = document.getElementById('icono-acordeon-apartados');
+            if(!cuerpo) return;
+            if(cuerpo.classList.contains('hidden')) {
+                cuerpo.classList.remove('hidden');
+                if(icono) icono.style.transform = "rotate(0deg)";
+            } else {
+                cuerpo.classList.add('hidden');
+                if(icono) icono.style.transform = "rotate(-90deg)";
+            }
+        };
+
+        window.filtrarListaApartados = function() {
+            const busq = (document.getElementById('busq-apartados-input')?.value || '').toLowerCase().trim();
+            const filtrados = APARTADOS.filter(apt => {
+                return apt.cedula.toLowerCase().includes(busq) || apt.nombre.toLowerCase().includes(busq) || apt.modelo.toLowerCase().includes(busq);
+            });
+            window.renderizarListaApartadosHTML(filtrados);
+        };
+
+        // --- MÓDULO APARTADOS CON DOBLE ENTRADA Y AJUSTE DINÁMICO ---
+        window.cambiarModoCargaApartado = function(modo) {
+            modoCargaApartadoActivo = modo;
+            const tabMan = document.getElementById('tab-apt-manual');
+            const tabInv = document.getElementById('tab-apt-inventario');
+            const bloqMan = document.getElementById('carga-apt-manual-bloque');
+            const bloqInv = document.getElementById('carga-apt-inventario-bloque');
+
+            if(modo === 'manual') {
+                tabMan.className = "text-blue-600 border-b-2 border-blue-600 pb-2 px-1 flex items-center gap-1 font-bold";
+                tabInv.className = "text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1 font-bold";
+                bloqMan.classList.remove('hidden');
+                bloqInv.classList.add('hidden');
+            } else {
+                tabMan.className = "text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1 font-bold";
+                tabInv.className = "text-blue-600 border-b-2 border-blue-600 pb-2 px-1 flex items-center gap-1 font-bold";
+                bloqMan.classList.add('hidden');
+                bloqInv.classList.remove('hidden');
+                window.actualizarSelectApartados();
+            }
+            window.calcularSaldosApartado();
+        };
+
+        window.renderizarCamposImeiApartado = function(modo) {
+            if(modo === 'manual') {
+                const cant = parseInt(document.getElementById('apt-manual-cantidad').value) || 1;
+                const check = document.getElementById('apt-manual-check-imei').checked;
+                const contenedor = document.getElementById('wrapper-apt-manual-imeis');
+                if(!contenedor) return;
+                contenedor.innerHTML = '';
+                if(check && cant > 0) {
+                    for(let i=1; i<=cant; i++) {
+                        contenedor.innerHTML += `
+                            <div>
+                                <label class="text-[8px] text-red-500 font-bold block mb-0.5">IMEI Celular ${i}</label>
+                                <input type="text" id="apt-manual-imei-field-${i}" maxlength="4" placeholder="4 dígitos" class="w-full bg-white border border-gray-300 p-1 rounded-lg text-xs font-black text-center font-mono">
+                            </div>`;
+                    }
+                }
+            } else {
+                const id = document.getElementById('apt-select-producto').value;
+                const cant = parseInt(document.getElementById('apt-cat-cantidad').value) || 1;
+                const contenedor = document.getElementById('wrapper-apt-fact-imeis');
+                if(!contenedor) return;
+                contenedor.innerHTML = '';
+                if(!id) return;
+                const prod = PRODUCTOS.find(p => p.id === id);
+                if(prod && prod.marca !== 'Otros Productos' && cant > 0) {
+                    for(let i=1; i<=cant; i++) {
+                        contenedor.innerHTML += `
+                            <div>
+                                <label class="text-[8px] text-red-500 font-bold block mb-0.5">IMEI Celular ${i}</label>
+                                <input type="text" id="apt-fact-imei-field-${i}" maxlength="4" placeholder="4 dígitos" class="w-full bg-white border border-gray-300 p-1 rounded-lg text-xs font-black text-center font-mono">
+                            </div>`;
+                    }
+                }
+            }
+        };
+
+        window.alSeleccionarProductoApartadoCatalogo = function() {
+            window.renderizarCamposImeiApartado('inventario');
+            const id = document.getElementById('apt-select-producto').value;
+            const prod = PRODUCTOS.find(p => p.id === id);
+            const cant = parseInt(document.getElementById('apt-cat-cantidad').value) || 1;
+            if(prod) {
+                document.getElementById('apt-display-total').value = (prod.precio * cant).toFixed(2);
+            } else {
+                document.getElementById('apt-display-total').value = "0.00";
+            }
+            window.calcularSaldosApartado();
+        };
+
+        window.calcularSaldosApartado = function() {
+            let precioTotal = 0;
+            if(modoCargaApartadoActivo === 'manual') {
+                const unit = parseFloat(document.getElementById('apt-manual-precio').value) || 0;
+                const cant = parseInt(document.getElementById('apt-manual-cantidad').value) || 1;
+                precioTotal = unit * cant;
+                document.getElementById('apt-display-total').value = precioTotal.toFixed(2);
+            } else {
+                const id = document.getElementById('apt-select-producto').value;
+                const prod = PRODUCTOS.find(p => p.id === id);
+                const cant = parseInt(document.getElementById('apt-cat-cantidad').value) || 1;
+                precioTotal = prod ? prod.precio * cant : 0;
+                document.getElementById('apt-display-total').value = precioTotal.toFixed(2);
+            }
+
+            const abono = parseFloat(document.getElementById('apt-abono-inicial').value) || 0;
+            const saldo = Math.max(0, precioTotal - abono);
+            document.getElementById('apt-saldo-pendiente').value = saldo.toFixed(2);
+        };
+
+        window.guardarNuevoApartadoFirebase = async function() {
+            const nombre = document.getElementById('apt-nombre').value.trim();
+            const cedula = document.getElementById('apt-cedula').value.trim();
+            const telefono = document.getElementById('apt-telefono').value.trim();
+            const direccion = document.getElementById('apt-direccion').value.trim() || 'Cordero';
+
+            let modelo = '';
+            let cantidad = 1;
+            let precioTotal = 0;
+            let productoId = null;
+            let imeis = [];
+
+            if(modoCargaApartadoActivo === 'manual') {
+                modelo = document.getElementById('apt-manual-modelo').value.trim();
+                const unit = parseFloat(document.getElementById('apt-manual-precio').value) || 0;
+                cantidad = parseInt(document.getElementById('apt-manual-cantidad').value) || 1;
+                precioTotal = unit * cantidad;
+                const checkImei = document.getElementById('apt-manual-check-imei').checked;
+                
+                if(checkImei) {
+                    for(let i=1; i<=cantidad; i++) {
+                        const val = (document.getElementById(`apt-manual-imei-field-${i}`)?.value || '').trim();
+                        if(val.length !== 4) return alert(`Ingrese los 4 dígitos de IMEI para el equipo ${i}`);
+                        imeis.push(val);
+                    }
+                }
+            } else {
+                productoId = document.getElementById('apt-select-producto').value;
+                const prod = PRODUCTOS.find(p => p.id === productoId);
+                if(!prod) return alert("Seleccione un equipo del catálogo.");
+                modelo = prod.modelo;
+                cantidad = parseInt(document.getElementById('apt-cat-cantidad').value) || 1;
+                precioTotal = prod.precio * cantidad;
+
+                if(prod.marca !== 'Otros Productos') {
+                    for(let i=1; i<=cantidad; i++) {
+                        const val = (document.getElementById(`apt-fact-imei-field-${i}`)?.value || '').trim();
+                        if(val.length !== 4) return alert(`Ingrese los 4 dígitos de IMEI para el equipo ${i}`);
+                        imeis.push(val);
+                    }
+                }
+            }
+
+            const abonoInicial = parseFloat(document.getElementById('apt-abono-inicial').value) || 0;
+            const saldoPendiente = Math.max(0, precioTotal - abonoInicial);
+
+            if(!nombre || !cedula || !telefono || !modelo || precioTotal <= 0 || abonoInicial <= 0) {
+                return alert("Complete los datos del cliente, producto, precio total y abono inicial.");
+            }
+
+            const nuevoApartado = {
+                nombre,
+                cedula,
+                telefono,
+                direccion,
+                modoEntrada: modoCargaApartadoActivo,
+                productoId,
+                modelo,
+                cantidad,
+                imeis: imeis.length > 0 ? imeis : null,
+                precioPactadoUSD: precioTotal,
+                abonoAcumuladoUSD: abonoInicial,
+                saldoPendienteUSD: saldoPendiente,
+                fechaRegistro: new Date().toLocaleDateString('es-VE'),
+                timestamp: Date.now(),
+                estatus: saldoPendiente === 0 ? "LIQUIDADO" : "ACTIVO"
+            };
+
+            try {
+                await addDoc(collection(db, "equipos_apartados"), nuevoApartado);
+                alert("✅ Apartado registrado con éxito.");
+                document.getElementById('apt-nombre').value = '';
+                document.getElementById('apt-cedula').value = '';
+                document.getElementById('apt-telefono').value = '';
+                document.getElementById('apt-direccion').value = '';
+                document.getElementById('apt-manual-modelo').value = '';
+                document.getElementById('apt-manual-precio').value = '';
+                document.getElementById('apt-abono-inicial').value = '';
+                document.getElementById('apt-saldo-pendiente').value = '0.00';
+                document.getElementById('apt-display-total').value = '0.00';
+                await window.cargarApartadosFirebase();
+            } catch(e) {
+                console.error(e);
+                alert("Error al registrar apartado.");
+            }
+        };
+
+        window.cargarApartadosFirebase = async function() {
+            try {
+                const snap = await getDocs(query(collection(db, "equipos_apartados"), orderBy("timestamp", "desc")));
+                APARTADOS = [];
+                snap.forEach(d => APARTADOS.push({ ...d.data(), id: d.id }));
+                window.renderizarListaApartadosHTML(APARTADOS);
+            } catch(e) { console.error(e); }
+        };
+
+        window.renderizarListaApartadosHTML = function(lista = APARTADOS) {
+            const cont = document.getElementById('contenedor-lista-apartados');
+            const badge = document.getElementById('cnt-apartados-badge');
+            if(badge) badge.innerText = `${APARTADOS.length} cuentas`;
+            if(!cont) return;
+            if(lista.length === 0) {
+                cont.innerHTML = `<p class="text-center text-slate-500 text-xs py-3">Sin apartados registrados.</p>`;
+                return;
+            }
+
+            cont.innerHTML = lista.map(apt => {
+                const prodActual = apt.productoId ? PRODUCTOS.find(p => p.id === apt.productoId) : null;
+                const precioInventarioActual = prodActual ? (prodActual.precio * (apt.cantidad || 1)) : apt.precioPactadoUSD;
+                const hayDiferenciaPrecio = prodActual && (precioInventarioActual !== apt.precioPactadoUSD);
+
+                return `
+                    <div class="bg-slate-950 border border-slate-800 p-3 rounded-2xl flex flex-col justify-between gap-2 shadow-sm hover:border-slate-700 transition-all">
+                        <div>
+                            <div class="flex items-center justify-between gap-2">
+                                <strong class="text-white text-xs uppercase truncate">${apt.nombre}</strong>
+                                <span class="bg-blue-900/60 text-blue-300 border border-blue-700 text-[9px] font-mono px-2 py-0.5 rounded font-bold">${apt.cedula}</span>
+                            </div>
+                            <p class="text-[11px] text-slate-300 font-medium mt-0.5 truncate">📱 ${apt.cantidad || 1}x ${apt.modelo}</p>
+                            ${apt.imeis ? `<p class="text-[9px] text-amber-400 font-mono">IMEIs: ${apt.imeis.join(', ')}</p>` : ''}
+                            ${hayDiferenciaPrecio ? `<div class="mt-1 bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[9px] font-black px-2 py-0.5 rounded">⚠️ Variación en catálogo: Actual $${precioInventarioActual} vs Pactado $${apt.precioPactadoUSD}</div>` : ''}
+                            <div class="mt-1.5 pt-1.5 border-t border-slate-800 text-[10px] font-mono text-slate-400 flex justify-between">
+                                <span>Pactado: <strong class="text-white">$${apt.precioPactadoUSD}</strong></span>
+                                <span>Abonado: <strong class="text-emerald-400">$${apt.abonoAcumuladoUSD}</strong></span>
+                                <span>Resta: <strong class="text-red-400">$${apt.saldoPendienteUSD}</strong></span>
+                            </div>
+                        </div>
+                        <div class="flex gap-1.5 pt-1 border-t border-slate-800/80">
+                            <button onclick="window.gestionarAbonoApartado('${apt.id}')" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs py-1.5 rounded-xl shadow-sm transition-all flex items-center justify-center gap-1">
+                                <i class="fa-solid fa-hand-holding-dollar"></i> Abonar / Ajustar
+                            </button>
+                            <button onclick="window.imprimirTicketApartado('${apt.id}')" class="bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold text-xs px-2.5 py-1.5 rounded-xl" title="Imprimir Comprobante 10x15">
+                                <i class="fa-solid fa-print"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        };
+
+        window.gestionarAbonoApartado = async function(id) {
+            const apt = APARTADOS.find(a => a.id === id);
+            if(!apt) return;
+
+            const prodActual = apt.productoId ? PRODUCTOS.find(p => p.id === apt.productoId) : null;
+            let precioFinalCalculo = apt.precioPactadoUSD;
+
+            if (prodActual && (prodActual.precio * (apt.cantidad || 1)) !== apt.precioPactadoUSD) {
+                const precioNuevo = prodActual.precio * (apt.cantidad || 1);
+                const opcion = prompt(`⚠️ ASISTENTE DE AJUSTE DINÁMICO DE PRECIOS (OPCIÓN B)\n\nEl precio de inventario actual para "${apt.modelo}" es de $${precioNuevo} USD (Pactado original: $${apt.precioPactadoUSD} USD).\n\nAbonado previamente por el cliente: $${apt.abonoAcumuladoUSD} USD.\n\nSeleccione una opción:\n[1] Mantener precio original pactado ($${apt.precioPactadoUSD} USD)\n[2] Actualizar al nuevo precio de mercado ($${precioNuevo} USD)\n\nIngrese 1 o 2:`, "2");
+                
+                if (opcion === "2") {
+                    precioFinalCalculo = precioNuevo;
+                    apt.precioPactadoUSD = precioFinalCalculo;
+                }
+            }
+
+            const saldoActual = Math.max(0, precioFinalCalculo - apt.abonoAcumuladoUSD);
+            const montoAbono = parseFloat(prompt(`Cliente: ${apt.nombre} (${apt.cedula})\nEquipo: ${apt.modelo}\nSaldo Restante: $${saldoActual.toFixed(2)} USD\n\nIngrese monto del nuevo abono ($ USD):`, saldoActual.toFixed(2))) || 0;
+
+            if (montoAbono <= 0) return;
+
+            apt.abonoAcumuladoUSD += montoAbono;
+            apt.saldoPendienteUSD = Math.max(0, precioFinalCalculo - apt.abonoAcumuladoUSD);
+
+            if (apt.saldoPendienteUSD === 0) {
+                alert("🎉 ¡Apartado Liquidado al 100%! Se trasladará automáticamente al historial general de notas de venta.");
+                await addDoc(collection(db, "notas_ventas"), {
+                    numNota: (await getDocs(collection(db, "notas_ventas"))).size + 1,
+                    fecha: new Date().toLocaleDateString('es-VE'),
+                    cliente: apt.nombre,
+                    cedula: apt.cedula,
+                    telefono: apt.telefono,
+                    direccion: apt.direccion || "Apartado Retirado",
+                    items: [{ 
+                        cantidad: apt.cantidad || 1, 
+                        modelo: `${apt.modelo} (Apartado Liquidado)`, 
+                        precio: precioFinalCalculo,
+                        imeis: apt.imeis || null
+                    }],
+                    totalUSD: precioFinalCalculo,
+                    tasaCop: parseFloat(document.getElementById('tasa-cop').value) || 3600,
+                    tasaBs: parseFloat(document.getElementById('tasa-bs').value) || 3.3,
+                    estatus: "PROCESADA",
+                    timestamp: Date.now()
+                });
+                await deleteDoc(doc(db, "equipos_apartados", apt.id));
+            } else {
+                await updateDoc(doc(db, "equipos_apartados", apt.id), {
+                    precioPactadoUSD: apt.precioPactadoUSD,
+                    abonoAcumuladoUSD: apt.abonoAcumuladoUSD,
+                    saldoPendienteUSD: apt.saldoPendienteUSD
+                });
+                alert(`✅ Abono registrado. Saldo pendiente: $${apt.saldoPendienteUSD.toFixed(2)} USD`);
+            }
+
+            await window.cargarApartadosFirebase();
+        };
+
+        window.imprimirTicketApartado = function(id) {
+            const apt = APARTADOS.find(a => a.id === id);
+            if(!apt) return;
+
+            const notaFicticia = {
+                numNota: "APT-" + String(apt.timestamp).slice(-4),
+                fecha: apt.fechaRegistro,
+                cliente: apt.nombre,
+                cedula: apt.cedula,
+                telefono: apt.telefono,
+                direccion: apt.direccion || "Apartado Comercial (Opción B)",
+                items: [{ 
+                    cantidad: apt.cantidad || 1, 
+                    modelo: `${apt.modelo} [Abonado: $${apt.abonoAcumuladoUSD} | Resta: $${apt.saldoPendienteUSD}]`, 
+                    precio: apt.precioPactadoUSD,
+                    imeis: apt.imeis || null
+                }],
+                totalUSD: apt.saldoPendienteUSD,
+                tasaCop: parseFloat(document.getElementById('tasa-cop').value) || 3600,
+                tasaBs: parseFloat(document.getElementById('tasa-bs').value) || 3.3,
+                estatus: "APARTADO ACTIVO"
+            };
+
+            document.getElementById('wrapper-impresion-epson').style.display = 'block';
+            window.inyectarDatosAlTicketDOM(notaFicticia);
+            setTimeout(() => {
+                window.print();
+                document.getElementById('wrapper-impresion-epson').style.display = 'none';
+            }, 350);
+        };
+
+        // --- CIERRE DE MES GERENCIAL E INTERMENSUAL ---
+        window.generarCierreMesGerencial = function() {
+            const mesSel = parseInt(document.getElementById('cierre-mes-select').value) || (new Date().getMonth() + 1);
+            const anioSel = parseInt(document.getElementById('cierre-anio-input').value) || 2026;
+            const cont = document.getElementById('contenedor-metricas-cierre-mes');
+            if(!cont) return;
+
+            const filtrarMes = (m, a) => HISTORIAL_NOTAS.filter(n => {
+                if(!n.timestamp) return false;
+                const d = new Date(n.timestamp);
+                return (d.getMonth() + 1) === m && d.getFullYear() === a && n.estatus !== 'ANULADA';
+            });
+
+            const ventasMesActual = filtrarMes(mesSel, anioSel);
+            const mesAnt = mesSel === 1 ? 12 : mesSel - 1;
+            const anioAnt = mesSel === 1 ? anioSel - 1 : anioSel;
+            const ventasMesAnterior = filtrarMes(mesAnt, anioAnt);
+
+            const totalActualUSD = ventasMesActual.reduce((acc, v) => acc + (v.totalUSD || 0), 0);
+            const totalAntUSD = ventasMesAnterior.reduce((acc, v) => acc + (v.totalUSD || 0), 0);
+
+            let difPorcentaje = 0;
+            if (totalAntUSD > 0) {
+                difPorcentaje = (((totalActualUSD - totalAntUSD) / totalAntUSD) * 100).toFixed(1);
+            }
+
+            const agrupadoModelos = {};
+            ventasMesActual.forEach(v => {
+                (v.items || []).forEach(it => {
+                    agrupadoModelos[it.modelo] = (agrupadoModelos[it.modelo] || 0) + (it.cantidad || 1);
+                });
+            });
+
+            cont.innerHTML = `
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div class="bg-slate-900 text-white p-4 rounded-2xl shadow-sm">
+                        <span class="text-[9px] text-slate-400 font-bold uppercase block">Ventas Mes Seleccionado</span>
+                        <strong class="text-xl font-black text-emerald-400">$${totalActualUSD.toFixed(2)} USD</strong>
+                        <span class="text-[10px] text-slate-400 block mt-1">${ventasMesActual.length} Notas Emitidas</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm">
+                        <span class="text-[9px] text-gray-400 font-bold uppercase block">Mes Anterior Comparativo</span>
+                        <strong class="text-xl font-black text-slate-800">$${totalAntUSD.toFixed(2)} USD</strong>
+                        <span class="text-[10px] text-gray-500 block mt-1">${ventasMesAnterior.length} Notas</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between">
+                        <span class="text-[9px] text-gray-400 font-bold uppercase block">Crecimiento Intermensual</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-lg font-black ${difPorcentaje >= 0 ? 'text-emerald-600' : 'text-red-600'}">${difPorcentaje >= 0 ? '+' : ''}${difPorcentaje}%</span>
+                            <i class="fa-solid ${difPorcentaje >= 0 ? 'fa-arrow-trend-up text-emerald-600' : 'fa-arrow-trend-down text-red-600'}"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-2xl border border-gray-200 space-y-2">
+                    <h5 class="text-xs font-black uppercase text-gray-800">Desglose de Artículos Vendidos en el Mes</h5>
+                    <div class="divide-y text-xs font-mono">
+                        ${Object.entries(agrupadoModelos).map(([mod, cant]) => `
+                            <div class="py-1.5 flex justify-between"><span>${mod}</span><strong class="text-blue-600">${cant} Unds</strong></div>
+                        `).join('') || '<p class="text-gray-400 py-2">Sin movimientos registrados este mes.</p>'}
+                    </div>
+                </div>
+            `;
+        };
+
+        window.imprimirCierreMesHojaBlanca = function() {
+            window.print();
+        };
+
+        window.enviarCierreMesWhatsApp = function() {
+            const mesSel = document.getElementById('cierre-mes-select').value;
+            const anioSel = document.getElementById('cierre-anio-input').value;
+            const msg = `📊 *INFORME DE CIERRE DE MES — TUCOCEL C.A.*\n📅 Período: ${mesSel}/${anioSel}\n\nResumen consolidado generado por el sistema administrativo.`;
+            window.open(`https://wa.me/584247357549?text=${encodeURIComponent(msg)}`, '_blank');
+        };
+
+        // --- VISUALIZADOR DE NOTAS EN HOJA BLANCA (OPCIÓN 5) ---
+        window.abrirVisualizadorHojaBlanca = function(index) {
+            const nota = HISTORIAL_NOTAS[index];
+            if(!nota) return;
+
+            document.getElementById('wrapper-impresion-epson').style.display = 'block';
+            window.inyectarDatosAlTicketDOM(nota);
+            setTimeout(() => {
+                window.print();
+                document.getElementById('wrapper-impresion-epson').style.display = 'none';
+            }, 300);
+        };
+
+        window.renderizarTablaHistorialHTML = function(lista) {
+            const tabla = document.getElementById('tabla-historial-cuerpo'); 
+            if(!tabla) return;
+            if(lista.length === 0) { 
+                tabla.innerHTML = '<tr><td colspan="8" class="p-3 text-center text-gray-400">Ningún registro coincidente.</td></tr>'; 
+                return; 
+            }
+            tabla.innerHTML = '';
+            lista.forEach((n, idx) => {
+                const colorLabel = n.estatus === 'ANULADA' ? 'text-red-500 bg-red-50' : 'text-emerald-600 bg-emerald-50';
+                tabla.innerHTML += `
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="p-3 font-mono text-blue-600 font-bold">#${String(n.numNota).padStart(6, '0')}</td>
+                        <td class="p-3 text-gray-500">${n.fecha}</td>
+                        <td class="p-3 font-bold text-gray-900">${n.cliente}</td>
+                        <td class="p-3 font-mono text-gray-600">${n.cedula}</td>
+                        <td class="p-3 text-gray-500 truncate max-w-[180px]">${(n.items || []).map(i => `${i.cantidad}x ${i.modelo}`).join(', ')}</td>
+                        <td class="p-3 text-right font-mono font-black text-gray-900">$${n.totalUSD}</td>
+                        <td class="p-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase ${colorLabel}">${n.estatus || 'PROCESADA'}</span></td>
+                        <td class="p-3 text-center flex justify-center gap-1">
+                            <button onclick="window.abrirVisualizadorHojaBlanca(${idx})" class="text-amber-600 bg-amber-50 hover:bg-amber-100 px-2 py-1 rounded-lg text-xs font-bold" title="Ver Hoja Blanca / Imprimir 10x15"><i class="fa-solid fa-file-lines"></i></button>
+                            <button onclick="reabrirNotaHistorialPorObjeto(${idx})" class="text-blue-600 bg-blue-50 hover:bg-blue-100 px-2 py-1 rounded-lg text-xs font-bold" title="Opciones"><i class="fa-solid fa-sliders"></i></button>
+                        </td>
+                    </tr>`;
+            });
+        };
 
         window.renderizarCamposImeiDinamicos = function(modo) {
             if(modo === 'manual') {
@@ -983,7 +1672,7 @@
                         contenedor.innerHTML += `
                             <div>
                                 <label class="text-[8px] text-red-500 font-bold block mb-0.5">IMEI Celular ${i}</label>
-                                <input type="text" id="manual-imei-field-${i}" maxlength="4" placeholder="Últimos 4" class="w-full bg-white border border-gray-300 p-1 rounded-lg text-xs font-black text-center tracking-widest">
+                                <input type="text" id="manual-imei-field-${i}" maxlength="4" placeholder="4 dígitos" class="w-full bg-white border border-gray-300 p-1 rounded-lg text-xs font-black text-center font-mono">
                             </div>`;
                     }
                 }
@@ -1000,30 +1689,10 @@
                         contenedor.innerHTML += `
                             <div>
                                 <label class="text-[8px] text-red-500 font-bold block mb-0.5">IMEI Celular ${i}</label>
-                                <input type="text" id="fact-imei-field-${i}" maxlength="4" placeholder="Últimos 4" class="w-full bg-white border border-gray-300 p-1 rounded-lg text-xs font-black text-center tracking-widest">
+                                <input type="text" id="fact-imei-field-${i}" maxlength="4" placeholder="4 dígitos" class="w-full bg-white border border-gray-300 p-1 rounded-lg text-xs font-black text-center font-mono">
                             </div>`;
                     }
                 }
-            }
-        };
-
-        window.cambiarSeccionAdministrativa = function(seccion) {
-            const bFactura = document.getElementById('bloque-emision-facturas');
-            const bReporte = document.getElementById('bloque-reportes-auditoria');
-            const tabCajero = document.getElementById('btn-vista-cajero');
-            const tabAuditoria = document.getElementById('btn-vista-auditoria');
-
-            if(seccion === 'cajero') {
-                if(bFactura) bFactura.classList.remove('hidden');
-                if(bReporte) bReporte.classList.add('hidden');
-                if(tabCajero) tabCajero.className = "text-blue-600 border-b-2 border-blue-600 pb-1";
-                if(tabAuditoria) tabAuditoria.className = "text-gray-500 hover:text-gray-700 pb-1";
-            } else {
-                if(bFactura) bFactura.classList.add('hidden');
-                if(bReporte) bReporte.classList.remove('hidden');
-                if(tabCajero) tabCajero.className = "text-gray-500 hover:text-gray-700 pb-1";
-                if(tabAuditoria) tabAuditoria.className = "text-blue-600 border-b-2 border-blue-600 pb-1";
-                window.cargarHistorialFirebase();
             }
         };
 
@@ -1031,11 +1700,13 @@
             const marca = document.getElementById('add-marca').value;
             const wrapper = document.getElementById('wrapper-tipo-producto');
             if(!wrapper) return;
-            if(marca === 'Otros Productos') { wrapper.classList.remove('hidden'); } else { wrapper.classList.add('hidden'); }
+            if(marca === 'Otros Productos') wrapper.classList.remove('hidden'); 
+            else wrapper.classList.add('hidden');
         };
 
         window.abrirLoginAdmin = function() {
-            if(esAdminAutenticado) { window.toggleAdminPanel(); } else { document.getElementById('modal-login').classList.remove('hidden'); }
+            if(esAdminAutenticado) window.toggleAdminPanel(); 
+            else document.getElementById('modal-login').classList.remove('hidden');
         };
         
         window.cerrarLoginAdmin = function() { document.getElementById('modal-login').classList.add('hidden'); };
@@ -1045,7 +1716,7 @@
             const p = document.getElementById('admin-pass').value.trim();
             if(u === ADMIN_USER && p === ADMIN_PASS) {
                 esAdminAutenticado = true;
-                try { localStorage.setItem('tucocel_admin_sesion', 'true'); } catch(err) {}
+                localStorage.setItem('tucocel_admin_sesion', 'true');
                 window.cerrarLoginAdmin();
                 window.controlarVisibilidadModulosOcultos(true);
                 window.manejarVisibilidadLapicitosAdmin(true);
@@ -1055,7 +1726,7 @@
         
         window.cerrarSesionAdmin = function() {
             esAdminAutenticado = false;
-            try { localStorage.removeItem('tucocel_admin_sesion'); } catch(err) {}
+            localStorage.removeItem('tucocel_admin_sesion');
             document.getElementById('panel-admin').classList.add('hidden');
             window.controlarVisibilidadModulosOcultos(false);
             window.manejarVisibilidadLapicitosAdmin(false);
@@ -1065,8 +1736,7 @@
 
         window.toggleAdminPanel = function() {
             const panel = document.getElementById('panel-admin');
-            if(!panel) return;
-            if(panel.classList.contains('hidden')) { panel.classList.remove('hidden'); } else { panel.classList.add('hidden'); }
+            if(panel) panel.classList.toggle('hidden');
         };
 
         window.controlarVisibilidadModulosOcultos = function(mostrar) {
@@ -1095,105 +1765,35 @@
             if (!prod) return;
             productoSeleccionadoActual = prod;
             document.getElementById('modal-img').src = prod.foto || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80';
-            
-            let labelCategoria = prod.marca;
-            if(prod.marca === 'Otros Productos') { labelCategoria = prod.tipoProducto === 'Celular' ? 'Teléfono' : 'Accesorio'; }
-            document.getElementById('modal-marca').innerText = labelCategoria;
+            document.getElementById('modal-marca').innerText = prod.marca;
             document.getElementById('modal-modelo').innerText = prod.modelo;
             document.getElementById('modal-memoria').innerText = prod.memoria || '';
-            
-            const dynamicPriceElement = document.createElement('p');
-            dynamicPriceElement.id = 'modal-precio';
-            dynamicPriceElement.className = 'hidden';
-            dynamicPriceElement.innerText = prod.precio;
-            document.getElementById('modal-producto').appendChild(dynamicPriceElement);
-            
-            const mod = prod.modalidad || 'vitrina';
-            const formCompra = document.getElementById('form-compra');
-            if(!formCompra) return;
-            
-            if(mod === 'consultar') {
-                document.getElementById('modal-desc').innerHTML = `${prod.desc || ''}<br><br><span class="block p-2.5 bg-blue-50 text-blue-950 border border-blue-200 font-bold rounded-xl text-xs text-justify leading-relaxed">🔮 <strong>Nota de Preventa:</strong> La modalidad de venta para este artículo es única y exclusivamente bajo pedido. Es un producto que no se encuentra disponible para despacho inmediato en tienda. Lo cancelas en nuestra oficina, y en un lapso de 2 horas el equipo estará listo en el local para ser retirado, lo cual te será notificado de inmediato vía WhatsApp.</span>`;
-                formCompra.innerHTML = `
-                    <div class="bg-gray-50 border border-gray-100 p-4 rounded-2xl space-y-3">
-                        <div class="text-center p-2 bg-amber-50 text-amber-900 border border-amber-200 font-bold rounded-xl text-[11px]">
-                            🔍 Nota: Este artículo requiere confirmación y abono previo en oficina física.
-                        </div>
-                        <button onclick="preguntarDisponibilidadDirectaWa()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black text-xs py-3 rounded-xl shadow-md flex items-center justify-center gap-1.5 uppercase transition-all">
-                            <i class="fa-brands fa-whatsapp text-sm"></i> Preguntar Disponibilidad
-                        </button>
-                    </div>`;
-            } else {
-                document.getElementById('modal-desc').innerText = prod.desc || 'Sin descripción.';
-                formCompra.innerHTML = `
-                    <div class="bg-gray-50 border border-gray-100 p-4 rounded-2xl space-y-3">
-                        <h4 class="text-[11px] font-black uppercase text-blue-600 tracking-wider"><i class="fa-solid fa-file-invoice mr-1"></i> Datos para concretar pedido</h4>
-                        <div class="grid grid-cols-2 gap-2">
-                            <input type="text" id="cli-nombre" placeholder="Nombre" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs font-semibold text-gray-900">
-                            <input type="text" id="cli-apellido" placeholder="Apellido" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs font-semibold text-gray-900">
-                        </div>
-                        <input type="text" id="cli-direccion" placeholder="Dirección de Habitación o Referencia" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs font-semibold text-gray-900">
-                        <div>
-                            <select id="cli-pago" class="w-full bg-white border border-gray-200 p-2 rounded-xl text-xs font-bold text-gray-900">
-                                <option value="Pago Móvil (Bolívares)">Bolívares (Pago Móvil)</option>
-                                <option value="USDT por Binance P2P">USDT por Binance</option>
-                                <option value="Zinli">Zinli</option>
-                                <option value="Nequi">Nequi</option>
-                                <option value="Efectivo / Pago directo en Tienda">Efectivo / Pago directo en Tienda</option>
-                            </select>
-                        </div>
-                        <button onclick="procesarPedidoWhatsApp()" class="w-full bg-emerald-500 text-white font-black text-xs py-2.5 rounded-xl shadow-md flex items-center justify-center gap-2 hover:bg-emerald-600 transition-colors mt-2">
-                            <i class="fa-solid fa-cart-shopping"></i> Enviar Pedido por WhatsApp
-                        </button>
-                    </div>`;
-            }
-
+            document.getElementById('modal-desc').innerText = prod.desc || 'Sin descripción.';
             document.getElementById('modal-like-count').innerText = prod.likes || 0;
-            let currentLikeState = false;
-            try { currentLikeState = localStorage.getItem(`like_tucocel_${prod.id}`) === 'true'; } catch(err) {}
-            document.getElementById('modal-btn-like').className = currentLikeState ? "bg-red-50 text-red-600 px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-colors text-xs font-bold" : "bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-colors text-xs font-bold";
             
+            const formCompra = document.getElementById('form-compra');
+            if(formCompra) {
+                formCompra.innerHTML = `
+                    <button onclick="window.compartirProductoEspecificoWa('${prod.modelo}', ${prod.precio})" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-3 rounded-xl uppercase flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-sm"></i> Cotizar por WhatsApp ($${prod.precio} USD)
+                    </button>
+                `;
+            }
             document.getElementById('modal-producto').classList.remove('hidden');
         };
 
         window.cerrarModalProducto = function() {
             document.getElementById('modal-producto').classList.add('hidden');
-            const targetEl = document.getElementById('modal-precio');
-            if(targetEl) targetEl.remove();
             productoSeleccionadoActual = null;
         };
 
-        window.preguntarDisponibilidadDirectaWa = function() {
-            if(!productoSeleccionadoActual) return;
-            const msgDispo = `¡Hola, Tucocel! 👋\n\nEstoy visitando su Vitrina Digital y me interesa consultar la disponibilidad para preventa del siguiente artículo:\n\n📦 *ARTÍCULO:* ${productoSeleccionadoActual.modelo}\n💰 *PRECIO:* $${productoSeleccionadoActual.precio} USD\n\n¿Tienen disponibilidad de almacén para gestionarlo bajo pedido? 🔍`;
-            window.open(`https://wa.me/584247357549?text=${encodeURIComponent(msgDispo)}`, '_blank');
-            window.cerrarModalProducto();
-        };
-
-        window.procesarPedidoWhatsApp = function() {
-            const nombre = document.getElementById('cli-nombre').value.trim();
-            const apellido = document.getElementById('cli-apellido').value.trim();
-            const direccion = document.getElementById('cli-direccion').value.trim();
-            const pago = document.getElementById('cli-pago').value;
-            if(!nombre || !apellido || !direccion) return alert("Por favor rellenar los datos del pedido.");
-            const msg = `¡Hola Tucocel! Deseo concretar un pedido:\n\n📱 *Artículo:* ${productoSeleccionadoActual.modelo}\n👤 *Cliente:* ${nombre} ${apellido}\n📍 *Dirección:* ${direccion}\n💳 *Método de Pago:* ${pago}`;
-            window.open("https://wa.me/584247357549?text=" + encodeURIComponent(msg), '_blank');
-            window.cerrarModalProducto();
-        };
-
         window.abrirModalConsultaBanner = function() { document.getElementById('modal-consulta-banner').classList.remove('hidden'); };
-        window.cerrarModalConsultaBanner = function() {
-            document.getElementById('modal-consulta-banner').classList.add('hidden');
-            document.getElementById('banner-con-nombre').value = '';
-            document.getElementById('banner-con-direccion').value = '';
-        };
-
+        window.cerrarModalConsultaBanner = function() { document.getElementById('modal-consulta-banner').classList.add('hidden'); };
         window.enviarConsultaBannerWhatsApp = function() {
             const nombre = document.getElementById('banner-con-nombre').value.trim();
-            const direccion = document.getElementById('banner-con-direccion').value.trim();
-            if(!nombre || !direccion) { alert("Por favor complete los campos."); return; }
-            const mensajeConsultar = `¡Hola, Tucocel! 👋\n\nEstoy visitando su Vitrina Digital y me gustaría consultar por la disponibilidad de un producto o servicio.\n\n👤 *CLIENTE:* ${nombre}\n📍 *DIRECCIÓN:* ${direccion}`;
-            window.open('https://wa.me/584247357549?text=' + encodeURIComponent(mensajeConsultar), '_blank');
+            const dir = document.getElementById('banner-con-direccion').value.trim();
+            if(!nombre || !dir) return alert("Complete los campos.");
+            window.open(`https://wa.me/584247357549?text=${encodeURIComponent(`¡Hola Tucocel! Consulta de ${nombre} (${dir})`)}`, '_blank');
             window.cerrarModalConsultaBanner();
         };
 
@@ -1201,12 +1801,12 @@
         window.cerrarModalConsultaGeneral = function() { document.getElementById('modal-consulta-general').classList.add('hidden'); };
         window.verificarMotivoEspecifico = function() {
             const m = document.getElementById('con-motivo').value;
-            document.getElementById('label-detalles-con').innerText = m === 'Servicio Técnico' ? '¿Falla?' : '¿Artículo?';
+            document.getElementById('label-detalles-con').innerText = m === 'Servicio Técnico' ? '¿Falla?' : '¿Requerimiento?';
         };
         window.enviarConsultaGeneralWhatsApp = function() {
             const n = document.getElementById('con-nombre').value;
             const d = document.getElementById('con-detalles').value;
-            window.open("https://wa.me/584247357549?text=" + encodeURIComponent("Consulta de " + n + ": " + d), '_blank');
+            window.open(`https://wa.me/584247357549?text=${encodeURIComponent(`Consulta de ${n}: ${d}`)}`, '_blank');
             window.cerrarModalConsultaGeneral();
         };
 
@@ -1215,7 +1815,7 @@
             window.cambiarSeccionAdministrativa('cajero');
         };
         window.cerrarModalSistemaFacturacion = function() { document.getElementById('modal-sistema-facturacion').classList.add('hidden'); };
-        
+
         window.cambiarModoCargaFactura = function(modo) {
             modoCargaFacturaActivo = modo;
             if(modo === 'manual') {
@@ -1232,87 +1832,232 @@
             }
         };
 
-        window.toggleManualImeiView = function() { window.renderizarCamposImeiDinamicos('manual'); };
-        window.verificarTipoArticuloFactura = function() { window.renderizarCamposImeiDinamicos('inventario'); };
-
         window.ejecutarBotonAgregarItem = function() {
-            const cop = parseFloat(document.getElementById('tasa-cop').value) || 0;
-            const bs = parseFloat(document.getElementById('tasa-bs').value) || 0;
-            if (cop === 0 || bs === 0) { alert("⚠️ Ingrese las Tasas del Día antes de facturar."); return; }
-
             if(modoCargaFacturaActivo === 'manual') {
                 const modelo = document.getElementById('manual-modelo').value.trim();
-                const precioUnitario = parseInt(document.getElementById('manual-precio').value.trim()) || 0;
+                const precio = parseFloat(document.getElementById('manual-precio').value) || 0;
                 const cant = parseInt(document.getElementById('manual-cantidad').value) || 1;
                 const checkImei = document.getElementById('manual-check-imei').checked;
                 
-                if(!modelo || !precioUnitario) { alert("Ingrese descripción y precio válido."); return; }
+                if(!modelo || precio <= 0) return alert("Ingrese modelo y precio válido.");
                 
-                let imeisRecopilados = [];
+                let imeis = [];
                 if(checkImei) {
                     for(let i=1; i<=cant; i++) {
-                        const valImei = document.getElementById(`manual-imei-field-${i}`).value.trim();
-                        if(valImei.length !== 4) { alert(`Ingrese los 4 dígitos del IMEI para el teléfono ${i}`); return; }
-                        imeisRecopilados.push(valImei);
+                        const val = (document.getElementById(`manual-imei-field-${i}`)?.value || '').trim();
+                        if(val.length !== 4) return alert(`Ingrese los 4 dígitos de IMEI para el equipo ${i}`);
+                        imeis.push(val);
                     }
                 }
 
-                ITEMS_VENTA_ACTIVA.push({ 
-                    id: "manual-" + new Date().getTime(), 
-                    marca: checkImei ? "Celular" : "Otros Productos", 
-                    modelo: modelo, 
-                    amount: cant,
-                    cantidad: cant,
-                    precio: precioUnitario * cant, 
-                    imeis: checkImei ? imeisRecopilados : null 
-                });
-
-                document.getElementById('manual-modelo').value = ''; document.getElementById('manual-precio').value = '';
-                document.getElementById('manual-cantidad').value = '1'; document.getElementById('manual-check-imei').checked = false;
+                ITEMS_VENTA_ACTIVA.push({ id: "man-" + Date.now(), modelo, cantidad: cant, precio: precio * cant, imeis: checkImei ? imeis : null });
+                document.getElementById('manual-modelo').value = '';
+                document.getElementById('manual-precio').value = '';
+                document.getElementById('manual-cantidad').value = '1';
                 document.getElementById('wrapper-manual-imeis').innerHTML = '';
             } else {
                 const id = document.getElementById('fact-select-producto').value;
                 const cant = parseInt(document.getElementById('fact-cantidad').value) || 1;
-                if(!id) return;
                 const prod = PRODUCTOS.find(p => p.id === id);
-                if(!prod) return;
+                if(!prod) return alert("Seleccione un producto.");
 
-                let imeisRecopilados = [];
+                let imeis = [];
                 if(prod.marca !== 'Otros Productos') {
                     for(let i=1; i<=cant; i++) {
-                        const valImei = document.getElementById(`fact-imei-field-${i}`).value.trim();
-                        if(valImei.length !== 4) { alert(`Ingrese los 4 dígitos del IMEI para el teléfono ${i}`); return; }
-                        imeisRecopilados.push(valImei);
+                        const val = (document.getElementById(`fact-imei-field-${i}`)?.value || '').trim();
+                        if(val.length !== 4) return alert(`Ingrese los 4 dígitos de IMEI para el equipo ${i}`);
+                        imeis.push(val);
                     }
                 }
 
-                ITEMS_VENTA_ACTIVA.push({ 
-                    id: prod.id, 
-                    marca: prod.marca, 
-                    modelo: prod.modelo, 
-                    amount: cant,
-                    cantidad: cant,
-                    precio: prod.precio * cant, 
-                    imeis: prod.marca !== 'Otros Productos' ? imeisRecopilados : null 
-                });
-
-                document.getElementById('fact-select-producto').value = ''; document.getElementById('fact-cantidad').value = '1';
+                ITEMS_VENTA_ACTIVA.push({ id: prod.id, modelo: prod.modelo, cantidad: cant, precio: prod.precio * cant, imeis: prod.marca !== 'Otros Productos' ? imeis : null });
+                document.getElementById('fact-select-producto').value = '';
                 document.getElementById('wrapper-fact-imeis').innerHTML = '';
             }
             window.renderizarItemsVentaActiva();
         };
 
-        window.removerItemVenta = function(index) { ITEMS_VENTA_ACTIVA.splice(index, 1); window.renderizarItemsVentaActiva(); };
-        
+        window.removerItemVenta = function(index) {
+            ITEMS_VENTA_ACTIVA.splice(index, 1);
+            window.renderizarItemsVentaActiva();
+        };
+
+        window.renderizarItemsVentaActiva = function() {
+            const cont = document.getElementById('fact-lista-items');
+            document.getElementById('fact-items-count').innerText = `${ITEMS_VENTA_ACTIVA.length} items`;
+            if(ITEMS_VENTA_ACTIVA.length === 0) {
+                cont.innerHTML = '<p class="text-center text-slate-500 text-xs py-4">No hay artículos añadidos todavía.</p>';
+                window.calcularTotalesFactura();
+                return;
+            }
+            cont.innerHTML = ITEMS_VENTA_ACTIVA.map((item, idx) => `
+                <div class="bg-slate-950 p-2 rounded-xl border border-slate-800 flex justify-between text-white text-xs">
+                    <div>
+                        <p class="font-bold truncate max-w-[140px]">${item.cantidad}x ${item.modelo}</p>
+                        ${item.imeis ? `<span class="text-[9px] text-amber-400 font-mono">IMEIs: ${item.imeis.join(', ')}</span>` : ''}
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span>$${item.precio.toFixed(2)}</span>
+                        <button onclick="removerItemVenta(${idx})" class="text-red-400 font-bold"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                </div>
+            `).join('');
+            window.calcularTotalesFactura();
+        };
+
         window.calcularTotalesFactura = function() {
-            const tCOP = parseFloat(document.getElementById('tasa-cop').value) || 0; 
-            const tBS = parseFloat(document.getElementById('tasa-bs').value) || 0;
-            let totalUSD = 0; ITEMS_VENTA_ACTIVA.forEach(i => totalUSD += i.precio);
-            const totalCOP = totalUSD * tCOP;
-            const totalBS = tBS > 0 ? totalCOP / tBS : 0;
-            document.getElementById('total-usd').innerText = `Total Neto: $${totalUSD}`;
-            document.getElementById('total-cop-val').innerText = `${totalCOP.toLocaleString('es-CO')} COP`;
-            document.getElementById('total-bs-val').innerText = `${totalBS.toLocaleString('es-VE')} Bs`;
+            let totalUSD = 0; 
+            ITEMS_VENTA_ACTIVA.forEach(i => totalUSD += i.precio);
+            document.getElementById('total-usd').innerText = `Total: $${totalUSD.toFixed(2)}`;
+            window.calcularVueltoPOS();
+        };
+
+        window.ejecutarBotonImprimir = async function() {
+            if(ITEMS_VENTA_ACTIVA.length === 0) return alert("Agregue al menos un producto.");
+            const nota = await window.registrarNotaEnFirebase();
+            if(!nota) return;
+            document.getElementById('wrapper-impresion-epson').style.display = 'block';
+            window.inyectarDatosAlTicketDOM(nota);
+            setTimeout(() => {
+                window.print();
+                document.getElementById('wrapper-impresion-epson').style.display = 'none';
+                window.limpiarFormularioFacturaCompleto();
+            }, 350);
+        };
+
+        window.ejecutarBotonWhatsApp = async function() {
+            if(ITEMS_VENTA_ACTIVA.length === 0) return alert("Agregue al menos un producto.");
+            const nota = await window.registrarNotaEnFirebase();
+            if(!nota) return;
+            window.procesarEnvioWaObjeto(nota);
+            window.limpiarFormularioFacturaCompleto();
+        };
+
+        window.registrarNotaEnFirebase = async function() {
+            let totalUSD = 0; 
+            ITEMS_VENTA_ACTIVA.forEach(i => totalUSD += i.precio);
+            const tCOP = parseFloat(document.getElementById('tasa-cop').value) || 3600;
+            const tBS = parseFloat(document.getElementById('tasa-bs').value) || 3.3;
+
+            const nuevaNota = {
+                numNota: (await getDocs(collection(db, "notas_ventas"))).size + 1,
+                fecha: new Date().toLocaleDateString('es-VE'),
+                cliente: document.getElementById('fact-cli-nombre').value.trim() || "Consumidor Final",
+                cedula: document.getElementById('fact-cli-cedula').value.trim() || "V-00000000",
+                telefono: document.getElementById('fact-cli-telefono').value.trim() || "04247357549",
+                direccion: document.getElementById('fact-cli-direccion').value.trim() || "Cordero",
+                items: [...ITEMS_VENTA_ACTIVA],
+                totalUSD: totalUSD,
+                tasaCop: tCOP,
+                tasaBs: tBS,
+                estatus: "PROCESADA",
+                timestamp: Date.now()
+            };
+
+            await addDoc(collection(db, "notas_ventas"), nuevaNota);
+            await window.cargarHistorialFirebase();
+            return nuevaNota;
+        };
+
+        window.inyectarDatosAlTicketDOM = function(nota) {
+            document.getElementById('tk-num-nota').innerText = String(nota.numNota).padStart(6, '0');
+            document.getElementById('tk-fecha').innerText = nota.fecha;
+            document.getElementById('tk-cliente-nombre').innerText = nota.cliente;
+            document.getElementById('tk-cliente-cedula').innerText = nota.cedula;
+            document.getElementById('tk-cliente-direccion').innerText = nota.direccion;
+            document.getElementById('tk-cliente-telefono').innerText = nota.telefono;
+            document.getElementById('tk-status-label').innerText = nota.estatus || "PROCESADA";
+
+            const tbody = document.getElementById('tk-items-tabla');
+            if(!tbody) return;
+            tbody.innerHTML = (nota.items || []).map(item => `
+                <tr>
+                    <td style="text-align: center;">${item.cantidad}</td>
+                    <td>
+                        <strong>${item.modelo}</strong>
+                        ${item.imeis ? `<br><span style="color: #b91c1c; font-size: 7.5px;">[IMEI: ${item.imeis.join(', ')}]</span>` : ''}
+                    </td>
+                    <td style="text-align: right; font-weight: bold;">$${item.precio.toFixed(2)}</td>
+                </tr>
+            `).join('');
+
+            const usdNeto = parseFloat(nota.totalUSD) || 0;
+            const copTasa = parseFloat(nota.tasaCop) || 3600;
+            const bsTasa = parseFloat(nota.tasaBs) || 3.3;
+
+            const totalEnCop = usdNeto * copTasa;
+            const totalEnBs = bsTasa > 0 ? (totalEnCop / bsTasa) : 0;
+
+            document.getElementById('tk-total-usd').innerText = `$${usdNeto.toFixed(2)}`;
+            document.getElementById('tk-total-cop').innerText = `${Math.round(totalEnCop).toLocaleString('es-CO')} COP`;
+            document.getElementById('tk-total-bs').innerText = `${totalEnBs.toFixed(2).toLocaleString('es-VE')} Bs`;
+        };
+
+        window.procesarEnvioWaObjeto = function(nota) {
+            let desc = (nota.items || []).map(i => `  • ${i.cantidad}x ${i.modelo} -> $${i.precio.toFixed(2)} ${i.imeis ? `(IMEI: ${i.imeis.join(', ')})` : ''}`).join('\n');
+            const usdNeto = parseFloat(nota.totalUSD) || 0;
+            const copTasa = parseFloat(nota.tasaCop) || 3600;
+            const bsTasa = parseFloat(nota.tasaBs) || 3.3;
+            const totalEnCop = usdNeto * copTasa;
+            const totalEnBs = bsTasa > 0 ? (totalEnCop / bsTasa) : 0;
+
+            const msg = `*TUCOCEL C.A. — RIF: J-31378837-6*\n*Nota de Entrega N° ${String(nota.numNota).padStart(6, '0')}*\n*Fecha:* ${nota.fecha}\n\n👤 *Cliente:* ${nota.cliente}\n💳 *Cédula/RIF:* ${nota.cedula}\n📞 *Teléfono:* ${nota.telefono}\n📍 *Dirección:* ${nota.direccion}\n\n📦 *Detalle de compra:*\n${desc}\n\n💵 *Total General:* $${usdNeto.toFixed(2)} USD\n*Ref COP:* ${Math.round(totalEnCop).toLocaleString('es-CO')} COP\n*Ref VES:* ${totalEnBs.toFixed(2).toLocaleString('es-VE')} Bs\n\n🛡️ *GARANTÍA (60 DÍAS)*: 2 meses continuos en defectos técnicos de fábrica.`;
+            window.open(`https://wa.me/${nota.telefono.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`, '_blank');
+        };
+
+        window.reabrirNotaHistorialPorObjeto = function(index) { 
+            const n = HISTORIAL_NOTAS[index]; 
+            if(!n) return;
+            const s = prompt(`⚙️ CONTROL DE NOTA N° ${String(n.numNota).padStart(6, '0')}\n\n[1] Reimprimir Nota de Entrega (10x15)\n[2] Reenviar por WhatsApp\n[3] Anular Nota\n[4] Eliminar de Firebase\n\nIngrese opción:`); 
+            if(s==="1") { 
+                document.getElementById('wrapper-impresion-epson').style.display = 'block'; 
+                window.inyectarDatosAlTicketDOM(n); 
+                setTimeout(() => {
+                    window.print(); 
+                    document.getElementById('wrapper-impresion-epson').style.display = 'none'; 
+                }, 400);
+            } else if(s==="2") { 
+                window.procesarEnvioWaObjeto(n); 
+            } else if(s==="3") {
+                if(confirm(`⚠️ ¿Deseas ANULAR la Nota #${n.numNota}?`)) { window.anularNotaHistorialPorId(n.id); }
+            } else if(s==="4") {
+                if(confirm(`🚨 ¿Eliminar Nota #${n.numNota} de Firebase?`)) { window.eliminarNotaHistorialPorId(n.id); }
+            }
+        };
+
+        window.anularNotaHistorialPorId = async function(id) {
+            try {
+                await updateDoc(doc(db, "notas_ventas", id), { estatus: "ANULADA" });
+                alert("Nota colocada en estatus ANULADA.");
+                await window.cargarHistorialFirebase();
+            } catch(e) { console.error(e); }
+        };
+
+        window.eliminarNotaHistorialPorId = async function(id) {
+            try {
+                await deleteDoc(doc(db, "notas_ventas", id));
+                alert("Nota eliminada de Firebase.");
+                await window.cargarHistorialFirebase();
+            } catch(e) { console.error(e); }
+        };
+
+        window.limpiarFormularioFacturaCompleto = function() {
+            document.getElementById('fact-cli-nombre').value = '';
+            document.getElementById('fact-cli-cedula').value = '';
+            document.getElementById('fact-cli-telefono').value = '';
+            document.getElementById('fact-cli-direccion').value = '';
+            document.getElementById('vuelto-monto-recibido').value = '';
+            ITEMS_VENTA_ACTIVA = [];
+            window.renderizarItemsVentaActiva();
+        };
+
+        window.cargarHistorialFirebase = async function() {
+            try { 
+                const snap = await getDocs(query(collection(db, "notas_ventas"), orderBy("timestamp", "desc"), limit(60))); 
+                HISTORIAL_NOTAS = []; 
+                snap.forEach(d => HISTORIAL_NOTAS.push({ ...d.data(), id: d.id })); 
+                window.renderizarTablaHistorialHTML(HISTORIAL_NOTAS); 
+            } catch(e) { console.error(e); }
         };
 
         window.filtrarTablaHistorial = function() {
@@ -1329,21 +2074,58 @@
         window.exportarHistorialExcel = function() {
             if(HISTORIAL_NOTAS.length === 0) return alert("No hay datos para exportar.");
             const sheet = XLSX.utils.json_to_sheet(HISTORIAL_NOTAS.map(n => ({ Nota: n.numNota, Fecha: n.fecha, Cliente: n.cliente, Cedula: n.cedula, TotalUSD: n.totalUSD, Estatus: n.estatus || "PROCESADA" })));
-            const book = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(book, sheet, "Ventas"); XLSX.writeFile(book, "Respaldo_Tucocel_2026.xlsx");
+            const book = XLSX.utils.book_new(); 
+            XLSX.utils.book_append_sheet(book, sheet, "Ventas"); 
+            XLSX.writeFile(book, "Respaldo_Tucocel_2026.xlsx");
+        };
+
+        window.cargarInventarioFirebase = async function() {
+            try {
+                const docSnap = await getDoc(doc(db, "inventario", "productos_tucocel"));
+                if (docSnap.exists()) { 
+                    PRODUCTOS = docSnap.data().lista || []; 
+                    PRODUCTOS.sort((a, b) => a.precio - b.precio); 
+                }
+            } catch (e) { 
+                console.error(e); 
+            } finally { 
+                window.verificarSesionLocal(); 
+                window.ejecutarFiltroCombinado(); 
+                window.actualizarSelectFacturacion(); 
+                window.actualizarSelectApartados();
+            }
+        };
+
+        window.guardarInventarioFirebase = async function() {
+            const btn = document.getElementById('btn-guardar'); 
+            if(btn) { btn.disabled = true; btn.innerText = "Guardando..."; }
+            try { 
+                PRODUCTOS.sort((a, b) => a.precio - b.precio); 
+                await setDoc(doc(db, "inventario", "productos_tucocel"), { lista: PRODUCTOS }); 
+            } catch (e) { 
+                alert("Error guardando cambios."); 
+            } finally { 
+                if(btn) { btn.disabled = false; btn.innerText = "Guardar en Inventario"; } 
+            }
         };
 
         window.prepararEdicionArticulo = function(id) {
-            const prod = PRODUCTOS.find(p => p.id === id); if (!prod) return; idArticuloEnEdicion = id;
+            const prod = PRODUCTOS.find(p => p.id === id); 
+            if (!prod) return; 
+            idArticuloEnEdicion = id;
             document.getElementById('add-marca').value = prod.marca; 
             window.verificarMarcaSeleccionadaPanel();
             if(prod.marca === 'Otros Productos' && prod.tipoProducto) { document.getElementById('add-tipo').value = prod.tipoProducto; }
             document.getElementById('add-modalidad').value = prod.modalidad || 'vitrina';
             document.getElementById('add-modelo').value = prod.modelo;
-            document.getElementById('memoria').value = prod.memoria || ''; document.getElementById('add-precio').value = prod.precio;
-            document.getElementById('add-desc').value = prod.desc || ''; document.getElementById('foto-base64').value = prod.foto || '';
+            document.getElementById('memoria').value = prod.memoria || ''; 
+            document.getElementById('add-precio').value = prod.precio;
+            document.getElementById('add-desc').value = prod.desc || ''; 
+            document.getElementById('foto-base64').value = prod.foto || '';
             const preview = document.getElementById('preview-foto');
             if (prod.foto && preview) { preview.src = prod.foto; preview.classList.remove('hidden'); }
-            document.getElementById('panel-titulo').innerText = "✏️ Editando Artículo"; document.getElementById('btn-cancelar-edicion').classList.remove('hidden');
+            document.getElementById('panel-titulo').innerText = "✏️ Editando Artículo"; 
+            document.getElementById('btn-cancelar-edicion').classList.remove('hidden');
             document.getElementById('panel-admin').scrollIntoView({ behavior: 'smooth' });
         };
 
@@ -1363,6 +2145,170 @@
             } 
         };
 
+        window.procesarGuardadoInventario = async function() {
+            const marca = document.getElementById('add-marca').value; 
+            const mod = document.getElementById('add-modalidad').value;
+            const modelo = document.getElementById('add-modelo').value.trim(); 
+            const memoriaVal = document.getElementById('memoria').value.trim(); 
+            const precio = parseInt(document.getElementById('add-precio').value.trim()) || 0; 
+            const foto = document.getElementById('foto-base64').value; 
+            const desc = document.getElementById('add-desc').value.trim();
+            const tipoProductoVal = marca === 'Otros Productos' ? document.getElementById('add-tipo').value : 'Celular';
+            
+            if(!modelo || !precio) { alert("Complete modelo y precio."); return; }
+            
+            if (idArticuloEnEdicion) { 
+                const idx = PRODUCTOS.findIndex(p => p.id === idArticuloEnEdicion); 
+                if (idx !== -1) PRODUCTOS[idx] = { id: idArticuloEnEdicion, marca, modalidad: mod, modelo, memoria: memoriaVal, precio, foto, desc, tipoProducto: tipoProductoVal, likes: PRODUCTOS[idx].likes || 0 }; 
+                window.cancelarEdicionActiva(); 
+            } else { 
+                PRODUCTOS.unshift({ id: (new Date().getTime()).toString(), marca, modalidad: mod, modelo, memoria: memoriaVal, precio, foto, desc, tipoProducto: tipoProductoVal, likes: 0 }); 
+                window.limpiarFormularioPanel(); 
+            }
+            await window.guardarInventarioFirebase(); 
+            window.ejecutarFiltroCombinado(); 
+            window.actualizarSelectFacturacion();
+            window.actualizarSelectApartados();
+        };
+
+        window.procesarImagen = function(e) { 
+            const file = e.target.files[0]; 
+            if (!file) return; 
+            const reader = new FileReader(); 
+            reader.onload = function(event) { 
+                const img = new Image(); 
+                img.onload = function() { 
+                    const canvas = document.createElement('canvas'); 
+                    const ctx = canvas.getContext('2d'); 
+                    canvas.width = 600; 
+                    canvas.height = 600; 
+                    ctx.drawImage(img, 0, 0, 600, 600); 
+                    const base64Str = canvas.toDataURL('image/jpeg', 0.85); 
+                    document.getElementById('foto-base64').value = base64Str;
+                    const preview = document.getElementById('preview-foto'); 
+                    if(preview) { preview.src = base64Str; preview.classList.remove('hidden'); }
+                }; 
+                img.src = event.target.result; 
+            }; 
+            reader.readAsDataURL(file); 
+        };
+
+        window.limpiarFormularioPanel = function() {
+            document.getElementById('add-modelo').value = ''; 
+            document.getElementById('memoria').value = '';
+            document.getElementById('add-precio').value = ''; 
+            document.getElementById('add-desc').value = '';
+            document.getElementById('add-foto-file').value = ''; 
+            document.getElementById('foto-base64').value = '';
+            const p = document.getElementById('preview-foto'); 
+            if(p) p.classList.add('hidden');
+        };
+
+        window.actualizarSelectFacturacion = function() {
+            const selFact = document.getElementById('fact-select-producto');
+            const optionsHtml = '<option value="">-- Seleccione un producto --</option>' + PRODUCTOS.map(p => `<option value="${p.id}">${p.modelo} (${p.marca}) - $${p.precio} USD</option>`).join('');
+            if(selFact) selFact.innerHTML = optionsHtml;
+        };
+
+        window.actualizarSelectApartados = function() {
+            const selApt = document.getElementById('apt-select-producto');
+            const optionsHtml = '<option value="">-- Seleccionar Equipo en Stock --</option>' + PRODUCTOS.map(p => `<option value="${p.id}">${p.modelo} (${p.marca}) - $${p.precio} USD</option>`).join('');
+            if(selApt) selApt.innerHTML = optionsHtml;
+        };
+
+        window.ejecutarFiltroCombinado = function() {
+            const telefonos = PRODUCTOS.filter(p => p.marca !== 'Otros Productos');
+            const otros = PRODUCTOS.filter(p => p.marca === 'Otros Productos');
+            window.renderizarCatalogoHTML(telefonos);
+            window.renderizarCarruselOtrosHTML(otros);
+        };
+
+        // --- RENDERIZADOR DE VITRINA DE SMARTPHONES CON DISEÑO ORIGINAL RESTAURADO ---
+        window.renderizarCatalogoHTML = function(lista) {
+            const contenedor = document.getElementById('contenedor-productos'); 
+            if(!contenedor) return;
+            let listaFiltrada = lista;
+            if (marcaSeleccionada !== 'Todas') { listaFiltrada = lista.filter(p => p.marca.toLowerCase() === marcaSeleccionada.toLowerCase()); }
+            const contador = document.getElementById('contador-productos'); 
+            if(contador) contador.innerText = `${listaFiltrada.length} Disponibles`;
+            if(listaFiltrada.length === 0) { 
+                contenedor.innerHTML = '<div class="text-center col-span-full py-12 text-gray-400 text-sm font-medium">No hay artículos comerciales disponibles.</div>'; 
+                return; 
+            }
+            contenedor.innerHTML = listaFiltrada.map(prod => {
+                const fotoProd = prod.foto || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80';
+                const mod = prod.modalidad || 'vitrina';
+                const tagEntrega = mod === 'vitrina' 
+                    ? `<span class="text-[9.5px] bg-emerald-50 text-emerald-700 border border-emerald-200 font-extrabold px-2 py-0.5 rounded-md">Entrega Inmediata</span>` 
+                    : `<span class="text-[9.5px] bg-amber-50 text-amber-700 border border-amber-200 font-extrabold px-2 py-0.5 rounded-md">Bajo Pedido</span>`;
+                
+                return `
+                    <div onclick="abrirModalProducto('${prod.id}')" class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex flex-col justify-between transition-all hover:shadow-xl cursor-pointer group">
+                        <div>
+                            <div class="w-full h-64 bg-white border border-gray-50 rounded-xl overflow-hidden mb-3.5 flex justify-center items-center p-2">
+                                <img src="${fotoProd}" alt="${prod.modelo}" class="max-w-full max-h-full object-contain filter drop-shadow-md">
+                            </div>
+                            <div class="flex justify-between items-center mb-1.5 gap-1">
+                                <span class="text-[10px] font-black text-blue-600 uppercase tracking-widest">${prod.marca}</span>
+                                ${tagEntrega}
+                            </div>
+                            <h3 class="font-extrabold text-gray-900 text-base group-hover:text-blue-600 truncate">${prod.modelo}</h3>
+                            <p class="text-xs text-gray-400 font-medium mt-0.5">${prod.memoria || ''}</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-gray-50 flex items-center justify-between">
+                            <p class="text-base font-black text-gray-900 font-mono">$${prod.precio} <span class="text-[10px] text-gray-400 font-bold uppercase">USD</span></p>
+                            <div class="flex items-center gap-2">
+                                <button onclick="event.stopPropagation(); window.compartirProductoEspecificoWa('${prod.modelo}', ${prod.precio})" class="text-emerald-500 hover:text-emerald-600 transition-colors p-1" title="Preguntar por WhatsApp">
+                                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                                </button>
+                                <span class="text-blue-600 hover:text-blue-700 font-extrabold text-xs">Ver</span>
+                            </div>
+                        </div>
+                        ${esAdminAutenticado ? `<div class="flex gap-2 border-t pt-2 mt-2 justify-center"><button onclick="event.stopPropagation(); prepararEdicionArticulo('${prod.id}')" class="text-blue-600 hover:underline text-xs font-bold">Editar</button><button onclick="event.stopPropagation(); eliminarProducto('${prod.id}')" class="text-red-500 hover:underline text-xs font-bold">Borrar</button></div>` : ''}
+                    </div>
+                `;
+            }).join('');
+        };
+
+        window.renderizarCarruselOtrosHTML = function(lista) {
+            const carrusel = document.getElementById('carrusel-otros');
+            if(!carrusel) return;
+            carrusel.innerHTML = lista.map(prod => `
+                <div onclick="abrirModalProducto('${prod.id}')" class="snap-start shrink-0 w-44 bg-white rounded-2xl p-3 border border-gray-100 shadow-sm flex flex-col justify-between cursor-pointer select-none">
+                    <div>
+                        <div class="w-full h-32 flex items-center justify-center p-2 bg-white rounded-xl">
+                            <img src="${prod.foto || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80'}" class="max-w-full max-h-full object-contain">
+                        </div>
+                        <h4 class="font-bold text-gray-800 text-xs truncate mt-1">${prod.modelo}</h4>
+                    </div>
+                    <div class="mt-2 pt-1 border-t border-gray-50 flex justify-between items-center">
+                        <strong class="text-sm font-black text-gray-900">$${prod.precio}</strong>
+                        <button onclick="event.stopPropagation(); window.compartirProductoEspecificoWa('${prod.modelo}', ${prod.precio})" class="text-emerald-500 hover:text-emerald-600 text-xs" title="Compartir">
+                            <i class="fa-brands fa-whatsapp text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        };
+
+        window.compartirVitrinaGeneralWa = function() {
+            const msg = `📱 *TUCOCEL C.A. — Vitrina Tecnológica Digital*\nRIF: J-31378837-6\n\nExplora nuestro stock en tiempo real y cotiza al instante:\nhttps://tucocel.github.io/`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+        };
+
+        window.compartirProductoEspecificoWa = function(modelo, precio) {
+            const msg = `📱 *TUCOCEL C.A.* | Consulta de Smartphone:\n📦 *Modelo:* ${modelo}\n💵 *Precio:* $${precio} USD\n\n¿Sigue disponible para entrega inmediata?`;
+            window.open(`https://wa.me/584247357549?text=${encodeURIComponent(msg)}`, '_blank');
+        };
+
+        window.verificarSesionLocal = function() { 
+            if (localStorage.getItem('tucocel_admin_sesion') === 'true') { 
+                esAdminAutenticado = true; 
+                window.controlarVisibilidadModulosOcultos(true); 
+                window.manejarVisibilidadLapicitosAdmin(true);
+            } 
+        };
+
         window.incrementarLikeActivo = async function() {
             if(!productoSeleccionadoActual) return;
             const key = `like_tucocel_${productoSeleccionadoActual.id}`;
@@ -1370,8 +2316,13 @@
             const idx = PRODUCTOS.findIndex(p => p.id === productoSeleccionadoActual.id);
             if(idx === -1) return;
 
-            if(yaDioLike) { PRODUCTOS[idx].likes = Math.max(0, (PRODUCTOS[idx].likes || 1) - 1); localStorage.removeItem(key); } 
-            else { PRODUCTOS[idx].likes = (PRODUCTOS[idx].likes || 0) + 1; localStorage.setItem(key, 'true'); }
+            if(yaDioLike) { 
+                PRODUCTOS[idx].likes = Math.max(0, (PRODUCTOS[idx].likes || 1) - 1); 
+                localStorage.removeItem(key); 
+            } else { 
+                PRODUCTOS[idx].likes = (PRODUCTOS[idx].likes || 0) + 1; 
+                localStorage.setItem(key, 'true'); 
+            }
 
             productoSeleccionadoActual.likes = PRODUCTOS[idx].likes;
             document.getElementById('modal-like-count').innerText = productoSeleccionadoActual.likes;
@@ -1388,159 +2339,6 @@
             elemento.innerText = nuevoTexto.trim();
             BASE_TEXTOS_WEB[idElemento] = { texto: nuevoTexto.trim(), alineacion: "1", estilo: "1" };
             await window.sincronizarTextosFirebase();
-        };
-
-        window.abrirModalNotificarCliente = function() {
-            const tlf = prompt("Ingrese el WhatsApp del cliente:");
-            const equipo = prompt("Nombre del equipo/servicio listo:");
-            if(!tlf || !equipo) return;
-            const msg = `¡Hola! 👋 Te saludamos de *TUCOCEL C.A.* Le informamos que su equipo (${equipo}) ya se encuentra listo y verificado por nuestro departamento de servicio técnico. Puede pasar a retirarlo por nuestra oficina física en el horario habitual. 🚀`;
-            window.open(`https://wa.me/${tlf.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`, '_blank');
-        };
-
-        window.ejecutarBotonImprimir = async function() {
-            if(ITEMS_VENTA_ACTIVA.length === 0) return alert("Agregue al menos un producto al ticket.");
-            const nota = await window.registrarNotaEnFirebase();
-            if(!nota) return;
-            document.getElementById('wrapper-impresion-epson').style.display = 'block';
-            window.inyectarDatosAlTicketDOM(nota);
-            setTimeout(() => { 
-                window.print(); 
-                document.getElementById('wrapper-impresion-epson').style.display = 'none'; 
-                window.limpiarFormularioFacturaCompleto(); 
-            }, 350);
-        };
-
-        window.ejecutarBotonWhatsApp = async function() {
-            if(ITEMS_VENTA_ACTIVA.length === 0) return alert("Agregue al menos un producto al ticket.");
-            let celTlf = document.getElementById('fact-cli-telefono').value.trim();
-            if(!celTlf) { 
-                celTlf = prompt("Ingrese el WhatsApp del cliente:"); 
-                if(!celTlf) return;
-                document.getElementById('fact-cli-telefono').value = celTlf;
-            }
-            const nota = await window.registrarNotaEnFirebase();
-            if(!nota) return;
-            window.inyectarDatosAlTicketDOM(nota);
-            window.procesarEnvioWaObjeto(nota);
-            window.limpiarFormularioFacturaCompleto();
-        };
-
-        window.reabrirNotaHistorialPorObjeto = function(index) { 
-            const n = HISTORIAL_NOTAS[index]; 
-            if(!n) return;
-            const s = prompt(`⚙️ CONTROL DE NOTA N° ${String(n.numNota).padStart(6, '0')}\n\nEscriba el número de la acción que desea:\n[1] Reimprimir Nota de Entrega\n[2] Reenviar Comprobante por WhatsApp\n[3] ANULAR COMPROBANTE VISUALMENTE\n[4] ELIMINAR PERMANENTEMENTE DE FIREBASE\n\nPresione cancelar para salir.`); 
-            if(s==="1") { 
-                document.getElementById('wrapper-impresion-epson').style.display = 'block'; 
-                window.inyectarDatosAlTicketDOM(n); 
-                setTimeout(() => {
-                    window.print(); 
-                    document.getElementById('wrapper-impresion-epson').style.display = 'none'; 
-                }, 400);
-            } else if(s==="2") { 
-                window.procesarEnvioWaObjeto(n); 
-            } else if(s==="3") {
-                if(confirm(`⚠️ ¿Deseas ANULAR la Nota #${n.numNota}?`)) { window.anularNotaHistorialPorId(n.id); }
-            } else if(s==="4") {
-                if(confirm(`🚨 ¿CRÍTICO: Seguro que deseas ELIMINAR por completo la Nota #${n.numNota} de Firebase? El correlativo regresará.`)) { window.eliminarNotaHistorialPorId(n.id); }
-            }
-        };
-
-        window.anularNotaHistorialPorId = async function(id) {
-            try {
-                await updateDoc(doc(db, "notas_ventas", id), { estatus: "ANULADA" });
-                alert("Nota colocada en estatus ANULADA.");
-                await window.cargarHistorialFirebase();
-            } catch(e) { console.error(e); }
-        };
-
-        window.eliminarNotaHistorialPorId = async function(id) {
-            try {
-                await deleteDoc(doc(db, "notas_ventas", id));
-                alert("Nota eliminada permanentemente de Firebase.");
-                await window.cargarHistorialFirebase();
-            } catch(e) { console.error(e); }
-        };
-
-        window.registrarNotaEnFirebase = async function() {
-            try {
-                let totalUSD = 0; ITEMS_VENTA_ACTIVA.forEach(i => totalUSD += i.precio);
-                const tCOP = parseFloat(document.getElementById('tasa-cop').value) || 0; 
-                const tBS = parseFloat(document.getElementById('tasa-bs').value) || 0;
-                
-                const snapConteo = await getDocs(collection(db, "notas_ventas"));
-                const numNotaGenerado = snapConteo.size + 1;
-                const fechaEstructurada = new Date().toLocaleString('es-VE');
-
-                const nuevaNota = {
-                    numNota: numNotaGenerado,
-                    fecha: fechaEstructurada,
-                    cliente: document.getElementById('fact-cli-nombre').value.trim() || "Consumidor Final",
-                    cedula: document.getElementById('fact-cli-cedula').value.trim() || "V-00000000",
-                    telefono: document.getElementById('fact-cli-telefono').value.trim() || "04240000000",
-                    direccion: document.getElementById('fact-cli-direccion').value.trim() || "Cordero",
-                    items: ITEMS_VENTA_ACTIVA,
-                    totalUSD: totalUSD,
-                    tasaCop: tCOP,
-                    tasaBs: tBS,
-                    estatus: "PROCESADA",
-                    timestamp: new Date().getTime()
-                };
-
-                await addDoc(collection(db, "notas_ventas"), nuevaNota);
-                await window.cargarHistorialFirebase();
-                return nuevaNota;
-            } catch(err) {
-                alert("Error guardando el registro.");
-                return null;
-            }
-        };
-
-        window.inyectarDatosAlTicketDOM = function(nota) {
-            document.getElementById('tk-num-nota').innerText = String(nota.numNota).padStart(6, '0');
-            document.getElementById('tk-fecha').innerText = `${nota.fecha.split(' ')[0]}`;
-            document.getElementById('tk-cliente-nombre').innerText = nota.cliente;
-            document.getElementById('tk-cliente-cedula').innerText = nota.cedula;
-            document.getElementById('tk-cliente-direccion').innerText = nota.direccion;
-            document.getElementById('tk-cliente-telefono').innerText = nota.telefono;
-            document.getElementById('tk-status-label').innerText = nota.estatus || "PROCESADA";
-
-            const tbody = document.getElementById('tk-items-tabla');
-            if(!tbody) return;
-            tbody.innerHTML = '';
-            
-            nota.items.forEach(item => {
-                const imeiTxt = item.imeis ? `<br><span class="imei" style="color: #b91c1c; font-size: 8px; display: block; margin-top: 2px; font-weight: bold;">[IMEI: ${item.imeis.join(', ')}]</span>` : '';
-                tbody.innerHTML += `
-                    <tr>
-                        <td style="text-align: center;">${item.cantidad}</td>
-                        <td>
-                            <strong>${item.modelo}</strong>${imeiTxt}
-                        </td>
-                        <td style="text-align: right; font-weight: bold;">$${item.precio.toFixed(2)}</td>
-                    </tr>`;
-            });
-
-            const usdNeto = parseFloat(nota.totalUSD) || 0;
-            const copTasa = parseFloat(nota.tasaCop) || 0;
-            const bsTasa = parseFloat(nota.tasaBs) || 0;
-
-            const totalEnCop = usdNeto * copTasa;
-            const totalEnBs = bsTasa > 0 ? totalEnCop / bsTasa : 0;
-
-            document.getElementById('tk-total-usd').innerText = `$${usdNeto.toFixed(2)}`;
-            document.getElementById('tk-total-cop').innerText = copTasa > 0 ? `${Math.round(totalEnCop).toLocaleString('es-CO')} COP` : '0 COP';
-            document.getElementById('tk-total-bs').innerText = bsTasa > 0 ? `${totalEnBs.toFixed(2).toLocaleString('es-VE')} Bs` : '0 Bs';
-        };
-
-        window.compartirVitrinaGeneralWa = function() {
-            const msg = `🌍 ¡TUCOCEL EVOLUCIONA! Lanzamos oficialmente nuestra Vitrina Tecnológica Digital para conectar contigo desde cualquier rincón del mundo. 🚀\n\n🔥 Explora nuestro stock disponible en tiempo real, cotiza al instante y haz tu compra online de forma rápida y segura.\n\n✨ NUESTROS SERVICIOS:\n📲 Venta de Líneas Movistar, Recuperación de Chip y eSIM\n📱 Smartphones de Última Generación con Garantía Real\n🔌 Accesorios Premium para Celulares y Computación\n🛠️ Servicio Técnico de Telefonía, Computación e Impresoras\n📸 Estudio Fotográfico (Foto Estudiantil, Fotocarnet e Impresiones)\n💼 Servicio de Publicidad Impresa y Digital\n\n👇 ¡Ingresa a la vitrina oficial con un clic aquí abajo! 👇\nhttps://tucocel.github.io/`;
-            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
-        };
-
-        window.compartirProductoEspecificoWa = function(modelo, precio) {
-            const msg = `📱 *¡Mira este equipo en la Vitrina Digital de TUCOCEL C.A.!*\n\n📦 *PRODUCTO:* ${modelo}\n💵 *PRECIO:* $${precio} USD\n🛡️ Garantía de 60 días y stock físico disponible.\n\n🌐 _Ver detalles aquí:_ https://tucocel.github.io/`;
-            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
         };
 
         window.descargarTextosPersonalizados = async function() {
@@ -1568,252 +2366,21 @@
             document.querySelectorAll('.btn-editar-texto').forEach(l => l.style.display = mostrar ? 'inline-block' : 'none'); 
         };
 
-        window.cargarInventarioFirebase = async function() {
-            try {
-                const docSnap = await getDoc(doc(db, "inventario", "productos_tucocel"));
-                if (docSnap.exists()) { PRODUCTOS = docSnap.data().lista || []; PRODUCTOS.sort((a, b) => a.precio - b.precio); }
-            } catch (e) { console.error(e); } finally { window.verificarSesionLocal(); window.ejecutarFiltroCombinado(); window.gestionarContadorVisitasReal(); }
-        };
-
-        window.gestionarContadorVisitasReal = function() {
-            try {
-                let visitas = parseInt(localStorage.getItem('tucocel_visitas_db')) || 0;
-                visitas += 1;
-                localStorage.setItem('tucocel_visitas_db', visitas);
-                const el = document.getElementById('contador-visitas-num');
-                if(el) el.innerText = visitas;
-            } catch(err) { console.error(err); }
-        };
-
-        window.guardarInventarioFirebase = async function() {
-            const btn = document.getElementById('btn-guardar'); if(btn) { btn.disabled = true; btn.innerText = "Guardando..."; }
-            try { PRODUCTOS.sort((a, b) => a.precio - b.precio); await setDoc(doc(db, "inventario", "productos_tucocel"), { lista: PRODUCTOS }); } 
-            catch (e) { alert("Error guardando cambios."); } finally { if(btn) { btn.disabled = false; btn.innerText = "Guardar en Inventario"; } }
-        };
-
-        window.ejecutarFiltroCombinado = function() {
-            const telefonosFiltrados = PRODUCTOS.filter(p => p.marca !== 'Otros Productos');
-            const otrosFiltrados = PRODUCTOS.filter(p => p.marca === 'Otros Productos');
-            window.renderizarCatalogoHTML(telefonosFiltrados);
-            window.renderizarCarruselOtrosHTML(otrosFiltrados);
-        };
-
-        window.procesarEnvioWaObjeto = function(nota) {
-            let desc = nota.items.map(i => `  • ${i.cantidad}x ${i.modelo} -> $${i.precio} ${i.imeis ? `\n    📱 IMEI: ${i.imeis.join(', ')}` : ''}`).join('\n');
-            const usdNeto = parseFloat(nota.totalUSD) || 0;
-            const copTasa = parseFloat(nota.tasaCop) || 0;
-            const bsTasa = parseFloat(nota.tasaBs) || 0;
-            const totalEnCop = usdNeto * copTasa;
-            const totalEnBs = bsTasa > 0 ? totalEnCop / bsTasa : 0;
-
-            const msg = `*TUCOCEL C.A.*\n*Nota de Entrega:* N° ${String(nota.numNota).padStart(6, '0')}\n*Fecha:* ${nota.fecha}\n\n👤 *Cliente:* ${nota.cliente}\n💳 *Cédula/RIF:* ${nota.cedula}\n📞 *Teléfono:* ${nota.telefono}\n📍 *DIrección:* ${nota.direccion}\n\n📦 *Detalle de compra:*\n${desc}\n\n💵 *Total General:* $${usdNeto.toFixed(2)} USD\n*Ref COP:* ${Math.round(totalEnCop).toLocaleString('es-CO')} COP\n*Ref VES:* ${totalEnBs.toFixed(2).toLocaleString('es-VE')} Bs\n_Valores informativos calculados a la tasa del día._\n\n================================\n🔒 *CONTROL INTERNO (NO FISCAL)*\n_Este documento es un comprobante de entrega administrativo. No constituye, ni pretende sustituir a una factura fiscal regulada por la ley._\n\n================================\n🛡️ *TÉRMINOS DE GARANTÍA (60 DÍAS)*\n_Garantía por defectos de fábrica de los equipos celulares: 2 meses. La garantía no cubre golpes, humedad, sellos rotos, sobrecargas eléctricas o alteración de software._\n\n================================\n🚀 *¡Gracias por confiar en tu compra!*\n🌐 *Visita nuestra Vitrina Digital:* https://tucocel.github.io/`;
-            window.open(`https://wa.me/${nota.telefono.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`, '_blank');
-        };
-
-        window.cargarHistorialFirebase = async function() {
-            try { 
-                const snap = await getDocs(query(collection(db, "notas_ventas"), orderBy("timestamp", "desc"), limit(50))); 
-                HISTORIAL_NOTAS = []; 
-                snap.forEach(d => HISTORIAL_NOTAS.push({ ...d.data(), id: d.id })); 
-                window.renderizarTablaHistorialHTML(HISTORIAL_NOTAS); 
-            } catch(e) { console.error(e); }
-        };
-
-        window.renderizarTablaHistorialHTML = function(lista) {
-            const tabla = document.getElementById('tabla-historial-cuerpo'); if(!tabla) return;
-            if(lista.length === 0) { tabla.innerHTML = '<tr><td colspan="8" class="p-3 text-center text-gray-400">Ningún registro coincidente.</td></tr>'; return; }
-            tabla.innerHTML = '';
-            lista.forEach((n, idx) => {
-                const colorLabel = n.estatus === 'ANULADA' ? 'text-red-500 bg-red-50' : 'text-emerald-600 bg-emerald-50';
-                tabla.innerHTML += `
-                    <tr class="border-b hover:bg-gray-50">
-                        <td class="p-3 font-mono text-blue-600 font-bold">#${String(n.numNota).padStart(6, '0')}</td>
-                        <td class="p-3 text-gray-500">${n.fecha}</td>
-                        <td class="p-3 font-bold text-gray-900">${n.cliente}</td>
-                        <td class="p-3 font-mono text-gray-600">${n.cedula}</td>
-                        <td class="p-3 text-gray-500 truncate max-w-[180px]">${n.items.map(i => `${i.cantidad}x ${i.modelo}`).join(', ')}</td>
-                        <td class="p-3 text-right font-mono font-black text-gray-900">$${n.totalUSD}</td>
-                        <td class="p-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase ${colorLabel}">${n.estatus || 'PROCESADA'}</span></td>
-                        <td class="p-3 text-center"><button onclick="reabrirNotaHistorialPorObjeto(${idx})" class="text-blue-600 bg-blue-50 hover:bg-blue-100 p-2 rounded-lg font-bold"><i class="fa-solid fa-sliders"></i></button></td>
-                    </tr>`;
-            });
-        };
-
-        window.renderizarCatalogoHTML = function(lista) {
-            const contenedor = document.getElementById('contenedor-productos'); if(!contenedor) return;
-            let listaFiltrada = lista;
-            if (marcaSeleccionada !== 'Todas') { listaFiltrada = lista.filter(p => p.marca.toLowerCase() === marcaSeleccionada.toLowerCase()); }
-            const contador = document.getElementById('contador-productos'); if(contador) contador.innerText = `${listaFiltrada.length} Disponibles`;
-            if(listaFiltrada.length === 0) { contenedor.innerHTML = '<div class="text-center col-span-full py-12 text-gray-400 text-sm font-medium">No hay artículos comerciales cargados.</div>'; return; }
-            contenedor.innerHTML = '';
-            listaFiltrada.forEach(prod => {
-                const fotoProd = prod.foto || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80';
-                const mod = prod.modalidad || 'vitrina';
-                const tagEntrega = mod === 'vitrina' ? `<span class="text-[9px] bg-emerald-50 text-emerald-700 border border-emerald-100 font-extrabold px-1.5 py-0.5 rounded">Entrega Inmediata</span>` : `<span class="text-[9px] bg-amber-50 text-amber-700 border border-amber-100 font-extrabold px-1.5 py-0.5 rounded">Bajo Pedido</span>`;
-                contenedor.innerHTML += `
-                    <div onclick="abrirModalProducto('${prod.id}')" class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex flex-col justify-between transition-all hover:shadow-xl cursor-pointer group">
-                        <div>
-                            <div class="w-full h-64 bg-white border border-gray-50 rounded-xl overflow-hidden mb-4 flex justify-center items-center p-1">
-                                <img src="${fotoProd}" alt="Ficha smartphone" class="max-w-full max-h-full object-contain filter drop-shadow-md">
-                            </div>
-                            <div class="flex justify-between items-center mb-1.5 gap-1">
-                                <span class="text-[9px] font-extrabold text-blue-600 bg-blue-50 uppercase tracking-widest px-2 py-0.5 rounded-md">${prod.marca}</span>
-                                ${tagEntrega}
-                            </div>
-                            <h3 class="font-bold text-gray-900 text-base group-hover:text-blue-600 truncate">${prod.modelo}</h3>
-                            <p class="text-xs text-gray-400 mt-0.5">${prod.memoria || ''}</p>
-                        </div>
-                        <div class="mt-5 space-y-2">
-                            <div class="flex items-center justify-between pt-3 border-t border-gray-50">
-                                <p class="text-base font-black text-gray-900">$${prod.precio} <span class="text-[10px] text-gray-400 font-bold">USD</span></p>
-                                <div class="flex gap-1.5">
-                                    <button onclick="event.stopPropagation(); window.compartirProductoEspecificoWa('${prod.modelo}', ${prod.precio})" class="bg-emerald-50 text-emerald-600 p-2 rounded-xl text-xs hover:bg-emerald-100 transition-colors" title="Compartir en WhatsApp">
-                                        <i class="fa-brands fa-whatsapp"></i>
-                                    </button>
-                                    <span class="bg-blue-50 text-blue-600 text-[10px] font-extrabold px-2.5 py-1.5 rounded-xl">${mod === 'consultar' ? 'Consultar' : 'Ver'}</span>
-                                </div>
-                            </div>
-                            ${esAdminAutenticado ? `<div class="flex gap-2 border-t pt-2 mt-1 justify-center"><button onclick="event.stopPropagation(); prepararEdicionArticulo('${prod.id}')" class="text-blue-600 hover:underline text-xs font-bold">Editar</button><button onclick="event.stopPropagation(); eliminarProducto('${prod.id}')" class="text-red-500 hover:underline text-xs font-bold">Borrar</button></div>` : ''}
-                        </div>
-                    </div>`;
-            });
-        };
-
-        window.renderizarCarruselOtrosHTML = function(lista) {
-            const carrusel = document.getElementById('carrusel-otros'); if(!carrusel) return;
-            carrusel.innerHTML = '';
-            lista.forEach(prod => {
-                const fotoProd = prod.foto || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80';
-                const mod = prod.modalidad || 'vitrina';
-                const tagEntrega = mod === 'vitrina' ? `<span class="text-[9px] bg-emerald-50 text-emerald-700 border border-emerald-100 font-extrabold px-1.5 py-0.5 rounded">Entrega Inmediata</span>` : `<span class="text-[9px] bg-amber-50 text-amber-700 border border-amber-100 font-extrabold px-1.5 py-0.5 rounded">Bajo Pedido</span>`;
-                carrusel.innerHTML += `
-                    <div onclick="abrirModalProducto('${prod.id}')" class="snap-start shrink-0 w-44 bg-white rounded-2xl p-3 border border-gray-100 shadow-sm flex flex-col justify-between cursor-pointer select-none">
-                        <div>
-                            <div class="w-full h-36 bg-white border border-gray-50 rounded-xl overflow-hidden mb-2 flex items-center justify-center p-2">
-                                <img src="${fotoProd}" alt="Ficha accesorio" class="max-w-full max-h-full object-contain">
-                            </div>
-                            <div class="flex flex-col gap-1 items-start">
-                                <span class="text-[8px] font-black uppercase tracking-widest text-blue-500 bg-blue-50 px-1.5 py-0.5 rounded inline-block">${prod.tipoProducto === 'Celular' ? 'Teléfono' : 'Accesorio'}</span>
-                                ${tagEntrega}
-                            </div>
-                            <h4 class="font-bold text-gray-800 text-xs truncate mt-1">${prod.modelo}</h4>
-                        </div>
-                        <div class="mt-2">
-                            <div class="flex justify-between items-center">
-                                <p class="text-sm font-black text-gray-900">$${prod.precio}</p>
-                                <button onclick="event.stopPropagation(); window.compartirProductoEspecificoWa('${prod.modelo}', ${prod.precio})" class="text-emerald-500 hover:text-emerald-600 text-xs" title="Compartir">
-                                    <i class="fa-brands fa-whatsapp text-sm"></i>
-                                </button>
-                            </div>
-                            ${esAdminAutenticado ? `<div class="flex gap-2 border-t pt-1.5 mt-1 justify-center"><button onclick="event.stopPropagation(); prepararEdicionArticulo('${prod.id}')" class="text-blue-600 hover:underline text-[11px] font-bold">Editar</button><button onclick="event.stopPropagation(); eliminarProducto('${prod.id}')" class="text-red-500 hover:underline text-[11px] font-bold">Borrar</button></div>` : ''}
-                        </div>
-                    </div>`;
-            });
-        };
-
-        window.renderizarItemsVentaActiva = function() {
-            const contenedor = document.getElementById('fact-lista-items'); document.getElementById('fact-items-count').innerText = `${ITEMS_VENTA_ACTIVA.length} items`;
-            if(ITEMS_VENTA_ACTIVA.length === 0) { contenedor.innerHTML = '<p class="text-center text-slate-500 text-xs py-6">No hay artículos añadidos todavía.</p>'; window.calcularTotalesFactura(); return; }
-            contenedor.innerHTML = '';
-            ITEMS_VENTA_ACTIVA.forEach((item, index) => {
-                const imeiLabel = item.imeis ? `<span class="text-[10px] text-amber-400 font-mono block">IMEIs: ${item.imeis.join(', ')}</span>` : '';
-                contenedor.innerHTML += `
-                    <div class="bg-slate-950 p-2 rounded-xl border border-slate-800 flex justify-between text-white text-xs">
-                        <div><p class="font-bold truncate max-w-[140px]">${item.cantidad}x ${item.modelo}</p>${imeiLabel}</div>
-                        <div class="flex items-center gap-2"><span>$${item.precio}</span><button onclick="removerItemVenta(${index})" class="text-red-400 font-bold"><i class="fa-solid fa-square-xmark"></i></button></div>
-                    </div>`;
-            });
-            window.calcularTotalesFactura();
-        };
-
-        window.actualizarSelectFacturacion = function() {
-            const select = document.getElementById('fact-select-producto'); if(!select) return;
-            select.innerHTML = '<option value="">-- Seleccione un producto --</option>';
-            PRODUCTOS.forEach(p => { select.innerHTML += `<option value="${p.id}">${p.modelo} (${p.marca}) - $${p.precio}</option>`; });
-        };
-
-        window.limpiarFormularioPanel = function() {
-            document.getElementById('add-modelo').value = ''; 
-            document.getElementById('memoria').value = '';
-            document.getElementById('add-precio').value = ''; 
-            document.getElementById('add-desc').value = '';
-            document.getElementById('add-foto-file').value = ''; 
-            document.getElementById('foto-base64').value = '';
-            const p = document.getElementById('preview-foto'); if(p) p.classList.add('hidden');
-        };
-
-        window.limpiarFormularioFacturaCompleto = function() {
-            document.getElementById('fact-cli-nombre').value = '';
-            document.getElementById('fact-cli-cedula').value = '';
-            document.getElementById('fact-cli-telefono').value = '';
-            document.getElementById('fact-cli-direccion').value = '';
-            ITEMS_VENTA_ACTIVA = [];
-            window.renderizarItemsVentaActiva();
-        };
-
-        window.procesarGuardadoInventario = async function() {
-            const marca = document.getElementById('add-marca').value; 
-            const mod = document.getElementById('add-modalidad').value;
-            const modelo = document.getElementById('add-modelo').value.trim(); 
-            const memoriaVal = document.getElementById('memoria').value.trim(); 
-            const precio = parseInt(document.getElementById('add-precio').value.trim()) || 0; 
-            const foto = document.getElementById('foto-base64').value; 
-            const desc = document.getElementById('add-desc').value.trim();
-            const tipoProductoVal = marca === 'Otros Productos' ? document.getElementById('add-tipo').value : 'Celular';
-            
-            if(!modelo || !precio) { alert("Complete modelo y precio."); return; }
-            
-            if (idArticuloEnEdicion) { 
-                const idx = PRODUCTOS.findIndex(p => p.id === idArticuloEnEdicion); 
-                if (idx !== -1) PRODUCTOS[idx] = { id: idArticuloEnEdicion, marca, modalidad: mod, modelo, memoria: memoriaVal, precio, foto, desc, tipoProducto: tipoProductoVal, likes: PRODUCTOS[idx].likes || 0 }; 
-                window.cancelarEdicionActiva(); 
-            } else { 
-                PRODUCTOS.unshift({ id: (new Date().getTime()).toString(), marca, modalidad: mod, modelo, memoria: memoriaVal, precio, foto, desc, tipoProducto: tipoProductoVal, likes: 0 }); 
-                window.limpiarFormularioPanel(); 
-            }
-            await window.guardarInventarioFirebase(); 
-            window.ejecutarFiltroCombinado(); 
-            window.actualizarSelectFacturacion();
-        };
-
-        window.procesarImagen = function(e) { 
-            const file = e.target.files[0]; if (!file) return; 
-            const reader = new FileReader(); 
-            reader.onload = function(event) { 
-                const img = new Image(); 
-                img.onload = function() { 
-                    const canvas = document.createElement('canvas'); const ctx = canvas.getContext('2d'); 
-                    canvas.width = 600; canvas.height = 600; ctx.drawImage(img, 0, 0, 600, 600); 
-                    const base64Str = canvas.toDataURL('image/jpeg', 0.85); 
-                    document.getElementById('foto-base64').value = base64Str;
-                    const preview = document.getElementById('preview-foto'); if(preview) { preview.src = base64Str; preview.classList.remove('hidden'); }
-                }; 
-                img.src = event.target.result; 
-            }; 
-            reader.readAsDataURL(file); 
-        };
-
-        window.verificarSesionLocal = function() { 
-            let s = false; try { s = localStorage.getItem('tucocel_admin_sesion') === 'true'; } catch(e) {} 
-            if (s) { 
-                esAdminAutenticado = true; 
-                const p = document.getElementById('panel-admin'); if(p) p.classList.remove('hidden'); 
-                window.controlarVisibilidadModulosOcultos(true); 
-                window.manejarVisibilidadLapicitosAdmin(true); 
-            } 
-        };
-
         window.inicializarScrollAutomaticoCarrusel = function() {
-            const c = document.getElementById('carrusel-otros'); if(!c) return;
+            const c = document.getElementById('carrusel-otros'); 
+            if(!c) return;
             let dir = 1;
             setInterval(() => {
-                if(c.scrollLeft >= (c.scrollWidth - c.clientWidth) - 10) dir = -1; else if(c.scrollLeft <= 10) dir = 1;
+                if(c.scrollLeft >= (c.scrollWidth - c.clientWidth) - 10) dir = -1; 
+                else if(c.scrollLeft <= 10) dir = 1;
                 c.scrollBy({ left: 35 * dir, behavior: 'smooth' });
             }, 4000);
         };
 
-        const inputFoto = document.getElementById('add-foto-file'); if(inputFoto) inputFoto.addEventListener('change', window.procesarImagen);
-        const selectMarca = document.getElementById('add-marca'); if(selectMarca) selectMarca.addEventListener('change', window.verificarMarcaSeleccionadaPanel);
+        const inputFoto = document.getElementById('add-foto-file'); 
+        if(inputFoto) inputFoto.addEventListener('change', window.procesarImagen);
+        const selectMarca = document.getElementById('add-marca'); 
+        if(selectMarca) selectMarca.addEventListener('change', window.verificarMarcaSeleccionadaPanel);
 
         window.verificarConexionNubeInicial();
         window.descargarTextosPersonalizados();
@@ -1821,4 +2388,4 @@
         window.inicializarScrollAutomaticoCarrusel();
     </script>
 </body>
-                                                                                                                                                                                         </html>
+</html>
