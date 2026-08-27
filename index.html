@@ -12,7 +12,7 @@
     <meta property="og:url" content="https://tucocel.github.io/">
     <meta property="og:type" content="website">
 
-        <!-- METATAGS PWA STANDALONE & MANIFEST NATIVO -->
+    <!-- METATAGS PWA STANDALONE & MANIFEST NATIVO -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Tucocel">
@@ -60,9 +60,11 @@
             color: #f59e0b;
         }
 
-                                /* FORMATO DE IMPRESIÓN DUAL EXACTO (10x13 CM POR COPIA = 20x13 CM TOTAL DUAL AUTOAJUSTABLE) */
+        /* =========================================================
+           FORMATO DE IMPRESIÓN DUAL FACTURA (10x13 CM BASE AUTOAJUSTABLE)
+           ========================================================= */
         @media screen {
-            #wrapper-impresion-epson {
+            #wrapper-impresion-epson, #wrapper-impresion-etiquetas {
                 display: none !important;
             }
         }
@@ -234,18 +236,153 @@
             color: #334155;
         }
 
+        /* =========================================================
+           ESTILO EXACTO DE ETIQUETAS DE VITRINA (6x4 CM) - PROMOCIÓN GRANDE & CENTRADA
+           ========================================================= */
+        .grid-etiquetas-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(60mm, 1fr));
+            gap: 3mm;
+            padding: 3mm;
+            box-sizing: border-box;
+        }
+
+        .etiqueta-tarjeta-item {
+            width: 60mm;
+            height: 40mm;
+            box-sizing: border-box;
+            background: #ffffff;
+            border: 2.5px solid #0284c7;
+            position: relative;
+            padding: 2mm 3mm 1.5mm 3mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            page-break-inside: avoid;
+            clip-path: polygon(0 0, calc(100% - 11mm) 0, 100% 11mm, 100% 100%, 0 100%);
+            -webkit-clip-path: polygon(0 0, calc(100% - 11mm) 0, 100% 11mm, 100% 100%, 0 100%);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            user-select: none;
+            overflow: hidden;
+        }
+
+        .etiqueta-tarjeta-item.deseleccionada {
+            opacity: 0.25;
+            filter: grayscale(1);
+            border-color: #cbd5e1;
+        }
+
+        .etiqueta-header-box {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding-right: 9mm; /* Seguridad corte diagonal */
+        }
+
+        .etiqueta-titulo-modelo {
+            font-size: 14px;
+            font-weight: 900;
+            color: #0f172a;
+            line-height: 1.05;
+            text-transform: uppercase;
+            letter-spacing: -0.2px;
+            margin: 0;
+            word-break: break-word;
+        }
+
+        .etiqueta-memoria-tag {
+            font-size: 11.5px;
+            font-weight: 800;
+            color: #0284c7;
+            line-height: 1.1;
+            margin-top: 1px;
+            text-transform: uppercase;
+        }
+
+        .etiqueta-franja-promo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin: auto 0;
+            text-align: center;
+        }
+
+        .etiqueta-texto-promo {
+            font-size: 19px;
+            font-weight: 900;
+            color: #0284c7;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-style: italic;
+            line-height: 1;
+            text-shadow: 1px 1px 0px rgba(15, 23, 42, 0.15);
+            width: 100%;
+            text-align: center;
+        }
+
+        .etiqueta-fila-inferior {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .etiqueta-precio-impacto {
+            font-size: 40px;
+            font-weight: 900;
+            color: #ff0000;
+            line-height: 0.85;
+            letter-spacing: -1.5px;
+            font-family: 'Plus Jakarta Sans', 'Arial Black', sans-serif;
+            text-shadow: 2px 2px 0px #000000, -1px -1px 0px #000000, 1px -1px 0px #000000, -1px 1px 0px #000000;
+            margin: 0;
+            padding: 0;
+        }
+
+        .etiqueta-logo-box {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: flex-end;
+            margin-bottom: 0.5mm;
+        }
+
+        .etiqueta-logo-tc {
+            font-size: 15px;
+            font-weight: 900;
+            color: #0284c7;
+            line-height: 0.9;
+            letter-spacing: -0.5px;
+        }
+
+        .etiqueta-logo-sub {
+            font-size: 6.5px;
+            font-weight: 900;
+            color: #0f172a;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            line-height: 1;
+            margin-top: 1px;
+        }
+
+        /* REGLAS LIMPIAS DE IMPRESIÓN (FACTURAS VS ETIQUETAS) */
         @media print {
             html, body {
                 background: #ffffff !important;
                 margin: 0 !important;
                 padding: 0 !important;
-                width: 200mm !important;
+                width: 100% !important;
                 height: auto !important;
             }
-            body > *:not(#wrapper-impresion-epson) {
+
+            /* 1. MODO FACTURACIÓN DUAL (10x13 CM BASE) */
+            body.imprimiendo-factura > *:not(#wrapper-impresion-epson) {
                 display: none !important;
             }
-            #wrapper-impresion-epson {
+            body.imprimiendo-factura #wrapper-impresion-epson {
                 display: block !important;
                 visibility: visible !important;
                 position: static !important;
@@ -259,23 +396,36 @@
                 page-break-after: avoid !important;
                 page-break-inside: avoid !important;
             }
-            .dual-print-container {
+
+            /* 2. MODO ETIQUETAS DE VITRINA (6x4 CM COMPACTAS) */
+            body.imprimiendo-etiquetas > *:not(#wrapper-impresion-etiquetas) {
+                display: none !important;
+            }
+            body.imprimiendo-etiquetas #wrapper-impresion-etiquetas {
+                display: block !important;
+                visibility: visible !important;
+                position: static !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            body.imprimiendo-etiquetas .grid-etiquetas-layout {
                 display: flex !important;
-                flex-direction: row !important;
-                justify-content: space-between !important;
-                align-items: stretch !important;
-                width: 200mm !important;
-                min-height: 128mm !important;
+                flex-wrap: wrap !important;
+                gap: 2mm !important;
+                padding: 2mm !important;
+                justify-content: flex-start !important;
             }
-            .ticket-half-block {
-                width: 98mm !important;
-                min-height: 128mm !important;
-                height: auto !important;
-                page-break-inside: avoid !important;
-                page-break-after: avoid !important;
+            body.imprimiendo-etiquetas .etiqueta-tarjeta-item {
+                display: flex !important;
+                margin: 0 !important;
             }
+            body.imprimiendo-etiquetas .etiqueta-tarjeta-item.deseleccionada {
+                display: none !important;
+            }
+
             @page {
-                size: 200mm auto;
+                size: auto;
                 margin: 0mm !important;
             }
         }
@@ -283,8 +433,8 @@
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased min-h-screen pb-12 relative">
 
-    <!-- MODAL DE CONEXIÓN CON EL SERVIDOR -->
-    <div id="modal-conexion-nube-supremo" class="fixed inset-0 bg-slate-950/95 backdrop-blur-md z-[99999] flex items-center justify-center p-4 transition-all duration-500">
+    <!-- MODAL DE CONEXIÓN CON EL SERVIDOR (DESVANECIMIENTO AUTOMÁTICO SEGURO) -->
+    <div id="modal-conexion-nube-supremo" class="fixed inset-0 bg-slate-950/95 backdrop-blur-md z-[99999] flex items-center justify-center p-4 transition-all duration-300">
         <div class="bg-slate-900 border border-blue-500/40 rounded-3xl p-6 max-w-sm w-full text-center space-y-4 shadow-[0_0_50px_rgba(59,130,246,0.3)] relative overflow-hidden">
             <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.1),transparent_70%)]"></div>
             <div id="icon-nube-spinner" class="w-16 h-16 bg-blue-600/20 border border-blue-500/40 rounded-2xl flex items-center justify-center mx-auto text-blue-400 text-3xl shadow-xl animate-spin">
@@ -295,10 +445,21 @@
             </div>
             <div class="space-y-1 relative z-10">
                 <h3 id="lbl-estado-conexion-titulo" class="font-black text-sm text-white uppercase tracking-wider">Conectando al Servidor</h3>
-                <p id="lbl-estado-conexion-desc" class="text-xs text-slate-400 font-mono">Sincronizando datos con Google Firebase Firestore...</p>
+                <p id="lbl-estado-conexion-desc" class="text-xs text-slate-400 font-mono">Sincronizando datos con Google Firebase...</p>
             </div>
         </div>
     </div>
+
+    <!-- SCRIPT DE DESBLOQUEO INMEDIATO DE PANTALLA -->
+    <script>
+        setTimeout(function() {
+            var m = document.getElementById('modal-conexion-nube-supremo');
+            if (m) {
+                m.style.opacity = '0';
+                setTimeout(function() { if (m && m.parentNode) m.parentNode.removeChild(m); }, 300);
+            }
+        }, 1200);
+    </script>
 
     <!-- BARRA SUPERIOR ADMINISTRATIVA -->
     <div id="barra-accesos-admin" class="bg-slate-950 text-white px-4 py-2 text-xs font-bold hidden border-b border-slate-800 sticky top-0 z-50">
@@ -307,11 +468,14 @@
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
                 <span class="text-slate-400 text-[11px] sm:text-xs">SESIÓN: <span class="text-amber-400 uppercase tracking-wider">ADMINISTRADOR</span></span>
             </div>
-            <div class="flex items-center gap-2 justify-center w-full sm:w-auto">
-                <button onclick="abrirModalSistemaFacturacion()" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-xl transition-all shadow-md flex items-center gap-1.5 font-extrabold text-[10px] sm:text-xs whitespace-nowrap">
+            <div class="flex items-center gap-2 justify-center w-full sm:w-auto flex-wrap">
+                <button onclick="window.abrirModalEtiquetasVitrina()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-3 py-1.5 rounded-xl transition-all shadow-md flex items-center gap-1.5 font-black text-[10px] sm:text-xs whitespace-nowrap">
+                    <i class="fa-solid fa-tags text-xs"></i> Generar Etiquetas 6x4
+                </button>
+                <button onclick="window.abrirModalSistemaFacturacion()" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-xl transition-all shadow-md flex items-center gap-1.5 font-extrabold text-[10px] sm:text-xs whitespace-nowrap">
                     <i class="fa-solid fa-file-invoice-dollar text-xs"></i> Abrir Facturación
                 </button>
-                <button onclick="cerrarSesionAdmin()" class="bg-red-500/20 text-red-400 hover:bg-red-500/30 px-3 py-1.5 rounded-xl transition-colors text-[10px] sm:text-xs whitespace-nowrap">Salir</button>
+                <button onclick="window.cerrarSesionAdmin()" class="bg-red-500/20 text-red-400 hover:bg-red-500/30 px-3 py-1.5 rounded-xl transition-colors text-[10px] sm:text-xs whitespace-nowrap">Salir</button>
             </div>
         </div>
     </div>
@@ -334,7 +498,7 @@
                     <button onclick="window.instalarAppDispositivo()" class="bg-slate-900 hover:bg-slate-800 text-amber-400 border border-slate-700 px-3.5 py-2 rounded-xl font-black text-[11px] flex items-center gap-1.5 shadow-sm active:scale-95 transition-all">
                         <i class="fa-solid fa-mobile-screen-button text-xs"></i> <span class="hidden sm:inline">Instalar</span> App
                     </button>
-                    <button onclick="abrirLoginAdmin()" class="w-10 h-10 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl flex items-center justify-center transition-colors shadow-sm" title="Acceso Administrativo">
+                    <button onclick="window.abrirLoginAdmin()" class="w-10 h-10 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="Acceso Administrativo">
                         <i class="fa-solid fa-user-shield text-base"></i>
                     </button>
                 </div>
@@ -355,13 +519,13 @@
                 <h1 id="txt-header-titulo" class="text-3xl md:text-4xl font-black tracking-tight text-white transition-all">
                     Encuentra tu próximo smartphone
                 </h1>
-                <i class="fa-solid fa-pen btn-editar-texto" onclick="solicitarEdicionAvanzada('txt-header-titulo')"></i>
+                <i class="fa-solid fa-pen btn-editar-texto" onclick="window.solicitarEdicionAvanzada('txt-header-titulo')"></i>
             </div>
             <div class="w-full flex items-center justify-center">
                 <p id="txt-header-desc" class="text-slate-400 text-xs md:text-sm max-w-2xl font-medium transition-all">
                     Equipos nuevos, garantizados y con la mejor asesoría comercial de la zona.
                 </p>
-                <i class="fa-solid fa-pen btn-editar-texto" onclick="solicitarEdicionAvanzada('txt-header-desc')"></i>
+                <i class="fa-solid fa-pen btn-editar-texto" onclick="window.solicitarEdicionAvanzada('txt-header-desc')"></i>
             </div>
         </div>
     </header>
@@ -398,7 +562,7 @@
                     <p class="text-xs text-blue-100 mt-0.5 font-medium">Si no ves el modelo o accesorio que buscas, ¡te lo cotizamos al instante!</p>
                 </div>
             </div>
-            <button onclick="abrirModalConsultaBanner()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs px-6 py-3 rounded-xl transition-all shadow-md flex items-center justify-center gap-2 uppercase tracking-wide shrink-0">
+            <button onclick="window.abrirModalConsultaBanner()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs px-6 py-3 rounded-xl transition-all shadow-md flex items-center justify-center gap-2 uppercase tracking-wide shrink-0">
                 <i class="fa-brands fa-whatsapp text-sm"></i> Consultar por WhatsApp
             </button>
         </div>
@@ -425,15 +589,15 @@
             <div>
                 <p class="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mb-2 px-1">Explorar Smartphone por Marca</p>
                 <div class="flex gap-2 overflow-x-auto pb-3 pt-1 px-1 no-scrollbar snap-x justify-start md:justify-center w-full">
-                    <button onclick="filtrarPorMarca('Todas', this)" class="marca-btn snap-start shrink-0 bg-slate-900 text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">Todas las Marcas</button>
-                    <button onclick="filtrarPorMarca('Infinix', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">Infinix</button>
-                    <button onclick="filtrarPorMarca('Tecno', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">Tecno</button>
-                    <button onclick="filtrarPorMarca('Xiaomi', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">Xiaomi</button>
-                    <button onclick="filtrarPorMarca('Samsung', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">Samsung</button>
-                    <button onclick="filtrarPorMarca('Apple', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">Apple</button>
-                    <button onclick="filtrarPorMarca('Motorola', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">Motorola</button>
-                    <button onclick="filtrarPorMarca('ZTE', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">ZTE</button>
-                    <button onclick="filtrarPorMarca('Otros Productos', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">Otros Productos</button>
+                    <button onclick="window.filtrarPorMarca('Todas', this)" class="marca-btn snap-start shrink-0 bg-slate-900 text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">Todas las Marcas</button>
+                    <button onclick="window.filtrarPorMarca('Infinix', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">Infinix</button>
+                    <button onclick="window.filtrarPorMarca('Tecno', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">Tecno</button>
+                    <button onclick="window.filtrarPorMarca('Xiaomi', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">Xiaomi</button>
+                    <button onclick="window.filtrarPorMarca('Samsung', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">Samsung</button>
+                    <button onclick="window.filtrarPorMarca('Apple', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">Apple</button>
+                    <button onclick="window.filtrarPorMarca('Motorola', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">Motorola</button>
+                    <button onclick="window.filtrarPorMarca('ZTE', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">ZTE</button>
+                    <button onclick="window.filtrarPorMarca('Otros Productos', this)" class="marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center">Otros Productos</button>
                 </div>
             </div>
             
@@ -514,7 +678,7 @@
     </footer>
 
     <!-- BOTÓN FLOTANTE WA -->
-    <button onclick="abrirModalConsultaGeneral()" class="btn-flotante-wa fixed bottom-6 right-6 bg-emerald-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl z-40 transition-all hover:bg-emerald-600 shadow-xl">
+    <button onclick="window.abrirModalConsultaGeneral()" class="btn-flotante-wa fixed bottom-6 right-6 bg-emerald-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl z-40 transition-all hover:bg-emerald-600 shadow-xl cursor-pointer">
         <i class="fa-brands fa-whatsapp"></i>
     </button>
 
@@ -565,13 +729,96 @@
         <div class="mt-4 pt-3 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
             <div class="w-full sm:w-auto flex items-center gap-3">
                 <input type="file" id="add-foto-file" accept="image/*" class="hidden">
-                <button onclick="document.getElementById('add-foto-file').click()" class="bg-slate-800 hover:bg-slate-700 text-xs py-2 px-4 rounded-xl font-medium transition-colors border border-slate-700 w-full sm:w-auto"><i class="fa-solid fa-camera mr-2"></i>Cargar Foto del Artículo</button>
+                <button onclick="document.getElementById('add-foto-file').click()" class="bg-slate-800 hover:bg-slate-700 text-xs py-2 px-4 rounded-xl font-medium transition-colors border border-slate-700 w-full sm:w-auto cursor-pointer"><i class="fa-solid fa-camera mr-2"></i>Cargar Foto del Artículo</button>
                 <input type="hidden" id="foto-base64">
                 <img id="preview-foto" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Vista previa de carga de imagen" class="w-9 h-9 object-cover rounded-lg bg-slate-800 border border-slate-700 hidden">
             </div>
             <div class="flex gap-2 w-full sm:w-auto">
-                <button id="btn-cancelar-edicion" onclick="cancelarEdicionActiva()" class="hidden w-1/2 sm:w-auto bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors">Cancelar</button>
-                <button id="btn-guardar" onclick="procesarGuardadoInventario()" class="w-full sm:w-auto bg-amber-400 hover:bg-amber-500 text-slate-950 text-xs font-black px-6 py-2.5 rounded-xl shadow-lg transition-colors">Guardar en Inventario</button>
+                <button id="btn-cancelar-edicion" onclick="window.cancelarEdicionActiva()" class="hidden w-1/2 sm:w-auto bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors cursor-pointer">Cancelar</button>
+                <button id="btn-guardar" onclick="window.procesarGuardadoInventario()" class="w-full sm:w-auto bg-amber-400 hover:bg-amber-500 text-slate-950 text-xs font-black px-6 py-2.5 rounded-xl shadow-lg transition-colors cursor-pointer">Guardar en Inventario</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL GENERADOR DE ETIQUETAS DE VITRINA (6x4 CM) -->
+    <div id="modal-generador-etiquetas" class="fixed inset-0 bg-slate-950/90 z-50 overflow-y-auto backdrop-blur-md p-2 sm:p-4 lg:p-6 hidden">
+        <div class="bg-white rounded-3xl w-full max-w-5xl mx-auto my-2 md:my-4 shadow-2xl overflow-hidden border border-gray-100 flex flex-col md:h-[90vh]">
+            
+            <div class="bg-slate-900 text-white px-4 py-3 border-b border-slate-800 shrink-0 space-y-2.5">
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-3">
+                    <div class="flex items-center gap-2.5 w-full sm:w-auto">
+                        <i class="fa-solid fa-tags text-amber-400 text-xl"></i>
+                        <div>
+                            <h3 class="font-black text-sm tracking-wide uppercase">Generador de Etiquetas (6×4 cm)</h3>
+                            <p class="text-[10px] text-slate-400 font-medium">Sincronizado en tiempo real con los precios de tu vitrina</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 flex-wrap justify-end w-full sm:w-auto">
+                        <button onclick="window.abrirModalEditorRapidoPrecios()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-black px-3.5 py-1.5 rounded-xl shadow-md flex items-center gap-1.5 cursor-pointer">
+                            <i class="fa-solid fa-pen-to-square"></i> Editor de Precios Rápido
+                        </button>
+                        <button onclick="window.dispararImpresionEtiquetas()" class="bg-amber-400 hover:bg-amber-500 text-slate-950 text-xs font-black px-4 py-1.5 rounded-xl shadow-md flex items-center gap-1.5 cursor-pointer">
+                            <i class="fa-solid fa-print"></i> Imprimir (<span id="etiquetas-contador-sel">0</span>)
+                        </button>
+                        <button onclick="window.cerrarModalEtiquetasVitrina()" class="bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white w-8 h-8 rounded-xl flex items-center justify-center cursor-pointer">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- SUB-BARRA DE FILTROS POR CATEGORÍA Y CONTROL DE SELECCIÓN -->
+                <div class="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-slate-800/80 text-xs font-bold">
+                    <div class="flex items-center gap-1.5 bg-slate-950 p-1 rounded-xl border border-slate-800">
+                        <button id="tab-etq-telefonos" onclick="window.cambiarFiltroCategoriaEtiquetas('telefonos')" class="bg-blue-600 text-white px-3 py-1 rounded-lg text-xs font-black transition-all cursor-pointer">📱 Teléfonos</button>
+                        <button id="tab-etq-accesorios" onclick="window.cambiarFiltroCategoriaEtiquetas('accesorios')" class="bg-transparent text-slate-400 hover:text-white px-3 py-1 rounded-lg text-xs font-black transition-all cursor-pointer">🔌 Accesorios / Otros</button>
+                        <button id="tab-etq-todos" onclick="window.cambiarFiltroCategoriaEtiquetas('todos')" class="bg-transparent text-slate-400 hover:text-white px-3 py-1 rounded-lg text-xs font-black transition-all cursor-pointer">📦 Todo el Stock</button>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="window.seleccionarTodasEtiquetas(true)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px] font-bold px-2.5 py-1 rounded-lg cursor-pointer">Marcar Lote</button>
+                        <button onclick="window.seleccionarTodasEtiquetas(false)" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px] font-bold px-2.5 py-1 rounded-lg cursor-pointer">Desmarcar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 bg-slate-100 overflow-y-auto flex-grow">
+                <div id="contenedor-visor-etiquetas" class="grid-etiquetas-layout"></div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- MODAL EDITOR RÁPIDO DE PRECIOS EN LOTE -->
+    <div id="modal-editor-rapido-precios" class="fixed inset-0 bg-slate-950/90 z-[60] overflow-y-auto backdrop-blur-md p-2 sm:p-4 hidden flex items-center justify-center">
+        <div class="bg-white rounded-3xl w-full max-w-3xl my-2 shadow-2xl overflow-hidden border border-gray-100 flex flex-col max-h-[85vh]">
+            <div class="bg-slate-900 text-white px-5 py-4 flex justify-between items-center border-b border-slate-800 shrink-0">
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-solid fa-pen-to-square text-amber-400 text-xl"></i>
+                    <div>
+                        <h3 class="font-black text-sm tracking-wide uppercase">Editor Rápido de Precios</h3>
+                        <p class="text-[10px] text-slate-400 font-medium">Modifica los precios y se actualizarán en vitrina y etiquetas al instante</p>
+                    </div>
+                </div>
+                <button onclick="window.cerrarModalEditorRapidoPrecios()" class="bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white w-8 h-8 rounded-xl flex items-center justify-center cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="p-4 bg-gray-50 overflow-y-auto flex-grow space-y-3">
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-gray-400 text-xs"></i>
+                    <input type="text" id="busq-editor-precios" onkeyup="window.filtrarEditorRapidoPrecios()" placeholder="Buscar modelo o accesorio..." class="w-full bg-white border border-gray-200 pl-8 pr-3 py-2 rounded-xl text-xs font-bold text-gray-900 focus:outline-blue-500 shadow-sm">
+                </div>
+
+                <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+                    <div id="contenedor-items-editor-precios" class="divide-y divide-gray-100 max-h-[50vh] overflow-y-auto"></div>
+                </div>
+            </div>
+
+            <div class="bg-slate-900 px-5 py-3 flex justify-between items-center shrink-0 border-t border-slate-800">
+                <span class="text-[10px] text-slate-400 font-mono">Los cambios se guardan directamente en Firebase.</span>
+                <button onclick="window.guardarCambiosEditorRapido()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs px-5 py-2 rounded-xl shadow-md flex items-center gap-1.5 cursor-pointer">
+                    <i class="fa-solid fa-check"></i> Guardar y Aplicar Todo
+                </button>
             </div>
         </div>
     </div>
@@ -591,26 +838,26 @@
                 <div class="flex flex-col sm:flex-row flex-wrap items-center gap-3 bg-slate-950 p-2.5 rounded-2xl border border-slate-800 text-xs w-full md:w-auto">
                     <div class="flex items-center justify-between w-full sm:w-auto gap-2">
                         <span class="text-slate-400 shrink-0">1 USD =</span>
-                        <input type="number" id="tasa-cop" value="3600" oninput="calcularTotalesFactura()" class="w-full sm:w-20 bg-slate-800 text-white border border-slate-700 px-2 py-1 rounded-lg text-center font-mono focus:outline-none">
+                        <input type="number" id="tasa-cop" value="3600" oninput="window.calcularTotalesFactura()" class="w-full sm:w-20 bg-slate-800 text-white border border-slate-700 px-2 py-1 rounded-lg text-center font-mono focus:outline-none">
                         <span class="text-emerald-400 font-bold text-[10px] shrink-0">COP</span>
                     </div>
                     <div class="flex items-center justify-between w-full sm:w-auto gap-2">
                         <span class="text-slate-400 shrink-0">Dividir COP entre:</span>
-                        <input type="number" step="0.1" id="tasa-bs" value="3.3" oninput="calcularTotalesFactura()" class="w-full sm:w-16 bg-slate-800 text-white border border-slate-700 px-2 py-1 rounded-lg text-center font-mono focus:outline-none">
+                        <input type="number" step="0.1" id="tasa-bs" value="3.3" oninput="window.calcularTotalesFactura()" class="w-full sm:w-16 bg-slate-800 text-white border border-slate-700 px-2 py-1 rounded-lg text-center font-mono focus:outline-none">
                         <span class="text-blue-400 font-bold text-[10px] shrink-0">Bs</span>
                     </div>
                 </div>
-                <button onclick="cerrarModalSistemaFacturacion()" class="bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white w-9 h-9 rounded-xl flex items-center justify-center transition-colors absolute top-4 right-4 md:relative md:top-0 md:right-0">
+                <button onclick="window.cerrarModalSistemaFacturacion()" class="bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white w-9 h-9 rounded-xl flex items-center justify-center transition-colors absolute top-4 right-4 md:relative md:top-0 md:right-0 cursor-pointer">
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
             </div>
 
             <!-- PESTAÑAS ADMINISTRATIVAS -->
             <div class="bg-slate-100 border-b border-gray-200 px-4 sm:px-6 py-2 flex gap-4 text-xs font-bold uppercase shrink-0 overflow-x-auto no-scrollbar">
-                <button id="btn-vista-cajero" onclick="window.cambiarSeccionAdministrativa('cajero')" class="text-blue-600 border-b-2 border-blue-600 pb-1 whitespace-nowrap font-bold"><i class="fa-solid fa-calculator mr-1"></i> Facturar Venta</button>
-                <button id="btn-vista-apartados" onclick="window.cambiarSeccionAdministrativa('apartados')" class="text-gray-500 hover:text-gray-700 pb-1 whitespace-nowrap"><i class="fa-solid fa-hand-holding-dollar mr-1"></i> Equipos Apartados</button>
-                <button id="btn-vista-auditoria" onclick="window.cambiarSeccionAdministrativa('auditoria')" class="text-gray-500 hover:text-gray-700 pb-1 whitespace-nowrap"><i class="fa-solid fa-clock-rotate-left mr-1"></i> Historial de Ventas</button>
-                <button id="btn-vista-cierre-mes" onclick="window.cambiarSeccionAdministrativa('cierre-mes')" class="text-gray-500 hover:text-gray-700 pb-1 whitespace-nowrap"><i class="fa-solid fa-chart-pie mr-1"></i> Cierre de Mes</button>
+                <button id="btn-vista-cajero" onclick="window.cambiarSeccionAdministrativa('cajero')" class="text-blue-600 border-b-2 border-blue-600 pb-1 whitespace-nowrap font-bold cursor-pointer"><i class="fa-solid fa-calculator mr-1"></i> Facturar Venta</button>
+                <button id="btn-vista-apartados" onclick="window.cambiarSeccionAdministrativa('apartados')" class="text-gray-500 hover:text-gray-700 pb-1 whitespace-nowrap cursor-pointer"><i class="fa-solid fa-hand-holding-dollar mr-1"></i> Equipos Apartados</button>
+                <button id="btn-vista-auditoria" onclick="window.cambiarSeccionAdministrativa('auditoria')" class="text-gray-500 hover:text-gray-700 pb-1 whitespace-nowrap cursor-pointer"><i class="fa-solid fa-clock-rotate-left mr-1"></i> Historial de Ventas</button>
+                <button id="btn-vista-cierre-mes" onclick="window.cambiarSeccionAdministrativa('cierre-mes')" class="text-gray-500 hover:text-gray-700 pb-1 whitespace-nowrap cursor-pointer"><i class="fa-solid fa-chart-pie mr-1"></i> Cierre de Mes</button>
             </div>
 
             <!-- PESTAÑA 1: FACTURAR VENTA (POS) CON CALCULADORA DE VUELTO -->
@@ -640,8 +887,8 @@
 
                     <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-4">
                         <div class="flex border-b border-gray-100 gap-4 text-xs font-bold uppercase pb-1 flex-wrap">
-                            <button id="tab-manual" onclick="cambiarModoCargaFactura('manual')" class="text-blue-600 border-b-2 border-blue-600 pb-2 px-1 flex items-center gap-1 font-bold"><i class="fa-solid fa-keyboard"></i> Manual Libre</button>
-                            <button id="tab-inventario" onclick="cambiarModoCargaFactura('inventario')" class="text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1 font-bold"><i class="fa-solid fa-boxes-stacked"></i> Desde Catálogo</button>
+                            <button id="tab-manual" onclick="window.cambiarModoCargaFactura('manual')" class="text-blue-600 border-b-2 border-blue-600 pb-2 px-1 flex items-center gap-1 font-bold cursor-pointer"><i class="fa-solid fa-keyboard"></i> Manual Libre</button>
+                            <button id="tab-inventario" onclick="window.cambiarModoCargaFactura('inventario')" class="text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1 font-bold cursor-pointer"><i class="fa-solid fa-boxes-stacked"></i> Desde Catálogo</button>
                         </div>
 
                         <div id="carga-manual-bloque" class="space-y-3">
@@ -685,7 +932,7 @@
                         </div>
 
                         <div class="flex justify-end pt-1">
-                            <button onclick="window.ejecutarBotonAgregarItem()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white text-xs font-black px-5 py-2.5 rounded-xl shadow-md flex items-center justify-center gap-1">
+                            <button onclick="window.ejecutarBotonAgregarItem()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white text-xs font-black px-5 py-2.5 rounded-xl shadow-md flex items-center justify-center gap-1 cursor-pointer">
                                 <i class="fa-solid fa-circle-plus"></i> Añadir al Ticket
                             </button>
                         </div>
@@ -716,7 +963,7 @@
                             <div class="grid grid-cols-2 gap-2">
                                 <div>
                                     <label class="text-[8px] text-slate-400 uppercase block">Moneda de Pago</label>
-                                    <select id="vuelto-moneda-pago" onchange="calcularVueltoPOS()" class="w-full bg-slate-800 text-white border border-slate-700 p-1.5 rounded-lg text-xs font-bold">
+                                    <select id="vuelto-moneda-pago" onchange="window.calcularVueltoPOS()" class="w-full bg-slate-800 text-white border border-slate-700 p-1.5 rounded-lg text-xs font-bold">
                                         <option value="USD">💵 Dólares ($)</option>
                                         <option value="COP">🇨🇴 Pesos (COP)</option>
                                         <option value="BS">🇻🇪 Bolívares (Bs)</option>
@@ -724,7 +971,7 @@
                                 </div>
                                 <div>
                                     <label class="text-[8px] text-slate-400 uppercase block">Monto Entregado</label>
-                                    <input type="number" id="vuelto-monto-recibido" oninput="calcularVueltoPOS()" placeholder="0.00" class="w-full bg-slate-800 text-amber-400 border border-slate-700 p-1.5 rounded-lg text-xs font-black">
+                                    <input type="number" id="vuelto-monto-recibido" oninput="window.calcularVueltoPOS()" placeholder="0.00" class="w-full bg-slate-800 text-amber-400 border border-slate-700 p-1.5 rounded-lg text-xs font-black">
                                 </div>
                             </div>
                             <div class="border-t border-slate-800 pt-1.5 text-[10px] space-y-0.5">
@@ -735,10 +982,10 @@
                         </div>
 
                         <div class="grid grid-cols-2 gap-2 pt-1">
-                            <button onclick="ejecutarBotonImprimir()" class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-xs py-3 rounded-xl shadow-md flex items-center justify-center gap-1.5 uppercase">
-                                <i class="fa-solid fa-print"></i> Imprimir 10x15
+                            <button onclick="window.ejecutarBotonImprimir()" class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-xs py-3 rounded-xl shadow-md flex items-center justify-center gap-1.5 uppercase cursor-pointer">
+                                <i class="fa-solid fa-print"></i> Imprimir 10x13
                             </button>
-                            <button onclick="ejecutarBotonWhatsApp()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-3 rounded-xl shadow-md flex items-center justify-center gap-1.5 uppercase">
+                            <button onclick="window.ejecutarBotonWhatsApp()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-3 rounded-xl shadow-md flex items-center justify-center gap-1.5 uppercase cursor-pointer">
                                 <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
                             </button>
                         </div>
@@ -746,11 +993,9 @@
                 </div>
             </div>
 
-            <!-- PESTAÑA 2: MÓDULO DE EQUIPOS APARTADOS CON ACORDEÓN DESPLEGABLE COMPACTO Y BUSCADOR POR CÉDULA -->
-                        <!-- PESTAÑA 2: MÓDULO DE EQUIPOS APARTADOS (SISTEMA DE ABONOS MULTIMONEDA SIN IMEI) -->
+            <!-- PESTAÑA 2: MÓDULO DE EQUIPOS APARTADOS -->
             <div id="bloque-equipos-apartados" class="p-3 sm:p-4 md:p-6 grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 overflow-y-auto flex-grow bg-gray-50 items-start hidden">
                 <div class="lg:col-span-2 space-y-4">
-                    <!-- DATOS DEL CLIENTE APARTADO -->
                     <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-3">
                         <h4 class="text-[11px] font-black uppercase text-amber-600 tracking-wider flex items-center gap-1.5">
                             <i class="fa-solid fa-user-tag"></i> Datos del Cliente (Apartado de Equipo)
@@ -775,18 +1020,16 @@
                         </div>
                     </div>
 
-                    <!-- CARGA DE PRODUCTO (MANUAL O CATÁLOGO - SIN IMEI) -->
                     <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-4">
                         <div class="flex border-b border-gray-100 gap-4 text-xs font-bold uppercase pb-1 flex-wrap">
-                            <button id="tab-apt-manual" onclick="cambiarModoCargaApartado('manual')" class="text-blue-600 border-b-2 border-blue-600 pb-2 px-1 flex items-center gap-1 font-bold">
+                            <button id="tab-apt-manual" onclick="window.cambiarModoCargaApartado('manual')" class="text-blue-600 border-b-2 border-blue-600 pb-2 px-1 flex items-center gap-1 font-bold cursor-pointer">
                                 <i class="fa-solid fa-keyboard"></i> Entrada Manual Libre
                             </button>
-                            <button id="tab-apt-inventario" onclick="cambiarModoCargaApartado('inventario')" class="text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1 font-bold">
+                            <button id="tab-apt-inventario" onclick="window.cambiarModoCargaApartado('inventario')" class="text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1 font-bold cursor-pointer">
                                 <i class="fa-solid fa-boxes-stacked"></i> Jalar desde Catálogo / Vitrina
                             </button>
                         </div>
 
-                        <!-- 1. ENTRADA MANUAL LIBRE APARTADO -->
                         <div id="carga-apt-manual-bloque" class="space-y-3">
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                                 <div class="sm:col-span-2">
@@ -795,12 +1038,11 @@
                                 </div>
                                 <div>
                                     <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Precio Total Pactado ($ USD) *</label>
-                                    <input type="number" step="any" id="apt-manual-precio" oninput="calcularSaldosApartado()" placeholder="0.00" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-black text-blue-600 font-mono">
+                                    <input type="number" step="any" id="apt-manual-precio" oninput="window.calcularSaldosApartado()" placeholder="0.00" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-black text-blue-600 font-mono">
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 2. JALAR DESDE CATÁLOGO APARTADO -->
                         <div id="carga-apt-inventario-bloque" class="space-y-3 hidden">
                             <div>
                                 <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Seleccionar Modelo en Vitrina / Stock *</label>
@@ -810,16 +1052,15 @@
                             </div>
                         </div>
 
-                        <!-- DESGLOSE DE ABONO INICIAL MULTIMONEDA -->
                         <div class="bg-amber-50/70 p-4 rounded-2xl border border-amber-200 space-y-3 font-mono">
                             <div class="flex justify-between items-center">
                                 <span class="text-[10px] font-black uppercase text-amber-900 tracking-wider">
                                     <i class="fa-solid fa-money-bill-transfer mr-1"></i> Abono Inicial Multimoneda
                                 </span>
                                 <div class="flex gap-1 text-[9px] font-bold">
-                                    <button type="button" onclick="window.seleccionarMonedaAbonoApt('USD')" id="btn-apt-m-usd" class="px-2 py-0.5 rounded border border-blue-600 bg-blue-600 text-white font-black">USD</button>
-                                    <button type="button" onclick="window.seleccionarMonedaAbonoApt('COP')" id="btn-apt-m-cop" class="px-2 py-0.5 rounded border border-slate-300 bg-white text-slate-700">COP</button>
-                                    <button type="button" onclick="window.seleccionarMonedaAbonoApt('BS')" id="btn-apt-m-bs" class="px-2 py-0.5 rounded border border-slate-300 bg-white text-slate-700">Bs</button>
+                                    <button type="button" onclick="window.seleccionarMonedaAbonoApt('USD')" id="btn-apt-m-usd" class="px-2 py-0.5 rounded border border-blue-600 bg-blue-600 text-white font-black cursor-pointer">USD</button>
+                                    <button type="button" onclick="window.seleccionarMonedaAbonoApt('COP')" id="btn-apt-m-cop" class="px-2 py-0.5 rounded border border-slate-300 bg-white text-slate-700 cursor-pointer">COP</button>
+                                    <button type="button" onclick="window.seleccionarMonedaAbonoApt('BS')" id="btn-apt-m-bs" class="px-2 py-0.5 rounded border border-slate-300 bg-white text-slate-700 cursor-pointer">Bs</button>
                                 </div>
                             </div>
 
@@ -830,7 +1071,7 @@
                                 </div>
                                 <div>
                                     <label id="lbl-apt-abono-input" class="text-[8.5px] text-emerald-700 uppercase block mb-1 font-bold">Abono Inicial Recibido ($ USD) *</label>
-                                    <input type="number" step="any" id="apt-abono-inicial" oninput="calcularSaldosApartado()" placeholder="0.00" class="w-full bg-white border-2 border-emerald-500 p-2.5 rounded-xl text-emerald-600 font-black">
+                                    <input type="number" step="any" id="apt-abono-inicial" oninput="window.calcularSaldosApartado()" placeholder="0.00" class="w-full bg-white border-2 border-emerald-500 p-2.5 rounded-xl text-emerald-600 font-black">
                                 </div>
                                 <div>
                                     <label class="text-[8.5px] text-red-700 uppercase block mb-1 font-bold">Saldo Restante por Pagar ($)</label>
@@ -838,7 +1079,6 @@
                                 </div>
                             </div>
 
-                            <!-- Equivalencias en Vivo -->
                             <div class="grid grid-cols-2 gap-2 text-center text-[10px] pt-1">
                                 <div class="bg-white p-2 rounded-xl border border-amber-200">
                                     <span class="text-[8px] text-slate-400 block uppercase">Equivalente Saldo COP</span>
@@ -852,16 +1092,14 @@
                         </div>
 
                         <div class="flex flex-col sm:flex-row justify-end gap-2 pt-1">
-                            <button onclick="window.guardarNuevoApartadoFirebase()" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black px-6 py-3 rounded-xl shadow-md flex items-center justify-center gap-1.5 uppercase transition-all active:scale-95">
+                            <button onclick="window.guardarNuevoApartadoFirebase()" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black px-6 py-3 rounded-xl shadow-md flex items-center justify-center gap-1.5 uppercase transition-all active:scale-95 cursor-pointer">
                                 <i class="fa-solid fa-lock text-sm"></i> Guardar y Emitir Apartado
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- COLUMNA DERECHA: ACORDEÓN DESPLEGABLE COMPACTO CON BUSCADOR POR CÉDULA -->
                 <div class="bg-slate-900 text-white p-4 rounded-3xl shadow-xl border border-slate-800 transition-all duration-300">
-                    <!-- ENCABEZADO CLICKABLE TOTALMENTE RECEPTIVO -->
                     <button type="button" onclick="window.toggleAcordeonApartados()" class="w-full flex justify-between items-center cursor-pointer select-none py-1 focus:outline-none text-left">
                         <span class="flex items-center gap-2">
                             <i class="fa-solid fa-hand-holding-dollar text-amber-400 text-base"></i>
@@ -873,15 +1111,11 @@
                         </span>
                     </button>
 
-                    <!-- CUERPO DESPLEGABLE OCULTO POR DEFECTO -->
                     <div id="cuerpo-acordeon-apartados" class="hidden space-y-3 pt-3 border-t border-slate-800 mt-2">
-                        <!-- BUSCADOR POR CÉDULA O NOMBRE -->
                         <div class="relative">
                             <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
                             <input type="text" id="busq-apartados-input" onkeyup="window.filtrarListaApartados()" placeholder="Buscar por Cédula o Cliente..." class="w-full bg-slate-950 border border-slate-800 pl-8 pr-3 py-2 rounded-xl text-xs font-mono text-white placeholder-slate-500 focus:outline-blue-500">
                         </div>
-
-                        <!-- LISTA DE APARTADOS -->
                         <div id="contenedor-lista-apartados" class="space-y-2 max-h-80 overflow-y-auto no-scrollbar pr-1">
                             <p class="text-center text-slate-500 text-xs py-3">Sin apartados registrados.</p>
                         </div>
@@ -889,20 +1123,21 @@
                 </div>
             </div>
 
-<div id="bloque-reportes-auditoria" class="p-4 sm:p-6 bg-gray-50 flex-grow overflow-y-auto hidden space-y-4">
+            <!-- PESTAÑA 3: HISTORIAL GENERAL DE NOTAS -->
+            <div id="bloque-reportes-auditoria" class="p-4 sm:p-6 bg-gray-50 flex-grow overflow-y-auto hidden space-y-4">
                 <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm space-y-3">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-gray-100 pb-2">
                         <div>
                             <h4 class="font-extrabold text-xs text-gray-900 uppercase flex items-center gap-1"><i class="fa-solid fa-clock-rotate-left text-blue-600"></i> Historial General de Notas</h4>
                             <p class="text-[10px] text-gray-400 mt-0.5">Control de garantías (60 días continuos) y consulta de comprobantes.</p>
                         </div>
-                        <button onclick="exportarHistorialExcel()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3.5 py-1.5 rounded-xl transition-colors flex items-center gap-1 shadow-sm w-full sm:w-auto justify-center">
+                        <button onclick="window.exportarHistorialExcel()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3.5 py-1.5 rounded-xl transition-colors flex items-center gap-1 shadow-sm w-full sm:w-auto justify-center cursor-pointer">
                             <i class="fa-solid fa-file-excel"></i> Exportar Excel
                         </button>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <input type="text" id="busq-historial" onkeyup="filtrarTablaHistorial()" placeholder="🔍 Buscar por Cédula, Nombre o N° Nota..." class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs font-semibold focus:outline-blue-500 shadow-sm">
-                        <input type="date" id="busq-fecha" onchange="filtrarTablaHistorial()" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs font-semibold text-gray-700 focus:outline-blue-500 shadow-sm">
+                        <input type="text" id="busq-historial" onkeyup="window.filtrarTablaHistorial()" placeholder="🔍 Buscar por Cédula, Nombre o N° Nota..." class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs font-semibold focus:outline-blue-500 shadow-sm">
+                        <input type="date" id="busq-fecha" onchange="window.filtrarTablaHistorial()" class="w-full bg-white border border-gray-200 p-2.5 rounded-xl text-xs font-semibold text-gray-700 focus:outline-blue-500 shadow-sm">
                     </div>
                 </div>
 
@@ -934,7 +1169,7 @@
                 <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex flex-wrap justify-between items-center gap-3">
                     <div class="flex items-center gap-2">
                         <label class="text-xs font-bold uppercase text-slate-600">Mes:</label>
-                        <select id="cierre-mes-select" onchange="generarCierreMesGerencial()" class="bg-gray-50 border p-2 rounded-xl text-xs font-bold">
+                        <select id="cierre-mes-select" onchange="window.generarCierreMesGerencial()" class="bg-gray-50 border p-2 rounded-xl text-xs font-bold">
                             <option value="1">Enero</option>
                             <option value="2">Febrero</option>
                             <option value="3">Marzo</option>
@@ -949,11 +1184,11 @@
                             <option value="12">Diciembre</option>
                         </select>
                         <label class="text-xs font-bold uppercase text-slate-600 ml-2">Año:</label>
-                        <input type="number" id="cierre-anio-input" value="2026" onchange="generarCierreMesGerencial()" class="w-20 bg-gray-50 border p-2 rounded-xl text-xs font-bold text-center">
+                        <input type="number" id="cierre-anio-input" value="2026" onchange="window.generarCierreMesGerencial()" class="w-20 bg-gray-50 border p-2 rounded-xl text-xs font-bold text-center">
                     </div>
                     <div class="flex gap-2">
-                        <button onclick="imprimirCierreMesHojaBlanca()" class="bg-slate-900 text-white font-bold text-xs px-4 py-2 rounded-xl flex items-center gap-1.5"><i class="fa-solid fa-print"></i> Imprimir Informe</button>
-                        <button onclick="enviarCierreMesWhatsApp()" class="bg-emerald-600 text-white font-bold text-xs px-4 py-2 rounded-xl flex items-center gap-1.5"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
+                        <button onclick="window.imprimirCierreMesHojaBlanca()" class="bg-slate-900 text-white font-bold text-xs px-4 py-2 rounded-xl flex items-center gap-1.5 cursor-pointer"><i class="fa-solid fa-print"></i> Imprimir Informe</button>
+                        <button onclick="window.enviarCierreMesWhatsApp()" class="bg-emerald-600 text-white font-bold text-xs px-4 py-2 rounded-xl flex items-center gap-1.5 cursor-pointer"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
                     </div>
                 </div>
 
@@ -963,9 +1198,7 @@
         </div>
     </div>
 
-    <!-- TICKET DE IMPRESIÓN EPSON (10x15 CM) -->
-        <!-- TICKET DE IMPRESIÓN DOBLE (ORIGINAL Y COPIA EN 1 SOLA HOJA SIN DESBORDE) -->
-        <!-- TICKET DE IMPRESIÓN DOBLE (ORIGINAL Y COPIA EN 1 SOLA HOJA - AUTOAJUSTABLE Y COMPLETO) -->
+    <!-- TICKET DE IMPRESIÓN DUAL (10x13 CM BASE AUTOAJUSTABLE EN 1 SOLA HOJA) -->
     <div id="wrapper-impresion-epson">
         <div class="dual-print-container">
             <!-- COPIA 1: ORIGINAL (CLIENTE) -->
@@ -1139,10 +1372,15 @@
         </div>
     </div>
 
+    <!-- WRAPPER EXCLUSIVO DE IMPRESIÓN PARA ETIQUETAS (6x4 CM) -->
+    <div id="wrapper-impresion-etiquetas">
+        <div id="grid-impresion-etiquetas-dom" class="grid-etiquetas-layout"></div>
+    </div>
+
     <!-- MODAL DETALLE DE PRODUCTO PÚBLICO -->
     <div id="modal-producto" class="fixed inset-0 bg-slate-950/80 z-50 p-4 backdrop-blur-md hidden flex items-center justify-center">
         <div class="bg-white rounded-3xl w-full max-w-md p-6 shadow-2xl relative overflow-hidden max-h-[90vh] overflow-y-auto">
-            <button onclick="cerrarModalProducto()" class="absolute top-4 right-4 bg-gray-100 hover:bg-gray-200 text-gray-500 w-8 h-8 rounded-full flex items-center justify-center transition-colors z-20">
+            <button onclick="window.cerrarModalProducto()" class="absolute top-4 right-4 bg-gray-100 hover:bg-gray-200 text-gray-500 w-8 h-8 rounded-full flex items-center justify-center transition-colors z-20 cursor-pointer">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <div class="w-full h-64 bg-white border border-gray-100 rounded-2xl overflow-hidden mb-4 flex justify-center items-center p-2">
@@ -1151,7 +1389,7 @@
             <div class="space-y-3">
                 <div class="flex justify-between items-center">
                     <span id="modal-marca" class="text-[10px] font-extrabold text-blue-600 bg-blue-50 uppercase tracking-widest px-2.5 py-1 rounded-md">Marca</span>
-                    <button id="modal-btn-like" onclick="incrementarLikeActivo()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-colors text-xs font-bold">
+                    <button id="modal-btn-like" onclick="window.incrementarLikeActivo()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-colors text-xs font-bold cursor-pointer">
                         <i class="fa-solid fa-heart text-red-500"></i> Me gusta (<span id="modal-like-count">0</span>)
                     </button>
                 </div>
@@ -1169,12 +1407,12 @@
     <!-- MODAL DE ACCESO ADMIN -->
     <div id="modal-login" class="fixed inset-0 bg-slate-950/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm hidden">
         <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-xl border border-gray-100 relative">
-            <button onclick="cerrarLoginAdmin()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <button onclick="window.cerrarLoginAdmin()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
             <h3 class="text-sm font-black uppercase text-slate-900 tracking-wider mb-4 text-center"><i class="fa-solid fa-lock mr-1 text-blue-600"></i> Autenticación Privada</h3>
             <div class="space-y-3">
-                <input type="text" id="admin-user" placeholder="Usuario" class="w-full bg-gray-50 border p-2.5 rounded-xl text-xs font-bold text-gray-900">
-                <input type="password" id="admin-pass" placeholder="Contraseña" class="w-full bg-gray-50 border p-2.5 rounded-xl text-xs font-bold text-gray-900">
-                <button onclick="autenticarAdmin()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black text-xs py-2.5 rounded-xl shadow-md uppercase">Acceder</button>
+                <input type="text" id="admin-user" placeholder="Usuario" class="w-full bg-gray-50 border p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
+                <input type="password" id="admin-pass" placeholder="Contraseña" class="w-full bg-gray-50 border p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
+                <button onclick="window.autenticarAdmin()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black text-xs py-2.5 rounded-xl shadow-md uppercase cursor-pointer">Acceder</button>
             </div>
         </div>
     </div>
@@ -1182,12 +1420,12 @@
     <!-- MODAL CONSULTA BANNER -->
     <div id="modal-consulta-banner" class="fixed inset-0 bg-slate-950/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm hidden">
         <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-xl border border-gray-100 relative">
-            <button onclick="cerrarModalConsultaBanner()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <button onclick="window.cerrarModalConsultaBanner()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
             <h3 class="text-xs font-black uppercase text-slate-900 tracking-wider mb-4"><i class="fa-brands fa-whatsapp text-emerald-500 mr-1 text-base"></i> Cotización Directa</h3>
             <div class="space-y-3">
                 <input type="text" id="banner-con-nombre" placeholder="Tu Nombre Completo" class="w-full bg-gray-50 border p-2.5 rounded-xl text-xs font-bold">
                 <input type="text" id="banner-con-direccion" placeholder="Tu Ubicación o Referencia" class="w-full bg-gray-50 border p-2.5 rounded-xl text-xs font-bold">
-                <button onclick="enviarConsultaBannerWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-2.5 rounded-xl uppercase flex items-center justify-center gap-2">
+                <button onclick="window.enviarConsultaBannerWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-2.5 rounded-xl uppercase flex items-center justify-center gap-2 cursor-pointer">
                     <i class="fa-brands fa-whatsapp text-sm"></i> Consultar
                 </button>
             </div>
@@ -1197,25 +1435,42 @@
     <!-- MODAL CONSULTA GENERAL -->
     <div id="modal-consulta-general" class="fixed inset-0 bg-slate-950/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm hidden">
         <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-xl border border-gray-100 relative">
-            <button onclick="cerrarModalConsultaGeneral()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <button onclick="window.cerrarModalConsultaGeneral()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 cursor-pointer"><i class="fa-solid fa-xmark text-lg"></i></button>
             <h3 class="text-xs font-black uppercase text-slate-900 tracking-wider mb-4"><i class="fa-solid fa-headset text-blue-600 mr-1"></i> Soporte de Atención</h3>
             <div class="space-y-3">
                 <input type="text" id="con-nombre" placeholder="Tu Nombre" class="w-full bg-gray-50 border p-2.5 rounded-xl text-xs font-bold">
-                <select id="con-motivo" onchange="verificarMotivoEspecifico()" class="w-full bg-gray-50 border p-2.5 rounded-xl text-xs font-bold">
+                <select id="con-motivo" onchange="window.verificarMotivoEspecifico()" class="w-full bg-gray-50 border p-2.5 rounded-xl text-xs font-bold">
                     <option value="Compra de Smartphone">Comprar Smartphone</option>
                     <option value="Servicio Técnico">Servicio Técnico</option>
                     <option value="Accesorios / Otros">Accesorios</option>
                 </select>
                 <label id="label-detalles-con" class="text-[10px] text-gray-400 font-bold uppercase block -mb-1">¿Requerimiento?</label>
                 <textarea id="con-detalles" placeholder="Detalles..." class="w-full bg-gray-50 border p-2.5 rounded-xl text-xs font-bold h-20 resize-none"></textarea>
-                <button onclick="enviarConsultaGeneralWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-2.5 rounded-xl uppercase flex items-center justify-center gap-2">
+                <button onclick="window.enviarConsultaGeneralWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-2.5 rounded-xl uppercase flex items-center justify-center gap-2 cursor-pointer">
                     <i class="fa-brands fa-whatsapp text-sm"></i> Enviar a WhatsApp
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- SCRIPT PRINCIPAL ÍNTEGRO -->
+    <!-- SCRIPT PRINCIPAL ÍNTEGRO CON FUNCIONES GLOBALES INMEDIATAS -->
+    <script>
+        // Fallback global de apertura/cierre de modales para respuesta instantánea
+        window.abrirLoginAdmin = function() {
+            if (localStorage.getItem('tucocel_admin_sesion') === 'true') {
+                var p = document.getElementById('panel-admin');
+                if (p) p.classList.toggle('hidden');
+            } else {
+                var m = document.getElementById('modal-login');
+                if (m) m.classList.remove('hidden');
+            }
+        };
+        window.cerrarLoginAdmin = function() {
+            var m = document.getElementById('modal-login');
+            if (m) m.classList.add('hidden');
+        };
+    </script>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, doc, setDoc, getDoc, collection, addDoc, getDocs, query, orderBy, limit, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -1247,11 +1502,12 @@
         let modoCargaFacturaActivo = 'manual';
         let modoCargaApartadoActivo = 'manual';
         let BASE_TEXTOS_WEB = {};
-                        let deferredPrompt = null;
+        let ETIQUETAS_SELECCIONADAS = {};
+        let deferredPrompt = null;
+
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            console.log("📲 Evento PWA beforeinstallprompt capturado con éxito.");
         });
 
         // REGISTRO DE SERVICE WORKER PARA DISPARO NATIVO PWA
@@ -1260,27 +1516,21 @@
                 const swCode = "self.addEventListener('fetch', (e) => { e.respondWith(fetch(e.request).catch(() => caches.match(e.request))); });";
                 const blob = new Blob([swCode], { type: 'application/javascript' });
                 const swUrl = URL.createObjectURL(blob);
-                navigator.serviceWorker.register(swUrl).catch((err) => console.log('SW aviso:', err));
+                navigator.serviceWorker.register(swUrl).catch(() => {});
             });
         }
 
         window.instalarAppDispositivo = async function() {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                if (outcome === 'accepted') {
-                    console.log('✅ Usuario aceptó la instalación nativa.');
-                }
+                await deferredPrompt.userChoice;
                 deferredPrompt = null;
             } else {
-                const isAndroid = /android/i.test(navigator.userAgent);
                 const isIOS = /ipad|iphone|ipod/i.test(navigator.userAgent) && !window.MSStream;
                 if (isIOS) {
-                    alert("📲 Para instalar en iPhone / iPad (Safari):\n\n1. Toca el botón Compartir (icono con flecha hacia arriba).\n2. Selecciona 'Agregar a Inicio' (+).\n3. ¡Listo! Tendrás el icono en tu pantalla.");
-                } else if (isAndroid) {
-                    alert("📲 Para instalar en tu Android:\n\n1. Toca los tres puntos (⋮) arriba a la derecha en Chrome.\n2. Selecciona 'Instalar aplicación' o 'Agregar a la pantalla principal'.\n3. ¡Listo! Se abrirá como aplicación nativa.");
+                    alert("📲 Para instalar en iPhone / iPad (Safari):\n\n1. Toca Compartir (icono flecha arriba).\n2. Selecciona 'Agregar a Inicio'.");
                 } else {
-                    alert("📲 Para instalar en tu PC / Laptop:\n\n1. Haz clic en el icono de instalación en la barra de direcciones.\n2. Haz clic en 'Instalar'.");
+                    alert("📲 Para instalar la App:\n\n1. Toca el menú de opciones de tu navegador.\n2. Selecciona 'Instalar aplicación' o 'Agregar a la pantalla principal'.");
                 }
             }
         };
@@ -1292,23 +1542,28 @@
             const titulo = document.getElementById('lbl-estado-conexion-titulo');
             const desc = document.getElementById('lbl-estado-conexion-desc');
 
+            const cerrar = () => {
+                if (modalConexion && modalConexion.parentElement) {
+                    modalConexion.style.opacity = '0';
+                    setTimeout(() => {
+                        if (modalConexion && modalConexion.parentElement) modalConexion.remove();
+                    }, 300);
+                }
+            };
+
             try {
-                await getDoc(doc(db, "inventario", "productos_tucocel"));
+                const fetchPromise = getDoc(doc(db, "inventario", "productos_tucocel"));
+                const timeoutPromise = new Promise((_, rej) => setTimeout(() => rej(new Error('T')), 800));
+                await Promise.race([fetchPromise, timeoutPromise]);
                 if (spinner) spinner.classList.add('hidden');
                 if (chulito) chulito.classList.remove('hidden');
                 if (titulo) titulo.innerText = "¡Conexión Segura!";
                 if (desc) desc.innerText = "Sincronizado con Google Firebase Firestore en la nube.";
-            } catch(err) {
+            } catch(e) {
                 if (spinner) spinner.classList.add('hidden');
-                if (titulo) titulo.innerText = "Modo Local / Conectado";
-                if (desc) desc.innerText = "Operando con respaldo en caché de forma segura.";
+                if (titulo) titulo.innerText = "Modo Conectado";
             } finally {
-                setTimeout(() => {
-                    if (modalConexion) {
-                        modalConexion.style.opacity = '0';
-                        setTimeout(() => modalConexion.remove(), 400);
-                    }
-                }, 600);
+                setTimeout(cerrar, 300);
             }
         };
 
@@ -1350,30 +1605,274 @@
             const tabCierreMes = document.getElementById('btn-vista-cierre-mes');
 
             [bFactura, bApartados, bReporte, bCierreMes].forEach(el => el && el.classList.add('hidden'));
-            [tabCajero, tabApartados, tabAuditoria, tabCierreMes].forEach(el => el && (el.className = "text-gray-500 hover:text-gray-700 pb-1 whitespace-nowrap"));
+            [tabCajero, tabApartados, tabAuditoria, tabCierreMes].forEach(el => el && (el.className = "text-gray-500 hover:text-gray-700 pb-1 whitespace-nowrap cursor-pointer"));
 
             if(seccion === 'cajero') {
                 if(bFactura) bFactura.classList.remove('hidden');
-                if(tabCajero) tabCajero.className = "text-blue-600 border-b-2 border-blue-600 pb-1 whitespace-nowrap font-bold";
+                if(tabCajero) tabCajero.className = "text-blue-600 border-b-2 border-blue-600 pb-1 whitespace-nowrap font-bold cursor-pointer";
             } else if(seccion === 'apartados') {
                 if(bApartados) bApartados.classList.remove('hidden');
-                if(tabApartados) tabApartados.className = "text-blue-600 border-b-2 border-blue-600 pb-1 whitespace-nowrap font-bold";
+                if(tabApartados) tabApartados.className = "text-blue-600 border-b-2 border-blue-600 pb-1 whitespace-nowrap font-bold cursor-pointer";
                 window.actualizarSelectApartados();
                 window.cargarApartadosFirebase();
             } else if(seccion === 'auditoria') {
                 if(bReporte) bReporte.classList.remove('hidden');
-                if(tabAuditoria) tabAuditoria.className = "text-blue-600 border-b-2 border-blue-600 pb-1 whitespace-nowrap font-bold";
+                if(tabAuditoria) tabAuditoria.className = "text-blue-600 border-b-2 border-blue-600 pb-1 whitespace-nowrap font-bold cursor-pointer";
                 window.cargarHistorialFirebase();
             } else if(seccion === 'cierre-mes') {
                 if(bCierreMes) bCierreMes.classList.remove('hidden');
-                if(tabCierreMes) tabCierreMes.className = "text-blue-600 border-b-2 border-blue-600 pb-1 whitespace-nowrap font-bold";
+                if(tabCierreMes) tabCierreMes.className = "text-blue-600 border-b-2 border-blue-600 pb-1 whitespace-nowrap font-bold cursor-pointer";
                 window.generarCierreMesGerencial();
             }
         };
 
-        
         // =============================================================
-        // MÓDULO DE EQUIPOS APARTADOS (ABONOS MULTIMONEDA, ACORDEÓN & OPCIÓN B)
+        // GENERADOR DE ETIQUETAS DE VITRINA (6x4 CM) & EDITOR RÁPIDO
+        // =============================================================
+        let filtroCategoriaEtiquetas = 'telefonos'; // 'telefonos' | 'accesorios' | 'todos'
+
+        window.abrirModalEtiquetasVitrina = function() {
+            document.getElementById('modal-generador-etiquetas').classList.remove('hidden');
+            window.renderizarVisorEtiquetas();
+        };
+
+        window.cerrarModalEtiquetasVitrina = function() {
+            document.getElementById('modal-generador-etiquetas').classList.add('hidden');
+        };
+
+        window.cambiarFiltroCategoriaEtiquetas = function(categoria) {
+            filtroCategoriaEtiquetas = categoria;
+            const tTel = document.getElementById('tab-etq-telefonos');
+            const tAcc = document.getElementById('tab-etq-accesorios');
+            const tAll = document.getElementById('tab-etq-todos');
+
+            [tTel, tAcc, tAll].forEach(b => {
+                if(b) b.className = "bg-transparent text-slate-400 hover:text-white px-3 py-1 rounded-lg text-xs font-black transition-all cursor-pointer";
+            });
+
+            if(categoria === 'telefonos' && tTel) tTel.className = "bg-blue-600 text-white px-3 py-1 rounded-lg text-xs font-black transition-all cursor-pointer";
+            else if(categoria === 'accesorios' && tAcc) tAcc.className = "bg-blue-600 text-white px-3 py-1 rounded-lg text-xs font-black transition-all cursor-pointer";
+            else if(categoria === 'todos' && tAll) tAll.className = "bg-blue-600 text-white px-3 py-1 rounded-lg text-xs font-black transition-all cursor-pointer";
+
+            window.renderizarVisorEtiquetas();
+        };
+
+        window.obtenerListaArticulosSegunFiltroEtiquetas = function() {
+            if(filtroCategoriaEtiquetas === 'telefonos') {
+                return PRODUCTOS.filter(p => p.marca !== 'Otros Productos');
+            } else if(filtroCategoriaEtiquetas === 'accesorios') {
+                return PRODUCTOS.filter(p => p.marca === 'Otros Productos');
+            } else {
+                return PRODUCTOS;
+            }
+        };
+
+        window.renderizarVisorEtiquetas = function() {
+            const cont = document.getElementById('contenedor-visor-etiquetas');
+            if(!cont) return;
+
+            const listaArticulos = window.obtenerListaArticulosSegunFiltroEtiquetas();
+            
+            listaArticulos.forEach(p => {
+                if(ETIQUETAS_SELECCIONADAS[p.id] === undefined) {
+                    ETIQUETAS_SELECCIONADAS[p.id] = true;
+                }
+            });
+
+            if(listaArticulos.length === 0) {
+                cont.innerHTML = '<div class="col-span-full py-12 text-center text-slate-500 font-bold text-xs">No hay artículos registrados en esta categoría.</div>';
+                window.actualizarContadorEtiquetas();
+                return;
+            }
+
+            cont.innerHTML = listaArticulos.map(p => {
+                const seleccionada = ETIQUETAS_SELECCIONADAS[p.id];
+                const subTexto = p.memoria ? p.memoria : (p.marca === 'Otros Productos' ? 'Accesorio Garantizado' : '');
+                return `
+                    <div id="etq-item-${p.id}" onclick="window.toggleSeleccionEtiqueta('${p.id}')" class="etiqueta-tarjeta-item cursor-pointer transition-all ${seleccionada ? '' : 'deseleccionada'}">
+                        <div class="etiqueta-header-box">
+                            <h4 class="etiqueta-titulo-modelo">${p.modelo}</h4>
+                            ${subTexto ? `<div class="etiqueta-memoria-tag">${subTexto}</div>` : ''}
+                        </div>
+                        <div class="etiqueta-franja-promo">
+                            <span class="etiqueta-texto-promo">PROMOCIÓN</span>
+                        </div>
+                        <div class="etiqueta-fila-inferior">
+                            <span class="etiqueta-precio-impacto">${p.precio}$</span>
+                            <div class="etiqueta-logo-box">
+                                <span class="etiqueta-logo-tc">TC</span>
+                                <span class="etiqueta-logo-sub">TUCOCEL C.A</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            window.actualizarContadorEtiquetas();
+        };
+
+        window.toggleSeleccionEtiqueta = function(id) {
+            ETIQUETAS_SELECCIONADAS[id] = !ETIQUETAS_SELECCIONADAS[id];
+            const el = document.getElementById(`etq-item-${id}`);
+            if(el) {
+                if(ETIQUETAS_SELECCIONADAS[id]) el.classList.remove('deseleccionada');
+                else el.classList.add('deseleccionada');
+            }
+            window.actualizarContadorEtiquetas();
+        };
+
+        window.seleccionarTodasEtiquetas = function(estado) {
+            const listaArticulos = window.obtenerListaArticulosSegunFiltroEtiquetas();
+            listaArticulos.forEach(p => {
+                ETIQUETAS_SELECCIONADAS[p.id] = estado;
+                const el = document.getElementById(`etq-item-${p.id}`);
+                if(el) {
+                    if(estado) el.classList.remove('deseleccionada');
+                    else el.classList.add('deseleccionada');
+                }
+            });
+            window.actualizarContadorEtiquetas();
+        };
+
+        window.actualizarContadorEtiquetas = function() {
+            const listaArticulos = window.obtenerListaArticulosSegunFiltroEtiquetas();
+            const total = listaArticulos.filter(p => ETIQUETAS_SELECCIONADAS[p.id] === true).length;
+            const cnt = document.getElementById('etiquetas-contador-sel');
+            if(cnt) cnt.innerText = total;
+        };
+
+        window.dispararImpresionEtiquetas = function() {
+            const listaArticulos = window.obtenerListaArticulosSegunFiltroEtiquetas().filter(p => ETIQUETAS_SELECCIONADAS[p.id]);
+            if(listaArticulos.length === 0) return alert("Seleccione al menos una etiqueta de esta categoría para imprimir.");
+
+            const contPrint = document.getElementById('grid-impresion-etiquetas-dom');
+            if(contPrint) {
+                contPrint.innerHTML = listaArticulos.map(p => {
+                    const subTexto = p.memoria ? p.memoria : (p.marca === 'Otros Productos' ? 'Accesorio Garantizado' : '');
+                    return `
+                        <div class="etiqueta-tarjeta-item">
+                            <div class="etiqueta-header-box">
+                                <h4 class="etiqueta-titulo-modelo">${p.modelo}</h4>
+                                ${subTexto ? `<div class="etiqueta-memoria-tag">${subTexto}</div>` : ''}
+                            </div>
+                            <div class="etiqueta-franja-promo">
+                                <span class="etiqueta-texto-promo">PROMOCIÓN</span>
+                            </div>
+                            <div class="etiqueta-fila-inferior">
+                                <span class="etiqueta-precio-impacto">${p.precio}$</span>
+                                <div class="etiqueta-logo-box">
+                                    <span class="etiqueta-logo-tc">TC</span>
+                                    <span class="etiqueta-logo-sub">TUCOCEL C.A</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            document.body.classList.remove('imprimiendo-factura');
+            document.body.classList.add('imprimiendo-etiquetas');
+
+            setTimeout(() => {
+                window.print();
+                setTimeout(() => {
+                    document.body.classList.remove('imprimiendo-etiquetas');
+                }, 600);
+            }, 250);
+        };
+
+        // --- EDITOR RÁPIDO DE PRECIOS EN LOTE ---
+        window.abrirModalEditorRapidoPrecios = function() {
+            document.getElementById('modal-editor-rapido-precios').classList.remove('hidden');
+            window.renderizarItemsEditorRapido();
+        };
+
+        window.cerrarModalEditorRapidoPrecios = function() {
+            document.getElementById('modal-editor-rapido-precios').classList.add('hidden');
+        };
+
+        window.renderizarItemsEditorRapido = function(lista = PRODUCTOS) {
+            const cont = document.getElementById('contenedor-items-editor-precios');
+            if(!cont) return;
+
+            if(lista.length === 0) {
+                cont.innerHTML = '<div class="p-4 text-center text-gray-400 text-xs font-bold">No se encontraron productos.</div>';
+                return;
+            }
+
+            cont.innerHTML = lista.map(p => {
+                const esCelular = p.marca !== 'Otros Productos';
+                const badgeTipo = esCelular ? 
+                    `<span class="text-[9px] bg-blue-100 text-blue-800 font-extrabold px-2 py-0.5 rounded uppercase">${p.marca}</span>` : 
+                    `<span class="text-[9px] bg-amber-100 text-amber-800 font-extrabold px-2 py-0.5 rounded uppercase">Accesorio</span>`;
+                
+                return `
+                    <div class="p-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 hover:bg-slate-50 transition-colors">
+                        <div class="flex items-center gap-3 w-full sm:w-auto">
+                            <img src="${p.foto || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80'}" class="w-10 h-10 object-contain rounded-lg border border-gray-200 bg-white p-1 shrink-0">
+                            <div class="min-w-0">
+                                <div class="flex items-center gap-1.5 flex-wrap">
+                                    <strong class="text-xs text-gray-900 truncate block">${p.modelo}</strong>
+                                    ${badgeTipo}
+                                </div>
+                                <span class="text-[10px] text-gray-500 font-medium block">${p.memoria || (p.desc ? p.desc.slice(0, 30) + '...' : 'Stock disponible')}</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 self-end sm:self-center w-full sm:w-auto justify-end">
+                            <span class="text-xs font-bold text-gray-500">Precio USD:</span>
+                            <div class="relative w-28">
+                                <span class="absolute left-2.5 top-2 text-xs font-black text-gray-400">$</span>
+                                <input type="number" id="input-precio-rapido-${p.id}" value="${p.precio}" class="w-full bg-gray-50 border-2 border-blue-200 focus:border-blue-600 pl-6 pr-2 py-1.5 rounded-xl text-xs font-black text-gray-900 font-mono focus:bg-white transition-colors text-right">
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        };
+
+        window.filtrarEditorRapidoPrecios = function() {
+            const query = (document.getElementById('busq-editor-precios')?.value || '').toLowerCase().trim();
+            const filtrados = PRODUCTOS.filter(p => {
+                return p.modelo.toLowerCase().includes(query) || p.marca.toLowerCase().includes(query) || (p.memoria || '').toLowerCase().includes(query);
+            });
+            window.renderizarItemsEditorRapido(filtrados);
+        };
+
+        window.guardarCambiosEditorRapido = async function() {
+            let cambiosRealizados = 0;
+            PRODUCTOS.forEach(p => {
+                const input = document.getElementById(`input-precio-rapido-${p.id}`);
+                if(input) {
+                    const nuevoPrecio = parseFloat(input.value);
+                    if(!isNaN(nuevoPrecio) && nuevoPrecio >= 0 && nuevoPrecio !== p.precio) {
+                        p.precio = nuevoPrecio;
+                        cambiosRealizados++;
+                    }
+                }
+            });
+
+            if(cambiosRealizados === 0) {
+                alert("No hubo modificaciones de precios.");
+                window.cerrarModalEditorRapidoPrecios();
+                return;
+            }
+
+            try {
+                await window.guardarInventarioFirebase();
+                window.ejecutarFiltroCombinado();
+                window.renderizarVisorEtiquetas();
+                window.actualizarSelectFacturacion();
+                window.actualizarSelectApartados();
+                alert(`✅ ¡Precios actualizados con éxito! (${cambiosRealizados} artículos modificados).`);
+                window.cerrarModalEditorRapidoPrecios();
+            } catch(e) {
+                console.error(e);
+                alert("Error al sincronizar con la nube.");
+            }
+        };
+
+        // =============================================================
+        // MÓDULO DE EQUIPOS APARTADOS
         // =============================================================
         let monedaAbonoApartadoActiva = 'USD';
 
@@ -1408,17 +1907,17 @@
             const lbl = document.getElementById('lbl-apt-abono-input');
 
             [bUSD, bCOP, bBS].forEach(b => {
-                if (b) b.className = "px-2 py-0.5 rounded border border-slate-300 bg-white text-slate-700 font-bold";
+                if (b) b.className = "px-2 py-0.5 rounded border border-slate-300 bg-white text-slate-700 font-bold cursor-pointer";
             });
 
             if (moneda === 'USD') {
-                if (bUSD) bUSD.className = "px-2 py-0.5 rounded border border-blue-600 bg-blue-600 text-white font-black";
+                if (bUSD) bUSD.className = "px-2 py-0.5 rounded border border-blue-600 bg-blue-600 text-white font-black cursor-pointer";
                 if (lbl) lbl.innerText = "Abono Inicial Recibido ($ USD) *";
             } else if (moneda === 'COP') {
-                if (bCOP) bCOP.className = "px-2 py-0.5 rounded border border-slate-800 bg-slate-800 text-white font-black";
+                if (bCOP) bCOP.className = "px-2 py-0.5 rounded border border-slate-800 bg-slate-800 text-white font-black cursor-pointer";
                 if (lbl) lbl.innerText = "Abono Inicial Recibido (COP) *";
             } else {
-                if (bBS) bBS.className = "px-2 py-0.5 rounded border border-emerald-600 bg-emerald-600 text-white font-black";
+                if (bBS) bBS.className = "px-2 py-0.5 rounded border border-emerald-600 bg-emerald-600 text-white font-black cursor-pointer";
                 if (lbl) lbl.innerText = "Abono Inicial Recibido (Bs) *";
             }
             window.calcularSaldosApartado();
@@ -1432,13 +1931,13 @@
             const bloqInv = document.getElementById('carga-apt-inventario-bloque');
 
             if(modo === 'manual') {
-                if(tabMan) tabMan.className = "text-blue-600 border-b-2 border-blue-600 pb-2 px-1 flex items-center gap-1 font-bold";
-                if(tabInv) tabInv.className = "text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1 font-bold";
+                if(tabMan) tabMan.className = "text-blue-600 border-b-2 border-blue-600 pb-2 px-1 flex items-center gap-1 font-bold cursor-pointer";
+                if(tabInv) tabInv.className = "text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1 font-bold cursor-pointer";
                 if(bloqMan) bloqMan.classList.remove('hidden');
                 if(bloqInv) bloqInv.classList.add('hidden');
             } else {
-                if(tabMan) tabMan.className = "text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1 font-bold";
-                if(tabInv) tabInv.className = "text-blue-600 border-b-2 border-blue-600 pb-2 px-1 flex items-center gap-1 font-bold";
+                if(tabMan) tabMan.className = "text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1 font-bold cursor-pointer";
+                if(tabInv) tabInv.className = "text-blue-600 border-b-2 border-blue-600 pb-2 px-1 flex items-center gap-1 font-bold cursor-pointer";
                 if(bloqMan) bloqMan.classList.add('hidden');
                 if(bloqInv) bloqInv.classList.remove('hidden');
                 window.actualizarSelectApartados();
@@ -1551,7 +2050,7 @@
                 const docRef = await addDoc(collection(db, "equipos_apartados"), nuevoApartado);
                 nuevoApartado.id = docRef.id;
 
-                const opcionAccion = prompt(`✅ ¡Apartado registrado con éxito!\n\nCliente: ${nombre}\nEquipo: ${modelo}\nAbonado: $${abonoUSD.toFixed(2)} USD\nSaldo Pendiente: $${saldoPendiente.toFixed(2)} USD\n\n¿Qué desea hacer?\n[1] Imprimir Recibo 10x15\n[2] Enviar a WhatsApp del Cliente\n[3] Continuar`, "2");
+                const opcionAccion = prompt("✅ ¡Apartado registrado con éxito!\n\nCliente: " + nombre + "\nEquipo: " + modelo + "\nAbonado: $" + abonoUSD.toFixed(2) + " USD\nSaldo Pendiente: $" + saldoPendiente.toFixed(2) + " USD\n\n¿Qué desea hacer?\n[1] Imprimir Recibo 10x13\n[2] Enviar a WhatsApp del Cliente\n[3] Continuar", "2");
 
                 if (opcionAccion === "1") {
                     window.imprimirTicketApartado(docRef.id);
@@ -1618,16 +2117,16 @@
                             </div>
                         </div>
                         <div class="flex gap-1.5 pt-1 border-t border-slate-800/80">
-                            <button onclick="window.gestionarAbonoApartado('${apt.id}')" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs py-1.5 rounded-xl shadow-sm transition-all flex items-center justify-center gap-1" title="Registrar nuevo abono o ajuste">
+                            <button onclick="window.gestionarAbonoApartado('${apt.id}')" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs py-1.5 rounded-xl shadow-sm transition-all flex items-center justify-center gap-1 cursor-pointer" title="Registrar nuevo abono o ajuste">
                                 <i class="fa-solid fa-hand-holding-dollar"></i> Abonar
                             </button>
-                            <button onclick="window.imprimirTicketApartado('${apt.id}')" class="bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold text-xs px-2.5 py-1.5 rounded-xl" title="Imprimir Comprobante 10x15 Dual">
+                            <button onclick="window.imprimirTicketApartado('${apt.id}')" class="bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold text-xs px-2.5 py-1.5 rounded-xl cursor-pointer" title="Imprimir Comprobante 10x13 Dual">
                                 <i class="fa-solid fa-print"></i>
                             </button>
-                            <button onclick="window.enviarWhatsAppApartadoObjeto(APARTADOS[${idx}])" class="bg-emerald-800/60 hover:bg-emerald-700 text-emerald-300 font-bold text-xs px-2.5 py-1.5 rounded-xl" title="Reenviar Estado por WhatsApp">
+                            <button onclick="window.enviarWhatsAppApartadoObjeto(APARTADOS[${idx}])" class="bg-emerald-800/60 hover:bg-emerald-700 text-emerald-300 font-bold text-xs px-2.5 py-1.5 rounded-xl cursor-pointer" title="Reenviar Estado por WhatsApp">
                                 <i class="fa-brands fa-whatsapp"></i>
                             </button>
-                            <button onclick="window.eliminarApartadoFirebase('${apt.id}')" class="bg-red-950/60 hover:bg-red-800 text-red-400 font-bold text-xs px-2.5 py-1.5 rounded-xl transition-colors border border-red-800/50" title="Eliminar Apartado">
+                            <button onclick="window.eliminarApartadoFirebase('${apt.id}')" class="bg-red-950/60 hover:bg-red-800 text-red-400 font-bold text-xs px-2.5 py-1.5 rounded-xl transition-colors border border-red-800/50 cursor-pointer" title="Eliminar Apartado">
                                 <i class="fa-solid fa-trash-can"></i>
                             </button>
                         </div>
@@ -1639,7 +2138,7 @@
         window.eliminarApartadoFirebase = async function(id) {
             const apt = APARTADOS.find(a => a.id === id);
             if (!apt) return;
-            if (confirm(`🗑️ ¿Estás seguro de ELIMINAR permanentemente el apartado de "${apt.nombre}" (${apt.modelo})?\n\nEsta acción borrará la comanda de la base de datos.`)) {
+            if (confirm("🗑️ ¿Estás seguro de ELIMINAR permanentemente el apartado de \"" + apt.nombre + "\" (" + apt.modelo + ")?\n\nEsta acción borrará la comanda de la base de datos.")) {
                 try {
                     await deleteDoc(doc(db, "equipos_apartados", id));
                     alert("✅ Apartado eliminado con éxito.");
@@ -1651,7 +2150,6 @@
             }
         };
 
-        // GESTIÓN DE ABONOS CON ALERTA DE AJUSTE INTELIGENTE (OPCIÓN B)
         window.gestionarAbonoApartado = async function(id) {
             const apt = APARTADOS.find(a => a.id === id);
             if(!apt) return;
@@ -1659,12 +2157,11 @@
             const tCOP = parseFloat(document.getElementById('tasa-cop').value) || 3600;
             const tBS = parseFloat(document.getElementById('tasa-bs').value) || 3.3;
 
-            // 1. ALERTA INTELIGENTE DE AJUSTE DE PRECIO (OPCIÓN B)
             let precioVentaFinal = apt.precioPactadoUSD;
-            const ajusteOpcion = prompt(`🔔 ALERTA DE PRECIO (OPCIÓN B) — APARTADOS TUCOCEL\n\nCliente: ${apt.nombre} (${apt.cedula})\nEquipo: ${apt.modelo}\nPrecio Base en Cuenta: $${apt.precioPactadoUSD.toFixed(2)} USD\nTotal Abonado Previo: $${apt.abonoAcumuladoUSD.toFixed(2)} USD\n\nSeleccione una opción:\n[1] MANTENER precio actual ($${apt.precioPactadoUSD.toFixed(2)} USD)\n[2] AJUSTAR / ACTUALIZAR a nuevo precio de mercado\n\nIngrese 1 o 2:`, "1");
+            const ajusteOpcion = prompt("🔔 ALERTA DE PRECIO — APARTADOS TUCOCEL\n\nCliente: " + apt.nombre + " (" + apt.cedula + ")\nEquipo: " + apt.modelo + "\nPrecio Base en Cuenta: $" + apt.precioPactadoUSD.toFixed(2) + " USD\nTotal Abonado Previo: $" + apt.abonoAcumuladoUSD.toFixed(2) + " USD\n\nSeleccione una opción:\n[1] MANTENER precio actual ($" + apt.precioPactadoUSD.toFixed(2) + " USD)\n[2] AJUSTAR / ACTUALIZAR a nuevo precio de mercado\n\nIngrese 1 o 2:", "1");
 
             if (ajusteOpcion === "2") {
-                const nuevoPrecioIngresado = parseFloat(prompt(`Ingrese el NUEVO PRECIO de mercado para "${apt.modelo}" ($ USD):`, apt.precioPactadoUSD.toFixed(2))) || apt.precioPactadoUSD;
+                const nuevoPrecioIngresado = parseFloat(prompt("Ingrese el NUEVO PRECIO de mercado para \"" + apt.modelo + "\" ($ USD):", apt.precioPactadoUSD.toFixed(2))) || apt.precioPactadoUSD;
                 if (nuevoPrecioIngresado > 0) {
                     precioVentaFinal = nuevoPrecioIngresado;
                     apt.precioPactadoUSD = precioVentaFinal;
@@ -1673,8 +2170,7 @@
 
             const saldoCalculadoPrevio = Math.max(0, precioVentaFinal - apt.abonoAcumuladoUSD);
 
-            // 2. SELECCIÓN DE MONEDA Y MONTO DEL NUEVO ABONO
-            const monedaAbono = prompt(`💵 MONEDA DE PAGO DEL NUEVO ABONO\n\nSaldo Pendiente: $${saldoCalculadoPrevio.toFixed(2)} USD\n(${Math.round(saldoCalculadoPrevio * tCOP).toLocaleString('es-CO')} COP | ${(tBS > 0 ? (saldoCalculadoPrevio * tCOP) / tBS : 0).toFixed(2).toLocaleString('es-VE')} Bs)\n\nSeleccione la moneda en que entrega el dinero el cliente:\n[1] Dólares ($ USD)\n[2] Pesos Colombianos (COP)\n[3] Bolívares (Bs)\n\nIngrese 1, 2 o 3:`, "1");
+            const monedaAbono = prompt("💵 MONEDA DE PAGO DEL NUEVO ABONO\n\nSaldo Pendiente: $" + saldoCalculadoPrevio.toFixed(2) + " USD\n(" + Math.round(saldoCalculadoPrevio * tCOP).toLocaleString('es-CO') + " COP | " + (tBS > 0 ? (saldoCalculadoPrevio * tCOP) / tBS : 0).toFixed(2).toLocaleString('es-VE') + " Bs)\n\nSeleccione la moneda en que entrega el dinero el cliente:\n[1] Dólares ($ USD)\n[2] Pesos Colombianos (COP)\n[3] Bolívares (Bs)\n\nIngrese 1, 2 o 3:", "1");
 
             let monedaTexto = 'USD';
             if (monedaAbono === "2") monedaTexto = 'COP';
@@ -1684,7 +2180,7 @@
             if (monedaTexto === 'COP') placeholderMonto = Math.round(saldoCalculadoPrevio * tCOP);
             else if (monedaTexto === 'BS') placeholderMonto = (tBS > 0 ? (saldoCalculadoPrevio * tCOP) / tBS : 0).toFixed(2);
 
-            const montoEntregadoRaw = parseFloat(prompt(`Ingrese el monto abonado en ${monedaTexto}:`, placeholderMonto)) || 0;
+            const montoEntregadoRaw = parseFloat(prompt("Ingrese el monto abonado en " + monedaTexto + ":", placeholderMonto)) || 0;
             if (montoEntregadoRaw <= 0) return;
 
             let nuevoAbonoUSD = montoEntregadoRaw;
@@ -1702,10 +2198,9 @@
                 montoUSD: nuevoAbonoUSD
             });
 
-            // 3. SI EL SALDO LLEGA A 0 USD -> LIQUIDACIÓN TOTAL Y ENTREGA
             if (apt.saldoPendienteUSD <= 0.01) {
                 apt.saldoPendienteUSD = 0;
-                const imeiFisico = prompt(`🎉 ¡APARTADO TOTALMENTE LIQUIDADO!\n\nPor favor ingrese los 4 últimos dígitos del IMEI del equipo físico que se le entrega en mano al cliente:`, "0000");
+                const imeiFisico = prompt("🎉 ¡APARTADO TOTALMENTE LIQUIDADO!\n\nPor favor ingrese los 4 últimos dígitos del IMEI del equipo físico que se le entrega en mano al cliente:", "0000");
 
                 await addDoc(collection(db, "notas_ventas"), {
                     numNota: (await getDocs(collection(db, "notas_ventas"))).size + 1,
@@ -1737,7 +2232,7 @@
                     historialAbonos: apt.historialAbonos
                 });
 
-                const accionPost = prompt(`✅ Abono registrado exitosamente.\n\nSaldo Restante por Pagar: $${apt.saldoPendienteUSD.toFixed(2)} USD\n\n[1] Imprimir Recibo 10x15\n[2] Enviar a WhatsApp\n[3] Cerrar`, "2");
+                const accionPost = prompt("✅ Abono registrado exitosamente.\n\nSaldo Restante por Pagar: $" + apt.saldoPendienteUSD.toFixed(2) + " USD\n\n[1] Imprimir Recibo 10x13\n[2] Enviar a WhatsApp\n[3] Cerrar", "2");
                 if (accionPost === "1") {
                     window.imprimirTicketApartado(apt.id);
                 } else if (accionPost === "2") {
@@ -1748,7 +2243,6 @@
             await window.cargarApartadosFirebase();
         };
 
-        // MENSAJE ELEGANTE Y ESTRUCTURADO PARA WHATSAPP
         window.enviarWhatsAppApartadoObjeto = function(apt, abonoUSD = null, moneda = 'USD', montoOriginal = null) {
             const tCOP = parseFloat(document.getElementById('tasa-cop').value) || 3600;
             const tBS = parseFloat(document.getElementById('tasa-bs').value) || 3.3;
@@ -1779,7 +2273,7 @@
             window.open(`https://wa.me/${apt.telefono.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`, '_blank');
         };
 
-        // IMPRESIÓN DEL COMPROBANTE DE APARTADO 10x15 CM DUAL
+        // IMPRESIÓN DEL COMPROBANTE DE APARTADO 10x13 CM DUAL
         window.imprimirTicketApartado = function(id) {
             const apt = APARTADOS.find(a => a.id === id);
             if(!apt) return;
@@ -1885,7 +2379,7 @@
             window.open(`https://wa.me/584247357549?text=${encodeURIComponent(msg)}`, '_blank');
         };
 
-        // --- VISUALIZADOR DE NOTAS EN HOJA BLANCA (OPCIÓN 5) ---
+        // --- VISUALIZADOR DE NOTAS EN HOJA BLANCA ---
         window.abrirVisualizadorHojaBlanca = function(index) {
             const nota = HISTORIAL_NOTAS[index];
             if(!nota) return;
@@ -1913,8 +2407,8 @@
                         <td class="p-3 text-right font-mono font-black text-gray-900">$${n.totalUSD}</td>
                         <td class="p-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase ${colorLabel}">${n.estatus || 'PROCESADA'}</span></td>
                         <td class="p-3 text-center flex justify-center gap-1">
-                            <button onclick="window.abrirVisualizadorHojaBlanca(${idx})" class="text-amber-600 bg-amber-50 hover:bg-amber-100 px-2 py-1 rounded-lg text-xs font-bold" title="Ver Hoja Blanca / Imprimir 10x15"><i class="fa-solid fa-file-lines"></i></button>
-                            <button onclick="reabrirNotaHistorialPorObjeto(${idx})" class="text-blue-600 bg-blue-50 hover:bg-blue-100 px-2 py-1 rounded-lg text-xs font-bold" title="Opciones"><i class="fa-solid fa-sliders"></i></button>
+                            <button onclick="window.abrirVisualizadorHojaBlanca(${idx})" class="text-amber-600 bg-amber-50 hover:bg-amber-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Ver Hoja Blanca / Imprimir 10x13"><i class="fa-solid fa-file-lines"></i></button>
+                            <button onclick="window.reabrirNotaHistorialPorObjeto(${idx})" class="text-blue-600 bg-blue-50 hover:bg-blue-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Opciones"><i class="fa-solid fa-sliders"></i></button>
                         </td>
                     </tr>`;
             });
@@ -1966,14 +2460,20 @@
 
         window.abrirLoginAdmin = function() {
             if(esAdminAutenticado) window.toggleAdminPanel(); 
-            else document.getElementById('modal-login').classList.remove('hidden');
+            else {
+                var m = document.getElementById('modal-login');
+                if (m) m.classList.remove('hidden');
+            }
         };
         
-        window.cerrarLoginAdmin = function() { document.getElementById('modal-login').classList.add('hidden'); };
+        window.cerrarLoginAdmin = function() { 
+            var m = document.getElementById('modal-login');
+            if (m) m.classList.add('hidden'); 
+        };
         
         window.autenticarAdmin = function() {
-            const u = document.getElementById('admin-user').value.trim();
-            const p = document.getElementById('admin-pass').value.trim();
+            const u = (document.getElementById('admin-user')?.value || '').trim();
+            const p = (document.getElementById('admin-pass')?.value || '').trim();
             if(u === ADMIN_USER && p === ADMIN_PASS) {
                 esAdminAutenticado = true;
                 localStorage.setItem('tucocel_admin_sesion', 'true');
@@ -2014,9 +2514,9 @@
         window.filtrarPorMarca = function(marca, boton) { 
             marcaSeleccionada = marca; 
             document.querySelectorAll('.marca-btn').forEach(b => { 
-                b.className = "marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center"; 
+                b.className = "marca-btn snap-start shrink-0 bg-white text-gray-700 border border-gray-200 px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center cursor-pointer"; 
             }); 
-            boton.className = "marca-btn snap-start shrink-0 bg-slate-900 text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center";
+            if(boton) boton.className = "marca-btn snap-start shrink-0 bg-slate-900 text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center cursor-pointer";
             window.ejecutarFiltroCombinado(); 
         };
 
@@ -2034,7 +2534,7 @@
             const formCompra = document.getElementById('form-compra');
             if(formCompra) {
                 formCompra.innerHTML = `
-                    <button onclick="window.compartirProductoEspecificoWa('${prod.modelo}', ${prod.precio})" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-3 rounded-xl uppercase flex items-center justify-center gap-2">
+                    <button onclick="window.compartirProductoEspecificoWa('${prod.modelo}', ${prod.precio})" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-3 rounded-xl uppercase flex items-center justify-center gap-2 cursor-pointer">
                         <i class="fa-brands fa-whatsapp text-sm"></i> Cotizar por WhatsApp ($${prod.precio} USD)
                     </button>
                 `;
@@ -2079,13 +2579,13 @@
         window.cambiarModoCargaFactura = function(modo) {
             modoCargaFacturaActivo = modo;
             if(modo === 'manual') {
-                document.getElementById('tab-manual').className = "text-blue-600 border-b-2 border-blue-600 pb-2 px-1 flex items-center gap-1 font-bold";
-                document.getElementById('tab-inventario').className = "text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1 font-bold";
+                document.getElementById('tab-manual').className = "text-blue-600 border-b-2 border-blue-600 pb-2 px-1 flex items-center gap-1 font-bold cursor-pointer";
+                document.getElementById('tab-inventario').className = "text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1 font-bold cursor-pointer";
                 document.getElementById('carga-manual-bloque').classList.remove('hidden');
                 document.getElementById('carga-inventario-bloque').classList.add('hidden');
             } else {
-                document.getElementById('tab-manual').className = "text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1 font-bold";
-                document.getElementById('tab-inventario').className = "text-blue-600 border-b-2 border-blue-600 pb-2 px-1 flex items-center gap-1 font-bold";
+                document.getElementById('tab-manual').className = "text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1 font-bold cursor-pointer";
+                document.getElementById('tab-inventario').className = "text-blue-600 border-b-2 border-blue-600 pb-2 px-1 flex items-center gap-1 font-bold cursor-pointer";
                 document.getElementById('carga-manual-bloque').classList.add('hidden');
                 document.getElementById('carga-inventario-bloque').classList.remove('hidden');
                 window.actualizarSelectFacturacion();
@@ -2158,7 +2658,7 @@
                     </div>
                     <div class="flex items-center gap-2">
                         <span>$${item.precio.toFixed(2)}</span>
-                        <button onclick="removerItemVenta(${idx})" class="text-red-400 font-bold"><i class="fa-solid fa-xmark"></i></button>
+                        <button onclick="window.removerItemVenta(${idx})" class="text-red-400 font-bold cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
                     </div>
                 </div>
             `).join('');
@@ -2174,11 +2674,15 @@
 
         window.dispararImpresionTicket = function(nota, callback) {
             window.inyectarDatosAlTicketDOM(nota);
+            document.body.classList.remove('imprimiendo-etiquetas');
+            document.body.classList.add('imprimiendo-factura');
+
             setTimeout(() => {
                 window.print();
-                if (typeof callback === 'function') {
-                    setTimeout(callback, 500);
-                }
+                setTimeout(() => {
+                    document.body.classList.remove('imprimiendo-factura');
+                    if (typeof callback === 'function') callback();
+                }, 600);
             }, 250);
         };
 
@@ -2225,7 +2729,7 @@
             return nuevaNota;
         };
 
-                window.inyectarDatosAlTicketDOM = function(nota) {
+        window.inyectarDatosAlTicketDOM = function(nota) {
             const setAll = (selector, val) => {
                 document.querySelectorAll(selector).forEach(el => el.innerText = val);
             };
@@ -2280,15 +2784,15 @@
         window.reabrirNotaHistorialPorObjeto = function(index) { 
             const n = HISTORIAL_NOTAS[index]; 
             if(!n) return;
-            const s = prompt(`⚙️ CONTROL DE NOTA N° ${String(n.numNota).padStart(6, '0')}\n\n[1] Reimprimir Nota de Entrega (10x15)\n[2] Reenviar por WhatsApp\n[3] Anular Nota\n[4] Eliminar de Firebase\n\nIngrese opción:`); 
+            const s = prompt("⚙️ CONTROL DE NOTA N° " + String(n.numNota).padStart(6, '0') + "\n\n[1] Reimprimir Nota de Entrega (10x13)\n[2] Reenviar por WhatsApp\n[3] Anular Nota\n[4] Eliminar de Firebase\n\nIngrese opción:"); 
             if(s==="1") { 
                 window.dispararImpresionTicket(n);
             } else if(s==="2") { 
                 window.procesarEnvioWaObjeto(n); 
             } else if(s==="3") {
-                if(confirm(`⚠️ ¿Deseas ANULAR la Nota #${n.numNota}?`)) { window.anularNotaHistorialPorId(n.id); }
+                if(confirm("⚠️ ¿Deseas ANULAR la Nota #" + n.numNota + "?")) { window.anularNotaHistorialPorId(n.id); }
             } else if(s==="4") {
-                if(confirm(`🚨 ¿Eliminar Nota #${n.numNota} de Firebase?`)) { window.eliminarNotaHistorialPorId(n.id); }
+                if(confirm("🚨 ¿Eliminar Nota #" + n.numNota + " de Firebase?")) { window.eliminarNotaHistorialPorId(n.id); }
             }
         };
 
@@ -2510,7 +3014,7 @@
                     : `<span class="text-[9.5px] bg-amber-50 text-amber-700 border border-amber-200 font-extrabold px-2 py-0.5 rounded-md">Bajo Pedido</span>`;
                 
                 return `
-                    <div onclick="abrirModalProducto('${prod.id}')" class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex flex-col justify-between transition-all hover:shadow-xl cursor-pointer group">
+                    <div onclick="window.abrirModalProducto('${prod.id}')" class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex flex-col justify-between transition-all hover:shadow-xl cursor-pointer group">
                         <div>
                             <div class="w-full h-64 bg-white border border-gray-50 rounded-xl overflow-hidden mb-3.5 flex justify-center items-center p-2">
                                 <img src="${fotoProd}" alt="${prod.modelo}" class="max-w-full max-h-full object-contain filter drop-shadow-md">
@@ -2525,13 +3029,13 @@
                         <div class="mt-4 pt-3 border-t border-gray-50 flex items-center justify-between">
                             <p class="text-base font-black text-gray-900 font-mono">$${prod.precio} <span class="text-[10px] text-gray-400 font-bold uppercase">USD</span></p>
                             <div class="flex items-center gap-2">
-                                <button onclick="event.stopPropagation(); window.compartirProductoEspecificoWa('${prod.modelo}', ${prod.precio})" class="text-emerald-500 hover:text-emerald-600 transition-colors p-1" title="Preguntar por WhatsApp">
+                                <button onclick="event.stopPropagation(); window.compartirProductoEspecificoWa('${prod.modelo}', ${prod.precio})" class="text-emerald-500 hover:text-emerald-600 transition-colors p-1 cursor-pointer" title="Preguntar por WhatsApp">
                                     <i class="fa-brands fa-whatsapp text-lg"></i>
                                 </button>
                                 <span class="text-blue-600 hover:text-blue-700 font-extrabold text-xs">Ver</span>
                             </div>
                         </div>
-                        ${esAdminAutenticado ? `<div class="flex gap-2 border-t pt-2 mt-2 justify-center"><button onclick="event.stopPropagation(); prepararEdicionArticulo('${prod.id}')" class="text-blue-600 hover:underline text-xs font-bold">Editar</button><button onclick="event.stopPropagation(); eliminarProducto('${prod.id}')" class="text-red-500 hover:underline text-xs font-bold">Borrar</button></div>` : ''}
+                        ${esAdminAutenticado ? `<div class="flex gap-2 border-t pt-2 mt-2 justify-center"><button onclick="event.stopPropagation(); window.prepararEdicionArticulo('${prod.id}')" class="text-blue-600 hover:underline text-xs font-bold cursor-pointer">Editar</button><button onclick="event.stopPropagation(); window.eliminarProducto('${prod.id}')" class="text-red-500 hover:underline text-xs font-bold cursor-pointer">Borrar</button></div>` : ''}
                     </div>
                 `;
             }).join('');
@@ -2541,7 +3045,7 @@
             const carrusel = document.getElementById('carrusel-otros');
             if(!carrusel) return;
             carrusel.innerHTML = lista.map(prod => `
-                <div onclick="abrirModalProducto('${prod.id}')" class="snap-start shrink-0 w-44 bg-white rounded-2xl p-3 border border-gray-100 shadow-sm flex flex-col justify-between cursor-pointer select-none">
+                <div onclick="window.abrirModalProducto('${prod.id}')" class="snap-start shrink-0 w-44 bg-white rounded-2xl p-3 border border-gray-100 shadow-sm flex flex-col justify-between cursor-pointer select-none">
                     <div>
                         <div class="w-full h-32 flex items-center justify-center p-2 bg-white rounded-xl">
                             <img src="${prod.foto || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80'}" class="max-w-full max-h-full object-contain">
@@ -2550,7 +3054,7 @@
                     </div>
                     <div class="mt-2 pt-1 border-t border-gray-50 flex justify-between items-center">
                         <strong class="text-sm font-black text-gray-900">$${prod.precio}</strong>
-                        <button onclick="event.stopPropagation(); window.compartirProductoEspecificoWa('${prod.modelo}', ${prod.precio})" class="text-emerald-500 hover:text-emerald-600 text-xs" title="Compartir">
+                        <button onclick="event.stopPropagation(); window.compartirProductoEspecificoWa('${prod.modelo}', ${prod.precio})" class="text-emerald-500 hover:text-emerald-600 text-xs cursor-pointer" title="Compartir">
                             <i class="fa-brands fa-whatsapp text-sm"></i>
                         </button>
                     </div>
@@ -2601,7 +3105,7 @@
             if (!esAdminAutenticado) return;
             const elemento = document.getElementById(idElemento);
             if (!elemento) return;
-            const nuevoTexto = prompt(`✏️ Modificar texto:`, elemento.innerText.trim());
+            const nuevoTexto = prompt("✏️ Modificar texto:", elemento.innerText.trim());
             if (nuevoTexto === null || nuevoTexto.trim() === "") return;
             elemento.innerText = nuevoTexto.trim();
             BASE_TEXTOS_WEB[idElemento] = { texto: nuevoTexto.trim(), alineacion: "1", estilo: "1" };
@@ -2648,21 +3152,6 @@
         if(inputFoto) inputFoto.addEventListener('change', window.procesarImagen);
         const selectMarca = document.getElementById('add-marca'); 
         if(selectMarca) selectMarca.addEventListener('change', window.verificarMarcaSeleccionadaPanel);
-
-                window.eliminarApartadoFirebase = async function(id) {
-            const apt = APARTADOS.find(a => a.id === id);
-            if (!apt) return;
-            if (confirm(`🗑️ ¿Estás seguro de ELIMINAR permanentemente el apartado de "${apt.nombre}" (${apt.modelo})?\n\nEsta acción borrará la comanda de la base de datos.`)) {
-                try {
-                    await deleteDoc(doc(db, "equipos_apartados", id));
-                    alert("✅ Apartado eliminado con éxito.");
-                    await window.cargarApartadosFirebase();
-                } catch(e) {
-                    console.error(e);
-                    alert("Error al eliminar apartado.");
-                }
-            }
-        };
 
         window.verificarConexionNubeInicial();
         window.descargarTextosPersonalizados();
