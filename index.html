@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tucocel C.A. — Telefonía Móvil y Computación</title>
+
     <!-- SEGURIDAD Y PROTECCIÓN DE CÓDIGO FUENTE / BLOQUEO DE INSPECTOR Y CLIC DERECHO -->
     <script>
         document.addEventListener('contextmenu', function(e) {
@@ -24,9 +28,6 @@
             }
         });
     </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tucocel C.A. — Telefonía Móvil y Computación</title>
 
     <!-- METATAGS OPEN GRAPH -->
     <meta property="og:title" content="📱 TUCOCEL C.A. | Vitrina Tecnológica Digital">
@@ -260,7 +261,7 @@
         }
 
         /* =========================================================
-           ESTILO EXACTO DE ETIQUETAS DE VITRINA (6x4 CM) - PROMOCIÓN GRANDE & CENTRADA
+           ESTILO EXACTO DE ETIQUETAS DE VITRINA (6x4 CM)
            ========================================================= */
         .grid-etiquetas-layout {
             display: grid;
@@ -299,7 +300,7 @@
             display: flex;
             flex-direction: column;
             width: 100%;
-            padding-right: 9mm; /* Seguridad corte diagonal */
+            padding-right: 9mm;
         }
 
         .etiqueta-titulo-modelo {
@@ -391,7 +392,7 @@
             margin-top: 1px;
         }
 
-        /* REGLAS LIMPIAS DE IMPRESIÓN (FACTURAS VS ETIQUETAS) */
+        /* REGLAS LIMPIAS DE IMPRESIÓN */
         @media print {
             html, body {
                 background: #ffffff !important;
@@ -401,7 +402,6 @@
                 height: auto !important;
             }
 
-            /* 1. MODO FACTURACIÓN DUAL (10x13 CM BASE) */
             body.imprimiendo-factura > *:not(#wrapper-impresion-epson) {
                 display: none !important;
             }
@@ -420,7 +420,6 @@
                 page-break-inside: avoid !important;
             }
 
-            /* 2. MODO ETIQUETAS DE VITRINA (6x4 CM COMPACTAS) */
             body.imprimiendo-etiquetas > *:not(#wrapper-impresion-etiquetas) {
                 display: none !important;
             }
@@ -456,7 +455,7 @@
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased min-h-screen pb-12 relative">
 
-    <!-- MODAL DE CONEXIÓN CON EL SERVIDOR (DESVANECIMIENTO AUTOMÁTICO SEGURO) -->
+    <!-- MODAL DE CONEXIÓN CON EL SERVIDOR -->
     <div id="modal-conexion-nube-supremo" class="fixed inset-0 bg-slate-950/95 backdrop-blur-md z-[99999] flex items-center justify-center p-4 transition-all duration-300">
         <div class="bg-slate-900 border border-blue-500/40 rounded-3xl p-6 max-w-sm w-full text-center space-y-4 shadow-[0_0_50px_rgba(59,130,246,0.3)] relative overflow-hidden">
             <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.1),transparent_70%)]"></div>
@@ -628,7 +627,7 @@
             <span id="contador-productos" class="text-[10px] bg-blue-50 text-blue-600 font-black px-2.5 py-1 rounded-full">Cargando...</span>
         </div>
 
-        <!-- GRID DE SMARTPHONES CON DISEÑO ORIGINAL RESTAURADO -->
+        <!-- GRID DE SMARTPHONES CON DISEÑO ARMONIOSO Y ALINEACIÓN EXACTA -->
         <div id="contenedor-productos" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6"></div>
     </main>
 
@@ -644,7 +643,7 @@
         <div id="carrusel-otros" class="flex gap-4 overflow-x-auto pb-4 pt-1 no-scrollbar snap-x scroll-smooth"></div>
     </section>
 
-    <!-- SECCIÓN DE MÉTODOS DE PAGO RESTAURADA -->
+    <!-- SECCIÓN DE MÉTODOS DE PAGO -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 border-t border-gray-100 pt-8">
         <div class="text-center max-w-xl mx-auto mb-6">
             <h3 class="text-xs font-black uppercase text-blue-600 tracking-widest">Métodos de Pago Soportados</h3>
@@ -659,7 +658,7 @@
         </div>
     </section>
 
-    <!-- FOOTER ORIGINAL RESTAURADO CON 3 COLUMNAS Y RIF EN LÍNEA FLUIDA -->
+    <!-- FOOTER -->
     <footer class="bg-slate-900 text-slate-400 py-10 px-4 mt-16 border-t border-slate-800 text-xs font-medium">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
             <div class="space-y-1.5">
@@ -814,8 +813,6 @@
         </div>
     </div>
 
-    
-    
     <!-- MODAL CREAR ETIQUETA INDEPENDIENTE / PERSONALIZADA CON VISTA PREVIA EN VIVO -->
     <div id="modal-crear-etiqueta-libre" class="fixed inset-0 bg-slate-950/90 z-[70] overflow-y-auto backdrop-blur-md p-2 sm:p-4 hidden flex items-center justify-center">
         <div class="bg-white rounded-3xl w-full max-w-xl my-2 shadow-2xl overflow-hidden border border-gray-100 flex flex-col">
@@ -833,7 +830,6 @@
             </div>
 
             <div class="p-5 bg-gray-50 space-y-4">
-                <!-- FORMULARIO DE ENTRADA -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div class="sm:col-span-2">
                         <label class="text-[10px] text-gray-500 font-bold uppercase block mb-1">Nombre o Modelo del Artículo *</label>
@@ -849,7 +845,6 @@
                     </div>
                 </div>
 
-                <!-- CONTENEDOR DE VISTA PREVIA EN VIVO (EXACTA A LA REAL) -->
                 <div class="border-t border-gray-200 pt-3">
                     <span class="text-[10px] font-black uppercase tracking-wider text-gray-400 block mb-2 text-center">👁️ Vista Previa en Vivo de la Etiqueta (6×4 cm):</span>
                     <div class="flex justify-center p-3 bg-slate-900/10 rounded-2xl border border-dashed border-gray-300">
@@ -1499,7 +1494,6 @@
         </div>
     </div>
 
-    
     <!-- MODAL CAMBIO DE CONTRASEÑA ADMINISTRATIVA SEGURA -->
     <div id="modal-cambiar-password" class="fixed inset-0 bg-slate-950/90 z-[90] p-4 backdrop-blur-md hidden flex items-center justify-center">
         <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl relative border border-gray-100 space-y-4">
@@ -1585,7 +1579,6 @@
 
     <!-- SCRIPT PRINCIPAL ÍNTEGRO CON FUNCIONES GLOBALES INMEDIATAS -->
     <script>
-        // Fallback global de apertura/cierre de modales para respuesta instantánea
         window.abrirLoginAdmin = function() {
             if (localStorage.getItem('tucocel_admin_sesion') === 'true') {
                 var p = document.getElementById('panel-admin');
@@ -1606,7 +1599,7 @@
         import { getFirestore, doc, setDoc, getDoc, collection, addDoc, getDocs, query, orderBy, limit, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
-          apiKey: "AIzaSyDytP_5UQyyRUT7wFC2bDIYz5t70z_pQV4",
+          apiKey: "AIzaSyDytP_5UQyyRUT7wPC2bDIYz5t70z_pQV4",
           authDomain: "tucocel-vitrina.firebaseapp.com",
           projectId: "tucocel-vitrina",
           storageBucket: "tucocel-vitrina.firebasestorage.app",
@@ -1619,7 +1612,7 @@
         const db = getFirestore(app);
 
         let ADMIN_USER = "tucocel";
-        let ADMIN_PASS_ACTUAL = "Razu2020."; // Clave maestra base
+        let ADMIN_PASS_ACTUAL = "Razu2020.";
         
         window.descargarSeguridadAdmin = async function() {
             try {
@@ -1700,7 +1693,6 @@
             deferredPrompt = e;
         });
 
-        // REGISTRO DE SERVICE WORKER PARA DISPARO NATIVO PWA
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 const swCode = "self.addEventListener('fetch', (e) => { e.respondWith(fetch(e.request).catch(() => caches.match(e.request))); });";
@@ -1819,7 +1811,7 @@
         // =============================================================
         // GENERADOR DE ETIQUETAS (6x4 CM), ETIQUETAS LIBRES & EDITOR RÁPIDO
         // =============================================================
-        let filtroCategoriaEtiquetas = 'telefonos'; // 'telefonos' | 'accesorios' | 'libres' | 'todos'
+        let filtroCategoriaEtiquetas = 'telefonos';
 
         window.abrirModalEtiquetasVitrina = function() {
             document.getElementById('modal-generador-etiquetas').classList.remove('hidden');
@@ -2201,7 +2193,6 @@
             }
         };
 
-        
         // =============================================================
         // MÓDULO DE EQUIPOS APARTADOS
         // =============================================================
@@ -2604,7 +2595,6 @@
             window.open(`https://wa.me/${apt.telefono.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`, '_blank');
         };
 
-        // IMPRESIÓN DEL COMPROBANTE DE APARTADO 10x13 CM DUAL
         window.imprimirTicketApartado = function(id) {
             const apt = APARTADOS.find(a => a.id === id);
             if(!apt) return;
@@ -2634,7 +2624,6 @@
             window.dispararImpresionTicket(notaApartado);
         };
 
-        // --- CIERRE DE MES GERENCIAL E INTERMENSUAL ---
         window.generarCierreMesGerencial = function() {
             const mesSel = parseInt(document.getElementById('cierre-mes-select').value) || (new Date().getMonth() + 1);
             const anioSel = parseInt(document.getElementById('cierre-anio-input').value) || 2026;
@@ -2710,7 +2699,6 @@
             window.open(`https://wa.me/584247357549?text=${encodeURIComponent(msg)}`, '_blank');
         };
 
-        // --- VISUALIZADOR DE NOTAS EN HOJA BLANCA ---
         window.abrirVisualizadorHojaBlanca = function(index) {
             const nota = HISTORIAL_NOTAS[index];
             if(!nota) return;
@@ -3188,7 +3176,6 @@
                     PRODUCTOS = docSnap.data().lista || []; 
                     PRODUCTOS.sort((a, b) => a.precio - b.precio); 
                 }
-                // Sincronizar marcas existentes en los productos
                 const customMarcasLocal = JSON.parse(localStorage.getItem('tucocel_marcas_custom') || '[]');
                 customMarcasLocal.forEach(m => { if(!MARCAS_REGISTRADAS.includes(m)) MARCAS_REGISTRADAS.push(m); });
                 PRODUCTOS.forEach(p => {
@@ -3335,7 +3322,7 @@
             window.renderizarCarruselOtrosHTML(otros);
         };
 
-        // --- RENDERIZADOR DE VITRINA DE SMARTPHONES CON DISEÑO ORIGINAL RESTAURADO ---
+        // --- RENDERIZADOR DE VITRINA DE SMARTPHONES CON DISEÑO ARMONIOSO Y ALINEACIÓN EXACTA ---
         window.renderizarCatalogoHTML = function(lista) {
             const contenedor = document.getElementById('contenedor-productos'); 
             if(!contenedor) return;
@@ -3355,9 +3342,13 @@
                     ? `<span class="text-[8.5px] sm:text-[10px] bg-emerald-50 text-emerald-700 border border-emerald-200 font-black px-2 py-0.5 rounded-md truncate">Entrega Inmediata</span>` 
                     : `<span class="text-[8.5px] sm:text-[10px] bg-amber-50 text-amber-700 border border-amber-200 font-black px-2 py-0.5 rounded-md truncate">Bajo Pedido</span>`;
                 
+                const capsulaMemoria = prod.memoria 
+                    ? `<div class="mt-1.5 h-6 flex items-center"><span class="text-[10px] sm:text-[11px] font-bold text-slate-700 bg-slate-100 border border-slate-200/80 px-2 py-0.5 rounded-lg inline-flex items-center gap-1 truncate max-w-full"><i class="fa-solid fa-microchip text-[9px] text-blue-500 shrink-0"></i> <span class="truncate">${prod.memoria}</span></span></div>`
+                    : `<div class="mt-1.5 h-6 flex items-center"><span class="text-[10px] sm:text-[11px] font-semibold text-slate-400 bg-gray-50 border border-gray-100 px-2 py-0.5 rounded-lg inline-flex items-center gap-1"><i class="fa-solid fa-shield-check text-[9px] text-emerald-500 shrink-0"></i> Garantizado</span></div>`;
+
                 return `
-                    <div onclick="window.abrirModalProducto('${prod.id}')" class="bg-white rounded-2xl p-3 sm:p-4 border border-gray-200/80 shadow-sm flex flex-col justify-between transition-all hover:shadow-xl hover:border-blue-200 cursor-pointer group">
-                        <div>
+                    <div onclick="window.abrirModalProducto('${prod.id}')" class="bg-white rounded-2xl p-3 sm:p-4 border border-gray-200/80 shadow-sm flex flex-col justify-between transition-all hover:shadow-xl hover:border-blue-300 cursor-pointer group">
+                        <div class="flex flex-col flex-grow">
                             <div class="w-full h-40 sm:h-56 md:h-64 bg-white border border-gray-50 rounded-xl overflow-hidden mb-2.5 sm:mb-3.5 flex justify-center items-center p-1.5 sm:p-2">
                                 <img src="${fotoProd}" alt="${prod.modelo}" class="max-w-full max-h-full object-contain filter drop-shadow-md group-hover:scale-105 transition-transform duration-300">
                             </div>
@@ -3365,8 +3356,8 @@
                                 <span class="text-[9px] sm:text-[11px] font-black text-blue-600 uppercase tracking-widest truncate">${prod.marca}</span>
                                 ${tagEntrega}
                             </div>
-                            <h3 class="font-black text-slate-900 text-sm sm:text-lg group-hover:text-blue-600 truncate leading-snug tracking-tight">${prod.modelo}</h3>
-                            <p class="text-[11px] sm:text-sm text-slate-500 font-extrabold mt-0.5 truncate tracking-wide">${prod.memoria || ''}</p>
+                            <h3 class="font-black text-slate-900 text-xs sm:text-base group-hover:text-blue-600 leading-snug tracking-tight line-clamp-2 min-h-[2.4rem] sm:min-h-[2.75rem]" title="${prod.modelo}">${prod.modelo}</h3>
+                            ${capsulaMemoria}
                         </div>
                         <div class="mt-3 sm:mt-4 pt-2.5 sm:pt-3 border-t border-gray-100 flex items-center justify-between gap-1">
                             <div class="flex items-baseline gap-1">
@@ -3377,7 +3368,7 @@
                                 <button onclick="event.stopPropagation(); window.compartirProductoEspecificoWa('${prod.modelo}', ${prod.precio})" class="w-8 h-8 sm:w-9 sm:h-9 bg-emerald-50 hover:bg-emerald-100 text-emerald-600 border border-emerald-200/60 rounded-xl flex items-center justify-center transition-all cursor-pointer shadow-sm" title="Preguntar por WhatsApp">
                                     <i class="fa-brands fa-whatsapp text-sm sm:text-base"></i>
                                 </button>
-                                <span class="bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white font-black text-xs px-2.5 sm:px-3 py-1.5 rounded-xl transition-all border border-blue-200/60 shadow-sm">Ver</span>
+                                <span class="bg-blue-50 text-blue-700 group-hover:bg-blue-600 group-hover:text-white font-black text-xs px-2.5 sm:px-3 py-1.5 rounded-xl transition-all border border-blue-200/60 shadow-sm">Ver</span>
                             </div>
                         </div>
                         ${esAdminAutenticado ? `<div class="flex gap-2 border-t pt-1.5 mt-2 justify-center"><button onclick="event.stopPropagation(); window.prepararEdicionArticulo('${prod.id}')" class="text-blue-600 hover:underline text-xs font-black cursor-pointer">Editar</button><button onclick="event.stopPropagation(); window.eliminarProducto('${prod.id}')" class="text-red-500 hover:underline text-xs font-black cursor-pointer">Borrar</button></div>` : ''}
@@ -3385,25 +3376,24 @@
                 `;
             }).join('');
 
-            // CÁLCULO DINÁMICO DE RELLENO (MÓVIL VS ESCRITORIO)
+            // CÁLCULO DINÁMICO DE RELLENO - DISEÑO BLANCO Y ARMONIOSO
             const total = listaFiltrada.length;
             const faltaMovil = (total % 2 !== 0) ? 1 : 0;
             const faltaEscritorio = (total % 4 !== 0) ? (4 - (total % 4)) : 0;
 
             const renderPlaceholderCard = (clasesVisibilidad) => `
-                <div onclick="window.abrirModalConsultaBanner()" class="${clasesVisibilidad} bg-gradient-to-br from-slate-900 to-blue-950 rounded-2xl p-3 sm:p-4 border border-blue-500/30 shadow-sm flex-col justify-between items-center text-center transition-all hover:shadow-xl cursor-pointer group relative overflow-hidden min-h-[230px]">
-                    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:12px_12px]"></div>
-                    <div class="my-auto py-3 sm:py-5 space-y-2 z-10 flex flex-col items-center">
-                        <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-blue-600/20 border border-blue-400/30 flex items-center justify-center text-amber-400 text-xl sm:text-2xl shadow-inner group-hover:scale-110 transition-transform">
+                <div onclick="window.abrirModalConsultaBanner()" class="${clasesVisibilidad} bg-white rounded-2xl p-3 sm:p-4 border-2 border-dashed border-blue-200/90 shadow-sm flex-col justify-between items-center text-center transition-all hover:shadow-xl hover:border-blue-400 cursor-pointer group relative overflow-hidden min-h-[260px] sm:min-h-[340px]">
+                    <div class="my-auto py-3 sm:py-5 space-y-2.5 z-10 flex flex-col items-center w-full">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 text-xl sm:text-2xl shadow-inner group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
                             <i class="fa-solid fa-box-open"></i>
                         </div>
-                        <span class="text-[8.5px] sm:text-[10px] bg-blue-500/20 text-blue-300 border border-blue-400/30 font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider">Próximo Ingreso</span>
-                        <h4 class="text-xs sm:text-sm font-black text-white leading-tight">En espera de próximo producto</h4>
-                        <p class="text-[10px] sm:text-xs text-slate-400 font-medium">¿Buscas otro modelo? ¡Te lo cotizamos!</p>
+                        <span class="text-[8.5px] sm:text-[10px] bg-blue-50 text-blue-600 border border-blue-200 font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider">Próximo Ingreso</span>
+                        <h4 class="text-xs sm:text-sm font-black text-slate-800 leading-tight">En espera de próximo producto</h4>
+                        <p class="text-[10px] sm:text-xs text-slate-500 font-medium max-w-[180px]">¿Buscas otro modelo? ¡Te lo cotizamos al instante!</p>
                     </div>
-                    <div class="w-full pt-2 border-t border-slate-800/80 z-10">
-                        <span class="text-xs text-emerald-400 font-black flex items-center justify-center gap-1.5 py-1">
-                            <i class="fa-brands fa-whatsapp text-sm"></i> Preguntar
+                    <div class="w-full pt-2.5 border-t border-gray-100 z-10">
+                        <span class="text-xs text-emerald-600 font-black flex items-center justify-center gap-1.5 py-1 group-hover:text-emerald-700">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> Preguntar por WhatsApp
                         </span>
                     </div>
                 </div>
@@ -3438,9 +3428,11 @@
                     ? `<span class="text-[8.5px] bg-emerald-50 text-emerald-700 border border-emerald-200 font-black px-2 py-0.5 rounded-md truncate">Entrega Inmediata</span>` 
                     : `<span class="text-[8.5px] bg-amber-50 text-amber-700 border border-amber-200 font-black px-2 py-0.5 rounded-md truncate">Bajo Pedido</span>`;
                 
+                const detalleTexto = prod.memoria ? prod.memoria : (prod.desc ? prod.desc.slice(0, 30) : 'Garantizado');
+
                 return `
-                    <div onclick="window.abrirModalProducto('${prod.id}')" class="snap-start shrink-0 w-52 sm:w-60 bg-white rounded-2xl p-3.5 border border-gray-200/80 shadow-sm flex flex-col justify-between transition-all hover:shadow-xl hover:border-blue-200 cursor-pointer select-none group">
-                        <div>
+                    <div onclick="window.abrirModalProducto('${prod.id}')" class="snap-start shrink-0 w-52 sm:w-60 bg-white rounded-2xl p-3.5 border border-gray-200/80 shadow-sm flex flex-col justify-between transition-all hover:shadow-xl hover:border-blue-300 cursor-pointer select-none group">
+                        <div class="flex flex-col flex-grow">
                             <div class="w-full h-40 bg-white border border-gray-50 rounded-xl overflow-hidden mb-2.5 flex justify-center items-center p-2">
                                 <img src="${fotoProd}" alt="${prod.modelo}" class="max-w-full max-h-full object-contain filter drop-shadow-md group-hover:scale-105 transition-transform duration-300">
                             </div>
@@ -3448,8 +3440,13 @@
                                 <span class="text-[9px] font-black text-amber-600 uppercase tracking-widest truncate">Accesorio</span>
                                 ${tagEntrega}
                             </div>
-                            <h4 class="font-black text-slate-900 text-sm group-hover:text-blue-600 truncate leading-snug tracking-tight">${prod.modelo}</h4>
-                            <p class="text-[11px] text-slate-500 font-extrabold mt-0.5 truncate tracking-wide">${prod.memoria || (prod.desc ? prod.desc.slice(0, 25) + '...' : 'Garantizado')}</p>
+                            <h4 class="font-black text-slate-900 text-xs sm:text-sm group-hover:text-blue-600 leading-snug tracking-tight line-clamp-2 min-h-[2.4rem]" title="${prod.modelo}">${prod.modelo}</h4>
+                            <div class="mt-1.5 h-6 flex items-center">
+                                <span class="text-[10px] text-slate-600 bg-slate-50 border border-slate-200/80 px-2 py-0.5 rounded-lg inline-flex items-center gap-1 font-bold truncate max-w-full">
+                                    <i class="fa-solid fa-tag text-[9px] text-amber-500 shrink-0"></i>
+                                    <span class="truncate">${detalleTexto}</span>
+                                </span>
+                            </div>
                         </div>
                         <div class="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between gap-1">
                             <div class="flex items-baseline gap-1">
@@ -3460,7 +3457,7 @@
                                 <button onclick="event.stopPropagation(); window.compartirProductoEspecificoWa('${prod.modelo}', ${prod.precio})" class="w-8 h-8 bg-emerald-50 hover:bg-emerald-100 text-emerald-600 border border-emerald-200/60 rounded-xl flex items-center justify-center transition-all cursor-pointer shadow-sm" title="Preguntar por WhatsApp">
                                     <i class="fa-brands fa-whatsapp text-sm"></i>
                                 </button>
-                                <span class="bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white font-black text-xs px-2.5 py-1.5 rounded-xl transition-all border border-blue-200/60 shadow-sm">Ver</span>
+                                <span class="bg-blue-50 text-blue-700 group-hover:bg-blue-600 group-hover:text-white font-black text-xs px-2.5 py-1.5 rounded-xl transition-all border border-blue-200/60 shadow-sm">Ver</span>
                             </div>
                         </div>
                         ${esAdminAutenticado ? `<div class="flex gap-2 border-t pt-1.5 mt-2 justify-center"><button onclick="event.stopPropagation(); window.prepararEdicionArticulo('${prod.id}')" class="text-blue-600 hover:underline text-xs font-black cursor-pointer">Editar</button><button onclick="event.stopPropagation(); window.eliminarProducto('${prod.id}')" class="text-red-500 hover:underline text-xs font-black cursor-pointer">Borrar</button></div>` : ''}
