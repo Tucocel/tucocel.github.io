@@ -744,8 +744,19 @@
                     © 2026 TUCOCEL C.A. — RIF: J-31378837-6
                 </p>
                 <p class="text-slate-500 text-[11px]">Web desarrollada de manera exclusiva por <a href="#" class="text-blue-400 hover:underline font-bold">@publionlinemk</a> — Agencia Oficial de Publicidad de Tucocel C.A.</p>
-                <div class="pt-2 flex items-center justify-center md:justify-start gap-2 text-[10px] text-slate-500 font-bold uppercase tracking-wider">
-                    <i class="fa-solid fa-eye text-blue-500"></i> Visitas del sitio: <span id="contador-visitas-num" class="bg-slate-950 text-blue-400 px-2 py-0.5 rounded border border-slate-800 font-mono">0</span>
+                <div class="pt-2 flex flex-wrap items-center justify-center md:justify-start gap-2 sm:gap-3 text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+                    <span class="inline-flex items-center gap-1.5 bg-slate-950 px-2.5 py-1 rounded-xl border border-slate-800 shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        <span class="text-emerald-400">En vivo ahora:</span> <b id="contador-online-num" class="text-white font-mono font-black">1</b>
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 bg-slate-950 px-2.5 py-1 rounded-xl border border-slate-800 shadow-sm">
+                        <i class="fa-solid fa-calendar-day text-amber-400"></i>
+                        <span class="text-amber-400">Hoy:</span> <b id="contador-visitas-hoy" class="text-white font-mono font-black">0</b>
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 bg-slate-950 px-2.5 py-1 rounded-xl border border-slate-800 shadow-sm">
+                        <i class="fa-solid fa-eye text-cyan-400"></i>
+                        <span class="text-slate-400">Total:</span> <b id="contador-visitas-num" class="text-cyan-400 font-mono font-black">0</b>
+                    </span>
                 </div>
             </div>
             
@@ -768,6 +779,8 @@
             </div>
         </div>
     </footer>
+    >
+
 
     <!-- BOTÓN FLOTANTE WA -->
     <button onclick="window.abrirModalConsultaGeneral()" class="btn-flotante-wa fixed bottom-6 right-6 bg-emerald-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl z-40 transition-all hover:bg-emerald-600 shadow-xl cursor-pointer">
@@ -2685,7 +2698,7 @@
                         `⚠️ *Nota Comercial:* El saldo pendiente se ajustará al valor vigente del equipo al momento de completar el pago total para su retiro. El equipo físico con su serial/IMEI se asigna y entrega al liquidar la totalidad de la cuenta.\n\n` +
                         `🛡️ *Garantía de 60 días activa a partir del retiro físico.* ¡Gracias por su confianza! 🚀`;
 
-            window.open(`https://wa.me/${apt.telefono.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`, '_blank');
+            window.abrirWhatsAppSelector(apt.telefono, msg);
         };
 
         window.imprimirTicketApartado = function(id) {
@@ -2789,7 +2802,7 @@
             const mesSel = document.getElementById('cierre-mes-select').value;
             const anioSel = document.getElementById('cierre-anio-input').value;
             const msg = `📊 *INFORME DE CIERRE DE MES — TUCOCEL C.A.*\n📅 Período: ${mesSel}/${anioSel}\n\nResumen consolidado generado por el sistema administrativo.`;
-            window.open(`https://wa.me/584247357549?text=${encodeURIComponent(msg)}`, '_blank');
+            window.abrirWhatsAppSelector('584247357549', msg);
         };
 
         window.abrirVisualizadorHojaBlanca = function(index) {
@@ -2965,8 +2978,8 @@
             const nombre = document.getElementById('banner-con-nombre').value.trim();
             const dir = document.getElementById('banner-con-direccion').value.trim();
             if(!nombre || !dir) return alert("Complete los campos.");
-            window.open(`https://wa.me/584247357549?text=${encodeURIComponent(`¡Hola Tucocel! Consulta de ${nombre} (${dir})`)}`, '_blank');
             window.cerrarModalConsultaBanner();
+            window.abrirWhatsAppSelector('584247357549', `¡Hola Tucocel! Consulta de ${nombre} (${dir})`);
         };
 
         window.abrirModalConsultaGeneral = function() { document.getElementById('modal-consulta-general').classList.remove('hidden'); };
@@ -2978,8 +2991,8 @@
         window.enviarConsultaGeneralWhatsApp = function() {
             const n = document.getElementById('con-nombre').value;
             const d = document.getElementById('con-detalles').value;
-            window.open(`https://wa.me/584247357549?text=${encodeURIComponent(`Consulta de ${n}: ${d}`)}`, '_blank');
             window.cerrarModalConsultaGeneral();
+            window.abrirWhatsAppSelector('584247357549', `Consulta de ${n}: ${d}`);
         };
 
         window.abrirModalSistemaFacturacion = function() {
@@ -3190,7 +3203,7 @@
             const totalEnBs = bsTasa > 0 ? (totalEnCop / bsTasa) : 0;
 
             const msg = `*TUCOCEL C.A. — RIF: J-31378837-6*\n*Nota de Entrega N° ${String(nota.numNota).padStart(6, '0')}*\n*Fecha:* ${nota.fecha}\n\n👤 *Cliente:* ${nota.cliente}\n💳 *Cédula/RIF:* ${nota.cedula}\n📞 *Teléfono:* ${nota.telefono}\n📍 *Dirección:* ${nota.direccion}\n\n📦 *Detalle de compra:*\n${desc}\n\n💵 *Total General:* $${usdNeto.toFixed(2)} USD\n*Ref COP:* ${Math.round(totalEnCop).toLocaleString('es-CO')} COP\n*Ref VES:* ${totalEnBs.toFixed(2).toLocaleString('es-VE')} Bs\n\n🛡️ *GARANTÍA (60 DÍAS)*: 2 meses continuos en defectos técnicos de fábrica.`;
-            window.open(`https://wa.me/${nota.telefono.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`, '_blank');
+            window.abrirWhatsAppSelector(nota.telefono, msg);
         };
 
         window.reabrirNotaHistorialPorObjeto = function(index) { 
@@ -3363,37 +3376,28 @@
             if(!modelo || !precio) { alert("Complete modelo y precio."); return; }
 
             const btn = document.getElementById('btn-guardar');
-            if(btn) { btn.disabled = true; btn.innerText = "Optimizando foto..."; }
+            if(btn) { btn.disabled = true; btn.innerText = "Guardando..."; }
 
-            // Subir a Firebase Storage si es una imagen nueva en Base64 para almacenar URL ultraliviana
-            if (foto && foto.startsWith('data:image/')) {
-                try {
-                    const itemKeyId = idArticuloEnEdicion || ("prod_" + Date.now());
-                    const storageRef = sRef(storage, `fotos_catalogo/${itemKeyId}.webp`);
-                    await uploadString(storageRef, foto, 'data_url');
-                    const downloadUrl = await getDownloadURL(storageRef);
-                    if (downloadUrl) {
-                        foto = downloadUrl;
-                    }
-                } catch (errStorage) {
-                    console.warn("Storage upload fallback to compressed string:", errStorage);
+            try {
+                if (idArticuloEnEdicion) { 
+                    const idx = PRODUCTOS.findIndex(p => p.id === idArticuloEnEdicion); 
+                    if (idx !== -1) PRODUCTOS[idx] = { id: idArticuloEnEdicion, marca, modalidad: mod, modelo, memoria: memoriaVal, precio, foto: foto || PRODUCTOS[idx].foto, desc, tipoProducto: tipoProductoVal, likes: PRODUCTOS[idx].likes || 0 }; 
+                    window.cancelarEdicionActiva(); 
+                } else { 
+                    PRODUCTOS.unshift({ id: (new Date().getTime()).toString(), marca, modalidad: mod, modelo, memoria: memoriaVal, precio, foto, desc, tipoProducto: tipoProductoVal, likes: 0 }); 
+                    window.limpiarFormularioPanel(); 
                 }
+                await window.guardarInventarioFirebase(); 
+                window.ejecutarFiltroCombinado(); 
+                window.actualizarSelectFacturacion();
+                window.actualizarSelectApartados();
+                alert("✅ Producto guardado exitosamente.");
+            } catch(err) {
+                console.error("Error guardando:", err);
+                alert("Error al guardar en base de datos.");
+            } finally {
+                if(btn) { btn.disabled = false; btn.innerText = "Guardar en Inventario"; }
             }
-            
-            if (idArticuloEnEdicion) { 
-                const idx = PRODUCTOS.findIndex(p => p.id === idArticuloEnEdicion); 
-                if (idx !== -1) PRODUCTOS[idx] = { id: idArticuloEnEdicion, marca, modalidad: mod, modelo, memoria: memoriaVal, precio, foto: foto || PRODUCTOS[idx].foto, desc, tipoProducto: tipoProductoVal, likes: PRODUCTOS[idx].likes || 0 }; 
-                window.cancelarEdicionActiva(); 
-            } else { 
-                PRODUCTOS.unshift({ id: (new Date().getTime()).toString(), marca, modalidad: mod, modelo, memoria: memoriaVal, precio, foto, desc, tipoProducto: tipoProductoVal, likes: 0 }); 
-                window.limpiarFormularioPanel(); 
-            }
-            if(btn) { btn.innerText = "Guardando en Inventario..."; }
-            await window.guardarInventarioFirebase(); 
-            window.ejecutarFiltroCombinado(); 
-            window.actualizarSelectFacturacion();
-            window.actualizarSelectApartados();
-            if(btn) { btn.disabled = false; btn.innerText = "Guardar en Inventario"; }
         };
 
         window.procesarImagen = function(e) { 
@@ -3632,12 +3636,12 @@
 
         window.compartirVitrinaGeneralWa = function() {
             const msg = `📱 *TUCOCEL C.A. — Vitrina Tecnológica Digital*\nRIF: J-31378837-6\n\nExplora nuestro stock en tiempo real y cotiza al instante:\nhttps://tucocel.github.io/`;
-            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+            window.abrirWhatsAppSelector('', msg);
         };
 
         window.compartirProductoEspecificoWa = function(modelo, precio) {
             const msg = `📱 *TUCOCEL C.A.* | Consulta de Smartphone:\n📦 *Modelo:* ${modelo}\n💵 *Precio:* $${precio} USD\n\n¿Sigue disponible para entrega inmediata?`;
-            window.open(`https://wa.me/584247357549?text=${encodeURIComponent(msg)}`, '_blank');
+            window.abrirWhatsAppSelector('584247357549', msg);
         };
 
         window.verificarSesionLocal = function() { 
@@ -3726,6 +3730,124 @@
         window.verificarConexionNubeInicial();
         window.descargarTextosPersonalizados();
         window.cargarInventarioFirebase();
+        
+        // =============================================================
+        // SISTEMA NATIVO DE COMPARTIR (ANDROID / SISTEMA OPERATIVO)
+        // =============================================================
+        window.abrirWhatsAppSelector = async function(telefono, mensaje) {
+            let cleanPhone = (telefono || '').replace(/[^0-9]/g, '');
+            const textoCompleto = mensaje || '';
+
+            // Si el dispositivo cuenta con el menú nativo de Compartir del Sistema (Android / iOS)
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'Tucocel C.A.',
+                        text: textoCompleto
+                    });
+                    return;
+                } catch(err) {
+                    // Si el usuario cancela o no soporta compartir texto directo, pasa al enlace directo
+                    if (err.name === 'AbortError') return;
+                }
+            }
+
+            // Enlace universal compatible (Android/iOS despliega selector si no hay Web Share)
+            const textEnc = encodeURIComponent(textoCompleto);
+            let url = cleanPhone ? `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${textEnc}` : `https://api.whatsapp.com/send?text=${textEnc}`;
+            window.open(url, '_blank');
+        };
+
+        // =============================================================
+        // CONTADOR DE VISITAS EN TIEMPO REAL, VISITAS HOY Y TOTALES
+        // =============================================================
+        window.gestionarContadorVisitasFirebase = async function() {
+            try {
+                const hoyStr = new Date().toLocaleDateString('es-VE');
+                const docRef = doc(db, "configuraciones", "estadisticas_visitas");
+                const docSnap = await getDoc(docRef);
+
+                let totalVisitas = 1;
+                let visitasHoy = 1;
+                let fechaRegistrada = hoyStr;
+                let heartbeat = {};
+
+                const miSesionId = "ses_" + Date.now() + "_" + Math.random().toString(36).substring(2, 7);
+
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    totalVisitas = (data.totalVisitas || 0) + 1;
+                    if (data.fechaRegistrada === hoyStr) {
+                        visitasHoy = (data.visitasHoy || 0) + 1;
+                    } else {
+                        visitasHoy = 1; // Nuevo día, reinicia conteo diario
+                        fechaRegistrada = hoyStr;
+                    }
+                    heartbeat = data.heartbeat || {};
+                }
+
+                // Registrar latido activo de esta sesión
+                heartbeat[miSesionId] = Date.now();
+
+                // Limpiar sesiones inactivas de más de 3 minutos
+                const ahora = Date.now();
+                let onlineCount = 1;
+                Object.keys(heartbeat).forEach(k => {
+                    if (ahora - heartbeat[k] > 180000) {
+                        delete heartbeat[k];
+                    } else {
+                        onlineCount++;
+                    }
+                });
+
+                // Actualizar en Firebase
+                await setDoc(docRef, {
+                    totalVisitas,
+                    visitasHoy,
+                    fechaRegistrada,
+                    heartbeat
+                }, { merge: true });
+
+                // Renderizar en el DOM
+                const elTot = document.getElementById('contador-visitas-num');
+                const elHoy = document.getElementById('contador-visitas-hoy');
+                const elOnl = document.getElementById('contador-online-num');
+
+                if (elTot) elTot.innerText = totalVisitas.toLocaleString();
+                if (elHoy) elHoy.innerText = visitasHoy.toLocaleString();
+                if (elOnl) elOnl.innerText = Math.max(1, Object.keys(heartbeat).length);
+
+                // Latido en segundo plano cada 60 segundos
+                setInterval(async () => {
+                    try {
+                        const snapRefresh = await getDoc(docRef);
+                        if (snapRefresh.exists()) {
+                            let hb = snapRefresh.data().heartbeat || {};
+                            hb[miSesionId] = Date.now();
+                            const nowCheck = Date.now();
+                            Object.keys(hb).forEach(k => {
+                                if (nowCheck - hb[k] > 180000) delete hb[k];
+                            });
+                            await updateDoc(docRef, { heartbeat: hb });
+                            const elOnlLive = document.getElementById('contador-online-num');
+                            if (elOnlLive) elOnlLive.innerText = Math.max(1, Object.keys(hb).length);
+                        }
+                    } catch(e) {}
+                }, 60000);
+
+            } catch(e) {
+                console.warn("Analytics local mode:", e);
+                // Fallback local si la red está en modo offline
+                const elTot = document.getElementById('contador-visitas-num');
+                const elHoy = document.getElementById('contador-visitas-hoy');
+                const elOnl = document.getElementById('contador-online-num');
+                if (elTot) elTot.innerText = "1";
+                if (elHoy) elHoy.innerText = "1";
+                if (elOnl) elOnl.innerText = "1";
+            }
+        };
+
+        window.gestionarContadorVisitasFirebase();
         window.inicializarScrollAutomaticoCarrusel();
     </script>
 </body>
