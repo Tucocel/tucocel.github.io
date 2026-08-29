@@ -1073,43 +1073,60 @@
                         </div>
 
                         <div id="carga-manual-bloque" class="space-y-3">
-                            <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
-                                <div class="sm:col-span-2">
+                            <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
+                                <div class="sm:col-span-5">
                                     <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Descripción / Modelo</label>
-                                    <input type="text" id="manual-modelo" placeholder="Ej: Redmi Note 13 Pro..." class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
+                                    <input type="text" id="manual-modelo" placeholder="Ej: Redmi Note 13 Pro / Vidrio Templado..." class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
                                 </div>
-                                <div>
-                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Precio Unitario ($)</label>
-                                    <input type="number" id="manual-precio" placeholder="0" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
+                                <div class="sm:col-span-3">
+                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Moneda de Cobro</label>
+                                    <select id="manual-moneda-item" onchange="window.alCambiarMonedaManualFactura()" class="w-full bg-white border-2 border-blue-500 p-2 rounded-xl text-xs font-black text-blue-700 focus:outline-none">
+                                        <option value="USD">💵 Dólares ($ USD)</option>
+                                        <option value="COP">🇨🇴 Pesos (COP)</option>
+                                    </select>
                                 </div>
-                                <div>
+                                <div class="sm:col-span-2">
+                                    <label id="lbl-manual-precio" class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Precio ($ USD)</label>
+                                    <input type="number" id="manual-precio" placeholder="0" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 font-mono focus:bg-white focus:outline-blue-500">
+                                </div>
+                                <div class="sm:col-span-2">
                                     <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Cantidad</label>
-                                    <input type="number" id="manual-cantidad" value="1" min="1" oninput="window.renderizarCamposImeiDinamicos('manual')" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
+                                    <input type="number" id="manual-cantidad" value="1" min="1" oninput="window.renderizarCamposImeiDinamicos('manual')" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 font-mono focus:bg-white focus:outline-blue-500">
                                 </div>
                             </div>
-                            <div class="space-y-2 bg-gray-50 p-3 rounded-xl border border-gray-100">
-                                <div class="flex items-center gap-2">
-                                    <input type="checkbox" id="manual-check-imei" onchange="window.renderizarCamposImeiDinamicos('manual')" class="w-4 h-4 text-blue-600 rounded">
-                                    <label for="manual-check-imei" class="text-xs text-gray-700 font-bold cursor-pointer">¿Es celular? (Desglosar 4 dígitos de IMEI)</label>
+                            <div class="space-y-2 bg-slate-100 p-3.5 rounded-xl border border-slate-300 shadow-inner">
+                                <div class="flex items-center gap-2.5">
+                                    <input type="checkbox" id="manual-check-imei" onchange="window.renderizarCamposImeiDinamicos('manual')" class="w-4 h-4 text-blue-600 rounded cursor-pointer accent-blue-600">
+                                    <label for="manual-check-imei" class="text-xs text-slate-900 font-black cursor-pointer select-none">📱 ¿Es celular? (Desglosar 4 dígitos de IMEI)</label>
                                 </div>
-                                <div id="wrapper-manual-imeis" class="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-2"></div>
+                                <div id="wrapper-manual-imeis" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-2"></div>
                             </div>
                         </div>
 
                         <div id="carga-inventario-bloque" class="space-y-3 hidden">
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                                <div class="sm:col-span-2">
+                            <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
+                                <div class="sm:col-span-6">
                                     <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Seleccionar Producto</label>
-                                    <select id="fact-select-producto" onchange="window.renderizarCamposImeiDinamicos('inventario')" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
+                                    <select id="fact-select-producto" onchange="window.alSeleccionarProductoFacturacionCatalogo()" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
                                         <option value="">-- Seleccione un producto --</option>
                                     </select>
                                 </div>
-                                <div>
+                                <div class="sm:col-span-3">
+                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Moneda de Cobro</label>
+                                    <select id="fact-moneda-item" onchange="window.alCambiarMonedaCatalogoFactura()" class="w-full bg-white border-2 border-blue-500 p-2 rounded-xl text-xs font-black text-blue-700 focus:outline-none">
+                                        <option value="USD">💵 Dólares ($ USD)</option>
+                                        <option value="COP">🇨🇴 Pesos (COP)</option>
+                                    </select>
+                                </div>
+                                <div class="sm:col-span-3">
                                     <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Cantidad</label>
-                                    <input type="number" id="fact-cantidad" value="1" min="1" oninput="window.renderizarCamposImeiDinamicos('inventario')" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900">
+                                    <input type="number" id="fact-cantidad" value="1" min="1" oninput="window.renderizarCamposImeiDinamicos('inventario')" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 font-mono focus:bg-white focus:outline-blue-500">
                                 </div>
                             </div>
-                            <div id="wrapper-fact-imeis" class="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-gray-50 p-2 rounded-xl mt-1"></div>
+                            <div id="wrapper-fact-imeis-card" class="bg-slate-100 p-3.5 rounded-xl border border-slate-300 shadow-inner hidden">
+                                <span class="text-xs text-slate-900 font-black block mb-2">📱 Desglose de 4 dígitos de IMEI:</span>
+                                <div id="wrapper-fact-imeis" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5"></div>
+                            </div>
                         </div>
 
                         <div class="flex justify-end pt-1">
@@ -2839,38 +2856,77 @@
             });
         };
 
+        window.alCambiarMonedaManualFactura = function() {
+            const m = document.getElementById('manual-moneda-item')?.value || 'USD';
+            const lbl = document.getElementById('lbl-manual-precio');
+            const inp = document.getElementById('manual-precio');
+            if (m === 'COP') {
+                if (lbl) lbl.innerText = "Precio (COP Pesos)";
+                if (inp) inp.placeholder = "Ej: 20000";
+            } else {
+                if (lbl) lbl.innerText = "Precio ($ USD)";
+                if (inp) inp.placeholder = "0.00";
+            }
+        };
+
+        window.alSeleccionarProductoFacturacionCatalogo = function() {
+            const id = document.getElementById('fact-select-producto')?.value;
+            const prod = PRODUCTOS.find(p => p.id === id);
+            const selMoneda = document.getElementById('fact-moneda-item');
+            if (prod && selMoneda) {
+                // Si es un accesorio (marca Otros Productos), sugiere COP por comodidad
+                if (prod.marca === 'Otros Productos') {
+                    selMoneda.value = 'COP';
+                } else {
+                    selMoneda.value = 'USD';
+                }
+            }
+            window.renderizarCamposImeiDinamicos('inventario');
+        };
+
+        window.alCambiarMonedaCatalogoFactura = function() {
+            window.renderizarCamposImeiDinamicos('inventario');
+        };
+
         window.renderizarCamposImeiDinamicos = function(modo) {
             if(modo === 'manual') {
-                const cant = parseInt(document.getElementById('manual-cantidad').value) || 1;
-                const check = document.getElementById('manual-check-imei').checked;
+                const cant = parseInt(document.getElementById('manual-cantidad')?.value) || 1;
+                const check = document.getElementById('manual-check-imei')?.checked;
                 const contenedor = document.getElementById('wrapper-manual-imeis');
                 if(!contenedor) return;
                 contenedor.innerHTML = '';
                 if(check && cant > 0) {
                     for(let i=1; i<=cant; i++) {
                         contenedor.innerHTML += `
-                            <div>
-                                <label class="text-[8px] text-red-500 font-bold block mb-0.5">IMEI Celular ${i}</label>
-                                <input type="text" id="manual-imei-field-${i}" maxlength="4" placeholder="4 dígitos" class="w-full bg-white border border-gray-300 p-1 rounded-lg text-xs font-black text-center font-mono">
+                            <div class="bg-white p-2 rounded-xl border-2 border-slate-300 shadow-sm">
+                                <label class="text-[9px] text-red-600 font-extrabold uppercase block mb-1">IMEI Celular ${i} *</label>
+                                <input type="text" id="manual-imei-field-${i}" maxlength="4" placeholder="4 dígitos" class="w-full bg-slate-50 border-2 border-slate-400 focus:border-blue-600 focus:bg-white p-1.5 rounded-lg text-sm font-black text-center font-mono text-slate-950 placeholder-slate-400 outline-none">
                             </div>`;
                     }
                 }
             } else {
-                const id = document.getElementById('fact-select-producto').value;
-                const cant = parseInt(document.getElementById('fact-cantidad').value) || 1;
+                const id = document.getElementById('fact-select-producto')?.value;
+                const cant = parseInt(document.getElementById('fact-cantidad')?.value) || 1;
                 const contenedor = document.getElementById('wrapper-fact-imeis');
+                const card = document.getElementById('wrapper-fact-imeis-card');
                 if(!contenedor) return;
                 contenedor.innerHTML = '';
-                if(!id) return;
+                if(!id) {
+                    if(card) card.classList.add('hidden');
+                    return;
+                }
                 const prod = PRODUCTOS.find(p => p.id === id);
                 if(prod && prod.marca !== 'Otros Productos' && cant > 0) {
+                    if(card) card.classList.remove('hidden');
                     for(let i=1; i<=cant; i++) {
                         contenedor.innerHTML += `
-                            <div>
-                                <label class="text-[8px] text-red-500 font-bold block mb-0.5">IMEI Celular ${i}</label>
-                                <input type="text" id="fact-imei-field-${i}" maxlength="4" placeholder="4 dígitos" class="w-full bg-white border border-gray-300 p-1 rounded-lg text-xs font-black text-center font-mono">
+                            <div class="bg-white p-2 rounded-xl border-2 border-slate-300 shadow-sm">
+                                <label class="text-[9px] text-red-600 font-extrabold uppercase block mb-1">IMEI Celular ${i} *</label>
+                                <input type="text" id="fact-imei-field-${i}" maxlength="4" placeholder="4 dígitos" class="w-full bg-slate-50 border-2 border-slate-400 focus:border-blue-600 focus:bg-white p-1.5 rounded-lg text-sm font-black text-center font-mono text-slate-950 placeholder-slate-400 outline-none">
                             </div>`;
                     }
+                } else {
+                    if(card) card.classList.add('hidden');
                 }
             }
         };
@@ -3105,13 +3161,16 @@
         };
 
         window.ejecutarBotonAgregarItem = function() {
+            const tCOP = parseFloat(document.getElementById('tasa-cop')?.value) || 3600;
+
             if(modoCargaFacturaActivo === 'manual') {
-                const modelo = document.getElementById('manual-modelo').value.trim();
-                const precio = parseFloat(document.getElementById('manual-precio').value) || 0;
-                const cant = parseInt(document.getElementById('manual-cantidad').value) || 1;
-                const checkImei = document.getElementById('manual-check-imei').checked;
+                const modelo = (document.getElementById('manual-modelo')?.value || '').trim();
+                const precioRaw = parseFloat(document.getElementById('manual-precio')?.value) || 0;
+                const cant = parseInt(document.getElementById('manual-cantidad')?.value) || 1;
+                const checkImei = document.getElementById('manual-check-imei')?.checked;
+                const monedaItem = document.getElementById('manual-moneda-item')?.value || 'USD';
                 
-                if(!modelo || precio <= 0) return alert("Ingrese modelo y precio válido.");
+                if(!modelo || precioRaw <= 0) return alert("Ingrese modelo y precio válido.");
                 
                 let imeis = [];
                 if(checkImei) {
@@ -3122,14 +3181,38 @@
                     }
                 }
 
-                ITEMS_VENTA_ACTIVA.push({ id: "man-" + Date.now(), modelo, cantidad: cant, precio: precio * cant, imeis: checkImei ? imeis : null });
+                // Cálculo en USD base y precio original según moneda
+                let precioUnitUSD = precioRaw;
+                let precioUnitCOP = precioRaw * tCOP;
+                if (monedaItem === 'COP') {
+                    precioUnitCOP = precioRaw;
+                    precioUnitUSD = tCOP > 0 ? (precioRaw / tCOP) : 0;
+                }
+
+                const totalUSDItem = precioUnitUSD * cant;
+                const totalCOPItem = precioUnitCOP * cant;
+
+                ITEMS_VENTA_ACTIVA.push({
+                    id: "man-" + Date.now(),
+                    modelo,
+                    cantidad: cant,
+                    monedaIngreso: monedaItem,
+                    precioOriginalUnit: precioRaw,
+                    precioUnitUSD: precioUnitUSD,
+                    precio: totalUSDItem, // Total USD para compatibilidad general
+                    totalCOP: totalCOPItem,
+                    imeis: checkImei ? imeis : null
+                });
+
                 document.getElementById('manual-modelo').value = '';
                 document.getElementById('manual-precio').value = '';
                 document.getElementById('manual-cantidad').value = '1';
+                document.getElementById('manual-check-imei').checked = false;
                 document.getElementById('wrapper-manual-imeis').innerHTML = '';
             } else {
-                const id = document.getElementById('fact-select-producto').value;
-                const cant = parseInt(document.getElementById('fact-cantidad').value) || 1;
+                const id = document.getElementById('fact-select-producto')?.value;
+                const cant = parseInt(document.getElementById('fact-cantidad')?.value) || 1;
+                const monedaItem = document.getElementById('fact-moneda-item')?.value || 'USD';
                 const prod = PRODUCTOS.find(p => p.id === id);
                 if(!prod) return alert("Seleccione un producto.");
 
@@ -3142,9 +3225,30 @@
                     }
                 }
 
-                ITEMS_VENTA_ACTIVA.push({ id: prod.id, modelo: prod.modelo, cantidad: cant, precio: prod.precio * cant, imeis: prod.marca !== 'Otros Productos' ? imeis : null });
+                // Si se escogió en COP, convertimos el precio del producto a COP con la tasa
+                let precioUnitUSD = prod.precio;
+                let precioUnitCOP = prod.precio * tCOP;
+
+                const totalUSDItem = precioUnitUSD * cant;
+                const totalCOPItem = precioUnitCOP * cant;
+
+                ITEMS_VENTA_ACTIVA.push({
+                    id: prod.id,
+                    modelo: prod.modelo,
+                    cantidad: cant,
+                    monedaIngreso: monedaItem,
+                    precioOriginalUnit: monedaItem === 'COP' ? precioUnitCOP : precioUnitUSD,
+                    precioUnitUSD: precioUnitUSD,
+                    precio: totalUSDItem,
+                    totalCOP: totalCOPItem,
+                    imeis: prod.marca !== 'Otros Productos' ? imeis : null
+                });
+
                 document.getElementById('fact-select-producto').value = '';
+                document.getElementById('fact-cantidad').value = '1';
                 document.getElementById('wrapper-fact-imeis').innerHTML = '';
+                const card = document.getElementById('wrapper-fact-imeis-card');
+                if(card) card.classList.add('hidden');
             }
             window.renderizarItemsVentaActiva();
         };
@@ -3156,24 +3260,35 @@
 
         window.renderizarItemsVentaActiva = function() {
             const cont = document.getElementById('fact-lista-items');
-            document.getElementById('fact-items-count').innerText = `${ITEMS_VENTA_ACTIVA.length} items`;
+            const cntBadge = document.getElementById('fact-items-count');
+            if(cntBadge) cntBadge.innerText = `${ITEMS_VENTA_ACTIVA.length} items`;
+            if(!cont) return;
             if(ITEMS_VENTA_ACTIVA.length === 0) {
                 cont.innerHTML = '<p class="text-center text-slate-500 text-xs py-4">No hay artículos añadidos todavía.</p>';
                 window.calcularTotalesFactura();
                 return;
             }
-            cont.innerHTML = ITEMS_VENTA_ACTIVA.map((item, idx) => `
-                <div class="bg-slate-950 p-2 rounded-xl border border-slate-800 flex justify-between text-white text-xs">
-                    <div>
-                        <p class="font-bold truncate max-w-[140px]">${item.cantidad}x ${item.modelo}</p>
-                        ${item.imeis ? `<span class="text-[9px] text-amber-400 font-mono">IMEIs: ${item.imeis.join(', ')}</span>` : ''}
+            cont.innerHTML = ITEMS_VENTA_ACTIVA.map((item, idx) => {
+                const badgeMoneda = item.monedaIngreso === 'COP'
+                    ? `<span class="text-[9px] bg-emerald-950 text-emerald-300 border border-emerald-500/40 px-1.5 py-0.2 rounded font-bold">${Math.round(item.totalCOP || (item.precio * 3600)).toLocaleString('es-CO')} COP</span>`
+                    : `<span class="text-[9px] bg-blue-950 text-blue-300 border border-blue-500/40 px-1.5 py-0.2 rounded font-bold">$${item.precio.toFixed(2)} USD</span>`;
+
+                return `
+                    <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex justify-between items-center text-white text-xs gap-2">
+                        <div class="min-w-0">
+                            <p class="font-bold truncate text-white">${item.cantidad}x ${item.modelo}</p>
+                            <div class="flex items-center gap-1.5 mt-0.5">
+                                ${badgeMoneda}
+                                ${item.imeis ? `<span class="text-[9px] text-amber-400 font-mono font-bold">IMEI: ${item.imeis.join(', ')}</span>` : ''}
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 shrink-0">
+                            <span class="font-mono font-bold text-white">$${item.precio.toFixed(2)}</span>
+                            <button onclick="window.removerItemVenta(${idx})" class="text-red-400 hover:text-red-300 font-bold p-1 cursor-pointer" title="Eliminar ítem"><i class="fa-solid fa-xmark"></i></button>
+                        </div>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <span>$${item.precio.toFixed(2)}</span>
-                        <button onclick="window.removerItemVenta(${idx})" class="text-red-400 font-bold cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
-                    </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
             window.calcularTotalesFactura();
         };
 
@@ -3397,6 +3512,7 @@
                 window.ejecutarFiltroCombinado(); 
                 window.actualizarSelectFacturacion(); 
                 window.actualizarSelectApartados();
+                window.verificarEnlaceDirectoProductoUrl();
             }
         };
 
@@ -3729,12 +3845,24 @@
         window.compartirProductoEspecificoWa = function(idOModelo, precioOpcional) {
             let prod = PRODUCTOS.find(p => p.id === idOModelo || p.modelo === idOModelo);
             
+            const prodId = prod ? prod.id : idOModelo;
             const modelo = prod ? prod.modelo : idOModelo;
             const marca = prod ? prod.marca : "SMARTPHONE";
             const precio = prod ? prod.precio : (precioOpcional || 0);
             const memoria = prod && prod.memoria ? prod.memoria : "";
             const modalidad = prod && prod.modalidad === 'consultar' ? '🔮 Bajo Pedido (Preventa)' : '⚡ Stock Físico (Entrega Inmediata)';
             const desc = prod && prod.desc ? prod.desc.trim() : "";
+            const fotoUrl = (prod && prod.foto && !prod.foto.startsWith('data:image')) ? prod.foto : 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80';
+
+            // Generar enlace directo específico con parámetro de producto
+            let baseSiteUrl = window.location.origin + window.location.pathname;
+            if (!baseSiteUrl || baseSiteUrl.startsWith('null') || baseSiteUrl.startsWith('file')) {
+                baseSiteUrl = "https://tucocel.github.io/";
+            }
+            if (!baseSiteUrl.endsWith('/') && !baseSiteUrl.endsWith('.html')) {
+                baseSiteUrl += '/';
+            }
+            const linkDirectoProducto = `${baseSiteUrl}?p=${encodeURIComponent(prodId)}`;
 
             let msg = `🔥 *¡MIRA ESTE EQUIPO DISPONIBLE EN TUCOCEL C.A.!* 🔥\n` +
                       `──────────────────────────────\n` +
@@ -3757,12 +3885,30 @@
                    `💳 *MÉTODOS DE PAGO:* Pago Móvil (Bs), USDT (Binance), Zinli, Nequi y Efectivo en Tienda\n` +
                    `📍 *UBICACIÓN:* Av. Bolívar, entre calles 12 y 13, Cordero, Táchira\n` +
                    `──────────────────────────────\n` +
-                   `🚀 *¡Escríbenos para apartar o comprar de inmediato!*\n` +
-                   `📲 *WhatsApp Ventas:* https://wa.me/584247357549\n` +
-                   `🌐 *Explora nuestra Vitrina Digital:* https://tucocel.github.io/`;
+                   `👉 *Toca aquí para ver este equipo y comprarlo directamente:*\n` +
+                   `🔗 ${linkDirectoProducto}\n\n` +
+                   `📲 *WhatsApp Ventas:* https://wa.me/584247357549`;
 
             // Abre el selector nativo de compartir (para enviar a grupos de WhatsApp, estados, chats, etc.)
             window.abrirWhatsAppSelector('', msg);
+        };
+
+        // Función para autodetectar enlace directo a un producto específico al abrir la web
+        window.verificarEnlaceDirectoProductoUrl = function() {
+            try {
+                const params = new URLSearchParams(window.location.search);
+                const prodIdParam = params.get('p') || params.get('producto');
+                if (prodIdParam && PRODUCTOS.length > 0) {
+                    const prodTarget = PRODUCTOS.find(p => p.id === prodIdParam || p.modelo.toLowerCase().trim() === prodIdParam.toLowerCase().trim());
+                    if (prodTarget) {
+                        setTimeout(() => {
+                            window.abrirModalProducto(prodTarget.id);
+                        }, 400);
+                    }
+                }
+            } catch(e) {
+                console.warn("Deep linking check error:", e);
+            }
         };
 
         window.verificarSesionLocal = function() { 
