@@ -3824,29 +3824,47 @@
         };
 
         window.cargarInventarioFirebase = async function() {
-            // 1. Renderizado ultrarrápido inmediato si hay caché local
+            // 1. Carga inicial desde caché si existe
             const cache = localStorage.getItem('tucocel_productos_cache');
             if (cache) {
                 try {
-                    PRODUCTOS = JSON.parse(cache);
-                    window.ejecutarFiltroCombinado();
+                    const parsed = JSON.parse(cache);
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        PRODUCTOS = parsed;
+                        window.PRODUCTOS = parsed;
+                        window.ejecutarFiltroCombinado();
+                    }
                 } catch(e) {}
             }
 
-            // 2. Consulta directa e independiente a Firestore
+            // 2. Consulta directa a Firebase Firestore en tiempo real (Pública y Universal)
             try {
-                const docSnap = await getDoc(doc(db, "inventario", "productos_tucocel"));
+                const docRef = doc(db, "inventario", "productos_tucocel");
+                const docSnap = await getDoc(docRef);
+                
                 if (docSnap && docSnap.exists()) { 
-                    PRODUCTOS = docSnap.data().lista || []; 
-                    PRODUCTOS.sort((a, b) => a.precio - b.precio); 
-                    localStorage.setItem('tucocel_productos_cache', JSON.stringify(PRODUCTOS));
+                    const datosNube = docSnap.data().lista || [];
+                    if (Array.isArray(datosNube) && datosNube.length > 0) {
+                        PRODUCTOS = datosNube;
+                        window.PRODUCTOS = datosNube;
+                        PRODUCTOS.sort((a, b) => a.precio - b.precio); 
+                        localStorage.setItem('tucocel_productos_cache', JSON.stringify(PRODUCTOS));
+                    }
+                } else {
+                    console.warn("Documento 'inventario/productos_tucocel' no existe en Firestore aún.");
                 }
-            } catch (e) { 
-                console.warn("Carga desde almacenamiento local/offline:", e);
-                if (cache) PRODUCTOS = JSON.parse(cache);
+            } catch (err) { 
+                console.error("⚠️ Error leyendo Firestore (Posible bloqueo de reglas de seguridad):", err);
+                // Si falla por reglas o red y no hay caché, mantiene los productos base
+                if (!PRODUCTOS || PRODUCTOS.length === 0) {
+                    if (typeof SEED_PRODUCTOS_DEFAULT !== 'undefined') {
+                        PRODUCTOS = SEED_PRODUCTOS_DEFAULT;
+                        window.PRODUCTOS = SEED_PRODUCTOS_DEFAULT;
+                    }
+                }
             }
 
-            // 3. Consolidar marcas y renderizar siempre
+            // 3. Sincronizar marcas y renderizar catálogo inmediatamente
             try {
                 const customMarcasLocal = JSON.parse(localStorage.getItem('tucocel_marcas_custom') || '[]');
                 customMarcasLocal.forEach(m => { if(!MARCAS_REGISTRADAS.includes(m)) MARCAS_REGISTRADAS.push(m); });
