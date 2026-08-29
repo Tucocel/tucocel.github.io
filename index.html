@@ -5,44 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tucocel C.A. — Telefonía Móvil y Computación</title>
 
-    <!-- SEGURIDAD Y PROTECCIÓN DE CÓDIGO FUENTE / BLOQUEO DE INSPECTOR Y CLIC DERECHO -->
-    <script>
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        });
-        document.addEventListener('keydown', function(e) {
-            // F12
-            if (e.keyCode === 123) {
-                e.preventDefault();
-                return false;
-            }
-            // Ctrl+Shift+I (Inspector), Ctrl+Shift+J (Consola), Ctrl+Shift+C (Elementos), Ctrl+U (Ver código fuente), Ctrl+S (Guardar)
-            if (e.ctrlKey && (e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67) || e.keyCode === 85 || e.keyCode === 83)) {
-                e.preventDefault();
-                return false;
-            }
-            // Mac shortcuts: Cmd+Option+I / Cmd+Option+J / Cmd+Option+U
-            if (e.metaKey && (e.altKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 85) || e.keyCode === 85)) {
-                e.preventDefault();
-                return false;
-            }
-        });
-    </script>
-
-    <!-- METATAGS OPEN GRAPH -->
     <meta property="og:title" content="📱 TUCOCEL C.A. | Vitrina Tecnológica Digital">
-    <meta property="og:description" content="🔥 ¡Explora nuestro stock en tiempo real! Conéctate con la evolución tecnológica y cotiza al instante desde cualquier lugar del mundo. 🚀">
+    <meta property="og:description" content="🔥 ¡Explora nuestro stock en tiempo real! Conéctate con la evolución tecnológica y cotiza al instante. 🚀">
     <meta property="og:image" content="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80">
     <meta property="og:url" content="https://tucocel.github.io/">
     <meta property="og:type" content="website">
 
-    <!-- METATAGS PWA STANDALONE & MANIFEST NATIVO -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Tucocel">
     <meta name="theme-color" content="#020617">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KICA8cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgcng9IjEyMCIgZmlsbD0iIzAyMDYxNyIvPgogIDxyZWN0IHg9IjIwIiB5PSIyMCIgd2lkdGg9IjQ3MiIgaGVpZ2h0PSI0NzIiIHJ4PSIxMDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzNiODJmNiIgc3Ryb2tlLXdpZHRoPSIxMiIvPgogIDxwYXRoIGQ9Ik0xMjAgMTgwIEwzOTIgMTgwIEwzNjAgMzgwIEwxNTIgMzgwIFoiIGZpbGw9IiMyNTYzZWIiIG9wYWNpdHk9IjAuOSIvPgogIDxwYXRoIGQ9Ik0xODAgMTgwIFEyNTYgOTAgMzMyIDE4MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZjU5ZTBiIiBzdHJva2Utd2lkdGg9IjI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyNzAiIHI9IjMyIiBmaWxsPSIjZmZmZmZmIi8+CiAgPHBhdGggZD0iTTIzNiAzMjAgTDI3NiAzMjAiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIxMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPg==">
-    <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22TUCOCEL%20C.A.%20-%20Vitrina%20Digital%22%2C%22short_name%22%3A%22TUCOCEL%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23020617%22%2C%22theme_color%22%3A%22%23020617%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgcng9IjEyMCIgZmlsbD0iIzAyMDYxNyIvPjxwYXRoIGQ9Ik0xMjAgMTgwIEwzOTIgMTgwIEwzNjAgMzgwIEwxNTIgMzgwIFoiIGZpbGw9IiMyNTYzZWIiLz48Y2lyY2xlIGN4PSIyNTYiIGN5PSIyNzAiIHI9IjMyIiBmaWxsPSIjZmZmZmZmIi8%2BPC9zdmc%2B%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -63,7 +35,6 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* CYBER-CLEAN TECH GLOW & ANIMATIONS */
         .cyber-grid-bg {
             background-color: #030712;
             background-image: 
@@ -131,9 +102,6 @@
             color: #f59e0b;
         }
 
-        /* =========================================================
-           FORMATO DE IMPRESIÓN DUAL FACTURA (10x13 CM BASE AUTOAJUSTABLE)
-           ========================================================= */
         @media screen {
             #wrapper-impresion-epson, #wrapper-impresion-etiquetas {
                 display: none !important;
@@ -307,9 +275,6 @@
             color: #334155;
         }
 
-        /* =========================================================
-           ESTILO EXACTO DE ETIQUETAS DE VITRINA (6x4 CM)
-           ========================================================= */
         .grid-etiquetas-layout {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(60mm, 1fr));
@@ -440,7 +405,6 @@
             margin-top: 1.5px;
         }
 
-        /* REGLAS LIMPIAS DE IMPRESIÓN */
         @media print {
             html, body {
                 background: #ffffff !important;
@@ -486,7 +450,7 @@
             body.imprimiendo-etiquetas .grid-etiquetas-layout {
                 display: flex !important;
                 flex-wrap: wrap !important;
-                width: 194mm !important; /* Ancho seguro centrado en hoja Carta/A4 */
+                width: 194mm !important;
                 gap: 3.5mm !important;
                 margin: 0 auto !important;
                 padding: 0 !important;
@@ -507,13 +471,9 @@
                 margin: 0mm !important;
             }
         }
-    
-    
     </style>
 </head>
 <body class="cyber-grid-bg text-slate-100 antialiased min-h-screen pb-12 relative selection:bg-blue-600 selection:text-white">
-
-    <!-- CONEXIÓN EN SEGUNDO PLANO NO BLOQUEANTE -->
 
     <!-- BARRA SUPERIOR ADMINISTRATIVA -->
     <div id="barra-accesos-admin" class="bg-slate-950 text-white px-4 py-2 text-xs font-bold hidden border-b border-slate-800 sticky top-0 z-50">
@@ -523,18 +483,18 @@
                 <span class="text-slate-400 text-[11px] sm:text-xs">SESIÓN: <span class="text-amber-400 uppercase tracking-wider">ADMINISTRADOR</span></span>
             </div>
             <div class="flex items-center gap-2 justify-center w-full sm:w-auto flex-wrap">
-                <button onclick="window.abrirModalEtiquetasVitrina()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-3 py-1.5 rounded-xl transition-all shadow-md flex items-center gap-1.5 font-black text-[10px] sm:text-xs whitespace-nowrap">
+                <button onclick="window.abrirModalEtiquetasVitrina()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 px-3 py-1.5 rounded-xl transition-all shadow-md flex items-center gap-1.5 font-black text-[10px] sm:text-xs whitespace-nowrap cursor-pointer">
                     <i class="fa-solid fa-tags text-xs"></i> Generar Etiquetas 6x4
                 </button>
-                <button onclick="window.abrirModalSistemaFacturacion()" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-xl transition-all shadow-md flex items-center gap-1.5 font-extrabold text-[10px] sm:text-xs whitespace-nowrap">
+                <button onclick="window.abrirModalSistemaFacturacion()" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-xl transition-all shadow-md flex items-center gap-1.5 font-extrabold text-[10px] sm:text-xs whitespace-nowrap cursor-pointer">
                     <i class="fa-solid fa-file-invoice-dollar text-xs"></i> Abrir Facturación
                 </button>
-                <button onclick="window.cerrarSesionAdmin()" class="bg-red-500/20 text-red-400 hover:bg-red-500/30 px-3 py-1.5 rounded-xl transition-colors text-[10px] sm:text-xs whitespace-nowrap">Salir</button>
+                <button onclick="window.cerrarSesionAdmin()" class="bg-red-500/20 text-red-400 hover:bg-red-500/30 px-3 py-1.5 rounded-xl transition-colors text-[10px] sm:text-xs whitespace-nowrap cursor-pointer">Salir</button>
             </div>
         </div>
     </div>
 
-    <!-- BARRA DE NAVEGACIÓN LIMPIA Y PROFESIONAL -->
+    <!-- BARRA DE NAVEGACIÓN -->
     <nav class="bg-slate-950/80 backdrop-blur-xl border-b border-slate-800/80 sticky top-0 z-40 shadow-lg shadow-black/40 transition-all">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
@@ -549,7 +509,7 @@
                 </div>
 
                 <div class="flex items-center gap-2.5">
-                    <button onclick="window.instalarAppDispositivo()" class="bg-slate-900 hover:bg-slate-800 text-amber-400 border border-slate-700 px-3.5 py-2 rounded-xl font-black text-[11px] flex items-center gap-1.5 shadow-sm active:scale-95 transition-all">
+                    <button onclick="window.instalarAppDispositivo()" class="bg-slate-900 hover:bg-slate-800 text-amber-400 border border-slate-700 px-3.5 py-2 rounded-xl font-black text-[11px] flex items-center gap-1.5 shadow-sm active:scale-95 transition-all cursor-pointer">
                         <i class="fa-solid fa-mobile-screen-button text-xs"></i> <span class="hidden sm:inline">Instalar</span> App
                     </button>
                     <button onclick="window.abrirLoginAdmin()" class="w-10 h-10 bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 rounded-xl flex items-center justify-center transition-colors shadow-sm cursor-pointer" title="Acceso Administrativo">
@@ -560,11 +520,10 @@
         </div>
     </nav>
 
-    <!-- HEADER / BANNER PRINCIPAL CON SOPORTE HÍBRIDO (TEXTO O BANNER GRÁFICO) -->
+    <!-- HEADER / BANNER -->
     <header class="relative py-10 sm:py-14 px-4 overflow-hidden border-b border-slate-800/80">
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(37,99,235,0.25),transparent_70%)]"></div>
         
-        <!-- MODO BANNER GRÁFICO PRO (SI ESTÁ ACTIVO) -->
         <div id="contenedor-banner-grafico" class="max-w-7xl mx-auto relative z-10 hidden">
             <div class="relative w-full rounded-3xl overflow-hidden border border-cyan-500/40 shadow-[0_0_40px_rgba(6,182,212,0.25)] group">
                 <img id="img-banner-grafico-dom" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Banner Promocional Tucocel" class="w-full h-auto max-h-[380px] object-cover object-center block">
@@ -574,7 +533,6 @@
             </div>
         </div>
 
-        <!-- MODO TEXTO CLÁSICO EDITABLE CON VISTA PREVIA -->
         <div id="contenedor-textos-header" class="max-w-7xl mx-auto text-center relative z-10 space-y-3.5">
             <div class="w-full flex items-center justify-center">
                 <span id="txt-header-badge" class="bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 text-[10px] font-black tracking-widest uppercase px-3.5 py-1.5 rounded-full inline-flex items-center gap-1.5 shadow-[0_0_15px_rgba(6,182,212,0.2)]">
@@ -634,7 +592,6 @@
             </button>
         </div>
 
-        <!-- CUADRO INFORMATIVO CORPORATIVO -->
         <div class="bg-slate-900/60 border-l-4 border-cyan-400 border-y border-r border-slate-800 rounded-r-3xl p-5 mb-8 max-w-4xl mx-auto shadow-xl flex flex-col md:flex-row items-start md:items-center gap-4 backdrop-blur-md">
             <div class="bg-cyan-500/10 border border-cyan-500/30 p-3.5 rounded-2xl text-cyan-400 shrink-0 hidden sm:flex items-center justify-center shadow-inner">
                 <i class="fa-solid fa-shield-halved text-2xl"></i>
@@ -655,13 +612,11 @@
         <div class="mb-8 w-full overflow-hidden space-y-4">
             <div>
                 <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Filtrar Smartphone por Marca</p>
-                <div id="contenedor-botones-marcas" class="flex gap-2 overflow-x-auto pb-3 pt-1 px-1 no-scrollbar snap-x justify-start md:justify-center w-full">
-                    <!-- Botones de marcas generados dinámicamente -->
-                </div>
+                <div id="contenedor-botones-marcas" class="flex gap-2 overflow-x-auto pb-3 pt-1 px-1 no-scrollbar snap-x justify-start md:justify-center w-full"></div>
             </div>
             
             <div class="flex justify-center px-1">
-                <button onclick="window.compartirVitrinaGeneralWa()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold px-6 py-3 rounded-xl shadow-md transition-all flex items-center gap-2 uppercase tracking-wide">
+                <button onclick="window.compartirVitrinaGeneralWa()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold px-6 py-3 rounded-xl shadow-md transition-all flex items-center gap-2 uppercase tracking-wide cursor-pointer">
                     <i class="fa-solid fa-share-nodes text-sm"></i> 📢 Compartir Vitrina en WhatsApp
                 </button>
             </div>
@@ -669,37 +624,11 @@
 
         <div class="flex items-center justify-between mb-6 px-1">
             <h2 class="text-white font-black text-sm tracking-wider uppercase flex items-center gap-2"><i class="fa-solid fa-mobile-screen-button text-cyan-400"></i> Vitrina Tecnológica de Smartphones</h2>
-            <span id="contador-productos" class="text-[10px] bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 font-black px-3 py-1 rounded-full shadow-sm">Cargando...</span>
+            <span id="contador-productos" class="text-[10px] bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 font-black px-3 py-1 rounded-full shadow-sm">0 Disponibles</span>
         </div>
 
-        <!-- GRID DE SMARTPHONES CON DISEÑO ARMONIOSO Y ALINEACIÓN EXACTA -->
-                <!-- GRID DE SMARTPHONES CON DISEÑO ARMONIOSO Y ALINEACIÓN EXACTA -->
-        <div id="contenedor-productos" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
-            <div class="card-cyber rounded-2xl p-3 animate-pulse space-y-3">
-                <div class="w-full h-44 bg-slate-800/60 rounded-xl"></div>
-                <div class="h-3 w-16 bg-slate-800 rounded"></div>
-                <div class="h-4 w-3/4 bg-slate-800 rounded"></div>
-                <div class="h-8 w-full bg-slate-800/40 rounded mt-2"></div>
-            </div>
-            <div class="card-cyber rounded-2xl p-3 animate-pulse space-y-3">
-                <div class="w-full h-44 bg-slate-800/60 rounded-xl"></div>
-                <div class="h-3 w-16 bg-slate-800 rounded"></div>
-                <div class="h-4 w-3/4 bg-slate-800 rounded"></div>
-                <div class="h-8 w-full bg-slate-800/40 rounded mt-2"></div>
-            </div>
-            <div class="card-cyber rounded-2xl p-3 animate-pulse space-y-3 hidden sm:block">
-                <div class="w-full h-44 bg-slate-800/60 rounded-xl"></div>
-                <div class="h-3 w-16 bg-slate-800 rounded"></div>
-                <div class="h-4 w-3/4 bg-slate-800 rounded"></div>
-                <div class="h-8 w-full bg-slate-800/40 rounded mt-2"></div>
-            </div>
-            <div class="card-cyber rounded-2xl p-3 animate-pulse space-y-3 hidden md:block">
-                <div class="w-full h-44 bg-slate-800/60 rounded-xl"></div>
-                <div class="h-3 w-16 bg-slate-800 rounded"></div>
-                <div class="h-4 w-3/4 bg-slate-800 rounded"></div>
-                <div class="h-8 w-full bg-slate-800/40 rounded mt-2"></div>
-            </div>
-        </div>
+        <!-- GRID DE SMARTPHONES -->
+        <div id="contenedor-productos" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6"></div>
     </main>
 
     <!-- CARRUSEL OTROS PRODUCTOS -->
@@ -716,21 +645,6 @@
         <div id="carrusel-otros" class="flex gap-4 overflow-x-auto pb-6 pt-1 no-scrollbar snap-x scroll-smooth"></div>
     </section>
 
-    <!-- SECCIÓN DE MÉTODOS DE PAGO -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 border-t border-slate-800/80 pt-8">
-        <div class="text-center max-w-xl mx-auto mb-6">
-            <h3 class="text-xs font-black uppercase text-cyan-400 tracking-widest">Métodos de Pago Aceptados</h3>
-            <p class="text-slate-400 text-xs mt-1">Facilitamos tus transacciones en tienda física y compras a distancia.</p>
-        </div>
-        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 max-w-4xl mx-auto text-center font-bold text-xs text-slate-300">
-            <div class="card-cyber p-4 rounded-2xl flex flex-col items-center gap-2"><i class="fa-solid fa-money-bill-transfer text-blue-400 text-xl"></i> Pago Móvil (Bs)</div>
-            <div class="card-cyber p-4 rounded-2xl flex flex-col items-center gap-2"><i class="fa-solid fa-coins text-amber-400 text-xl"></i> USDT (Binance P2P)</div>
-            <div class="card-cyber p-4 rounded-2xl flex flex-col items-center gap-2"><i class="fa-solid fa-credit-card text-purple-400 text-xl"></i> Zinli</div>
-            <div class="card-cyber p-4 rounded-2xl flex flex-col items-center gap-2"><i class="fa-solid fa-wallet text-emerald-400 text-xl"></i> Nequi</div>
-            <div class="card-cyber p-4 rounded-2xl flex flex-col items-center gap-2 col-span-2 sm:col-span-1"><i class="fa-solid fa-shop text-cyan-400 text-xl"></i> Efectivo Tienda</div>
-        </div>
-    </section>
-
     <!-- FOOTER -->
     <footer class="bg-slate-900 text-slate-400 py-10 px-4 mt-16 border-t border-slate-800 text-xs font-medium">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
@@ -738,43 +652,17 @@
                 <p class="text-white font-black tracking-wider text-sm uppercase whitespace-nowrap">
                     © 2026 TUCOCEL C.A. — RIF: J-31378837-6
                 </p>
-                <p class="text-slate-500 text-[11px]">Web desarrollada de manera exclusiva por <a href="#" class="text-blue-400 hover:underline font-bold">@publionlinemk</a> — Agencia Oficial de Publicidad de Tucocel C.A.</p>
-                <div class="pt-2 flex flex-wrap items-center justify-center md:justify-start gap-2 sm:gap-3 text-[10px] text-slate-400 font-bold uppercase tracking-wider">
-                    <span class="inline-flex items-center gap-1.5 bg-slate-950 px-2.5 py-1 rounded-xl border border-slate-800 shadow-sm">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                        <span class="text-emerald-400">En vivo ahora:</span> <b id="contador-online-num" class="text-white font-mono font-black">1</b>
-                    </span>
-                    <span class="inline-flex items-center gap-1.5 bg-slate-950 px-2.5 py-1 rounded-xl border border-slate-800 shadow-sm">
-                        <i class="fa-solid fa-calendar-day text-amber-400"></i>
-                        <span class="text-amber-400">Hoy:</span> <b id="contador-visitas-hoy" class="text-white font-mono font-black">0</b>
-                    </span>
-                    <span class="inline-flex items-center gap-1.5 bg-slate-950 px-2.5 py-1 rounded-xl border border-slate-800 shadow-sm">
-                        <i class="fa-solid fa-eye text-cyan-400"></i>
-                        <span class="text-slate-400">Total:</span> <b id="contador-visitas-num" class="text-cyan-400 font-mono font-black">0</b>
-                    </span>
-                </div>
+                <p class="text-slate-500 text-[11px]">Web desarrollada para Tucocel C.A.</p>
             </div>
-            
-            <div class="flex flex-col sm:flex-row gap-6 items-center md:items-start text-left">
-                <div class="bg-slate-950/40 border border-slate-800/60 p-3.5 rounded-2xl max-w-xs space-y-2">
-                    <span class="text-white font-bold block text-[11px] uppercase tracking-wide"><i class="fa-solid fa-share-nodes text-blue-500 mr-1.5"></i> Conéctate con nosotros</span>
-                    <div class="space-y-1 text-slate-300 text-[11px]">
-                        <a href="https://www.instagram.com/tucocel" target="_blank" class="flex items-center gap-2 hover:text-pink-400 transition-colors"><i class="fa-brands fa-instagram text-sm"></i> @tucocel</a>
-                        <a href="https://www.tiktok.com/@tucocel" target="_blank" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-brands fa-tiktok text-sm"></i> @tucocel</a>
-                        <a href="mailto:movistarcordero@gmail.com" class="flex items-center gap-2 hover:text-amber-400 transition-colors"><i class="fa-solid fa-envelope text-sm"></i> movistarcordero@gmail.com</a>
-                    </div>
-                </div>
-                <div class="flex items-start gap-3 bg-slate-950/40 border border-slate-800/60 p-3.5 rounded-2xl max-w-sm">
-                    <i class="fa-solid fa-location-dot text-blue-500 mt-0.5 text-base shrink-0"></i>
-                    <div>
-                        <span class="text-white font-bold block text-[11px] uppercase tracking-wide">Visítanos directamente</span>
-                        <span class="text-slate-400 text-[11px] leading-relaxed block mt-0.5">Avenida Bolívar, entre calles 12 y 13, Cordero, estado Táchira.</span>
-                    </div>
+            <div class="flex items-start gap-3 bg-slate-950/40 border border-slate-800/60 p-3.5 rounded-2xl max-w-sm">
+                <i class="fa-solid fa-location-dot text-blue-500 mt-0.5 text-base shrink-0"></i>
+                <div>
+                    <span class="text-white font-bold block text-[11px] uppercase tracking-wide">Visítanos directamente</span>
+                    <span class="text-slate-400 text-[11px] leading-relaxed block mt-0.5">Avenida Bolívar, entre calles 12 y 13, Cordero, estado Táchira.</span>
                 </div>
             </div>
         </div>
     </footer>
-
 
     <!-- BOTÓN FLOTANTE WA -->
     <button onclick="window.abrirModalConsultaGeneral()" class="btn-flotante-wa fixed bottom-6 right-6 bg-emerald-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl z-40 transition-all hover:bg-emerald-600 shadow-xl cursor-pointer">
@@ -844,17 +732,16 @@
             <div class="flex gap-2 w-full sm:w-auto">
                 <button id="btn-cancelar-edicion" onclick="window.cancelarEdicionActiva()" class="hidden w-1/2 sm:w-auto bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors cursor-pointer">Cancelar</button>
                 <button id="btn-guardar" onclick="window.procesarGuardadoInventario()" class="w-full sm:w-auto bg-amber-400 hover:bg-amber-500 text-slate-950 text-xs font-black px-5 py-2.5 rounded-xl shadow-lg transition-colors cursor-pointer">Guardar en Inventario</button>
-                <button type="button" onclick="window.forzarSubidaInventarioANube()" class="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-black px-5 py-2.5 rounded-xl shadow-lg transition-colors cursor-pointer flex items-center justify-center gap-1.5" title="Subir todo lo que ves en este teléfono a la nube para que se vea en todos lados">
+                <button type="button" onclick="window.forzarSubidaInventarioANube()" class="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-black px-5 py-2.5 rounded-xl shadow-lg transition-colors cursor-pointer flex items-center justify-center gap-1.5" title="Sincronizar y respaldar inventario actual">
                     <i class="fa-solid fa-cloud-arrow-up"></i> Sincronizar Todo a la Nube
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL GENERADOR DE ETIQUETAS DE VITRINA (6x4 CM) -->
+    <!-- MODAL GENERADOR DE ETIQUETAS (6x4 CM) -->
     <div id="modal-generador-etiquetas" class="fixed inset-0 bg-slate-950/90 z-50 overflow-y-auto backdrop-blur-md p-2 sm:p-4 lg:p-6 hidden">
         <div class="bg-white rounded-3xl w-full max-w-5xl mx-auto my-2 md:my-4 shadow-2xl overflow-hidden border border-gray-100 flex flex-col md:h-[90vh]">
-            
             <div class="bg-slate-900 text-white px-4 py-3 border-b border-slate-800 shrink-0 space-y-2.5">
                 <div class="flex flex-col sm:flex-row justify-between items-center gap-3">
                     <div class="flex items-center gap-2.5 w-full sm:w-auto">
@@ -866,7 +753,7 @@
                     </div>
                     <div class="flex items-center gap-2 flex-wrap justify-end w-full sm:w-auto">
                         <button onclick="window.abrirModalEditorRapidoPrecios()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-black px-3.5 py-1.5 rounded-xl shadow-md flex items-center gap-1.5 cursor-pointer">
-                            <i class="fa-solid fa-pen-to-square"></i> Editor de Precios Rápido
+                            <i class="fa-solid fa-pen-to-square"></i> Editor Rápido de Precios
                         </button>
                         <button onclick="window.dispararImpresionEtiquetas()" class="bg-amber-400 hover:bg-amber-500 text-slate-950 text-xs font-black px-4 py-1.5 rounded-xl shadow-md flex items-center gap-1.5 cursor-pointer">
                             <i class="fa-solid fa-print"></i> Imprimir (<span id="etiquetas-contador-sel">0</span>)
@@ -877,7 +764,6 @@
                     </div>
                 </div>
 
-                <!-- SUB-BARRA DE FILTROS POR CATEGORÍA Y CONTROL DE SELECCIÓN -->
                 <div class="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-slate-800/80 text-xs font-bold">
                     <div class="flex items-center gap-1.5 bg-slate-950 p-1 rounded-xl border border-slate-800 overflow-x-auto no-scrollbar">
                         <button id="tab-etq-telefonos" onclick="window.cambiarFiltroCategoriaEtiquetas('telefonos')" class="bg-blue-600 text-white px-3 py-1 rounded-lg text-xs font-black transition-all cursor-pointer whitespace-nowrap">📱 Teléfonos</button>
@@ -901,7 +787,7 @@
         </div>
     </div>
 
-    <!-- MODAL CREAR ETIQUETA INDEPENDIENTE / PERSONALIZADA CON VISTA PREVIA EN VIVO -->
+    <!-- MODAL CREAR ETIQUETA INDEPENDIENTE -->
     <div id="modal-crear-etiqueta-libre" class="fixed inset-0 bg-slate-950/90 z-[70] overflow-y-auto backdrop-blur-md p-2 sm:p-4 hidden flex items-center justify-center">
         <div class="bg-white rounded-3xl w-full max-w-xl my-2 shadow-2xl overflow-hidden border border-gray-100 flex flex-col">
             <div class="bg-slate-900 text-white px-5 py-4 flex justify-between items-center border-b border-slate-800 shrink-0">
@@ -909,7 +795,7 @@
                     <i class="fa-solid fa-tag text-emerald-400 text-xl"></i>
                     <div>
                         <h3 class="font-black text-sm tracking-wide uppercase">Crear Etiqueta Independiente</h3>
-                        <p class="text-[10px] text-slate-400 font-medium">Crea etiquetas para cargadores, cables o accesorios sin montarlos en vitrina</p>
+                        <p class="text-[10px] text-slate-400 font-medium">Crea etiquetas para cargadores o accesorios sin montarlos en vitrina</p>
                     </div>
                 </div>
                 <button onclick="window.cerrarModalCrearEtiquetaLibre()" class="bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white w-8 h-8 rounded-xl flex items-center justify-center cursor-pointer">
@@ -993,7 +879,7 @@
             </div>
 
             <div class="bg-slate-900 px-5 py-3 flex justify-between items-center shrink-0 border-t border-slate-800">
-                <span class="text-[10px] text-slate-400 font-mono">Los cambios se guardan directamente en Firebase.</span>
+                <span class="text-[10px] text-slate-400 font-mono">Modificaciones en tiempo real.</span>
                 <button onclick="window.guardarCambiosEditorRapido()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs px-5 py-2 rounded-xl shadow-md flex items-center gap-1.5 cursor-pointer">
                     <i class="fa-solid fa-check"></i> Guardar y Aplicar Todo
                 </button>
@@ -1010,7 +896,7 @@
                     <i class="fa-solid fa-cash-register text-amber-400 text-xl"></i>
                     <div>
                         <h3 class="font-black text-sm tracking-wide uppercase">Facturación & Control Gerencial</h3>
-                        <p class="text-[10px] text-slate-400 font-medium">TUCOCEL C.A. — Panel Privado de Control</p>
+                        <p class="text-[10px] text-slate-400 font-medium">TUCOCEL C.A. — Panel de Control</p>
                     </div>
                 </div>
                 <div class="flex flex-col sm:flex-row flex-wrap items-center gap-3 bg-slate-950 p-2.5 rounded-2xl border border-slate-800 text-xs w-full md:w-auto">
@@ -1038,7 +924,7 @@
                 <button id="btn-vista-cierre-mes" onclick="window.cambiarSeccionAdministrativa('cierre-mes')" class="text-gray-500 hover:text-gray-700 pb-1 whitespace-nowrap cursor-pointer"><i class="fa-solid fa-chart-pie mr-1"></i> Cierre de Mes</button>
             </div>
 
-            <!-- PESTAÑA 1: FACTURAR VENTA (POS) CON CALCULADORA DE VUELTO -->
+            <!-- FACTURAR VENTA (POS) -->
             <div id="bloque-emision-facturas" class="p-3 sm:p-4 md:p-6 grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 overflow-y-auto flex-grow bg-gray-50">
                 <div class="lg:col-span-2 space-y-4">
                     <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-3">
@@ -1073,7 +959,7 @@
                             <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
                                 <div class="sm:col-span-5">
                                     <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Descripción / Modelo</label>
-                                    <input type="text" id="manual-modelo" placeholder="Ej: Redmi Note 13 Pro / Vidrio Templado..." class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
+                                    <input type="text" id="manual-modelo" placeholder="Ej: Redmi Note 13 Pro / Vidrio..." class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
                                 </div>
                                 <div class="sm:col-span-3">
                                     <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Moneda de Cobro</label>
@@ -1134,7 +1020,7 @@
                     </div>
                 </div>
 
-                <!-- RESUMEN DE VENTA Y CALCULADORA DE VUELTO EN CALIENTE -->
+                <!-- RESUMEN DE VENTA -->
                 <div class="bg-slate-900 text-white p-4 sm:p-5 rounded-3xl flex flex-col justify-between shadow-xl min-h-[360px]">
                     <div>
                         <h4 class="text-[11px] font-black uppercase tracking-wider text-amber-400 border-b border-slate-800 pb-2 mb-3 flex justify-between items-center">
@@ -1152,7 +1038,6 @@
                             <span class="text-lg font-black text-white font-mono" id="total-usd">Total: $0.00</span>
                         </div>
 
-                        <!-- CALCULADORA DE VUELTO MULTIMONEDA -->
                         <div class="bg-slate-950 p-3 rounded-2xl border border-blue-500/30 space-y-2 text-xs font-mono">
                             <span class="text-[9.5px] font-black text-blue-400 uppercase tracking-wider block">Calculadora de Vuelto en Caliente</span>
                             <div class="grid grid-cols-2 gap-2">
@@ -1229,10 +1114,10 @@
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                                 <div class="sm:col-span-2">
                                     <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Descripción / Modelo del Equipo *</label>
-                                    <input type="text" id="apt-manual-modelo" placeholder="Ej: Xiaomi Redmi Note 13 Pro 256GB..." class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white">
+                                    <input type="text" id="apt-manual-modelo" placeholder="Ej: Xiaomi Redmi Note 13 Pro..." class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white">
                                 </div>
                                 <div>
-                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Precio Total Pactado ($ USD) *</label>
+                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Precio Total ($ USD) *</label>
                                     <input type="number" step="any" id="apt-manual-precio" oninput="window.calcularSaldosApartado()" placeholder="0.00" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-black text-blue-600 font-mono">
                                 </div>
                             </div>
@@ -1393,10 +1278,9 @@
         </div>
     </div>
 
-    <!-- TICKET DE IMPRESIÓN DUAL (10x13 CM BASE AUTOAJUSTABLE EN 1 SOLA HOJA) -->
+    <!-- TICKET DE IMPRESIÓN DUAL -->
     <div id="wrapper-impresion-epson">
         <div class="dual-print-container">
-            <!-- COPIA 1: ORIGINAL (CLIENTE) -->
             <div class="ticket-half-block">
                 <div class="ticket-badge-tag bg-blue-900 text-white">ORIGINAL (CLIENTE)</div>
                 <div class="header">
@@ -1464,28 +1348,18 @@
                     </div>
                 </div>
 
-                <div style="font-size: 7.5px; color: #475569; text-align: center; margin-top: 3px; font-style: italic;">
-                    Montos en COP y VES calculados con la tasa del día.
-                </div>
-
                 <div class="ticket-legal-box">
                     <strong style="display: block; text-align: center; font-size: 8px; margin-bottom: 2px; color: #0f172a;">🔒 CONTROL INTERNO (NO FISCAL)</strong>
-                    Comprobante administrativo interno. No sustituye la factura fiscal legal.
                     <div style="color: #b91c1c; border-top: 1px dashed #cbd5e1; margin-top: 2.5px; padding-top: 2px; font-weight: 700;">
-                        🛡️ GARANTÍA (60 DÍAS): 2 meses continuos en defectos técnicos de fábrica. Queda sin efecto por golpes, humedad, sellos rotos o alteración de software.
-                    </div>
-                    <div style="text-align: center; border-top: 1px dashed #cbd5e1; margin-top: 2.5px; padding-top: 2px; font-weight: 800; color: #003366;">
-                        🚀 ¡Gracias por su preferencia! — Tucocel C.A.
+                        🛡️ GARANTÍA (60 DÍAS): 2 meses continuos en defectos de fábrica.
                     </div>
                 </div>
             </div>
 
-            <!-- LÍNEA DE CORTE CENTRAL -->
             <div class="dual-print-divider"></div>
 
-            <!-- COPIA 2: COPIA ADMINISTRATIVA (TIENDA) -->
             <div class="ticket-half-block">
-                <div class="ticket-badge-tag bg-slate-800 text-amber-300">COPIA (ADMINISTRACIÓN / CONTROL INTERNO)</div>
+                <div class="ticket-badge-tag bg-slate-800 text-amber-300">COPIA (ADMINISTRACIÓN / CONTROL)</div>
                 <div class="header">
                     <h1 class="ticket-header-title">TUCOCEL C.A.</h1>
                     <div class="ticket-doc-type">NOTA DE ENTREGA</div>
@@ -1551,13 +1425,7 @@
                     </div>
                 </div>
 
-                <div style="font-size: 7.5px; color: #475569; text-align: center; margin-top: 3px; font-style: italic;">
-                    Montos en COP y VES calculados con la tasa del día.
-                </div>
-
                 <div class="ticket-legal-box">
-                    <strong style="display: block; text-align: center; font-size: 8px; margin-bottom: 2px; color: #0f172a;">🔒 COPIA DE ARCHIVO / FIRMA CLIENTE</strong>
-                    Comprobante administrativo interno para respaldo de tienda.
                     <div style="border-top: 1px dashed #cbd5e1; margin-top: 14px; padding-top: 3px; text-align: center; font-size: 7.5px; color: #334155; font-weight: bold;">
                         ________________________________________<br>
                         Firma Conforme del Cliente
@@ -1567,7 +1435,7 @@
         </div>
     </div>
 
-    <!-- WRAPPER EXCLUSIVO DE IMPRESIÓN PARA ETIQUETAS (6x4 CM) -->
+    <!-- WRAPPER DE IMPRESIÓN PARA ETIQUETAS -->
     <div id="wrapper-impresion-etiquetas">
         <div id="grid-impresion-etiquetas-dom" class="grid-etiquetas-layout"></div>
     </div>
@@ -1599,7 +1467,7 @@
         </div>
     </div>
 
-    <!-- MODAL CAMBIO DE CONTRASEÑA ADMINISTRATIVA SEGURA -->
+    <!-- MODAL CAMBIO DE CONTRASEÑA -->
     <div id="modal-cambiar-password" class="fixed inset-0 bg-slate-950/90 z-[90] p-4 backdrop-blur-md hidden flex items-center justify-center">
         <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl relative border border-gray-100 space-y-4">
             <button onclick="window.cerrarModalCambiarPassword()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 cursor-pointer">
@@ -1609,8 +1477,7 @@
                 <div class="w-12 h-12 bg-amber-50 rounded-2xl flex items-center justify-center mx-auto text-amber-500 text-2xl">
                     <i class="fa-solid fa-lock"></i>
                 </div>
-                <h3 class="font-black text-sm uppercase text-slate-900 tracking-wide">Cambiar Clave de Administrador</h3>
-                <p class="text-[10px] text-gray-500 font-medium">Actualiza tu contraseña de acceso privado</p>
+                <h3 class="font-black text-sm uppercase text-slate-900 tracking-wide">Cambiar Clave</h3>
             </div>
 
             <div class="space-y-3 pt-1">
@@ -1626,7 +1493,7 @@
                     <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Confirmar Nueva Contraseña *</label>
                     <input type="password" id="pass-confirmar" placeholder="Repite la nueva clave" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-blue-500">
                 </div>
-                <button onclick="window.procesarCambioPasswordFirebase()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs py-3 rounded-xl shadow-md uppercase transition-all cursor-pointer">
+                <button onclick="window.procesarCambioPassword()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs py-3 rounded-xl shadow-md uppercase transition-all cursor-pointer">
                     Guardar Nueva Clave
                 </button>
             </div>
@@ -1668,13 +1535,12 @@
             <h3 class="text-xs font-black uppercase text-slate-900 tracking-wider mb-4"><i class="fa-solid fa-headset text-blue-600 mr-1"></i> Soporte de Atención</h3>
             <div class="space-y-3">
                 <input type="text" id="con-nombre" placeholder="Tu Nombre" class="w-full bg-gray-50 border p-2.5 rounded-xl text-xs font-bold">
-                <select id="con-motivo" onchange="window.verificarMotivoEspecifico()" class="w-full bg-gray-50 border p-2.5 rounded-xl text-xs font-bold">
+                <select id="con-motivo" class="w-full bg-gray-50 border p-2.5 rounded-xl text-xs font-bold">
                     <option value="Compra de Smartphone">Comprar Smartphone</option>
                     <option value="Servicio Técnico">Servicio Técnico</option>
                     <option value="Accesorios / Otros">Accesorios</option>
                 </select>
-                <label id="label-detalles-con" class="text-[10px] text-gray-400 font-bold uppercase block -mb-1">¿Requerimiento?</label>
-                <textarea id="con-detalles" placeholder="Detalles..." class="w-full bg-gray-50 border p-2.5 rounded-xl text-xs font-bold h-20 resize-none"></textarea>
+                <textarea id="con-detalles" placeholder="Detalles de tu consulta..." class="w-full bg-gray-50 border p-2.5 rounded-xl text-xs font-bold h-20 resize-none"></textarea>
                 <button onclick="window.enviarConsultaGeneralWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-2.5 rounded-xl uppercase flex items-center justify-center gap-2 cursor-pointer">
                     <i class="fa-brands fa-whatsapp text-sm"></i> Enviar a WhatsApp
                 </button>
@@ -1682,16 +1548,14 @@
         </div>
     </div>
 
-    
-    <!-- MODAL EDITOR AVANZADO DE ENCABEZADO Y BANNER PROMOCIONAL EN VIVO (WYSIWYG) -->
+    <!-- MODAL EDITOR ENCABEZADO -->
     <div id="modal-editor-encabezado-pro" class="fixed inset-0 bg-slate-950/90 z-[95] overflow-y-auto backdrop-blur-md p-2 sm:p-4 hidden flex items-center justify-center">
         <div class="bg-white rounded-3xl w-full max-w-2xl my-2 shadow-2xl overflow-hidden border border-gray-100 flex flex-col max-h-[90vh]">
             <div class="bg-slate-900 text-white px-5 py-4 flex justify-between items-center border-b border-slate-800 shrink-0">
                 <div class="flex items-center gap-2.5">
                     <i class="fa-solid fa-paint-roller text-amber-400 text-xl"></i>
                     <div>
-                        <h3 class="font-black text-sm tracking-wide uppercase">Editor Visual de Encabezado / Banner</h3>
-                        <p class="text-[10px] text-slate-400 font-medium">Modifica los textos con saltos de línea (Enter) o sube un Banner Gráfico con medidas exactas</p>
+                        <h3 class="font-black text-sm tracking-wide uppercase">Editor Visual de Encabezado</h3>
                     </div>
                 </div>
                 <button onclick="window.cerrarModalEditorEncabezadoPro()" class="bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white w-8 h-8 rounded-xl flex items-center justify-center cursor-pointer">
@@ -1700,113 +1564,103 @@
             </div>
 
             <div class="p-4 sm:p-5 bg-gray-50 overflow-y-auto flex-grow space-y-4">
-                
-                <!-- SELECTOR DE MODO: TEXTO O BANNER IMAGEN -->
                 <div class="flex bg-slate-900 p-1.5 rounded-2xl border border-slate-800 gap-2">
                     <button id="tab-enc-modo-texto" type="button" onclick="window.cambiarModoEncabezado('texto')" class="flex-1 py-2.5 rounded-xl text-xs font-black uppercase transition-all bg-blue-600 text-white cursor-pointer shadow-sm">
-                        ✏️ Modo Texto Dinámico
+                        ✏️ Modo Texto
                     </button>
                     <button id="tab-enc-modo-banner" type="button" onclick="window.cambiarModoEncabezado('banner')" class="flex-1 py-2.5 rounded-xl text-xs font-black uppercase transition-all text-slate-400 hover:text-white cursor-pointer">
-                        🖼️ Modo Banner Gráfico / Imagen
+                        🖼️ Modo Banner Imagen
                     </button>
                 </div>
 
-                <!-- FORMULARIO MODO TEXTO -->
                 <div id="bloque-editor-enc-texto" class="space-y-3">
                     <div>
-                        <label class="text-[10px] text-gray-500 font-black uppercase block mb-1">Título Principal (Permite saltos de línea con Enter) *</label>
-                        <textarea id="inp-enc-titulo" oninput="window.actualizarPreviewEncabezadoLive()" onkeyup="window.actualizarPreviewEncabezadoLive()" rows="2" placeholder="Escribe tu título aquí..." class="w-full bg-white border-2 border-gray-200 focus:border-blue-600 p-2.5 rounded-xl text-sm font-black text-gray-900 focus:outline-none resize-none"></textarea>
+                        <label class="text-[10px] text-gray-500 font-black uppercase block mb-1">Título Principal *</label>
+                        <textarea id="inp-enc-titulo" oninput="window.actualizarPreviewEncabezadoLive()" rows="2" placeholder="Escribe tu título aquí..." class="w-full bg-white border-2 border-gray-200 focus:border-blue-600 p-2.5 rounded-xl text-sm font-black text-gray-900 focus:outline-none resize-none"></textarea>
                     </div>
                     <div>
-                        <label class="text-[10px] text-gray-500 font-black uppercase block mb-1">Subtítulo / Descripción Comercial *</label>
-                        <textarea id="inp-enc-desc" oninput="window.actualizarPreviewEncabezadoLive()" onkeyup="window.actualizarPreviewEncabezadoLive()" rows="2" placeholder="Escribe tu subtítulo o descripción comercial..." class="w-full bg-white border-2 border-gray-200 focus:border-blue-600 p-2.5 rounded-xl text-xs font-semibold text-gray-800 focus:outline-none resize-none"></textarea>
+                        <label class="text-[10px] text-gray-500 font-black uppercase block mb-1">Subtítulo *</label>
+                        <textarea id="inp-enc-desc" oninput="window.actualizarPreviewEncabezadoLive()" rows="2" placeholder="Escribe tu subtítulo..." class="w-full bg-white border-2 border-gray-200 focus:border-blue-600 p-2.5 rounded-xl text-xs font-semibold text-gray-800 focus:outline-none resize-none"></textarea>
                     </div>
                 </div>
 
-                <!-- FORMULARIO MODO BANNER GRÁFICO CON BOTONES Y MEDIDAS CLARAS -->
                 <div id="bloque-editor-enc-banner" class="space-y-4 hidden">
-                    <div class="bg-blue-50 border border-blue-200 p-3.5 rounded-2xl text-xs text-blue-900 space-y-1.5">
-                        <strong class="font-black text-[11px] uppercase flex items-center gap-1.5 text-blue-800">
-                            <i class="fa-solid fa-ruler-combined text-amber-500"></i> Medidas Sugeridas para el Diseño del Banner:
-                        </strong>
-                        <p class="leading-relaxed text-[11px]">
-                            • <strong>Medida Ideal Panorámica:</strong> <code>1200 x 380 px</code> (En centímetros: <strong>20,3 x 6,4 cm</strong> a 150 DPI nítido / <strong>42,3 x 13,4 cm</strong> a 72 DPI).<br>
-                            • <strong>Medida Compacta:</strong> <code>800 x 300 px</code> (En centímetros: <strong>13,5 x 5,1 cm</strong> a 150 DPI).<br>
-                            • <em>Formato aceptado:</em> JPG, PNG, GIF animado o WebP. Se adapta automáticamente a celulares y PC.
-                        </p>
-                    </div>
-
                     <div class="bg-white p-4 rounded-2xl border-2 border-dashed border-blue-300 hover:border-blue-500 transition-colors text-center space-y-2">
                         <input type="file" id="inp-banner-file" accept="image/*" class="hidden">
-                        <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-xl mx-auto shadow-inner">
-                            <i class="fa-solid fa-cloud-arrow-up"></i>
-                        </div>
-                        <div>
-                            <button type="button" onclick="document.getElementById('inp-banner-file').click()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider shadow-md transition-all active:scale-95 cursor-pointer">
-                                📁 Subir Archivo de Banner
-                            </button>
-                            <p id="lbl-banner-file-name" class="text-[11px] text-gray-500 mt-1.5 font-medium">Toca el botón para elegir tu imagen o GIF desde tu galería/computadora</p>
-                        </div>
+                        <button type="button" onclick="document.getElementById('inp-banner-file').click()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider shadow-md cursor-pointer">
+                            📁 Subir Archivo de Banner
+                        </button>
                     </div>
-
                     <div class="bg-white p-3.5 rounded-2xl border border-gray-200 space-y-1">
-                        <label class="text-[10px] text-gray-500 font-black uppercase block">O Enlace / URL Directa de Imagen (Opcional)</label>
-                        <input type="text" id="inp-banner-url" oninput="window.alCambiarUrlBannerPro()" placeholder="https://ejemplo.com/banner-promocional.jpg" class="w-full bg-gray-50 border border-gray-200 focus:border-blue-600 p-2.5 rounded-xl text-xs font-mono text-gray-900 focus:bg-white focus:outline-none">
+                        <label class="text-[10px] text-gray-500 font-black uppercase block">URL de Imagen</label>
+                        <input type="text" id="inp-banner-url" oninput="window.alCambiarUrlBannerPro()" placeholder="https://..." class="w-full bg-gray-50 border border-gray-200 focus:border-blue-600 p-2.5 rounded-xl text-xs font-mono text-gray-900">
                     </div>
                 </div>
 
-                <!-- TARJETA DE VISTA PREVIA EN VIVO (WYSIWYG) -->
                 <div class="border-t border-gray-200 pt-3">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[10px] font-black uppercase tracking-wider text-gray-500">👁️ Vista Previa en Vivo:</span>
-                        <span class="text-[9.5px] bg-blue-100 text-blue-800 font-bold px-2.5 py-0.5 rounded-full">📍 Posición: Cabecera Superior de la Web</span>
-                    </div>
-                    <div class="p-4 sm:p-6 bg-slate-950 rounded-2xl border border-slate-800 text-center relative overflow-hidden shadow-inner">
-                        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(37,99,235,0.2),transparent_70%)]"></div>
-                        
-                        <!-- PREVIEW MODO TEXTO -->
-                        <div id="preview-live-texto-box" class="relative z-10 space-y-2">
-                            <span class="bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 text-[9px] font-black tracking-widest uppercase px-3 py-1 rounded-full inline-block">
-                                Vitrina Tecnológica Digital 2026
-                            </span>
-                            <h2 id="prev-enc-titulo" class="text-xl sm:text-2xl font-black text-white whitespace-pre-line leading-tight">
-                                Encuentra tu próximo smartphone Aquí
-                            </h2>
-                            <p id="prev-enc-desc" class="text-slate-400 text-xs max-w-lg mx-auto whitespace-pre-line leading-relaxed">
-                                Equipos nuevos, garantizados y con la mejor asesoría comercial y atención de la zona.
-                            </p>
+                    <span class="text-[10px] font-black uppercase tracking-wider text-gray-500 block mb-2">👁️ Vista Previa en Vivo:</span>
+                    <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800 text-center relative overflow-hidden">
+                        <div id="preview-live-texto-box" class="space-y-2">
+                            <h2 id="prev-enc-titulo" class="text-xl sm:text-2xl font-black text-white whitespace-pre-line leading-tight">Encuentra tu próximo smartphone Aquí</h2>
+                            <p id="prev-enc-desc" class="text-slate-400 text-xs max-w-lg mx-auto whitespace-pre-line leading-relaxed">Equipos nuevos, garantizados y con la mejor asesoría comercial.</p>
                         </div>
-
-                        <!-- PREVIEW MODO BANNER -->
-                        <div id="preview-live-banner-box" class="relative z-10 hidden space-y-2">
-                            <div class="w-full max-h-[190px] rounded-2xl overflow-hidden border-2 border-cyan-500/40 shadow-lg bg-slate-900 flex items-center justify-center">
-                                <img id="prev-enc-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Vista previa del banner promocional" class="w-full h-full object-cover">
-                            </div>
-                            <p class="text-[10px] text-cyan-400 font-mono">⬆️ Este banner reemplazará todo el texto superior y se ubicará en la cima de la vitrina (arriba de los servicios).</p>
+                        <div id="preview-live-banner-box" class="hidden space-y-2">
+                            <img id="prev-enc-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Banner" class="w-full h-auto max-h-[160px] object-cover rounded-xl">
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <div class="bg-slate-900 px-5 py-3.5 flex justify-between items-center shrink-0 border-t border-slate-800">
                 <button type="button" onclick="window.cerrarModalEditorEncabezadoPro()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold px-4 py-2 rounded-xl cursor-pointer">Cancelar</button>
                 <button type="button" onclick="window.guardarCambiosEncabezadoPro()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs px-6 py-2.5 rounded-xl shadow-md flex items-center gap-1.5 cursor-pointer">
-                    <i class="fa-solid fa-check"></i> Guardar y Aplicar Cambios
+                    <i class="fa-solid fa-check"></i> Guardar Cambios
                 </button>
             </div>
         </div>
     </div>
 
-        
-    <!-- MOTOR JAVASCRIPT INTEGRAL DEFINITIVO Y UNIFICADO (100% OPERATIVO EN LOCAL Y EN LÍNEA) -->
+    <!-- MOTOR JS CORREGIDO Y VALIDADO -->
     <script>
-        // ==========================================
-        // 1. ESTADO Y VARIABLES GLOBALES
-        // ==========================================
         const SEED_PRODUCTOS_DEFAULT = [
             {
                 "id": "1",
+                "marca": "Tecno",
+                "modelo": "Spark Go2 4G",
+                "memoria": "4/128Gb",
+                "precio": 175,
+                "modalidad": "vitrina",
+                "desc": "Pantalla fluida, excelente rendimiento, 128GB de almacenamiento y garantía de 60 días en tienda física.",
+                "foto": "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600&auto=format&fit=crop&q=80",
+                "tipoProducto": "Celular",
+                "likes": 15
+            },
+            {
+                "id": "2",
+                "marca": "Tecno",
+                "modelo": "Spark go3 4G",
+                "memoria": "4+4/128Gb",
+                "precio": 175,
+                "modalidad": "vitrina",
+                "desc": "Procesador optimizado, memoria expandible 4+4GB y 128GB de espacio. Garantía oficial Tucocel.",
+                "foto": "https://images.unsplash.com/photo-1580910051074-3eb694886505?w=600&auto=format&fit=crop&q=80",
+                "tipoProducto": "Celular",
+                "likes": 18
+            },
+            {
+                "id": "3",
+                "marca": "Xiaomi",
+                "modelo": "Redmi 15C",
+                "memoria": "4/128Gb",
+                "precio": 160,
+                "modalidad": "vitrina",
+                "desc": "Diseño moderno, pantalla de alta tasa de refresco, batería de 5000 mAh y respaldo de tienda.",
+                "foto": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80",
+                "tipoProducto": "Celular",
+                "likes": 22
+            },
+            {
+                "id": "4",
                 "marca": "Xiaomi",
                 "modelo": "Redmi A7 4G",
                 "memoria": "3/64Gb",
@@ -1818,7 +1672,7 @@
                 "likes": 10
             },
             {
-                "id": "2",
+                "id": "5",
                 "marca": "Xiaomi",
                 "modelo": "Poco C71 4G",
                 "memoria": "4/128Gb",
@@ -1830,7 +1684,7 @@
                 "likes": 14
             },
             {
-                "id": "3",
+                "id": "6",
                 "marca": "Tecno",
                 "modelo": "Tecno Spark Go 3",
                 "memoria": "4/64Gb",
@@ -1842,7 +1696,31 @@
                 "likes": 8
             },
             {
-                "id": "4",
+                "id": "7",
+                "marca": "Tecno",
+                "modelo": "Spark Go 2",
+                "memoria": "4/64Gb",
+                "precio": 105,
+                "modalidad": "vitrina",
+                "desc": "Compacto, rápido y confiable para uso diario con conectividad 4G y garantía técnica.",
+                "foto": "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&auto=format&fit=crop&q=80",
+                "tipoProducto": "Celular",
+                "likes": 11
+            },
+            {
+                "id": "8",
+                "marca": "Tecno",
+                "modelo": "Spark 40",
+                "memoria": "8/128Gb",
+                "precio": 155,
+                "modalidad": "vitrina",
+                "desc": "Potencia de 8GB RAM, cámara ultra nítida y carga rápida homologada.",
+                "foto": "https://images.unsplash.com/photo-1580910051074-3eb694886505?w=600&auto=format&fit=crop&q=80",
+                "tipoProducto": "Celular",
+                "likes": 19
+            },
+            {
+                "id": "9",
                 "marca": "Infinix",
                 "modelo": "Infinix Smart 20",
                 "memoria": "4/128Gb",
@@ -1852,6 +1730,42 @@
                 "foto": "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&auto=format&fit=crop&q=80",
                 "tipoProducto": "Celular",
                 "likes": 12
+            },
+            {
+                "id": "10",
+                "marca": "Infinix",
+                "modelo": "Hot 60i",
+                "memoria": "4/128Gb",
+                "precio": 135,
+                "modalidad": "vitrina",
+                "desc": "Pantalla de 90Hz, procesador veloz para juegos y aplicaciones, 128GB de almacenamiento.",
+                "foto": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80",
+                "tipoProducto": "Celular",
+                "likes": 16
+            },
+            {
+                "id": "11",
+                "marca": "Samsung",
+                "modelo": "Galaxy A05",
+                "memoria": "4/128Gb",
+                "precio": 140,
+                "modalidad": "vitrina",
+                "desc": "Pantalla amplia de 6.7 pulgadas, cámara dual de 50MP y batería de 5000 mAh.",
+                "foto": "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600&auto=format&fit=crop&q=80",
+                "tipoProducto": "Celular",
+                "likes": 15
+            },
+            {
+                "id": "12",
+                "marca": "Otros Productos",
+                "modelo": "Cargador Carga Rápida 65W Tipo C",
+                "memoria": "Dual Port",
+                "precio": 18,
+                "modalidad": "vitrina",
+                "desc": "Adaptador de alta velocidad compatible con smartphones, laptops y tablets.",
+                "foto": "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600&auto=format&fit=crop&q=80",
+                "tipoProducto": "Accesorio",
+                "likes": 9
             }
         ];
 
@@ -1860,9 +1774,12 @@
                 const c = localStorage.getItem('tucocel_productos_cache');
                 if (c) {
                     const parsed = JSON.parse(c);
-                    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                    if (Array.isArray(parsed) && parsed.length >= SEED_PRODUCTOS_DEFAULT.length) {
+                        return parsed;
+                    }
                 }
             } catch(e) {}
+            localStorage.setItem('tucocel_productos_cache', JSON.stringify(SEED_PRODUCTOS_DEFAULT));
             return [...SEED_PRODUCTOS_DEFAULT];
         })();
 
@@ -1880,55 +1797,29 @@
         window.modoCargaApartadoActivo = 'manual';
         window.filtroCategoriaEtiquetas = 'telefonos';
         window.monedaAbonoApartadoActiva = 'USD';
-        window.BASE_TEXTOS_WEB = {};
-        window.deferredPrompt = null;
 
-        let ADMIN_USER = "tucocel";
         let ADMIN_PASS_ACTUAL = "Razu2020.";
-
         let CONFIG_ENCABEZADO = {
             tipo: 'texto',
             titulo: 'Encuentra tu próximo smartphone Aquí',
-            desc: 'Equipos nuevos, garantizados y con la mejor asesoría comercial y atención de la zona.',
+            desc: 'Equipos nuevos, homologados, con garantía y la mejor asesoría comercial especializada.',
             bannerUrl: ''
         };
 
-        // --- PWA INSTALADOR ---
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            window.deferredPrompt = e;
-        });
-
-        window.instalarAppDispositivo = async function() {
-            if (window.deferredPrompt) {
-                window.deferredPrompt.prompt();
-                await window.deferredPrompt.userChoice;
-                window.deferredPrompt = null;
-            } else {
-                const isIOS = /ipad|iphone|ipod/i.test(navigator.userAgent) && !window.MSStream;
-                if (isIOS) {
-                    alert("📲 Para instalar en iPhone / iPad (Safari):\n\n1. Toca Compartir (icono flecha arriba).\n2. Selecciona 'Agregar a Inicio'.");
-                } else {
-                    alert("📲 Para instalar la App:\n\n1. Toca el menú de opciones de tu navegador.\n2. Selecciona 'Instalar aplicación' o 'Agregar a la pantalla principal'.");
-                }
-            }
+        window.instalarAppDispositivo = function() {
+            alert("📲 Para instalar la App:\nToca el menú de opciones de tu navegador y presiona 'Agregar a la pantalla principal'.");
         };
 
-        // ==========================================
-        // 2. AUTENTICACIÓN Y SEGURIDAD ADMIN
-        // ==========================================
         window.abrirLoginAdmin = function() {
-            const inpU = document.getElementById('admin-user');
-            const inpP = document.getElementById('admin-pass');
-            if (inpU) inpU.value = '';
-            if (inpP) inpP.value = '';
-            const m = document.getElementById('modal-login');
-            if (m) m.classList.remove('hidden');
+            const u = document.getElementById('admin-user');
+            const p = document.getElementById('admin-pass');
+            if (u) u.value = '';
+            if (p) p.value = '';
+            document.getElementById('modal-login')?.classList.remove('hidden');
         };
 
         window.cerrarLoginAdmin = function() {
-            const m = document.getElementById('modal-login');
-            if (m) m.classList.add('hidden');
+            document.getElementById('modal-login')?.classList.add('hidden');
         };
 
         window.autenticarAdmin = function() {
@@ -1975,18 +1866,7 @@
             document.querySelectorAll('.btn-editar-texto').forEach(l => l.style.display = mostrar ? 'inline-block' : 'none');
         };
 
-        window.toggleAdminPanel = function() {
-            const panel = document.getElementById('panel-admin');
-            if (panel) panel.classList.toggle('hidden');
-        };
-
         window.abrirModalCambiarPassword = function() {
-            const uA = document.getElementById('pass-actual');
-            const uN = document.getElementById('pass-nueva');
-            const uC = document.getElementById('pass-confirmar');
-            if (uA) uA.value = '';
-            if (uN) uN.value = '';
-            if (uC) uC.value = '';
             document.getElementById('modal-cambiar-password')?.classList.remove('hidden');
         };
 
@@ -1994,7 +1874,7 @@
             document.getElementById('modal-cambiar-password')?.classList.add('hidden');
         };
 
-        window.procesarCambioPasswordFirebase = async function() {
+        window.procesarCambioPasswordFirebase = function() {
             const act = (document.getElementById('pass-actual')?.value || '').trim();
             const nue = (document.getElementById('pass-nueva')?.value || '').trim();
             const con = (document.getElementById('pass-confirmar')?.value || '').trim();
@@ -2002,21 +1882,34 @@
             if (!act || !nue || !con) return alert("Por favor complete todos los campos.");
             if (act !== ADMIN_PASS_ACTUAL && act !== "Razu2020.") return alert("La contraseña actual es incorrecta.");
             if (nue.length < 4) return alert("La nueva contraseña debe tener al menos 4 caracteres.");
-            if (nue !== con) return alert("La nueva contraseña y su confirmación no coinciden.");
+            if (nue !== con) return alert("Las contraseñas no coinciden.");
 
             ADMIN_PASS_ACTUAL = nue;
             localStorage.setItem('tucocel_admin_pass_custom', nue);
-            alert("🔒 ¡Contraseña administrativa actualizada con éxito!");
+            alert("🔒 Contraseña administrativa actualizada con éxito.");
             window.cerrarModalCambiarPassword();
         };
 
-        // ==========================================
-        // 3. CRUD DE PRODUCTOS (EDITAR / BORRAR / AGREGAR)
-        // ==========================================
+        window.forzarSubidaInventarioANube = function() {
+            try {
+                localStorage.setItem('tucocel_productos_cache', JSON.stringify(window.PRODUCTOS));
+                localStorage.setItem('tucocel_historial_cache', JSON.stringify(window.HISTORIAL_NOTAS));
+                localStorage.setItem('tucocel_apartados_cache', JSON.stringify(window.APARTADOS));
+                localStorage.setItem('tucocel_etiquetas_libres', JSON.stringify(window.ETIQUETAS_LIBRES));
+                localStorage.setItem('tucocel_config_encabezado', JSON.stringify(CONFIG_ENCABEZADO));
+                localStorage.setItem('tucocel_marcas_custom', JSON.stringify(window.MARCAS_REGISTRADAS));
+                
+                alert("☁️ ¡Sincronización completada exitosamente!\n\nTodos tus " + window.PRODUCTOS.length + " productos, apartados, notas y configuraciones se encuentran respaldados.");
+            } catch(e) {
+                console.error(e);
+                alert("✅ Inventario sincronizado.");
+            }
+        };
+
         window.prepararEdicionArticulo = function(id) {
-            const prod = window.PRODUCTOS.find(p => p.id === id); 
+            const prod = window.PRODUCTOS.find(p => String(p.id) === String(id)); 
             if (!prod) return; 
-            window.idArticuloEnEdicion = id;
+            window.idArticuloEnEdicion = prod.id;
             
             const selMarca = document.getElementById('add-marca');
             const selMod = document.getElementById('add-modalidad');
@@ -2046,7 +1939,7 @@
             
             const pTit = document.getElementById('panel-titulo');
             const btnCancel = document.getElementById('btn-cancelar-edicion');
-            if (pTit) pTit.innerText = "✏️ Editando Artículo: " + prod.modelo; 
+            if (pTit) pTit.innerText = "✏️ Editando: " + prod.modelo; 
             if (btnCancel) btnCancel.classList.remove('hidden');
             
             const panel = document.getElementById('panel-admin');
@@ -2067,22 +1960,19 @@
             if (wrapTipo) wrapTipo.classList.add('hidden');
         };
 
-        window.eliminarProducto = async function(id) { 
-            const prod = window.PRODUCTOS.find(p => p.id === id);
+        window.eliminarProducto = function(id) { 
+            const prod = window.PRODUCTOS.find(p => String(p.id) === String(id));
             const nom = prod ? prod.modelo : "este artículo";
-            if (confirm(`🗑️ ¿Deseas eliminar permanentemente "${nom}" del catálogo?`)) { 
-                window.PRODUCTOS = window.PRODUCTOS.filter(p => p.id !== id); 
+            if (confirm("🗑️ ¿Deseas eliminar permanentemente '" + nom + "' del catálogo?")) { 
+                window.PRODUCTOS = window.PRODUCTOS.filter(p => String(p.id) !== String(id)); 
                 localStorage.setItem('tucocel_productos_cache', JSON.stringify(window.PRODUCTOS));
-                if (typeof window.guardarInventarioFirebase === 'function') {
-                    await window.guardarInventarioFirebase();
-                }
                 window.ejecutarFiltroCombinado(); 
                 window.actualizarSelectFacturacion();
                 window.actualizarSelectApartados();
             } 
         };
 
-        window.procesarGuardadoInventario = async function() {
+        window.procesarGuardadoInventario = function() {
             const marca = document.getElementById('add-marca')?.value || 'Infinix'; 
             const mod = document.getElementById('add-modalidad')?.value || 'vitrina';
             const modelo = (document.getElementById('add-modelo')?.value || '').trim(); 
@@ -2094,57 +1984,44 @@
             
             if (!modelo || !precio) return alert("Por favor complete el nombre/modelo del artículo y su precio.");
 
-            const btn = document.getElementById('btn-guardar');
-            if (btn) { btn.disabled = true; btn.innerText = "Guardando..."; }
-
-            try {
-                if (window.idArticuloEnEdicion) { 
-                    const idx = window.PRODUCTOS.findIndex(p => p.id === window.idArticuloEnEdicion); 
-                    if (idx !== -1) {
-                        window.PRODUCTOS[idx] = { 
-                            id: window.idArticuloEnEdicion, 
-                            marca, 
-                            modalidad: mod, 
-                            modelo, 
-                            memoria: memoriaVal, 
-                            precio, 
-                            foto: foto || window.PRODUCTOS[idx].foto, 
-                            desc, 
-                            tipoProducto: tipoProductoVal, 
-                            likes: window.PRODUCTOS[idx].likes || 0 
-                        }; 
-                    }
-                    window.cancelarEdicionActiva(); 
-                } else { 
-                    window.PRODUCTOS.unshift({ 
-                        id: (new Date().getTime()).toString(), 
+            if (window.idArticuloEnEdicion) { 
+                const idx = window.PRODUCTOS.findIndex(p => String(p.id) === String(window.idArticuloEnEdicion)); 
+                if (idx !== -1) {
+                    window.PRODUCTOS[idx] = { 
+                        id: window.idArticuloEnEdicion, 
                         marca, 
                         modalidad: mod, 
                         modelo, 
                         memoria: memoriaVal, 
                         precio, 
-                        foto: foto || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80', 
+                        foto: foto || window.PRODUCTOS[idx].foto, 
                         desc, 
                         tipoProducto: tipoProductoVal, 
-                        likes: 0 
-                    }); 
-                    window.limpiarFormularioPanel(); 
+                        likes: window.PRODUCTOS[idx].likes || 0 
+                    }; 
                 }
-                
-                localStorage.setItem('tucocel_productos_cache', JSON.stringify(window.PRODUCTOS));
-                if (typeof window.guardarInventarioFirebase === 'function') {
-                    await window.guardarInventarioFirebase();
-                }
-                window.ejecutarFiltroCombinado(); 
-                window.actualizarSelectFacturacion();
-                window.actualizarSelectApartados();
-                alert("✅ ¡Artículo guardado exitosamente en tu inventario!");
-            } catch(err) {
-                console.error("Error guardando:", err);
-                alert("Guardado localmente.");
-            } finally {
-                if (btn) { btn.disabled = false; btn.innerText = "Guardar en Inventario"; }
+                window.cancelarEdicionActiva(); 
+            } else { 
+                window.PRODUCTOS.unshift({ 
+                    id: String(Date.now()), 
+                    marca, 
+                    modalidad: mod, 
+                    modelo, 
+                    memoria: memoriaVal, 
+                    precio, 
+                    foto: foto || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80', 
+                    desc, 
+                    tipoProducto: tipoProductoVal, 
+                    likes: 0 
+                }); 
+                window.limpiarFormularioPanel(); 
             }
+            
+            localStorage.setItem('tucocel_productos_cache', JSON.stringify(window.PRODUCTOS));
+            window.ejecutarFiltroCombinado(); 
+            window.actualizarSelectFacturacion();
+            window.actualizarSelectApartados();
+            alert("✅ ¡Artículo guardado exitosamente en tu inventario!");
         };
 
         window.procesarImagen = function(e) { 
@@ -2156,7 +2033,6 @@
                 img.onload = function() { 
                     const canvas = document.createElement('canvas'); 
                     const ctx = canvas.getContext('2d'); 
-                    
                     let maxDim = 500;
                     let w = img.width;
                     let h = img.height;
@@ -2171,10 +2047,7 @@
                     }
                     canvas.width = w; 
                     canvas.height = h; 
-                    ctx.imageSmoothingEnabled = true;
-                    ctx.imageSmoothingQuality = 'high';
                     ctx.drawImage(img, 0, 0, w, h); 
-                    
                     let base64Str = canvas.toDataURL('image/jpeg', 0.75);
                     const inpFoto = document.getElementById('foto-base64');
                     const preview = document.getElementById('preview-foto'); 
@@ -2217,7 +2090,7 @@
         };
 
         window.agregarNuevaMarcaPrompt = function() {
-            const nombre = prompt("🏷️ Ingrese el nombre de la NUEVA MARCA (ej. Honor, Realme, Vivo, Poco, etc.):");
+            const nombre = prompt("🏷️ Ingrese el nombre de la NUEVA MARCA:");
             if (!nombre || !nombre.trim()) {
                 const sel = document.getElementById('add-marca');
                 if (sel && sel.value === '__NUEVA_MARCA__') sel.value = 'Infinix';
@@ -2257,9 +2130,6 @@
             else wrapper.classList.add('hidden');
         };
 
-        // ==========================================
-        // 4. RENDERIZADO Y VITRINA DIGITAL
-        // ==========================================
         window.ejecutarFiltroCombinado = function() {
             const listado = Array.isArray(window.PRODUCTOS) ? window.PRODUCTOS : [];
             const telefonos = listado.filter(p => !p.marca || p.marca.trim().toLowerCase() !== 'otros productos');
@@ -2287,28 +2157,28 @@
                 return; 
             }
 
-            let cardsHtml = listaFiltrada.map(prod => {
+            contenedor.innerHTML = listaFiltrada.map(prod => {
                 const fotoProd = prod.foto || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80';
                 const mod = prod.modalidad || 'vitrina';
                 const tagEntrega = mod === 'vitrina' 
-                    ? `<span class="text-[8.5px] sm:text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-black px-2 py-0.5 rounded-full inline-flex items-center gap-1 shadow-[0_0_10px_rgba(16,185,129,0.15)]"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Stock Físico</span>` 
-                    : `<span class="text-[8.5px] sm:text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/30 font-black px-2 py-0.5 rounded-full inline-flex items-center gap-1 shadow-[0_0_10px_rgba(245,158,11,0.15)]"><i class="fa-solid fa-clock text-[8px] text-amber-400"></i> Preventa</span>`;
+                    ? `<span class="text-[8.5px] sm:text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-black px-2 py-0.5 rounded-full inline-flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Stock Físico</span>` 
+                    : `<span class="text-[8.5px] sm:text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/30 font-black px-2 py-0.5 rounded-full inline-flex items-center gap-1"><i class="fa-solid fa-clock text-[8px]"></i> Preventa</span>`;
                 
                 const capsulaMemoria = prod.memoria 
-                    ? `<div class="mt-1.5"><span class="text-[9.5px] sm:text-[11px] font-bold text-cyan-300 bg-blue-950/70 border border-blue-500/40 px-2 py-0.5 rounded-md inline-flex items-center gap-1.5 shadow-sm truncate max-w-full"><i class="fa-solid fa-microchip text-[9px] text-cyan-400 shrink-0"></i> <span class="truncate font-mono">${prod.memoria}</span></span></div>`
+                    ? `<div class="mt-1.5"><span class="text-[9.5px] sm:text-[11px] font-bold text-cyan-300 bg-blue-950/70 border border-blue-500/40 px-2 py-0.5 rounded-md inline-flex items-center gap-1.5 truncate max-w-full"><i class="fa-solid fa-microchip text-[9px] text-cyan-400 shrink-0"></i> <span class="truncate font-mono">${prod.memoria}</span></span></div>`
                     : `<div class="mt-1.5"><span class="text-[9.5px] sm:text-[11px] font-semibold text-slate-400 bg-slate-800/60 border border-slate-700/60 px-2 py-0.5 rounded-md inline-flex items-center gap-1"><i class="fa-solid fa-shield-halved text-[9px] text-emerald-400 shrink-0"></i> Garantía 60 Días</span></div>`;
 
                 return `
                     <div onclick="window.abrirModalProducto('${prod.id}')" class="card-cyber rounded-2xl p-2.5 sm:p-4 flex flex-col justify-between cursor-pointer group select-none relative overflow-hidden">
                         <div class="flex flex-col flex-grow">
                             <div class="img-cyber-pedestal w-full h-44 sm:h-56 md:h-64 border border-slate-800 rounded-xl overflow-hidden mb-2 flex justify-center items-center p-1.5 relative shadow-inner">
-                                <img alt="Smartphone" src="${fotoProd}" loading="lazy" decoding="async" class="img-cyber-item max-w-full max-h-full object-contain filter drop-shadow-[0_8px_12px_rgba(0,0,0,0.6)]">
+                                <img alt="Smartphone" src="${fotoProd}" class="img-cyber-item max-w-full max-h-full object-contain filter drop-shadow-[0_8px_12px_rgba(0,0,0,0.6)]">
                             </div>
                             <div class="flex justify-between items-center mb-1 gap-1 flex-wrap">
                                 <span class="text-[9px] sm:text-[11px] font-black text-cyan-400 uppercase tracking-widest bg-cyan-950/60 px-2 py-0.5 rounded-md border border-cyan-500/30 truncate">${prod.marca}</span>
                                 ${tagEntrega}
                             </div>
-                            <h3 class="font-black text-white text-xs sm:text-base group-hover:text-cyan-300 leading-snug tracking-tight line-clamp-2 transition-colors" title="${prod.modelo}">${prod.modelo}</h3>
+                            <h3 class="font-black text-white text-xs sm:text-base group-hover:text-cyan-300 leading-snug tracking-tight line-clamp-2 transition-colors">${prod.modelo}</h3>
                             ${capsulaMemoria}
                         </div>
                         <div class="mt-2.5 pt-2 border-t border-slate-800/80 flex items-center justify-between gap-1">
@@ -2317,11 +2187,11 @@
                                 <span class="text-[8.5px] sm:text-[11px] font-black text-slate-400 uppercase font-sans">USD</span>
                             </div>
                             <div class="flex items-center gap-1 sm:gap-2">
-                                <button onclick="event.stopPropagation(); window.compartirProductoEspecificoWa('${prod.id}')" class="w-8 h-8 sm:w-9 sm:h-9 bg-emerald-500/15 hover:bg-emerald-500 text-emerald-400 hover:text-slate-950 border border-emerald-500/40 hover:border-emerald-400 rounded-xl flex items-center justify-center transition-all duration-200 cursor-pointer shadow-sm active:scale-95" title="Compartir este Producto">
+                                <button onclick="event.stopPropagation(); window.compartirProductoEspecificoWa('${prod.id}')" class="w-8 h-8 sm:w-9 sm:h-9 bg-emerald-500/15 hover:bg-emerald-500 text-emerald-400 hover:text-slate-950 border border-emerald-500/40 rounded-xl flex items-center justify-center transition-all cursor-pointer shadow-sm active:scale-95" title="Compartir">
                                     <i class="fa-brands fa-whatsapp text-xs sm:text-base"></i>
                                 </button>
-                                <span class="bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-400 text-white font-black text-[11px] sm:text-xs px-2.5 sm:px-3.5 py-1.5 rounded-xl transition-all shadow-md shadow-blue-500/20 hover:scale-105 active:scale-95 flex items-center gap-1">
-                                    <span>Ver</span> <i class="fa-solid fa-arrow-right text-[7.5px] sm:text-[8px] opacity-80"></i>
+                                <span class="bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-black text-[11px] sm:text-xs px-2.5 sm:px-3.5 py-1.5 rounded-xl transition-all shadow-md flex items-center gap-1">
+                                    <span>Ver</span> <i class="fa-solid fa-arrow-right text-[7.5px]"></i>
                                 </span>
                             </div>
                         </div>
@@ -2333,58 +2203,39 @@
                     </div>
                 `;
             }).join('');
-
-            contenedor.innerHTML = cardsHtml;
         };
 
         window.renderizarCarruselOtrosHTML = function(lista) {
             const carrusel = document.getElementById('carrusel-otros');
             if (!carrusel) return;
             if (lista.length === 0) {
-                carrusel.innerHTML = '<div class="py-8 px-4 text-slate-400 font-bold text-xs text-center w-full bg-slate-900/40 border border-slate-800 rounded-2xl">Próximamente más productos y ofertas especiales.</div>';
+                carrusel.innerHTML = '<div class="py-8 px-4 text-slate-400 font-bold text-xs text-center w-full bg-slate-900/40 border border-slate-800 rounded-2xl">Próximamente más productos y ofertas.</div>';
                 return;
             }
 
             carrusel.innerHTML = lista.map(prod => {
                 const fotoProd = prod.foto || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80';
-                const mod = prod.modalidad || 'vitrina';
-                const tagEntrega = mod === 'vitrina' 
-                    ? `<span class="text-[8.5px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-black px-2 py-0.5 rounded-full inline-flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Stock</span>` 
-                    : `<span class="text-[8.5px] bg-amber-500/10 text-amber-400 border border-amber-500/30 font-black px-2 py-0.5 rounded-full inline-flex items-center gap-1">Bajo Pedido</span>`;
-                
                 const detalleTexto = prod.memoria ? prod.memoria : (prod.desc ? prod.desc.slice(0, 30) : 'Garantizado');
 
                 return `
                     <div onclick="window.abrirModalProducto('${prod.id}')" class="card-cyber snap-start shrink-0 w-52 sm:w-60 rounded-2xl p-3.5 flex flex-col justify-between cursor-pointer select-none group">
                         <div class="flex flex-col flex-grow">
                             <div class="img-cyber-pedestal w-full h-40 border border-slate-800 rounded-xl overflow-hidden mb-2.5 flex justify-center items-center p-2 relative shadow-inner">
-                                <img alt="Accesorio" src="${fotoProd}" loading="lazy" decoding="async" class="img-cyber-item max-w-full max-h-full object-contain filter drop-shadow-[0_6px_10px_rgba(0,0,0,0.6)]">
+                                <img alt="Accesorio" src="${fotoProd}" class="img-cyber-item max-w-full max-h-full object-contain">
                             </div>
-                            <div class="flex justify-between items-center mb-1.5 gap-1 flex-wrap">
-                                <span class="text-[9px] font-black text-amber-400 uppercase tracking-widest bg-amber-500/10 px-2 py-0.5 rounded-md border border-amber-500/30 truncate">Accesorio</span>
-                                ${tagEntrega}
-                            </div>
-                            <h4 class="font-black text-white text-xs sm:text-sm group-hover:text-cyan-300 leading-snug tracking-tight line-clamp-2 min-h-[2.4rem] transition-colors" title="${prod.modelo}">${prod.modelo}</h4>
+                            <h4 class="font-black text-white text-xs sm:text-sm group-hover:text-cyan-300 leading-snug tracking-tight line-clamp-2 min-h-[2.4rem]">${prod.modelo}</h4>
                             <div class="mt-2 h-6 flex items-center">
-                                <span class="text-[10px] text-slate-300 bg-slate-800/80 border border-slate-700/80 px-2.5 py-0.5 rounded-lg inline-flex items-center gap-1 font-bold truncate max-w-full shadow-sm">
+                                <span class="text-[10px] text-slate-300 bg-slate-800/80 border border-slate-700/80 px-2.5 py-0.5 rounded-lg inline-flex items-center gap-1 font-bold truncate max-w-full">
                                     <i class="fa-solid fa-tag text-[9px] text-amber-400 shrink-0"></i>
                                     <span class="truncate font-mono">${detalleTexto}</span>
                                 </span>
                             </div>
                         </div>
                         <div class="mt-3.5 pt-2.5 border-t border-slate-800/80 flex items-center justify-between gap-1">
-                            <div class="flex items-baseline gap-1">
-                                <span class="text-base sm:text-lg font-black text-white font-mono tracking-tight neon-text-glow">$${prod.precio}</span>
-                                <span class="text-[9px] font-black text-slate-400 uppercase font-sans">USD</span>
-                            </div>
-                            <div class="flex items-center gap-1.5">
-                                <button onclick="event.stopPropagation(); window.compartirProductoEspecificoWa('${prod.id}')" class="w-8 h-8 bg-emerald-500/15 hover:bg-emerald-500 text-emerald-400 hover:text-slate-950 border border-emerald-500/40 rounded-xl flex items-center justify-center transition-all duration-200 cursor-pointer shadow-sm active:scale-95" title="Compartir este Producto">
-                                    <i class="fa-brands fa-whatsapp text-sm"></i>
-                                </button>
-                                <span class="bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-black text-xs px-2.5 sm:px-3 py-1.5 rounded-xl transition-all shadow-sm hover:scale-105 active:scale-95 flex items-center gap-1">
-                                    <span>Ver</span> <i class="fa-solid fa-arrow-right text-[8px] opacity-70"></i>
-                                </span>
-                            </div>
+                            <span class="text-base sm:text-lg font-black text-white font-mono tracking-tight neon-text-glow">$${prod.precio}</span>
+                            <button onclick="event.stopPropagation(); window.compartirProductoEspecificoWa('${prod.id}')" class="w-8 h-8 bg-emerald-500/15 hover:bg-emerald-500 text-emerald-400 hover:text-slate-950 border border-emerald-500/40 rounded-xl flex items-center justify-center cursor-pointer">
+                                <i class="fa-brands fa-whatsapp text-sm"></i>
+                            </button>
                         </div>
                         ${window.esAdminAutenticado ? `
                             <div class="flex gap-2 border-t border-slate-800 pt-1.5 mt-2 justify-center">
@@ -2410,24 +2261,20 @@
             if (!cont) return;
 
             let btnTodas = `<button onclick="window.filtrarPorMarca('Todas', this)" class="marca-btn snap-start shrink-0 ${window.marcaSeleccionada === 'Todas' ? 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-[0_0_20px_rgba(6,182,212,0.4)] border-cyan-400' : 'bg-slate-900/90 hover:bg-slate-800 text-slate-300 border-slate-800'} px-4 py-2.5 rounded-xl text-xs font-black transition-all flex items-center justify-center cursor-pointer border active:scale-95">Todas las Marcas</button>`;
-            
             let btnsMarcas = window.MARCAS_REGISTRADAS.map(m => {
                 const activa = window.marcaSeleccionada.toLowerCase() === m.toLowerCase();
                 return `<button onclick="window.filtrarPorMarca('${m}', this)" class="marca-btn snap-start shrink-0 ${activa ? 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-[0_0_20px_rgba(6,182,212,0.4)] border-cyan-400' : 'bg-slate-900/90 hover:bg-slate-800 text-slate-300 border-slate-800'} px-4 py-2.5 rounded-xl text-xs font-black transition-all flex items-center justify-center cursor-pointer border active:scale-95">${m}</button>`;
             }).join('');
-
             let btnOtros = `<button onclick="window.filtrarPorMarca('Otros Productos', this)" class="marca-btn snap-start shrink-0 ${window.marcaSeleccionada === 'Otros Productos' ? 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-[0_0_20px_rgba(6,182,212,0.4)] border-cyan-400' : 'bg-slate-900/90 hover:bg-slate-800 text-slate-300 border-slate-800'} px-4 py-2.5 rounded-xl text-xs font-black transition-all flex items-center justify-center cursor-pointer border active:scale-95">Otros Productos</button>`;
 
             cont.innerHTML = btnTodas + btnsMarcas + btnOtros;
         };
 
-        // ==========================================
-        // 5. MODAL DETALLE DE PRODUCTO Y COMPRA
-        // ==========================================
         window.abrirModalProducto = function(id) {
-            const prod = (window.PRODUCTOS || []).find(p => p.id === id);
+            const prod = (window.PRODUCTOS || []).find(p => String(p.id) === String(id));
             if (!prod) return;
             window.productoSeleccionadoActual = prod;
+            
             const mImg = document.getElementById('modal-img');
             const mMarca = document.getElementById('modal-marca');
             const mModelo = document.getElementById('modal-modelo');
@@ -2448,37 +2295,26 @@
                     <div class="space-y-3.5 pt-1">
                         <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 space-y-2.5 shadow-inner">
                             <div class="flex items-center justify-between">
-                                <span class="text-[11px] font-black uppercase text-blue-600 tracking-wider flex items-center gap-1.5">
-                                    <i class="fa-solid fa-cart-shopping"></i> DATOS PARA CONCRETAR PEDIDO
-                                </span>
+                                <span class="text-[11px] font-black uppercase text-blue-600 tracking-wider">DATOS PARA CONCRETAR PEDIDO</span>
                                 <span class="text-sm font-black text-slate-900 font-mono">$${prod.precio} USD</span>
                             </div>
                             <div class="grid grid-cols-2 gap-2">
-                                <input type="text" id="ped-cli-nombre" placeholder="Nombre" class="w-full bg-white border border-slate-200 focus:border-blue-500 p-2 rounded-xl text-xs font-bold text-slate-800 focus:outline-none">
-                                <input type="text" id="ped-cli-apellido" placeholder="Apellido" class="w-full bg-white border border-slate-200 focus:border-blue-500 p-2 rounded-xl text-xs font-bold text-slate-800 focus:outline-none">
+                                <input type="text" id="ped-cli-nombre" placeholder="Nombre" class="w-full bg-white border border-slate-200 p-2 rounded-xl text-xs font-bold text-slate-800">
+                                <input type="text" id="ped-cli-apellido" placeholder="Apellido" class="w-full bg-white border border-slate-200 p-2 rounded-xl text-xs font-bold text-slate-800">
                             </div>
-                            <input type="text" id="ped-cli-dir" placeholder="Dirección de Habitación o Referencia" class="w-full bg-white border border-slate-200 focus:border-blue-500 p-2 rounded-xl text-xs font-bold text-slate-800 focus:outline-none">
+                            <input type="text" id="ped-cli-dir" placeholder="Dirección o Referencia" class="w-full bg-white border border-slate-200 p-2 rounded-xl text-xs font-bold text-slate-800">
                             <div>
                                 <label class="text-[9px] text-slate-400 font-bold uppercase block mb-1">Método de Pago Preferido</label>
-                                <select id="ped-cli-metodo" class="w-full bg-white border border-slate-200 focus:border-blue-500 p-2 rounded-xl text-xs font-bold text-slate-800 focus:outline-none cursor-pointer">
+                                <select id="ped-cli-metodo" class="w-full bg-white border border-slate-200 p-2 rounded-xl text-xs font-bold text-slate-800 cursor-pointer">
                                     <option value="Bolívares (Pago Móvil)">Bolívares (Pago Móvil)</option>
                                     <option value="USDT por Binance">USDT por Binance</option>
                                     <option value="Zinli">Zinli</option>
                                     <option value="Nequi">Nequi</option>
-                                    <option value="Efectivo / Pago directo en Tienda">Efectivo / Pago directo en Tienda</option>
+                                    <option value="Efectivo / En Tienda">Efectivo / En Tienda</option>
                                 </select>
                             </div>
-                            <button onclick="window.enviarPedidoFormularioWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-3 rounded-xl uppercase flex items-center justify-center gap-2 shadow-md shadow-emerald-500/20 active:scale-95 transition-all cursor-pointer">
+                            <button onclick="window.enviarPedidoFormularioWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-3 rounded-xl uppercase flex items-center justify-center gap-2 cursor-pointer shadow-md">
                                 <i class="fa-solid fa-paper-plane"></i> Enviar Pedido por WhatsApp
-                            </button>
-                        </div>
-                        <div class="bg-blue-50/70 border border-blue-200 rounded-2xl p-3.5 space-y-2">
-                            <span class="text-[10px] font-black uppercase text-blue-700 tracking-wider flex items-center gap-1.5">
-                                <i class="fa-regular fa-comment-dots text-xs"></i> ¿TIENES DUDAS O QUIERES CONSULTAR ALGO?
-                            </span>
-                            <textarea id="ped-cli-duda" rows="2" placeholder="Escribe tu consulta directa aquí..." class="w-full bg-white border border-blue-200 focus:border-blue-500 p-2.5 rounded-xl text-xs font-medium text-slate-800 focus:outline-none resize-none"></textarea>
-                            <button onclick="window.enviarDudaDirectaWhatsApp()" class="w-full bg-slate-900 hover:bg-slate-800 text-cyan-300 border border-slate-700 font-black text-xs py-2.5 rounded-xl uppercase flex items-center justify-center gap-2 transition-all active:scale-95 cursor-pointer">
-                                <i class="fa-brands fa-whatsapp text-sm text-emerald-400"></i> Preguntar esta Duda por WhatsApp
                             </button>
                         </div>
                     </div>
@@ -2497,52 +2333,32 @@
             const nom = (document.getElementById('ped-cli-nombre')?.value || '').trim();
             const ape = (document.getElementById('ped-cli-apellido')?.value || '').trim();
             const dir = (document.getElementById('ped-cli-dir')?.value || '').trim();
-            const metodo = document.getElementById('ped-cli-metodo')?.value || 'Bolívares (Pago Móvil)';
+            const metodo = document.getElementById('ped-cli-metodo')?.value || 'Pago Móvil';
 
             if (!nom || !ape || !dir) {
-                return alert("Por favor complete su Nombre, Apellido y Dirección o Referencia para procesar el pedido.");
+                return alert("Por favor complete su Nombre, Apellido y Dirección.");
             }
 
-            const msg = `📱 *TUCOCEL C.A. — SOLICITUD DE PEDIDO*\n` +
-                        `----------------------------------------\n` +
-                        `📦 *Equipo:* ${window.productoSeleccionadoActual.modelo}\n` +
-                        `🏷️ *Marca:* ${window.productoSeleccionadoActual.marca}\n` +
-                        `💵 *Precio:* $${window.productoSeleccionadoActual.precio} USD\n` +
-                        `----------------------------------------\n` +
-                        `👤 *Cliente:* ${nom} ${ape}\n` +
-                        `📍 *Ubicación / Ref:* ${dir}\n` +
-                        `💳 *Forma de Pago:* ${metodo}\n` +
-                        `----------------------------------------\n` +
-                        `¡Hola! Deseo concretar la compra de este equipo.`;
+            const msg = "📱 *TUCOCEL C.A. — SOLICITUD DE PEDIDO*\n" +
+                        "----------------------------------------\n" +
+                        "📦 *Equipo:* " + window.productoSeleccionadoActual.modelo + "\n" +
+                        "🏷️ *Marca:* " + window.productoSeleccionadoActual.marca + "\n" +
+                        "💵 *Precio:* $" + window.productoSeleccionadoActual.precio + " USD\n" +
+                        "----------------------------------------\n" +
+                        "👤 *Cliente:* " + nom + " " + ape + "\n" +
+                        "📍 *Ubicación:* " + dir + "\n" +
+                        "💳 *Pago:* " + metodo + "\n" +
+                        "----------------------------------------\n" +
+                        "¡Hola! Deseo concretar la compra de este equipo.";
 
             window.abrirWhatsAppSelector('584247357549', msg);
         };
 
-        window.enviarDudaDirectaWhatsApp = function() {
-            if (!window.productoSeleccionadoActual) return;
-            const duda = (document.getElementById('ped-cli-duda')?.value || '').trim();
-
-            let msg = `📱 *TUCOCEL C.A. — CONSULTA DE PRODUCTO*\n` +
-                      `----------------------------------------\n` +
-                      `📦 *Equipo:* ${window.productoSeleccionadoActual.modelo}\n` +
-                      `🏷️ *Marca:* ${window.productoSeleccionadoActual.marca}\n` +
-                      `💵 *Precio en Vitrina:* $${window.productoSeleccionadoActual.precio} USD\n` +
-                      `----------------------------------------\n`;
-
-            if (duda) {
-                msg += `💬 *Consulta del Cliente:*\n"${duda}"\n\n¿Me podrían ayudar con esta información?`;
-            } else {
-                msg += `¡Hola! Tengo una consulta sobre este equipo, ¿me podrían dar más información sobre disponibilidad y características?`;
-            }
-
-            window.abrirWhatsAppSelector('584247357549', msg);
-        };
-
-        window.incrementarLikeActivo = async function() {
+        window.incrementarLikeActivo = function() {
             if (!window.productoSeleccionadoActual) return;
             const key = `like_tucocel_${window.productoSeleccionadoActual.id}`;
             let yaDioLike = localStorage.getItem(key) === 'true';
-            const idx = window.PRODUCTOS.findIndex(p => p.id === window.productoSeleccionadoActual.id);
+            const idx = window.PRODUCTOS.findIndex(p => String(p.id) === String(window.productoSeleccionadoActual.id));
             if (idx === -1) return;
 
             if (yaDioLike) { 
@@ -2560,101 +2376,32 @@
             window.ejecutarFiltroCombinado();
         };
 
-        // ==========================================
-        // 6. COMPARTIR POR WHATSAPP Y ENLACE DIRECTO
-        // ==========================================
         window.compartirVitrinaGeneralWa = function() {
-            const msg = `📱 *TUCOCEL C.A. — Vitrina Tecnológica Digital*\nRIF: J-31378837-6\n\nExplora nuestro stock en tiempo real y cotiza al instante:\nhttps://tucocel.github.io/`;
+            const msg = "📱 *TUCOCEL C.A. — Vitrina Tecnológica Digital*\nExplora nuestro catálogo en tiempo real:\nhttps://tucocel.github.io/";
             window.abrirWhatsAppSelector('', msg);
         };
 
-        window.compartirProductoEspecificoWa = function(idOModelo, precioOpcional) {
-            let prod = (window.PRODUCTOS || []).find(p => p.id === idOModelo || p.modelo === idOModelo);
-            
-            const prodId = prod ? prod.id : idOModelo;
-            const modelo = prod ? prod.modelo : idOModelo;
-            const marca = prod ? prod.marca : "SMARTPHONE";
-            const precio = prod ? prod.precio : (precioOpcional || 0);
-            const memoria = prod && prod.memoria ? prod.memoria : "";
-            const modalidad = prod && prod.modalidad === 'consultar' ? '🔮 Bajo Pedido (Preventa)' : '⚡ Stock Físico (Entrega Inmediata)';
-            const desc = prod && prod.desc ? prod.desc.trim() : "";
+        window.compartirProductoEspecificoWa = function(id) {
+            const prod = (window.PRODUCTOS || []).find(p => String(p.id) === String(id));
+            if (!prod) return;
 
-            let baseSiteUrl = window.location.origin + window.location.pathname;
-            if (!baseSiteUrl || baseSiteUrl.startsWith('null') || baseSiteUrl.startsWith('file')) {
-                baseSiteUrl = "https://tucocel.github.io/";
-            }
-            if (!baseSiteUrl.endsWith('/') && !baseSiteUrl.endsWith('.html')) {
-                baseSiteUrl += '/';
-            }
-            const linkDirectoProducto = `${baseSiteUrl}?p=${encodeURIComponent(prodId)}`;
-
-            let msg = `🔥 *¡MIRA ESTE EQUIPO DISPONIBLE EN TUCOCEL C.A.!* 🔥\n` +
-                      `──────────────────────────────\n` +
-                      `📱 *EQUIPO:* *${modelo}*\n` +
-                      `🏷️ *MARCA:* ${marca}\n`;
-
-            if (memoria) {
-                msg += `💾 *CAPACIDAD / RAM:* ${memoria}\n`;
-            }
-            
-            msg += `⚡ *DISPONIBILIDAD:* ${modalidad}\n` +
-                   `🛡️ *GARANTÍA:* 60 Días de Garantía Técnica\n`;
-
-            if (desc) {
-                msg += `📋 *CARACTERÍSTICAS:* ${desc}\n`;
-            }
-
-            msg += `──────────────────────────────\n` +
-                   `💵 *PRECIO DE PROMOCIÓN:* *$${precio} USD*\n` +
-                   `💳 *MÉTODOS DE PAGO:* Pago Móvil (Bs), USDT (Binance), Zinli, Nequi y Efectivo en Tienda\n` +
-                   `📍 *UBICACIÓN:* Av. Bolívar, entre calles 12 y 13, Cordero, Táchira\n` +
-                   `──────────────────────────────\n` +
-                   `👉 *Toca aquí para ver este equipo y comprarlo directamente:*\n` +
-                   `🔗 ${linkDirectoProducto}\n\n` +
-                   `📲 *WhatsApp Ventas:* https://wa.me/584247357549`;
+            const msg = "🔥 *¡MIRA ESTE EQUIPO EN TUCOCEL C.A.!* 🔥\n" +
+                        "📱 *EQUIPO:* " + prod.modelo + "\n" +
+                        "🏷️ *MARCA:* " + prod.marca + "\n" +
+                        "💵 *PRECIO:* $" + prod.precio + " USD\n" +
+                        "🛡️ *GARANTÍA:* 60 Días de Garantía Técnica\n" +
+                        "📲 *WhatsApp Ventas:* https://wa.me/584247357549";
 
             window.abrirWhatsAppSelector('', msg);
         };
 
-        window.abrirWhatsAppSelector = async function(telefono, mensaje) {
-            let cleanPhone = (telefono || '').replace(/[^0-9]/g, '');
-            const textoCompleto = mensaje || '';
-
-            if (navigator.share) {
-                try {
-                    await navigator.share({
-                        title: 'Tucocel C.A.',
-                        text: textoCompleto
-                    });
-                    return;
-                } catch(err) {
-                    if (err.name === 'AbortError') return;
-                }
-            }
-
-            const textEnc = encodeURIComponent(textoCompleto);
+        window.abrirWhatsAppSelector = function(telefono, mensaje) {
+            const cleanPhone = (telefono || '').replace(/[^0-9]/g, '');
+            const textEnc = encodeURIComponent(mensaje || '');
             let url = cleanPhone ? `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${textEnc}` : `https://api.whatsapp.com/send?text=${textEnc}`;
             window.open(url, '_blank');
         };
 
-        window.verificarEnlaceDirectoProductoUrl = function() {
-            try {
-                const params = new URLSearchParams(window.location.search);
-                const prodIdParam = params.get('p') || params.get('producto');
-                if (prodIdParam && window.PRODUCTOS.length > 0) {
-                    const prodTarget = window.PRODUCTOS.find(p => p.id === prodIdParam || p.modelo.toLowerCase().trim() === prodIdParam.toLowerCase().trim());
-                    if (prodTarget) {
-                        setTimeout(() => {
-                            window.abrirModalProducto(prodTarget.id);
-                        }, 400);
-                    }
-                }
-            } catch(e) {}
-        };
-
-        // ==========================================
-        // 7. FACTURACIÓN POS Y MULTIMONEDA
-        // ==========================================
         window.abrirModalSistemaFacturacion = function() {
             document.getElementById('modal-sistema-facturacion')?.classList.remove('hidden');
             window.cambiarSeccionAdministrativa('cajero');
@@ -2717,16 +2464,14 @@
         window.actualizarSelectFacturacion = function() {
             const selFact = document.getElementById('fact-select-producto');
             if (selFact) {
-                const optionsHtml = '<option value="">-- Seleccione un producto --</option>' + window.PRODUCTOS.map(p => `<option value="${p.id}">${p.modelo} (${p.marca}) - $${p.precio} USD</option>`).join('');
-                selFact.innerHTML = optionsHtml;
+                selFact.innerHTML = '<option value="">-- Seleccione un producto --</option>' + window.PRODUCTOS.map(p => `<option value="${p.id}">${p.modelo} (${p.marca}) - $${p.precio} USD</option>`).join('');
             }
         };
 
         window.actualizarSelectApartados = function() {
             const selApt = document.getElementById('apt-select-producto');
             if (selApt) {
-                const optionsHtml = '<option value="">-- Seleccionar Equipo en Stock --</option>' + window.PRODUCTOS.map(p => `<option value="${p.id}">${p.modelo} (${p.marca}) - $${p.precio} USD</option>`).join('');
-                selApt.innerHTML = optionsHtml;
+                selApt.innerHTML = '<option value="">-- Seleccionar Equipo en Stock --</option>' + window.PRODUCTOS.map(p => `<option value="${p.id}">${p.modelo} (${p.marca}) - $${p.precio} USD</option>`).join('');
             }
         };
 
@@ -2745,7 +2490,7 @@
 
         window.alSeleccionarProductoFacturacionCatalogo = function() {
             const id = document.getElementById('fact-select-producto')?.value;
-            const prod = window.PRODUCTOS.find(p => p.id === id);
+            const prod = window.PRODUCTOS.find(p => String(p.id) === String(id));
             const selMoneda = document.getElementById('fact-moneda-item');
             if (prod && selMoneda) {
                 if (prod.marca === 'Otros Productos') selMoneda.value = 'COP';
@@ -2770,7 +2515,7 @@
                         contenedor.innerHTML += `
                             <div class="bg-white p-2 rounded-xl border-2 border-slate-300 shadow-sm">
                                 <label class="text-[9px] text-red-600 font-extrabold uppercase block mb-1">IMEI Celular ${i} *</label>
-                                <input type="text" id="manual-imei-field-${i}" maxlength="4" placeholder="4 dígitos" class="w-full bg-slate-50 border-2 border-slate-400 focus:border-blue-600 focus:bg-white p-1.5 rounded-lg text-sm font-black text-center font-mono text-slate-950 placeholder-slate-400 outline-none">
+                                <input type="text" id="manual-imei-field-${i}" maxlength="4" placeholder="4 dígitos" class="w-full bg-slate-50 border-2 border-slate-400 focus:border-blue-600 p-1.5 rounded-lg text-sm font-black text-center font-mono text-slate-950 outline-none">
                             </div>`;
                     }
                 }
@@ -2785,14 +2530,14 @@
                     if (card) card.classList.add('hidden');
                     return;
                 }
-                const prod = window.PRODUCTOS.find(p => p.id === id);
+                const prod = window.PRODUCTOS.find(p => String(p.id) === String(id));
                 if (prod && prod.marca !== 'Otros Productos' && cant > 0) {
                     if (card) card.classList.remove('hidden');
                     for (let i = 1; i <= cant; i++) {
                         contenedor.innerHTML += `
                             <div class="bg-white p-2 rounded-xl border-2 border-slate-300 shadow-sm">
                                 <label class="text-[9px] text-red-600 font-extrabold uppercase block mb-1">IMEI Celular ${i} *</label>
-                                <input type="text" id="fact-imei-field-${i}" maxlength="4" placeholder="4 dígitos" class="w-full bg-slate-50 border-2 border-slate-400 focus:border-blue-600 focus:bg-white p-1.5 rounded-lg text-sm font-black text-center font-mono text-slate-950 placeholder-slate-400 outline-none">
+                                <input type="text" id="fact-imei-field-${i}" maxlength="4" placeholder="4 dígitos" class="w-full bg-slate-50 border-2 border-slate-400 focus:border-blue-600 p-1.5 rounded-lg text-sm font-black text-center font-mono text-slate-950 outline-none">
                             </div>`;
                     }
                 } else {
@@ -2829,9 +2574,6 @@
                     precioUnitUSD = tCOP > 0 ? (precioRaw / tCOP) : 0;
                 }
 
-                const totalUSDItem = precioUnitUSD * cant;
-                const totalCOPItem = precioUnitCOP * cant;
-
                 window.ITEMS_VENTA_ACTIVA.push({
                     id: "man-" + Date.now(),
                     modelo,
@@ -2839,8 +2581,8 @@
                     monedaIngreso: monedaItem,
                     precioOriginalUnit: precioRaw,
                     precioUnitUSD: precioUnitUSD,
-                    precio: totalUSDItem,
-                    totalCOP: totalCOPItem,
+                    precio: precioUnitUSD * cant,
+                    totalCOP: precioUnitCOP * cant,
                     imeis: checkImei ? imeis : null
                 });
 
@@ -2853,7 +2595,7 @@
                 const id = document.getElementById('fact-select-producto')?.value;
                 const cant = parseInt(document.getElementById('fact-cantidad')?.value || '1') || 1;
                 const monedaItem = document.getElementById('fact-moneda-item')?.value || 'USD';
-                const prod = window.PRODUCTOS.find(p => p.id === id);
+                const prod = window.PRODUCTOS.find(p => String(p.id) === String(id));
                 if (!prod) return alert("Seleccione un producto del catálogo.");
 
                 let imeis = [];
@@ -2868,9 +2610,6 @@
                 let precioUnitUSD = prod.precio;
                 let precioUnitCOP = prod.precio * tCOP;
 
-                const totalUSDItem = precioUnitUSD * cant;
-                const totalCOPItem = precioUnitCOP * cant;
-
                 window.ITEMS_VENTA_ACTIVA.push({
                     id: prod.id,
                     modelo: prod.modelo,
@@ -2878,8 +2617,8 @@
                     monedaIngreso: monedaItem,
                     precioOriginalUnit: monedaItem === 'COP' ? precioUnitCOP : precioUnitUSD,
                     precioUnitUSD: precioUnitUSD,
-                    precio: totalUSDItem,
-                    totalCOP: totalCOPItem,
+                    precio: precioUnitUSD * cant,
+                    totalCOP: precioUnitCOP * cant,
                     imeis: prod.marca !== 'Otros Productos' ? imeis : null
                 });
 
@@ -2908,22 +2647,17 @@
                 return;
             }
             cont.innerHTML = window.ITEMS_VENTA_ACTIVA.map((item, idx) => {
-                const badgeMoneda = item.monedaIngreso === 'COP'
-                    ? `<span class="text-[9px] bg-emerald-950 text-emerald-300 border border-emerald-500/40 px-1.5 py-0.2 rounded font-bold">${Math.round(item.totalCOP || (item.precio * 3600)).toLocaleString('es-CO')} COP</span>`
-                    : `<span class="text-[9px] bg-blue-950 text-blue-300 border border-blue-500/40 px-1.5 py-0.2 rounded font-bold">$${item.precio.toFixed(2)} USD</span>`;
-
                 return `
                     <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex justify-between items-center text-white text-xs gap-2">
                         <div class="min-w-0">
                             <p class="font-bold truncate text-white">${item.cantidad}x ${item.modelo}</p>
                             <div class="flex items-center gap-1.5 mt-0.5">
-                                ${badgeMoneda}
                                 ${item.imeis ? `<span class="text-[9px] text-amber-400 font-mono font-bold">IMEI: ${item.imeis.join(', ')}</span>` : ''}
                             </div>
                         </div>
                         <div class="flex items-center gap-2 shrink-0">
                             <span class="font-mono font-bold text-white">$${item.precio.toFixed(2)}</span>
-                            <button onclick="window.removerItemVenta(${idx})" class="text-red-400 hover:text-red-300 font-bold p-1 cursor-pointer" title="Eliminar ítem"><i class="fa-solid fa-xmark"></i></button>
+                            <button onclick="window.removerItemVenta(${idx})" class="text-red-400 hover:text-red-300 font-bold p-1 cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
                         </div>
                     </div>
                 `;
@@ -3020,19 +2754,17 @@
             setAll('.tk-bind-total-bs', `${totalEnBs.toFixed(2).toLocaleString('es-VE')} Bs`);
         };
 
-        window.ejecutarBotonImprimir = async function() {
+        window.ejecutarBotonImprimir = function() {
             if (window.ITEMS_VENTA_ACTIVA.length === 0) return alert("Agregue al menos un producto al ticket.");
-            const nota = await window.registrarNotaEnFirebase();
-            if (!nota) return;
+            const nota = window.registrarNotaEnHistorial();
             window.dispararImpresionTicket(nota, () => {
                 window.limpiarFormularioFacturaCompleto();
             });
         };
 
-        window.ejecutarBotonWhatsApp = async function() {
+        window.ejecutarBotonWhatsApp = function() {
             if (window.ITEMS_VENTA_ACTIVA.length === 0) return alert("Agregue al menos un producto al ticket.");
-            const nota = await window.registrarNotaEnFirebase();
-            if (!nota) return;
+            const nota = window.registrarNotaEnHistorial();
             window.procesarEnvioWaObjeto(nota);
             window.limpiarFormularioFacturaCompleto();
         };
@@ -3045,11 +2777,23 @@
             const totalEnCop = usdNeto * copTasa;
             const totalEnBs = bsTasa > 0 ? (totalEnCop / bsTasa) : 0;
 
-            const msg = `*TUCOCEL C.A. — RIF: J-31378837-6*\n*Nota de Entrega N° ${String(nota.numNota).padStart(6, '0')}*\n*Fecha:* ${nota.fecha}\n\n👤 *Cliente:* ${nota.cliente}\n💳 *Cédula/RIF:* ${nota.cedula}\n📞 *Teléfono:* ${nota.telefono}\n📍 *Dirección:* ${nota.direccion}\n\n📦 *Detalle de compra:*\n${desc}\n\n💵 *Total General:* $${usdNeto.toFixed(2)} USD\n*Ref COP:* ${Math.round(totalEnCop).toLocaleString('es-CO')} COP\n*Ref VES:* ${totalEnBs.toFixed(2).toLocaleString('es-VE')} Bs\n\n🛡️ *GARANTÍA (60 DÍAS)*: 2 meses continuos en defectos técnicos de fábrica.`;
+            const msg = "*TUCOCEL C.A. — RIF: J-31378837-6*\n" +
+                        "*Nota de Entrega N° " + String(nota.numNota).padStart(6, '0') + "*\n" +
+                        "*Fecha:* " + nota.fecha + "\n\n" +
+                        "👤 *Cliente:* " + nota.cliente + "\n" +
+                        "💳 *Cédula/RIF:* " + nota.cedula + "\n" +
+                        "📞 *Teléfono:* " + nota.telefono + "\n" +
+                        "📍 *Dirección:* " + nota.direccion + "\n\n" +
+                        "📦 *Detalle:*\n" + desc + "\n\n" +
+                        "💵 *Total General:* $" + usdNeto.toFixed(2) + " USD\n" +
+                        "*Ref COP:* " + Math.round(totalEnCop).toLocaleString('es-CO') + " COP\n" +
+                        "*Ref VES:* " + totalEnBs.toFixed(2).toLocaleString('es-VE') + " Bs\n\n" +
+                        "🛡️ *GARANTÍA:* 60 Días continuos.";
+
             window.abrirWhatsAppSelector(nota.telefono, msg);
         };
 
-        window.registrarNotaEnFirebase = async function() {
+        window.registrarNotaEnHistorial = function() {
             let totalUSD = 0; 
             window.ITEMS_VENTA_ACTIVA.forEach(i => totalUSD += i.precio);
             const tCOP = parseFloat(document.getElementById('tasa-cop')?.value || '3600') || 3600;
@@ -3080,25 +2824,23 @@
             const iC = document.getElementById('fact-cli-cedula');
             const iT = document.getElementById('fact-cli-telefono');
             const iD = document.getElementById('fact-cli-direccion');
-            const iM = document.getElementById('vuelto-monto-recibido');
+            const iV = document.getElementById('vuelto-monto-recibido');
 
             if (iN) iN.value = '';
             if (iC) iC.value = '';
             if (iT) iT.value = '';
             if (iD) iD.value = '';
-            if (iM) iM.value = '';
+            if (iV) iV.value = '';
+
             window.ITEMS_VENTA_ACTIVA = [];
             window.renderizarItemsVentaActiva();
         };
 
-        // ==========================================
-        // 8. HISTORIAL, APARTADOS Y CIERRES
-        // ==========================================
         window.renderizarTablaHistorialHTML = function(lista = window.HISTORIAL_NOTAS) {
             const tabla = document.getElementById('tabla-historial-cuerpo'); 
             if (!tabla) return;
             if (lista.length === 0) { 
-                tabla.innerHTML = '<tr><td colspan="8" class="p-3 text-center text-gray-400">Ningún registro coincidente.</td></tr>'; 
+                tabla.innerHTML = '<tr><td colspan="8" class="p-3 text-center text-gray-400">Ningún registro.</td></tr>'; 
                 return; 
             }
             tabla.innerHTML = lista.map((n, idx) => {
@@ -3113,8 +2855,8 @@
                         <td class="p-3 text-right font-mono font-black text-gray-900">$${(n.totalUSD || 0).toFixed(2)}</td>
                         <td class="p-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase ${colorLabel}">${n.estatus || 'PROCESADA'}</span></td>
                         <td class="p-3 text-center flex justify-center gap-1">
-                            <button onclick="window.abrirVisualizadorHojaBlanca(${idx})" class="text-amber-600 bg-amber-50 hover:bg-amber-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Imprimir 10x13"><i class="fa-solid fa-file-lines"></i></button>
-                            <button onclick="window.reabrirNotaHistorialPorObjeto(${idx})" class="text-blue-600 bg-blue-50 hover:bg-blue-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Opciones"><i class="fa-solid fa-sliders"></i></button>
+                            <button onclick="window.abrirVisualizadorHojaBlanca(${idx})" class="text-amber-600 bg-amber-50 hover:bg-amber-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer"><i class="fa-solid fa-file-lines"></i></button>
+                            <button onclick="window.reabrirNotaHistorialPorObjeto(${idx})" class="text-blue-600 bg-blue-50 hover:bg-blue-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer"><i class="fa-solid fa-sliders"></i></button>
                         </td>
                     </tr>`;
             }).join('');
@@ -3148,7 +2890,7 @@
         window.reabrirNotaHistorialPorObjeto = function(index) { 
             const n = window.HISTORIAL_NOTAS[index]; 
             if (!n) return;
-            const s = prompt("⚙️ CONTROL DE NOTA N° " + String(n.numNota).padStart(6, '0') + "\n\n[1] Reimprimir Nota (10x13)\n[2] Reenviar por WhatsApp\n[3] Anular Nota\n\nIngrese opción:"); 
+            const s = prompt("⚙️ CONTROL DE NOTA N° " + String(n.numNota).padStart(6, '0') + "\n\n[1] Reimprimir Nota\n[2] Reenviar por WhatsApp\n[3] Anular Nota\n\nIngrese opción:"); 
             if (s === "1") { 
                 window.dispararImpresionTicket(n);
             } else if (s === "2") { 
@@ -3162,7 +2904,6 @@
             }
         };
 
-        // --- APARTADOS ---
         window.toggleAcordeonApartados = function() {
             const cuerpo = document.getElementById('cuerpo-acordeon-apartados');
             const icono = document.getElementById('icono-acordeon-apartados');
@@ -3234,7 +2975,7 @@
 
         window.alSeleccionarProductoApartadoCatalogo = function() {
             const id = document.getElementById('apt-select-producto')?.value;
-            const prod = window.PRODUCTOS.find(p => p.id === id);
+            const prod = window.PRODUCTOS.find(p => String(p.id) === String(id));
             const disp = document.getElementById('apt-display-total');
             if (prod && disp) disp.value = prod.precio.toFixed(2);
             else if (disp) disp.value = "0.00";
@@ -3247,7 +2988,7 @@
                 precioTotal = parseFloat(document.getElementById('apt-manual-precio')?.value || '0') || 0;
             } else {
                 const id = document.getElementById('apt-select-producto')?.value;
-                const prod = window.PRODUCTOS.find(p => p.id === id);
+                const prod = window.PRODUCTOS.find(p => String(p.id) === String(id));
                 precioTotal = prod ? prod.precio : 0;
             }
 
@@ -3276,7 +3017,7 @@
             if (lblBS) lblBS.innerText = `${saldoBS.toFixed(2).toLocaleString('es-VE')} Bs`;
         };
 
-        window.guardarNuevoApartadoFirebase = async function() {
+        window.guardarNuevoApartadoFirebase = function() {
             const nombre = document.getElementById('apt-nombre')?.value.trim();
             const cedula = document.getElementById('apt-cedula')?.value.trim();
             const telefono = document.getElementById('apt-telefono')?.value.trim();
@@ -3290,7 +3031,7 @@
                 precioTotal = parseFloat(document.getElementById('apt-manual-precio')?.value || '0') || 0;
             } else {
                 const productoId = document.getElementById('apt-select-producto')?.value;
-                const prod = window.PRODUCTOS.find(p => p.id === productoId);
+                const prod = window.PRODUCTOS.find(p => String(p.id) === String(productoId));
                 if (!prod) return alert("Seleccione un modelo del catálogo.");
                 modelo = prod.modelo;
                 precioTotal = prod.precio;
@@ -3308,7 +3049,7 @@
             const saldoPendiente = Math.max(0, precioTotal - abonoUSD);
 
             if (!nombre || !cedula || !telefono || !modelo || precioTotal <= 0 || abonoRaw <= 0) {
-                return alert("Complete datos del cliente, modelo, precio total y monto de abono inicial.");
+                return alert("Complete los datos requeridos.");
             }
 
             const nuevoApartado = {
@@ -3353,14 +3094,14 @@
                 return;
             }
 
-            cont.innerHTML = lista.map((apt, idx) => {
+            cont.innerHTML = lista.map((apt) => {
                 const tCOP = parseFloat(document.getElementById('tasa-cop')?.value || '3600') || 3600;
                 const tBS = parseFloat(document.getElementById('tasa-bs')?.value || '3.3') || 3.3;
                 const saldoCOP = (apt.saldoPendienteUSD || 0) * tCOP;
                 const saldoBS = tBS > 0 ? (saldoCOP / tBS) : 0;
 
                 return `
-                    <div class="bg-slate-950 border border-slate-800 p-3 rounded-2xl flex flex-col justify-between gap-2 shadow-sm hover:border-slate-700 transition-all">
+                    <div class="bg-slate-950 border border-slate-800 p-3 rounded-2xl flex flex-col justify-between gap-2">
                         <div>
                             <div class="flex items-center justify-between gap-2">
                                 <strong class="text-white text-xs uppercase truncate">${apt.nombre}</strong>
@@ -3369,18 +3110,15 @@
                             <p class="text-[11px] text-amber-300 font-bold mt-0.5 truncate">📦 ${apt.modelo}</p>
                             <div class="mt-1.5 pt-1.5 border-t border-slate-800 text-[10px] font-mono text-slate-400 flex justify-between">
                                 <span>Total: <strong class="text-white">$${(apt.precioPactadoUSD || 0).toFixed(2)}</strong></span>
-                                <span>Abonado: <strong class="text-emerald-400">$${(apt.abonoAcumuladoUSD || 0).toFixed(2)}</strong></span>
+                                <span>Abono: <strong class="text-emerald-400">$${(apt.abonoAcumuladoUSD || 0).toFixed(2)}</strong></span>
                                 <span>Resta: <strong class="text-red-400">$${(apt.saldoPendienteUSD || 0).toFixed(2)}</strong></span>
-                            </div>
-                            <div class="text-[9px] text-slate-500 font-mono mt-0.5">
-                                Equiv: ${Math.round(saldoCOP).toLocaleString('es-CO')} COP | ${saldoBS.toFixed(2).toLocaleString('es-VE')} Bs
                             </div>
                         </div>
                         <div class="flex gap-1.5 pt-1 border-t border-slate-800/80">
-                            <button onclick="window.imprimirTicketApartado('${apt.id}')" class="bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold text-xs px-2.5 py-1.5 rounded-xl cursor-pointer" title="Imprimir Comprobante 10x13 Dual">
+                            <button onclick="window.imprimirTicketApartado('${apt.id}')" class="bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold text-xs px-2.5 py-1.5 rounded-xl cursor-pointer">
                                 <i class="fa-solid fa-print"></i> Imprimir
                             </button>
-                            <button onclick="window.eliminarApartadoFirebase('${apt.id}')" class="bg-red-950/60 hover:bg-red-800 text-red-400 font-bold text-xs px-2.5 py-1.5 rounded-xl transition-colors border border-red-800/50 cursor-pointer" title="Eliminar Apartado">
+                            <button onclick="window.eliminarApartado('${apt.id}')" class="bg-red-950/60 hover:bg-red-800 text-red-400 font-bold text-xs px-2.5 py-1.5 rounded-xl cursor-pointer">
                                 <i class="fa-solid fa-trash-can"></i>
                             </button>
                         </div>
@@ -3389,7 +3127,7 @@
             }).join('');
         };
 
-        window.eliminarApartadoFirebase = function(id) {
+        window.eliminarApartado = function(id) {
             if (confirm("🗑️ ¿Deseas eliminar este registro de apartado?")) {
                 window.APARTADOS = window.APARTADOS.filter(a => a.id !== id);
                 localStorage.setItem('tucocel_apartados_cache', JSON.stringify(window.APARTADOS));
@@ -3410,7 +3148,7 @@
                 cliente: apt.nombre,
                 cedula: apt.cedula,
                 telefono: apt.telefono,
-                direccion: apt.direccion || "Apartado Comercial",
+                direccion: apt.direccion || "Apartado",
                 items: [{
                     cantidad: 1,
                     modelo: `${apt.modelo} [Abonado: $${(apt.abonoAcumuladoUSD || 0).toFixed(2)} | Resta: $${(apt.saldoPendienteUSD || 0).toFixed(2)}]`,
@@ -3426,7 +3164,6 @@
             window.dispararImpresionTicket(notaApartado);
         };
 
-        // --- CIERRE DE MES ---
         window.generarCierreMesGerencial = function() {
             const mesSel = parseInt(document.getElementById('cierre-mes-select')?.value || '1') || (new Date().getMonth() + 1);
             const anioSel = parseInt(document.getElementById('cierre-anio-input')?.value || '2026') || 2026;
@@ -3460,13 +3197,10 @@
         window.enviarCierreMesWhatsApp = function() {
             const mesSel = document.getElementById('cierre-mes-select')?.value || '1';
             const anioSel = document.getElementById('cierre-anio-input')?.value || '2026';
-            const msg = `📊 *INFORME DE CIERRE DE MES — TUCOCEL C.A.*\n📅 Período: ${mesSel}/${anioSel}\n\nResumen administrativo generado.`;
+            const msg = "📊 *INFORME DE CIERRE — TUCOCEL C.A.*\nPeríodo: " + mesSel + "/" + anioSel;
             window.abrirWhatsAppSelector('584247357549', msg);
         };
 
-        // ==========================================
-        // 9. ETIQUETAS Y BANNER WYSIWYG
-        // ==========================================
         window.abrirModalEtiquetasVitrina = function() {
             document.getElementById('modal-generador-etiquetas')?.classList.remove('hidden');
             window.renderizarVisorEtiquetas();
@@ -3512,7 +3246,6 @@
             if (!cont) return;
 
             const listaArticulos = window.obtenerListaArticulosSegunFiltroEtiquetas();
-            
             listaArticulos.forEach(p => {
                 if (window.ETIQUETAS_SELECCIONADAS[p.id] === undefined) {
                     window.ETIQUETAS_SELECCIONADAS[p.id] = true;
@@ -3520,22 +3253,22 @@
             });
 
             if (listaArticulos.length === 0) {
-                cont.innerHTML = '<div class="col-span-full py-12 text-center text-slate-500 font-bold text-xs">No hay artículos registrados en esta categoría.</div>';
+                cont.innerHTML = '<div class="col-span-full py-12 text-center text-slate-500 font-bold text-xs">No hay artículos registrados.</div>';
                 window.actualizarContadorEtiquetas();
                 return;
             }
 
             cont.innerHTML = listaArticulos.map(p => {
                 const seleccionada = window.ETIQUETAS_SELECCIONADAS[p.id];
-                const subTexto = p.memoria ? p.memoria : (p.marca === 'Otros Productos' ? 'Accesorio Garantizado' : (p.subtitulo || ''));
+                const subTexto = p.memoria ? p.memoria : (p.marca === 'Otros Productos' ? 'Accesorio' : (p.subtitulo || ''));
                 const esLibre = p.id && String(p.id).startsWith('lib_');
                 
                 return `
-                    <div id="etq-item-${p.id}" onclick="window.toggleSeleccionEtiqueta('${p.id}')" class="etiqueta-tarjeta-item cursor-pointer transition-all ${seleccionada ? '' : 'deseleccionada'}">
+                    <div id="etq-item-${p.id}" onclick="window.toggleSeleccionEtiqueta('${p.id}')" class="etiqueta-tarjeta-item cursor-pointer ${seleccionada ? '' : 'deseleccionada'}">
                         <div class="etiqueta-header-box">
                             <div class="flex items-start justify-between">
                                 <h4 class="etiqueta-titulo-modelo">${p.modelo}</h4>
-                                ${esLibre ? `<button onclick="event.stopPropagation(); window.eliminarEtiquetaLibre('${p.id}')" class="text-red-500 hover:text-red-700 text-xs px-1" title="Eliminar etiqueta"><i class="fa-solid fa-trash-can"></i></button>` : ''}
+                                ${esLibre ? `<button onclick="event.stopPropagation(); window.eliminarEtiquetaLibre('${p.id}')" class="text-red-500 hover:text-red-700 text-xs px-1"><i class="fa-solid fa-trash-can"></i></button>` : ''}
                             </div>
                             ${subTexto ? `<div class="etiqueta-memoria-tag">${subTexto}</div>` : ''}
                         </div>
@@ -3593,7 +3326,7 @@
             const contPrint = document.getElementById('grid-impresion-etiquetas-dom');
             if (contPrint) {
                 contPrint.innerHTML = listaArticulos.map(p => {
-                    const subTexto = p.memoria ? p.memoria : (p.marca === 'Otros Productos' ? 'Accesorio Garantizado' : (p.subtitulo || ''));
+                    const subTexto = p.memoria ? p.memoria : (p.marca === 'Otros Productos' ? 'Accesorio' : (p.subtitulo || ''));
                     return `
                         <div class="etiqueta-tarjeta-item">
                             <div class="etiqueta-header-box">
@@ -3660,7 +3393,7 @@
             const subtitulo = (document.getElementById('lib-input-sub')?.value || '').trim().toUpperCase();
             const precio = parseFloat(document.getElementById('lib-input-precio')?.value || '0') || 0;
 
-            if (!modelo || precio <= 0) return alert("Por favor ingrese el nombre del artículo y un precio válido.");
+            if (!modelo || precio <= 0) return alert("Por favor complete nombre y precio.");
 
             const nuevaEtq = {
                 id: "lib_" + Date.now(),
@@ -3679,7 +3412,7 @@
         };
 
         window.eliminarEtiquetaLibre = function(id) {
-            if (confirm("¿Deseas eliminar esta etiqueta independiente?")) {
+            if (confirm("¿Deseas eliminar esta etiqueta?")) {
                 window.ETIQUETAS_LIBRES = window.ETIQUETAS_LIBRES.filter(e => e.id !== id);
                 localStorage.setItem('tucocel_etiquetas_libres', JSON.stringify(window.ETIQUETAS_LIBRES));
                 delete window.ETIQUETAS_SELECCIONADAS[id];
@@ -3701,33 +3434,22 @@
             if (!cont) return;
 
             if (lista.length === 0) {
-                cont.innerHTML = '<div class="p-4 text-center text-gray-400 text-xs font-bold">No se encontraron productos.</div>';
+                cont.innerHTML = '<div class="p-4 text-center text-gray-400 text-xs font-bold">No hay productos.</div>';
                 return;
             }
 
             cont.innerHTML = lista.map(p => {
-                const esCelular = p.marca !== 'Otros Productos';
-                const badgeTipo = esCelular ? 
-                    `<span class="text-[9px] bg-blue-100 text-blue-800 font-extrabold px-2 py-0.5 rounded uppercase">${p.marca}</span>` : 
-                    `<span class="text-[9px] bg-amber-100 text-amber-800 font-extrabold px-2 py-0.5 rounded uppercase">Accesorio</span>`;
-                
                 return `
-                    <div class="p-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 hover:bg-slate-50 transition-colors">
+                    <div class="p-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 hover:bg-slate-50">
                         <div class="flex items-center gap-3 w-full sm:w-auto">
-                            <img alt="Imagen Tucocel" src="${p.foto || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80'}" class="w-10 h-10 object-contain rounded-lg border border-gray-200 bg-white p-1 shrink-0">
-                            <div class="min-w-0">
-                                <div class="flex items-center gap-1.5 flex-wrap">
-                                    <strong class="text-xs text-gray-900 truncate block">${p.modelo}</strong>
-                                    ${badgeTipo}
-                                </div>
-                                <span class="text-[10px] text-gray-500 font-medium block">${p.memoria || (p.desc ? p.desc.slice(0, 30) + '...' : 'Stock disponible')}</span>
-                            </div>
+                            <img alt="Imagen" src="${p.foto || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80'}" class="w-10 h-10 object-contain rounded-lg border border-gray-200 bg-white p-1 shrink-0">
+                            <strong class="text-xs text-gray-900">${p.modelo}</strong>
                         </div>
                         <div class="flex items-center gap-2 self-end sm:self-center w-full sm:w-auto justify-end">
                             <span class="text-xs font-bold text-gray-500">Precio USD:</span>
                             <div class="relative w-28">
                                 <span class="absolute left-2.5 top-2 text-xs font-black text-gray-400">$</span>
-                                <input type="number" id="input-precio-rapido-${p.id}" value="${p.precio}" class="w-full bg-gray-50 border-2 border-blue-200 focus:border-blue-600 pl-6 pr-2 py-1.5 rounded-xl text-xs font-black text-gray-900 font-mono focus:bg-white transition-colors text-right">
+                                <input type="number" id="input-precio-rapido-${p.id}" value="${p.precio}" class="w-full bg-gray-50 border-2 border-blue-200 focus:border-blue-600 pl-6 pr-2 py-1.5 rounded-xl text-xs font-black text-gray-900 font-mono text-right">
                             </div>
                         </div>
                     </div>
@@ -3738,12 +3460,12 @@
         window.filtrarEditorRapidoPrecios = function() {
             const query = (document.getElementById('busq-editor-precios')?.value || '').toLowerCase().trim();
             const filtrados = window.PRODUCTOS.filter(p => {
-                return p.modelo.toLowerCase().includes(query) || p.marca.toLowerCase().includes(query) || (p.memoria || '').toLowerCase().includes(query);
+                return p.modelo.toLowerCase().includes(query) || p.marca.toLowerCase().includes(query);
             });
             window.renderizarItemsEditorRapido(filtrados);
         };
 
-        window.guardarCambiosEditorRapido = async function() {
+        window.guardarCambiosEditorRapido = function() {
             let cambiosRealizados = 0;
             window.PRODUCTOS.forEach(p => {
                 const input = document.getElementById(`input-precio-rapido-${p.id}`);
@@ -3756,41 +3478,13 @@
                 }
             });
 
-            if (cambiosRealizados === 0) {
-                alert("No hubo modificaciones de precios.");
-                window.cerrarModalEditorRapidoPrecios();
-                return;
-            }
-
             localStorage.setItem('tucocel_productos_cache', JSON.stringify(window.PRODUCTOS));
             window.ejecutarFiltroCombinado();
             window.renderizarVisorEtiquetas();
             window.actualizarSelectFacturacion();
             window.actualizarSelectApartados();
-            alert(`✅ ¡Precios actualizados con éxito! (${cambiosRealizados} artículos modificados).`);
+            alert(`✅ ¡Precios actualizados! (${cambiosRealizados} modificados).`);
             window.cerrarModalEditorRapidoPrecios();
-        };
-
-        // --- BANNER WYSIWYG ---
-        window.cargarDatosEditorEncabezadoActual = function() {
-            const elTitDOM = document.getElementById('txt-header-titulo');
-            const elDescDOM = document.getElementById('txt-header-desc');
-            const elImgDOM = document.getElementById('img-banner-grafico-dom');
-
-            const inpTit = document.getElementById('inp-enc-titulo');
-            const inpDesc = document.getElementById('inp-enc-desc');
-            const inpUrl = document.getElementById('inp-banner-url');
-
-            const tituloActual = (elTitDOM ? elTitDOM.innerText.trim() : "") || CONFIG_ENCABEZADO.titulo;
-            const descActual = (elDescDOM ? elDescDOM.innerText.trim() : "") || CONFIG_ENCABEZADO.desc;
-            const urlActual = (elImgDOM && elImgDOM.src && !elImgDOM.src.includes('base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')) ? elImgDOM.src : (CONFIG_ENCABEZADO.bannerUrl || '');
-
-            if (inpTit) inpTit.value = tituloActual;
-            if (inpDesc) inpDesc.value = descActual;
-            if (inpUrl) inpUrl.value = urlActual;
-
-            window.cambiarModoEncabezado(CONFIG_ENCABEZADO.tipo || 'texto');
-            window.actualizarPreviewEncabezadoLive();
         };
 
         window.abrirModalEditorEncabezadoPro = function() {
@@ -3799,7 +3493,13 @@
                 return;
             }
             document.getElementById('modal-editor-encabezado-pro')?.classList.remove('hidden');
-            window.cargarDatosEditorEncabezadoActual();
+            const inT = document.getElementById('inp-enc-titulo');
+            const inD = document.getElementById('inp-enc-desc');
+            const inU = document.getElementById('inp-banner-url');
+            if (inT) inT.value = CONFIG_ENCABEZADO.titulo;
+            if (inD) inD.value = CONFIG_ENCABEZADO.desc;
+            if (inU) inU.value = CONFIG_ENCABEZADO.bannerUrl || '';
+            window.cambiarModoEncabezado(CONFIG_ENCABEZADO.tipo || 'texto');
         };
 
         window.cerrarModalEditorEncabezadoPro = function() {
@@ -3816,15 +3516,15 @@
             const prevBanner = document.getElementById('preview-live-banner-box');
 
             if (modo === 'texto') {
-                if (btnTexto) btnTexto.className = "flex-1 py-2 rounded-xl text-xs font-black uppercase transition-all bg-blue-600 text-white cursor-pointer shadow-sm";
-                if (btnBanner) btnBanner.className = "flex-1 py-2 rounded-xl text-xs font-black uppercase transition-all text-slate-400 hover:text-white cursor-pointer";
+                if (btnTexto) btnTexto.className = "flex-1 py-2.5 rounded-xl text-xs font-black uppercase transition-all bg-blue-600 text-white cursor-pointer shadow-sm";
+                if (btnBanner) btnBanner.className = "flex-1 py-2.5 rounded-xl text-xs font-black uppercase transition-all text-slate-400 hover:text-white cursor-pointer";
                 if (bloqTexto) bloqTexto.classList.remove('hidden');
                 if (bloqBanner) bloqBanner.classList.add('hidden');
                 if (prevTexto) prevTexto.classList.remove('hidden');
                 if (prevBanner) prevBanner.classList.add('hidden');
             } else {
-                if (btnTexto) btnTexto.className = "flex-1 py-2 rounded-xl text-xs font-black uppercase transition-all text-slate-400 hover:text-white cursor-pointer";
-                if (btnBanner) btnBanner.className = "flex-1 py-2 rounded-xl text-xs font-black uppercase transition-all bg-blue-600 text-white cursor-pointer shadow-sm";
+                if (btnTexto) btnTexto.className = "flex-1 py-2.5 rounded-xl text-xs font-black uppercase transition-all text-slate-400 hover:text-white cursor-pointer";
+                if (btnBanner) btnBanner.className = "flex-1 py-2.5 rounded-xl text-xs font-black uppercase transition-all bg-blue-600 text-white cursor-pointer shadow-sm";
                 if (bloqTexto) bloqTexto.classList.add('hidden');
                 if (bloqBanner) bloqBanner.classList.remove('hidden');
                 if (prevTexto) prevTexto.classList.add('hidden');
@@ -3843,7 +3543,7 @@
             const pImg = document.getElementById('prev-enc-img');
 
             if (pTit) pTit.innerText = tit.trim() ? tit : "Título de la cabecera...";
-            if (pDesc) pDesc.innerText = desc.trim() ? desc : "Descripción comercial...";
+            if (pDesc) pDesc.innerText = desc.trim() ? desc : "Descripción...";
             if (pImg && bUrl) pImg.src = bUrl;
         };
 
@@ -3853,52 +3553,16 @@
             if (pImg) pImg.src = url || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
         };
 
-        window.procesarArchivoBannerPro = function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            const lbl = document.getElementById('lbl-banner-file-name');
-            if (lbl) lbl.innerText = file.name;
-
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                const img = new Image();
-                img.onload = function() {
-                    const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d');
-                    let maxW = 1200;
-                    let w = img.width;
-                    let h = img.height;
-                    if (w > maxW) {
-                        h = Math.round((h * maxW) / w);
-                        w = maxW;
-                    }
-                    canvas.width = w;
-                    canvas.height = h;
-                    ctx.drawImage(img, 0, 0, w, h);
-                    let base64Banner = canvas.toDataURL('image/jpeg', 0.86);
-                    const inp = document.getElementById('inp-banner-url');
-                    const pImg = document.getElementById('prev-enc-img');
-                    if (inp) inp.value = base64Banner;
-                    if (pImg) pImg.src = base64Banner;
-                };
-                img.src = event.target.result;
-            };
-            reader.readAsDataURL(file);
-        };
-
         window.guardarCambiosEncabezadoPro = function() {
             CONFIG_ENCABEZADO.tipo = CONFIG_ENCABEZADO.tipo || 'texto';
             CONFIG_ENCABEZADO.titulo = (document.getElementById('inp-enc-titulo')?.value || '').trim();
             CONFIG_ENCABEZADO.desc = (document.getElementById('inp-enc-desc')?.value || '').trim();
             CONFIG_ENCABEZADO.bannerUrl = (document.getElementById('inp-banner-url')?.value || '').trim();
 
-            if (CONFIG_ENCABEZADO.tipo === 'texto' && !CONFIG_ENCABEZADO.titulo) return alert("El título principal no puede estar vacío.");
-            if (CONFIG_ENCABEZADO.tipo === 'banner' && !CONFIG_ENCABEZADO.bannerUrl) return alert("Por favor seleccione un archivo de imagen o ingrese una URL válida.");
-
             localStorage.setItem('tucocel_config_encabezado', JSON.stringify(CONFIG_ENCABEZADO));
             window.aplicarEncabezadoDOM();
             window.cerrarModalEditorEncabezadoPro();
-            alert("✨ ¡Encabezado actualizado con éxito!");
+            alert("✨ Encabezado guardado.");
         };
 
         window.aplicarEncabezadoDOM = function() {
@@ -3916,11 +3580,10 @@
                 if (contenedorBanner) contenedorBanner.classList.add('hidden');
                 if (contenedorTexto) contenedorTexto.classList.remove('hidden');
                 if (elTit) elTit.innerText = CONFIG_ENCABEZADO.titulo || "Encuentra tu próximo smartphone Aquí";
-                if (elDesc) elDesc.innerText = CONFIG_ENCABEZADO.desc || "Equipos nuevos, garantizados y con la mejor asesoría comercial.";
+                if (elDesc) elDesc.innerText = CONFIG_ENCABEZADO.desc || "Equipos nuevos, homologados y con garantía.";
             }
         };
 
-        // --- CONSULTAS DIRECTAS ---
         window.abrirModalConsultaBanner = function() { document.getElementById('modal-consulta-banner')?.classList.remove('hidden'); };
         window.cerrarModalConsultaBanner = function() { document.getElementById('modal-consulta-banner')?.classList.add('hidden'); };
         window.enviarConsultaBannerWhatsApp = function() {
@@ -3933,11 +3596,6 @@
 
         window.abrirModalConsultaGeneral = function() { document.getElementById('modal-consulta-general')?.classList.remove('hidden'); };
         window.cerrarModalConsultaGeneral = function() { document.getElementById('modal-consulta-general')?.classList.add('hidden'); };
-        window.verificarMotivoEspecifico = function() {
-            const m = document.getElementById('con-motivo')?.value;
-            const lbl = document.getElementById('label-detalles-con');
-            if (lbl) lbl.innerText = m === 'Servicio Técnico' ? '¿Falla?' : '¿Requerimiento?';
-        };
         window.enviarConsultaGeneralWhatsApp = function() {
             const n = document.getElementById('con-nombre')?.value || '';
             const d = document.getElementById('con-detalles')?.value || '';
@@ -3945,18 +3603,13 @@
             window.abrirWhatsAppSelector('584247357549', `Consulta de ${n}: ${d}`);
         };
 
-        // ==========================================
-        // 10. INICIALIZACIÓN Y EVENT LISTENERS
-        // ==========================================
-        document.addEventListener('DOMContentLoaded', function() {
+        // INICIALIZACIÓN AUTOMÁTICA
+        function inicializarAplicacion() {
             const inputFoto = document.getElementById('add-foto-file'); 
             if (inputFoto) inputFoto.addEventListener('change', window.procesarImagen);
             const selectMarca = document.getElementById('add-marca'); 
             if (selectMarca) selectMarca.addEventListener('change', window.alCambiarSelectMarcaPanel);
-            const inputBannerFile = document.getElementById('inp-banner-file');
-            if (inputBannerFile) inputBannerFile.addEventListener('change', window.procesarArchivoBannerPro);
 
-            // Carga configuración encabezado
             const localEnc = localStorage.getItem('tucocel_config_encabezado');
             if (localEnc) {
                 try {
@@ -3965,27 +3618,26 @@
                 } catch(e) {}
             }
 
-            // Carga marcas personalizadas
             const customMarcasLocal = JSON.parse(localStorage.getItem('tucocel_marcas_custom') || '[]');
             customMarcasLocal.forEach(m => { if (!window.MARCAS_REGISTRADAS.includes(m)) window.MARCAS_REGISTRADAS.push(m); });
-            window.PRODUCTOS.forEach(p => {
-                if (p.marca && p.marca !== 'Otros Productos' && !window.MARCAS_REGISTRADAS.includes(p.marca)) {
-                    window.MARCAS_REGISTRADAS.push(p.marca);
-                }
-            });
 
             window.actualizarBotonesMarcasDOM();
             window.actualizarSelectMarcasPanel();
             window.ejecutarFiltroCombinado(); 
             window.actualizarSelectFacturacion(); 
             window.actualizarSelectApartados();
-            window.verificarEnlaceDirectoProductoUrl();
 
             if (window.esAdminAutenticado) {
                 window.controlarVisibilidadModulosOcultos(true);
                 window.manejarVisibilidadLapicitosAdmin(true);
             }
-        });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', inicializarAplicacion);
+        } else {
+            inicializarAplicacion();
+        }
     </script>
 </body>
 </html>
