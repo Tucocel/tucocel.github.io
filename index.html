@@ -2959,12 +2959,99 @@
             const formCompra = document.getElementById('form-compra');
             if(formCompra) {
                 formCompra.innerHTML = `
-                    <button onclick="window.compartirProductoEspecificoWa('${prod.modelo}', ${prod.precio})" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-3 rounded-xl uppercase flex items-center justify-center gap-2 cursor-pointer">
-                        <i class="fa-brands fa-whatsapp text-sm"></i> Cotizar por WhatsApp ($${prod.precio} USD)
-                    </button>
+                    <div class="space-y-3.5 pt-1">
+                        <!-- SECCIÓN 1: DATOS PARA CONCRETAR PEDIDO -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 space-y-2.5 shadow-inner">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[11px] font-black uppercase text-blue-600 tracking-wider flex items-center gap-1.5">
+                                    <i class="fa-solid fa-cart-shopping"></i> DATOS PARA CONCRETAR PEDIDO
+                                </span>
+                                <span class="text-sm font-black text-slate-900 font-mono">$${prod.precio} USD</span>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2">
+                                <input type="text" id="ped-cli-nombre" placeholder="Nombre" class="w-full bg-white border border-slate-200 focus:border-blue-500 p-2 rounded-xl text-xs font-bold text-slate-800 focus:outline-none">
+                                <input type="text" id="ped-cli-apellido" placeholder="Apellido" class="w-full bg-white border border-slate-200 focus:border-blue-500 p-2 rounded-xl text-xs font-bold text-slate-800 focus:outline-none">
+                            </div>
+
+                            <input type="text" id="ped-cli-dir" placeholder="Dirección de Habitación o Referencia" class="w-full bg-white border border-slate-200 focus:border-blue-500 p-2 rounded-xl text-xs font-bold text-slate-800 focus:outline-none">
+
+                            <div>
+                                <label class="text-[9px] text-slate-400 font-bold uppercase block mb-1">Método de Pago Preferido</label>
+                                <select id="ped-cli-metodo" class="w-full bg-white border border-slate-200 focus:border-blue-500 p-2 rounded-xl text-xs font-bold text-slate-800 focus:outline-none cursor-pointer">
+                                    <option value="Bolívares (Pago Móvil)">Bolívares (Pago Móvil)</option>
+                                    <option value="USDT por Binance">USDT por Binance</option>
+                                    <option value="Zinli">Zinli</option>
+                                    <option value="Nequi">Nequi</option>
+                                    <option value="Efectivo / Pago directo en Tienda">Efectivo / Pago directo en Tienda</option>
+                                </select>
+                            </div>
+
+                            <button onclick="window.enviarPedidoFormularioWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-3 rounded-xl uppercase flex items-center justify-center gap-2 shadow-md shadow-emerald-500/20 active:scale-95 transition-all cursor-pointer">
+                                <i class="fa-solid fa-paper-plane"></i> Enviar Pedido por WhatsApp
+                            </button>
+                        </div>
+
+                        <!-- SECCIÓN 2: ESCRIBIR Y PREGUNTAR DIRECTO -->
+                        <div class="bg-blue-50/70 border border-blue-200 rounded-2xl p-3.5 space-y-2">
+                            <span class="text-[10px] font-black uppercase text-blue-700 tracking-wider flex items-center gap-1.5">
+                                <i class="fa-regular fa-comment-dots text-xs"></i> ¿TIENES DUDAS O QUIERES CONSULTAR ALGO?
+                            </span>
+                            <textarea id="ped-cli-duda" rows="2" placeholder="Escribe tu consulta directa aquí (ej: colores disponibles, garantía, entrega)..." class="w-full bg-white border border-blue-200 focus:border-blue-500 p-2.5 rounded-xl text-xs font-medium text-slate-800 focus:outline-none resize-none"></textarea>
+                            <button onclick="window.enviarDudaDirectaWhatsApp()" class="w-full bg-slate-900 hover:bg-slate-800 text-cyan-300 border border-slate-700 font-black text-xs py-2.5 rounded-xl uppercase flex items-center justify-center gap-2 transition-all active:scale-95 cursor-pointer">
+                                <i class="fa-brands fa-whatsapp text-sm text-emerald-400"></i> Preguntar esta Duda por WhatsApp
+                            </button>
+                        </div>
+                    </div>
                 `;
             }
             document.getElementById('modal-producto').classList.remove('hidden');
+        };
+
+        window.enviarPedidoFormularioWhatsApp = function() {
+            if (!productoSeleccionadoActual) return;
+            const nom = (document.getElementById('ped-cli-nombre')?.value || '').trim();
+            const ape = (document.getElementById('ped-cli-apellido')?.value || '').trim();
+            const dir = (document.getElementById('ped-cli-dir')?.value || '').trim();
+            const metodo = document.getElementById('ped-cli-metodo')?.value || 'Bolívares (Pago Móvil)';
+
+            if (!nom || !ape || !dir) {
+                return alert("Por favor complete su Nombre, Apellido y Dirección o Referencia para procesar el pedido.");
+            }
+
+            const msg = `📱 *TUCOCEL C.A. — SOLICITUD DE PEDIDO*\n` +
+                        `----------------------------------------\n` +
+                        `📦 *Equipo:* ${productoSeleccionadoActual.modelo}\n` +
+                        `🏷️ *Marca:* ${productoSeleccionadoActual.marca}\n` +
+                        `💵 *Precio:* $${productoSeleccionadoActual.precio} USD\n` +
+                        `----------------------------------------\n` +
+                        `👤 *Cliente:* ${nom} ${ape}\n` +
+                        `📍 *Ubicación / Ref:* ${dir}\n` +
+                        `💳 *Forma de Pago:* ${metodo}\n` +
+                        `----------------------------------------\n` +
+                        `¡Hola! Deseo concretar la compra de este equipo.`;
+
+            window.abrirWhatsAppSelector('584247357549', msg);
+        };
+
+        window.enviarDudaDirectaWhatsApp = function() {
+            if (!productoSeleccionadoActual) return;
+            const duda = (document.getElementById('ped-cli-duda')?.value || '').trim();
+
+            let msg = `📱 *TUCOCEL C.A. — CONSULTA DE PRODUCTO*\n` +
+                      `----------------------------------------\n` +
+                      `📦 *Equipo:* ${productoSeleccionadoActual.modelo}\n` +
+                      `🏷️ *Marca:* ${productoSeleccionadoActual.marca}\n` +
+                      `💵 *Precio en Vitrina:* $${productoSeleccionadoActual.precio} USD\n` +
+                      `----------------------------------------\n`;
+
+            if (duda) {
+                msg += `💬 *Consulta del Cliente:*\n"${duda}"\n\n¿Me podrían ayudar con esta información?`;
+            } else {
+                msg += `¡Hola! Tengo una consulta sobre este equipo, ¿me podrían dar más información sobre disponibilidad y características?`;
+            }
+
+            window.abrirWhatsAppSelector('584247357549', msg);
         };
 
         window.cerrarModalProducto = function() {
@@ -3530,7 +3617,7 @@
                                 <span class="text-[8.5px] sm:text-[11px] font-black text-slate-400 uppercase font-sans">USD</span>
                             </div>
                             <div class="flex items-center gap-1 sm:gap-2">
-                                <button onclick="event.stopPropagation(); window.compartirProductoEspecificoWa('${prod.modelo}', ${prod.precio})" class="w-8 h-8 sm:w-9 sm:h-9 bg-emerald-500/15 hover:bg-emerald-500 text-emerald-400 hover:text-slate-950 border border-emerald-500/40 hover:border-emerald-400 rounded-xl flex items-center justify-center transition-all duration-200 cursor-pointer shadow-sm active:scale-95" title="Cotizar por WhatsApp">
+                                <button onclick="event.stopPropagation(); window.compartirProductoEspecificoWa('${prod.id}')" class="w-8 h-8 sm:w-9 sm:h-9 bg-emerald-500/15 hover:bg-emerald-500 text-emerald-400 hover:text-slate-950 border border-emerald-500/40 hover:border-emerald-400 rounded-xl flex items-center justify-center transition-all duration-200 cursor-pointer shadow-sm active:scale-95" title="Compartir este Producto">
                                     <i class="fa-brands fa-whatsapp text-xs sm:text-base"></i>
                                 </button>
                                 <span class="bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-400 text-white font-black text-[11px] sm:text-xs px-2.5 sm:px-3.5 py-1.5 rounded-xl transition-all shadow-md shadow-blue-500/20 hover:scale-105 active:scale-95 flex items-center gap-1">
@@ -3620,7 +3707,7 @@
                                 <span class="text-[9px] font-black text-slate-400 uppercase font-sans">USD</span>
                             </div>
                             <div class="flex items-center gap-1.5">
-                                <button onclick="event.stopPropagation(); window.compartirProductoEspecificoWa('${prod.modelo}', ${prod.precio})" class="w-8 h-8 bg-emerald-500/15 hover:bg-emerald-500 text-emerald-400 hover:text-slate-950 border border-emerald-500/40 rounded-xl flex items-center justify-center transition-all duration-200 cursor-pointer shadow-sm active:scale-95" title="Preguntar por WhatsApp">
+                                <button onclick="event.stopPropagation(); window.compartirProductoEspecificoWa('${prod.id}')" class="w-8 h-8 bg-emerald-500/15 hover:bg-emerald-500 text-emerald-400 hover:text-slate-950 border border-emerald-500/40 rounded-xl flex items-center justify-center transition-all duration-200 cursor-pointer shadow-sm active:scale-95" title="Compartir este Producto">
                                     <i class="fa-brands fa-whatsapp text-sm"></i>
                                 </button>
                                 <span class="bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-black text-xs px-2.5 sm:px-3 py-1.5 rounded-xl transition-all shadow-sm hover:scale-105 active:scale-95 flex items-center gap-1">
@@ -3639,9 +3726,43 @@
             window.abrirWhatsAppSelector('', msg);
         };
 
-        window.compartirProductoEspecificoWa = function(modelo, precio) {
-            const msg = `📱 *TUCOCEL C.A.* | Consulta de Smartphone:\n📦 *Modelo:* ${modelo}\n💵 *Precio:* $${precio} USD\n\n¿Sigue disponible para entrega inmediata?`;
-            window.abrirWhatsAppSelector('584247357549', msg);
+        window.compartirProductoEspecificoWa = function(idOModelo, precioOpcional) {
+            let prod = PRODUCTOS.find(p => p.id === idOModelo || p.modelo === idOModelo);
+            
+            const modelo = prod ? prod.modelo : idOModelo;
+            const marca = prod ? prod.marca : "SMARTPHONE";
+            const precio = prod ? prod.precio : (precioOpcional || 0);
+            const memoria = prod && prod.memoria ? prod.memoria : "";
+            const modalidad = prod && prod.modalidad === 'consultar' ? '🔮 Bajo Pedido (Preventa)' : '⚡ Stock Físico (Entrega Inmediata)';
+            const desc = prod && prod.desc ? prod.desc.trim() : "";
+
+            let msg = `🔥 *¡MIRA ESTE EQUIPO DISPONIBLE EN TUCOCEL C.A.!* 🔥\n` +
+                      `──────────────────────────────\n` +
+                      `📱 *EQUIPO:* *${modelo}*\n` +
+                      `🏷️ *MARCA:* ${marca}\n`;
+
+            if (memoria) {
+                msg += `💾 *CAPACIDAD / RAM:* ${memoria}\n`;
+            }
+            
+            msg += `⚡ *DISPONIBILIDAD:* ${modalidad}\n` +
+                   `🛡️ *GARANTÍA:* 60 Días de Garantía Técnica\n`;
+
+            if (desc) {
+                msg += `📋 *CARACTERÍSTICAS:* ${desc}\n`;
+            }
+
+            msg += `──────────────────────────────\n` +
+                   `💵 *PRECIO DE PROMOCIÓN:* *$${precio} USD*\n` +
+                   `💳 *MÉTODOS DE PAGO:* Pago Móvil (Bs), USDT (Binance), Zinli, Nequi y Efectivo en Tienda\n` +
+                   `📍 *UBICACIÓN:* Av. Bolívar, entre calles 12 y 13, Cordero, Táchira\n` +
+                   `──────────────────────────────\n` +
+                   `🚀 *¡Escríbenos para apartar o comprar de inmediato!*\n` +
+                   `📲 *WhatsApp Ventas:* https://wa.me/584247357549\n` +
+                   `🌐 *Explora nuestra Vitrina Digital:* https://tucocel.github.io/`;
+
+            // Abre el selector nativo de compartir (para enviar a grupos de WhatsApp, estados, chats, etc.)
+            window.abrirWhatsAppSelector('', msg);
         };
 
         window.verificarSesionLocal = function() { 
