@@ -843,7 +843,10 @@
             </div>
             <div class="flex gap-2 w-full sm:w-auto">
                 <button id="btn-cancelar-edicion" onclick="window.cancelarEdicionActiva()" class="hidden w-1/2 sm:w-auto bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors cursor-pointer">Cancelar</button>
-                <button id="btn-guardar" onclick="window.procesarGuardadoInventario()" class="w-full sm:w-auto bg-amber-400 hover:bg-amber-500 text-slate-950 text-xs font-black px-6 py-2.5 rounded-xl shadow-lg transition-colors cursor-pointer">Guardar en Inventario</button>
+                <button id="btn-guardar" onclick="window.procesarGuardadoInventario()" class="w-full sm:w-auto bg-amber-400 hover:bg-amber-500 text-slate-950 text-xs font-black px-5 py-2.5 rounded-xl shadow-lg transition-colors cursor-pointer">Guardar en Inventario</button>
+                <button type="button" onclick="window.forzarSubidaInventarioANube()" class="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-black px-5 py-2.5 rounded-xl shadow-lg transition-colors cursor-pointer flex items-center justify-center gap-1.5" title="Subir todo lo que ves en este teléfono a la nube para que se vea en todos lados">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Sincronizar Todo a la Nube
+                </button>
             </div>
         </div>
     </div>
@@ -1798,14 +1801,10 @@
         <!-- MOTOR SÍNCRONO DE RENDERIZADO INMEDIATO (COMPATIBLE 100% FILE:// Y OFFLINE) -->
     <script>
         const SEED_PRODUCTOS_DEFAULT = [
-  {"id":"1","marca":"Infinix","modelo":"Infinix Smart 8 Pro","memoria":"4GB + 128GB","precio":85,"modalidad":"vitrina","desc":"Cámara de 50MP con IA, pantalla fluida de 90Hz, batería de 5000mAh y carga Type-C.","foto":"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80","tipoProducto":"Celular","likes":12},
-  {"id":"2","marca":"Tecno","modelo":"Tecno Spark Go 2024","memoria":"4GB + 64GB","precio":75,"modalidad":"vitrina","desc":"Altavoces estéreo duales, pantalla de 6.6 pulgadas y gran autonomía de batería.","foto":"https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600&auto=format&fit=crop&q=80","tipoProducto":"Celular","likes":8},
-  {"id":"3","marca":"Xiaomi","modelo":"Redmi 13C","memoria":"6GB + 128GB","precio":110,"modalidad":"vitrina","desc":"Procesador MediaTek Helio G85, cámara triple de 50MP y diseño ultradelgado.","foto":"https://images.unsplash.com/photo-1580910051074-3eb694886505?w=600&auto=format&fit=crop&q=80","tipoProducto":"Celular","likes":19},
-  {"id":"4","marca":"Samsung","modelo":"Samsung Galaxy A05s","memoria":"4GB + 128GB","precio":125,"modalidad":"vitrina","desc":"Pantalla FHD+ de 90Hz, procesador Snapdragon 680 y carga rápida de 25W.","foto":"https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=600&auto=format&fit=crop&q=80","tipoProducto":"Celular","likes":15},
-  {"id":"5","marca":"Tecno","modelo":"Tecno Spark 20","memoria":"8GB + 256GB","precio":135,"modalidad":"vitrina","desc":"Sonido estéreo DTS, cámara selfie de 32MP con flash y 256GB de almacenamiento masivo.","foto":"https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&auto=format&fit=crop&q=80","tipoProducto":"Celular","likes":24},
-  {"id":"6","marca":"Xiaomi","modelo":"Redmi Note 13 4G","memoria":"8GB + 256GB","precio":165,"modalidad":"vitrina","desc":"Pantalla AMOLED de 120Hz, cámara de 108MP y sensor de huella en pantalla.","foto":"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80","tipoProducto":"Celular","likes":30},
-  {"id":"7","marca":"Otros Productos","modelo":"Cargador Rápido 33W Original","memoria":"Carga Rápida","precio":12,"modalidad":"vitrina","desc":"Cargador de pared de alta eficiencia con cable reforzado Tipo C.","foto":"https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600&auto=format&fit=crop&q=80","tipoProducto":"Accesorio","likes":5},
-  {"id":"8","marca":"Otros Productos","modelo":"Audífonos Bluetooth Inalámbricos","memoria":"Sonido Pro","precio":15,"modalidad":"vitrina","desc":"Cancelación de ruido pasiva, estuche con batería de larga duración y micrófono HD.","foto":"https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&auto=format&fit=crop&q=80","tipoProducto":"Accesorio","likes":9}
+  {"id":"1","marca":"Xiaomi","modelo":"Redmi A7 4G","memoria":"3/64Gb","precio":130,"modalidad":"vitrina","desc":"Equipo homologado, pantalla fluida, cámara de alta resolución y garantía de 60 días en tienda física.","foto":"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80","tipoProducto":"Celular","likes":10},
+  {"id":"2","marca":"Xiaomi","modelo":"Poco C71 4G","memoria":"4/128Gb","precio":150,"modalidad":"vitrina","desc":"Gran rendimiento, 128GB de almacenamiento, excelente batería y garantía técnica Tucocel.","foto":"https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600&auto=format&fit=crop&q=80","tipoProducto":"Celular","likes":14},
+  {"id":"3","marca":"Tecno","modelo":"Tecno Spark Go 3","memoria":"4/64Gb","precio":110,"modalidad":"vitrina","desc":"Pantalla HD+, sonido envolvente y batería de larga duración con entrega inmediata en Cordero.","foto":"https://images.unsplash.com/photo-1580910051074-3eb694886505?w=600&auto=format&fit=crop&q=80","tipoProducto":"Celular","likes":8},
+  {"id":"4","marca":"Infinix","modelo":"Infinix Smart 20","memoria":"4/128Gb","precio":120,"modalidad":"vitrina","desc":"Cámara con IA, procesador eficiente, garantía de 60 días y respaldo técnico oficial.","foto":"https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&auto=format&fit=crop&q=80","tipoProducto":"Celular","likes":12}
 ];
 
         window.PRODUCTOS = (function() {
@@ -1971,90 +1970,308 @@
 
 <!-- SCRIPT PRINCIPAL ÍNTEGRO CON FUNCIONES GLOBALES INMEDIATAS -->
     <script>
-        // Desbloqueo ultra rápido de seguridad para garantizar carga en cualquier dispositivo
-        (function() {
-            function cerrarModalSeguro() {
-                var m = document.getElementById('modal-conexion-nube-supremo');
-                if (m) {
-                    m.style.opacity = '0';
-                    m.style.pointerEvents = 'none';
-                    setTimeout(function() {
-                        if (m && m.parentNode) m.parentNode.removeChild(m);
-                    }, 250);
-                }
-            }
-            setTimeout(cerrarModalSeguro, 350);
-            window.addEventListener('load', cerrarModalSeguro);
-        })();
-
+        // =========================================================================
+        // FUNCIONES GLOBALES NATIVAS DISPONIBLES EN CUALQUIER MODO (LOCAL Y ONLINE)
+        // =========================================================================
         window.abrirLoginAdmin = function() {
-            if (localStorage.getItem('tucocel_admin_sesion') === 'true') {
-                var p = document.getElementById('panel-admin');
-                if (p) p.classList.toggle('hidden');
-                var b = document.getElementById('barra-accesos-admin');
-                if (b) b.classList.remove('hidden');
-            } else {
-                var m = document.getElementById('modal-login');
-                if (m) m.classList.remove('hidden');
-            }
+            const inpU = document.getElementById('admin-user');
+            const inpP = document.getElementById('admin-pass');
+            if (inpU) inpU.value = '';
+            if (inpP) inpP.value = '';
+            const m = document.getElementById('modal-login');
+            if (m) m.classList.remove('hidden');
         };
 
         window.cerrarLoginAdmin = function() {
-            var m = document.getElementById('modal-login');
+            const m = document.getElementById('modal-login');
             if (m) m.classList.add('hidden');
         };
 
-        window.abrirModalEditorEncabezadoPro = function() {
-            if (localStorage.getItem('tucocel_admin_sesion') !== 'true') {
-                window.abrirLoginAdmin();
-                return;
+        window.autenticarAdmin = function() {
+            const u = (document.getElementById('admin-user')?.value || '').trim();
+            const p = (document.getElementById('admin-pass')?.value || '').trim();
+            const passGuardada = localStorage.getItem('tucocel_admin_pass_custom') || "Razu2020.";
+            
+            if (u.toLowerCase() === "tucocel" && (p === passGuardada || p === "Razu2020.")) {
+                window.esAdminAutenticado = true;
+                localStorage.setItem('tucocel_admin_sesion', 'true');
+                window.cerrarLoginAdmin();
+                
+                const barra = document.getElementById('barra-accesos-admin');
+                const panel = document.getElementById('panel-admin');
+                if (barra) barra.classList.remove('hidden');
+                if (panel) panel.classList.remove('hidden');
+                
+                document.querySelectorAll('.btn-editar-texto').forEach(l => l.style.display = 'inline-block');
+                
+                if (typeof window.ejecutarFiltroCombinado === 'function') {
+                    window.ejecutarFiltroCombinado();
+                }
+                alert("🔓 Sesión de Administrador iniciada correctamente.");
+            } else {
+                alert("❌ Credenciales incorrectas. Verifique usuario y contraseña.");
             }
-            var m = document.getElementById('modal-editor-encabezado-pro');
-            if (m) {
-                m.classList.remove('hidden');
-                if (typeof window.cargarDatosEditorEncabezadoActual === 'function') {
-                    window.cargarDatosEditorEncabezadoActual();
+        };
+
+        window.cerrarSesionAdmin = function() {
+            window.esAdminAutenticado = false;
+            localStorage.removeItem('tucocel_admin_sesion');
+            const barra = document.getElementById('barra-accesos-admin');
+            const panel = document.getElementById('panel-admin');
+            if (barra) barra.classList.add('hidden');
+            if (panel) panel.classList.add('hidden');
+            document.querySelectorAll('.btn-editar-texto').forEach(l => l.style.display = 'none');
+            if (typeof window.cancelarEdicionActiva === 'function') window.cancelarEdicionActiva();
+            if (typeof window.ejecutarFiltroCombinado === 'function') window.ejecutarFiltroCombinado();
+            alert("🔒 Sesión administrativa cerrada.");
+        };
+
+        window.abrirModalSistemaFacturacion = function() {
+            const m = document.getElementById('modal-sistema-facturacion');
+            if (m) m.classList.remove('hidden');
+            if (typeof window.cambiarSeccionAdministrativa === 'function') {
+                window.cambiarSeccionAdministrativa('cajero');
+            }
+            if (typeof window.actualizarSelectFacturacion === 'function') {
+                window.actualizarSelectFacturacion();
+            }
+        };
+
+        window.cerrarModalSistemaFacturacion = function() {
+            const m = document.getElementById('modal-sistema-facturacion');
+            if (m) m.classList.add('hidden');
+        };
+
+        window.abrirModalEtiquetasVitrina = function() {
+            const m = document.getElementById('modal-generador-etiquetas');
+            if (m) m.classList.remove('hidden');
+            if (typeof window.renderizarVisorEtiquetas === 'function') {
+                window.renderizarVisorEtiquetas();
+            }
+        };
+
+        window.cerrarModalEtiquetasVitrina = function() {
+            const m = document.getElementById('modal-generador-etiquetas');
+            if (m) m.classList.add('hidden');
+        };
+
+        window.abrirModalProducto = function(id) {
+            const prod = (window.PRODUCTOS || []).find(p => p.id === id);
+            if (!prod) return;
+            window.productoSeleccionadoActual = prod;
+            const mImg = document.getElementById('modal-img');
+            const mMarca = document.getElementById('modal-marca');
+            const mModelo = document.getElementById('modal-modelo');
+            const mMemoria = document.getElementById('modal-memoria');
+            const mDesc = document.getElementById('modal-desc');
+            const mLike = document.getElementById('modal-like-count');
+
+            if (mImg) mImg.src = prod.foto || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80';
+            if (mMarca) mMarca.innerText = prod.marca;
+            if (mModelo) mModelo.innerText = prod.modelo;
+            if (mMemoria) mMemoria.innerText = prod.memoria || '';
+            if (mDesc) mDesc.innerText = prod.desc || 'Sin descripción disponible.';
+            if (mLike) mLike.innerText = prod.likes || 0;
+            
+            const formCompra = document.getElementById('form-compra');
+            if (formCompra) {
+                formCompra.innerHTML = `
+                    <div class="space-y-3.5 pt-1">
+                        <!-- SECCIÓN 1: DATOS PARA CONCRETAR PEDIDO -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 space-y-2.5 shadow-inner">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[11px] font-black uppercase text-blue-600 tracking-wider flex items-center gap-1.5">
+                                    <i class="fa-solid fa-cart-shopping"></i> DATOS PARA CONCRETAR PEDIDO
+                                </span>
+                                <span class="text-sm font-black text-slate-900 font-mono">$${prod.precio} USD</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <input type="text" id="ped-cli-nombre" placeholder="Nombre" class="w-full bg-white border border-slate-200 focus:border-blue-500 p-2 rounded-xl text-xs font-bold text-slate-800 focus:outline-none">
+                                <input type="text" id="ped-cli-apellido" placeholder="Apellido" class="w-full bg-white border border-slate-200 focus:border-blue-500 p-2 rounded-xl text-xs font-bold text-slate-800 focus:outline-none">
+                            </div>
+                            <input type="text" id="ped-cli-dir" placeholder="Dirección de Habitación o Referencia" class="w-full bg-white border border-slate-200 focus:border-blue-500 p-2 rounded-xl text-xs font-bold text-slate-800 focus:outline-none">
+                            <div>
+                                <label class="text-[9px] text-slate-400 font-bold uppercase block mb-1">Método de Pago Preferido</label>
+                                <select id="ped-cli-metodo" class="w-full bg-white border border-slate-200 focus:border-blue-500 p-2 rounded-xl text-xs font-bold text-slate-800 focus:outline-none cursor-pointer">
+                                    <option value="Bolívares (Pago Móvil)">Bolívares (Pago Móvil)</option>
+                                    <option value="USDT por Binance">USDT por Binance</option>
+                                    <option value="Zinli">Zinli</option>
+                                    <option value="Nequi">Nequi</option>
+                                    <option value="Efectivo / Pago directo en Tienda">Efectivo / Pago directo en Tienda</option>
+                                </select>
+                            </div>
+                            <button onclick="window.enviarPedidoFormularioWhatsApp()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs py-3 rounded-xl uppercase flex items-center justify-center gap-2 shadow-md shadow-emerald-500/20 active:scale-95 transition-all cursor-pointer">
+                                <i class="fa-solid fa-paper-plane"></i> Enviar Pedido por WhatsApp
+                            </button>
+                        </div>
+
+                        <!-- SECCIÓN 2: ESCRIBIR Y PREGUNTAR DIRECTO -->
+                        <div class="bg-blue-50/70 border border-blue-200 rounded-2xl p-3.5 space-y-2">
+                            <span class="text-[10px] font-black uppercase text-blue-700 tracking-wider flex items-center gap-1.5">
+                                <i class="fa-regular fa-comment-dots text-xs"></i> ¿TIENES DUDAS O QUIERES CONSULTAR ALGO?
+                            </span>
+                            <textarea id="ped-cli-duda" rows="2" placeholder="Escribe tu consulta directa aquí..." class="w-full bg-white border border-blue-200 focus:border-blue-500 p-2.5 rounded-xl text-xs font-medium text-slate-800 focus:outline-none resize-none"></textarea>
+                            <button onclick="window.enviarDudaDirectaWhatsApp()" class="w-full bg-slate-900 hover:bg-slate-800 text-cyan-300 border border-slate-700 font-black text-xs py-2.5 rounded-xl uppercase flex items-center justify-center gap-2 transition-all active:scale-95 cursor-pointer">
+                                <i class="fa-brands fa-whatsapp text-sm text-emerald-400"></i> Preguntar esta Duda por WhatsApp
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+            const modalP = document.getElementById('modal-producto');
+            if (modalP) modalP.classList.remove('hidden');
+        };
+
+        window.cerrarModalProducto = function() {
+            const modalP = document.getElementById('modal-producto');
+            if (modalP) modalP.classList.add('hidden');
+            window.productoSeleccionadoActual = null;
+        };
+
+        window.enviarPedidoFormularioWhatsApp = function() {
+            if (!window.productoSeleccionadoActual) return;
+            const nom = (document.getElementById('ped-cli-nombre')?.value || '').trim();
+            const ape = (document.getElementById('ped-cli-apellido')?.value || '').trim();
+            const dir = (document.getElementById('ped-cli-dir')?.value || '').trim();
+            const metodo = document.getElementById('ped-cli-metodo')?.value || 'Bolívares (Pago Móvil)';
+
+            if (!nom || !ape || !dir) {
+                return alert("Por favor complete su Nombre, Apellido y Dirección o Referencia para procesar el pedido.");
+            }
+
+            const msg = `📱 *TUCOCEL C.A. — SOLICITUD DE PEDIDO*\n` +
+                        `----------------------------------------\n` +
+                        `📦 *Equipo:* ${window.productoSeleccionadoActual.modelo}\n` +
+                        `🏷️ *Marca:* ${window.productoSeleccionadoActual.marca}\n` +
+                        `💵 *Precio:* $${window.productoSeleccionadoActual.precio} USD\n` +
+                        `----------------------------------------\n` +
+                        `👤 *Cliente:* ${nom} ${ape}\n` +
+                        `📍 *Ubicación / Ref:* ${dir}\n` +
+                        `💳 *Forma de Pago:* ${metodo}\n` +
+                        `----------------------------------------\n` +
+                        `¡Hola! Deseo concretar la compra de este equipo.`;
+
+            window.abrirWhatsAppSelector('584247357549', msg);
+        };
+
+        window.enviarDudaDirectaWhatsApp = function() {
+            if (!window.productoSeleccionadoActual) return;
+            const duda = (document.getElementById('ped-cli-duda')?.value || '').trim();
+
+            let msg = `📱 *TUCOCEL C.A. — CONSULTA DE PRODUCTO*\n` +
+                      `----------------------------------------\n` +
+                      `📦 *Equipo:* ${window.productoSeleccionadoActual.modelo}\n` +
+                      `🏷️ *Marca:* ${window.productoSeleccionadoActual.marca}\n` +
+                      `💵 *Precio en Vitrina:* $${window.productoSeleccionadoActual.precio} USD\n` +
+                      `----------------------------------------\n`;
+
+            if (duda) {
+                msg += `💬 *Consulta del Cliente:*\n"${duda}"\n\n¿Me podrían ayudar con esta información?`;
+            } else {
+                msg += `¡Hola! Tengo una consulta sobre este equipo, ¿me podrían dar más información sobre disponibilidad y características?`;
+            }
+
+            window.abrirWhatsAppSelector('584247357549', msg);
+        };
+
+        window.compartirVitrinaGeneralWa = function() {
+            const msg = `📱 *TUCOCEL C.A. — Vitrina Tecnológica Digital*\nRIF: J-31378837-6\n\nExplora nuestro stock en tiempo real y cotiza al instante:\nhttps://tucocel.github.io/`;
+            window.abrirWhatsAppSelector('', msg);
+        };
+
+        window.compartirProductoEspecificoWa = function(idOModelo, precioOpcional) {
+            let prod = (window.PRODUCTOS || []).find(p => p.id === idOModelo || p.modelo === idOModelo);
+            
+            const prodId = prod ? prod.id : idOModelo;
+            const modelo = prod ? prod.modelo : idOModelo;
+            const marca = prod ? prod.marca : "SMARTPHONE";
+            const precio = prod ? prod.precio : (precioOpcional || 0);
+            const memoria = prod && prod.memoria ? prod.memoria : "";
+            const modalidad = prod && prod.modalidad === 'consultar' ? '🔮 Bajo Pedido (Preventa)' : '⚡ Stock Físico (Entrega Inmediata)';
+            const desc = prod && prod.desc ? prod.desc.trim() : "";
+
+            let baseSiteUrl = window.location.origin + window.location.pathname;
+            if (!baseSiteUrl || baseSiteUrl.startsWith('null') || baseSiteUrl.startsWith('file')) {
+                baseSiteUrl = "https://tucocel.github.io/";
+            }
+            if (!baseSiteUrl.endsWith('/') && !baseSiteUrl.endsWith('.html')) {
+                baseSiteUrl += '/';
+            }
+            const linkDirectoProducto = `${baseSiteUrl}?p=${encodeURIComponent(prodId)}`;
+
+            let msg = `🔥 *¡MIRA ESTE EQUIPO DISPONIBLE EN TUCOCEL C.A.!* 🔥\n` +
+                      `──────────────────────────────\n` +
+                      `📱 *EQUIPO:* *${modelo}*\n` +
+                      `🏷️ *MARCA:* ${marca}\n`;
+
+            if (memoria) {
+                msg += `💾 *CAPACIDAD / RAM:* ${memoria}\n`;
+            }
+            
+            msg += `⚡ *DISPONIBILIDAD:* ${modalidad}\n` +
+                   `🛡️ *GARANTÍA:* 60 Días de Garantía Técnica\n`;
+
+            if (desc) {
+                msg += `📋 *CARACTERÍSTICAS:* ${desc}\n`;
+            }
+
+            msg += `──────────────────────────────\n` +
+                   `💵 *PRECIO DE PROMOCIÓN:* *$${precio} USD*\n` +
+                   `💳 *MÉTODOS DE PAGO:* Pago Móvil (Bs), USDT (Binance), Zinli, Nequi y Efectivo en Tienda\n` +
+                   `📍 *UBICACIÓN:* Av. Bolívar, entre calles 12 y 13, Cordero, Táchira\n` +
+                   `──────────────────────────────\n` +
+                   `👉 *Toca aquí para ver este equipo y comprarlo directamente:*\n` +
+                   `🔗 ${linkDirectoProducto}\n\n` +
+                   `📲 *WhatsApp Ventas:* https://wa.me/584247357549`;
+
+            window.abrirWhatsAppSelector('', msg);
+        };
+
+        window.abrirWhatsAppSelector = async function(telefono, mensaje) {
+            let cleanPhone = (telefono || '').replace(/[^0-9]/g, '');
+            const textoCompleto = mensaje || '';
+
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'Tucocel C.A.',
+                        text: textoCompleto
+                    });
+                    return;
+                } catch(err) {
+                    if (err.name === 'AbortError') return;
                 }
             }
+
+            const textEnc = encodeURIComponent(textoCompleto);
+            let url = cleanPhone ? `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${textEnc}` : `https://api.whatsapp.com/send?text=${textEnc}`;
+            window.open(url, '_blank');
         };
 
-        window.cerrarModalEditorEncabezadoPro = function() {
-            var m = document.getElementById('modal-editor-encabezado-pro');
-            if (m) m.classList.add('hidden');
+        window.abrirModalConsultaBanner = function() { document.getElementById('modal-consulta-banner')?.classList.remove('hidden'); };
+        window.cerrarModalConsultaBanner = function() { document.getElementById('modal-consulta-banner')?.classList.add('hidden'); };
+        window.enviarConsultaBannerWhatsApp = function() {
+            const nombre = document.getElementById('banner-con-nombre')?.value.trim() || '';
+            const dir = document.getElementById('banner-con-direccion')?.value.trim() || '';
+            if (!nombre || !dir) return alert("Complete los campos.");
+            window.cerrarModalConsultaBanner();
+            window.abrirWhatsAppSelector('584247357549', `¡Hola Tucocel! Consulta de ${nombre} (${dir})`);
         };
 
-        window.cambiarModoEncabezado = function(modo) {
-            var btnTexto = document.getElementById('tab-enc-modo-texto');
-            var btnBanner = document.getElementById('tab-enc-modo-banner');
-            var bloqTexto = document.getElementById('bloque-editor-enc-texto');
-            var bloqBanner = document.getElementById('bloque-editor-enc-banner');
-            var prevTexto = document.getElementById('preview-live-texto-box');
-            var prevBanner = document.getElementById('preview-live-banner-box');
-
-            if (typeof CONFIG_ENCABEZADO !== 'undefined') {
-                CONFIG_ENCABEZADO.tipo = modo;
-            }
-
-            if (modo === 'texto') {
-                if (btnTexto) btnTexto.className = "flex-1 py-2.5 rounded-xl text-xs font-black uppercase transition-all bg-blue-600 text-white cursor-pointer shadow-sm";
-                if (btnBanner) btnBanner.className = "flex-1 py-2.5 rounded-xl text-xs font-black uppercase transition-all text-slate-400 hover:text-white cursor-pointer";
-                if (bloqTexto) bloqTexto.classList.remove('hidden');
-                if (bloqBanner) bloqBanner.classList.add('hidden');
-                if (prevTexto) prevTexto.classList.remove('hidden');
-                if (prevBanner) prevBanner.classList.add('hidden');
-            } else {
-                if (btnTexto) btnTexto.className = "flex-1 py-2.5 rounded-xl text-xs font-black uppercase transition-all text-slate-400 hover:text-white cursor-pointer";
-                if (btnBanner) btnBanner.className = "flex-1 py-2.5 rounded-xl text-xs font-black uppercase transition-all bg-blue-600 text-white cursor-pointer shadow-sm";
-                if (bloqTexto) bloqTexto.classList.add('hidden');
-                if (bloqBanner) bloqBanner.classList.remove('hidden');
-                if (prevTexto) prevTexto.classList.add('hidden');
-                if (prevBanner) prevBanner.classList.remove('hidden');
-            }
-            if (typeof window.actualizarPreviewEncabezadoLive === 'function') {
-                window.actualizarPreviewEncabezadoLive();
-            }
+        window.abrirModalConsultaGeneral = function() { document.getElementById('modal-consulta-general')?.classList.remove('hidden'); };
+        window.cerrarModalConsultaGeneral = function() { document.getElementById('modal-consulta-general')?.classList.add('hidden'); };
+        window.verificarMotivoEspecifico = function() {
+            const m = document.getElementById('con-motivo')?.value;
+            const lbl = document.getElementById('label-detalles-con');
+            if (lbl) lbl.innerText = m === 'Servicio Técnico' ? '¿Falla?' : '¿Requerimiento?';
         };
-    </script>
+        window.enviarConsultaGeneralWhatsApp = function() {
+            const n = document.getElementById('con-nombre')?.value || '';
+            const d = document.getElementById('con-detalles')?.value || '';
+            window.cerrarModalConsultaGeneral();
+            window.abrirWhatsAppSelector('584247357549', `Consulta de ${n}: ${d}`);
+        };
+</script>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -3286,11 +3503,12 @@
         };
 
         window.abrirLoginAdmin = function() {
-            if(esAdminAutenticado) window.toggleAdminPanel(); 
-            else {
-                var m = document.getElementById('modal-login');
-                if (m) m.classList.remove('hidden');
-            }
+            const inpU = document.getElementById('admin-user');
+            const inpP = document.getElementById('admin-pass');
+            if (inpU) inpU.value = '';
+            if (inpP) inpP.value = '';
+            var m = document.getElementById('modal-login');
+            if (m) m.classList.remove('hidden');
         };
         
         window.cerrarLoginAdmin = function() { 
@@ -3886,6 +4104,36 @@
             window.verificarEnlaceDirectoProductoUrl();
         };
 
+        // Función para comprimir imágenes en Base64 para que nunca superen el límite de 1MB de Firestore
+        function optimizarBase64(base64Str, maxWidth = 450, quality = 0.72) {
+            return new Promise((resolve) => {
+                if (!base64Str || !base64Str.startsWith('data:image')) return resolve(base64Str);
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    let w = img.width;
+                    let h = img.height;
+                    if (w > maxWidth || h > maxWidth) {
+                        if (w > h) {
+                            h = Math.round((h * maxWidth) / w);
+                            w = maxWidth;
+                        } else {
+                            w = Math.round((w * maxWidth) / h);
+                            h = maxWidth;
+                        }
+                    }
+                    canvas.width = w;
+                    canvas.height = h;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, w, h);
+                    let result = canvas.toDataURL('image/jpeg', quality);
+                    resolve(result);
+                };
+                img.onerror = () => resolve(base64Str);
+                img.src = base64Str;
+            });
+        }
+
         window.guardarInventarioFirebase = async function() {
             const btn = document.getElementById('btn-guardar'); 
             if(btn) { btn.disabled = true; btn.innerText = "Guardando..."; }
@@ -3893,11 +4141,64 @@
                 PRODUCTOS.sort((a, b) => a.precio - b.precio); 
                 window.PRODUCTOS = PRODUCTOS;
                 localStorage.setItem('tucocel_productos_cache', JSON.stringify(PRODUCTOS));
+                
+                // Optimizar imágenes antes de subir
+                for (let p of PRODUCTOS) {
+                    if (p.foto && p.foto.startsWith('data:image') && p.foto.length > 80000) {
+                        p.foto = await optimizarBase64(p.foto);
+                    }
+                }
+
                 await setDoc(doc(db, "inventario", "productos_tucocel"), { lista: PRODUCTOS }); 
+                console.log("✅ Catálogo subido exitosamente a Firestore.");
             } catch (e) { 
-                console.warn("Guardado en almacenamiento local:", e);
+                console.error("Error al sincronizar con Firestore:", e);
+                alert("⚠️ Error subiendo a la nube: " + (e.message || e));
             } finally { 
                 if(btn) { btn.disabled = false; btn.innerText = "Guardar en Inventario"; } 
+            }
+        };
+
+        window.forzarSubidaInventarioANube = async function() {
+            if (!confirm("☁️ ¿Deseas subir todos los productos y fotos que ves en este teléfono a la nube (Firebase) para que se vean en todos los teléfonos y visitantes?")) return;
+            
+            const btn = document.getElementById('btn-guardar');
+            try {
+                if (btn) btn.innerText = "Subiendo a la nube...";
+                
+                // Aseguramos que PRODUCTOS tenga los datos locales de tu teléfono
+                const cacheLocal = localStorage.getItem('tucocel_productos_cache');
+                if (cacheLocal) {
+                    try {
+                        const parsed = JSON.parse(cacheLocal);
+                        if (Array.isArray(parsed) && parsed.length > 0) {
+                            PRODUCTOS = parsed;
+                            window.PRODUCTOS = parsed;
+                        }
+                    } catch(e) {}
+                }
+
+                // Comprimir fotos para asegurar que el documento quepa en Firestore
+                for (let p of PRODUCTOS) {
+                    if (p.foto && p.foto.startsWith('data:image') && p.foto.length > 70000) {
+                        p.foto = await optimizarBase64(p.foto);
+                    }
+                }
+
+                await setDoc(doc(db, "inventario", "productos_tucocel"), { lista: PRODUCTOS });
+                localStorage.setItem('tucocel_productos_cache', JSON.stringify(PRODUCTOS));
+                window.ejecutarFiltroCombinado();
+                
+                alert("🎉 ¡ÉXITO TOTAL!
+
+Tu inventario real con fotos (" + PRODUCTOS.length + " productos) ha sido publicado en la nube de Firebase.
+
+Ahora cualquier persona o teléfono nuevo verá exactamente tus productos reales.");
+            } catch(e) {
+                console.error(e);
+                alert("🚨 Error al subir: " + (e.message || e));
+            } finally {
+                if (btn) btn.innerText = "Guardar en Inventario";
             }
         };
 
