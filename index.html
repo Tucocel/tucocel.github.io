@@ -2136,7 +2136,7 @@
             }
         };
 
-        let PRODUCTOS = JSON.parse(localStorage.getItem('tucocel_productos_cache') || '[]');
+        let PRODUCTOS = (Array.isArray(window.PRODUCTOS) && window.PRODUCTOS.length > 0) ? window.PRODUCTOS : JSON.parse(localStorage.getItem('tucocel_productos_cache') || '[]');
         let ITEMS_VENTA_ACTIVA = [];
         let HISTORIAL_NOTAS = [];
         let APARTADOS = [];
@@ -3824,20 +3824,23 @@
         };
 
         window.cargarInventarioFirebase = async function() {
-            // 1. Carga inicial desde caché si existe
-            const cache = localStorage.getItem('tucocel_productos_cache');
-            if (cache) {
-                try {
-                    const parsed = JSON.parse(cache);
-                    if (Array.isArray(parsed) && parsed.length > 0) {
-                        PRODUCTOS = parsed;
-                        window.PRODUCTOS = parsed;
-                        window.ejecutarFiltroCombinado();
-                    }
-                } catch(e) {}
+            // 1. Garantizar que PRODUCTOS y window.PRODUCTOS siempre tengan datos válidos
+            if (!Array.isArray(window.PRODUCTOS) || window.PRODUCTOS.length === 0) {
+                const cache = localStorage.getItem('tucocel_productos_cache');
+                if (cache) {
+                    try {
+                        const parsed = JSON.parse(cache);
+                        if (Array.isArray(parsed) && parsed.length > 0) window.PRODUCTOS = parsed;
+                    } catch(e) {}
+                }
+                if (!Array.isArray(window.PRODUCTOS) || window.PRODUCTOS.length === 0) {
+                    if (typeof SEED_PRODUCTOS_DEFAULT !== 'undefined') window.PRODUCTOS = [...SEED_PRODUCTOS_DEFAULT];
+                }
             }
+            PRODUCTOS = window.PRODUCTOS;
+            window.ejecutarFiltroCombinado();
 
-            // 2. Consulta directa a Firebase Firestore en tiempo real (Pública y Universal)
+            // 2. Consulta y Auto-Inicialización en Firebase Firestore en tiempo real
             try {
                 const docRef = doc(db, "inventario", "productos_tucocel");
                 const docSnap = await getDoc(docRef);
@@ -3849,19 +3852,18 @@
                         window.PRODUCTOS = datosNube;
                         PRODUCTOS.sort((a, b) => a.precio - b.precio); 
                         localStorage.setItem('tucocel_productos_cache', JSON.stringify(PRODUCTOS));
+                    } else {
+                        // Si en la nube está vacío, sembramos automáticamente los productos base y guardamos en Firestore
+                        console.log("Inicializando catálogo en la nube con inventario base...");
+                        await setDoc(docRef, { lista: window.PRODUCTOS });
                     }
                 } else {
-                    console.warn("Documento 'inventario/productos_tucocel' no existe en Firestore aún.");
+                    // Si el documento no existe en Firestore, lo creamos de inmediato con el catálogo base
+                    console.log("Creando documento 'inventario/productos_tucocel' en Firestore...");
+                    await setDoc(docRef, { lista: window.PRODUCTOS });
                 }
             } catch (err) { 
-                console.error("⚠️ Error leyendo Firestore (Posible bloqueo de reglas de seguridad):", err);
-                // Si falla por reglas o red y no hay caché, mantiene los productos base
-                if (!PRODUCTOS || PRODUCTOS.length === 0) {
-                    if (typeof SEED_PRODUCTOS_DEFAULT !== 'undefined') {
-                        PRODUCTOS = SEED_PRODUCTOS_DEFAULT;
-                        window.PRODUCTOS = SEED_PRODUCTOS_DEFAULT;
-                    }
-                }
+                console.warn("Lectura offline/local activa:", err);
             }
 
             // 3. Sincronizar marcas y renderizar catálogo inmediatamente
@@ -3889,10 +3891,11 @@
             if(btn) { btn.disabled = true; btn.innerText = "Guardando..."; }
             try { 
                 PRODUCTOS.sort((a, b) => a.precio - b.precio); 
+                window.PRODUCTOS = PRODUCTOS;
                 localStorage.setItem('tucocel_productos_cache', JSON.stringify(PRODUCTOS));
                 await setDoc(doc(db, "inventario", "productos_tucocel"), { lista: PRODUCTOS }); 
             } catch (e) { 
-                alert("Guardado localmente. Se sincronizará en cuanto haya conexión."); 
+                console.warn("Guardado en almacenamiento local:", e);
             } finally { 
                 if(btn) { btn.disabled = false; btn.innerText = "Guardar en Inventario"; } 
             }
