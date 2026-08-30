@@ -705,34 +705,45 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- FOOTER CON ANALYTICS 3 EN 1 -->
     <footer class="bg-slate-900 text-slate-400 py-10 px-4 mt-16 border-t border-slate-800 text-xs font-medium">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
             <div class="space-y-1.5">
                 <p class="text-white font-black tracking-wider text-sm uppercase whitespace-nowrap">
                     © 2026 TUCOCEL C.A. — RIF: J-31378837-6
                 </p>
-                <p class="text-slate-500 text-[11px]">Web desarrollada para Tucocel C.A.</p>
-                <div class="pt-2 flex flex-wrap items-center justify-center md:justify-start gap-2 sm:gap-3 text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+                <p class="text-slate-500 text-[11px]">Web desarrollada de manera exclusiva por <a href="#" class="text-blue-400 hover:underline font-bold">@publionlinemk</a> — Agencia Oficial de Publicidad de Tucocel C.A.</p>
+                <div class="pt-2 flex flex-wrap items-center justify-center md:justify-start gap-2 text-[10px] font-bold uppercase tracking-wider">
                     <span class="inline-flex items-center gap-1.5 bg-slate-950 px-2.5 py-1 rounded-xl border border-slate-800 shadow-sm">
                         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                        <span class="text-emerald-400">En vivo:</span> <b id="contador-online-num" class="text-white font-mono font-black">1</b>
+                        <span class="text-emerald-400">EN VIVO AHORA:</span> <b id="contador-online-num" class="text-white font-mono font-black">1</b>
                     </span>
                     <span class="inline-flex items-center gap-1.5 bg-slate-950 px-2.5 py-1 rounded-xl border border-slate-800 shadow-sm">
                         <i class="fa-solid fa-calendar-day text-amber-400"></i>
-                        <span class="text-amber-400">Hoy:</span> <b id="contador-visitas-hoy" class="text-white font-mono font-black">0</b>
+                        <span class="text-amber-400">HOY:</span> <b id="contador-visitas-hoy" class="text-white font-mono font-black">0</b>
                     </span>
                     <span class="inline-flex items-center gap-1.5 bg-slate-950 px-2.5 py-1 rounded-xl border border-slate-800 shadow-sm">
                         <i class="fa-solid fa-eye text-cyan-400"></i>
-                        <span class="text-slate-400">Total:</span> <b id="contador-visitas-num" class="text-cyan-400 font-mono font-black">0</b>
+                        <span class="text-slate-400">TOTAL:</span> <b id="contador-visitas-num" class="text-cyan-400 font-mono font-black">0</b>
                     </span>
                 </div>
             </div>
-            <div class="flex items-start gap-3 bg-slate-950/40 border border-slate-800/60 p-3.5 rounded-2xl max-w-sm">
-                <i class="fa-solid fa-location-dot text-blue-500 mt-0.5 text-base shrink-0"></i>
-                <div>
-                    <span class="text-white font-bold block text-[11px] uppercase tracking-wide">Visítanos directamente</span>
-                    <span class="text-slate-400 text-[11px] leading-relaxed block mt-0.5">Avenida Bolívar, entre calles 12 y 13, Cordero, estado Táchira.</span>
+            
+            <div class="flex flex-col sm:flex-row gap-6 items-center md:items-start text-left">
+                <div class="bg-slate-950/40 border border-slate-800/60 p-3.5 rounded-2xl max-w-xs space-y-2">
+                    <span class="text-white font-bold block text-[11px] uppercase tracking-wide"><i class="fa-solid fa-share-nodes text-blue-500 mr-1.5"></i> Conéctate con nosotros</span>
+                    <div class="space-y-1 text-slate-300 text-[11px]">
+                        <a href="https://www.instagram.com/tucocel" target="_blank" class="flex items-center gap-2 hover:text-pink-400 transition-colors"><i class="fa-brands fa-instagram text-sm"></i> @tucocel</a>
+                        <a href="https://www.tiktok.com/@tucocel" target="_blank" class="flex items-center gap-2 hover:text-white transition-colors"><i class="fa-brands fa-tiktok text-sm"></i> @tucocel</a>
+                        <a href="mailto:movistarcordero@gmail.com" class="flex items-center gap-2 hover:text-amber-400 transition-colors"><i class="fa-solid fa-envelope text-sm"></i> movistarcordero@gmail.com</a>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 bg-slate-950/40 border border-slate-800/60 p-3.5 rounded-2xl max-w-sm">
+                    <i class="fa-solid fa-location-dot text-blue-500 mt-0.5 text-base shrink-0"></i>
+                    <div>
+                        <span class="text-white font-bold block text-[11px] uppercase tracking-wide">Visítanos directamente</span>
+                        <span class="text-slate-400 text-[11px] leading-relaxed block mt-0.5">Avenida Bolívar, entre calles 12 y 13, Cordero, estado Táchira.</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -3596,7 +3607,7 @@
             window.open(url, '_blank');
         };
 
-        // --- ESTADÍSTICAS / VISITAS EN VIVO FIREBASE ---
+        // --- CONTADOR DE VISITAS REAL EN FIREBASE (EN VIVO, HOY Y TOTAL) ---
         window.gestionarContadorVisitasFirebase = async function() {
             try {
                 const hoyStr = new Date().toLocaleDateString('es-VE');
@@ -3616,20 +3627,27 @@
                     if (data.fechaRegistrada === hoyStr) {
                         visitasHoy = (data.visitasHoy || 0) + 1;
                     } else {
-                        visitasHoy = 1;
+                        visitasHoy = 1; // Nuevo día, reinicia conteo diario real
                         fechaRegistrada = hoyStr;
                     }
                     heartbeat = data.heartbeat || {};
                 }
 
+                // Registrar latido activo de esta sesión
                 heartbeat[miSesionId] = Date.now();
 
+                // Limpiar sesiones inactivas de más de 3 minutos
                 const ahora = Date.now();
                 Object.keys(heartbeat).forEach(k => {
                     if (ahora - heartbeat[k] > 180000) delete heartbeat[k];
                 });
 
-                await setDoc(docRef, { totalVisitas, visitasHoy, fechaRegistrada, heartbeat }, { merge: true });
+                await setDoc(docRef, {
+                    totalVisitas,
+                    visitasHoy,
+                    fechaRegistrada,
+                    heartbeat
+                }, { merge: true });
 
                 const elTot = document.getElementById('contador-visitas-num');
                 const elHoy = document.getElementById('contador-visitas-hoy');
@@ -3639,6 +3657,7 @@
                 if (elHoy) elHoy.innerText = visitasHoy.toLocaleString();
                 if (elOnl) elOnl.innerText = Math.max(1, Object.keys(heartbeat).length);
 
+                // Latido en segundo plano cada 60 segundos
                 setInterval(async () => {
                     try {
                         const snapRefresh = await getDoc(docRef);
@@ -3658,6 +3677,12 @@
 
             } catch(e) {
                 console.warn("Analytics modo local:", e);
+                const elTot = document.getElementById('contador-visitas-num');
+                const elHoy = document.getElementById('contador-visitas-hoy');
+                const elOnl = document.getElementById('contador-online-num');
+                if (elTot) elTot.innerText = "1";
+                if (elHoy) elHoy.innerText = "1";
+                if (elOnl) elOnl.innerText = "1";
             }
         };
 
