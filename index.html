@@ -4204,11 +4204,7 @@
                 localStorage.setItem('tucocel_productos_cache', JSON.stringify(PRODUCTOS));
                 window.ejecutarFiltroCombinado();
                 
-                alert("🎉 ¡ÉXITO TOTAL!
-
-Tu inventario real con fotos (" + PRODUCTOS.length + " productos) ha sido publicado en la nube de Firebase.
-
-Ahora cualquier persona o teléfono nuevo verá exactamente tus productos reales.");
+                alert("🎉 ¡ÉXITO TOTAL!\n\nTu inventario real con fotos (" + PRODUCTOS.length + " productos) ha sido publicado en la nube de Firebase.\n\nAhora cualquier persona o teléfono nuevo verá exactamente tus productos reales.");
             } catch(e) {
                 console.error(e);
                 alert("🚨 Error al subir: " + (e.message || e));
