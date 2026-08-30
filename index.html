@@ -2174,8 +2174,45 @@
             window.abrirWhatsAppSelector('584247357549', msg);
         };
 
+
+        // Función generadora de enlace limpio con el nombre del modelo (Slug amigable sin números)
+        function generarSlugAmigable(nombre) {
+            return (nombre || '')
+                .toString()
+                .toLowerCase()
+                .trim()
+                .replace(/\s+/g, '-')
+                .replace(/[^\w\-]+/g, '')
+                .replace(/\-\-+/g, '-');
+        }
+
         window.compartirVitrinaGeneralWa = function() {
-            const msg = `📱 *TUCOCEL C.A. — Vitrina Tecnológica Digital*\nRIF: J-31378837-6\n\nExplora nuestro stock en tiempo real y cotiza al instante:\nhttps://tucocel.github.io/`;
+            let baseSiteUrl = window.location.origin + window.location.pathname;
+            if (!baseSiteUrl || baseSiteUrl.startsWith('null') || baseSiteUrl.startsWith('file')) {
+                baseSiteUrl = "https://tucocel.github.io/";
+            }
+            if (!baseSiteUrl.endsWith('/') && !baseSiteUrl.endsWith('.html')) {
+                baseSiteUrl += '/';
+            }
+
+            const msg = `🔥 *¡BIENVENIDO A LA VITRINA DIGITAL DE TUCOCEL C.A.!* 📱✨\n` +
+                        `Agente Autorizado Movistar | RIF: J-31378837-6\n\n` +
+                        `🚀 *¡Conéctate con la evolución tecnológica y compra al mejor precio!*\n\n` +
+                        `En nuestra vitrina digital podrás:\n` +
+                        `🔹 *Ver Smartphones Nuevos con Garantía* (Xiaomi, Tecno, Infinix, Samsung y más).\n` +
+                        `🔹 *Consultar Precios y Stock en Tiempo Real* actualizados a la tasa del día.\n` +
+                        `🔹 *Comprar Accesorios Originales:* Cargadores ultra rápidos, vidrios templados y fundas.\n` +
+                        `🔹 *Solicitar Servicio Técnico Especializado* en laboratorio profesional.\n\n` +
+                        `💳 *MÉTODOS DE PAGO 100% CÓMODOS Y SEGUROS:*\n` +
+                        `• Pago Móvil y Transferencias Bancarias (Bs)\n` +
+                        `• USDT por Binance Pay / P2P\n` +
+                        `• Zinli / Nequi\n` +
+                        `• Efectivo directo en tienda (Dólares o Pesos COP)\n\n` +
+                        `📍 *Visítanos:* Av. Bolívar, entre calles 12 y 13, Cordero, estado Táchira.\n\n` +
+                        `👇 *Toca aquí para ver todo nuestro catálogo online y cotizar al instante:*\n` +
+                        `🌐 ${baseSiteUrl}\n\n` +
+                        `📲 *WhatsApp de Ventas y Asesoría:* https://wa.me/584247357549`;
+
             window.abrirWhatsAppSelector('', msg);
         };
 
@@ -2187,9 +2224,10 @@
             const marca = prod ? prod.marca : "SMARTPHONE";
             const precio = prod ? prod.precio : (precioOpcional || 0);
             const memoria = prod && prod.memoria ? prod.memoria : "";
-            const modalidad = prod && prod.modalidad === 'consultar' ? '🔮 Bajo Pedido (Preventa)' : '⚡ Stock Físico (Entrega Inmediata)';
+            const modalidad = prod && prod.modalidad === 'consultar' ? '🔮 Bajo Pedido (Preventa 2 Horas)' : '⚡ Stock Físico (Entrega Inmediata)';
             const desc = prod && prod.desc ? prod.desc.trim() : "";
 
+            const slugModelo = generarSlugAmigable(modelo);
             let baseSiteUrl = window.location.origin + window.location.pathname;
             if (!baseSiteUrl || baseSiteUrl.startsWith('null') || baseSiteUrl.startsWith('file')) {
                 baseSiteUrl = "https://tucocel.github.io/";
@@ -2197,35 +2235,52 @@
             if (!baseSiteUrl.endsWith('/') && !baseSiteUrl.endsWith('.html')) {
                 baseSiteUrl += '/';
             }
-            const linkDirectoProducto = `${baseSiteUrl}?p=${encodeURIComponent(prodId)}`;
+            const linkDirectoProducto = `${baseSiteUrl}?p=${encodeURIComponent(slugModelo)}`;
 
-            let msg = `🔥 *¡MIRA ESTE EQUIPO DISPONIBLE EN TUCOCEL C.A.!* 🔥\n` +
-                      `──────────────────────────────\n` +
-                      `📱 *EQUIPO:* *${modelo}*\n` +
-                      `🏷️ *MARCA:* ${marca}\n`;
+            let caracteristicasFormateadas = "";
+            if (desc) {
+                const oraciones = desc.split(/\.|\n/).map(s => s.trim()).filter(s => s.length > 3);
+                if (oraciones.length > 1) {
+                    caracteristicasFormateadas = oraciones.map(o => `   • ${o}`).join('\n');
+                } else {
+                    caracteristicasFormateadas = `   • ${desc}`;
+                }
+            }
+
+            let msg = `📱✨ *¡MIRA ESTE EQUIPO DISPONIBLE EN TUCOCEL C.A.!* ✨📱\n` +
+                      `━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+                      `📦 *EQUIPO:* *${modelo.toUpperCase()}*\n` +
+                      `🏷️ *MARCA:* ${marca.toUpperCase()}\n`;
 
             if (memoria) {
-                msg += `💾 *CAPACIDAD / RAM:* ${memoria}\n`;
+                msg += `💾 *CAPACIDAD / MEMORIA:* ${memoria}\n`;
             }
-            
+
             msg += `⚡ *DISPONIBILIDAD:* ${modalidad}\n` +
-                   `🛡️ *GARANTÍA:* 60 Días de Garantía Técnica\n`;
+                   `🛡️ *GARANTÍA:* 60 Días Continuos de Garantía Técnica\n` +
+                   `━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
 
-            if (desc) {
-                msg += `📋 *CARACTERÍSTICAS:* ${desc}\n`;
+            if (caracteristicasFormateadas) {
+                msg += `📋 *CARACTERÍSTICAS DESTACADAS:*\n` +
+                       `${caracteristicasFormateadas}\n` +
+                       `━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
             }
 
-            msg += `──────────────────────────────\n` +
-                   `💵 *PRECIO DE PROMOCIÓN:* *$${precio} USD*\n` +
-                   `💳 *MÉTODOS DE PAGO:* Pago Móvil (Bs), USDT (Binance), Zinli, Nequi y Efectivo en Tienda\n` +
-                   `📍 *UBICACIÓN:* Av. Bolívar, entre calles 12 y 13, Cordero, Táchira\n` +
-                   `──────────────────────────────\n` +
-                   `👉 *Toca aquí para ver este equipo y comprarlo directamente:*\n` +
+            msg += `💵 *PRECIO DE PROMOCIÓN:* *$${precio} USD*\n\n` +
+                   `💳 *FORMAS DE PAGO ACEPTADAS:*\n` +
+                   `  ✔️ Pago Móvil (Bs al cambio del día)\n` +
+                   `  ✔️ USDT (Binance Pay / P2P)\n` +
+                   `  ✔️ Zinli / Nequi\n` +
+                   `  ✔️ Efectivo en Tienda (USD / COP Pesos)\n\n` +
+                   `📍 *Punto de Retiro:* Av. Bolívar, entre calles 12 y 13, Cordero, estado Táchira.\n` +
+                   `━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+                   `👉 *Toca aquí para ver fotos y concretar tu pedido en línea:*\n` +
                    `🔗 ${linkDirectoProducto}\n\n` +
                    `📲 *WhatsApp Ventas:* https://wa.me/584247357549`;
 
             window.abrirWhatsAppSelector('', msg);
         };
+
 
         window.abrirWhatsAppSelector = async function(telefono, mensaje) {
             let cleanPhone = (telefono || '').replace(/[^0-9]/g, '');
@@ -4521,7 +4576,32 @@
         };
 
         window.compartirVitrinaGeneralWa = function() {
-            const msg = `📱 *TUCOCEL C.A. — Vitrina Tecnológica Digital*\nRIF: J-31378837-6\n\nExplora nuestro stock en tiempo real y cotiza al instante:\nhttps://tucocel.github.io/`;
+            let baseSiteUrl = window.location.origin + window.location.pathname;
+            if (!baseSiteUrl || baseSiteUrl.startsWith('null') || baseSiteUrl.startsWith('file')) {
+                baseSiteUrl = "https://tucocel.github.io/";
+            }
+            if (!baseSiteUrl.endsWith('/') && !baseSiteUrl.endsWith('.html')) {
+                baseSiteUrl += '/';
+            }
+
+            const msg = `🔥 *¡BIENVENIDO A LA VITRINA DIGITAL DE TUCOCEL C.A.!* 📱✨\n` +
+                        `Agente Autorizado Movistar | RIF: J-31378837-6\n\n` +
+                        `🚀 *¡Conéctate con la evolución tecnológica y compra al mejor precio!*\n\n` +
+                        `En nuestra vitrina digital podrás:\n` +
+                        `🔹 *Ver Smartphones Nuevos con Garantía* (Xiaomi, Tecno, Infinix, Samsung y más).\n` +
+                        `🔹 *Consultar Precios y Stock en Tiempo Real* actualizados a la tasa del día.\n` +
+                        `🔹 *Comprar Accesorios Originales:* Cargadores ultra rápidos, vidrios templados y fundas.\n` +
+                        `🔹 *Solicitar Servicio Técnico Especializado* en laboratorio profesional.\n\n` +
+                        `💳 *MÉTODOS DE PAGO 100% CÓMODOS Y SEGUROS:*\n` +
+                        `• Pago Móvil y Transferencias Bancarias (Bs)\n` +
+                        `• USDT por Binance Pay / P2P\n` +
+                        `• Zinli / Nequi\n` +
+                        `• Efectivo directo en tienda (Dólares o Pesos COP)\n\n` +
+                        `📍 *Visítanos:* Av. Bolívar, entre calles 12 y 13, Cordero, estado Táchira.\n\n` +
+                        `👇 *Toca aquí para ver todo nuestro catálogo online y cotizar al instante:*\n` +
+                        `🌐 ${baseSiteUrl}\n\n` +
+                        `📲 *WhatsApp de Ventas y Asesoría:* https://wa.me/584247357549`;
+
             window.abrirWhatsAppSelector('', msg);
         };
 
@@ -4533,11 +4613,10 @@
             const marca = prod ? prod.marca : "SMARTPHONE";
             const precio = prod ? prod.precio : (precioOpcional || 0);
             const memoria = prod && prod.memoria ? prod.memoria : "";
-            const modalidad = prod && prod.modalidad === 'consultar' ? '🔮 Bajo Pedido (Preventa)' : '⚡ Stock Físico (Entrega Inmediata)';
+            const modalidad = prod && prod.modalidad === 'consultar' ? '🔮 Bajo Pedido (Preventa 2 Horas)' : '⚡ Stock Físico (Entrega Inmediata)';
             const desc = prod && prod.desc ? prod.desc.trim() : "";
-            const fotoUrl = (prod && prod.foto && !prod.foto.startsWith('data:image')) ? prod.foto : 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80';
 
-            // Generar enlace directo específico con parámetro de producto
+            const slugModelo = generarSlugAmigable(modelo);
             let baseSiteUrl = window.location.origin + window.location.pathname;
             if (!baseSiteUrl || baseSiteUrl.startsWith('null') || baseSiteUrl.startsWith('file')) {
                 baseSiteUrl = "https://tucocel.github.io/";
@@ -4545,44 +4624,62 @@
             if (!baseSiteUrl.endsWith('/') && !baseSiteUrl.endsWith('.html')) {
                 baseSiteUrl += '/';
             }
-            const linkDirectoProducto = `${baseSiteUrl}?p=${encodeURIComponent(prodId)}`;
+            const linkDirectoProducto = `${baseSiteUrl}?p=${encodeURIComponent(slugModelo)}`;
 
-            let msg = `🔥 *¡MIRA ESTE EQUIPO DISPONIBLE EN TUCOCEL C.A.!* 🔥\n` +
-                      `──────────────────────────────\n` +
-                      `📱 *EQUIPO:* *${modelo}*\n` +
-                      `🏷️ *MARCA:* ${marca}\n`;
+            let caracteristicasFormateadas = "";
+            if (desc) {
+                const oraciones = desc.split(/\.|\n/).map(s => s.trim()).filter(s => s.length > 3);
+                if (oraciones.length > 1) {
+                    caracteristicasFormateadas = oraciones.map(o => `   • ${o}`).join('\n');
+                } else {
+                    caracteristicasFormateadas = `   • ${desc}`;
+                }
+            }
+
+            let msg = `📱✨ *¡MIRA ESTE EQUIPO DISPONIBLE EN TUCOCEL C.A.!* ✨📱\n` +
+                      `━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+                      `📦 *EQUIPO:* *${modelo.toUpperCase()}*\n` +
+                      `🏷️ *MARCA:* ${marca.toUpperCase()}\n`;
 
             if (memoria) {
-                msg += `💾 *CAPACIDAD / RAM:* ${memoria}\n`;
+                msg += `💾 *CAPACIDAD / MEMORIA:* ${memoria}\n`;
             }
-            
+
             msg += `⚡ *DISPONIBILIDAD:* ${modalidad}\n` +
-                   `🛡️ *GARANTÍA:* 60 Días de Garantía Técnica\n`;
+                   `🛡️ *GARANTÍA:* 60 Días Continuos de Garantía Técnica\n` +
+                   `━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
 
-            if (desc) {
-                msg += `📋 *CARACTERÍSTICAS:* ${desc}\n`;
+            if (caracteristicasFormateadas) {
+                msg += `📋 *CARACTERÍSTICAS DESTACADAS:*\n` +
+                       `${caracteristicasFormateadas}\n` +
+                       `━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
             }
 
-            msg += `──────────────────────────────\n` +
-                   `💵 *PRECIO DE PROMOCIÓN:* *$${precio} USD*\n` +
-                   `💳 *MÉTODOS DE PAGO:* Pago Móvil (Bs), USDT (Binance), Zinli, Nequi y Efectivo en Tienda\n` +
-                   `📍 *UBICACIÓN:* Av. Bolívar, entre calles 12 y 13, Cordero, Táchira\n` +
-                   `──────────────────────────────\n` +
-                   `👉 *Toca aquí para ver este equipo y comprarlo directamente:*\n` +
+            msg += `💵 *PRECIO DE PROMOCIÓN:* *$${precio} USD*\n\n` +
+                   `💳 *FORMAS DE PAGO ACEPTADAS:*\n` +
+                   `  ✔️ Pago Móvil (Bs al cambio del día)\n` +
+                   `  ✔️ USDT (Binance Pay / P2P)\n` +
+                   `  ✔️ Zinli / Nequi\n` +
+                   `  ✔️ Efectivo en Tienda (USD / COP Pesos)\n\n` +
+                   `📍 *Punto de Retiro:* Av. Bolívar, entre calles 12 y 13, Cordero, estado Táchira.\n` +
+                   `━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+                   `👉 *Toca aquí para ver fotos y concretar tu pedido en línea:*\n` +
                    `🔗 ${linkDirectoProducto}\n\n` +
                    `📲 *WhatsApp Ventas:* https://wa.me/584247357549`;
 
-            // Abre el selector nativo de compartir (para enviar a grupos de WhatsApp, estados, chats, etc.)
             window.abrirWhatsAppSelector('', msg);
         };
 
-        // Función para autodetectar enlace directo a un producto específico al abrir la web
+        // Función para autodetectar enlace directo a un producto específico por Slug, Nombre o ID al abrir la web
         window.verificarEnlaceDirectoProductoUrl = function() {
             try {
                 const params = new URLSearchParams(window.location.search);
-                const prodIdParam = params.get('p') || params.get('producto');
-                if (prodIdParam && PRODUCTOS.length > 0) {
-                    const prodTarget = PRODUCTOS.find(p => p.id === prodIdParam || p.modelo.toLowerCase().trim() === prodIdParam.toLowerCase().trim());
+                const prodParam = (params.get('p') || params.get('producto') || window.location.hash.replace('#', '')).trim().toLowerCase();
+                if (prodParam && PRODUCTOS.length > 0) {
+                    const prodTarget = PRODUCTOS.find(p => {
+                        const slugP = generarSlugAmigable(p.modelo);
+                        return p.id === prodParam || slugP === prodParam || p.modelo.toLowerCase().trim() === prodParam;
+                    });
                     if (prodTarget) {
                         setTimeout(() => {
                             window.abrirModalProducto(prodTarget.id);
