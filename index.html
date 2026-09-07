@@ -782,7 +782,7 @@
     </button>
 
     <!-- PANEL ADMIN INVENTARIO -->
-    <div id="panel-admin" class="bg-slate-900 text-slate-100 p-5 hidden max-w-4xl mx-auto sm:mt-4 sm:rounded-2xl shadow-2xl border border-slate-800">
+    <div id="panel-admin" class="bg-slate-900 text-slate-100 p-5 hidden max-w-4xl mx-auto sm:mt-4 sm:rounded-2xl shadow-2xl border border-slate-800 mb-20 relative z-30">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4 border-b border-slate-800 pb-2">
             <h3 id="panel-titulo" class="text-xs font-bold uppercase text-amber-400 tracking-wider"><i class="fa-solid fa-database mr-1"></i> Panel de Gestión Tucocel</h3>
             <button onclick="window.abrirModalCambiarPassword()" class="bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 px-3 py-1 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer">
@@ -841,11 +841,20 @@
                 <input type="hidden" id="foto-base64">
                 <img id="preview-foto" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Vista previa de carga de imagen" class="w-9 h-9 object-cover rounded-lg bg-slate-800 border border-slate-700 hidden">
             </div>
-            <div class="flex gap-2 w-full sm:w-auto">
-                <button id="btn-cancelar-edicion" onclick="window.cancelarEdicionActiva()" class="hidden w-1/2 sm:w-auto bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors cursor-pointer">Cancelar</button>
-                <button id="btn-guardar" onclick="window.procesarGuardadoInventario()" class="w-full sm:w-auto bg-amber-400 hover:bg-amber-500 text-slate-950 text-xs font-black px-5 py-2.5 rounded-xl shadow-lg transition-colors cursor-pointer">Guardar en Inventario</button>
-                <button type="button" onclick="window.forzarSubidaInventarioANube()" class="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-black px-5 py-2.5 rounded-xl shadow-lg transition-colors cursor-pointer flex items-center justify-center gap-1.5" title="Subir todo lo que ves en este teléfono a la nube para que se vea en todos lados">
-                    <i class="fa-solid fa-cloud-arrow-up"></i> Sincronizar Todo a la Nube
+            <div class="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 w-full sm:w-auto items-center">
+                <button id="btn-cancelar-edicion" onclick="window.cancelarEdicionActiva()" class="hidden col-span-2 sm:col-span-1 bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors cursor-pointer text-center">Cancelar</button>
+                <button id="btn-guardar" onclick="window.procesarGuardadoInventario()" class="bg-amber-400 hover:bg-amber-500 text-slate-950 text-xs font-black px-4 py-2.5 rounded-xl shadow-lg transition-colors cursor-pointer flex items-center justify-center gap-1.5 text-center leading-tight">
+                    <i class="fa-solid fa-floppy-disk text-xs"></i> Guardar
+                </button>
+                <button type="button" onclick="window.forzarSubidaInventarioANube()" class="bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-black px-3.5 py-2.5 rounded-xl shadow-lg transition-colors cursor-pointer flex items-center justify-center gap-1.5 text-center leading-tight" title="Subir todo lo que ves en este teléfono a la nube para que se vea en todos lados">
+                    <i class="fa-solid fa-cloud-arrow-up text-xs"></i> Nube Firebase
+                </button>
+                <button type="button" onclick="window.exportarInventarioJSON()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-black px-3.5 py-2.5 rounded-xl shadow-lg transition-colors cursor-pointer flex items-center justify-center gap-1.5 text-center leading-tight" title="Descargar copia de respaldo del inventario en formato JSON">
+                    <i class="fa-solid fa-file-arrow-down text-xs"></i> Backup JSON
+                </button>
+                <input type="file" id="inp-restaurar-json" accept=".json,application/json" class="hidden" onchange="window.importarInventarioJSON(event)">
+                <button type="button" onclick="document.getElementById('inp-restaurar-json').click()" class="bg-purple-600 hover:bg-purple-700 text-white text-xs font-black px-3.5 py-2.5 rounded-xl shadow-lg transition-colors cursor-pointer flex items-center justify-center gap-1.5 text-center leading-tight" title="Restaurar inventario desde un archivo JSON">
+                    <i class="fa-solid fa-file-arrow-up text-xs"></i> Cargar JSON
                 </button>
             </div>
         </div>
@@ -1801,10 +1810,162 @@
         <!-- MOTOR SÍNCRONO DE RENDERIZADO INMEDIATO (COMPATIBLE 100% FILE:// Y OFFLINE) -->
     <script>
         const SEED_PRODUCTOS_DEFAULT = [
-  {"id":"1","marca":"Xiaomi","modelo":"Redmi A7 4G","memoria":"3/64Gb","precio":130,"modalidad":"vitrina","desc":"Equipo homologado, pantalla fluida, cámara de alta resolución y garantía de 60 días en tienda física.","foto":"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80","tipoProducto":"Celular","likes":10},
-  {"id":"2","marca":"Xiaomi","modelo":"Poco C71 4G","memoria":"4/128Gb","precio":150,"modalidad":"vitrina","desc":"Gran rendimiento, 128GB de almacenamiento, excelente batería y garantía técnica Tucocel.","foto":"https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600&auto=format&fit=crop&q=80","tipoProducto":"Celular","likes":14},
-  {"id":"3","marca":"Tecno","modelo":"Tecno Spark Go 3","memoria":"4/64Gb","precio":110,"modalidad":"vitrina","desc":"Pantalla HD+, sonido envolvente y batería de larga duración con entrega inmediata en Cordero.","foto":"https://images.unsplash.com/photo-1580910051074-3eb694886505?w=600&auto=format&fit=crop&q=80","tipoProducto":"Celular","likes":8},
-  {"id":"4","marca":"Infinix","modelo":"Infinix Smart 20","memoria":"4/128Gb","precio":120,"modalidad":"vitrina","desc":"Cámara con IA, procesador eficiente, garantía de 60 días y respaldo técnico oficial.","foto":"https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&auto=format&fit=crop&q=80","tipoProducto":"Celular","likes":12}
+  {
+    "id": "1",
+    "marca": "Xiaomi",
+    "modelo": "Redmi 14C 4G",
+    "memoria": "4/128Gb",
+    "precio": 125,
+    "modalidad": "vitrina",
+    "desc": "Pantalla fluida 120Hz de 6.88\", cámara dual AI de 50MP, batería 5160mAh, homologado con garantía de 60 días.",
+    "foto": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80",
+    "tipoProducto": "Celular",
+    "likes": 18
+  },
+  {
+    "id": "2",
+    "marca": "Xiaomi",
+    "modelo": "Redmi Note 13 4G",
+    "memoria": "8/256Gb",
+    "precio": 180,
+    "modalidad": "vitrina",
+    "desc": "Pantalla AMOLED FHD+ 120Hz, cámara triple de 108MP, carga rápida 33W, procesador Snapdragon 685 garantizado.",
+    "foto": "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600&auto=format&fit=crop&q=80",
+    "tipoProducto": "Celular",
+    "likes": 24
+  },
+  {
+    "id": "3",
+    "marca": "Xiaomi",
+    "modelo": "Poco C65",
+    "memoria": "6/128Gb",
+    "precio": 135,
+    "modalidad": "vitrina",
+    "desc": "Procesador octa-core MediaTek Helio G85, pantalla 90Hz protegida con Corning Gorilla Glass y batería 5000mAh.",
+    "foto": "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&auto=format&fit=crop&q=80",
+    "tipoProducto": "Celular",
+    "likes": 15
+  },
+  {
+    "id": "4",
+    "marca": "Tecno",
+    "modelo": "Tecno Spark 20",
+    "memoria": "8/256Gb",
+    "precio": 140,
+    "modalidad": "vitrina",
+    "desc": "Cámara frontal 32MP con flash dual, altavoces estéreo DTS, 256GB de memoria interna y entrega inmediata en Cordero.",
+    "foto": "https://images.unsplash.com/photo-1580910051074-3eb694886505?w=600&auto=format&fit=crop&q=80",
+    "tipoProducto": "Celular",
+    "likes": 21
+  },
+  {
+    "id": "5",
+    "marca": "Tecno",
+    "modelo": "Tecno Spark Go 2024",
+    "memoria": "4/64Gb",
+    "precio": 95,
+    "modalidad": "vitrina",
+    "desc": "Pantalla Punch-Hole fluida 90Hz, Dynamic Port para notificaciones inteligentes y batería de larga duración.",
+    "foto": "https://images.unsplash.com/photo-1580910051074-3eb694886505?w=600&auto=format&fit=crop&q=80",
+    "tipoProducto": "Celular",
+    "likes": 12
+  },
+  {
+    "id": "6",
+    "marca": "Infinix",
+    "modelo": "Infinix Smart 8",
+    "memoria": "4/128Gb",
+    "precio": 105,
+    "modalidad": "vitrina",
+    "desc": "Cámara de 13MP con IA, Dynamic Bar interactiva, batería 5000mAh Tipo-C con garantía técnica de 60 días.",
+    "foto": "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&auto=format&fit=crop&q=80",
+    "tipoProducto": "Celular",
+    "likes": 14
+  },
+  {
+    "id": "7",
+    "marca": "Infinix",
+    "modelo": "Infinix Hot 40 Pro",
+    "memoria": "8/256Gb",
+    "precio": 175,
+    "modalidad": "vitrina",
+    "desc": "Procesador Helio G99 6nm ultra rápido, cámara 108MP, pantalla 120Hz FHD+ y carga súper rápida 33W.",
+    "foto": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80",
+    "tipoProducto": "Celular",
+    "likes": 26
+  },
+  {
+    "id": "8",
+    "marca": "Samsung",
+    "modelo": "Samsung Galaxy A15 4G",
+    "memoria": "6/128Gb",
+    "precio": 160,
+    "modalidad": "vitrina",
+    "desc": "Pantalla Super AMOLED 90Hz brillante, triple cámara de 50MP con gran angular y respaldo garantizado.",
+    "foto": "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=600&auto=format&fit=crop&q=80",
+    "tipoProducto": "Celular",
+    "likes": 30
+  },
+  {
+    "id": "9",
+    "marca": "Samsung",
+    "modelo": "Samsung Galaxy A05s",
+    "memoria": "4/128Gb",
+    "precio": 130,
+    "modalidad": "vitrina",
+    "desc": "Pantalla amplia 6.7\" FHD+, procesador Snapdragon 680 eficiente y triple cámara trasera de alta nitidez.",
+    "foto": "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=600&auto=format&fit=crop&q=80",
+    "tipoProducto": "Celular",
+    "likes": 19
+  },
+  {
+    "id": "10",
+    "marca": "ZTE",
+    "modelo": "ZTE Blade A54",
+    "memoria": "4/128Gb",
+    "precio": 90,
+    "modalidad": "vitrina",
+    "desc": "Pantalla HD+ de 6.6\", lector de huellas lateral, memoria expandible y rendimiento estable para uso diario.",
+    "foto": "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600&auto=format&fit=crop&q=80",
+    "tipoProducto": "Celular",
+    "likes": 11
+  },
+  {
+    "id": "11",
+    "marca": "Otros Productos",
+    "modelo": "Cargador Rápido 65W GaN Tipo C",
+    "memoria": "Dual Puerto PD",
+    "precio": 15,
+    "modalidad": "vitrina",
+    "desc": "Cargador ultra rápido inteligente GaN 65W con puerto USB-C y USB-A. Compatible con laptops, Xiaomi, Samsung e iPhone.",
+    "foto": "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600&auto=format&fit=crop&q=80",
+    "tipoProducto": "Accesorio",
+    "likes": 35
+  },
+  {
+    "id": "12",
+    "marca": "Otros Productos",
+    "modelo": "Audífonos Inalámbricos Pro TWS",
+    "memoria": "Bluetooth 5.3",
+    "precio": 18,
+    "modalidad": "vitrina",
+    "desc": "Cancelación pasiva de ruido, sonido Hi-Fi estéreo, estuche con pantalla LED indicadora de batería y micrófono HD.",
+    "foto": "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&auto=format&fit=crop&q=80",
+    "tipoProducto": "Accesorio",
+    "likes": 42
+  },
+  {
+    "id": "13",
+    "marca": "Otros Productos",
+    "modelo": "Vidrio Templado Cerámica 9D",
+    "memoria": "Full Cover HD",
+    "precio": 5,
+    "modalidad": "vitrina",
+    "desc": "Protector de pantalla cerámico irrompible flexible 9D antihuellas y máxima absorción de impactos para todo modelo.",
+    "foto": "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=600&auto=format&fit=crop&q=80",
+    "tipoProducto": "Accesorio",
+    "likes": 28
+  }
 ];
 
         window.PRODUCTOS = (function() {
@@ -2429,9 +2590,38 @@
             deferredPrompt = e;
         });
 
+        // Service Worker con estrategia Network First (red primero, nunca bloquea peticiones de Firestore)
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                const swCode = "self.addEventListener('fetch', (e) => { e.respondWith(fetch(e.request).catch(() => caches.match(e.request))); });";
+                const swCode = `
+                    const CACHE_NAME = 'tucocel-pwa-v2026';
+                    self.addEventListener('install', (e) => self.skipWaiting());
+                    self.addEventListener('activate', (e) => {
+                        e.waitUntil(
+                            caches.keys().then((keys) => {
+                                return Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)));
+                            }).then(() => self.clients.claim())
+                        );
+                    });
+                    self.addEventListener('fetch', (e) => {
+                        // Peticiones a Firebase Firestore o métodos no-GET pasan directo a internet sin cachear
+                        if (e.request.url.includes('firestore.googleapis.com') || 
+                            e.request.url.includes('firebase') || 
+                            e.request.method !== 'GET') {
+                            return;
+                        }
+                        // Estrategia Network First: Primero internet fresco; si falla la red, respaldo en caché
+                        e.respondWith(
+                            fetch(e.request).then((netRes) => {
+                                if (netRes && netRes.status === 200 && netRes.type === 'basic') {
+                                    const resClone = netRes.clone();
+                                    caches.open(CACHE_NAME).then(c => c.put(e.request, resClone));
+                                }
+                                return netRes;
+                            }).catch(() => caches.match(e.request))
+                        );
+                    });
+                `;
                 const blob = new Blob([swCode], { type: 'application/javascript' });
                 const swUrl = URL.createObjectURL(blob);
                 navigator.serviceWorker.register(swUrl).catch(() => {});
@@ -4097,61 +4287,39 @@
         };
 
         window.cargarInventarioFirebase = async function() {
-            // 1. Garantizar que PRODUCTOS y window.PRODUCTOS siempre tengan datos válidos
-            if (!Array.isArray(window.PRODUCTOS) || window.PRODUCTOS.length === 0) {
-                const cache = localStorage.getItem('tucocel_productos_cache');
-                if (cache) {
-                    try {
-                        const parsed = JSON.parse(cache);
-                        if (Array.isArray(parsed) && parsed.length > 0) window.PRODUCTOS = parsed;
-                    } catch(e) {}
-                }
-                if (!Array.isArray(window.PRODUCTOS) || window.PRODUCTOS.length === 0) {
-                    if (typeof SEED_PRODUCTOS_DEFAULT !== 'undefined') window.PRODUCTOS = [...SEED_PRODUCTOS_DEFAULT];
-                }
+            // 1. Inicialización de arranque con caché local o Seed real
+            let inventarioInicial = [];
+            const cache = localStorage.getItem('tucocel_productos_cache');
+            if (cache) {
+                try {
+                    const parsed = JSON.parse(cache);
+                    if (Array.isArray(parsed) && parsed.length > 0) inventarioInicial = parsed;
+                } catch(e) {}
             }
-            PRODUCTOS = window.PRODUCTOS;
+            if (inventarioInicial.length === 0) {
+                inventarioInicial = [...SEED_PRODUCTOS_DEFAULT];
+            }
+            
+            PRODUCTOS = inventarioInicial;
+            window.PRODUCTOS = inventarioInicial;
             window.ejecutarFiltroCombinado();
 
-            // 2. Sincronización Inteligente con Firebase Firestore
+            // 2. Consulta directa a Firebase Firestore (Nube Primero)
             try {
                 const docRef = doc(db, "inventario", "productos_tucocel");
                 const docSnap = await getDoc(docRef);
-                
-                // Leemos lo que tenemos localmente en el teléfono
-                const cacheLocal = localStorage.getItem('tucocel_productos_cache');
-                let listaLocal = [];
-                if (cacheLocal) {
-                    try { listaLocal = JSON.parse(cacheLocal); } catch(e) {}
-                }
 
                 if (docSnap && docSnap.exists()) { 
-                    const datosNube = docSnap.data().lista || [];
-                    
-                    // Si en el teléfono tenemos productos reales (más artículos o fotos reales) y en la nube solo hay 4 o genéricos:
-                    if (Array.isArray(listaLocal) && listaLocal.length > datosNube.length && listaLocal.length >= 5) {
-                        console.log("Detectado catálogo real local con más productos (" + listaLocal.length + "). Publicando a la nube...");
-                        PRODUCTOS = listaLocal;
-                        window.PRODUCTOS = listaLocal;
-                        // Subimos automáticamente a la nube para que se guarde en Firebase de una vez por todas
-                        for (let p of PRODUCTOS) {
-                            if (p.foto && p.foto.startsWith('data:image') && p.foto.length > 70000) {
-                                p.foto = await optimizarBase64(p.foto);
-                            }
-                        }
-                        await setDoc(docRef, { lista: PRODUCTOS });
-                    } else if (Array.isArray(datosNube) && datosNube.length > 0) {
+                    const datosNube = docSnap.data().lista;
+                    if (Array.isArray(datosNube) && datosNube.length > 0) {
                         PRODUCTOS = datosNube;
                         window.PRODUCTOS = datosNube;
-                        PRODUCTOS.sort((a, b) => a.precio - b.precio); 
+                        PRODUCTOS.sort((a, b) => a.precio - b.precio);
                         localStorage.setItem('tucocel_productos_cache', JSON.stringify(PRODUCTOS));
                     }
-                } else if (Array.isArray(listaLocal) && listaLocal.length > 0) {
-                    // Si no existe el doc en la nube, subimos el inventario del teléfono
-                    await setDoc(docRef, { lista: listaLocal });
                 }
             } catch (err) { 
-                console.warn("Lectura offline/local activa:", err);
+                console.warn("Consulta Firestore offline o red lenta. Manteniendo respaldo local:", err);
             }
 
             // 3. Sincronizar marcas y renderizar catálogo inmediatamente
@@ -4174,10 +4342,13 @@
             window.verificarEnlaceDirectoProductoUrl();
         };
 
-        // Función para comprimir imágenes en Base64 para que nunca superen el límite de 1MB de Firestore
-        function optimizarBase64(base64Str, maxWidth = 450, quality = 0.72) {
+        // Compresión automática de imágenes en Base64 para garantizar tamaño inferior al límite de 1MB de Firestore
+        function optimizarBase64(base64Str, maxWidth = 420, quality = 0.68) {
             return new Promise((resolve) => {
                 if (!base64Str || !base64Str.startsWith('data:image')) return resolve(base64Str);
+                // Si la imagen ya es pequeña (menos de 35KB), no requiere re-procesamiento
+                if (base64Str.length < 35000) return resolve(base64Str);
+
                 const img = new Image();
                 img.onload = () => {
                     const canvas = document.createElement('canvas');
@@ -4230,42 +4401,115 @@
         };
 
         window.forzarSubidaInventarioANube = async function() {
-            if (!confirm("☁️ ¿Deseas subir todos los productos y fotos que ves en este teléfono a la nube (Firebase) para que se vean en todos los teléfonos y visitantes?")) return;
+            if (!confirm("☁️ ¿Deseas subir todos los productos y fotos a la nube (Firebase Firestore)?\n\nEsto publicará el catálogo en tiempo real para todos los clientes y dispositivos.")) return;
             
             const btn = document.getElementById('btn-guardar');
             try {
-                if (btn) btn.innerText = "Subiendo a la nube...";
+                if (btn) { btn.disabled = true; btn.innerText = "Comprimiendo y subiendo..."; }
                 
-                // Aseguramos que PRODUCTOS tenga los datos locales de tu teléfono
+                // 1. Obtener lista actual en memoria o almacenamiento local
+                let listaASubir = Array.isArray(PRODUCTOS) && PRODUCTOS.length > 0 ? PRODUCTOS : [];
                 const cacheLocal = localStorage.getItem('tucocel_productos_cache');
-                if (cacheLocal) {
+                if ((!listaASubir || listaASubir.length === 0) && cacheLocal) {
                     try {
                         const parsed = JSON.parse(cacheLocal);
-                        if (Array.isArray(parsed) && parsed.length > 0) {
-                            PRODUCTOS = parsed;
-                            window.PRODUCTOS = parsed;
-                        }
+                        if (Array.isArray(parsed) && parsed.length > 0) listaASubir = parsed;
                     } catch(e) {}
                 }
+                if (listaASubir.length === 0) {
+                    listaASubir = [...SEED_PRODUCTOS_DEFAULT];
+                }
 
-                // Comprimir fotos para asegurar que el documento quepa en Firestore
-                for (let p of PRODUCTOS) {
-                    if (p.foto && p.foto.startsWith('data:image') && p.foto.length > 70000) {
+                // 2. Comprimir fotos para asegurar que el documento se mantenga muy por debajo de 1MB
+                for (let p of listaASubir) {
+                    if (p.foto && p.foto.startsWith('data:image')) {
                         p.foto = await optimizarBase64(p.foto);
                     }
                 }
 
-                await setDoc(doc(db, "inventario", "productos_tucocel"), { lista: PRODUCTOS });
+                // 3. Validar peso total estimado del JSON
+                const payloadStr = JSON.stringify({ lista: listaASubir });
+                const payloadSizeKb = Math.round(payloadStr.length / 1024);
+                if (payloadSizeKb > 950) {
+                    throw new Error("El inventario excede el límite permitido por Firestore (" + payloadSizeKb + " KB). Comprima las imágenes.");
+                }
+
+                // 4. Subida real con respuesta obligatoria del servidor
+                await setDoc(doc(db, "inventario", "productos_tucocel"), { 
+                    lista: listaASubir,
+                    ultimaActualizacion: Date.now()
+                });
+
+                PRODUCTOS = listaASubir;
+                window.PRODUCTOS = listaASubir;
                 localStorage.setItem('tucocel_productos_cache', JSON.stringify(PRODUCTOS));
                 window.ejecutarFiltroCombinado();
                 
-                alert("🎉 ¡ÉXITO TOTAL!\n\nTu inventario real con fotos (" + PRODUCTOS.length + " productos) ha sido publicado en la nube de Firebase.\n\nAhora cualquier persona o teléfono nuevo verá exactamente tus productos reales.");
+                alert("🎉 ¡ÉXITO TOTAL CONFIRMADO!\n\nTu inventario con " + PRODUCTOS.length + " artículos (" + payloadSizeKb + " KB) ha sido verificado y guardado en los servidores de Firebase.\n\nCualquier persona en Chrome, Opera o PC verá exactamente este catálogo actualizado.");
             } catch(e) {
-                console.error(e);
-                alert("🚨 Error al subir: " + (e.message || e));
+                console.error("Error en forzarSubidaInventarioANube:", e);
+                alert("🚨 ERROR EXACTO AL SUBIR A FIREBASE:\n\n" + (e.message || e) + "\n\nRevise su conexión o las reglas de Firestore.");
             } finally {
-                if (btn) btn.innerText = "Guardar en Inventario";
+                if (btn) { btn.disabled = false; btn.innerText = "Guardar en Inventario"; }
             }
+        };
+
+        // Exportar respaldo de catálogo completo en archivo .json
+        window.exportarInventarioJSON = function() {
+            try {
+                const lista = (Array.isArray(PRODUCTOS) && PRODUCTOS.length > 0) ? PRODUCTOS : JSON.parse(localStorage.getItem('tucocel_productos_cache') || '[]');
+                if (lista.length === 0) {
+                    return alert("No hay artículos en el inventario para respaldar.");
+                }
+                const dataStr = JSON.stringify(lista, null, 2);
+                const blob = new Blob([dataStr], { type: "application/json" });
+                const url = URL.createObjectURL(blob);
+                const fecha = new Date().toISOString().slice(0, 10);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `respaldo_inventario_tucocel_${fecha}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            } catch(e) {
+                alert("Error al generar respaldo JSON: " + (e.message || e));
+            }
+        };
+
+        // Restaurar catálogo completo desde archivo .json seleccionado
+        window.importarInventarioJSON = function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = async function(e) {
+                try {
+                    const parsed = JSON.parse(e.target.result);
+                    if (!Array.isArray(parsed) || parsed.length === 0) {
+                        return alert("El archivo no contiene un catálogo válido de artículos.");
+                    }
+                    if (confirm("📥 Se detectaron " + parsed.length + " artículos en el archivo.\n\n¿Deseas restaurar este inventario y aplicarlo en la web?")) {
+                        PRODUCTOS = parsed;
+                        window.PRODUCTOS = parsed;
+                        localStorage.setItem('tucocel_productos_cache', JSON.stringify(PRODUCTOS));
+                        window.ejecutarFiltroCombinado();
+                        window.actualizarSelectFacturacion();
+                        window.actualizarSelectApartados();
+                        
+                        if (confirm("✅ Inventario restaurado localmente.\n\n¿Deseas subirlo inmediatamente a la nube de Firebase para sincronizarlo con todos los visitantes?")) {
+                            await window.forzarSubidaInventarioANube();
+                        } else {
+                            alert("Inventario listo en este dispositivo. Recuerde presionar 'Sincronizar Todo a la Nube' cuando desee publicarlo.");
+                        }
+                    }
+                } catch(err) {
+                    alert("Error al leer archivo JSON: " + (err.message || err));
+                } finally {
+                    event.target.value = '';
+                }
+            };
+            reader.readAsText(file);
         };
 
         window.prepararEdicionArticulo = function(id) {
