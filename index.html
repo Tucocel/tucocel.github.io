@@ -930,12 +930,24 @@
                     <option value="Otros Productos">Otros Productos</option>
                     <option value="__NUEVA_MARCA__" class="font-black text-blue-600 bg-blue-50">➕ + Agregar Nueva Marca...</option>
                 </select>
-                <div id="wrapper-tipo-producto" class="hidden space-y-1.5 mt-2">
+                <div id="wrapper-tipo-producto" class="hidden space-y-2 mt-2">
                     <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block">Tipo de Artículo</label>
-                    <select id="add-tipo" class="w-full bg-white text-gray-950 p-2 rounded-xl text-xs font-bold border border-gray-300">
-                        <option value="Accesorio">🔌 Es un Accesorio / Otro</option>
+                    <select id="add-tipo" onchange="window.alCambiarTipoArticuloPanel()" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold border border-gray-300">
+                        <option value="Accesorio" selected>🔌 Es un Accesorio / Otro</option>
                         <option value="Celular">📱 Es un Teléfono Celular</option>
                     </select>
+
+                    <div id="wrapper-categoria-acc" class="space-y-1 pt-1">
+                        <div class="flex justify-between items-center">
+                            <label class="text-[10px] text-amber-400 uppercase font-bold tracking-wider">Categoría del Accesorio</label>
+                            <button type="button" onclick="window.agregarCategoriaAccesorioPromptGestor()" class="text-amber-400 hover:text-amber-300 text-[10px] font-black uppercase tracking-wider flex items-center gap-1 cursor-pointer">
+                                <i class="fa-solid fa-plus-circle"></i> Nueva Categoría
+                            </button>
+                        </div>
+                        <select id="add-categoria-acc" onchange="window.alCambiarSelectCatAccesorioPanel()" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-amber-300">
+                            <!-- Opciones cargadas dinámicamente -->
+                        </select>
+                    </div>
                 </div>
                 <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block mt-2">Modalidad de Disponibilidad</label>
                 <select id="add-modalidad" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300">
@@ -4498,12 +4510,31 @@ window.alCambiarSelectMarcaPanel = function() {
             }
         };
 
+        window.alCambiarTipoArticuloPanel = function() {
+            const tipo = document.getElementById('add-tipo') ? document.getElementById('add-tipo').value : 'Accesorio';
+            const wrapCat = document.getElementById('wrapper-categoria-acc');
+            if (wrapCat) {
+                if (tipo === 'Accesorio') {
+                    wrapCat.classList.remove('hidden');
+                    if (typeof window.actualizarSelectCatAccesorioPanel === 'function') {
+                        window.actualizarSelectCatAccesorioPanel();
+                    }
+                } else {
+                    wrapCat.classList.add('hidden');
+                }
+            }
+        };
+
         window.verificarMarcaSeleccionadaPanel = function() {
-            const marca = document.getElementById('add-marca').value;
+            const marca = document.getElementById('add-marca') ? document.getElementById('add-marca').value : 'Infinix';
             const wrapper = document.getElementById('wrapper-tipo-producto');
             if(!wrapper) return;
-            if(marca === 'Otros Productos') wrapper.classList.remove('hidden'); 
-            else wrapper.classList.add('hidden');
+            if(marca === 'Otros Productos') {
+                wrapper.classList.remove('hidden');
+                window.alCambiarTipoArticuloPanel();
+            } else {
+                wrapper.classList.add('hidden');
+            }
         };
 
         window.abrirLoginAdmin = function() {
@@ -5733,22 +5764,20 @@ window.controlarVisibilidadModulosOcultos = function(mostrar) {
 
             // Llenar campos del formulario
             const esAcc = prod.tipoProducto === 'Accesorio' || prod.marca === 'Otros Productos';
-            const selTipoGen = document.getElementById('add-tipo-general');
-            if (selTipoGen) {
-                selTipoGen.value = esAcc ? 'Accesorio' : 'Celular';
-                window.alCambiarTipoGeneralPanel();
+            const selMarca = document.getElementById('add-marca');
+            if (selMarca) {
+                selMarca.value = esAcc ? 'Otros Productos' : (prod.marca || 'Infinix');
+                window.verificarMarcaSeleccionadaPanel();
             }
 
-            if (esAcc) {
+            const selTipo = document.getElementById('add-tipo');
+            if (selTipo) {
+                selTipo.value = prod.tipoProducto || (esAcc ? 'Accesorio' : 'Celular');
+                window.alCambiarTipoArticuloPanel();
+            }
+
+            if (esAcc && typeof window.actualizarSelectCatAccesorioPanel === 'function') {
                 window.actualizarSelectCatAccesorioPanel(prod.categoriaAccesorio || '');
-            } else {
-                const selMarca = document.getElementById('add-marca');
-                if (selMarca) {
-                    selMarca.value = prod.marca || 'Infinix';
-                    if (typeof window.alCambiarSelectMarcaPanel === 'function') {
-                        window.alCambiarSelectMarcaPanel();
-                    }
-                }
             }
 
             const selMod = document.getElementById('add-modalidad');
@@ -5821,10 +5850,15 @@ window.controlarVisibilidadModulosOcultos = function(mostrar) {
         };
 
         window.limpiarFormularioPanel = function() {
-            const selTipoGen = document.getElementById('add-tipo-general');
-            if (selTipoGen) {
-                selTipoGen.value = 'Celular';
-                window.alCambiarTipoGeneralPanel();
+            const selM = document.getElementById('add-marca');
+            if (selM) {
+                selM.value = 'Infinix';
+                window.verificarMarcaSeleccionadaPanel();
+            }
+            const selTipo = document.getElementById('add-tipo');
+            if (selTipo) {
+                selTipo.value = 'Accesorio';
+                window.alCambiarTipoArticuloPanel();
             }
             const m = document.getElementById('add-modelo'); if (m) m.value = '';
             const mem = document.getElementById('memoria'); if (mem) mem.value = '';
@@ -5900,20 +5934,23 @@ window.procesarGuardadoInventario = async function() {
                 window.abrirLoginAdmin();
                 return;
             }
-            const tipoGeneral = document.getElementById('add-tipo-general') ? document.getElementById('add-tipo-general').value : 'Celular';
-            let marca = 'Infinix';
+            const selM = document.getElementById('add-marca');
+            const marcaSel = selM ? selM.value : 'Infinix';
+            let marca = marcaSel;
             let tipoProductoVal = 'Celular';
             let categoriaAccesorioVal = '';
 
-            if (tipoGeneral === 'Accesorio') {
+            if (marcaSel === 'Otros Productos') {
+                const selTipo = document.getElementById('add-tipo');
+                tipoProductoVal = selTipo ? selTipo.value : 'Accesorio';
                 marca = 'Otros Productos';
-                tipoProductoVal = 'Accesorio';
-                const selCat = document.getElementById('add-categoria-acc');
-                categoriaAccesorioVal = selCat ? selCat.value : 'Cargador';
-                if (categoriaAccesorioVal === '__NUEVA_CAT_ACC__') categoriaAccesorioVal = 'Cargador';
+                if (tipoProductoVal === 'Accesorio') {
+                    const selCat = document.getElementById('add-categoria-acc');
+                    categoriaAccesorioVal = selCat ? selCat.value : 'Cargador';
+                    if (categoriaAccesorioVal === '__NUEVA_CAT_ACC__') categoriaAccesorioVal = 'Cargador';
+                }
             } else {
-                const selM = document.getElementById('add-marca');
-                marca = selM ? selM.value : 'Infinix';
+                marca = marcaSel;
                 tipoProductoVal = 'Celular';
                 categoriaAccesorioVal = '';
             }
@@ -6736,6 +6773,3 @@ window.procesarGuardadoInventario = async function() {
 </script>
 </body>
 </html>
-
-
-
