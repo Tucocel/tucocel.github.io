@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -1204,8 +1205,8 @@
                             </div>
                             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-bold">
                                 <div>
-                                    <span class="text-[10px] text-slate-800 font-black uppercase block">Financiado por Cashea (App):</span>
-                                    <span id="lbl-csh-indicador-cliente" class="text-[9px] text-amber-700 font-bold">Cliente paga el 60% de inicial en tienda</span>
+                                    <span class="text-[10px] text-slate-800 font-black uppercase block">Inicial en Tienda (Cliente):</span>
+                                    <span id="lbl-csh-indicador-cliente" class="text-[9px] text-amber-700 font-bold">Cashea financia el 60% restante (en cuotas)</span>
                                 </div>
                                 <div class="flex items-center gap-1.5 w-full sm:w-auto">
                                     <button type="button" onclick="window.fijarPorcInicialCashea(40)" id="btn-csh-40" class="flex-1 sm:flex-none py-1.5 px-3 rounded-xl text-xs font-black border-2 border-amber-500 bg-amber-500 text-slate-950 shadow-sm cursor-pointer">40%</button>
@@ -1355,13 +1356,13 @@
                             </div>
                             <div class="flex justify-between items-center text-blue-400 text-[10.5px]">
                                 <span>Financiado por Cashea (App):</span>
-                                <b id="lbl-csh-saldo-live" class="text-blue-300 font-bold">$0.00 USD (40%)</b>
+                                <b id="lbl-csh-saldo-live" class="text-blue-300 font-bold">$0.00 USD (60%)</b>
                             </div>
                             
                             <div class="border-t border-slate-800 pt-2 space-y-1.5">
                                 <div class="flex justify-between items-center text-emerald-400">
                                     <span class="font-extrabold uppercase text-[10.5px]">Inicial a Pagar en Tienda:</span>
-                                    <b id="lbl-csh-inicial-live" class="text-emerald-400 font-black text-sm">$0.00 USD (60%)</b>
+                                    <b id="lbl-csh-inicial-live" class="text-emerald-400 font-black text-sm">$0.00 USD (40%)</b>
                                 </div>
                                 <div class="bg-slate-900/90 p-2 rounded-xl border border-cyan-500/40 flex justify-between items-center text-[10.5px]">
                                     <span class="text-cyan-400 font-bold">Inicial en Bolívares (Tasa Oficial BCV):</span>
@@ -4988,15 +4989,15 @@ window.controlarVisibilidadModulosOcultos = function(mostrar) {
             }
 
             if (esCashea) {
-                const pctCashea = parseFloat(document.getElementById('cashea-porc-inicial')?.value) || 40;
-                const pctClienteTienda = 100 - pctCashea;
+                const pctInicial = parseFloat(document.getElementById('cashea-porc-inicial')?.value) || 40;
+                const pctFinanciado = 100 - pctInicial;
 
-                const saldoCasheaUSD = totalUSD * (pctCashea / 100);
-                const inicialUSD = totalUSD * (pctClienteTienda / 100);
+                const inicialUSD = totalUSD * (pctInicial / 100);
+                const saldoCasheaUSD = totalUSD * (pctFinanciado / 100);
                 const metodo = document.getElementById('cashea-metodo-inicial')?.value || 'EFECTIVO_USD';
 
                 const lblInd = document.getElementById('lbl-csh-indicador-cliente');
-                if (lblInd) lblInd.innerText = `Cliente paga el ${pctClienteTienda}% de inicial en tienda`;
+                if (lblInd) lblInd.innerText = `Cashea financia el ${pctFinanciado}% restante (en cuotas)`;
 
                 if (lblTipoCobro) lblTipoCobro.innerText = "Total Venta Cashea:";
                 if (totalEl) totalEl.innerText = `$${totalUSD.toFixed(2)} USD`;
@@ -5005,10 +5006,10 @@ window.controlarVisibilidadModulosOcultos = function(mostrar) {
                 if (elTotFin) elTotFin.innerText = `$${totalUSD.toFixed(2)} USD`;
 
                 const elSaldo = document.getElementById('lbl-csh-saldo-live');
-                if (elSaldo) elSaldo.innerText = `$${saldoCasheaUSD.toFixed(2)} USD (${pctCashea}%)`;
+                if (elSaldo) elSaldo.innerText = `$${saldoCasheaUSD.toFixed(2)} USD (${pctFinanciado}%)`;
 
                 const elIni = document.getElementById('lbl-csh-inicial-live');
-                if (elIni) elIni.innerText = `$${inicialUSD.toFixed(2)} USD (${pctClienteTienda}%)`;
+                if (elIni) elIni.innerText = `$${inicialUSD.toFixed(2)} USD (${pctInicial}%)`;
 
                 const inicialBsBCV = inicialUSD * tBCV;
                 const elBsBcv = document.getElementById('lbl-csh-inicial-bs-bcv');
@@ -5029,7 +5030,7 @@ window.controlarVisibilidadModulosOcultos = function(mostrar) {
                 const elEq = document.getElementById('lbl-csh-equivalente-inicial');
                 if (elEq) elEq.innerText = equivStr;
 
-                if (lblCalcTitulo) lblCalcTitulo.innerText = `Vuelto Inicial Tienda (${pctClienteTienda}%)`;
+                if (lblCalcTitulo) lblCalcTitulo.innerText = `Vuelto Inicial Tienda (${pctInicial}%)`;
                 if (lblCalcTarget) lblCalcTarget.innerText = `(Meta: $${inicialUSD.toFixed(2)})`;
             } else {
                 if (lblTipoCobro) lblTipoCobro.innerText = "Total a Cobrar:";
@@ -5048,9 +5049,8 @@ window.controlarVisibilidadModulosOcultos = function(mostrar) {
             const esCashea = document.getElementById('chk-modalidad-cashea')?.checked || false;
             let targetUSD = totalBaseUSD;
             if (esCashea) {
-                const pctCashea = parseFloat(document.getElementById('cashea-porc-inicial')?.value) || 40;
-                const pctClienteTienda = 100 - pctCashea;
-                targetUSD = totalBaseUSD * (pctClienteTienda / 100);
+                const pctInicial = parseFloat(document.getElementById('cashea-porc-inicial')?.value) || 40;
+                targetUSD = totalBaseUSD * (pctInicial / 100);
             }
 
             const tCOP = parseFloat(document.getElementById('tasa-cop')?.value) || 3600;
@@ -5133,8 +5133,8 @@ window.controlarVisibilidadModulosOcultos = function(mostrar) {
             const esCashea = document.getElementById('chk-modalidad-cashea')?.checked || false;
             let targetUSD = totalBaseUSD;
             if (esCashea) {
-                const pctCashea = parseFloat(document.getElementById('cashea-porc-inicial')?.value) || 40;
-                targetUSD = totalBaseUSD * ((100 - pctCashea) / 100);
+                const pctInicial = parseFloat(document.getElementById('cashea-porc-inicial')?.value) || 40;
+                targetUSD = totalBaseUSD * (pctInicial / 100);
             }
 
             const tCOP = parseFloat(document.getElementById('tasa-cop')?.value) || 3600;
@@ -5300,8 +5300,8 @@ window.controlarVisibilidadModulosOcultos = function(mostrar) {
 
             if (nota.esCashea) {
                 const totalFinanciado = usdNeto;
-                const pctCashea = parseFloat(nota.porcInicialCashea) || 40;
-                const pctTienda = 100 - pctCashea;
+                const pctTienda = parseFloat(nota.porcInicialCashea) || 40;
+                const pctCashea = 100 - pctTienda;
                 const saldoUSD = totalFinanciado * (pctCashea / 100);
                 const inicialUSD = totalFinanciado * (pctTienda / 100);
                 const inicialBsBCV = inicialUSD * bcvTasa;
@@ -5316,7 +5316,7 @@ window.controlarVisibilidadModulosOcultos = function(mostrar) {
                 setAll('.tk-bind-lbl-ref-bs', `Inicial Bs (BCV ${pctTienda}%):`);
                 setAll('.tk-bind-total-bs', `${inicialBsBCV.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})} Bs`);
 
-                setAll('.tk-bind-status-label', `VENTA CASHEA (${pctTienda}% / ${pctCashea}%)`);
+                setAll('.tk-bind-status-label', `VENTA CASHEA (${pctTienda}% Inicial / ${pctCashea}% Cashea)`);
                 setAll('.tk-bind-nota-tasas', `Venta Cashea: Inicial calculada a Tasa Oficial BCV (${bcvTasa.toFixed(2)} Bs/$).`);
 
                 document.querySelectorAll('.tk-bind-cashea-disclaimer').forEach(el => el.style.display = 'block');
@@ -5357,14 +5357,14 @@ window.controlarVisibilidadModulosOcultos = function(mostrar) {
             let msg = '';
             if (nota.esCashea) {
                 const totalFinanciado = usdNeto;
-                const pctCashea = parseFloat(nota.porcInicialCashea) || 40;
-                const pctTienda = 100 - pctCashea;
+                const pctTienda = parseFloat(nota.porcInicialCashea) || 40;
+                const pctCashea = 100 - pctTienda;
                 const saldoUSD = totalFinanciado * (pctCashea / 100);
                 const inicialUSD = totalFinanciado * (pctTienda / 100);
                 const bcvTasa = parseFloat(nota.tasaBcv) || 36.50;
                 const inicialBsBCV = inicialUSD * bcvTasa;
 
-                msg = `*TUCOCEL C.A. — RIF: J-31378837-6*\n*🧾 NOTA DE ENTREGA CASHEA N° ${numTxt}*\n*Fecha:* ${nota.fecha}\n\n👤 *Cliente:* ${nota.cliente}\n💳 *Cédula/RIF:* ${nota.cedula}\n📞 *Teléfono:* ${nota.telefono}\n📍 *Dirección:* ${nota.direccion}\n\n📦 *Detalle de compra:*\n${desc}\n\n🟡 *CONDICIONES CASHEA:*\n💵 *Total Venta Cashea:* $${totalFinanciado.toFixed(2)} USD\n📱 *Financiado por Cashea (App) (${pctCashea}%):* $${saldoUSD.toFixed(2)} USD\n🏪 *Inicial a Pagar en Tienda (${pctTienda}%):* $${inicialUSD.toFixed(2)} USD\n🇻🇪 *Inicial en Bolívares (BCV):* ${inicialBsBCV.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})} Bs (Tasa Oficial BCV: ${bcvTasa.toFixed(2)} Bs/$)\n\n⚠️ *OBSERVACIÓN:* Tucocel C.A. no se hace responsable de las cuotas y los montos cobrados por Cashea.\n\n🛡️ *GARANTÍA (60 DÍAS)*: 2 meses continuos en defectos técnicos de fábrica.`;
+                msg = `*TUCOCEL C.A. — RIF: J-31378837-6*\n*🧾 NOTA DE ENTREGA CASHEA N° ${numTxt}*\n*Fecha:* ${nota.fecha}\n\n👤 *Cliente:* ${nota.cliente}\n💳 *Cédula/RIF:* ${nota.cedula}\n📞 *Teléfono:* ${nota.telefono}\n📍 *Dirección:* ${nota.direccion}\n\n📦 *Detalle de compra:*\n${desc}\n\n🟡 *CONDICIONES CASHEA:*\n💵 *Total Venta Cashea:* $${totalFinanciado.toFixed(2)} USD\n🏪 *Inicial a Pagar en Tienda (${pctTienda}%):* $${inicialUSD.toFixed(2)} USD\n📱 *Financiado por Cashea (App) (${pctCashea}%):* $${saldoUSD.toFixed(2)} USD\n🇻🇪 *Inicial en Bolívares (BCV):* ${inicialBsBCV.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})} Bs (Tasa Oficial BCV: ${bcvTasa.toFixed(2)} Bs/$)\n\n⚠️ *OBSERVACIÓN:* Tucocel C.A. no se hace responsable de las cuotas y los montos cobrados por Cashea.\n\n🛡️ *GARANTÍA (60 DÍAS)*: 2 meses continuos en defectos técnicos de fábrica.`;
             } else {
                 msg = `*TUCOCEL C.A. — RIF: J-31378837-6*\n*Nota de Entrega N° ${numTxt}*\n*Fecha:* ${nota.fecha}\n\n👤 *Cliente:* ${nota.cliente}\n💳 *Cédula/RIF:* ${nota.cedula}\n📞 *Teléfono:* ${nota.telefono}\n📍 *Dirección:* ${nota.direccion}\n\n📦 *Detalle de compra:*\n${desc}\n\n💵 *Total General:* $${usdNeto.toFixed(2)} USD\n*Ref COP:* ${Math.round(totalEnCop).toLocaleString('es-CO')} COP\n*Ref VES:* ${totalEnBs.toFixed(2).toLocaleString('es-VE')} Bs\n\n🛡️ *GARANTÍA (60 DÍAS)*: 2 meses continuos en defectos técnicos de fábrica.`;
             }
@@ -5426,7 +5426,7 @@ window.controlarVisibilidadModulosOcultos = function(mostrar) {
             lista.forEach((n, idx) => {
                 const colorLabel = n.estatus === 'ANULADA' ? 'text-red-500 bg-red-50' : 'text-amber-700 bg-amber-100 border border-amber-300';
                 const totalFinanciado = parseFloat(n.totalUSD) || 0;
-                const pctTienda = 100 - (parseFloat(n.porcInicialCashea) || 40);
+                const pctTienda = parseFloat(n.porcInicialCashea) || 40;
                 const inicialUSD = totalFinanciado * (pctTienda / 100);
                 const numTxt = n.numControlTexto || `NC-${String(n.numNota).padStart(6, '0')}`;
 
@@ -5502,7 +5502,7 @@ window.controlarVisibilidadModulosOcultos = function(mostrar) {
                 Cedula: n.cedula,
                 Telefono: n.telefono,
                 TotalUSD: n.totalUSD,
-                PorcInicialTienda: (100 - (n.porcInicialCashea || 40)) + '%',
+                PorcInicialTienda: (n.porcInicialCashea || 40) + '%',
                 Estatus: n.estatus || "VENTA CASHEA"
             })));
             const book = XLSX.utils.book_new(); 
