@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5311,10 +5310,10 @@ window.controlarVisibilidadModulosOcultos = function(mostrar) {
                 setAll('.tk-bind-lbl-total-usd', 'Total Venta:');
                 setAll('.tk-bind-total-usd', `$${totalFinanciado.toFixed(2)} USD`);
 
-                setAll('.tk-bind-lbl-ref-cop', `Inicial Tienda (${pctTienda}%):`);
-                setAll('.tk-bind-total-cop', `$${inicialUSD.toFixed(2)} USD`);
+                // OCULTAR FILA COP EN NOTAS CASHEA
+                document.querySelectorAll('.tk-bind-row-cop').forEach(el => el.style.setProperty('display', 'none', 'important'));
 
-                setAll('.tk-bind-lbl-ref-bs', 'Inicial Bs (BCV):');
+                setAll('.tk-bind-lbl-ref-bs', `Inicial Bs (BCV ${pctTienda}%):`);
                 setAll('.tk-bind-total-bs', `${inicialBsBCV.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})} Bs`);
 
                 setAll('.tk-bind-status-label', `VENTA CASHEA (${pctTienda}% / ${pctCashea}%)`);
@@ -5322,6 +5321,9 @@ window.controlarVisibilidadModulosOcultos = function(mostrar) {
 
                 document.querySelectorAll('.tk-bind-cashea-disclaimer').forEach(el => el.style.display = 'block');
             } else {
+                // MOSTRAR FILA COP EN VENTAS NORMALES
+                document.querySelectorAll('.tk-bind-row-cop').forEach(el => el.style.display = '');
+
                 const totalEnCop = usdNeto * copTasa;
                 const totalEnBs = bsTasa > 0 ? (totalEnCop / bsTasa) : 0;
 
