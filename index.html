@@ -381,7 +381,7 @@
         }
 
         .etiqueta-titulo-modelo {
-            font-size: 15.5px;
+            font-size: 17.5px;
             font-weight: 900;
             color: #091322;
             line-height: 1.02;
@@ -392,11 +392,11 @@
         }
 
         .etiqueta-memoria-tag {
-            font-size: 12px;
+            font-size: 13.5px;
             font-weight: 900;
             color: #0284c7;
-            line-height: 1.1;
-            margin-top: 1px;
+            line-height: 1.08;
+            margin-top: 1.5px;
             text-transform: uppercase;
             letter-spacing: 0.2px;
         }
@@ -406,16 +406,16 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-            margin: auto 0;
+            margin: 1mm 0 auto 0;
             text-align: center;
         }
 
         .etiqueta-texto-promo {
-            font-size: 21px;
+            font-size: 22px;
             font-weight: 900;
             color: #0284c7;
             text-transform: uppercase;
-            letter-spacing: 2.2px;
+            letter-spacing: 2px;
             font-style: italic;
             line-height: 1;
             text-shadow: 1px 1px 0px rgba(15, 23, 42, 0.2);
@@ -427,16 +427,17 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
+            gap: 4px;
             width: 100%;
             margin-top: auto;
         }
 
         .etiqueta-precio-impacto {
-            font-size: 43px;
+            font-size: 54px;
             font-weight: 900;
             color: #e11d48;
-            line-height: 0.82;
-            letter-spacing: -2px;
+            line-height: 0.84;
+            letter-spacing: -2.2px;
             font-family: 'Plus Jakarta Sans', 'Arial Black', sans-serif;
             text-shadow: 2px 2px 0px #000000, -1px -1px 0px #000000, 1px -1px 0px #000000, -1px 1px 0px #000000;
             margin: 0;
@@ -449,25 +450,28 @@
             flex-direction: column;
             align-items: flex-end;
             justify-content: flex-end;
+            gap: 3.5px;
             margin-bottom: 0.5mm;
+            flex-shrink: 0;
         }
 
         .etiqueta-logo-tc {
-            font-size: 17px;
+            font-size: 22px;
             font-weight: 900;
             color: #0284c7;
-            line-height: 0.88;
-            letter-spacing: -0.6px;
+            line-height: 0.9;
+            letter-spacing: -0.5px;
         }
 
         .etiqueta-logo-sub {
-            font-size: 7.2px;
+            font-size: 9.2px;
             font-weight: 900;
             color: #0f172a;
             text-transform: uppercase;
-            letter-spacing: 0.4px;
+            letter-spacing: 0.3px;
             line-height: 1;
-            margin-top: 1.5px;
+            margin-top: 0;
+            white-space: nowrap;
         }
 
         /* REGLAS LIMPIAS DE IMPRESIÓN */
@@ -1182,6 +1186,7 @@
             <!-- PESTAÑAS ADMINISTRATIVAS -->
             <div class="bg-slate-100 border-b border-gray-200 px-4 sm:px-6 py-2 flex gap-4 text-xs font-bold uppercase shrink-0 overflow-x-auto no-scrollbar">
                 <button id="btn-vista-cajero" onclick="window.cambiarSeccionAdministrativa('cajero')" class="text-blue-600 border-b-2 border-blue-600 pb-1 whitespace-nowrap font-bold cursor-pointer"><i class="fa-solid fa-calculator mr-1"></i> Facturar Venta</button>
+                <button id="btn-vista-presupuestos" onclick="window.cambiarSeccionAdministrativa('presupuestos')" class="text-gray-500 hover:text-gray-700 pb-1 whitespace-nowrap cursor-pointer"><i class="fa-solid fa-file-invoice mr-1 text-sky-600"></i> Presupuestos</button>
                 <button id="btn-vista-apartados" onclick="window.cambiarSeccionAdministrativa('apartados')" class="text-gray-500 hover:text-gray-700 pb-1 whitespace-nowrap cursor-pointer"><i class="fa-solid fa-hand-holding-dollar mr-1"></i> Apartados & Trabajos</button>
                 <button id="btn-vista-auditoria" onclick="window.cambiarSeccionAdministrativa('auditoria')" class="text-gray-500 hover:text-gray-700 pb-1 whitespace-nowrap cursor-pointer"><i class="fa-solid fa-clock-rotate-left mr-1"></i> Historial de Ventas</button>
                 <button id="btn-vista-cashea" onclick="window.cambiarSeccionAdministrativa('cashea')" class="text-gray-500 hover:text-gray-700 pb-1 whitespace-nowrap cursor-pointer"><i class="fa-solid fa-coins mr-1 text-amber-500"></i> Notas Cashea</button>
@@ -1438,6 +1443,234 @@
                                 <i class="fa-solid fa-file-lines shrink-0"></i><span>Presupuesto</span>
                             </button>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <!-- PESTAÑA INDEPENDIENTE: ZONA DE PRESUPUESTOS / COTIZACIONES -->
+            <div id="bloque-presupuestos-pro" class="p-3 sm:p-4 md:p-6 overflow-y-auto flex-grow bg-gray-50 hidden space-y-5">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 items-start">
+                    <!-- COLUMNA IZQUIERDA (2/3): DATOS, CONDICIONES E ÍTEMS -->
+                    <div class="lg:col-span-2 space-y-4">
+                        <!-- DATOS DEL CLIENTE -->
+                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-sky-100 space-y-3">
+                            <h4 class="text-[11px] font-black uppercase text-sky-600 tracking-wider flex items-center gap-1.5">
+                                <i class="fa-solid fa-user-tag"></i> Datos del Cliente (Presupuesto / Cotización)
+                            </h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+                                <div>
+                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Nombre y Apellido</label>
+                                    <input type="text" id="pre-cli-nombre" placeholder="Ej: Juan Pérez" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white">
+                                </div>
+                                <div>
+                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Cédula / RIF</label>
+                                    <input type="text" id="pre-cli-cedula" placeholder="Ej: V-12345678" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white font-mono">
+                                </div>
+                                <div>
+                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Teléfono (WhatsApp)</label>
+                                    <input type="tel" id="pre-cli-telefono" placeholder="Ej: 04247357549" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white font-mono">
+                                </div>
+                                <div>
+                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Dirección</label>
+                                    <input type="text" id="pre-cli-direccion" placeholder="Ej: Cordero" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CONDICIONES DE VALIDEZ Y ANTICIPO LIBRE -->
+                        <div class="bg-sky-50/70 p-4 rounded-2xl border border-sky-200 space-y-3">
+                            <h4 class="text-[11px] font-black uppercase text-sky-800 tracking-wider flex items-center gap-1.5">
+                                <i class="fa-solid fa-sliders"></i> Condiciones del Presupuesto (Vigencia y Anticipo)
+                            </h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div class="bg-white p-3 rounded-xl border border-sky-200/80 space-y-1.5">
+                                    <label class="text-[9.5px] text-slate-500 font-black uppercase block">Validez del Presupuesto (Días) *</label>
+                                    <div class="flex items-center gap-2">
+                                        <input type="number" id="pre-dias-validez" value="5" min="1" max="90" oninput="window.calcularTotalesPresupuesto()" class="w-20 bg-gray-50 border-2 border-sky-400 p-2 rounded-xl text-center text-sm font-mono font-black text-sky-900 focus:outline-none">
+                                        <span class="text-xs font-bold text-slate-600">días continuos</span>
+                                    </div>
+                                    <p class="text-[10px] text-slate-500">Se indica automáticamente en la nota de vencimiento.</p>
+                                </div>
+                                <div class="bg-white p-3 rounded-xl border border-sky-200/80 space-y-1.5">
+                                    <label class="text-[9.5px] text-slate-500 font-black uppercase block">Anticipo para Iniciar (%) — Libre</label>
+                                    <div class="flex items-center gap-1.5 flex-wrap">
+                                        <input type="number" id="pre-porc-anticipo" value="65" min="0" max="100" oninput="window.calcularTotalesPresupuesto()" class="w-20 bg-gray-50 border-2 border-emerald-500 p-2 rounded-xl text-center text-sm font-mono font-black text-emerald-700 focus:outline-none">
+                                        <span class="text-xs font-black text-slate-700 mr-1">%</span>
+                                        <button type="button" onclick="window.fijarPorcAnticipoPresupuesto(0)" class="px-2 py-1 rounded-lg text-[10px] font-black bg-slate-100 hover:bg-slate-200 text-slate-700 cursor-pointer">0%</button>
+                                        <button type="button" onclick="window.fijarPorcAnticipoPresupuesto(30)" class="px-2 py-1 rounded-lg text-[10px] font-black bg-slate-100 hover:bg-slate-200 text-slate-700 cursor-pointer">30%</button>
+                                        <button type="button" onclick="window.fijarPorcAnticipoPresupuesto(50)" class="px-2 py-1 rounded-lg text-[10px] font-black bg-slate-100 hover:bg-slate-200 text-slate-700 cursor-pointer">50%</button>
+                                        <button type="button" onclick="window.fijarPorcAnticipoPresupuesto(65)" class="px-2 py-1 rounded-lg text-[10px] font-black bg-emerald-100 hover:bg-emerald-200 text-emerald-800 cursor-pointer">65%</button>
+                                    </div>
+                                    <p class="text-[10px] text-slate-500">Pon <strong>0</strong> si no requiere anticipo previo.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CARGA DE PRODUCTOS O SERVICIOS -->
+                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-4">
+                            <div class="flex border-b border-gray-100 gap-4 text-xs font-bold uppercase pb-1 flex-wrap">
+                                <button id="tab-pre-manual" onclick="window.cambiarModoCargaPresupuesto('manual')" class="text-sky-600 border-b-2 border-sky-600 pb-2 px-1 flex items-center gap-1 font-bold cursor-pointer"><i class="fa-solid fa-keyboard"></i> Manual / Servicios</button>
+                                <button id="tab-pre-inventario" onclick="window.cambiarModoCargaPresupuesto('inventario')" class="text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1 font-bold cursor-pointer"><i class="fa-solid fa-boxes-stacked"></i> Desde Catálogo</button>
+                            </div>
+
+                            <div id="carga-pre-manual-bloque" class="grid grid-cols-1 sm:grid-cols-12 gap-3">
+                                <div class="sm:col-span-5">
+                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Descripción / Servicio / Producto</label>
+                                    <input type="text" id="pre-manual-modelo" placeholder="Ej: Cambio de Pantalla / Letrero / Equipo..." class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white focus:outline-sky-500">
+                                </div>
+                                <div class="sm:col-span-3">
+                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Moneda</label>
+                                    <select id="pre-manual-moneda" class="w-full bg-white border-2 border-sky-500 p-2 rounded-xl text-xs font-black text-sky-700 focus:outline-none">
+                                        <option value="USD">💵 USD ($)</option>
+                                        <option value="COP">🇨🇴 COP</option>
+                                    </select>
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Precio Unit.</label>
+                                    <input type="number" step="any" id="pre-manual-precio" placeholder="0" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 font-mono focus:bg-white">
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Cantidad</label>
+                                    <input type="number" id="pre-manual-cantidad" value="1" min="1" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 font-mono focus:bg-white">
+                                </div>
+                            </div>
+
+                            <div id="carga-pre-inventario-bloque" class="grid grid-cols-1 sm:grid-cols-12 gap-3 hidden">
+                                <div class="sm:col-span-7">
+                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Seleccionar Producto del Catálogo</label>
+                                    <select id="pre-select-producto" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white">
+                                        <option value="">-- Seleccione un producto --</option>
+                                    </select>
+                                </div>
+                                <div class="sm:col-span-3">
+                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Moneda</label>
+                                    <select id="pre-cat-moneda" class="w-full bg-white border-2 border-sky-500 p-2 rounded-xl text-xs font-black text-sky-700 focus:outline-none">
+                                        <option value="USD">💵 USD ($)</option>
+                                        <option value="COP">🇨🇴 COP</option>
+                                    </select>
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Cantidad</label>
+                                    <input type="number" id="pre-cat-cantidad" value="1" min="1" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 font-mono focus:bg-white">
+                                </div>
+                            </div>
+
+                            <div class="flex justify-end pt-1">
+                                <button type="button" onclick="window.agregarItemPresupuestoPro()" class="w-full sm:w-auto bg-sky-600 hover:bg-sky-700 text-white text-xs font-black px-5 py-2.5 rounded-xl shadow-md flex items-center justify-center gap-1.5 cursor-pointer">
+                                    <i class="fa-solid fa-circle-plus"></i> Añadir al Presupuesto
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- COLUMNA DERECHA (1/3): RESUMEN EN VIVO Y CÁLCULO DE ANTICIPO -->
+                    <div class="bg-slate-900 text-white p-4 sm:p-5 rounded-3xl flex flex-col justify-between shadow-xl space-y-4">
+                        <div>
+                            <h4 class="text-[11px] font-black uppercase tracking-wider text-sky-400 border-b border-slate-800 pb-2 mb-3 flex justify-between items-center">
+                                <span>Resumen Presupuesto</span>
+                                <span id="pre-items-count" class="bg-slate-800 text-white text-[9px] px-2 py-0.5 rounded-full font-mono">0 items</span>
+                            </h4>
+                            <div id="pre-lista-items" class="space-y-2 max-h-40 overflow-y-auto no-scrollbar pr-1">
+                                <p class="text-center text-slate-500 text-xs py-4">No hay ítems añadidos todavía.</p>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-800 pt-3 space-y-3 font-mono">
+                            <!-- TOTAL PRESUPUESTADO -->
+                            <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 space-y-2">
+                                <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
+                                    <span class="text-[10px] text-slate-300 font-bold uppercase font-sans">Total Presupuestado:</span>
+                                    <span id="pre-total-usd" class="text-base font-black text-emerald-400">$0.00</span>
+                                </div>
+                                <div class="grid grid-cols-2 gap-2 text-center text-[10.5px]">
+                                    <div class="bg-slate-900/90 p-1.5 rounded-xl border border-slate-800">
+                                        <span class="block text-[8px] text-slate-400 uppercase font-sans">Pesos</span>
+                                        <b id="pre-total-cop" class="text-amber-400 block font-black">0 COP</b>
+                                    </div>
+                                    <div class="bg-slate-900/90 p-1.5 rounded-xl border border-slate-800">
+                                        <span class="block text-[8px] text-slate-400 uppercase font-sans">Bolívares</span>
+                                        <b id="pre-total-bs" class="text-cyan-400 block font-black">0,00 Bs</b>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- DESGLOSE ANTICIPO / SALDO -->
+                            <div id="pre-caja-anticipo" class="bg-slate-950 p-3 rounded-2xl border border-emerald-500/40 space-y-2 text-[11px]">
+                                <div class="flex justify-between items-center text-emerald-400 font-black">
+                                    <span id="pre-lbl-anticipo-pct" class="font-sans uppercase text-[10px]">Anticipo (65%):</span>
+                                    <span id="pre-val-anticipo-usd">$0.00 USD</span>
+                                </div>
+                                <div class="flex justify-between text-[9.5px] text-slate-400">
+                                    <span id="pre-val-anticipo-cop">0 COP</span>
+                                    <span id="pre-val-anticipo-bs">0,00 Bs</span>
+                                </div>
+                                <div class="border-t border-slate-800 pt-2 flex justify-between items-center text-amber-300 font-black">
+                                    <span id="pre-lbl-resta-pct" class="font-sans uppercase text-[10px]">Resta al entregar (35%):</span>
+                                    <span id="pre-val-resta-usd">$0.00 USD</span>
+                                </div>
+                                <div class="flex justify-between text-[9.5px] text-slate-400">
+                                    <span id="pre-val-resta-cop">0 COP</span>
+                                    <span id="pre-val-resta-bs">0,00 Bs</span>
+                                </div>
+                            </div>
+
+                            <div class="text-[10px] text-sky-300 bg-sky-950/60 border border-sky-800/60 rounded-xl p-2 text-center font-sans">
+                                <i class="fa-solid fa-clock mr-1"></i> <span id="pre-lbl-validez-resumen">Válido por 5 días continuos — No descuenta inventario</span>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2 pt-1 font-sans">
+                                <button type="button" onclick="window.emitirPresupuestoPro('imprimir')" class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-[11px] py-3 px-2 rounded-xl shadow-md flex items-center justify-center gap-1.5 uppercase cursor-pointer whitespace-nowrap">
+                                    <i class="fa-solid fa-print"></i><span>Imprimir</span>
+                                </button>
+                                <button type="button" onclick="window.emitirPresupuestoPro('whatsapp')" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black text-[11px] py-3 px-2 rounded-xl shadow-md flex items-center justify-center gap-1.5 uppercase cursor-pointer whitespace-nowrap">
+                                    <i class="fa-brands fa-whatsapp text-sm"></i><span>WhatsApp</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HISTORIAL INDEPENDIENTE DE PRESUPUESTOS -->
+                <div class="bg-white p-4 rounded-2xl border border-sky-200/80 shadow-sm space-y-3">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-gray-100 pb-2">
+                        <div>
+                            <h4 class="font-extrabold text-xs text-sky-900 uppercase flex items-center gap-1.5">
+                                <i class="fa-solid fa-folder-open text-sky-600"></i> Historial de Presupuestos Emitidos
+                            </h4>
+                            <p class="text-[10px] text-gray-500 mt-0.5">Registro independiente (no afecta ventas ni inventario). Reimprime, reenvía, anula o elimina.</p>
+                        </div>
+                        <div class="flex items-center gap-2 w-full sm:w-auto">
+                            <span id="badge-total-presupuestos-count" class="bg-sky-100 text-sky-900 border border-sky-300 text-[10px] font-mono font-black px-2.5 py-1 rounded-xl">0 Presupuestos</span>
+                            <button type="button" onclick="window.exportarHistorialPresupuestosExcel()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3.5 py-1.5 rounded-xl transition-colors flex items-center gap-1 shadow-sm cursor-pointer">
+                                <i class="fa-solid fa-file-excel"></i> Excel
+                            </button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <input type="text" id="busq-historial-presupuestos" onkeyup="window.filtrarTablaPresupuestos()" placeholder="🔍 Buscar por Cliente, Cédula o N° Presupuesto..." class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-semibold focus:bg-white focus:outline-sky-500">
+                        <input type="date" id="busq-fecha-presupuestos" onchange="window.filtrarTablaPresupuestos()" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-semibold text-gray-700 focus:bg-white focus:outline-sky-500">
+                    </div>
+
+                    <div class="overflow-x-auto border border-gray-200 rounded-xl max-h-[38vh]">
+                        <table class="w-full text-left text-[11px] border-collapse min-w-[760px]">
+                            <thead>
+                                <tr class="bg-sky-50 text-sky-950 font-black uppercase border-b border-sky-200 sticky top-0 z-10 text-[10px]">
+                                    <th class="p-3">N° Presupuesto</th>
+                                    <th class="p-3">Fecha</th>
+                                    <th class="p-3">Cliente</th>
+                                    <th class="p-3">Detalle</th>
+                                    <th class="p-3 text-center">Validez</th>
+                                    <th class="p-3 text-center">Anticipo</th>
+                                    <th class="p-3 text-right">Total USD</th>
+                                    <th class="p-3 text-center">Estatus</th>
+                                    <th class="p-3 text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-historial-presupuestos-cuerpo" class="divide-y divide-gray-100 font-medium text-gray-700">
+                                <tr><td colspan="9" class="p-4 text-center text-gray-400">Cargando presupuestos...</td></tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -2113,6 +2346,34 @@
     </div>
 
     
+    
+    <!-- MODAL CONFIRMACIÓN OPCIONAL: ¿MOSTRAR MONTOS EN BOLÍVARES (Bs)? -->
+    <div id="modal-confirmar-bs" class="fixed inset-0 bg-slate-950/85 z-[130] backdrop-blur-md p-4 hidden flex items-center justify-center">
+        <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl relative border border-gray-100 space-y-4">
+            <button type="button" onclick="window.resolverModalConfirmarBs(null)" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 cursor-pointer">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="text-center space-y-1.5">
+                <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-xl mx-auto shadow-inner">
+                    <i class="fa-solid fa-coins"></i>
+                </div>
+                <h3 class="font-black text-sm uppercase text-slate-900 tracking-wide">¿Mostrar precios en Bolívares?</h3>
+                <p class="text-[11px] text-gray-500 font-medium leading-relaxed">Elige si deseas incluir la referencia en <strong>Bs</strong> en este comprobante o mostrar solo <strong>USD y COP</strong>.</p>
+            </div>
+            <div class="space-y-2.5 pt-1">
+                <button type="button" onclick="window.resolverModalConfirmarBs(true)" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs py-3 rounded-xl shadow-md flex items-center justify-center gap-2 uppercase cursor-pointer">
+                    <i class="fa-solid fa-check"></i> Sí, incluir Bolívares (Bs)
+                </button>
+                <button type="button" onclick="window.resolverModalConfirmarBs(false)" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 font-black text-xs py-3 rounded-xl shadow-md flex items-center justify-center gap-2 uppercase cursor-pointer">
+                    <i class="fa-solid fa-dollar-sign"></i> No, solo USD y COP
+                </button>
+                <button type="button" onclick="window.resolverModalConfirmarBs(null)" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-xs py-2 rounded-xl text-center cursor-pointer">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- MODAL HOJA BLANCA AUTOMÁTICA PARA DESCRIPCIÓN DE PRODUCTO -->
     <div id="modal-hoja-descripcion" class="fixed inset-0 bg-white z-[120] hidden flex flex-col">
         <div class="bg-slate-900 text-white px-4 py-3.5 flex items-center justify-between gap-2 shrink-0 shadow-md">
@@ -2464,6 +2725,10 @@
         let HISTORIAL_NOTAS = [];
         let HISTORIAL_NOTAS_CASHEA = [];
         let APARTADOS = [];
+        let ITEMS_PRESUPUESTO_ACTIVO = [];
+        let HISTORIAL_PRESUPUESTOS = [];
+        let modoCargaPresupuestoActivo = 'manual';
+        let unsubPresupuestosLive = null;
         let MARCAS_REGISTRADAS = JSON.parse(localStorage.getItem('tucocel_marcas_custom') || '["Infinix","Tecno","Xiaomi","Samsung","Apple","Motorola","ZTE","BLU"]');
         window.MARCAS_REGISTRADAS = MARCAS_REGISTRADAS;
         let CATEGORIAS_ACC_CUSTOM = JSON.parse(localStorage.getItem('tucocel_cat_acc_custom') || '["Cargador","Cable","Audífono","Teclado","Mouse","Vidrio","Corneta","Funda"]');
@@ -3789,6 +4054,7 @@
                 window.renderizarVisorEtiquetas();
                 window.actualizarSelectFacturacion();
                 window.actualizarSelectApartados();
+                    if (typeof window.actualizarSelectPresupuestos === 'function') window.actualizarSelectPresupuestos();
                 alert(`✅ ¡Precios actualizados con éxito en Firebase y en todos los dispositivos! (${cambiosRealizados} artículos).`);
                 window.cerrarModalEditorRapidoPrecios();
             } catch(e) {
@@ -3865,6 +4131,7 @@
                 if (bloqMan) bloqMan.classList.add('hidden');
                 if (bloqInv) bloqInv.classList.remove('hidden');
                 window.actualizarSelectApartados();
+                    if (typeof window.actualizarSelectPresupuestos === 'function') window.actualizarSelectPresupuestos();
             }
             window.calcularSaldosApartado();
         };
@@ -3958,6 +4225,8 @@
                 fechaRegistro: new Date().toLocaleDateString('es-VE'),
                 timestamp: Date.now(),
                 estatus: "ACTIVO",
+                afectaInventario: false,
+                notaReservaInventario: "Aviso informativo: equipo apartado sin descontar stock",
                 historialAbonos: [{
                     fecha: new Date().toLocaleDateString('es-VE'),
                     moneda: monedaAbonoApartadoActiva,
@@ -4195,32 +4464,56 @@
             }
         };
 
-        window.enviarWhatsAppApartadoObjeto = function(apt, abonoUSD = null, moneda = 'USD', montoOriginal = null) {
+        window.enviarWhatsAppApartadoObjeto = function(apt, abonoUSD = null, moneda = 'USD', montoOriginal = null, mostrarBs) {
+            if (mostrarBs === undefined) {
+                window.preguntarMostrarBolivares((incluirBs) => {
+                    window.enviarWhatsAppApartadoObjeto(apt, abonoUSD, moneda, montoOriginal, incluirBs);
+                });
+                return;
+            }
+            const incluirBs = Boolean(mostrarBs);
             const tCOP = parseFloat(document.getElementById('tasa-cop').value) || 3600;
             const tBS = parseFloat(document.getElementById('tasa-bs').value) || 3.3;
 
-            const saldoCOP = (apt.saldoPendienteUSD || 0) * tCOP;
+            const totalUSD = Number(apt.precioPactadoUSD || 0);
+            const abonadoTotalUSD = Number(apt.abonoAcumuladoUSD || 0);
+            const saldoUSD = Number(apt.saldoPendienteUSD || 0);
+            const saldoCOP = Math.round(saldoUSD * tCOP);
             const saldoBS = tBS > 0 ? (saldoCOP / tBS) : 0;
 
-            const abonoHoyTxt = abonoUSD !== null ?
-                (moneda === 'USD' ? `$${montoOriginal.toFixed(2)} USD` : (moneda === 'COP' ? `${Math.round(montoOriginal).toLocaleString('es-CO')} COP ($${abonoUSD.toFixed(2)} USD)` : `${montoOriginal.toFixed(2)} Bs ($${abonoUSD.toFixed(2)} USD)`)) :
-                `$${(apt.abonoAcumuladoUSD || 0).toFixed(2)} USD`;
+            let bloqueAbonoHoy = '';
+            if (abonoUSD !== null) {
+                let lineaOrig = `   • *$${Number(abonoUSD).toFixed(2)} USD*`;
+                if (moneda === 'COP') lineaOrig += `\n   • ${Math.round(montoOriginal).toLocaleString('es-CO')} COP`;
+                else if (moneda === 'BS') lineaOrig += `\n   • ${Number(montoOriginal).toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs`;
+                bloqueAbonoHoy = `💰 *ABONO REGISTRADO HOY:*\n${lineaOrig}\n\n`;
+            }
 
-            const msg = `📱 *TUCOCEL C.A. — COMPROBANTE DE ABONO*\n` +
-                        `RIF: J-31378837-6 | Cordero, Táchira\n` +
-                        `----------------------------------------\n` +
+            const msg = `🧾 *COMPROBANTE DE APARTADO*\n` +
+                        `🏢 *TUCOCEL C.A.*\n` +
+                        `RIF: J-31378837-6\n` +
+                        `📅 Fecha: ${new Date().toLocaleDateString('es-VE')}\n` +
+                        `──────────────────\n` +
                         `👤 *Cliente:* ${apt.nombre}\n` +
                         `💳 *Cédula/RIF:* ${apt.cedula}\n` +
-                        `📦 *Equipo Apartado:* ${apt.modelo}\n` +
-                        `----------------------------------------\n` +
-                        `💵 *Precio Total del Equipo:* $${(apt.precioPactadoUSD || 0).toFixed(2)} USD\n` +
-                        `💰 *Abono Registrado:* ${abonoHoyTxt}\n` +
-                        `✅ *Total Abonado a la Fecha:* $${(apt.abonoAcumuladoUSD || 0).toFixed(2)} USD\n` +
-                        `⏳ *Saldo Restante por Pagar:* *$${(apt.saldoPendienteUSD || 0).toFixed(2)} USD*\n` +
-                        `_(Equivalente: ${Math.round(saldoCOP).toLocaleString('es-CO')} COP | ${saldoBS.toFixed(2).toLocaleString('es-VE')} Bs)_\n` +
-                        `----------------------------------------\n` +
-                        `⚠️ *Nota Comercial:* El saldo pendiente se ajustará al valor vigente del equipo al momento de completar el pago total para su retiro. El equipo físico con su serial/IMEI se asigna y entrega al liquidar la totalidad de la cuenta.\n\n` +
-                        `🛡️ *Garantía de 60 días activa a partir del retiro físico.* ¡Gracias por su confianza! 🚀`;
+                        `──────────────────\n` +
+                        `📦 *EQUIPO / TRABAJO:*\n` +
+                        `• *${apt.modelo}*\n` +
+                        `   Costo total: *$${totalUSD.toFixed(2)} USD*\n` +
+                        `──────────────────\n` +
+                        `${bloqueAbonoHoy}` +
+                        `✅ *TOTAL ABONADO:*\n` +
+                        `   • *$${abonadoTotalUSD.toFixed(2)} USD*\n\n` +
+                        `⏳ *SALDO RESTANTE:*\n` +
+                        `   • *$${saldoUSD.toFixed(2)} USD*\n` +
+                        `   • ${saldoCOP.toLocaleString('es-CO')} COP\n` +
+                        (incluirBs ? `   • ${saldoBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs\n` : '') +
+                        `──────────────────\n` +
+                        `⚠️ *NOTA COMERCIAL:*\n` +
+                        `El saldo pendiente se ajustará al valor vigente al momento de liquidar la cuenta. El equipo físico con su serial/IMEI se asigna al completar el pago.\n\n` +
+                        `🛡️ *Garantía (60 días):* Activa a partir del retiro físico.\n` +
+                        `📍 Av. Bolívar, entre calles 12 y 13, Cordero, Táchira.\n` +
+                        `¡Gracias por su confianza! 🚀`;
 
             window.abrirWhatsAppSelector(apt.telefono, msg);
         };
@@ -4261,27 +4554,36 @@
         // =========================================================================
         window.cambiarSeccionAdministrativa = function(seccion) {
             const bFactura = document.getElementById('bloque-emision-facturas');
+            const bPresup = document.getElementById('bloque-presupuestos-pro');
             const bApartados = document.getElementById('bloque-equipos-apartados');
             const bReporte = document.getElementById('bloque-reportes-auditoria');
             const bCashea = document.getElementById('bloque-reportes-cashea');
             const bCierreMes = document.getElementById('bloque-cierre-mes-gerencial');
 
             const tabCajero = document.getElementById('btn-vista-cajero');
+            const tabPresup = document.getElementById('btn-vista-presupuestos');
             const tabApartados = document.getElementById('btn-vista-apartados');
             const tabAuditoria = document.getElementById('btn-vista-auditoria');
             const tabCashea = document.getElementById('btn-vista-cashea');
             const tabCierreMes = document.getElementById('btn-vista-cierre-mes');
 
-            [bFactura, bApartados, bReporte, bCashea, bCierreMes].forEach(el => el && el.classList.add('hidden'));
-            [tabCajero, tabApartados, tabAuditoria, tabCashea, tabCierreMes].forEach(el => el && (el.className = "text-gray-500 hover:text-gray-700 pb-1 whitespace-nowrap cursor-pointer"));
+            [bFactura, bPresup, bApartados, bReporte, bCashea, bCierreMes].forEach(el => el && el.classList.add('hidden'));
+            [tabCajero, tabPresup, tabApartados, tabAuditoria, tabCashea, tabCierreMes].forEach(el => el && (el.className = "text-gray-500 hover:text-gray-700 pb-1 whitespace-nowrap cursor-pointer"));
 
             if (seccion === 'cajero') {
                 if (bFactura) bFactura.classList.remove('hidden');
                 if (tabCajero) tabCajero.className = "text-blue-600 border-b-2 border-blue-600 pb-1 whitespace-nowrap font-bold cursor-pointer";
+            } else if (seccion === 'presupuestos') {
+                if (bPresup) bPresup.classList.remove('hidden');
+                if (tabPresup) tabPresup.className = "text-sky-600 border-b-2 border-sky-600 pb-1 whitespace-nowrap font-black cursor-pointer";
+                window.actualizarSelectPresupuestos();
+                window.calcularTotalesPresupuesto();
+                window.cargarPresupuestosFirebase();
             } else if (seccion === 'apartados') {
                 if (bApartados) bApartados.classList.remove('hidden');
                 if (tabApartados) tabApartados.className = "text-blue-600 border-b-2 border-blue-600 pb-1 whitespace-nowrap font-bold cursor-pointer";
                 window.actualizarSelectApartados();
+                    if (typeof window.actualizarSelectPresupuestos === 'function') window.actualizarSelectPresupuestos();
                 window.cargarApartadosFirebase();
             } else if (seccion === 'auditoria') {
                 if (bReporte) bReporte.classList.remove('hidden');
@@ -4748,8 +5050,14 @@
             window.calcularVueltoPOS();
         };
 
-        window.dispararImpresionTicket = function(nota, callback) {
-            window.inyectarDatosAlTicketDOM(nota);
+        window.dispararImpresionTicket = function(nota, callback, mostrarBs) {
+            if (mostrarBs === undefined) {
+                window.preguntarMostrarBolivares((incluirBs) => {
+                    window.dispararImpresionTicket(nota, callback, incluirBs);
+                });
+                return;
+            }
+            window.inyectarDatosAlTicketDOM(nota, mostrarBs);
             document.body.classList.remove('imprimiendo-etiquetas');
             document.body.classList.add('imprimiendo-factura');
 
@@ -4764,19 +5072,23 @@
 
         window.ejecutarBotonImprimir = async function() {
             if (ITEMS_VENTA_ACTIVA.length === 0) return alert("Agregue al menos un producto.");
-            const nota = await window.registrarNotaEnFirebase();
-            if (!nota) return;
-            window.dispararImpresionTicket(nota, () => {
-                window.limpiarFormularioFacturaCompleto();
+            window.preguntarMostrarBolivares(async (incluirBs) => {
+                const nota = await window.registrarNotaEnFirebase();
+                if (!nota) return;
+                window.dispararImpresionTicket(nota, () => {
+                    window.limpiarFormularioFacturaCompleto();
+                }, incluirBs);
             });
         };
 
         window.ejecutarBotonWhatsApp = async function() {
             if (ITEMS_VENTA_ACTIVA.length === 0) return alert("Agregue al menos un producto.");
-            const nota = await window.registrarNotaEnFirebase();
-            if (!nota) return;
-            window.procesarEnvioWaObjeto(nota);
-            window.limpiarFormularioFacturaCompleto();
+            window.preguntarMostrarBolivares(async (incluirBs) => {
+                const nota = await window.registrarNotaEnFirebase();
+                if (!nota) return;
+                window.procesarEnvioWaObjeto(nota, incluirBs);
+                window.limpiarFormularioFacturaCompleto();
+            });
         };
 
         window.registrarNotaEnFirebase = async function() {
@@ -4869,7 +5181,8 @@
             return nuevaNota;
         };
 
-        window.inyectarDatosAlTicketDOM = function(nota) {
+        window.inyectarDatosAlTicketDOM = function(nota, mostrarBs) {
+            const incluirBs = (mostrarBs !== undefined) ? Boolean(mostrarBs) : (nota && nota.mostrarBs !== undefined ? Boolean(nota.mostrarBs) : true);
             const setAll = (selector, val) => {
                 document.querySelectorAll(selector).forEach(el => el.innerText = val);
             };
@@ -4938,9 +5251,13 @@
 
                 setAll('.tk-bind-lbl-ref-bs', `Inicial Bs (BCV ${pctTienda}%):`);
                 setAll('.tk-bind-total-bs', `${inicialBsBCV.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs`);
+                document.querySelectorAll('.tk-bind-total-bs').forEach(el => {
+                    const tr = el.closest('tr');
+                    if (tr) tr.style.display = incluirBs ? 'table-row' : 'none';
+                });
 
                 setAll('.tk-bind-status-label', `VENTA CASHEA (${pctTienda}% Inicial / ${pctCashea}% Cashea)`);
-                setAll('.tk-bind-nota-tasas', `Venta Cashea: Inicial calculada a Tasa Oficial BCV (${bcvTasa.toFixed(2)} Bs/$).`);
+                setAll('.tk-bind-nota-tasas', incluirBs ? `Venta Cashea: Inicial calculada a Tasa Oficial BCV (${bcvTasa.toFixed(2)} Bs/$).` : `Venta Cashea: Montos expresados en USD.`);
 
                 document.querySelectorAll('.tk-bind-cashea-disclaimer').forEach(el => el.style.display = 'block');
             } else {
@@ -4955,22 +5272,37 @@
                 setAll('.tk-bind-total-cop', `${Math.round(totalEnCop).toLocaleString('es-CO')} COP`);
 
                 setAll('.tk-bind-lbl-ref-bs', 'Ref VES:');
-                setAll('.tk-bind-total-bs', `${totalEnBs.toFixed(2).toLocaleString('es-VE')} Bs`);
+                setAll('.tk-bind-total-bs', `${totalEnBs.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs`);
+                document.querySelectorAll('.tk-bind-total-bs').forEach(el => {
+                    const tr = el.closest('tr');
+                    if (tr) tr.style.display = incluirBs ? 'table-row' : 'none';
+                });
 
                 setAll('.tk-bind-status-label', nota.estatus || "PROCESADA");
-                setAll('.tk-bind-nota-tasas', 'Montos en COP y VES calculados con la tasa del día.');
+                setAll('.tk-bind-nota-tasas', incluirBs ? 'Montos en COP y VES calculados con la tasa del día.' : 'Montos en COP calculados con la tasa del día.');
 
                 document.querySelectorAll('.tk-bind-cashea-disclaimer').forEach(el => el.style.display = 'none');
             }
         };
         window.llenarDatosTicketImpresion = window.inyectarDatosAlTicketDOM;
 
-        window.procesarEnvioWaObjeto = function(nota) {
-            const desc = (nota.items || []).map(i => `  • ${i.cantidad}x ${i.modelo} -> $${i.precio.toFixed(2)} ${i.imeis ? `(IMEI: ${i.imeis.join(', ')})` : ''}`).join('\n');
+        window.procesarEnvioWaObjeto = function(nota, mostrarBs) {
+            if (mostrarBs === undefined) {
+                window.preguntarMostrarBolivares((incluirBs) => {
+                    window.procesarEnvioWaObjeto(nota, incluirBs);
+                });
+                return;
+            }
+            const incluirBs = Boolean(mostrarBs);
+            const desc = (nota.items || []).map(i => {
+                const imeiLinea = i.imeis && i.imeis.length ? `\n   IMEI: ${i.imeis.join(', ')}` : '';
+                return `• *${i.cantidad}x ${i.modelo}*\n   Monto: *$${Number(i.precio || 0).toFixed(2)} USD*${imeiLinea}`;
+            }).join('\n\n');
+
             const usdNeto = parseFloat(nota.totalUSD) || 0;
             const copTasa = parseFloat(nota.tasaCop) || 3600;
             const bsTasa = parseFloat(nota.tasaBs) || 3.3;
-            const totalEnCop = usdNeto * copTasa;
+            const totalEnCop = Math.round(usdNeto * copTasa);
             const totalEnBs = bsTasa > 0 ? (totalEnCop / bsTasa) : 0;
 
             const numTxt = nota.numControlTexto || (nota.esCashea ? `NC-${String(nota.numNota).padStart(6, '0')}` : String(nota.numNota).padStart(6, '0'));
@@ -4984,11 +5316,60 @@
                 const inicialUSD = totalFinanciado * (pctTienda / 100);
                 const bcvTasa = parseFloat(nota.tasaBcv) || 36.50;
                 const inicialBsBCV = inicialUSD * bcvTasa;
-                const odcLine = nota.odcCashea ? `\n🔖 *ODC Cashea:* ${nota.odcCashea}` : '';
+                const odcLine = nota.odcCashea ? `\n🔖 ODC Cashea: *${nota.odcCashea}*` : '';
 
-                msg = `*TUCOCEL C.A. — RIF: J-31378837-6*\n*🧾 NOTA DE ENTREGA CASHEA N° ${numTxt}*\n*Fecha:* ${nota.fecha}${odcLine}\n\n👤 *Cliente:* ${nota.cliente}\n💳 *Cédula/RIF:* ${nota.cedula}\n📞 *Teléfono:* ${nota.telefono}\n📍 *Dirección:* ${nota.direccion}\n\n📦 *Detalle de compra:*\n${desc}\n\n🟡 *CONDICIONES CASHEA:*\n💵 *Total Venta Cashea:* $${totalFinanciado.toFixed(2)} USD\n🏪 *Inicial a Pagar en Tienda (${pctTienda}%):* $${inicialUSD.toFixed(2)} USD\n📱 *Financiado por Cashea (App) (${pctCashea}%):* $${saldoUSD.toFixed(2)} USD\n🇻🇪 *Inicial en Bolívares (BCV):* ${inicialBsBCV.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs (Tasa Oficial BCV: ${bcvTasa.toFixed(2)} Bs/$)\n\n⚠️ *OBSERVACIÓN:* Tucocel C.A. no se hace responsable de las cuotas y los montos cobrados por Cashea.\n\n🛡️ *GARANTÍA (60 DÍAS)*: 2 meses continuos en defectos técnicos de fábrica.`;
+                msg = `🧾 *NOTA DE ENTREGA CASHEA*\n` +
+                      `N° *${numTxt}*${odcLine}\n` +
+                      `🏢 *TUCOCEL C.A.*\n` +
+                      `RIF: J-31378837-6\n` +
+                      `📅 Fecha: ${nota.fecha}\n` +
+                      `──────────────────\n` +
+                      `👤 *Cliente:* ${nota.cliente}\n` +
+                      `💳 *Cédula/RIF:* ${nota.cedula}\n` +
+                      `📞 *Teléfono:* ${nota.telefono}\n` +
+                      `📍 *Dirección:* ${nota.direccion}\n` +
+                      `──────────────────\n` +
+                      `📦 *DETALLE DE COMPRA:*\n\n` +
+                      `${desc}\n` +
+                      `──────────────────\n` +
+                      `🟡 *CONDICIONES CASHEA:*\n\n` +
+                      `💵 *Total Venta:*\n` +
+                      `   • *$${totalFinanciado.toFixed(2)} USD*\n\n` +
+                      `🏪 *Inicial Tienda (${pctTienda}%):*\n` +
+                      `   • *$${inicialUSD.toFixed(2)} USD*\n` +
+                      (incluirBs ? `   • ${inicialBsBCV.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs (BCV ${bcvTasa.toFixed(2)})\n\n` : `\n`) +
+                      `📱 *Financiado Cashea (${pctCashea}%):*\n` +
+                      `   • *$${saldoUSD.toFixed(2)} USD*\n` +
+                      `──────────────────\n` +
+                      `⚠️ *OBSERVACIÓN:*\n` +
+                      `Tucocel C.A. no se hace responsable de las cuotas y montos cobrados por Cashea.\n\n` +
+                      `🛡️ *GARANTÍA (60 DÍAS):*\n` +
+                      `2 meses continuos en defectos técnicos de fábrica.\n` +
+                      `📍 Av. Bolívar, entre calles 12 y 13, Cordero, Táchira.\n` +
+                      `¡Gracias por su compra! 🚀`;
             } else {
-                msg = `*TUCOCEL C.A. — RIF: J-31378837-6*\n*Nota de Entrega N° ${numTxt}*\n*Fecha:* ${nota.fecha}\n\n👤 *Cliente:* ${nota.cliente}\n💳 *Cédula/RIF:* ${nota.cedula}\n📞 *Teléfono:* ${nota.telefono}\n📍 *Dirección:* ${nota.direccion}\n\n📦 *Detalle de compra:*\n${desc}\n\n💵 *Total General:* $${usdNeto.toFixed(2)} USD\n*Ref COP:* ${Math.round(totalEnCop).toLocaleString('es-CO')} COP\n*Ref VES:* ${totalEnBs.toFixed(2).toLocaleString('es-VE')} Bs\n\n🛡️ *GARANTÍA (60 DÍAS)*: 2 meses continuos en defectos técnicos de fábrica.`;
+                msg = `🧾 *NOTA DE ENTREGA N° ${numTxt}*\n` +
+                      `🏢 *TUCOCEL C.A.*\n` +
+                      `RIF: J-31378837-6\n` +
+                      `📅 Fecha: ${nota.fecha}\n` +
+                      `──────────────────\n` +
+                      `👤 *Cliente:* ${nota.cliente}\n` +
+                      `💳 *Cédula/RIF:* ${nota.cedula}\n` +
+                      `📞 *Teléfono:* ${nota.telefono}\n` +
+                      `📍 *Dirección:* ${nota.direccion}\n` +
+                      `──────────────────\n` +
+                      `📦 *DETALLE DE COMPRA:*\n\n` +
+                      `${desc}\n` +
+                      `──────────────────\n` +
+                      `💰 *TOTAL GENERAL:*\n` +
+                      `   • *$${usdNeto.toFixed(2)} USD*\n` +
+                      `   • ${totalEnCop.toLocaleString('es-CO')} COP\n` +
+                      (incluirBs ? `   • ${totalEnBs.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs\n` : '') +
+                      `──────────────────\n` +
+                      `🛡️ *GARANTÍA (60 DÍAS):*\n` +
+                      `2 meses continuos en defectos técnicos de fábrica.\n` +
+                      `📍 Av. Bolívar, entre calles 12 y 13, Cordero, Táchira.\n` +
+                      `¡Gracias por su compra! 🚀`;
             }
             window.abrirWhatsAppSelector(nota.telefono, msg);
         };
@@ -5433,6 +5814,7 @@
                     window.ejecutarFiltroCombinado();
                     window.actualizarSelectFacturacion();
                     window.actualizarSelectApartados();
+                    if (typeof window.actualizarSelectPresupuestos === 'function') window.actualizarSelectPresupuestos();
                     window.renderizarVisorEtiquetas();
 
                     window.actualizarEstadoConexionVisual(true);
@@ -5974,9 +6356,549 @@
         };
 
         // =========================================================================
+        
+        // =========================================================================
+        // MÓDULO INDEPENDIENTE: ZONA DE PRESUPUESTOS / COTIZACIONES + HISTORIAL
+        // (NO DESCUENTA INVENTARIO NI ALTERA REPORTES DE VENTAS)
+        // =========================================================================
+        window.actualizarSelectPresupuestos = function() {
+            const sel = document.getElementById('pre-select-producto');
+            if (!sel) return;
+            sel.innerHTML = '<option value="">-- Seleccione un producto --</option>' +
+                PRODUCTOS.map(p => `<option value="${p.id}">${p.marca} ${p.modelo} ${p.memoria ? '(' + p.memoria + ')' : ''} — $${p.precio}</option>`).join('');
+        };
+
+        window.cambiarModoCargaPresupuesto = function(modo) {
+            modoCargaPresupuestoActivo = modo;
+            const tabMan = document.getElementById('tab-pre-manual');
+            const tabInv = document.getElementById('tab-pre-inventario');
+            const bloqMan = document.getElementById('carga-pre-manual-bloque');
+            const bloqInv = document.getElementById('carga-pre-inventario-bloque');
+
+            if (modo === 'manual') {
+                if (tabMan) tabMan.className = "text-sky-600 border-b-2 border-sky-600 pb-2 px-1 flex items-center gap-1 font-bold cursor-pointer";
+                if (tabInv) tabInv.className = "text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1 font-bold cursor-pointer";
+                bloqMan?.classList.remove('hidden');
+                bloqInv?.classList.add('hidden');
+            } else {
+                if (tabMan) tabMan.className = "text-gray-400 hover:text-gray-600 pb-2 px-1 flex items-center gap-1 font-bold cursor-pointer";
+                if (tabInv) tabInv.className = "text-sky-600 border-b-2 border-sky-600 pb-2 px-1 flex items-center gap-1 font-bold cursor-pointer";
+                bloqMan?.classList.add('hidden');
+                bloqInv?.classList.remove('hidden');
+                window.actualizarSelectPresupuestos();
+            }
+        };
+
+        window.fijarPorcAnticipoPresupuesto = function(pct) {
+            const inp = document.getElementById('pre-porc-anticipo');
+            if (inp) inp.value = pct;
+            window.calcularTotalesPresupuesto();
+        };
+
+        window.agregarItemPresupuestoPro = function() {
+            const tCOP = parseFloat(document.getElementById('tasa-cop')?.value) || 3600;
+
+            if (modoCargaPresupuestoActivo === 'manual') {
+                const modelo = (document.getElementById('pre-manual-modelo')?.value || '').trim();
+                const precioRaw = parseFloat(document.getElementById('pre-manual-precio')?.value) || 0;
+                const cant = parseInt(document.getElementById('pre-manual-cantidad')?.value, 10) || 1;
+                const moneda = document.getElementById('pre-manual-moneda')?.value || 'USD';
+
+                if (!modelo || precioRaw <= 0) return alert("Ingrese descripción y precio válido.");
+
+                const precioUnitUSD = moneda === 'COP' ? (tCOP > 0 ? precioRaw / tCOP : 0) : precioRaw;
+                ITEMS_PRESUPUESTO_ACTIVO.push({
+                    id: 'pre-' + Date.now(),
+                    modelo,
+                    cantidad: cant,
+                    monedaIngreso: moneda,
+                    precioUnitUSD,
+                    precio: precioUnitUSD * cant
+                });
+
+                document.getElementById('pre-manual-modelo').value = '';
+                document.getElementById('pre-manual-precio').value = '';
+                document.getElementById('pre-manual-cantidad').value = '1';
+            } else {
+                const id = document.getElementById('pre-select-producto')?.value;
+                const cant = parseInt(document.getElementById('pre-cat-cantidad')?.value, 10) || 1;
+                const moneda = document.getElementById('pre-cat-moneda')?.value || 'USD';
+                const prod = PRODUCTOS.find(p => String(p.id) === String(id));
+                if (!prod) return alert("Seleccione un producto del catálogo.");
+
+                const precioUnitUSD = Number(prod.precio) || 0;
+                ITEMS_PRESUPUESTO_ACTIVO.push({
+                    id: prod.id,
+                    modelo: `${prod.modelo}${prod.memoria ? ' ' + prod.memoria : ''}`.trim(),
+                    cantidad: cant,
+                    monedaIngreso: moneda,
+                    precioUnitUSD,
+                    precio: precioUnitUSD * cant
+                });
+
+                document.getElementById('pre-select-producto').value = '';
+                document.getElementById('pre-cat-cantidad').value = '1';
+            }
+            window.renderizarItemsPresupuestoPro();
+        };
+
+        window.removerItemPresupuestoPro = function(idx) {
+            ITEMS_PRESUPUESTO_ACTIVO.splice(idx, 1);
+            window.renderizarItemsPresupuestoPro();
+        };
+
+        window.renderizarItemsPresupuestoPro = function() {
+            const cont = document.getElementById('pre-lista-items');
+            const badge = document.getElementById('pre-items-count');
+            if (badge) badge.innerText = `${ITEMS_PRESUPUESTO_ACTIVO.length} items`;
+            if (!cont) return;
+
+            if (ITEMS_PRESUPUESTO_ACTIVO.length === 0) {
+                cont.innerHTML = '<p class="text-center text-slate-500 text-xs py-4">No hay ítems añadidos todavía.</p>';
+                window.calcularTotalesPresupuesto();
+                return;
+            }
+
+            cont.innerHTML = ITEMS_PRESUPUESTO_ACTIVO.map((it, idx) => `
+                <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex justify-between items-center text-white text-xs gap-2">
+                    <div class="min-w-0">
+                        <p class="font-bold truncate text-white">${it.cantidad}x ${it.modelo}</p>
+                        <span class="text-[9px] text-sky-400 font-mono font-bold">$${Number(it.precio).toFixed(2)} USD</span>
+                    </div>
+                    <button type="button" onclick="window.removerItemPresupuestoPro(${idx})" class="text-red-400 hover:text-red-300 font-bold p-1 cursor-pointer shrink-0"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            `).join('');
+
+            window.calcularTotalesPresupuesto();
+        };
+
+        window.calcularTotalesPresupuesto = function() {
+            let totalUSD = 0;
+            ITEMS_PRESUPUESTO_ACTIVO.forEach(i => totalUSD += (Number(i.precio) || 0));
+
+            const tCOP = parseFloat(document.getElementById('tasa-cop')?.value) || 3600;
+            const tBS = parseFloat(document.getElementById('tasa-bs')?.value) || 3.3;
+            const dias = Math.max(1, parseInt(document.getElementById('pre-dias-validez')?.value, 10) || 5);
+            let pctAnticipo = parseFloat(document.getElementById('pre-porc-anticipo')?.value);
+            if (isNaN(pctAnticipo) || pctAnticipo < 0) pctAnticipo = 0;
+            if (pctAnticipo > 100) pctAnticipo = 100;
+            const pctResta = Math.max(0, 100 - pctAnticipo);
+
+            const totalCOP = Math.round(totalUSD * tCOP);
+            const totalBS = tBS > 0 ? (totalCOP / tBS) : 0;
+
+            const anticipoUSD = totalUSD * (pctAnticipo / 100);
+            const anticipoCOP = Math.round(anticipoUSD * tCOP);
+            const anticipoBS = tBS > 0 ? (anticipoCOP / tBS) : 0;
+
+            const restaUSD = Math.max(0, totalUSD - anticipoUSD);
+            const restaCOP = Math.round(restaUSD * tCOP);
+            const restaBS = tBS > 0 ? (restaCOP / tBS) : 0;
+
+            const setT = (id, val) => { const el = document.getElementById(id); if (el) el.innerText = val; };
+            setT('pre-total-usd', `$${totalUSD.toFixed(2)}`);
+            setT('pre-total-cop', `${totalCOP.toLocaleString('es-CO')} COP`);
+            setT('pre-total-bs', `${totalBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs`);
+
+            const cajaAnt = document.getElementById('pre-caja-anticipo');
+            if (cajaAnt) cajaAnt.classList.toggle('hidden', pctAnticipo <= 0);
+
+            setT('pre-lbl-anticipo-pct', `Anticipo (${pctAnticipo}%):`);
+            setT('pre-val-anticipo-usd', `$${anticipoUSD.toFixed(2)} USD`);
+            setT('pre-val-anticipo-cop', `${anticipoCOP.toLocaleString('es-CO')} COP`);
+            setT('pre-val-anticipo-bs', `${anticipoBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs`);
+
+            setT('pre-lbl-resta-pct', `Resta al entregar (${pctResta}%):`);
+            setT('pre-val-resta-usd', `$${restaUSD.toFixed(2)} USD`);
+            setT('pre-val-resta-cop', `${restaCOP.toLocaleString('es-CO')} COP`);
+            setT('pre-val-resta-bs', `${restaBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs`);
+
+            setT('pre-lbl-validez-resumen', `Válido por ${dias} ${dias === 1 ? 'día continuo' : 'días continuos'} — No descuenta inventario`);
+        };
+
+        window.emitirPresupuestoPro = async function(accion, mostrarBs) {
+            if (ITEMS_PRESUPUESTO_ACTIVO.length === 0) {
+                return alert("Añada al menos un producto o servicio al presupuesto.");
+            }
+            if (mostrarBs === undefined) {
+                window.preguntarMostrarBolivares((incluirBs) => {
+                    window.emitirPresupuestoPro(accion, incluirBs);
+                });
+                return;
+            }
+            const firestoreDb = getDbCompat();
+            if (!firestoreDb) return alert("Sin conexión a Firebase.");
+
+            let totalUSD = 0;
+            ITEMS_PRESUPUESTO_ACTIVO.forEach(i => totalUSD += (Number(i.precio) || 0));
+
+            const tCOP = parseFloat(document.getElementById('tasa-cop')?.value) || 3600;
+            const tBS = parseFloat(document.getElementById('tasa-bs')?.value) || 3.3;
+            const diasValidez = Math.max(1, parseInt(document.getElementById('pre-dias-validez')?.value, 10) || 5);
+            let porcAnticipo = parseFloat(document.getElementById('pre-porc-anticipo')?.value);
+            if (isNaN(porcAnticipo) || porcAnticipo < 0) porcAnticipo = 0;
+            if (porcAnticipo > 100) porcAnticipo = 100;
+
+            const anticipoUSD = totalUSD * (porcAnticipo / 100);
+            const restaUSD = Math.max(0, totalUSD - anticipoUSD);
+
+            const ahora = new Date();
+            const fechaStr = `${String(ahora.getDate()).padStart(2, '0')}/${String(ahora.getMonth() + 1).padStart(2, '0')}/${ahora.getFullYear()}`;
+            let horas = ahora.getHours();
+            const ampm = horas >= 12 ? 'pm' : 'am';
+            horas = (horas % 12) || 12;
+            const horaStr = `${horas}:${String(ahora.getMinutes()).padStart(2, '0')} ${ampm}`;
+
+            let numPreFinal = 1;
+            try {
+                const refCorr = firestoreDb.collection("configuraciones").doc("correlativos");
+                let maxExistente = 0;
+                const snapPre = await firestoreDb.collection("presupuestos_emitidos").get();
+                snapPre.forEach(d => {
+                    const n = parseInt(d.data().numNota, 10) || 0;
+                    if (n > maxExistente) maxExistente = n;
+                });
+                numPreFinal = await firestoreDb.runTransaction(async (tx) => {
+                    const docC = await tx.get(refCorr);
+                    const actual = docC.exists ? (parseInt(docC.data().ultimo_presupuestos, 10) || 0) : 0;
+                    const siguiente = Math.max(actual, maxExistente) + 1;
+                    tx.set(refCorr, { ultimo_presupuestos: siguiente, actualizadoEn: Date.now() }, { merge: true });
+                    return siguiente;
+                });
+            } catch(e) {
+                const maxLocal = HISTORIAL_PRESUPUESTOS.reduce((mx, n) => Math.max(mx, parseInt(n.numNota, 10) || 0), 0);
+                numPreFinal = maxLocal + 1;
+            }
+
+            const nuevoPresupuesto = {
+                numNota: numPreFinal,
+                numControlTexto: `PRE-${String(numPreFinal).padStart(6, '0')}`,
+                fecha: fechaStr,
+                hora: horaStr,
+                cliente: document.getElementById('pre-cli-nombre')?.value.trim() || "Cliente General",
+                cedula: document.getElementById('pre-cli-cedula')?.value.trim() || "V-NO APLICA",
+                telefono: document.getElementById('pre-cli-telefono')?.value.trim() || "",
+                direccion: document.getElementById('pre-cli-direccion')?.value.trim() || "Cordero",
+                items: [...ITEMS_PRESUPUESTO_ACTIVO],
+                totalUSD,
+                tasaCop: tCOP,
+                tasaBs: tBS,
+                diasValidez,
+                porcAnticipo,
+                anticipoUSD,
+                restaUSD,
+                estatus: "VIGENTE",
+                esPresupuesto: true,
+                afectaInventario: false,
+                tipoRegistro: "PRESUPUESTO_INFORMATIVO",
+                timestamp: Date.now()
+            };
+
+            try {
+                const ref = await firestoreDb.collection("presupuestos_emitidos").add(nuevoPresupuesto);
+                nuevoPresupuesto.id = ref.id;
+                await window.cargarPresupuestosFirebase();
+
+                if (accion === 'imprimir') {
+                    window.dispararImpresionPresupuestoObjeto(nuevoPresupuesto, () => {
+                        window.limpiarFormularioPresupuestoPro();
+                    }, mostrarBs);
+                } else {
+                    window.enviarPresupuestoObjetoWa(nuevoPresupuesto, mostrarBs);
+                    window.limpiarFormularioPresupuestoPro();
+                }
+            } catch(e) {
+                console.error(e);
+                alert("Error guardando presupuesto: " + (e.message || e));
+            }
+        };
+
+        window.limpiarFormularioPresupuestoPro = function() {
+            ['pre-cli-nombre', 'pre-cli-cedula', 'pre-cli-telefono', 'pre-cli-direccion', 'pre-manual-modelo', 'pre-manual-precio'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.value = '';
+            });
+            ITEMS_PRESUPUESTO_ACTIVO = [];
+            window.renderizarItemsPresupuestoPro();
+        };
+
+        window.dispararImpresionPresupuestoObjeto = function(pre, callback, mostrarBs) {
+            if (!pre) return;
+            if (mostrarBs === undefined) {
+                window.preguntarMostrarBolivares((incluirBs) => {
+                    window.dispararImpresionPresupuestoObjeto(pre, callback, incluirBs);
+                });
+                return;
+            }
+            const dias = pre.diasValidez || 5;
+            const pct = Number(pre.porcAnticipo || 0);
+            const pctResta = Math.max(0, 100 - pct);
+            const totalUSD = Number(pre.totalUSD || 0);
+            const anticipoUSD = pre.anticipoUSD !== undefined ? Number(pre.anticipoUSD) : (totalUSD * (pct / 100));
+            const restaUSD = pre.restaUSD !== undefined ? Number(pre.restaUSD) : Math.max(0, totalUSD - anticipoUSD);
+
+            const datosTicket = {
+                ...pre,
+                numControlTexto: pre.numControlTexto || `PRE-${String(pre.numNota).padStart(6, '0')}`,
+                abonoUSD: pct > 0 ? anticipoUSD : undefined,
+                saldoUSD: pct > 0 ? restaUSD : undefined
+            };
+
+            window.inyectarDatosAlTicketDOM(datosTicket, mostrarBs);
+
+            const docTypes = document.querySelectorAll('.tk-bind-doc-type');
+            docTypes.forEach(d => { d.textContent = "PRESUPUESTO / COTIZACIÓN"; d.style.color = "#0284c7"; });
+
+            const statusLabels = document.querySelectorAll('.tk-bind-status-label');
+            statusLabels.forEach(s => {
+                if (pre.estatus === 'ANULADO') {
+                    s.textContent = "ANULADO";
+                    s.style.backgroundColor = "#dc2626";
+                } else {
+                    s.textContent = `VÁLIDO ${dias} DÍAS`;
+                    s.style.backgroundColor = "#0284c7";
+                }
+            });
+
+            const casheaDisc = document.querySelectorAll('.tk-bind-cashea-disclaimer');
+            const textoAnticipo = pct > 0
+                ? `<br><strong>CONDICIÓN DE PAGO:</strong> Anticipo del ${pct}% ($${anticipoUSD.toFixed(2)} USD) al concretar el negocio/trabajo y saldo restante del ${pctResta}% ($${restaUSD.toFixed(2)} USD) al retirar la mercancía o revisar el trabajo culminado.`
+                : '';
+            casheaDisc.forEach(c => {
+                c.style.display = "block";
+                c.style.backgroundColor = "#eff6ff";
+                c.style.borderColor = "#0284c7";
+                c.style.color = "#0c4a6e";
+                c.innerHTML = `ℹ️ <strong>VALIDEZ (${dias} DÍAS CONTINUOS):</strong> Este presupuesto vence en ${dias} días. Al momento de decidir concretar la compra o trabajo debe consultar nuevamente, ya que los precios pueden haber variado. No constituye venta ni aparta mercancía.${textoAnticipo}`;
+            });
+
+            document.body.classList.remove('imprimiendo-etiquetas');
+            document.body.classList.add('imprimiendo-factura');
+
+            setTimeout(() => {
+                window.print();
+                setTimeout(() => {
+                    document.body.classList.remove('imprimiendo-factura');
+                    document.querySelectorAll('.tk-bind-fila-abono-saldo').forEach(f => f.style.display = 'none');
+                    docTypes.forEach(d => { d.textContent = "NOTA DE ENTREGA"; d.style.color = "#cc3333"; });
+                    statusLabels.forEach(s => { s.textContent = "PROCESADA"; s.style.backgroundColor = "#16a34a"; });
+                    casheaDisc.forEach(c => {
+                        c.style.display = "none";
+                        c.style.backgroundColor = "#fffbeb";
+                        c.style.borderColor = "#d97706";
+                        c.style.color = "#92400e";
+                        c.innerHTML = "⚠️ OBSERVACIÓN: Tucocel C.A. no se hace responsable de las cuotas y los montos cobrados por Cashea.";
+                    });
+                    if (typeof callback === 'function') callback();
+                }, 700);
+            }, 250);
+        };
+
+        window.enviarPresupuestoObjetoWa = function(pre, mostrarBs) {
+            if (!pre) return;
+            if (mostrarBs === undefined) {
+                window.preguntarMostrarBolivares((incluirBs) => {
+                    window.enviarPresupuestoObjetoWa(pre, incluirBs);
+                });
+                return;
+            }
+            const incluirBs = Boolean(mostrarBs);
+            const totalUSD = Number(pre.totalUSD || 0);
+            const tCOP = parseFloat(pre.tasaCop) || parseFloat(document.getElementById('tasa-cop')?.value) || 3600;
+            const tBS = parseFloat(pre.tasaBs) || parseFloat(document.getElementById('tasa-bs')?.value) || 3.3;
+
+            const totalCOP = Math.round(totalUSD * tCOP);
+            const totalBS = tBS > 0 ? (totalCOP / tBS) : 0;
+
+            const dias = pre.diasValidez || 5;
+            const pct = Number(pre.porcAnticipo || 0);
+            const pctResta = Math.max(0, 100 - pct);
+            const numTxt = pre.numControlTexto || `PRE-${String(pre.numNota || 1).padStart(6, '0')}`;
+
+            const detalleItems = (pre.items || []).map(it =>
+                `• *${it.cantidad || 1}x ${it.modelo}*\n   Monto: *$${Number(it.precio || 0).toFixed(2)} USD*`
+            ).join('\n\n');
+
+            let bloqueAnticipo = '';
+            if (pct > 0) {
+                const anticipoUSD = pre.anticipoUSD !== undefined ? Number(pre.anticipoUSD) : (totalUSD * (pct / 100));
+                const anticipoCOP = Math.round(anticipoUSD * tCOP);
+                const anticipoBS = tBS > 0 ? (anticipoCOP / tBS) : 0;
+
+                const restaUSD = pre.restaUSD !== undefined ? Number(pre.restaUSD) : Math.max(0, totalUSD - anticipoUSD);
+                const restaCOP = Math.round(restaUSD * tCOP);
+                const restaBS = tBS > 0 ? (restaCOP / tBS) : 0;
+
+                bloqueAnticipo =
+                    `──────────────────\n` +
+                    `💳 *ANTICIPO PARA INICIAR (${pct}%):*\n` +
+                    `   • *$${anticipoUSD.toFixed(2)} USD*\n` +
+                    `   • ${anticipoCOP.toLocaleString('es-CO')} COP\n` +
+                    (incluirBs ? `   • ${anticipoBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs\n\n` : `\n`) +
+                    `⏳ *SALDO AL ENTREGAR (${pctResta}%):*\n` +
+                    `   • *$${restaUSD.toFixed(2)} USD*\n` +
+                    `   • ${restaCOP.toLocaleString('es-CO')} COP\n` +
+                    (incluirBs ? `   • ${restaBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs\n\n` : `\n`) +
+                    `_El cliente abona el ${pct}% al concretar el negocio/trabajo y el saldo restante se cancela al retirar la mercancía o al revisar el trabajo culminado._\n`;
+            }
+
+            const msg =
+                `📄 *PRESUPUESTO N° ${numTxt}*\n` +
+                `🏢 *TUCOCEL C.A.*\n` +
+                `RIF: J-31378837-6\n` +
+                `📅 Fecha: ${pre.fecha || new Date().toLocaleDateString('es-VE')}\n` +
+                `──────────────────\n` +
+                `👤 *Cliente:* ${pre.cliente || 'Cliente General'}\n` +
+                `💳 *Cédula/RIF:* ${pre.cedula || 'V-NO APLICA'}\n` +
+                `──────────────────\n` +
+                `📋 *DETALLE:*\n\n` +
+                `${detalleItems}\n` +
+                `──────────────────\n` +
+                `💰 *TOTAL PRESUPUESTADO:*\n` +
+                `   • *$${totalUSD.toFixed(2)} USD*\n` +
+                `   • ${totalCOP.toLocaleString('es-CO')} COP\n` +
+                (incluirBs ? `   • ${totalBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs\n` : '') +
+                `${bloqueAnticipo}` +
+                `──────────────────\n` +
+                `⚠️ *VALIDEZ: ${dias} ${dias === 1 ? 'día continuo' : 'días continuos'}*\n` +
+                `Al momento de concretar la compra o trabajo debe consultar nuevamente, ya que los precios pueden variar.\n` +
+                `_Documento informativo. No aparta mercancía._\n\n` +
+                `📍 Av. Bolívar, entre calles 12 y 13, Cordero, Táchira.\n` +
+                `¡Estamos a su orden! 🚀`;
+
+            const phone = (pre.telefono || '').replace(/\D/g, '');
+            window.abrirWhatsAppSelector(phone.length >= 10 ? phone : '584247357549', msg);
+        };
+
+        window.cargarPresupuestosFirebase = async function() {
+            const firestoreDb = getDbCompat();
+            if (!firestoreDb) return;
+            try {
+                const snap = await firestoreDb.collection("presupuestos_emitidos").orderBy("timestamp", "desc").limit(100).get();
+                HISTORIAL_PRESUPUESTOS = [];
+                snap.forEach(d => HISTORIAL_PRESUPUESTOS.push({ ...d.data(), id: d.id }));
+                window.renderizarTablaPresupuestosHTML(HISTORIAL_PRESUPUESTOS);
+            } catch(e) {
+                try {
+                    const snapFb = await firestoreDb.collection("presupuestos_emitidos").get();
+                    HISTORIAL_PRESUPUESTOS = [];
+                    snapFb.forEach(d => HISTORIAL_PRESUPUESTOS.push({ ...d.data(), id: d.id }));
+                    HISTORIAL_PRESUPUESTOS.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+                    window.renderizarTablaPresupuestosHTML(HISTORIAL_PRESUPUESTOS);
+                } catch(err) { console.error(err); }
+            }
+
+            if (!unsubPresupuestosLive) {
+                unsubPresupuestosLive = firestoreDb.collection("presupuestos_emitidos").onSnapshot(snap => {
+                    HISTORIAL_PRESUPUESTOS = [];
+                    snap.forEach(d => HISTORIAL_PRESUPUESTOS.push({ ...d.data(), id: d.id }));
+                    HISTORIAL_PRESUPUESTOS.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+                    window.renderizarTablaPresupuestosHTML(HISTORIAL_PRESUPUESTOS);
+                }, () => {});
+            }
+        };
+
+        window.renderizarTablaPresupuestosHTML = function(lista) {
+            const tbody = document.getElementById('tabla-historial-presupuestos-cuerpo');
+            const badge = document.getElementById('badge-total-presupuestos-count');
+            if (badge) badge.innerText = `${lista.length} Presupuestos`;
+            if (!tbody) return;
+
+            if (lista.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="9" class="p-4 text-center text-gray-400 font-bold">No hay presupuestos registrados todavía.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = lista.map(p => {
+                const realIdx = HISTORIAL_PRESUPUESTOS.findIndex(x => x.id === p.id);
+                const idxUse = realIdx !== -1 ? realIdx : 0;
+                const numTxt = p.numControlTexto || `PRE-${String(p.numNota).padStart(6, '0')}`;
+                const colorEst = p.estatus === 'ANULADO' ? 'text-red-500 bg-red-50' : 'text-sky-700 bg-sky-100';
+                const pctTxt = Number(p.porcAnticipo || 0) > 0 ? `${p.porcAnticipo}% ($${Number(p.anticipoUSD || 0).toFixed(2)})` : 'Sin anticipo';
+
+                return `
+                    <tr class="border-b hover:bg-sky-50/40">
+                        <td class="p-3 font-mono text-sky-700 font-black">${numTxt}</td>
+                        <td class="p-3 text-gray-500">${p.fecha}</td>
+                        <td class="p-3 font-bold text-gray-900">${p.cliente}</td>
+                        <td class="p-3 text-gray-500 truncate max-w-[170px]">${(p.items || []).map(i => `${i.cantidad}x ${i.modelo}`).join(', ')}</td>
+                        <td class="p-3 text-center font-mono font-bold text-slate-600">${p.diasValidez || 5}d</td>
+                        <td class="p-3 text-center font-mono text-emerald-700 font-bold">${pctTxt}</td>
+                        <td class="p-3 text-right font-mono font-black text-gray-900">$${Number(p.totalUSD || 0).toFixed(2)}</td>
+                        <td class="p-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase ${colorEst}">${p.estatus || 'VIGENTE'}</span></td>
+                        <td class="p-3 text-center flex justify-center gap-1">
+                            <button onclick="window.dispararImpresionPresupuestoObjeto(HISTORIAL_PRESUPUESTOS[${idxUse}])" class="text-amber-700 bg-amber-50 hover:bg-amber-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Reimprimir 10x13"><i class="fa-solid fa-print"></i></button>
+                            <button onclick="window.enviarPresupuestoObjetoWa(HISTORIAL_PRESUPUESTOS[${idxUse}])" class="text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Reenviar WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
+                            <button onclick="window.opcionesPresupuestoHistorial(${idxUse})" class="text-blue-600 bg-blue-50 hover:bg-blue-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Más opciones"><i class="fa-solid fa-sliders"></i></button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        };
+
+        window.filtrarTablaPresupuestos = function() {
+            const val = (document.getElementById('busq-historial-presupuestos')?.value || '').toLowerCase();
+            const fechaInput = document.getElementById('busq-fecha-presupuestos')?.value || '';
+            const f = HISTORIAL_PRESUPUESTOS.filter(p => {
+                const numTxt = p.numControlTexto || `PRE-${String(p.numNota).padStart(6, '0')}`;
+                const mTxt = (p.cliente || '').toLowerCase().includes(val) || (p.cedula || '').toLowerCase().includes(val) || numTxt.toLowerCase().includes(val);
+                const mFec = fechaInput ? (p.fecha || '').includes(fechaInput.split('-').reverse().join('/')) : true;
+                return mTxt && mFec;
+            });
+            window.renderizarTablaPresupuestosHTML(f);
+        };
+
+        window.opcionesPresupuestoHistorial = async function(index) {
+            const p = HISTORIAL_PRESUPUESTOS[index];
+            if (!p) return;
+            const numTxt = p.numControlTexto || `PRE-${String(p.numNota).padStart(6, '0')}`;
+            const s = prompt(`⚙️ CONTROL PRESUPUESTO ${numTxt}\n\n[1] Reimprimir Presupuesto (10x13)\n[2] Reenviar por WhatsApp\n[3] Anular Presupuesto\n[4] Eliminar de Firebase\n\nIngrese opción:`);
+            if (s === "1") {
+                window.dispararImpresionPresupuestoObjeto(p);
+            } else if (s === "2") {
+                window.enviarPresupuestoObjetoWa(p);
+            } else if (s === "3") {
+                if (confirm(`⚠️ ¿Deseas ANULAR el Presupuesto ${numTxt}?`)) {
+                    const firestoreDb = getDbCompat();
+                    if (firestoreDb) await firestoreDb.collection("presupuestos_emitidos").doc(p.id).update({ estatus: "ANULADO" });
+                    await window.cargarPresupuestosFirebase();
+                }
+            } else if (s === "4") {
+                if (confirm(`🚨 ¿Eliminar el Presupuesto ${numTxt} permanentemente de Firebase?`)) {
+                    const firestoreDb = getDbCompat();
+                    if (firestoreDb) await firestoreDb.collection("presupuestos_emitidos").doc(p.id).delete();
+                    await window.cargarPresupuestosFirebase();
+                }
+            }
+        };
+
+        window.exportarHistorialPresupuestosExcel = function() {
+            if (HISTORIAL_PRESUPUESTOS.length === 0) return alert("No hay presupuestos para exportar.");
+            const sheet = XLSX.utils.json_to_sheet(HISTORIAL_PRESUPUESTOS.map(p => ({
+                Presupuesto: p.numControlTexto || `PRE-${String(p.numNota).padStart(6, '0')}`,
+                Fecha: p.fecha,
+                Cliente: p.cliente,
+                Cedula: p.cedula,
+                ValidezDias: p.diasValidez || 5,
+                AnticipoPct: (p.porcAnticipo || 0) + '%',
+                AnticipoUSD: Number(p.anticipoUSD || 0).toFixed(2),
+                TotalUSD: Number(p.totalUSD || 0).toFixed(2),
+                Estatus: p.estatus || 'VIGENTE'
+            })));
+            const book = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(book, sheet, "Presupuestos");
+            XLSX.writeFile(book, "Presupuestos_Tucocel_2026.xlsx");
+        };
+
         // PRESUPUESTOS / COTIZACIONES Y RECIBO DE APARTADO / ENCARGO
         // =========================================================================
-        window.imprimirPresupuestoDOM = function() {
+        window.imprimirPresupuestoDOM = function(mostrarBs) {
+            if (mostrarBs === undefined) {
+                window.preguntarMostrarBolivares((incluirBs) => {
+                    window.imprimirPresupuestoDOM(incluirBs);
+                });
+                return;
+            }
             let totalUSD = 0;
             ITEMS_VENTA_ACTIVA.forEach(i => totalUSD += (Number(i.precio) || 0));
 
@@ -6014,7 +6936,7 @@
                 esPresupuesto: true
             };
 
-            window.inyectarDatosAlTicketDOM(datosPresupuesto);
+            window.inyectarDatosAlTicketDOM(datosPresupuesto, mostrarBs);
 
             const docTypes = document.querySelectorAll('.tk-bind-doc-type');
             docTypes.forEach(d => { d.textContent = "PRESUPUESTO / COTIZACIÓN"; d.style.color = "#0284c7"; });
@@ -6045,7 +6967,14 @@
             }, 300);
         };
 
-        window.enviarPresupuestoWhatsApp = function() {
+        window.enviarPresupuestoWhatsApp = function(mostrarBs) {
+            if (mostrarBs === undefined) {
+                window.preguntarMostrarBolivares((incluirBs) => {
+                    window.enviarPresupuestoWhatsApp(incluirBs);
+                });
+                return;
+            }
+            const incluirBs = Boolean(mostrarBs);
             let totalUSD = 0;
             ITEMS_VENTA_ACTIVA.forEach(i => totalUSD += (Number(i.precio) || 0));
 
@@ -6059,33 +6988,44 @@
             const cliNombre = document.getElementById('fact-cli-nombre')?.value.trim() || 'Estimado Cliente';
             const cliTelf = document.getElementById('fact-cli-telefono')?.value.trim() || '';
 
-            let msg = `📄 *PRESUPUESTO / COTIZACIÓN COMERCIAL*\n`;
-            msg += `🏢 *TUCOCEL C.A. — Agente Movistar & Publicidad*\n`;
-            msg += `👤 *Cliente:* ${cliNombre}\n`;
-            msg += `📅 *Fecha:* ${new Date().toLocaleDateString('es-VE')}\n`;
-            msg += `---------------------------------------\n`;
-            msg += `📋 *DETALLE DEL TRABAJO / ARTÍCULOS:*\n`;
+            const detalle = ITEMS_VENTA_ACTIVA.map(it =>
+                `• *${it.cantidad || 1}x ${it.modelo}*\n   Monto: *$${Number(it.precio || 0).toFixed(2)} USD*`
+            ).join('\n\n');
 
-            ITEMS_VENTA_ACTIVA.forEach((it, idx) => {
-                msg += `${idx + 1}. *${it.modelo}* (x${it.cantidad})\n`;
-                msg += `   💵 Monto: $${it.precio.toFixed(2)} USD\n`;
-            });
-
-            msg += `---------------------------------------\n`;
-            msg += `💰 *TOTAL COTIZADO:* *$${totalUSD.toFixed(2)} USD*\n`;
-            msg += `🇨🇴 *Ref. COP:* ${totalCOP.toLocaleString('es-CO')} COP\n`;
-            msg += `🇻🇪 *Ref. Bs:* ${totalBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs\n`;
-            msg += `---------------------------------------\n`;
-            msg += `⚠️ *NOTA DE VALIDEZ:* Este presupuesto tiene una validez de 3 días continuos a partir de la fecha de emisión. Precios sujetos a ajuste según la tasa del día.\n\n`;
-            msg += `📍 *Ubicación:* Av. Bolívar, entre calles 12 y 13, Cordero, Táchira.\n`;
-            msg += `¡Estamos a su completa orden! 🚀`;
+            const msg =
+                `📄 *PRESUPUESTO / COTIZACIÓN*\n` +
+                `🏢 *TUCOCEL C.A.*\n` +
+                `RIF: J-31378837-6\n` +
+                `📅 Fecha: ${new Date().toLocaleDateString('es-VE')}\n` +
+                `──────────────────\n` +
+                `👤 *Cliente:* ${cliNombre}\n` +
+                `──────────────────\n` +
+                `📋 *DETALLE:*\n\n` +
+                `${detalle}\n` +
+                `──────────────────\n` +
+                `💰 *TOTAL COTIZADO:*\n` +
+                `   • *$${totalUSD.toFixed(2)} USD*\n` +
+                `   • ${totalCOP.toLocaleString('es-CO')} COP\n` +
+                (incluirBs ? `   • ${totalBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs\n` : '') +
+                `──────────────────\n` +
+                `⚠️ *VALIDEZ: 3 días continuos*\n` +
+                `Al momento de concretar la compra o trabajo debe consultar nuevamente, ya que los precios pueden variar.\n` +
+                `_Documento informativo. No aparta mercancía._\n\n` +
+                `📍 Av. Bolívar, entre calles 12 y 13, Cordero, Táchira.\n` +
+                `¡Estamos a su orden! 🚀`;
 
             const phone = cliTelf.replace(/\D/g, '');
             window.abrirWhatsAppSelector(phone.length >= 10 ? phone : '584247357549', msg);
         };
 
-        window.imprimirReciboApartadoTrabajo = function(apt) {
+        window.imprimirReciboApartadoTrabajo = function(apt, mostrarBs) {
             if (!apt) return;
+            if (mostrarBs === undefined) {
+                window.preguntarMostrarBolivares((incluirBs) => {
+                    window.imprimirReciboApartadoTrabajo(apt, incluirBs);
+                });
+                return;
+            }
 
             const tCOP = parseFloat(document.getElementById('tasa-cop')?.value) || 3600;
             const tBS = parseFloat(document.getElementById('tasa-bs')?.value) || 3.3;
@@ -6120,7 +7060,7 @@
                 saldoUSD
             };
 
-            window.inyectarDatosAlTicketDOM(datosNota);
+            window.inyectarDatosAlTicketDOM(datosNota, mostrarBs);
 
             const docTypes = document.querySelectorAll('.tk-bind-doc-type');
             docTypes.forEach(d => { d.textContent = "RECIBO DE ENCARGO / ABONO"; d.style.color = "#d97706"; });
@@ -6184,6 +7124,32 @@
         // =========================================================================
         // PERSISTENCIA DE TASAS Y ARRANQUE ÚNICO DE LA VITRINA
         // =========================================================================
+        
+        // =========================================================================
+        // SELECTOR OPCIONAL DE BOLÍVARES (Bs) AL IMPRIMIR O ENVIAR POR WHATSAPP
+        // =========================================================================
+        let _cbConfirmarBs = null;
+
+        window.preguntarMostrarBolivares = function(callback) {
+            const modal = document.getElementById('modal-confirmar-bs');
+            if (!modal) {
+                if (typeof callback === 'function') callback(true);
+                return;
+            }
+            _cbConfirmarBs = callback;
+            modal.classList.remove('hidden');
+        };
+
+        window.resolverModalConfirmarBs = function(incluirBs) {
+            const modal = document.getElementById('modal-confirmar-bs');
+            if (modal) modal.classList.add('hidden');
+            const cb = _cbConfirmarBs;
+            _cbConfirmarBs = null;
+            if (incluirBs !== null && typeof cb === 'function') {
+                cb(Boolean(incluirBs));
+            }
+        };
+
         // HOJA BLANCA AUTOMÁTICA PARA DESCRIPCIÓN DEL PRODUCTO
         window.abrirHojaBlancaDescripcion = function() {
             const modal = document.getElementById('modal-hoja-descripcion');
@@ -6262,6 +7228,7 @@
                         }
                         _aplicandoTasasNube = false;
                         if (typeof window.calcularTotalesFactura === 'function') window.calcularTotalesFactura();
+                        if (typeof window.calcularTotalesPresupuesto === 'function') window.calcularTotalesPresupuesto();
                     }
                 }, () => {});
             } catch(e) {}
