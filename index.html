@@ -754,11 +754,22 @@
             </div>
         </div>
 
-        <div class="flex items-center justify-between mb-6 px-1">
-            <h2 id="titulo-seccion-vitrina" class="text-white font-black text-sm tracking-wider uppercase flex items-center gap-2">
-                <i class="fa-solid fa-mobile-screen-button text-cyan-400"></i> Vitrina Tecnológica de Smartphones
+        <!-- BUSCADOR RÁPIDO DE PRODUCTOS -->
+        <div class="max-w-xl mx-auto mb-6 px-1">
+            <div class="relative flex items-center">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 text-cyan-400 text-xs pointer-events-none"></i>
+                <input type="text" id="buscador-vitrina" oninput="window.ejecutarFiltroCombinado()" placeholder="Buscar modelo, marca, memoria o accesorio..." class="w-full bg-slate-900/80 border border-slate-700/80 focus:border-cyan-400 text-white placeholder-slate-400 pl-10 pr-10 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold focus:outline-none shadow-lg backdrop-blur-md transition-all">
+                <button type="button" id="btn-limpiar-buscador" onclick="const b=document.getElementById('buscador-vitrina'); if(b){b.value=''; window.ejecutarFiltroCombinado();}" class="hidden absolute right-3 text-slate-400 hover:text-white w-6 h-6 rounded-full flex items-center justify-center cursor-pointer" title="Limpiar búsqueda">
+                    <i class="fa-solid fa-xmark text-xs"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="flex items-center justify-between gap-2 mb-6 px-1 flex-wrap">
+            <h2 id="titulo-seccion-vitrina" class="text-white font-black text-xs sm:text-sm tracking-wider uppercase flex items-center gap-2">
+                <i class="fa-solid fa-mobile-screen-button text-cyan-400 shrink-0"></i><span>Vitrina Tecnológica de Smartphones</span>
             </h2>
-            <span id="contador-productos" class="text-[10px] bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 font-black px-3 py-1 rounded-full shadow-sm">Cargando...</span>
+            <span id="contador-productos" class="text-[10px] bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 font-black px-3 py-1 rounded-full shadow-sm whitespace-nowrap">Cargando...</span>
         </div>
 
             <!-- GRID DE SMARTPHONES CON DISEÑO ARMONIOSO Y ALINEACIÓN EXACTA -->
@@ -809,7 +820,7 @@
                     </div>
                     <span class="text-[10px] text-amber-400 font-bold inline-flex items-center gap-1">Deslizar <i class="fa-solid fa-arrow-right-long text-xs"></i></span>
                 </div>
-                <div id="carrusel-bajo-pedido" class="flex gap-3 overflow-x-auto pb-3 pt-1 no-scrollbar snap-x scroll-smooth"></div>
+                <div id="carrusel-bajo-pedido" class="flex gap-3 overflow-x-auto pb-3 pt-1 no-scrollbar"></div>
             </div>
 
             <!-- CUADRO 2: ACCESORIOS DISPONIBLES EN TIENDA -->
@@ -827,7 +838,7 @@
                     </div>
                     <span class="text-[10px] text-cyan-400 font-bold inline-flex items-center gap-1">Deslizar <i class="fa-solid fa-arrow-right-long text-xs"></i></span>
                 </div>
-                <div id="carrusel-accesorios" class="flex gap-3 overflow-x-auto pb-3 pt-1 no-scrollbar snap-x scroll-smooth"></div>
+                <div id="carrusel-accesorios" class="flex gap-3 overflow-x-auto pb-3 pt-1 no-scrollbar"></div>
             </div>
 
         </div>
@@ -964,7 +975,7 @@
                 <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block">Precio USD</label>
                 <input type="number" id="add-precio" class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300">
                 <label class="text-[10px] text-slate-400 uppercase font-bold tracking-wider block mt-2">Descripción Breve / Características</label>
-                <textarea id="add-desc" placeholder="Detalles técnicos del producto..." class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300 h-16 resize-none"></textarea>
+                <textarea id="add-desc" readonly onclick="window.abrirHojaBlancaDescripcion()" onfocus="window.abrirHojaBlancaDescripcion()" placeholder="Toca aquí para escribir en hoja blanca amplia..." class="w-full bg-white text-gray-950 p-2.5 rounded-xl text-xs font-bold shadow-sm border border-gray-300 h-16 resize-none cursor-pointer"></textarea>
             </div>
         </div>
         <div class="mt-4 pt-3 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
@@ -1386,29 +1397,29 @@
                         </div>
 
                         <!-- CALCULADORA DE VUELTO EN CALIENTE -->
-                        <div class="bg-slate-950 p-3 rounded-2xl border border-blue-500/30 space-y-2 text-xs font-mono">
-                            <div class="flex justify-between items-center">
-                                <span id="lbl-calc-vuelto-titulo" class="text-[9.5px] font-black text-blue-400 uppercase tracking-wider block">Calculadora de Vuelto</span>
-                                <span id="lbl-calc-target-info" class="text-[8.5px] text-slate-400 font-bold"></span>
+                        <div class="bg-slate-950 p-3 rounded-2xl border border-blue-500/30 space-y-2.5 text-xs font-mono">
+                            <div class="flex justify-between items-center gap-2 flex-wrap">
+                                <span id="lbl-calc-vuelto-titulo" class="text-[10px] font-black text-blue-400 uppercase tracking-wider">Calculadora de Vuelto</span>
+                                <div class="flex items-center gap-1.5">
+                                    <span id="lbl-calc-target-info" class="text-[8.5px] text-slate-400 font-bold"></span>
+                                    <button type="button" onclick="window.ponerPagoExactoPOS()" class="text-[9px] bg-emerald-600 hover:bg-emerald-500 text-white font-black px-2 py-0.5 rounded-lg cursor-pointer transition-all whitespace-nowrap shadow-sm">💵 Pago Exacto</button>
+                                </div>
                             </div>
-                            <div class="grid grid-cols-2 gap-2">
-                                <div>
-                                    <label class="text-[8px] text-slate-400 uppercase block">Moneda Entregada</label>
-                                    <select id="vuelto-moneda-pago" onchange="window.calcularVueltoPOS()" class="w-full bg-slate-800 text-white border border-slate-700 p-1.5 rounded-lg text-xs font-bold">
-                                        <option value="USD">💵 Dólares ($)</option>
-                                        <option value="COP">🇨🇴 Pesos (COP)</option>
-                                        <option value="BS">🇻🇪 Bolívares (Bs)</option>
+                            <div class="grid grid-cols-2 gap-2.5 items-end">
+                                <div class="min-w-0">
+                                    <label class="text-[8.5px] text-slate-400 uppercase block mb-1 truncate">Moneda</label>
+                                    <select id="vuelto-moneda-pago" onchange="window.calcularVueltoPOS()" class="w-full h-9 bg-slate-800 text-white border border-slate-700 px-2 rounded-xl text-xs font-bold focus:outline-none focus:border-blue-500">
+                                        <option value="USD">💵 USD ($)</option>
+                                        <option value="COP">🇨🇴 COP</option>
+                                        <option value="BS">🇻🇪 Bs</option>
                                     </select>
                                 </div>
-                                <div>
-                                    <div class="flex justify-between items-center mb-0.5">
-                                        <label class="text-[8px] text-slate-400 uppercase block">Monto Entregado</label>
-                                        <button type="button" onclick="window.ponerPagoExactoPOS()" class="text-[8px] bg-emerald-600 hover:bg-emerald-500 text-white font-black px-1.5 py-0.5 rounded cursor-pointer transition-all">💵 Pago Exacto</button>
-                                    </div>
-                                    <input type="number" step="any" id="vuelto-monto-recibido" oninput="window.calcularVueltoPOS()" onkeyup="window.calcularVueltoPOS()" onchange="window.calcularVueltoPOS()" placeholder="0.00" class="w-full bg-slate-800 text-amber-400 border border-slate-700 p-1.5 rounded-lg text-xs font-black">
+                                <div class="min-w-0">
+                                    <label class="text-[8.5px] text-slate-400 uppercase block mb-1 truncate">Monto Recibido</label>
+                                    <input type="number" step="any" id="vuelto-monto-recibido" oninput="window.calcularVueltoPOS()" onkeyup="window.calcularVueltoPOS()" onchange="window.calcularVueltoPOS()" placeholder="0.00" class="w-full h-9 bg-slate-800 text-amber-400 border border-slate-700 px-2.5 rounded-xl text-xs font-black focus:outline-none focus:border-amber-400">
                                 </div>
                             </div>
-                            <div class="border-t border-slate-800 pt-1.5 text-[10px] space-y-0.5">
+                            <div class="border-t border-slate-800 pt-2 text-[10.5px] space-y-1">
                                 <div class="flex justify-between text-emerald-400 font-bold"><span>USD:</span> <span id="vuelto-val-usd">$0.00</span></div>
                                 <div class="flex justify-between text-slate-300"><span>COP:</span> <span id="vuelto-val-cop">0 COP</span></div>
                                 <div class="flex justify-between text-blue-400"><span>VES (Bs):</span> <span id="vuelto-val-bs">0,00 Bs</span></div>
@@ -1416,15 +1427,15 @@
                         </div>
                     </div>
 
-                        <div class="grid grid-cols-3 gap-2 pt-1">
-                            <button onclick="window.ejecutarBotonImprimir()" class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-[11px] sm:text-xs py-3 rounded-xl shadow-md flex items-center justify-center gap-1 uppercase cursor-pointer">
-                                <i class="fa-solid fa-print"></i> Imprimir
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-1">
+                            <button onclick="window.ejecutarBotonImprimir()" class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-[11px] py-3 px-2 rounded-xl shadow-md flex items-center justify-center gap-1.5 uppercase cursor-pointer whitespace-nowrap">
+                                <i class="fa-solid fa-print shrink-0"></i><span>Imprimir</span>
                             </button>
-                            <button onclick="window.ejecutarBotonWhatsApp()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black text-[11px] sm:text-xs py-3 rounded-xl shadow-md flex items-center justify-center gap-1 uppercase cursor-pointer">
-                                <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
+                            <button onclick="window.ejecutarBotonWhatsApp()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black text-[11px] py-3 px-2 rounded-xl shadow-md flex items-center justify-center gap-1.5 uppercase cursor-pointer whitespace-nowrap">
+                                <i class="fa-brands fa-whatsapp text-sm shrink-0"></i><span>WhatsApp</span>
                             </button>
-                            <button onclick="window.abrirModalPresupuestoCotizacion()" class="bg-blue-600 hover:bg-blue-500 text-white font-black text-[11px] sm:text-xs py-3 rounded-xl shadow-md flex items-center justify-center gap-1 uppercase cursor-pointer" title="Emitir presupuesto informativo sin registrar venta">
-                                <i class="fa-solid fa-file-lines"></i> Presupuesto
+                            <button onclick="window.abrirModalPresupuestoCotizacion()" class="col-span-2 sm:col-span-1 bg-blue-600 hover:bg-blue-500 text-white font-black text-[11px] py-3 px-2 rounded-xl shadow-md flex items-center justify-center gap-1.5 uppercase cursor-pointer whitespace-nowrap" title="Emitir presupuesto informativo sin registrar venta">
+                                <i class="fa-solid fa-file-lines shrink-0"></i><span>Presupuesto</span>
                             </button>
                         </div>
                     </div>
@@ -2101,6 +2112,35 @@
         </div>
     </div>
 
+    
+    <!-- MODAL HOJA BLANCA AUTOMÁTICA PARA DESCRIPCIÓN DE PRODUCTO -->
+    <div id="modal-hoja-descripcion" class="fixed inset-0 bg-white z-[120] hidden flex flex-col">
+        <div class="bg-slate-900 text-white px-4 py-3.5 flex items-center justify-between gap-2 shrink-0 shadow-md">
+            <div class="flex items-center gap-2 min-w-0">
+                <i class="fa-solid fa-file-pen text-amber-400 text-base shrink-0"></i>
+                <div class="min-w-0">
+                    <h3 class="font-black text-xs sm:text-sm uppercase tracking-wider truncate">Descripción / Características</h3>
+                    <p class="text-[10px] text-slate-400 truncate">Hoja blanca de escritura cómoda</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+                <button type="button" onclick="window.limpiarHojaBlancaDescripcion()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold px-3 py-2 rounded-xl cursor-pointer">
+                    Borrar
+                </button>
+                <button type="button" onclick="window.aplicarYCerrarHojaBlancaDescripcion()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs px-4 py-2 rounded-xl shadow-md uppercase cursor-pointer flex items-center gap-1.5">
+                    <i class="fa-solid fa-check"></i> Listo
+                </button>
+            </div>
+        </div>
+        <div class="flex-grow flex flex-col p-4 sm:p-6 bg-white max-w-4xl w-full mx-auto">
+            <textarea id="hoja-blanca-textarea" oninput="window.actualizarContadorHojaBlanca()" placeholder="Escribe o pega aquí todas las características técnicas del producto (pantalla, procesador, RAM, almacenamiento, cámara, batería, garantía)..." class="w-full flex-grow bg-white text-slate-900 text-sm sm:text-base font-medium leading-relaxed focus:outline-none resize-none p-2"></textarea>
+            <div class="border-t border-slate-200 pt-2.5 flex items-center justify-between text-[11px] text-slate-500 font-mono">
+                <span id="lbl-hoja-blanca-chars">0 caracteres</span>
+                <button type="button" onclick="window.cerrarHojaBlancaSinGuardar()" class="text-slate-500 hover:text-slate-800 font-sans font-bold text-xs cursor-pointer">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
     <!-- MODAL EDITOR AVANZADO DE ENCABEZADO Y BANNER PROMOCIONAL EN VIVO (WYSIWYG) -->
     <div id="modal-editor-encabezado-pro" class="fixed inset-0 bg-slate-950/90 z-[95] overflow-y-auto backdrop-blur-md p-2 sm:p-4 hidden flex items-center justify-center">
         <div class="bg-white rounded-3xl w-full max-w-2xl my-2 shadow-2xl overflow-hidden border border-gray-100 flex flex-col max-h-[90vh]">
@@ -2581,6 +2621,21 @@
                 itemsVitrina = listado.filter(p => p.modalidad === 'consultar');
             }
 
+            const busqInput = document.getElementById('buscador-vitrina');
+            const textoBusq = (busqInput?.value || '').trim().toLowerCase();
+            const btnLimpiar = document.getElementById('btn-limpiar-buscador');
+            if (btnLimpiar) btnLimpiar.classList.toggle('hidden', !textoBusq);
+
+            if (textoBusq) {
+                itemsVitrina = listado.filter(p =>
+                    (p.modelo || '').toLowerCase().includes(textoBusq) ||
+                    (p.marca || '').toLowerCase().includes(textoBusq) ||
+                    (p.memoria || '').toLowerCase().includes(textoBusq) ||
+                    (p.categoriaAccesorio || '').toLowerCase().includes(textoBusq) ||
+                    (p.desc || '').toLowerCase().includes(textoBusq)
+                );
+            }
+
             const accesoriosDisponibles = listado.filter(p => (p.tipoProducto === 'Accesorio' || (p.marca && p.marca.trim().toLowerCase() === 'otros productos')) && (p.modalidad !== 'consultar'));
             const bajoPedido = listado.filter(p => p.modalidad === 'consultar');
 
@@ -2734,45 +2789,80 @@
         window.carruselesTimers = window.carruselesTimers || {};
         window.carruselesEventos = window.carruselesEventos || {};
 
+        window.carruselesPausa = window.carruselesPausa || {};
+        window.carruselesResumeTimer = window.carruselesResumeTimer || {};
+
         window.iniciarAutoScrollSuave = function(contenedorId) {
             const c = document.getElementById(contenedorId);
             if (!c || c.children.length <= 1) return;
 
             if (window.carruselesTimers[contenedorId]) {
-                clearInterval(window.carruselesTimers[contenedorId]);
+                cancelAnimationFrame(window.carruselesTimers[contenedorId]);
                 window.carruselesTimers[contenedorId] = null;
             }
 
-            let pausado = false;
+            // Duplicar tarjetas una sola vez para lograr un ciclo infinito sin saltos ni retrocesos
+            if (!c.dataset.infinitoClonado && c.children.length >= 2) {
+                const origHTML = c.innerHTML;
+                c.innerHTML = origHTML + origHTML;
+                c.dataset.infinitoClonado = 'true';
+            }
+
+            window.carruselesPausa[contenedorId] = false;
+
             if (!window.carruselesEventos[contenedorId]) {
-                c.addEventListener('mouseenter', () => { pausado = true; });
-                c.addEventListener('mouseleave', () => { pausado = false; });
-                c.addEventListener('touchstart', () => { pausado = true; }, { passive: true });
-                c.addEventListener('touchend', () => {
-                    setTimeout(() => { pausado = false; }, 2500);
-                }, { passive: true });
+                const pausar = () => {
+                    window.carruselesPausa[contenedorId] = true;
+                    if (window.carruselesResumeTimer[contenedorId]) {
+                        clearTimeout(window.carruselesResumeTimer[contenedorId]);
+                    }
+                };
+                const reanudarConEspera = (ms = 2200) => {
+                    if (window.carruselesResumeTimer[contenedorId]) {
+                        clearTimeout(window.carruselesResumeTimer[contenedorId]);
+                    }
+                    window.carruselesResumeTimer[contenedorId] = setTimeout(() => {
+                        window.carruselesPausa[contenedorId] = false;
+                    }, ms);
+                };
+
+                c.addEventListener('mouseenter', pausar);
+                c.addEventListener('mouseleave', () => reanudarConEspera(600));
+                c.addEventListener('touchstart', pausar, { passive: true });
+                c.addEventListener('touchend', () => reanudarConEspera(2400), { passive: true });
+                c.addEventListener('pointerdown', pausar, { passive: true });
+                c.addEventListener('pointerup', () => reanudarConEspera(2400), { passive: true });
                 window.carruselesEventos[contenedorId] = true;
             }
 
-            window.carruselesTimers[contenedorId] = setInterval(() => {
-                if (pausado || !c) return;
-                const maxScroll = c.scrollWidth - c.clientWidth;
-                if (maxScroll <= 10) return;
+            // Velocidades ligeramente distintas para que se vea natural y fluido
+            const velocidad = contenedorId === 'carrusel-bajo-pedido' ? 0.45 : 0.35;
+            let acumulador = c.scrollLeft;
 
-                const tarjeta = c.firstElementChild;
-                const anchoPaso = tarjeta ? (tarjeta.offsetWidth + 12) : 210;
-
-                if (c.scrollLeft >= maxScroll - 15) {
-                    c.scrollTo({ left: 0, behavior: 'smooth' });
+            function pasoSuave() {
+                if (!document.body.contains(c)) return;
+                if (!window.carruselesPausa[contenedorId]) {
+                    const mitad = c.scrollWidth / 2;
+                    if (mitad > c.clientWidth * 0.5) {
+                        acumulador = c.scrollLeft + velocidad;
+                        if (acumulador >= mitad) {
+                            acumulador -= mitad;
+                        }
+                        c.scrollLeft = acumulador;
+                    }
                 } else {
-                    c.scrollBy({ left: anchoPaso, behavior: 'smooth' });
+                    acumulador = c.scrollLeft;
                 }
-            }, 3000);
+                window.carruselesTimers[contenedorId] = requestAnimationFrame(pasoSuave);
+            }
+
+            window.carruselesTimers[contenedorId] = requestAnimationFrame(pasoSuave);
         };
 
         window.renderizarCarruselGenerico = function(contenedorId, lista, labelTag) {
             const carrusel = document.getElementById(contenedorId);
             if (!carrusel) return;
+            delete carrusel.dataset.infinitoClonado;
 
             if (lista.length === 0) {
                 carrusel.innerHTML = `<div class="py-8 px-4 text-slate-400 font-bold text-xs text-center w-full bg-slate-900/40 border border-slate-800 rounded-2xl">Próximamente más productos en esta sección.</div>`;
@@ -4720,25 +4810,31 @@
             const tasaBcvVal = parseFloat(document.getElementById('tasa-bcv')?.value) || 36.50;
             const odcCasheaVal = window.obtenerOdcCashea();
 
+            const coleccionDestino = modalidadCasheaActiva ? "notas_cashea" : "notas_ventas";
+            const campoContador = modalidadCasheaActiva ? "ultimo_cashea" : "ultimo_ventas";
             let numNotaFinal = 1;
-            let coleccionDestino = "notas_ventas";
 
-            if (modalidadCasheaActiva) {
-                coleccionDestino = "notas_cashea";
-                try {
-                    const snapCashea = await firestoreDb.collection("notas_cashea").get();
-                    numNotaFinal = snapCashea.size + 1;
-                } catch(e) {
-                    numNotaFinal = (HISTORIAL_NOTAS_CASHEA.length || 0) + 1;
-                }
-            } else {
-                coleccionDestino = "notas_ventas";
-                try {
-                    const snapVentas = await firestoreDb.collection("notas_ventas").get();
-                    numNotaFinal = snapVentas.size + 1;
-                } catch(e) {
-                    numNotaFinal = (HISTORIAL_NOTAS.length || 0) + 1;
-                }
+            try {
+                const refCorrelativos = firestoreDb.collection("configuraciones").doc("correlativos");
+                // Calcular base real existente para nunca retroceder si el contador aún no existía
+                let maxExistente = 0;
+                const snapCol = await firestoreDb.collection(coleccionDestino).get();
+                snapCol.forEach(d => {
+                    const n = parseInt(d.data().numNota, 10) || 0;
+                    if (n > maxExistente) maxExistente = n;
+                });
+
+                numNotaFinal = await firestoreDb.runTransaction(async (tx) => {
+                    const docCorr = await tx.get(refCorrelativos);
+                    const actual = docCorr.exists ? (parseInt(docCorr.data()[campoContador], 10) || 0) : 0;
+                    const siguiente = Math.max(actual, maxExistente) + 1;
+                    tx.set(refCorrelativos, { [campoContador]: siguiente, actualizadoEn: Date.now() }, { merge: true });
+                    return siguiente;
+                });
+            } catch(e) {
+                const listaRef = modalidadCasheaActiva ? HISTORIAL_NOTAS_CASHEA : HISTORIAL_NOTAS;
+                const maxLocal = listaRef.reduce((mx, n) => Math.max(mx, parseInt(n.numNota, 10) || 0), 0);
+                numNotaFinal = maxLocal + 1;
             }
 
             const nuevaNota = {
@@ -6088,6 +6184,51 @@
         // =========================================================================
         // PERSISTENCIA DE TASAS Y ARRANQUE ÚNICO DE LA VITRINA
         // =========================================================================
+        // HOJA BLANCA AUTOMÁTICA PARA DESCRIPCIÓN DEL PRODUCTO
+        window.abrirHojaBlancaDescripcion = function() {
+            const modal = document.getElementById('modal-hoja-descripcion');
+            const orig = document.getElementById('add-desc');
+            const editor = document.getElementById('hoja-blanca-textarea');
+            if (!modal || !orig || !editor) return;
+            editor.value = orig.value || '';
+            window.actualizarContadorHojaBlanca();
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                editor.focus();
+                editor.setSelectionRange(editor.value.length, editor.value.length);
+            }, 60);
+        };
+
+        window.actualizarContadorHojaBlanca = function() {
+            const editor = document.getElementById('hoja-blanca-textarea');
+            const lbl = document.getElementById('lbl-hoja-blanca-chars');
+            if (editor && lbl) lbl.innerText = `${editor.value.length} caracteres`;
+        };
+
+        window.limpiarHojaBlancaDescripcion = function() {
+            const editor = document.getElementById('hoja-blanca-textarea');
+            if (editor && (!editor.value || confirm("¿Borrar todo el texto de la descripción?"))) {
+                editor.value = '';
+                window.actualizarContadorHojaBlanca();
+                editor.focus();
+            }
+        };
+
+        window.aplicarYCerrarHojaBlancaDescripcion = function() {
+            const orig = document.getElementById('add-desc');
+            const editor = document.getElementById('hoja-blanca-textarea');
+            if (orig && editor) orig.value = editor.value.trim();
+            document.getElementById('modal-hoja-descripcion')?.classList.add('hidden');
+        };
+
+        window.cerrarHojaBlancaSinGuardar = function() {
+            document.getElementById('modal-hoja-descripcion')?.classList.add('hidden');
+        };
+
+        // TASAS SINCRONIZADAS EN TIEMPO REAL (PC <-> TELÉFONO)
+        let _timerSyncTasas = null;
+        let _aplicandoTasasNube = false;
+
         window.cargarTasasGuardadas = function() {
             try {
                 const c = localStorage.getItem('tucocel_tasa_cop');
@@ -6099,7 +6240,35 @@
             } catch(e) {}
         };
 
+        window.sincronizarTasasFirebase = function() {
+            const firestoreDb = getDbCompat();
+            if (!firestoreDb) return;
+            try {
+                firestoreDb.collection("configuraciones").doc("tasas_cambio").onSnapshot((snap) => {
+                    if (snap && snap.exists) {
+                        const d = snap.data();
+                        _aplicandoTasasNube = true;
+                        if (d.cop && document.getElementById('tasa-cop')) {
+                            document.getElementById('tasa-cop').value = d.cop;
+                            localStorage.setItem('tucocel_tasa_cop', d.cop);
+                        }
+                        if (d.bs && document.getElementById('tasa-bs')) {
+                            document.getElementById('tasa-bs').value = d.bs;
+                            localStorage.setItem('tucocel_tasa_bs', d.bs);
+                        }
+                        if (d.bcv && document.getElementById('tasa-bcv')) {
+                            document.getElementById('tasa-bcv').value = d.bcv;
+                            localStorage.setItem('tucocel_tasa_bcv', d.bcv);
+                        }
+                        _aplicandoTasasNube = false;
+                        if (typeof window.calcularTotalesFactura === 'function') window.calcularTotalesFactura();
+                    }
+                }, () => {});
+            } catch(e) {}
+        };
+
         window.guardarTasasActuales = function() {
+            if (_aplicandoTasasNube) return;
             try {
                 const c = document.getElementById('tasa-cop')?.value;
                 const b = document.getElementById('tasa-bs')?.value;
@@ -6107,6 +6276,19 @@
                 if (c) localStorage.setItem('tucocel_tasa_cop', c);
                 if (b) localStorage.setItem('tucocel_tasa_bs', b);
                 if (v) localStorage.setItem('tucocel_tasa_bcv', v);
+
+                clearTimeout(_timerSyncTasas);
+                _timerSyncTasas = setTimeout(() => {
+                    const firestoreDb = getDbCompat();
+                    if (firestoreDb && window.esAdminAutenticado) {
+                        firestoreDb.collection("configuraciones").doc("tasas_cambio").set({
+                            cop: c || '3600',
+                            bs: b || '3.3',
+                            bcv: v || '36.50',
+                            actualizadoEn: Date.now()
+                        }, { merge: true }).catch(() => {});
+                    }
+                }, 700);
             } catch(e) {}
         };
 
@@ -6127,6 +6309,7 @@
 
             try { window.descargarSeguridadAdmin(); } catch(e) {}
             try { window.descargarEncabezadoFirebase(); } catch(e) {}
+            try { window.sincronizarTasasFirebase(); } catch(e) {}
             try { window.cargarInventarioFirebase(); } catch(e) { window.cerrarOverlayConexion(); }
             try { window.gestionarContadorVisitasFirebase(); } catch(e) {}
 
