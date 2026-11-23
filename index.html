@@ -61,6 +61,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
@@ -1276,7 +1277,7 @@
                                 </div>
                                 <div class="sm:col-span-2">
                                     <label id="lbl-manual-precio" class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Precio ($ USD)</label>
-                                    <input type="number" id="manual-precio" placeholder="0" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 font-mono focus:bg-white focus:outline-blue-500">
+                                    <input type="text" inputmode="decimal" id="manual-precio" oninput="window.formatearInputMonto(this)" placeholder="0,00" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 font-mono focus:bg-white focus:outline-blue-500">
                                 </div>
                                 <div class="sm:col-span-2">
                                     <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Cantidad</label>
@@ -1421,7 +1422,7 @@
                                 </div>
                                 <div class="min-w-0">
                                     <label class="text-[8.5px] text-slate-400 uppercase block mb-1 truncate">Monto Recibido</label>
-                                    <input type="number" step="any" id="vuelto-monto-recibido" oninput="window.calcularVueltoPOS()" onkeyup="window.calcularVueltoPOS()" onchange="window.calcularVueltoPOS()" placeholder="0.00" class="w-full h-9 bg-slate-800 text-amber-400 border border-slate-700 px-2.5 rounded-xl text-xs font-black focus:outline-none focus:border-amber-400">
+                                    <input type="text" inputmode="decimal" id="vuelto-monto-recibido" oninput="window.formatearInputMonto(this); window.calcularVueltoPOS()" onchange="window.calcularVueltoPOS()" placeholder="0,00" class="w-full h-9 bg-slate-800 text-amber-400 border border-slate-700 px-2.5 rounded-xl text-xs font-black focus:outline-none focus:border-amber-400">
                                 </div>
                             </div>
                             <div class="border-t border-slate-800 pt-2 text-[10.5px] space-y-1">
@@ -1528,7 +1529,7 @@
                                 </div>
                                 <div class="sm:col-span-2">
                                     <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Precio Unit.</label>
-                                    <input type="number" step="any" id="pre-manual-precio" placeholder="0" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 font-mono focus:bg-white">
+                                    <input type="text" inputmode="decimal" id="pre-manual-precio" oninput="window.formatearInputMonto(this)" placeholder="0,00" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 font-mono focus:bg-white">
                                 </div>
                                 <div class="sm:col-span-2">
                                     <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Cantidad</label>
@@ -1720,7 +1721,7 @@
                                 </div>
                                 <div>
                                     <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Costo Total Acordado ($ USD) *</label>
-                                    <input type="number" step="any" id="apt-manual-precio" oninput="window.calcularSaldosApartado()" placeholder="0.00" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-black text-blue-600 font-mono">
+                                    <input type="text" inputmode="decimal" id="apt-manual-precio" oninput="window.formatearInputMonto(this); window.calcularSaldosApartado()" placeholder="0,00" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-black text-blue-600 font-mono">
                                 </div>
                             </div>
                         </div>
@@ -1753,7 +1754,7 @@
                                 </div>
                                 <div>
                                     <label id="lbl-apt-abono-input" class="text-[8.5px] text-emerald-700 uppercase block mb-1 font-bold">Abono Inicial Recibido ($ USD) *</label>
-                                    <input type="number" step="any" id="apt-abono-inicial" oninput="window.calcularSaldosApartado()" placeholder="0.00" class="w-full bg-white border-2 border-emerald-500 p-2.5 rounded-xl text-emerald-600 font-black">
+                                    <input type="text" inputmode="decimal" id="apt-abono-inicial" oninput="window.formatearInputMonto(this); window.calcularSaldosApartado()" placeholder="0,00" class="w-full bg-white border-2 border-emerald-500 p-2.5 rounded-xl text-emerald-600 font-black">
                                 </div>
                                 <div>
                                     <label class="text-[8.5px] text-red-700 uppercase block mb-1 font-bold">Saldo Restante por Pagar ($)</label>
@@ -2347,6 +2348,34 @@
 
     
     
+    
+    <!-- MODAL ESCÁNER DE CÓDIGO DE BARRAS / IMEI POR CÁMARA -->
+    <div id="modal-escaner-imei" class="fixed inset-0 bg-slate-950/90 z-[140] backdrop-blur-md p-4 hidden flex items-center justify-center">
+        <div class="bg-slate-900 text-white rounded-3xl w-full max-w-md overflow-hidden shadow-2xl border border-slate-700 flex flex-col">
+            <div class="px-5 py-4 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 bg-blue-600/20 text-cyan-400 rounded-xl flex items-center justify-center border border-cyan-500/30">
+                        <i class="fa-solid fa-barcode text-base"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-black text-xs sm:text-sm uppercase tracking-wider text-white">Escanear IMEI con Cámara</h3>
+                        <p class="text-[10px] text-slate-400">Apunta al código de barras de la caja (15 dígitos)</p>
+                    </div>
+                </div>
+                <button type="button" onclick="window.cerrarEscanerImeiCamara()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white w-8 h-8 rounded-xl flex items-center justify-center cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="p-4 space-y-3">
+                <div id="lector-imei-camara" class="w-full rounded-2xl overflow-hidden bg-black border-2 border-cyan-500/40 min-h-[240px]"></div>
+                <p id="lbl-estado-escaner-imei" class="text-[11px] text-center text-cyan-300 font-bold">Iniciando cámara trasera...</p>
+                <button type="button" onclick="window.cerrarEscanerImeiCamara()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs py-2.5 rounded-xl cursor-pointer uppercase">
+                    Cerrar Escáner
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- MODAL CONFIRMACIÓN OPCIONAL: ¿MOSTRAR MONTOS EN BOLÍVARES (Bs)? -->
     <div id="modal-confirmar-bs" class="fixed inset-0 bg-slate-950/85 z-[130] backdrop-blur-md p-4 hidden flex items-center justify-center">
         <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl relative border border-gray-100 space-y-4">
@@ -4146,7 +4175,7 @@
         window.calcularSaldosApartado = function() {
             let precioTotal = 0;
             if (modoCargaApartadoActivo === 'manual') {
-                precioTotal = parseFloat(document.getElementById('apt-manual-precio')?.value) || 0;
+                precioTotal = window.parsearMontoFormateado(document.getElementById('apt-manual-precio')?.value);
                 document.getElementById('apt-display-total').value = precioTotal.toFixed(2);
             } else {
                 const id = document.getElementById('apt-select-producto')?.value;
@@ -4158,11 +4187,12 @@
             const tCOP = parseFloat(document.getElementById('tasa-cop')?.value) || 3600;
             const tBS = parseFloat(document.getElementById('tasa-bs')?.value) || 3.3;
 
-            const abonoRaw = parseFloat(document.getElementById('apt-abono-inicial')?.value) || 0;
+            const abonoRaw = window.parsearMontoFormateado(document.getElementById('apt-abono-inicial')?.value);
             let abonoUSD = abonoRaw;
 
-            if (monedaAbonoApartadoActiva === 'COP') abonoUSD = tCOP > 0 ? (abonoRaw / tCOP) : 0;
-            else if (monedaAbonoApartadoActiva === 'BS') abonoUSD = (tCOP > 0 && tBS > 0) ? ((abonoRaw * tBS) / tCOP) : 0;
+            if (monedaAbonoApartadoActiva === 'COP') abonoUSD = tCOP > 0 ? window.redondear2(abonoRaw / tCOP) : 0;
+            else if (monedaAbonoApartadoActiva === 'BS') abonoUSD = (tCOP > 0 && tBS > 0) ? window.redondear2((abonoRaw * tBS) / tCOP) : 0;
+            else abonoUSD = window.redondear2(abonoRaw);
 
             const saldoUSD = Math.max(0, precioTotal - abonoUSD);
             const saldoCOP = saldoUSD * tCOP;
@@ -4172,7 +4202,7 @@
             const lblCOP = document.getElementById('apt-saldo-cop-val');
             const lblBS = document.getElementById('apt-saldo-bs-val');
             if (lblCOP) lblCOP.innerText = `${Math.round(saldoCOP).toLocaleString('es-CO')} COP`;
-            if (lblBS) lblBS.innerText = `${saldoBS.toFixed(2).toLocaleString('es-VE')} Bs`;
+            if (lblBS) lblBS.innerText = `${saldoBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs`;
         };
 
         window.guardarNuevoApartadoFirebase = async function() {
@@ -4187,7 +4217,7 @@
 
             if (modoCargaApartadoActivo === 'manual') {
                 modelo = document.getElementById('apt-manual-modelo').value.trim();
-                precioTotal = parseFloat(document.getElementById('apt-manual-precio').value) || 0;
+                precioTotal = window.parsearMontoFormateado(document.getElementById('apt-manual-precio').value);
             } else {
                 productoId = document.getElementById('apt-select-producto').value;
                 const prod = PRODUCTOS.find(p => String(p.id) === String(productoId));
@@ -4199,11 +4229,12 @@
             const tCOP = parseFloat(document.getElementById('tasa-cop').value) || 3600;
             const tBS = parseFloat(document.getElementById('tasa-bs').value) || 3.3;
 
-            const abonoRaw = parseFloat(document.getElementById('apt-abono-inicial').value) || 0;
+            const abonoRaw = window.parsearMontoFormateado(document.getElementById('apt-abono-inicial').value);
             let abonoUSD = abonoRaw;
 
-            if (monedaAbonoApartadoActiva === 'COP') abonoUSD = tCOP > 0 ? (abonoRaw / tCOP) : 0;
-            else if (monedaAbonoApartadoActiva === 'BS') abonoUSD = (tCOP > 0 && tBS > 0) ? ((abonoRaw * tBS) / tCOP) : 0;
+            if (monedaAbonoApartadoActiva === 'COP') abonoUSD = tCOP > 0 ? window.redondear2(abonoRaw / tCOP) : 0;
+            else if (monedaAbonoApartadoActiva === 'BS') abonoUSD = (tCOP > 0 && tBS > 0) ? window.redondear2((abonoRaw * tBS) / tCOP) : 0;
+            else abonoUSD = window.redondear2(abonoRaw);
 
             const saldoPendiente = Math.max(0, precioTotal - abonoUSD);
 
@@ -4681,7 +4712,12 @@
                         contenedor.innerHTML += `
                             <div class="bg-white p-2.5 rounded-xl border-2 border-slate-300 shadow-sm">
                                 <label class="text-[10px] text-red-600 font-extrabold uppercase block mb-1">IMEI Celular ${i} (15 Dígitos) *</label>
-                                <input type="text" id="manual-imei-field-${i}" maxlength="15" placeholder="Ingresar 15 dígitos" class="w-full bg-slate-50 border-2 border-slate-400 focus:border-blue-600 focus:bg-white py-2 px-2.5 rounded-xl text-xs sm:text-sm font-black text-center font-mono tracking-wider text-slate-950 placeholder-slate-400 outline-none">
+                                <div class="flex items-center gap-1.5">
+                                    <input type="text" inputmode="numeric" id="manual-imei-field-${i}" maxlength="15" placeholder="15 dígitos o escanear" class="w-full min-w-0 bg-slate-50 border-2 border-slate-400 focus:border-blue-600 focus:bg-white py-2 px-2 rounded-xl text-xs sm:text-sm font-black text-center font-mono tracking-wider text-slate-950 placeholder-slate-400 outline-none">
+                                    <button type="button" onclick="window.abrirEscanerImeiCamara('manual-imei-field-${i}')" class="shrink-0 bg-blue-600 hover:bg-blue-700 text-white w-10 h-10 rounded-xl flex items-center justify-center shadow-sm cursor-pointer active:scale-95 transition-all" title="Escanear IMEI con cámara">
+                                        <i class="fa-solid fa-camera text-sm"></i>
+                                    </button>
+                                </div>
                             </div>`;
                     }
                 }
@@ -4703,7 +4739,12 @@
                         contenedor.innerHTML += `
                             <div class="bg-white p-2.5 rounded-xl border-2 border-slate-300 shadow-sm">
                                 <label class="text-[10px] text-red-600 font-extrabold uppercase block mb-1">IMEI Celular ${i} (15 Dígitos) *</label>
-                                <input type="text" id="fact-imei-field-${i}" maxlength="15" placeholder="Ingresar 15 dígitos" class="w-full bg-slate-50 border-2 border-slate-400 focus:border-blue-600 focus:bg-white py-2 px-2.5 rounded-xl text-xs sm:text-sm font-black text-center font-mono tracking-wider text-slate-950 placeholder-slate-400 outline-none">
+                                <div class="flex items-center gap-1.5">
+                                    <input type="text" inputmode="numeric" id="fact-imei-field-${i}" maxlength="15" placeholder="15 dígitos o escanear" class="w-full min-w-0 bg-slate-50 border-2 border-slate-400 focus:border-blue-600 focus:bg-white py-2 px-2 rounded-xl text-xs sm:text-sm font-black text-center font-mono tracking-wider text-slate-950 placeholder-slate-400 outline-none">
+                                    <button type="button" onclick="window.abrirEscanerImeiCamara('fact-imei-field-${i}')" class="shrink-0 bg-blue-600 hover:bg-blue-700 text-white w-10 h-10 rounded-xl flex items-center justify-center shadow-sm cursor-pointer active:scale-95 transition-all" title="Escanear IMEI con cámara">
+                                        <i class="fa-solid fa-camera text-sm"></i>
+                                    </button>
+                                </div>
                             </div>`;
                     }
                 } else {
@@ -4717,7 +4758,7 @@
 
             if (modoCargaFacturaActivo === 'manual') {
                 const modelo = (document.getElementById('manual-modelo')?.value || '').trim();
-                const precioRaw = parseFloat(document.getElementById('manual-precio')?.value) || 0;
+                const precioRaw = window.parsearMontoFormateado(document.getElementById('manual-precio')?.value);
                 const cant = parseInt(document.getElementById('manual-cantidad')?.value) || 1;
                 const checkImei = document.getElementById('manual-check-imei')?.checked;
                 const monedaItem = document.getElementById('manual-moneda-item')?.value || 'USD';
@@ -4737,7 +4778,7 @@
                 let precioUnitCOP = precioRaw * tCOP;
                 if (monedaItem === 'COP') {
                     precioUnitCOP = precioRaw;
-                    precioUnitUSD = tCOP > 0 ? (precioRaw / tCOP) : 0;
+                    precioUnitUSD = tCOP > 0 ? window.redondear2(precioRaw / tCOP) : 0;
                 }
 
                 ITEMS_VENTA_ACTIVA.push({
@@ -4747,7 +4788,7 @@
                     monedaIngreso: monedaItem,
                     precioOriginalUnit: precioRaw,
                     precioUnitUSD,
-                    precio: precioUnitUSD * cant,
+                    precio: window.redondear2(precioUnitUSD * cant),
                     totalCOP: precioUnitCOP * cant,
                     imeis: checkImei ? imeis : null
                 });
@@ -4783,7 +4824,7 @@
                     monedaIngreso: monedaItem,
                     precioOriginalUnit: monedaItem === 'COP' ? precioUnitCOP : precioUnitUSD,
                     precioUnitUSD,
-                    precio: precioUnitUSD * cant,
+                    precio: window.redondear2(precioUnitUSD * cant),
                     totalCOP: precioUnitCOP * cant,
                     imeis: prod.marca !== 'Otros Productos' ? imeis : null
                 });
@@ -4974,7 +5015,7 @@
 
             const monedaPago = document.getElementById('vuelto-moneda-pago')?.value || 'USD';
             const montoEntregadoRaw = document.getElementById('vuelto-monto-recibido')?.value;
-            const montoEntregado = parseFloat(montoEntregadoRaw) || 0;
+            const montoEntregado = window.parsearMontoFormateado(montoEntregadoRaw);
 
             let entregadoEnUSD = 0;
             if (monedaPago === 'USD') {
@@ -5041,11 +5082,11 @@
             const inp = document.getElementById('vuelto-monto-recibido');
             if (!inp) return;
 
-            if (moneda === 'USD') inp.value = targetUSD.toFixed(2);
-            else if (moneda === 'COP') inp.value = Math.round(targetUSD * tCOP);
+            if (moneda === 'USD') inp.value = window.formatearNumeroParaInput(targetUSD, true);
+            else if (moneda === 'COP') inp.value = window.formatearNumeroParaInput(Math.round(targetUSD * tCOP), false);
             else if (moneda === 'BS') {
                 const montoBS = esCashea ? (targetUSD * tBCV) : ((targetUSD * tCOP) / tBS);
-                inp.value = montoBS.toFixed(2);
+                inp.value = window.formatearNumeroParaInput(montoBS, true);
             }
             window.calcularVueltoPOS();
         };
@@ -5099,7 +5140,8 @@
             }
 
             let totalUSD = 0;
-            ITEMS_VENTA_ACTIVA.forEach(i => totalUSD += i.precio);
+            ITEMS_VENTA_ACTIVA.forEach(i => totalUSD += (Number(i.precio) || 0));
+            totalUSD = window.redondear2(totalUSD);
             const tCOP = parseFloat(document.getElementById('tasa-cop').value) || 3600;
             const tBS = parseFloat(document.getElementById('tasa-bs').value) || 3.3;
 
@@ -5426,7 +5468,7 @@
                         <td class="p-3 font-bold text-gray-900">${n.cliente}</td>
                         <td class="p-3 font-mono text-gray-600">${n.cedula}</td>
                         <td class="p-3 text-gray-500 truncate max-w-[180px]">${(n.items || []).map(i => `${i.cantidad}x ${i.modelo}`).join(', ')}</td>
-                        <td class="p-3 text-right font-mono font-black text-gray-900">$${n.totalUSD}</td>
+                        <td class="p-3 text-right font-mono font-black text-gray-900">$${Number(n.totalUSD || 0).toFixed(2)}</td>
                         <td class="p-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase ${colorLabel}">${n.estatus || 'PROCESADA'}</span></td>
                         <td class="p-3 text-center flex justify-center gap-1">
                             <button onclick="window.abrirVisualizadorHojaBlanca(${idxUse})" class="text-amber-600 bg-amber-50 hover:bg-amber-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Ver Hoja Blanca / Imprimir 10x13"><i class="fa-solid fa-file-lines"></i></button>
@@ -5488,7 +5530,7 @@
 
         window.exportarHistorialExcel = function() {
             if (HISTORIAL_NOTAS.length === 0) return alert("No hay datos para exportar.");
-            const sheet = XLSX.utils.json_to_sheet(HISTORIAL_NOTAS.map(n => ({ Nota: n.numNota, Fecha: n.fecha, Cliente: n.cliente, Cedula: n.cedula, TotalUSD: n.totalUSD, Estatus: n.estatus || "PROCESADA" })));
+            const sheet = XLSX.utils.json_to_sheet(HISTORIAL_NOTAS.map(n => ({ Nota: n.numNota, Fecha: n.fecha, Cliente: n.cliente, Cedula: n.cedula, TotalUSD: Number(n.totalUSD || 0).toFixed(2), Estatus: n.estatus || "PROCESADA" })));
             const book = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(book, sheet, "Ventas");
             XLSX.writeFile(book, "Respaldo_Tucocel_2026.xlsx");
@@ -6400,13 +6442,13 @@
 
             if (modoCargaPresupuestoActivo === 'manual') {
                 const modelo = (document.getElementById('pre-manual-modelo')?.value || '').trim();
-                const precioRaw = parseFloat(document.getElementById('pre-manual-precio')?.value) || 0;
+                const precioRaw = window.parsearMontoFormateado(document.getElementById('pre-manual-precio')?.value);
                 const cant = parseInt(document.getElementById('pre-manual-cantidad')?.value, 10) || 1;
                 const moneda = document.getElementById('pre-manual-moneda')?.value || 'USD';
 
                 if (!modelo || precioRaw <= 0) return alert("Ingrese descripción y precio válido.");
 
-                const precioUnitUSD = moneda === 'COP' ? (tCOP > 0 ? precioRaw / tCOP : 0) : precioRaw;
+                const precioUnitUSD = moneda === 'COP' ? (tCOP > 0 ? window.redondear2(precioRaw / tCOP) : 0) : window.redondear2(precioRaw);
                 ITEMS_PRESUPUESTO_ACTIVO.push({
                     id: 'pre-' + Date.now(),
                     modelo,
@@ -6475,6 +6517,7 @@
         window.calcularTotalesPresupuesto = function() {
             let totalUSD = 0;
             ITEMS_PRESUPUESTO_ACTIVO.forEach(i => totalUSD += (Number(i.precio) || 0));
+            totalUSD = window.redondear2(totalUSD);
 
             const tCOP = parseFloat(document.getElementById('tasa-cop')?.value) || 3600;
             const tBS = parseFloat(document.getElementById('tasa-bs')?.value) || 3.3;
@@ -6531,6 +6574,7 @@
 
             let totalUSD = 0;
             ITEMS_PRESUPUESTO_ACTIVO.forEach(i => totalUSD += (Number(i.precio) || 0));
+            totalUSD = window.redondear2(totalUSD);
 
             const tCOP = parseFloat(document.getElementById('tasa-cop')?.value) || 3600;
             const tBS = parseFloat(document.getElementById('tasa-bs')?.value) || 3.3;
@@ -7126,6 +7170,160 @@
         // =========================================================================
         
         // =========================================================================
+        
+        // =========================================================================
+        // UTILIDADES DE REDONDEO, FORMATEO DE MONTOS Y ESCÁNER DE IMEI POR CÁMARA
+        // =========================================================================
+        window.redondear2 = function(n) {
+            const val = Number(n) || 0;
+            return Math.round((val + Number.EPSILON) * 100) / 100;
+        };
+
+        window.parsearMontoFormateado = function(val) {
+            if (val === null || val === undefined) return 0;
+            let s = String(val).trim();
+            if (!s) return 0;
+            s = s.replace(/[^\d.,-]/g, '');
+            if (!s) return 0;
+
+            if (s.includes(',')) {
+                // Formato latino: 28.500,56 -> 28500.56
+                s = s.replace(/\./g, '').replace(',', '.');
+            } else if (s.includes('.')) {
+                // Si coincide con separador de miles (ej: 20.000 o 1.250.000), quitar puntos
+                if (/^-?\d{1,3}(\.\d{3})+$/.test(s)) {
+                    s = s.replace(/\./g, '');
+                }
+                // Si tiene más de un punto, quitar todos menos el último si tiene 1-2 dígitos
+                else if ((s.match(/\./g) || []).length > 1) {
+                    const parts = s.split('.');
+                    const last = parts[parts.length - 1];
+                    if (last.length <= 2) {
+                        s = parts.slice(0, -1).join('') + '.' + last;
+                    } else {
+                        s = parts.join('');
+                    }
+                }
+            }
+            const num = parseFloat(s);
+            return isNaN(num) ? 0 : num;
+        };
+
+        window.formatearNumeroParaInput = function(num, conDecimales = true) {
+            const val = Number(num) || 0;
+            if (!conDecimales) {
+                return Math.round(val).toLocaleString('es-VE');
+            }
+            return window.redondear2(val).toLocaleString('es-VE', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        };
+
+        window.formatearInputMonto = function(el) {
+            if (!el) return;
+            let raw = String(el.value || '');
+            if (!raw) return;
+
+            // Si el usuario teclea un punto al final para empezar decimales (ej: "18." o "20.000.")
+            // convertirlo automáticamente a coma decimal para comodidad en teclado móvil
+            if (raw.endsWith('.') && !raw.includes(',')) {
+                raw = raw.slice(0, -1) + ',';
+            }
+
+            // Limpiar caracteres no permitidos
+            let limpio = raw.replace(/[^\d,]/g, '');
+            const tieneComa = limpio.includes(',');
+            let [parteEntera, parteDecimal] = limpio.split(',');
+
+            // Quitar ceros a la izquierda innecesarios salvo si es "0"
+            if (parteEntera.length > 1) {
+                parteEntera = parteEntera.replace(/^0+/, '') || '0';
+            }
+
+            // Agregar puntos de miles a la parte entera
+            const enteraFormateada = parteEntera ? parteEntera.replace(/\B(?=(\d{3})+(?!\d))/g, '.') : (tieneComa ? '0' : '');
+
+            if (tieneComa) {
+                const dec = (parteDecimal || '').slice(0, 2);
+                el.value = `${enteraFormateada},${dec}`;
+            } else {
+                el.value = enteraFormateada;
+            }
+        };
+
+        // ESCÁNER DE CÓDIGO DE BARRAS IMEI POR CÁMARA (HTML5-QRCODE)
+        let _escanerImeiInstancia = null;
+        let _campoDestinoImeiId = null;
+
+        window.abrirEscanerImeiCamara = async function(inputId) {
+            _campoDestinoImeiId = inputId;
+            const modal = document.getElementById('modal-escaner-imei');
+            const lbl = document.getElementById('lbl-estado-escaner-imei');
+            if (!modal) return;
+            modal.classList.remove('hidden');
+            if (lbl) lbl.innerText = "Iniciando cámara trasera...";
+
+            if (typeof Html5Qrcode === 'undefined') {
+                if (lbl) lbl.innerText = "⚠️ No se pudo cargar el módulo de cámara (requiere conexión a internet). Puedes ingresar el IMEI manualmente.";
+                return;
+            }
+
+            try {
+                if (_escanerImeiInstancia) {
+                    try { await _escanerImeiInstancia.stop(); } catch(e) {}
+                    try { _escanerImeiInstancia.clear(); } catch(e) {}
+                }
+                _escanerImeiInstancia = new Html5Qrcode("lector-imei-camara");
+
+                const config = {
+                    fps: 12,
+                    qrbox: { width: 260, height: 110 },
+                    aspectRatio: 1.33
+                };
+
+                await _escanerImeiInstancia.start(
+                    { facingMode: "environment" },
+                    config,
+                    (decodedText) => {
+                        const soloDigitos = String(decodedText || '').replace(/\D/g, '');
+                        const match15 = soloDigitos.match(/\d{15}/);
+                        const imeiFinal = match15 ? match15[0] : soloDigitos.slice(0, 15);
+                        if (imeiFinal.length >= 14) {
+                            const target = document.getElementById(_campoDestinoImeiId);
+                            if (target) {
+                                target.value = imeiFinal.slice(0, 15);
+                                target.dispatchEvent(new Event('input', { bubbles: true }));
+                            }
+                            if (navigator.vibrate) {
+                                try { navigator.vibrate(100); } catch(e) {}
+                            }
+                            window.cerrarEscanerImeiCamara();
+                        } else if (lbl) {
+                            lbl.innerText = `Código leído (${decodedText}) — Apunta al código de barras de 15 dígitos del IMEI.`;
+                        }
+                    },
+                    () => {}
+                );
+                if (lbl) lbl.innerText = "📷 Enfoque el código de barras del IMEI dentro del recuadro";
+            } catch (err) {
+                console.error("Error cámara IMEI:", err);
+                if (lbl) {
+                    lbl.innerText = "⚠️ No se pudo abrir la cámara. Verifica los permisos o abre el sistema desde tu enlace web (HTTPS).";
+                }
+            }
+        };
+
+        window.cerrarEscanerImeiCamara = async function() {
+            const modal = document.getElementById('modal-escaner-imei');
+            if (modal) modal.classList.add('hidden');
+            if (_escanerImeiInstancia) {
+                try { await _escanerImeiInstancia.stop(); } catch(e) {}
+                try { _escanerImeiInstancia.clear(); } catch(e) {}
+                _escanerImeiInstancia = null;
+            }
+        };
+
         // SELECTOR OPCIONAL DE BOLÍVARES (Bs) AL IMPRIMIR O ENVIAR POR WHATSAPP
         // =========================================================================
         let _cbConfirmarBs = null;
