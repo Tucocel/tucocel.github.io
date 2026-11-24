@@ -1175,7 +1175,7 @@
                     </div>
                     <div class="flex items-center justify-between w-full sm:w-auto gap-2 border-l border-slate-700 pl-3">
                         <span class="text-amber-400 font-bold shrink-0">Tasa Oficial BCV:</span>
-                        <input type="number" step="0.01" id="tasa-bcv" value="36.50" oninput="window.calcularTotalesFactura()" class="w-full sm:w-20 bg-slate-800 text-amber-300 font-black border border-slate-700 px-2 py-1 rounded-lg text-center font-mono focus:outline-none">
+                        <input type="number" step="0.01" id="tasa-bcv" value="0" oninput="window.calcularTotalesFactura()" class="w-full sm:w-20 bg-slate-800 text-amber-300 font-black border border-slate-700 px-2 py-1 rounded-lg text-center font-mono focus:outline-none">
                         <span class="text-emerald-400 font-bold text-[10px] shrink-0">Bs/$</span>
                     </div>
                 </div>
@@ -2376,6 +2376,79 @@
         </div>
     </div>
 
+    <!-- MODAL SELECTOR DE MEDIO DE ENVÍO (WHATSAPP NORMAL / BUSINESS DIRECTO + CORREO) -->
+    <div id="modal-selector-envio-wa" class="fixed inset-0 bg-slate-950/85 z-[135] backdrop-blur-md p-4 hidden flex items-center justify-center">
+        <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl relative border border-gray-100 space-y-4">
+            <button type="button" onclick="window.cerrarModalSelectorEnvioWa()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 cursor-pointer">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="text-center space-y-1.5">
+                <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center text-xl mx-auto shadow-inner">
+                    <i class="fa-brands fa-whatsapp text-2xl"></i>
+                </div>
+                <h3 class="font-black text-sm uppercase text-slate-900 tracking-wide">¿Desde cuál app deseas enviar?</h3>
+                <p id="lbl-selector-envio-sub" class="text-[11px] text-gray-500 font-medium leading-relaxed">Abre directamente el chat del cliente sin buscarlo en tus contactos.</p>
+            </div>
+            <div class="space-y-2.5 pt-1">
+                <button type="button" onclick="window.ejecutarEnvioWaPorApp('normal')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs py-3 px-3 rounded-xl shadow-md flex items-center justify-center gap-2 uppercase cursor-pointer">
+                    <i class="fa-brands fa-whatsapp text-base"></i> <span id="lbl-btn-wa-normal">WhatsApp Normal (Directo)</span>
+                </button>
+                <button type="button" onclick="window.ejecutarEnvioWaPorApp('business')" class="w-full bg-teal-700 hover:bg-teal-800 text-white font-black text-xs py-3 px-3 rounded-xl shadow-md flex items-center justify-center gap-2 uppercase cursor-pointer">
+                    <i class="fa-solid fa-briefcase text-sm"></i> <span id="lbl-btn-wa-business">WhatsApp Business (Directo)</span>
+                </button>
+                <button type="button" onclick="window.ejecutarEnvioCorreoDirecto()" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 font-black text-xs py-2.5 px-3 rounded-xl shadow-sm flex items-center justify-center gap-2 uppercase cursor-pointer">
+                    <i class="fa-solid fa-envelope text-sm"></i> Enviar por Correo Electrónico
+                </button>
+                <button type="button" onclick="window.ejecutarEnvioWaElegirApp()" class="w-full bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold text-[11px] py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer">
+                    <i class="fa-solid fa-share-nodes text-xs"></i> Compartir por otra App
+                </button>
+                <button type="button" onclick="window.cerrarModalSelectorEnvioWa()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-xs py-2 rounded-xl text-center cursor-pointer">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL EDITOR DE PRECIOS / ÍTEMS EN DOCUMENTOS GUARDADOS (PRESUPUESTOS Y FACTURAS) -->
+    <div id="modal-editar-precios-doc" class="fixed inset-0 bg-slate-950/90 z-[138] overflow-y-auto backdrop-blur-md p-2 sm:p-4 hidden flex items-center justify-center">
+        <div class="bg-white rounded-3xl w-full max-w-2xl my-2 shadow-2xl overflow-hidden border border-gray-100 flex flex-col max-h-[90vh]">
+            <div class="bg-slate-900 text-white px-5 py-4 flex justify-between items-center border-b border-slate-800 shrink-0">
+                <div class="flex items-center gap-2.5 min-w-0">
+                    <i class="fa-solid fa-pen-to-square text-amber-400 text-xl shrink-0"></i>
+                    <div class="min-w-0">
+                        <h3 id="ed-doc-titulo" class="font-black text-sm tracking-wide uppercase truncate">Editar Precios del Documento</h3>
+                        <p id="ed-doc-subtitulo" class="text-[10px] text-slate-400 font-medium truncate">Corrige precios exactos sin perder el número de control</p>
+                    </div>
+                </div>
+                <button type="button" onclick="window.cerrarModalEditarPreciosDoc()" class="bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white w-8 h-8 rounded-xl flex items-center justify-center cursor-pointer shrink-0">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="p-4 sm:p-5 bg-gray-50 overflow-y-auto flex-grow space-y-4">
+                <div id="ed-doc-lista-items" class="space-y-3"></div>
+
+                <div class="bg-slate-900 text-white p-4 rounded-2xl border border-slate-800 font-mono space-y-2">
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="text-slate-400 font-sans font-bold uppercase">Nuevo Total Exacto:</span>
+                        <strong id="ed-doc-total-principal" class="text-emerald-400 text-base font-black">0 COP</strong>
+                    </div>
+                    <div class="flex justify-between items-center text-[11px] text-slate-300 border-t border-slate-800 pt-1.5">
+                        <span id="ed-doc-total-secundario">$0.00 USD</span>
+                        <span id="ed-doc-anticipo-live" class="text-amber-300 font-bold"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-900 px-5 py-3.5 flex justify-between items-center gap-2 shrink-0 border-t border-slate-800">
+                <button type="button" onclick="window.cerrarModalEditarPreciosDoc()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold px-4 py-2.5 rounded-xl cursor-pointer">Cancelar</button>
+                <button type="button" onclick="window.guardarEdicionPreciosDocFirebase()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs px-5 py-2.5 rounded-xl shadow-md flex items-center gap-1.5 uppercase cursor-pointer">
+                    <i class="fa-solid fa-floppy-disk"></i> Guardar Cambios en Firebase
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- MODAL CONFIRMACIÓN OPCIONAL: ¿MOSTRAR MONTOS EN BOLÍVARES (Bs)? -->
     <div id="modal-confirmar-bs" class="fixed inset-0 bg-slate-950/85 z-[130] backdrop-blur-md p-4 hidden flex items-center justify-center">
         <div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl relative border border-gray-100 space-y-4">
@@ -3427,9 +3500,118 @@
             window.abrirWhatsAppSelector('', msg);
         };
 
-        window.abrirWhatsAppSelector = async function(telefono, mensaje) {
-            const cleanPhone = (telefono || '').replace(/[^0-9]/g, '');
+        window.normalizarTelefonoWhatsApp = function(telefono) {
+            let clean = String(telefono || '').replace(/[^0-9]/g, '');
+            if (!clean || clean.length < 7) return '';
+            if (clean.startsWith('00')) clean = clean.slice(2);
+            // Venezuela local (ej: 04247357549 -> 584247357549)
+            if (clean.length === 11 && clean.startsWith('0')) {
+                return '58' + clean.slice(1);
+            }
+            // Venezuela sin 0 inicial (ej: 4247357549 -> 584247357549)
+            if (clean.length === 10 && /^(412|414|416|424|426|2)/.test(clean)) {
+                return '58' + clean;
+            }
+            // Colombia móvil sin código (ej: 3101234567 -> 573101234567)
+            if (clean.length === 10 && clean.startsWith('3')) {
+                return '57' + clean;
+            }
+            return clean;
+        };
+
+        let _envioWaPendiente = null;
+
+        window.cerrarModalSelectorEnvioWa = function() {
+            document.getElementById('modal-selector-envio-wa')?.classList.add('hidden');
+            _envioWaPendiente = null;
+        };
+
+        window.ejecutarEnvioWaElegirApp = async function() {
+            const data = _envioWaPendiente;
+            window.cerrarModalSelectorEnvioWa();
+            if (!data) return;
+            const textoCompleto = data.mensaje || '';
+            if (navigator.share) {
+                try {
+                    await navigator.share({ title: 'Tucocel C.A.', text: textoCompleto });
+                    return;
+                } catch(err) {
+                    if (err.name === 'AbortError') return;
+                }
+            }
+            const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(textoCompleto)}`;
+            const win = window.open(url, '_blank');
+            if (!win) window.location.href = url;
+        };
+
+        window.ejecutarEnvioWaPorApp = function(tipoApp) {
+            const data = _envioWaPendiente;
+            window.cerrarModalSelectorEnvioWa();
+            if (!data) return;
+            const textEnc = encodeURIComponent(data.mensaje || '');
+            const query = data.phoneNorm ? `phone=${data.phoneNorm}&text=${textEnc}` : `text=${textEnc}`;
+            const webFallback = `https://api.whatsapp.com/send?${query}`;
+            const esAndroid = /Android/i.test(navigator.userAgent || '');
+
+            if (esAndroid) {
+                const pkg = (tipoApp === 'business') ? 'com.whatsapp.w4b' : 'com.whatsapp';
+                const intentUrl = `intent://send?${query}#Intent;scheme=whatsapp;package=${pkg};S.browser_fallback_url=${encodeURIComponent(webFallback)};end`;
+                window.location.href = intentUrl;
+                return;
+            }
+
+            const win = window.open(webFallback, '_blank');
+            if (!win) window.location.href = webFallback;
+        };
+
+        window.ejecutarEnvioCorreoDirecto = function() {
+            const data = _envioWaPendiente;
+            window.cerrarModalSelectorEnvioWa();
+            if (!data) return;
+            const asunto = encodeURIComponent('Comprobante TUCOCEL C.A.');
+            const cuerpo = encodeURIComponent(data.mensaje || '');
+            window.location.href = `mailto:?subject=${asunto}&body=${cuerpo}`;
+        };
+
+        window.abrirWhatsAppSelector = async function(telefono, mensaje, opciones) {
+            const phoneNorm = window.normalizarTelefonoWhatsApp(telefono);
             const textoCompleto = mensaje || '';
+            const elegirMedio = Boolean(opciones && opciones.elegirMedio);
+
+            // Para facturas, presupuestos, Cashea, apartados y cierres: elegir WhatsApp Normal o Business directo al cliente
+            if (elegirMedio) {
+                const modal = document.getElementById('modal-selector-envio-wa');
+                if (modal) {
+                    _envioWaPendiente = {
+                        telefonoRaw: telefono || '',
+                        phoneNorm,
+                        mensaje: textoCompleto
+                    };
+                    const lblNorm = document.getElementById('lbl-btn-wa-normal');
+                    const lblBus = document.getElementById('lbl-btn-wa-business');
+                    const lblSub = document.getElementById('lbl-selector-envio-sub');
+                    if (phoneNorm) {
+                        const numMostrar = telefono || phoneNorm;
+                        if (lblNorm) lblNorm.innerText = `WhatsApp Normal (${numMostrar})`;
+                        if (lblBus) lblBus.innerText = `WhatsApp Business (${numMostrar})`;
+                        if (lblSub) lblSub.innerText = `Destino automático: ${numMostrar}. Toca el WhatsApp desde el que deseas enviarlo sin buscar contactos.`;
+                    } else {
+                        if (lblNorm) lblNorm.innerText = 'WhatsApp Normal';
+                        if (lblBus) lblBus.innerText = 'WhatsApp Business';
+                        if (lblSub) lblSub.innerText = 'Este registro no tiene teléfono guardado. Elige desde cuál aplicación deseas enviarlo.';
+                    }
+                    modal.classList.remove('hidden');
+                    return;
+                }
+            }
+
+            const textEnc = encodeURIComponent(textoCompleto);
+            if (phoneNorm) {
+                const url = `https://api.whatsapp.com/send?phone=${phoneNorm}&text=${textEnc}`;
+                const win = window.open(url, '_blank');
+                if (!win) window.location.href = url;
+                return;
+            }
 
             if (navigator.share) {
                 try {
@@ -3440,12 +3622,276 @@
                 }
             }
 
-            const textEnc = encodeURIComponent(textoCompleto);
-            const url = cleanPhone ? `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${textEnc}` : `https://api.whatsapp.com/send?text=${textEnc}`;
-            window.open(url, '_blank');
+            const url = `https://api.whatsapp.com/send?text=${textEnc}`;
+            const win = window.open(url, '_blank');
+            if (!win) window.location.href = url;
         };
 
-        window.abrirModalConsultaBanner = function() { document.getElementById('modal-consulta-banner')?.classList.remove('hidden'); };
+        // EDITOR UNIVERSAL DE TELÉFONO EN FIREBASE (Facturas, Cashea, Presupuestos y Apartados)
+        window.editarTelefonoRegistroFirebase = async function(coleccion, docId, telefonoActual, nombreCliente, tipoModulo) {
+            const nuevoTel = prompt(
+                `📞 EDITAR TELÉFONO DEL CLIENTE\nCliente: ${nombreCliente || 'Cliente'}\nNúmero actual: ${telefonoActual || 'Sin número'}\n\nIngrese el nuevo número de WhatsApp (ej: 04247357549 o 573101234567):`,
+                telefonoActual || ''
+            );
+            if (nuevoTel === null) return;
+            const telLimpio = nuevoTel.trim();
+            if (!window.normalizarTelefonoWhatsApp(telLimpio)) {
+                return alert("⚠️ Ingrese un número de teléfono válido (mínimo 7 dígitos).");
+            }
+            const firestoreDb = getDbCompat();
+            if (!firestoreDb) return alert("Sin conexión a Firebase.");
+            try {
+                await firestoreDb.collection(coleccion).doc(docId).update({ telefono: telLimpio });
+                if (tipoModulo === 'ventas') await window.cargarHistorialFirebase();
+                else if (tipoModulo === 'cashea') await window.cargarHistorialCasheaFirebase();
+                else if (tipoModulo === 'presupuestos') await window.cargarPresupuestosFirebase();
+                else if (tipoModulo === 'apartados') await window.cargarApartadosFirebase();
+                alert(`✅ Teléfono actualizado a: ${telLimpio}`);
+            } catch (e) {
+                console.error(e);
+                alert("Error actualizando teléfono: " + (e.message || e));
+            }
+        };
+
+
+        // =========================================================================
+        // EDITOR DE PRECIOS / ÍTEMS EN REGISTROS YA GUARDADOS (PRESUPUESTOS / FACTURAS)
+        // =========================================================================
+        let _docEnEdicionPrecios = null;
+
+        window.cerrarModalEditarPreciosDoc = function() {
+            document.getElementById('modal-editar-precios-doc')?.classList.add('hidden');
+            _docEnEdicionPrecios = null;
+        };
+
+        window.abrirEditorPreciosDocumento = function(tipoModulo, index) {
+            let doc = null;
+            let coleccion = '';
+            if (tipoModulo === 'presupuestos') {
+                doc = HISTORIAL_PRESUPUESTOS[index];
+                coleccion = 'presupuestos_emitidos';
+            } else if (tipoModulo === 'ventas') {
+                doc = HISTORIAL_NOTAS[index];
+                coleccion = 'notas_ventas';
+            } else if (tipoModulo === 'cashea') {
+                doc = HISTORIAL_NOTAS_CASHEA[index];
+                coleccion = 'notas_cashea';
+            }
+            if (!doc) return;
+
+            const res = window.resolverTotalesDocumento(doc);
+            _docEnEdicionPrecios = {
+                tipoModulo,
+                coleccion,
+                docId: doc.id,
+                docOriginal: doc,
+                tCOP: res.tCOP,
+                tBS: res.tBS,
+                itemsEdit: res.itemsResueltos.map(it => {
+                    const m = it._m;
+                    return {
+                        ...it,
+                        modelo: it.modelo || '',
+                        cantidad: m.cant,
+                        monedaIngreso: m.moneda,
+                        precioUnitEdit: m.moneda === 'COP' ? m.unitCOP : m.unitUSD
+                    };
+                })
+            };
+
+            const numTxt = doc.numControlTexto || (tipoModulo === 'presupuestos'
+                ? `PRE-${String(doc.numNota || 1).padStart(6, '0')}`
+                : (doc.esCashea ? `NC-${String(doc.numNota || 1).padStart(6, '0')}` : `#${String(doc.numNota || 1).padStart(6, '0')}`));
+
+            const elTit = document.getElementById('ed-doc-titulo');
+            const elSub = document.getElementById('ed-doc-subtitulo');
+            if (elTit) elTit.innerText = `Editar Precios — ${numTxt}`;
+            if (elSub) elSub.innerText = `Cliente: ${doc.cliente || 'Cliente'} | Tasa: ${res.tCOP} COP/$`;
+
+            window.renderizarItemsEditorPreciosDoc();
+            document.getElementById('modal-editar-precios-doc')?.classList.remove('hidden');
+        };
+
+        window.renderizarItemsEditorPreciosDoc = function() {
+            const st = _docEnEdicionPrecios;
+            const cont = document.getElementById('ed-doc-lista-items');
+            if (!st || !cont) return;
+
+            cont.innerHTML = st.itemsEdit.map((it, idx) => {
+                const valInput = it.monedaIngreso === 'COP'
+                    ? window.formatearNumeroParaInput(it.precioUnitEdit, false)
+                    : window.formatearNumeroParaInput(it.precioUnitEdit, true);
+                return `
+                    <div class="bg-white p-3.5 rounded-2xl border border-gray-200 shadow-sm space-y-2.5">
+                        <div>
+                            <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Descripción del Artículo ${idx + 1}</label>
+                            <input type="text" id="ed-it-mod-${idx}" value="${String(it.modelo || '').replace(/"/g, '&quot;')}" oninput="window.actualizarCalculoEditorPreciosDoc()" class="w-full bg-gray-50 border border-gray-200 p-2 rounded-xl text-xs font-bold text-gray-900 focus:bg-white">
+                        </div>
+                        <div class="grid grid-cols-12 gap-2 items-end">
+                            <div class="col-span-3">
+                                <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Cant.</label>
+                                <input type="number" min="1" id="ed-it-cant-${idx}" value="${it.cantidad}" oninput="window.actualizarCalculoEditorPreciosDoc()" class="w-full bg-gray-50 border border-gray-200 p-2 rounded-xl text-xs font-mono font-black text-center text-gray-900">
+                            </div>
+                            <div class="col-span-4">
+                                <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Moneda</label>
+                                <select id="ed-it-mon-${idx}" onchange="window.actualizarCalculoEditorPreciosDoc()" class="w-full bg-white border-2 border-blue-500 p-2 rounded-xl text-xs font-black text-blue-700">
+                                    <option value="COP" ${it.monedaIngreso === 'COP' ? 'selected' : ''}>🇨🇴 COP</option>
+                                    <option value="USD" ${it.monedaIngreso === 'USD' ? 'selected' : ''}>💵 USD</option>
+                                </select>
+                            </div>
+                            <div class="col-span-5">
+                                <label class="text-[9px] text-emerald-700 font-bold uppercase block mb-1">Precio Unitario *</label>
+                                <input type="text" inputmode="decimal" id="ed-it-prc-${idx}" value="${valInput}" oninput="window.formatearInputMonto(this); window.actualizarCalculoEditorPreciosDoc()" class="w-full bg-emerald-50/50 border-2 border-emerald-500 p-2 rounded-xl text-xs font-mono font-black text-gray-900 text-right">
+                            </div>
+                        </div>
+                        <div class="flex justify-end text-[11px] font-mono font-bold text-slate-600">
+                            Subtotal: <span id="ed-it-sub-${idx}" class="ml-1.5 text-slate-900 font-black">0</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            window.actualizarCalculoEditorPreciosDoc();
+        };
+
+        window.actualizarCalculoEditorPreciosDoc = function() {
+            const st = _docEnEdicionPrecios;
+            if (!st) return null;
+
+            const tCOP = st.tCOP || 3600;
+            const nuevosItems = st.itemsEdit.map((orig, idx) => {
+                const modelo = (document.getElementById(`ed-it-mod-${idx}`)?.value || orig.modelo || '').trim();
+                const cant = Math.max(1, parseInt(document.getElementById(`ed-it-cant-${idx}`)?.value, 10) || 1);
+                const moneda = document.getElementById(`ed-it-mon-${idx}`)?.value || 'COP';
+                const prcRaw = window.parsearMontoFormateado(document.getElementById(`ed-it-prc-${idx}`)?.value);
+
+                let precioUnitUSD, precioUnitCOP, subtotalUSD, subtotalCOP;
+                if (moneda === 'COP') {
+                    precioUnitCOP = Math.round(prcRaw);
+                    subtotalCOP = Math.round(precioUnitCOP * cant);
+                    precioUnitUSD = tCOP > 0 ? window.redondear2(precioUnitCOP / tCOP) : 0;
+                    subtotalUSD = tCOP > 0 ? window.redondear2(subtotalCOP / tCOP) : 0;
+                } else {
+                    precioUnitUSD = window.redondear2(prcRaw);
+                    subtotalUSD = window.redondear2(precioUnitUSD * cant);
+                    precioUnitCOP = Math.round(precioUnitUSD * tCOP);
+                    subtotalCOP = Math.round(subtotalUSD * tCOP);
+                }
+
+                const elSub = document.getElementById(`ed-it-sub-${idx}`);
+                if (elSub) {
+                    elSub.innerText = moneda === 'COP'
+                        ? `${subtotalCOP.toLocaleString('es-CO')} COP`
+                        : `$${subtotalUSD.toFixed(2)} USD`;
+                }
+
+                const itemLimpio = {
+                    id: orig.id || ('ed-' + Date.now() + '-' + idx),
+                    modelo,
+                    cantidad: cant,
+                    monedaIngreso: moneda,
+                    precioOriginalUnit: moneda === 'COP' ? precioUnitCOP : precioUnitUSD,
+                    precioUnitUSD,
+                    precio: subtotalUSD,
+                    totalCOP: subtotalCOP
+                };
+                if (orig.imeis) itemLimpio.imeis = orig.imeis;
+                return itemLimpio;
+            });
+
+            const res = window.resolverTotalesDocumento({
+                items: nuevosItems,
+                tasaCop: tCOP,
+                tasaBs: st.tBS
+            });
+
+            const elPri = document.getElementById('ed-doc-total-principal');
+            const elSec = document.getElementById('ed-doc-total-secundario');
+            const elAnt = document.getElementById('ed-doc-anticipo-live');
+
+            if (res.monedaPrincipal === 'COP') {
+                if (elPri) elPri.innerText = `${res.totalCOP.toLocaleString('es-CO')} COP`;
+                if (elSec) elSec.innerText = `Equiv: $${res.totalUSD.toFixed(2)} USD`;
+            } else {
+                if (elPri) elPri.innerText = `$${res.totalUSD.toFixed(2)} USD`;
+                if (elSec) elSec.innerText = `Equiv: ${res.totalCOP.toLocaleString('es-CO')} COP`;
+            }
+
+            let anticipoCOP = 0, restaCOP = 0, anticipoUSD = 0, restaUSD = 0;
+            if (st.tipoModulo === 'presupuestos') {
+                const pct = Number(st.docOriginal.porcAnticipo || 0);
+                if (pct > 0) {
+                    if (res.monedaPrincipal === 'COP') {
+                        anticipoCOP = Math.round(res.totalCOP * (pct / 100));
+                        restaCOP = Math.max(0, res.totalCOP - anticipoCOP);
+                        anticipoUSD = tCOP > 0 ? window.redondear2(anticipoCOP / tCOP) : 0;
+                        restaUSD = tCOP > 0 ? window.redondear2(restaCOP / tCOP) : 0;
+                        if (elAnt) elAnt.innerText = `Anticipo ${pct}%: ${anticipoCOP.toLocaleString('es-CO')} COP`;
+                    } else {
+                        anticipoUSD = window.redondear2(res.totalUSD * (pct / 100));
+                        restaUSD = window.redondear2(Math.max(0, res.totalUSD - anticipoUSD));
+                        anticipoCOP = Math.round(anticipoUSD * tCOP);
+                        restaCOP = Math.round(restaUSD * tCOP);
+                        if (elAnt) elAnt.innerText = `Anticipo ${pct}%: $${anticipoUSD.toFixed(2)} USD`;
+                    }
+                } else if (elAnt) {
+                    elAnt.innerText = '';
+                }
+            } else if (elAnt) {
+                elAnt.innerText = '';
+            }
+
+            return {
+                nuevosItems,
+                monedaPrincipal: res.monedaPrincipal,
+                totalCOP: res.totalCOP,
+                totalUSD: res.totalUSD,
+                anticipoCOP,
+                restaCOP,
+                anticipoUSD,
+                restaUSD
+            };
+        };
+
+        window.guardarEdicionPreciosDocFirebase = async function() {
+            const st = _docEnEdicionPrecios;
+            if (!st) return;
+            const calc = window.actualizarCalculoEditorPreciosDoc();
+            if (!calc || calc.nuevosItems.some(it => !it.modelo || (it.totalCOP <= 0 && it.precio <= 0))) {
+                return alert("⚠️ Verifica que todos los artículos tengan descripción y un precio mayor a 0.");
+            }
+            const firestoreDb = getDbCompat();
+            if (!firestoreDb) return alert("Sin conexión a Firebase.");
+
+            const payload = {
+                items: calc.nuevosItems,
+                monedaPrincipal: calc.monedaPrincipal,
+                totalCOP: calc.totalCOP,
+                totalUSD: calc.totalUSD
+            };
+
+            if (st.tipoModulo === 'presupuestos') {
+                payload.anticipoCOP = calc.anticipoCOP;
+                payload.restaCOP = calc.restaCOP;
+                payload.anticipoUSD = calc.anticipoUSD;
+                payload.restaUSD = calc.restaUSD;
+            }
+
+            try {
+                await firestoreDb.collection(st.coleccion).doc(st.docId).update(payload);
+                const tipoMod = st.tipoModulo;
+                window.cerrarModalEditarPreciosDoc();
+                if (tipoMod === 'presupuestos') await window.cargarPresupuestosFirebase();
+                else if (tipoMod === 'ventas') await window.cargarHistorialFirebase();
+                else if (tipoMod === 'cashea') await window.cargarHistorialCasheaFirebase();
+                alert("✅ Precios y totales actualizados exactamente en Firebase. Ya puedes reenviarlo o reimprimirlo.");
+            } catch (e) {
+                console.error(e);
+                alert("Error guardando cambios: " + (e.message || e));
+            }
+        };
+
+                window.abrirModalConsultaBanner = function() { document.getElementById('modal-consulta-banner')?.classList.remove('hidden'); };
         window.cerrarModalConsultaBanner = function() { document.getElementById('modal-consulta-banner')?.classList.add('hidden'); };
         window.enviarConsultaBannerWhatsApp = function() {
             const nombre = document.getElementById('banner-con-nombre')?.value.trim() || '';
@@ -4350,6 +4796,7 @@
                                 <span class="bg-blue-900/60 text-blue-300 border border-blue-700 text-[9px] font-mono px-2 py-0.5 rounded font-bold">${apt.cedula}</span>
                             </div>
                             <p class="text-[11px] text-amber-300 font-bold mt-0.5 truncate">📦 ${apt.modelo}</p>
+                            <p class="text-[9.5px] text-cyan-400 font-mono mt-0.5">📞 ${apt.telefono || 'Sin teléfono'}</p>
                             <div class="mt-1.5 pt-1.5 border-t border-slate-800 text-[10px] font-mono text-slate-400 flex justify-between">
                                 <span>Total: <strong class="text-white">$${(apt.precioPactadoUSD || 0).toFixed(2)}</strong></span>
                                 <span>Abonado: <strong class="text-emerald-400">$${(apt.abonoAcumuladoUSD || 0).toFixed(2)}</strong></span>
@@ -4366,8 +4813,11 @@
                             <button onclick="window.imprimirTicketApartado('${apt.id}')" class="bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold text-xs px-2.5 py-1.5 rounded-xl cursor-pointer" title="Imprimir Comprobante 10x13 Dual">
                                 <i class="fa-solid fa-print"></i>
                             </button>
-                            <button onclick="window.enviarWhatsAppApartadoObjeto(APARTADOS[${idx}])" class="bg-emerald-800/60 hover:bg-emerald-700 text-emerald-300 font-bold text-xs px-2.5 py-1.5 rounded-xl cursor-pointer" title="Reenviar Estado por WhatsApp">
+                            <button onclick="const a=APARTADOS.find(x=>x.id==='${apt.id}'); if(a) window.enviarWhatsAppApartadoObjeto(a);" class="bg-emerald-800/60 hover:bg-emerald-700 text-emerald-300 font-bold text-xs px-2.5 py-1.5 rounded-xl cursor-pointer" title="Reenviar Estado por WhatsApp directo a ${apt.telefono || 'cliente'}">
                                 <i class="fa-brands fa-whatsapp"></i>
+                            </button>
+                            <button onclick="window.editarTelefonoRegistroFirebase('equipos_apartados', '${apt.id}', '${(apt.telefono || '').replace(/'/g, '')}', '${(apt.nombre || '').replace(/'/g, '')}', 'apartados')" class="bg-indigo-900/70 hover:bg-indigo-700 text-indigo-300 font-bold text-xs px-2.5 py-1.5 rounded-xl cursor-pointer" title="Editar Teléfono (${apt.telefono || 'Sin número'})">
+                                <i class="fa-solid fa-phone-flip"></i>
                             </button>
                             <button onclick="window.eliminarApartadoFirebase('${apt.id}')" class="bg-red-950/60 hover:bg-red-800 text-red-400 font-bold text-xs px-2.5 py-1.5 rounded-xl transition-colors border border-red-800/50 cursor-pointer" title="Eliminar Apartado">
                                 <i class="fa-solid fa-trash-can"></i>
@@ -4546,7 +4996,7 @@
                         `📍 Av. Bolívar, entre calles 12 y 13, Cordero, Táchira.\n` +
                         `¡Gracias por su confianza! 🚀`;
 
-            window.abrirWhatsAppSelector(apt.telefono, msg);
+            window.abrirWhatsAppSelector(apt.telefono, msg, { elegirMedio: true });
         };
 
         window.imprimirTicketApartado = function(id) {
@@ -4774,11 +5224,15 @@
                     }
                 }
 
-                let precioUnitUSD = precioRaw;
-                let precioUnitCOP = precioRaw * tCOP;
+                let precioUnitUSD = window.redondear2(precioRaw);
+                let precioUnitCOP = Math.round(precioRaw * tCOP);
+                let subtotalUSD = window.redondear2(precioUnitUSD * cant);
+                let subtotalCOP = Math.round(precioUnitCOP * cant);
                 if (monedaItem === 'COP') {
-                    precioUnitCOP = precioRaw;
-                    precioUnitUSD = tCOP > 0 ? window.redondear2(precioRaw / tCOP) : 0;
+                    precioUnitCOP = Math.round(precioRaw);
+                    subtotalCOP = Math.round(precioUnitCOP * cant);
+                    precioUnitUSD = tCOP > 0 ? window.redondear2(precioUnitCOP / tCOP) : 0;
+                    subtotalUSD = tCOP > 0 ? window.redondear2(subtotalCOP / tCOP) : 0;
                 }
 
                 ITEMS_VENTA_ACTIVA.push({
@@ -4786,10 +5240,10 @@
                     modelo,
                     cantidad: cant,
                     monedaIngreso: monedaItem,
-                    precioOriginalUnit: precioRaw,
+                    precioOriginalUnit: monedaItem === 'COP' ? precioUnitCOP : precioUnitUSD,
                     precioUnitUSD,
-                    precio: window.redondear2(precioUnitUSD * cant),
-                    totalCOP: precioUnitCOP * cant,
+                    precio: subtotalUSD,
+                    totalCOP: subtotalCOP,
                     imeis: checkImei ? imeis : null
                 });
 
@@ -4852,22 +5306,27 @@
                 window.calcularTotalesFactura();
                 return;
             }
+            const tCOP = parseFloat(document.getElementById('tasa-cop')?.value) || 3600;
             cont.innerHTML = ITEMS_VENTA_ACTIVA.map((item, idx) => {
-                const badgeMoneda = item.monedaIngreso === 'COP'
-                    ? `<span class="text-[9px] bg-emerald-950 text-emerald-300 border border-emerald-500/40 px-1.5 py-0.2 rounded font-bold">${Math.round(item.totalCOP || (item.precio * 3600)).toLocaleString('es-CO')} COP</span>`
-                    : `<span class="text-[9px] bg-blue-950 text-blue-300 border border-blue-500/40 px-1.5 py-0.2 rounded font-bold">$${item.precio.toFixed(2)} USD</span>`;
+                const m = window.resolverMontosItem(item, tCOP, item.monedaIngreso || 'USD');
+                const badgeMoneda = m.moneda === 'COP'
+                    ? `<span class="text-[9px] bg-emerald-950 text-emerald-300 border border-emerald-500/40 px-1.5 py-0.2 rounded font-bold">${m.unitCOP.toLocaleString('es-CO')} COP c/u</span>`
+                    : `<span class="text-[9px] bg-blue-950 text-blue-300 border border-blue-500/40 px-1.5 py-0.2 rounded font-bold">$${m.unitUSD.toFixed(2)} USD c/u</span>`;
+                const subTxt = m.moneda === 'COP'
+                    ? `${m.subCOP.toLocaleString('es-CO')} COP`
+                    : `$${m.subUSD.toFixed(2)}`;
 
                 return `
                     <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex justify-between items-center text-white text-xs gap-2">
                         <div class="min-w-0">
                             <p class="font-bold truncate text-white">${item.cantidad}x ${item.modelo}</p>
-                            <div class="flex items-center gap-1.5 mt-0.5">
+                            <div class="flex items-center gap-1.5 mt-0.5 flex-wrap">
                                 ${badgeMoneda}
                                 ${item.imeis ? `<span class="text-[9px] text-amber-400 font-mono font-bold">IMEI: ${item.imeis.join(', ')}</span>` : ''}
                             </div>
                         </div>
                         <div class="flex items-center gap-2 shrink-0">
-                            <span class="font-mono font-bold text-white">$${item.precio.toFixed(2)}</span>
+                            <span class="font-mono font-bold text-white">${subTxt}</span>
                             <button onclick="window.removerItemVenta(${idx})" class="text-red-400 hover:text-red-300 font-bold p-1 cursor-pointer" title="Eliminar ítem"><i class="fa-solid fa-xmark"></i></button>
                         </div>
                     </div>
@@ -4923,18 +5382,20 @@
 
         window.calcularTotalesFactura = function() {
             if (typeof window.guardarTasasActuales === 'function') window.guardarTasasActuales();
-            let totalBaseUSD = 0;
-            ITEMS_VENTA_ACTIVA.forEach(i => totalBaseUSD += (Number(i.precio) || 0));
-
             const esCashea = document.getElementById('chk-modalidad-cashea')?.checked || false;
-            const totalUSD = totalBaseUSD;
-
             const tCOP = parseFloat(document.getElementById('tasa-cop')?.value) || 3600;
             const tBS = parseFloat(document.getElementById('tasa-bs')?.value) || 3.3;
-            const tBCV = parseFloat(document.getElementById('tasa-bcv')?.value) || 36.50;
+            const tBCV = parseFloat(document.getElementById('tasa-bcv')?.value) || 0;
 
-            const totalCOP = Math.round(totalUSD * tCOP);
-            const totalBs = (tCOP > 0 && tBS > 0) ? (totalCOP / tBS) : 0;
+            const resFact = window.resolverTotalesDocumento({
+                items: ITEMS_VENTA_ACTIVA,
+                tasaCop: tCOP,
+                tasaBs: tBS,
+                tasaBcv: tBCV
+            });
+            const totalUSD = resFact.totalUSD;
+            const totalCOP = resFact.totalCOP;
+            const totalBs = resFact.totalBS;
 
             const totalEl = document.getElementById('total-usd');
             const lblTipoCobro = document.getElementById('lbl-tipo-cobro-titulo');
@@ -5011,7 +5472,7 @@
 
             const tCOP = parseFloat(document.getElementById('tasa-cop')?.value) || 3600;
             const tBS = parseFloat(document.getElementById('tasa-bs')?.value) || 3.3;
-            const tBCV = parseFloat(document.getElementById('tasa-bcv')?.value) || 36.50;
+            const tBCV = parseFloat(document.getElementById('tasa-bcv')?.value) || 0;
 
             const monedaPago = document.getElementById('vuelto-moneda-pago')?.value || 'USD';
             const montoEntregadoRaw = document.getElementById('vuelto-monto-recibido')?.value;
@@ -5076,7 +5537,7 @@
 
             const tCOP = parseFloat(document.getElementById('tasa-cop')?.value) || 3600;
             const tBS = parseFloat(document.getElementById('tasa-bs')?.value) || 3.3;
-            const tBCV = parseFloat(document.getElementById('tasa-bcv')?.value) || 36.50;
+            const tBCV = parseFloat(document.getElementById('tasa-bcv')?.value) || 0;
 
             const moneda = document.getElementById('vuelto-moneda-pago')?.value || 'USD';
             const inp = document.getElementById('vuelto-monto-recibido');
@@ -5139,11 +5600,16 @@
                 return null;
             }
 
-            let totalUSD = 0;
-            ITEMS_VENTA_ACTIVA.forEach(i => totalUSD += (Number(i.precio) || 0));
-            totalUSD = window.redondear2(totalUSD);
             const tCOP = parseFloat(document.getElementById('tasa-cop').value) || 3600;
             const tBS = parseFloat(document.getElementById('tasa-bs').value) || 3.3;
+            const resNota = window.resolverTotalesDocumento({
+                items: ITEMS_VENTA_ACTIVA,
+                tasaCop: tCOP,
+                tasaBs: tBS
+            });
+            const totalUSD = resNota.totalUSD;
+            const totalCOP = resNota.totalCOP;
+            const monedaPrincipalNota = resNota.monedaPrincipal;
 
             const ahora = new Date();
             const dia = String(ahora.getDate()).padStart(2, '0');
@@ -5161,7 +5627,7 @@
             const modalidadCasheaActiva = document.getElementById('chk-modalidad-cashea')?.checked || false;
             const nivelInicialCashea = parseFloat(document.getElementById('cashea-porc-inicial')?.value) || 40;
             const metodoPagoInicial = document.getElementById('cashea-metodo-inicial')?.value || 'EFECTIVO_USD';
-            const tasaBcvVal = parseFloat(document.getElementById('tasa-bcv')?.value) || 36.50;
+            const tasaBcvVal = parseFloat(document.getElementById('tasa-bcv')?.value) || 0;
             const odcCasheaVal = window.obtenerOdcCashea();
 
             const coleccionDestino = modalidadCasheaActiva ? "notas_cashea" : "notas_ventas";
@@ -5201,6 +5667,8 @@
                 telefono: document.getElementById('fact-cli-telefono').value.trim() || "04247357549",
                 direccion: document.getElementById('fact-cli-direccion').value.trim() || "Cordero",
                 items: [...ITEMS_VENTA_ACTIVA],
+                monedaPrincipal: monedaPrincipalNota,
+                totalCOP,
                 totalUSD,
                 tasaCop: tCOP,
                 tasaBs: tBS,
@@ -5248,34 +5716,55 @@
                 s.textContent = odcVal || 'N/A';
             });
 
+            const resTk = window.resolverTotalesDocumento(nota);
+            const monedaPrincipal = resTk.monedaPrincipal;
+            const usdNeto = resTk.totalUSD;
+            const totalCopExacto = resTk.totalCOP;
+            const totalBsExacto = resTk.totalBS;
+            const copTasa = resTk.tCOP;
+            const bsTasa = resTk.tBS;
+            const bcvTasa = resTk.tBCV;
+
             // Mostrar/ocultar filas de abono/saldo si existen en la nota
-            if (nota.abonoUSD !== undefined || nota.saldoUSD !== undefined) {
+            if (nota.abonoUSD !== undefined || nota.saldoUSD !== undefined || nota.abonoCOP !== undefined) {
                 document.querySelectorAll('.tk-bind-fila-abono-saldo').forEach(f => f.style.display = 'table-row');
-                setAll('.tk-bind-val-abono', `$${Number(nota.abonoUSD || 0).toFixed(2)}`);
-                setAll('.tk-bind-val-saldo', `$${Number(nota.saldoUSD || 0).toFixed(2)}`);
+                if (monedaPrincipal === 'COP' && !nota.esCashea) {
+                    const abCOP = nota.abonoCOP !== undefined ? Math.round(Number(nota.abonoCOP)) : Math.round((Number(nota.abonoUSD) || 0) * copTasa);
+                    const sdCOP = nota.saldoCOP !== undefined ? Math.round(Number(nota.saldoCOP)) : Math.max(0, totalCopExacto - abCOP);
+                    setAll('.tk-bind-val-abono', `${abCOP.toLocaleString('es-CO')} COP`);
+                    setAll('.tk-bind-val-saldo', `${sdCOP.toLocaleString('es-CO')} COP`);
+                } else {
+                    setAll('.tk-bind-val-abono', `$${Number(nota.abonoUSD || 0).toFixed(2)}`);
+                    setAll('.tk-bind-val-saldo', `$${Number(nota.saldoUSD || 0).toFixed(2)}`);
+                }
             } else {
                 document.querySelectorAll('.tk-bind-fila-abono-saldo').forEach(f => f.style.display = 'none');
             }
 
-            const rowsHtml = (nota.items || []).map(item => `
-                <tr>
-                    <td style="text-align: center;">${item.cantidad}</td>
-                    <td>
-                        <strong>${item.modelo}</strong>
-                        ${item.imeis ? `<br><span style="color: #b91c1c; font-size: 7px;">[IMEI: ${item.imeis.join(', ')}]</span>` : ''}
-                    </td>
-                    <td style="text-align: right; font-weight: bold;">$${item.precio.toFixed(2)}</td>
-                </tr>
-            `).join('');
+            const rowsHtml = resTk.itemsResueltos.map(item => {
+                const m = item._m;
+                const puTxt = m.moneda === 'COP'
+                    ? `P/U: ${m.unitCOP.toLocaleString('es-CO')} COP`
+                    : `P/U: $${m.unitUSD.toFixed(2)} USD`;
+                const montoTxt = m.moneda === 'COP'
+                    ? `${m.subCOP.toLocaleString('es-CO')} COP`
+                    : `$${m.subUSD.toFixed(2)}`;
+                return `
+                    <tr>
+                        <td style="text-align: center;">${m.cant}</td>
+                        <td>
+                            <strong>${item.modelo}</strong>
+                            <br><span style="color: #475569; font-size: 6.8px;">${puTxt}</span>
+                            ${item.imeis ? `<br><span style="color: #b91c1c; font-size: 7px;">[IMEI: ${item.imeis.join(', ')}]</span>` : ''}
+                        </td>
+                        <td style="text-align: right; font-weight: bold; white-space: nowrap;">${montoTxt}</td>
+                    </tr>
+                `;
+            }).join('');
 
             document.querySelectorAll('.tk-bind-items-tabla').forEach(tb => {
                 tb.innerHTML = rowsHtml;
             });
-
-            const usdNeto = parseFloat(nota.totalUSD) || 0;
-            const copTasa = parseFloat(nota.tasaCop) || 3600;
-            const bsTasa = parseFloat(nota.tasaBs) || 3.3;
-            const bcvTasa = parseFloat(nota.tasaBcv) || 36.50;
 
             if (nota.esCashea) {
                 const totalFinanciado = usdNeto;
@@ -5303,26 +5792,34 @@
 
                 document.querySelectorAll('.tk-bind-cashea-disclaimer').forEach(el => el.style.display = 'block');
             } else {
-                const totalEnCop = usdNeto * copTasa;
-                const totalEnBs = bsTasa > 0 ? (totalEnCop / bsTasa) : 0;
-
                 setAll('.tk-bind-doc-type', 'NOTA DE ENTREGA');
-                setAll('.tk-bind-lbl-total-usd', 'Total USD:');
-                setAll('.tk-bind-total-usd', `$${usdNeto.toFixed(2)}`);
 
-                setAll('.tk-bind-lbl-ref-cop', 'Ref COP:');
-                setAll('.tk-bind-total-cop', `${Math.round(totalEnCop).toLocaleString('es-CO')} COP`);
+                if (monedaPrincipal === 'COP') {
+                    setAll('.tk-bind-lbl-total-usd', 'Total COP:');
+                    setAll('.tk-bind-total-usd', `${totalCopExacto.toLocaleString('es-CO')} COP`);
+
+                    setAll('.tk-bind-lbl-ref-cop', 'Ref USD:');
+                    setAll('.tk-bind-total-cop', `$${usdNeto.toFixed(2)} USD`);
+
+                    setAll('.tk-bind-nota-tasas', incluirBs ? 'Montos en USD y VES calculados con la tasa del día.' : 'Monto en USD calculado con la tasa del día.');
+                } else {
+                    setAll('.tk-bind-lbl-total-usd', 'Total USD:');
+                    setAll('.tk-bind-total-usd', `$${usdNeto.toFixed(2)}`);
+
+                    setAll('.tk-bind-lbl-ref-cop', 'Ref COP:');
+                    setAll('.tk-bind-total-cop', `${totalCopExacto.toLocaleString('es-CO')} COP`);
+
+                    setAll('.tk-bind-nota-tasas', incluirBs ? 'Montos en COP y VES calculados con la tasa del día.' : 'Monto en COP calculado con la tasa del día.');
+                }
 
                 setAll('.tk-bind-lbl-ref-bs', 'Ref VES:');
-                setAll('.tk-bind-total-bs', `${totalEnBs.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs`);
+                setAll('.tk-bind-total-bs', `${totalBsExacto.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs`);
                 document.querySelectorAll('.tk-bind-total-bs').forEach(el => {
                     const tr = el.closest('tr');
                     if (tr) tr.style.display = incluirBs ? 'table-row' : 'none';
                 });
 
                 setAll('.tk-bind-status-label', nota.estatus || "PROCESADA");
-                setAll('.tk-bind-nota-tasas', incluirBs ? 'Montos en COP y VES calculados con la tasa del día.' : 'Montos en COP calculados con la tasa del día.');
-
                 document.querySelectorAll('.tk-bind-cashea-disclaimer').forEach(el => el.style.display = 'none');
             }
         };
@@ -5336,16 +5833,20 @@
                 return;
             }
             const incluirBs = Boolean(mostrarBs);
-            const desc = (nota.items || []).map(i => {
-                const imeiLinea = i.imeis && i.imeis.length ? `\n   IMEI: ${i.imeis.join(', ')}` : '';
-                return `• *${i.cantidad}x ${i.modelo}*\n   Monto: *$${Number(i.precio || 0).toFixed(2)} USD*${imeiLinea}`;
-            }).join('\n\n');
+            const resWa = window.resolverTotalesDocumento(nota);
+            const monedaPrincipal = resWa.monedaPrincipal;
+            const usdNeto = resWa.totalUSD;
+            const totalEnCop = resWa.totalCOP;
+            const totalEnBs = resWa.totalBS;
 
-            const usdNeto = parseFloat(nota.totalUSD) || 0;
-            const copTasa = parseFloat(nota.tasaCop) || 3600;
-            const bsTasa = parseFloat(nota.tasaBs) || 3.3;
-            const totalEnCop = Math.round(usdNeto * copTasa);
-            const totalEnBs = bsTasa > 0 ? (totalEnCop / bsTasa) : 0;
+            const desc = resWa.itemsResueltos.map(i => {
+                const m = i._m;
+                const imeiLinea = i.imeis && i.imeis.length ? `\n   IMEI: ${i.imeis.join(', ')}` : '';
+                if (m.moneda === 'COP' && !nota.esCashea) {
+                    return `• *${m.cant}x ${i.modelo}*\n   Precio c/u: ${m.unitCOP.toLocaleString('es-CO')} COP\n   Subtotal: *${m.subCOP.toLocaleString('es-CO')} COP*${imeiLinea}`;
+                }
+                return `• *${m.cant}x ${i.modelo}*\n   Precio c/u: $${m.unitUSD.toFixed(2)} USD\n   Subtotal: *$${m.subUSD.toFixed(2)} USD*${imeiLinea}`;
+            }).join('\n\n');
 
             const numTxt = nota.numControlTexto || (nota.esCashea ? `NC-${String(nota.numNota).padStart(6, '0')}` : String(nota.numNota).padStart(6, '0'));
 
@@ -5356,7 +5857,7 @@
                 const pctCashea = 100 - pctTienda;
                 const saldoUSD = totalFinanciado * (pctCashea / 100);
                 const inicialUSD = totalFinanciado * (pctTienda / 100);
-                const bcvTasa = parseFloat(nota.tasaBcv) || 36.50;
+                const bcvTasa = parseFloat(nota.tasaBcv) || 0;
                 const inicialBsBCV = inicialUSD * bcvTasa;
                 const odcLine = nota.odcCashea ? `\n🔖 ODC Cashea: *${nota.odcCashea}*` : '';
 
@@ -5404,8 +5905,11 @@
                       `${desc}\n` +
                       `──────────────────\n` +
                       `💰 *TOTAL GENERAL:*\n` +
-                      `   • *$${usdNeto.toFixed(2)} USD*\n` +
-                      `   • ${totalEnCop.toLocaleString('es-CO')} COP\n` +
+                      (monedaPrincipal === 'COP'
+                          ? `   • *${totalEnCop.toLocaleString('es-CO')} COP*\n` +
+                            `   • $${usdNeto.toFixed(2)} USD\n`
+                          : `   • *$${usdNeto.toFixed(2)} USD*\n` +
+                            `   • ${totalEnCop.toLocaleString('es-CO')} COP\n`) +
                       (incluirBs ? `   • ${totalEnBs.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs\n` : '') +
                       `──────────────────\n` +
                       `🛡️ *GARANTÍA (60 DÍAS):*\n` +
@@ -5413,7 +5917,7 @@
                       `📍 Av. Bolívar, entre calles 12 y 13, Cordero, Táchira.\n` +
                       `¡Gracias por su compra! 🚀`;
             }
-            window.abrirWhatsAppSelector(nota.telefono, msg);
+            window.abrirWhatsAppSelector(nota.telefono, msg, { elegirMedio: true });
         };
 
         window.limpiarFormularioFacturaCompleto = function() {
@@ -5472,7 +5976,10 @@
                         <td class="p-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase ${colorLabel}">${n.estatus || 'PROCESADA'}</span></td>
                         <td class="p-3 text-center flex justify-center gap-1">
                             <button onclick="window.abrirVisualizadorHojaBlanca(${idxUse})" class="text-amber-600 bg-amber-50 hover:bg-amber-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Ver Hoja Blanca / Imprimir 10x13"><i class="fa-solid fa-file-lines"></i></button>
-                            <button onclick="window.reabrirNotaHistorialPorObjeto(${idxUse})" class="text-blue-600 bg-blue-50 hover:bg-blue-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Opciones"><i class="fa-solid fa-sliders"></i></button>
+                            <button onclick="window.procesarEnvioWaObjeto(HISTORIAL_NOTAS[${idxUse}])" class="text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Reenviar WhatsApp directo a ${n.telefono || 'cliente'}"><i class="fa-brands fa-whatsapp"></i></button>
+                            <button onclick="window.abrirEditorPreciosDocumento('ventas', ${idxUse})" class="text-purple-700 bg-purple-50 hover:bg-purple-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Editar Precios / Ítems"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button onclick="window.editarTelefonoRegistroFirebase('notas_ventas', '${n.id}', '${(n.telefono || '').replace(/'/g, '')}', '${(n.cliente || '').replace(/'/g, '')}', 'ventas')" class="text-indigo-600 bg-indigo-50 hover:bg-indigo-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Editar Teléfono (${n.telefono || 'Sin número'})"><i class="fa-solid fa-phone-flip"></i></button>
+                            <button onclick="window.reabrirNotaHistorialPorObjeto(${idxUse})" class="text-blue-600 bg-blue-50 hover:bg-blue-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Más Opciones"><i class="fa-solid fa-sliders"></i></button>
                         </td>
                     </tr>`;
             });
@@ -5487,14 +5994,16 @@
         window.reabrirNotaHistorialPorObjeto = function(index) {
             const n = HISTORIAL_NOTAS[index];
             if (!n) return;
-            const s = prompt("⚙️ CONTROL DE NOTA N° " + String(n.numNota).padStart(6, '0') + "\n\n[1] Reimprimir Nota de Entrega (10x13)\n[2] Reenviar por WhatsApp\n[3] Anular Nota\n[4] Eliminar de Firebase\n\nIngrese opción:");
+            const s = prompt("⚙️ CONTROL DE NOTA N° " + String(n.numNota).padStart(6, '0') + "\n📞 Teléfono guardado: " + (n.telefono || "Sin número") + "\n\n[1] Reimprimir Nota de Entrega (10x13)\n[2] Reenviar por WhatsApp (Directo al cliente)\n[3] Editar Teléfono del Cliente\n[4] Anular Nota\n[5] Eliminar de Firebase\n\nIngrese opción:");
             if (s === "1") {
                 window.dispararImpresionTicket(n);
             } else if (s === "2") {
                 window.procesarEnvioWaObjeto(n);
             } else if (s === "3") {
-                if (confirm("⚠️ ¿Deseas ANULAR la Nota #" + n.numNota + "?")) window.anularNotaHistorialPorId(n.id);
+                window.editarTelefonoRegistroFirebase('notas_ventas', n.id, n.telefono, n.cliente, 'ventas');
             } else if (s === "4") {
+                if (confirm("⚠️ ¿Deseas ANULAR la Nota #" + n.numNota + "?")) window.anularNotaHistorialPorId(n.id);
+            } else if (s === "5") {
                 if (confirm("🚨 ¿Eliminar Nota #" + n.numNota + " de Firebase?")) window.eliminarNotaHistorialPorId(n.id);
             }
         };
@@ -5588,7 +6097,9 @@
                         <td class="p-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase ${colorLabel}">${n.estatus || 'VENTA CASHEA'}</span></td>
                         <td class="p-3 text-center flex justify-center gap-1">
                             <button onclick="window.dispararImpresionTicket(HISTORIAL_NOTAS_CASHEA[${idxUse}])" class="text-amber-700 bg-amber-50 hover:bg-amber-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Reimprimir Ticket 10x13"><i class="fa-solid fa-print"></i></button>
-                            <button onclick="window.procesarEnvioWaObjeto(HISTORIAL_NOTAS_CASHEA[${idxUse}])" class="text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Reenviar WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
+                            <button onclick="window.procesarEnvioWaObjeto(HISTORIAL_NOTAS_CASHEA[${idxUse}])" class="text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Reenviar WhatsApp directo a ${n.telefono || 'cliente'}"><i class="fa-brands fa-whatsapp"></i></button>
+                            <button onclick="window.abrirEditorPreciosDocumento('cashea', ${idxUse})" class="text-purple-700 bg-purple-50 hover:bg-purple-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Editar Precios / Ítems"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button onclick="window.editarTelefonoRegistroFirebase('notas_cashea', '${n.id}', '${(n.telefono || '').replace(/'/g, '')}', '${(n.cliente || '').replace(/'/g, '')}', 'cashea')" class="text-indigo-600 bg-indigo-50 hover:bg-indigo-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Editar Teléfono (${n.telefono || 'Sin número'})"><i class="fa-solid fa-phone-flip"></i></button>
                             <button onclick="window.reabrirNotaCasheaOpciones(${idxUse})" class="text-blue-600 bg-blue-50 hover:bg-blue-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Opciones"><i class="fa-solid fa-sliders"></i></button>
                         </td>
                     </tr>`;
@@ -5611,14 +6122,16 @@
             const n = HISTORIAL_NOTAS_CASHEA[index];
             if (!n) return;
             const numTxt = n.numControlTexto || `NC-${String(n.numNota).padStart(6, '0')}`;
-            const s = prompt("⚙️ CONTROL NOTA CASHEA N° " + numTxt + "\n\n[1] Reimprimir Nota de Entrega Cashea (10x13)\n[2] Reenviar por WhatsApp\n[3] Anular Nota Cashea\n[4] Eliminar de Firebase\n\nIngrese opción:");
+            const s = prompt("⚙️ CONTROL NOTA CASHEA N° " + numTxt + "\n📞 Teléfono guardado: " + (n.telefono || "Sin número") + "\n\n[1] Reimprimir Nota de Entrega Cashea (10x13)\n[2] Reenviar por WhatsApp (Directo al cliente)\n[3] Editar Teléfono del Cliente\n[4] Anular Nota Cashea\n[5] Eliminar de Firebase\n\nIngrese opción:");
             if (s === "1") {
                 window.dispararImpresionTicket(n);
             } else if (s === "2") {
                 window.procesarEnvioWaObjeto(n);
             } else if (s === "3") {
-                if (confirm("⚠️ ¿Deseas ANULAR la Nota Cashea " + numTxt + "?")) window.anularNotaCasheaPorId(n.id);
+                window.editarTelefonoRegistroFirebase('notas_cashea', n.id, n.telefono, n.cliente, 'cashea');
             } else if (s === "4") {
+                if (confirm("⚠️ ¿Deseas ANULAR la Nota Cashea " + numTxt + "?")) window.anularNotaCasheaPorId(n.id);
+            } else if (s === "5") {
                 if (confirm("🚨 ¿Eliminar Nota Cashea " + numTxt + " de Firebase?")) window.eliminarNotaCasheaPorId(n.id);
             }
         };
@@ -5734,7 +6247,7 @@
             const mesSel = document.getElementById('cierre-mes-select')?.value || '';
             const anioSel = document.getElementById('cierre-anio-input')?.value || '';
             const msg = `📊 *INFORME DE CIERRE DE MES — TUCOCEL C.A.*\n📅 Período: ${mesSel}/${anioSel}\n\nResumen consolidado generado por el sistema administrativo.`;
-            window.abrirWhatsAppSelector('584247357549', msg);
+            window.abrirWhatsAppSelector('584247357549', msg, { elegirMedio: true });
         };
 
         // =========================================================================
@@ -6448,14 +6961,25 @@
 
                 if (!modelo || precioRaw <= 0) return alert("Ingrese descripción y precio válido.");
 
-                const precioUnitUSD = moneda === 'COP' ? (tCOP > 0 ? window.redondear2(precioRaw / tCOP) : 0) : window.redondear2(precioRaw);
+                let precioUnitUSD = window.redondear2(precioRaw);
+                let precioUnitCOP = Math.round(precioRaw * tCOP);
+                let subtotalUSD = window.redondear2(precioUnitUSD * cant);
+                let subtotalCOP = Math.round(precioUnitCOP * cant);
+                if (moneda === 'COP') {
+                    precioUnitCOP = Math.round(precioRaw);
+                    subtotalCOP = Math.round(precioUnitCOP * cant);
+                    precioUnitUSD = tCOP > 0 ? window.redondear2(precioUnitCOP / tCOP) : 0;
+                    subtotalUSD = tCOP > 0 ? window.redondear2(subtotalCOP / tCOP) : 0;
+                }
                 ITEMS_PRESUPUESTO_ACTIVO.push({
                     id: 'pre-' + Date.now(),
                     modelo,
                     cantidad: cant,
                     monedaIngreso: moneda,
+                    precioOriginalUnit: moneda === 'COP' ? precioUnitCOP : precioUnitUSD,
                     precioUnitUSD,
-                    precio: precioUnitUSD * cant
+                    precio: subtotalUSD,
+                    totalCOP: subtotalCOP
                 });
 
                 document.getElementById('pre-manual-modelo').value = '';
@@ -6468,14 +6992,19 @@
                 const prod = PRODUCTOS.find(p => String(p.id) === String(id));
                 if (!prod) return alert("Seleccione un producto del catálogo.");
 
-                const precioUnitUSD = Number(prod.precio) || 0;
+                const precioUnitUSD = window.redondear2(Number(prod.precio) || 0);
+                const precioUnitCOP = Math.round(precioUnitUSD * tCOP);
+                const subtotalUSD = window.redondear2(precioUnitUSD * cant);
+                const subtotalCOP = Math.round(precioUnitCOP * cant);
                 ITEMS_PRESUPUESTO_ACTIVO.push({
                     id: prod.id,
                     modelo: `${prod.modelo}${prod.memoria ? ' ' + prod.memoria : ''}`.trim(),
                     cantidad: cant,
                     monedaIngreso: moneda,
+                    precioOriginalUnit: moneda === 'COP' ? precioUnitCOP : precioUnitUSD,
                     precioUnitUSD,
-                    precio: precioUnitUSD * cant
+                    precio: subtotalUSD,
+                    totalCOP: subtotalCOP
                 });
 
                 document.getElementById('pre-select-producto').value = '';
@@ -6501,42 +7030,58 @@
                 return;
             }
 
-            cont.innerHTML = ITEMS_PRESUPUESTO_ACTIVO.map((it, idx) => `
+            const tCOP = parseFloat(document.getElementById('tasa-cop')?.value) || 3600;
+            cont.innerHTML = ITEMS_PRESUPUESTO_ACTIVO.map((it, idx) => {
+                const m = window.resolverMontosItem(it, tCOP, it.monedaIngreso || 'USD');
+                const detTxt = m.moneda === 'COP'
+                    ? `${m.unitCOP.toLocaleString('es-CO')} COP c/u — Total: ${m.subCOP.toLocaleString('es-CO')} COP`
+                    : `$${m.unitUSD.toFixed(2)} USD c/u — Total: $${m.subUSD.toFixed(2)} USD`;
+                return `
                 <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex justify-between items-center text-white text-xs gap-2">
                     <div class="min-w-0">
                         <p class="font-bold truncate text-white">${it.cantidad}x ${it.modelo}</p>
-                        <span class="text-[9px] text-sky-400 font-mono font-bold">$${Number(it.precio).toFixed(2)} USD</span>
+                        <span class="text-[9px] ${m.moneda === 'COP' ? 'text-amber-300' : 'text-sky-400'} font-mono font-bold">${detTxt}</span>
                     </div>
                     <button type="button" onclick="window.removerItemPresupuestoPro(${idx})" class="text-red-400 hover:text-red-300 font-bold p-1 cursor-pointer shrink-0"><i class="fa-solid fa-xmark"></i></button>
                 </div>
-            `).join('');
+            `;
+            }).join('');
 
             window.calcularTotalesPresupuesto();
         };
 
         window.calcularTotalesPresupuesto = function() {
-            let totalUSD = 0;
-            ITEMS_PRESUPUESTO_ACTIVO.forEach(i => totalUSD += (Number(i.precio) || 0));
-            totalUSD = window.redondear2(totalUSD);
-
             const tCOP = parseFloat(document.getElementById('tasa-cop')?.value) || 3600;
             const tBS = parseFloat(document.getElementById('tasa-bs')?.value) || 3.3;
+            const res = window.resolverTotalesDocumento({
+                items: ITEMS_PRESUPUESTO_ACTIVO,
+                tasaCop: tCOP,
+                tasaBs: tBS
+            });
+            const totalUSD = res.totalUSD;
+            const totalCOP = res.totalCOP;
+            const totalBS = res.totalBS;
+
             const dias = Math.max(1, parseInt(document.getElementById('pre-dias-validez')?.value, 10) || 5);
             let pctAnticipo = parseFloat(document.getElementById('pre-porc-anticipo')?.value);
             if (isNaN(pctAnticipo) || pctAnticipo < 0) pctAnticipo = 0;
             if (pctAnticipo > 100) pctAnticipo = 100;
             const pctResta = Math.max(0, 100 - pctAnticipo);
 
-            const totalCOP = Math.round(totalUSD * tCOP);
-            const totalBS = tBS > 0 ? (totalCOP / tBS) : 0;
-
-            const anticipoUSD = totalUSD * (pctAnticipo / 100);
-            const anticipoCOP = Math.round(anticipoUSD * tCOP);
-            const anticipoBS = tBS > 0 ? (anticipoCOP / tBS) : 0;
-
-            const restaUSD = Math.max(0, totalUSD - anticipoUSD);
-            const restaCOP = Math.round(restaUSD * tCOP);
-            const restaBS = tBS > 0 ? (restaCOP / tBS) : 0;
+            let anticipoCOP, restaCOP, anticipoUSD, restaUSD;
+            if (res.monedaPrincipal === 'COP') {
+                anticipoCOP = Math.round(totalCOP * (pctAnticipo / 100));
+                restaCOP = Math.max(0, totalCOP - anticipoCOP);
+                anticipoUSD = tCOP > 0 ? window.redondear2(anticipoCOP / tCOP) : 0;
+                restaUSD = tCOP > 0 ? window.redondear2(restaCOP / tCOP) : 0;
+            } else {
+                anticipoUSD = window.redondear2(totalUSD * (pctAnticipo / 100));
+                restaUSD = window.redondear2(Math.max(0, totalUSD - anticipoUSD));
+                anticipoCOP = Math.round(anticipoUSD * tCOP);
+                restaCOP = Math.round(restaUSD * tCOP);
+            }
+            const anticipoBS = tBS > 0 ? window.redondear2(anticipoCOP / tBS) : 0;
+            const restaBS = tBS > 0 ? window.redondear2(restaCOP / tBS) : 0;
 
             const setT = (id, val) => { const el = document.getElementById(id); if (el) el.innerText = val; };
             setT('pre-total-usd', `$${totalUSD.toFixed(2)}`);
@@ -6572,19 +7117,34 @@
             const firestoreDb = getDbCompat();
             if (!firestoreDb) return alert("Sin conexión a Firebase.");
 
-            let totalUSD = 0;
-            ITEMS_PRESUPUESTO_ACTIVO.forEach(i => totalUSD += (Number(i.precio) || 0));
-            totalUSD = window.redondear2(totalUSD);
-
             const tCOP = parseFloat(document.getElementById('tasa-cop')?.value) || 3600;
             const tBS = parseFloat(document.getElementById('tasa-bs')?.value) || 3.3;
+            const resPre = window.resolverTotalesDocumento({
+                items: ITEMS_PRESUPUESTO_ACTIVO,
+                tasaCop: tCOP,
+                tasaBs: tBS
+            });
+            const monedaPrincipalPre = resPre.monedaPrincipal;
+            const totalUSD = resPre.totalUSD;
+            const totalCOP = resPre.totalCOP;
+
             const diasValidez = Math.max(1, parseInt(document.getElementById('pre-dias-validez')?.value, 10) || 5);
             let porcAnticipo = parseFloat(document.getElementById('pre-porc-anticipo')?.value);
             if (isNaN(porcAnticipo) || porcAnticipo < 0) porcAnticipo = 0;
             if (porcAnticipo > 100) porcAnticipo = 100;
 
-            const anticipoUSD = totalUSD * (porcAnticipo / 100);
-            const restaUSD = Math.max(0, totalUSD - anticipoUSD);
+            let anticipoCOP, restaCOP, anticipoUSD, restaUSD;
+            if (monedaPrincipalPre === 'COP') {
+                anticipoCOP = Math.round(totalCOP * (porcAnticipo / 100));
+                restaCOP = Math.max(0, totalCOP - anticipoCOP);
+                anticipoUSD = tCOP > 0 ? window.redondear2(anticipoCOP / tCOP) : 0;
+                restaUSD = tCOP > 0 ? window.redondear2(restaCOP / tCOP) : 0;
+            } else {
+                anticipoUSD = window.redondear2(totalUSD * (porcAnticipo / 100));
+                restaUSD = window.redondear2(Math.max(0, totalUSD - anticipoUSD));
+                anticipoCOP = Math.round(anticipoUSD * tCOP);
+                restaCOP = Math.round(restaUSD * tCOP);
+            }
 
             const ahora = new Date();
             const fechaStr = `${String(ahora.getDate()).padStart(2, '0')}/${String(ahora.getMonth() + 1).padStart(2, '0')}/${ahora.getFullYear()}`;
@@ -6624,11 +7184,15 @@
                 telefono: document.getElementById('pre-cli-telefono')?.value.trim() || "",
                 direccion: document.getElementById('pre-cli-direccion')?.value.trim() || "Cordero",
                 items: [...ITEMS_PRESUPUESTO_ACTIVO],
+                monedaPrincipal: monedaPrincipalPre,
+                totalCOP,
                 totalUSD,
                 tasaCop: tCOP,
                 tasaBs: tBS,
                 diasValidez,
                 porcAnticipo,
+                anticipoCOP,
+                restaCOP,
                 anticipoUSD,
                 restaUSD,
                 estatus: "VIGENTE",
@@ -6674,18 +7238,35 @@
                 });
                 return;
             }
+            const resP = window.resolverTotalesDocumento(pre);
             const dias = pre.diasValidez || 5;
             const pct = Number(pre.porcAnticipo || 0);
             const pctResta = Math.max(0, 100 - pct);
-            const totalUSD = Number(pre.totalUSD || 0);
-            const anticipoUSD = pre.anticipoUSD !== undefined ? Number(pre.anticipoUSD) : (totalUSD * (pct / 100));
-            const restaUSD = pre.restaUSD !== undefined ? Number(pre.restaUSD) : Math.max(0, totalUSD - anticipoUSD);
+            const totalUSD = resP.totalUSD;
+            const totalCOP = resP.totalCOP;
+            let anticipoCOP, restaCOP, anticipoUSD, restaUSD;
+            if (resP.monedaPrincipal === 'COP') {
+                anticipoCOP = pre.anticipoCOP !== undefined ? Math.round(Number(pre.anticipoCOP)) : Math.round(totalCOP * (pct / 100));
+                restaCOP = pre.restaCOP !== undefined ? Math.round(Number(pre.restaCOP)) : Math.max(0, totalCOP - anticipoCOP);
+                anticipoUSD = resP.tCOP > 0 ? window.redondear2(anticipoCOP / resP.tCOP) : 0;
+                restaUSD = resP.tCOP > 0 ? window.redondear2(restaCOP / resP.tCOP) : 0;
+            } else {
+                anticipoUSD = pre.anticipoUSD !== undefined ? window.redondear2(Number(pre.anticipoUSD)) : window.redondear2(totalUSD * (pct / 100));
+                restaUSD = pre.restaUSD !== undefined ? window.redondear2(Number(pre.restaUSD)) : window.redondear2(Math.max(0, totalUSD - anticipoUSD));
+                anticipoCOP = Math.round(anticipoUSD * resP.tCOP);
+                restaCOP = Math.round(restaUSD * resP.tCOP);
+            }
 
             const datosTicket = {
                 ...pre,
+                monedaPrincipal: resP.monedaPrincipal,
+                totalCOP,
+                totalUSD,
                 numControlTexto: pre.numControlTexto || `PRE-${String(pre.numNota).padStart(6, '0')}`,
                 abonoUSD: pct > 0 ? anticipoUSD : undefined,
-                saldoUSD: pct > 0 ? restaUSD : undefined
+                saldoUSD: pct > 0 ? restaUSD : undefined,
+                abonoCOP: pct > 0 ? anticipoCOP : undefined,
+                saldoCOP: pct > 0 ? restaCOP : undefined
             };
 
             window.inyectarDatosAlTicketDOM(datosTicket, mostrarBs);
@@ -6706,7 +7287,9 @@
 
             const casheaDisc = document.querySelectorAll('.tk-bind-cashea-disclaimer');
             const textoAnticipo = pct > 0
-                ? `<br><strong>CONDICIÓN DE PAGO:</strong> Anticipo del ${pct}% ($${anticipoUSD.toFixed(2)} USD) al concretar el negocio/trabajo y saldo restante del ${pctResta}% ($${restaUSD.toFixed(2)} USD) al retirar la mercancía o revisar el trabajo culminado.`
+                ? (resP.monedaPrincipal === 'COP'
+                    ? `<br><strong>CONDICIÓN DE PAGO:</strong> Anticipo del ${pct}% (${anticipoCOP.toLocaleString('es-CO')} COP / $${anticipoUSD.toFixed(2)} USD) al concretar el negocio/trabajo y saldo restante del ${pctResta}% (${restaCOP.toLocaleString('es-CO')} COP / $${restaUSD.toFixed(2)} USD) al retirar la mercancía o revisar el trabajo culminado.`
+                    : `<br><strong>CONDICIÓN DE PAGO:</strong> Anticipo del ${pct}% ($${anticipoUSD.toFixed(2)} USD) al concretar el negocio/trabajo y saldo restante del ${pctResta}% ($${restaUSD.toFixed(2)} USD) al retirar la mercancía o revisar el trabajo culminado.`)
                 : '';
             casheaDisc.forEach(c => {
                 c.style.display = "block";
@@ -6747,44 +7330,65 @@
                 return;
             }
             const incluirBs = Boolean(mostrarBs);
-            const totalUSD = Number(pre.totalUSD || 0);
-            const tCOP = parseFloat(pre.tasaCop) || parseFloat(document.getElementById('tasa-cop')?.value) || 3600;
-            const tBS = parseFloat(pre.tasaBs) || parseFloat(document.getElementById('tasa-bs')?.value) || 3.3;
-
-            const totalCOP = Math.round(totalUSD * tCOP);
-            const totalBS = tBS > 0 ? (totalCOP / tBS) : 0;
+            const res = window.resolverTotalesDocumento(pre);
+            const monedaPrincipal = res.monedaPrincipal;
+            const totalUSD = res.totalUSD;
+            const totalCOP = res.totalCOP;
+            const totalBS = res.totalBS;
+            const tCOP = res.tCOP;
+            const tBS = res.tBS;
 
             const dias = pre.diasValidez || 5;
             const pct = Number(pre.porcAnticipo || 0);
             const pctResta = Math.max(0, 100 - pct);
             const numTxt = pre.numControlTexto || `PRE-${String(pre.numNota || 1).padStart(6, '0')}`;
 
-            const detalleItems = (pre.items || []).map(it =>
-                `• *${it.cantidad || 1}x ${it.modelo}*\n   Monto: *$${Number(it.precio || 0).toFixed(2)} USD*`
-            ).join('\n\n');
+            const detalleItems = res.itemsResueltos.map(it => {
+                const m = it._m;
+                if (m.moneda === 'COP') {
+                    return `• *${m.cant}x ${it.modelo}*\n   Precio c/u: ${m.unitCOP.toLocaleString('es-CO')} COP\n   Subtotal: *${m.subCOP.toLocaleString('es-CO')} COP*`;
+                }
+                return `• *${m.cant}x ${it.modelo}*\n   Precio c/u: $${m.unitUSD.toFixed(2)} USD\n   Subtotal: *$${m.subUSD.toFixed(2)} USD*`;
+            }).join('\n\n');
 
             let bloqueAnticipo = '';
             if (pct > 0) {
-                const anticipoUSD = pre.anticipoUSD !== undefined ? Number(pre.anticipoUSD) : (totalUSD * (pct / 100));
-                const anticipoCOP = Math.round(anticipoUSD * tCOP);
-                const anticipoBS = tBS > 0 ? (anticipoCOP / tBS) : 0;
+                let anticipoCOP, restaCOP, anticipoUSD, restaUSD;
+                if (monedaPrincipal === 'COP') {
+                    anticipoCOP = pre.anticipoCOP !== undefined ? Math.round(Number(pre.anticipoCOP)) : Math.round(totalCOP * (pct / 100));
+                    restaCOP = pre.restaCOP !== undefined ? Math.round(Number(pre.restaCOP)) : Math.max(0, totalCOP - anticipoCOP);
+                    anticipoUSD = tCOP > 0 ? window.redondear2(anticipoCOP / tCOP) : 0;
+                    restaUSD = tCOP > 0 ? window.redondear2(restaCOP / tCOP) : 0;
+                } else {
+                    anticipoUSD = pre.anticipoUSD !== undefined ? window.redondear2(Number(pre.anticipoUSD)) : window.redondear2(totalUSD * (pct / 100));
+                    restaUSD = pre.restaUSD !== undefined ? window.redondear2(Number(pre.restaUSD)) : window.redondear2(Math.max(0, totalUSD - anticipoUSD));
+                    anticipoCOP = Math.round(anticipoUSD * tCOP);
+                    restaCOP = Math.round(restaUSD * tCOP);
+                }
+                const anticipoBS = tBS > 0 ? window.redondear2(anticipoCOP / tBS) : 0;
+                const restaBS = tBS > 0 ? window.redondear2(restaCOP / tBS) : 0;
 
-                const restaUSD = pre.restaUSD !== undefined ? Number(pre.restaUSD) : Math.max(0, totalUSD - anticipoUSD);
-                const restaCOP = Math.round(restaUSD * tCOP);
-                const restaBS = tBS > 0 ? (restaCOP / tBS) : 0;
+                const linAnt = monedaPrincipal === 'COP'
+                    ? `   • *${anticipoCOP.toLocaleString('es-CO')} COP*\n   • $${anticipoUSD.toFixed(2)} USD\n`
+                    : `   • *$${anticipoUSD.toFixed(2)} USD*\n   • ${anticipoCOP.toLocaleString('es-CO')} COP\n`;
+                const linRes = monedaPrincipal === 'COP'
+                    ? `   • *${restaCOP.toLocaleString('es-CO')} COP*\n   • $${restaUSD.toFixed(2)} USD\n`
+                    : `   • *$${restaUSD.toFixed(2)} USD*\n   • ${restaCOP.toLocaleString('es-CO')} COP\n`;
 
                 bloqueAnticipo =
                     `──────────────────\n` +
                     `💳 *ANTICIPO PARA INICIAR (${pct}%):*\n` +
-                    `   • *$${anticipoUSD.toFixed(2)} USD*\n` +
-                    `   • ${anticipoCOP.toLocaleString('es-CO')} COP\n` +
+                    linAnt +
                     (incluirBs ? `   • ${anticipoBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs\n\n` : `\n`) +
                     `⏳ *SALDO AL ENTREGAR (${pctResta}%):*\n` +
-                    `   • *$${restaUSD.toFixed(2)} USD*\n` +
-                    `   • ${restaCOP.toLocaleString('es-CO')} COP\n` +
+                    linRes +
                     (incluirBs ? `   • ${restaBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs\n\n` : `\n`) +
                     `_El cliente abona el ${pct}% al concretar el negocio/trabajo y el saldo restante se cancela al retirar la mercancía o al revisar el trabajo culminado._\n`;
             }
+
+            const linTotalPre = monedaPrincipal === 'COP'
+                ? `   • *${totalCOP.toLocaleString('es-CO')} COP*\n   • $${totalUSD.toFixed(2)} USD\n`
+                : `   • *$${totalUSD.toFixed(2)} USD*\n   • ${totalCOP.toLocaleString('es-CO')} COP\n`;
 
             const msg =
                 `📄 *PRESUPUESTO N° ${numTxt}*\n` +
@@ -6799,8 +7403,7 @@
                 `${detalleItems}\n` +
                 `──────────────────\n` +
                 `💰 *TOTAL PRESUPUESTADO:*\n` +
-                `   • *$${totalUSD.toFixed(2)} USD*\n` +
-                `   • ${totalCOP.toLocaleString('es-CO')} COP\n` +
+                linTotalPre +
                 (incluirBs ? `   • ${totalBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs\n` : '') +
                 `${bloqueAnticipo}` +
                 `──────────────────\n` +
@@ -6810,8 +7413,7 @@
                 `📍 Av. Bolívar, entre calles 12 y 13, Cordero, Táchira.\n` +
                 `¡Estamos a su orden! 🚀`;
 
-            const phone = (pre.telefono || '').replace(/\D/g, '');
-            window.abrirWhatsAppSelector(phone.length >= 10 ? phone : '584247357549', msg);
+            window.abrirWhatsAppSelector(pre.telefono || '', msg, { elegirMedio: true });
         };
 
         window.cargarPresupuestosFirebase = async function() {
@@ -6872,7 +7474,9 @@
                         <td class="p-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase ${colorEst}">${p.estatus || 'VIGENTE'}</span></td>
                         <td class="p-3 text-center flex justify-center gap-1">
                             <button onclick="window.dispararImpresionPresupuestoObjeto(HISTORIAL_PRESUPUESTOS[${idxUse}])" class="text-amber-700 bg-amber-50 hover:bg-amber-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Reimprimir 10x13"><i class="fa-solid fa-print"></i></button>
-                            <button onclick="window.enviarPresupuestoObjetoWa(HISTORIAL_PRESUPUESTOS[${idxUse}])" class="text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Reenviar WhatsApp"><i class="fa-brands fa-whatsapp"></i></button>
+                            <button onclick="window.enviarPresupuestoObjetoWa(HISTORIAL_PRESUPUESTOS[${idxUse}])" class="text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Reenviar WhatsApp directo a ${p.telefono || 'cliente'}"><i class="fa-brands fa-whatsapp"></i></button>
+                            <button onclick="window.abrirEditorPreciosDocumento('presupuestos', ${idxUse})" class="text-purple-700 bg-purple-50 hover:bg-purple-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Editar Precios / Ítems"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button onclick="window.editarTelefonoRegistroFirebase('presupuestos_emitidos', '${p.id}', '${(p.telefono || '').replace(/'/g, '')}', '${(p.cliente || '').replace(/'/g, '')}', 'presupuestos')" class="text-indigo-600 bg-indigo-50 hover:bg-indigo-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Editar Teléfono (${p.telefono || 'Sin número'})"><i class="fa-solid fa-phone-flip"></i></button>
                             <button onclick="window.opcionesPresupuestoHistorial(${idxUse})" class="text-blue-600 bg-blue-50 hover:bg-blue-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Más opciones"><i class="fa-solid fa-sliders"></i></button>
                         </td>
                     </tr>
@@ -6896,18 +7500,20 @@
             const p = HISTORIAL_PRESUPUESTOS[index];
             if (!p) return;
             const numTxt = p.numControlTexto || `PRE-${String(p.numNota).padStart(6, '0')}`;
-            const s = prompt(`⚙️ CONTROL PRESUPUESTO ${numTxt}\n\n[1] Reimprimir Presupuesto (10x13)\n[2] Reenviar por WhatsApp\n[3] Anular Presupuesto\n[4] Eliminar de Firebase\n\nIngrese opción:`);
+            const s = prompt(`⚙️ CONTROL PRESUPUESTO ${numTxt}\n📞 Teléfono guardado: ${p.telefono || 'Sin número'}\n\n[1] Reimprimir Presupuesto (10x13)\n[2] Reenviar por WhatsApp (Directo al cliente)\n[3] Editar Teléfono del Cliente\n[4] Anular Presupuesto\n[5] Eliminar de Firebase\n\nIngrese opción:`);
             if (s === "1") {
                 window.dispararImpresionPresupuestoObjeto(p);
             } else if (s === "2") {
                 window.enviarPresupuestoObjetoWa(p);
             } else if (s === "3") {
+                window.editarTelefonoRegistroFirebase('presupuestos_emitidos', p.id, p.telefono, p.cliente, 'presupuestos');
+            } else if (s === "4") {
                 if (confirm(`⚠️ ¿Deseas ANULAR el Presupuesto ${numTxt}?`)) {
                     const firestoreDb = getDbCompat();
                     if (firestoreDb) await firestoreDb.collection("presupuestos_emitidos").doc(p.id).update({ estatus: "ANULADO" });
                     await window.cargarPresupuestosFirebase();
                 }
-            } else if (s === "4") {
+            } else if (s === "5") {
                 if (confirm(`🚨 ¿Eliminar el Presupuesto ${numTxt} permanentemente de Firebase?`)) {
                     const firestoreDb = getDbCompat();
                     if (firestoreDb) await firestoreDb.collection("presupuestos_emitidos").doc(p.id).delete();
@@ -6948,7 +7554,7 @@
 
             const tCOP = parseFloat(document.getElementById('tasa-cop')?.value) || 3600;
             const tBS = parseFloat(document.getElementById('tasa-bs')?.value) || 3.3;
-            const tBCV = parseFloat(document.getElementById('tasa-bcv')?.value) || 36.50;
+            const tBCV = parseFloat(document.getElementById('tasa-bcv')?.value) || 0;
 
             const totalCOP = Math.round(totalUSD * tCOP);
             const totalBS = (tCOP > 0 && tBS > 0) ? (totalCOP / tBS) : (totalUSD * tBCV);
@@ -7019,22 +7625,32 @@
                 return;
             }
             const incluirBs = Boolean(mostrarBs);
-            let totalUSD = 0;
-            ITEMS_VENTA_ACTIVA.forEach(i => totalUSD += (Number(i.precio) || 0));
-
             const tCOP = parseFloat(document.getElementById('tasa-cop')?.value) || 3600;
             const tBS = parseFloat(document.getElementById('tasa-bs')?.value) || 3.3;
-            const tBCV = parseFloat(document.getElementById('tasa-bcv')?.value) || 36.50;
-
-            const totalCOP = Math.round(totalUSD * tCOP);
-            const totalBS = (tCOP > 0 && tBS > 0) ? (totalCOP / tBS) : (totalUSD * tBCV);
+            const res = window.resolverTotalesDocumento({
+                items: ITEMS_VENTA_ACTIVA,
+                tasaCop: tCOP,
+                tasaBs: tBS
+            });
+            const monedaPrincipal = res.monedaPrincipal;
+            const totalUSD = res.totalUSD;
+            const totalCOP = res.totalCOP;
+            const totalBS = res.totalBS;
 
             const cliNombre = document.getElementById('fact-cli-nombre')?.value.trim() || 'Estimado Cliente';
             const cliTelf = document.getElementById('fact-cli-telefono')?.value.trim() || '';
 
-            const detalle = ITEMS_VENTA_ACTIVA.map(it =>
-                `• *${it.cantidad || 1}x ${it.modelo}*\n   Monto: *$${Number(it.precio || 0).toFixed(2)} USD*`
-            ).join('\n\n');
+            const detalle = res.itemsResueltos.map(it => {
+                const m = it._m;
+                if (m.moneda === 'COP') {
+                    return `• *${m.cant}x ${it.modelo}*\n   Precio c/u: ${m.unitCOP.toLocaleString('es-CO')} COP\n   Subtotal: *${m.subCOP.toLocaleString('es-CO')} COP*`;
+                }
+                return `• *${m.cant}x ${it.modelo}*\n   Precio c/u: $${m.unitUSD.toFixed(2)} USD\n   Subtotal: *$${m.subUSD.toFixed(2)} USD*`;
+            }).join('\n\n');
+
+            const linTot = monedaPrincipal === 'COP'
+                ? `   • *${totalCOP.toLocaleString('es-CO')} COP*\n   • $${totalUSD.toFixed(2)} USD\n`
+                : `   • *$${totalUSD.toFixed(2)} USD*\n   • ${totalCOP.toLocaleString('es-CO')} COP\n`;
 
             const msg =
                 `📄 *PRESUPUESTO / COTIZACIÓN*\n` +
@@ -7048,8 +7664,7 @@
                 `${detalle}\n` +
                 `──────────────────\n` +
                 `💰 *TOTAL COTIZADO:*\n` +
-                `   • *$${totalUSD.toFixed(2)} USD*\n` +
-                `   • ${totalCOP.toLocaleString('es-CO')} COP\n` +
+                linTot +
                 (incluirBs ? `   • ${totalBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs\n` : '') +
                 `──────────────────\n` +
                 `⚠️ *VALIDEZ: 3 días continuos*\n` +
@@ -7058,8 +7673,7 @@
                 `📍 Av. Bolívar, entre calles 12 y 13, Cordero, Táchira.\n` +
                 `¡Estamos a su orden! 🚀`;
 
-            const phone = cliTelf.replace(/\D/g, '');
-            window.abrirWhatsAppSelector(phone.length >= 10 ? phone : '584247357549', msg);
+            window.abrirWhatsAppSelector(cliTelf || '', msg, { elegirMedio: true });
         };
 
         window.imprimirReciboApartadoTrabajo = function(apt, mostrarBs) {
@@ -7140,7 +7754,7 @@
 
             const tCOP = parseFloat(document.getElementById('tasa-cop')?.value) || 3600;
             const tBS = parseFloat(document.getElementById('tasa-bs')?.value) || 3.3;
-            const tBCV = parseFloat(document.getElementById('tasa-bcv')?.value) || 36.50;
+            const tBCV = parseFloat(document.getElementById('tasa-bcv')?.value) || 0;
 
             const totalCOP = Math.round(totalUSD * tCOP);
             const totalBS = (tCOP > 0 && tBS > 0) ? (totalCOP / tBS) : (totalUSD * tBCV);
@@ -7174,6 +7788,106 @@
         // =========================================================================
         // UTILIDADES DE REDONDEO, FORMATEO DE MONTOS Y ESCÁNER DE IMEI POR CÁMARA
         // =========================================================================
+
+        // =========================================================================
+        // MOTOR DE MONEDA PRINCIPAL Y CÁLCULO EXACTO (COP / USD / BS)
+        // Garantiza suma exacta en la moneda de ingreso sin desfase por redondeo
+        // y compatibilidad total con facturas/presupuestos ya guardados.
+        // =========================================================================
+        window.detectarMonedaPrincipalDoc = function(doc) {
+            if (doc && (doc.monedaPrincipal === 'COP' || doc.monedaPrincipal === 'USD')) {
+                return doc.monedaPrincipal;
+            }
+            const items = (doc && Array.isArray(doc.items)) ? doc.items : [];
+            if (items.length === 0) return 'USD';
+            let cntCOP = 0, cntUSD = 0;
+            items.forEach(it => {
+                if (it && it.monedaIngreso === 'COP') cntCOP++;
+                else cntUSD++;
+            });
+            return (cntCOP > 0 && cntCOP >= cntUSD) ? 'COP' : 'USD';
+        };
+
+        window.resolverMontosItem = function(it, tCOP, monedaDoc) {
+            const cant = Math.max(1, Number(it.cantidad) || 1);
+            const moneda = it.monedaIngreso || monedaDoc || 'USD';
+            const tasa = Number(tCOP) || 3600;
+
+            if (moneda === 'COP') {
+                let subCOP = 0;
+                let unitCOP = 0;
+                if (it.totalCOP !== undefined && Number(it.totalCOP) > 0) {
+                    subCOP = Math.round(Number(it.totalCOP));
+                    unitCOP = (it.precioOriginalUnit !== undefined && Number(it.precioOriginalUnit) > 0)
+                        ? Math.round(Number(it.precioOriginalUnit))
+                        : Math.round(subCOP / cant);
+                } else if (it.precioOriginalUnit !== undefined && Number(it.precioOriginalUnit) > 0) {
+                    unitCOP = Math.round(Number(it.precioOriginalUnit));
+                    subCOP = Math.round(unitCOP * cant);
+                } else {
+                    // Respaldo para registros anteriores sin totalCOP guardado
+                    subCOP = Math.round((Number(it.precio) || 0) * tasa);
+                    unitCOP = Math.round(subCOP / cant);
+                }
+                const subUSD = tasa > 0 ? window.redondear2(subCOP / tasa) : window.redondear2(it.precio || 0);
+                const unitUSD = tasa > 0 ? window.redondear2(unitCOP / tasa) : window.redondear2((it.precio || 0) / cant);
+                return { moneda: 'COP', cant, unitCOP, subCOP, unitUSD, subUSD };
+            } else {
+                const subUSD = window.redondear2(Number(it.precio) || 0);
+                const unitUSD = (it.precioUnitUSD !== undefined && Number(it.precioUnitUSD) > 0)
+                    ? window.redondear2(Number(it.precioUnitUSD))
+                    : window.redondear2(subUSD / cant);
+                const unitCOP = Math.round(unitUSD * tasa);
+                const subCOP = Math.round(subUSD * tasa);
+                return { moneda: 'USD', cant, unitCOP, subCOP, unitUSD, subUSD };
+            }
+        };
+
+        window.resolverTotalesDocumento = function(doc) {
+            const tCOP = parseFloat(doc.tasaCop) || parseFloat(document.getElementById('tasa-cop')?.value) || 3600;
+            const tBS = parseFloat(doc.tasaBs) || parseFloat(document.getElementById('tasa-bs')?.value) || 3.3;
+            const tBCV = parseFloat(doc.tasaBcv) || parseFloat(document.getElementById('tasa-bcv')?.value) || 0;
+            const monedaPrincipal = window.detectarMonedaPrincipalDoc(doc);
+            const itemsResueltos = (doc.items || []).map(it => ({
+                ...it,
+                _m: window.resolverMontosItem(it, tCOP, monedaPrincipal)
+            }));
+
+            let totalCOP = 0;
+            let totalUSD = 0;
+
+            if (monedaPrincipal === 'COP') {
+                if (doc.totalCOP !== undefined && Number(doc.totalCOP) > 0) {
+                    totalCOP = Math.round(Number(doc.totalCOP));
+                } else if (itemsResueltos.length > 0) {
+                    totalCOP = itemsResueltos.reduce((acc, x) => acc + x._m.subCOP, 0);
+                } else {
+                    totalCOP = Math.round((Number(doc.totalUSD) || 0) * tCOP);
+                }
+                totalUSD = tCOP > 0 ? window.redondear2(totalCOP / tCOP) : window.redondear2(doc.totalUSD || 0);
+            } else {
+                if (itemsResueltos.length > 0 && (doc.totalUSD === undefined || doc.totalUSD === null)) {
+                    totalUSD = window.redondear2(itemsResueltos.reduce((acc, x) => acc + x._m.subUSD, 0));
+                } else {
+                    totalUSD = window.redondear2(Number(doc.totalUSD) || 0);
+                }
+                totalCOP = Math.round(totalUSD * tCOP);
+            }
+
+            const totalBS = tBS > 0 ? window.redondear2(totalCOP / tBS) : 0;
+
+            return {
+                monedaPrincipal,
+                tCOP,
+                tBS,
+                tBCV,
+                totalCOP,
+                totalUSD,
+                totalBS,
+                itemsResueltos
+            };
+        };
+
         window.redondear2 = function(n) {
             const val = Number(n) || 0;
             return Math.round((val + Number.EPSILON) * 100) / 100;
@@ -7400,7 +8114,7 @@
                 const v = localStorage.getItem('tucocel_tasa_bcv');
                 if (c && document.getElementById('tasa-cop')) document.getElementById('tasa-cop').value = c;
                 if (b && document.getElementById('tasa-bs')) document.getElementById('tasa-bs').value = b;
-                if (v && document.getElementById('tasa-bcv')) document.getElementById('tasa-bcv').value = v;
+                if (document.getElementById('tasa-bcv')) document.getElementById('tasa-bcv').value = '0';
             } catch(e) {}
         };
 
@@ -7420,10 +8134,7 @@
                             document.getElementById('tasa-bs').value = d.bs;
                             localStorage.setItem('tucocel_tasa_bs', d.bs);
                         }
-                        if (d.bcv && document.getElementById('tasa-bcv')) {
-                            document.getElementById('tasa-bcv').value = d.bcv;
-                            localStorage.setItem('tucocel_tasa_bcv', d.bcv);
-                        }
+                        // Tasa BCV se mantiene en 0 por defecto hasta que el administrador la escriba manualmente
                         _aplicandoTasasNube = false;
                         if (typeof window.calcularTotalesFactura === 'function') window.calcularTotalesFactura();
                         if (typeof window.calcularTotalesPresupuesto === 'function') window.calcularTotalesPresupuesto();
@@ -7449,7 +8160,7 @@
                         firestoreDb.collection("configuraciones").doc("tasas_cambio").set({
                             cop: c || '3600',
                             bs: b || '3.3',
-                            bcv: v || '36.50',
+                            bcv: v || '0',
                             actualizadoEn: Date.now()
                         }, { merge: true }).catch(() => {});
                     }
