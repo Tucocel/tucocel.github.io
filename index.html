@@ -1715,29 +1715,45 @@
                         </div>
 
                         <div id="carga-apt-manual-bloque" class="space-y-3">
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                                <div class="sm:col-span-2">
-                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Descripción del Artículo o Trabajo a Realizar *</label>
-                                    <input type="text" id="apt-manual-modelo" placeholder="Ej: Teléfono Xiaomi / Letrero Luminoso 2x1m / 1000 Volantes..." class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white">
+                            <div>
+                                <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Descripción del Artículo o Trabajo a Realizar *</label>
+                                <input type="text" id="apt-manual-modelo" placeholder="Ej: Teléfono Xiaomi / Letrero Luminoso 2x1m / 1000 Volantes..." class="w-full h-10 bg-gray-50 border border-gray-200 px-3 rounded-xl text-xs font-bold text-gray-900 focus:bg-white">
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Moneda del Acuerdo *</label>
+                                    <select id="apt-moneda-precio" onchange="window.alCambiarMonedaPrecioApartado()" class="w-full h-10 bg-white border-2 border-blue-500 px-2.5 rounded-xl text-xs font-black text-blue-700 focus:outline-none">
+                                        <option value="USD">💵 Dólares ($ USD)</option>
+                                        <option value="COP">🇨🇴 Pesos (COP)</option>
+                                    </select>
                                 </div>
                                 <div>
-                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Costo Total Acordado ($ USD) *</label>
-                                    <input type="text" inputmode="decimal" id="apt-manual-precio" oninput="window.formatearInputMonto(this); window.calcularSaldosApartado()" placeholder="0,00" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-black text-blue-600 font-mono">
+                                    <label id="lbl-apt-manual-precio" class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Costo Total Acordado ($ USD) *</label>
+                                    <input type="text" inputmode="decimal" id="apt-manual-precio" oninput="window.formatearInputMonto(this); window.calcularSaldosApartado()" placeholder="0,00" class="w-full h-10 bg-gray-50 border border-gray-200 px-3 rounded-xl text-xs font-black text-blue-600 font-mono">
                                 </div>
                             </div>
                         </div>
 
                         <div id="carga-apt-inventario-bloque" class="space-y-3 hidden">
-                            <div>
-                                <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Seleccionar Modelo en Vitrina / Stock *</label>
-                                <select id="apt-select-producto" onchange="window.alSeleccionarProductoApartadoCatalogo()" class="w-full bg-gray-50 border border-gray-200 p-2.5 rounded-xl text-xs font-bold text-gray-900 focus:bg-white">
-                                    <option value="">-- Seleccionar Equipo en Stock --</option>
-                                </select>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <div class="sm:col-span-2">
+                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Seleccionar Modelo en Vitrina / Stock *</label>
+                                    <select id="apt-select-producto" onchange="window.alSeleccionarProductoApartadoCatalogo()" class="w-full h-10 bg-gray-50 border border-gray-200 px-3 rounded-xl text-xs font-bold text-gray-900 focus:bg-white">
+                                        <option value="">-- Seleccionar Equipo en Stock --</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Moneda del Acuerdo</label>
+                                    <select id="apt-cat-moneda" onchange="window.alCambiarMonedaCatApartado()" class="w-full h-10 bg-white border-2 border-blue-500 px-2.5 rounded-xl text-xs font-black text-blue-700 focus:outline-none">
+                                        <option value="USD">💵 USD ($)</option>
+                                        <option value="COP">🇨🇴 Pesos (COP)</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
                         <div class="bg-amber-50/70 p-4 rounded-2xl border border-amber-200 space-y-3 font-mono">
-                            <div class="flex justify-between items-center">
+                            <div class="flex flex-wrap justify-between items-center gap-2">
                                 <span class="text-[10px] font-black uppercase text-amber-900 tracking-wider">
                                     <i class="fa-solid fa-money-bill-transfer mr-1"></i> Abono Inicial Multimoneda
                                 </span>
@@ -1750,22 +1766,22 @@
 
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-bold">
                                 <div>
-                                    <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Costo Total ($)</label>
-                                    <input type="number" id="apt-display-total" readonly value="0.00" class="w-full bg-white border p-2.5 rounded-xl text-slate-900 font-black">
+                                    <label id="lbl-apt-display-total" class="text-[8.5px] text-slate-500 uppercase block mb-1">Costo Total ($ USD)</label>
+                                    <input type="text" id="apt-display-total" readonly value="$0.00" class="w-full h-10 bg-white border px-2.5 rounded-xl text-slate-900 font-black">
                                 </div>
                                 <div>
                                     <label id="lbl-apt-abono-input" class="text-[8.5px] text-emerald-700 uppercase block mb-1 font-bold">Abono Inicial Recibido ($ USD) *</label>
-                                    <input type="text" inputmode="decimal" id="apt-abono-inicial" oninput="window.formatearInputMonto(this); window.calcularSaldosApartado()" placeholder="0,00" class="w-full bg-white border-2 border-emerald-500 p-2.5 rounded-xl text-emerald-600 font-black">
+                                    <input type="text" inputmode="decimal" id="apt-abono-inicial" oninput="window.formatearInputMonto(this); window.calcularSaldosApartado()" placeholder="0,00" class="w-full h-10 bg-white border-2 border-emerald-500 px-2.5 rounded-xl text-emerald-600 font-black">
                                 </div>
                                 <div>
-                                    <label class="text-[8.5px] text-red-700 uppercase block mb-1 font-bold">Saldo Restante por Pagar ($)</label>
-                                    <input type="number" id="apt-saldo-pendiente" readonly value="0.00" class="w-full bg-red-50 border border-red-200 p-2.5 rounded-xl text-red-600 font-black">
+                                    <label id="lbl-apt-saldo-pendiente" class="text-[8.5px] text-red-700 uppercase block mb-1 font-bold">Saldo Restante ($ USD)</label>
+                                    <input type="text" id="apt-saldo-pendiente" readonly value="$0.00" class="w-full h-10 bg-red-50 border border-red-200 px-2.5 rounded-xl text-red-600 font-black">
                                 </div>
                             </div>
 
                             <div class="grid grid-cols-2 gap-2 text-center text-[10px] pt-1">
                                 <div class="bg-white p-2 rounded-xl border border-amber-200">
-                                    <span class="text-[8px] text-slate-400 block uppercase">Equivalente Saldo COP</span>
+                                    <span id="lbl-apt-eq-primario" class="text-[8px] text-slate-400 block uppercase">Equivalente Saldo COP</span>
                                     <strong id="apt-saldo-cop-val" class="text-slate-800">0 COP</strong>
                                 </div>
                                 <div class="bg-white p-2 rounded-xl border border-amber-200">
@@ -1775,9 +1791,20 @@
                             </div>
                         </div>
 
-                        <div class="flex flex-col sm:flex-row justify-end gap-2 pt-1">
-                            <button onclick="window.guardarNuevoApartadoFirebase()" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black px-6 py-3 rounded-xl shadow-md flex items-center justify-center gap-1.5 uppercase transition-all active:scale-95 cursor-pointer">
-                                <i class="fa-solid fa-receipt text-sm"></i> Guardar y Emitir Recibo de Encargo
+                        <div class="text-[10px] text-amber-900 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 leading-relaxed">
+                            <i class="fa-solid fa-triangle-exclamation text-amber-500 mr-1"></i>
+                            <strong>Nota Comercial:</strong> Los apartados pueden estar sujetos a variación de precio o ajuste cambiario según el tiempo que dure el producto o trabajo apartado. (Se incluye en recibo impreso y WhatsApp).
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
+                            <button type="button" onclick="window.guardarNuevoApartadoFirebase('imprimir')" class="bg-amber-400 hover:bg-amber-500 text-slate-950 text-xs font-black px-4 py-3 rounded-xl shadow-md flex items-center justify-center gap-1.5 uppercase transition-all active:scale-95 cursor-pointer">
+                                <i class="fa-solid fa-print text-sm"></i> Imprimir
+                            </button>
+                            <button type="button" onclick="window.guardarNuevoApartadoFirebase('whatsapp')" class="bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-black px-4 py-3 rounded-xl shadow-md flex items-center justify-center gap-1.5 uppercase transition-all active:scale-95 cursor-pointer">
+                                <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
+                            </button>
+                            <button type="button" onclick="window.guardarNuevoApartadoFirebase('guardar')" class="bg-slate-800 hover:bg-slate-700 text-white text-xs font-black px-4 py-3 rounded-xl shadow-md flex items-center justify-center gap-1.5 uppercase transition-all active:scale-95 cursor-pointer">
+                                <i class="fa-solid fa-floppy-disk text-sm"></i> Solo Guardar
                             </button>
                         </div>
                     </div>
@@ -2064,6 +2091,9 @@
                     <div class="tk-bind-cashea-disclaimer" style="display: none; color: #92400e; border: 1.5px solid #d97706; background-color: #fffbeb; border-radius: 4px; padding: 2.5px 3px; margin-top: 2.5px; font-size: 6.8px; font-weight: 800; text-align: justify; line-height: 1.15;">
                         ⚠️ OBSERVACIÓN: Tucocel C.A. no se hace responsable de las cuotas y los montos cobrados por Cashea.
                     </div>
+                    <div class="tk-bind-apartado-disclaimer" style="display: none; color: #92400e; border: 1.5px solid #d97706; background-color: #fffbeb; border-radius: 4px; padding: 2.5px 3px; margin-top: 2.5px; font-size: 6.8px; font-weight: 800; text-align: justify; line-height: 1.15;">
+                        ⚠️ NOTA COMERCIAL DE APARTADO: Los precios y saldos pendientes pueden estar sujetos a variación de precio o ajuste cambiario dependiendo del tiempo que dure el producto o trabajo apartado.
+                    </div>
                     <div style="text-align: center; border-top: 1px dashed #cbd5e1; margin-top: 2.5px; padding-top: 2px; font-weight: 800; color: #003366;">
                         🚀 ¡Gracias por su preferencia! — Tucocel C.A.
                     </div>
@@ -2163,6 +2193,9 @@
                     Comprobante administrativo interno para respaldo de tienda.
                     <div class="tk-bind-cashea-disclaimer" style="display: none; color: #92400e; border: 1.5px solid #d97706; background-color: #fffbeb; border-radius: 4px; padding: 2.5px 3px; margin-top: 2.5px; font-size: 6.8px; font-weight: 800; text-align: justify; line-height: 1.15;">
                         ⚠️ OBSERVACIÓN: Tucocel C.A. no se hace responsable de las cuotas y los montos cobrados por Cashea.
+                    </div>
+                    <div class="tk-bind-apartado-disclaimer" style="display: none; color: #92400e; border: 1.5px solid #d97706; background-color: #fffbeb; border-radius: 4px; padding: 2.5px 3px; margin-top: 2.5px; font-size: 6.8px; font-weight: 800; text-align: justify; line-height: 1.15;">
+                        ⚠️ NOTA COMERCIAL DE APARTADO: Los precios y saldos pendientes pueden estar sujetos a variación de precio o ajuste cambiario dependiendo del tiempo que dure el producto o trabajo apartado.
                     </div>
                     <div style="border-top: 1px dashed #cbd5e1; margin-top: 10px; padding-top: 3px; text-align: center; font-size: 7.5px; color: #334155; font-weight: bold;">
                         ________________________________________<br>
@@ -4612,81 +4645,211 @@
             window.calcularSaldosApartado();
         };
 
+        window.alCambiarMonedaPrecioApartado = function() {
+            const mon = document.getElementById('apt-moneda-precio')?.value || 'USD';
+            const selCat = document.getElementById('apt-cat-moneda');
+            if (selCat && selCat.value !== mon) selCat.value = mon;
+            const lbl = document.getElementById('lbl-apt-manual-precio');
+            if (lbl) lbl.innerText = mon === 'COP' ? 'Costo Total Acordado (COP) *' : 'Costo Total Acordado ($ USD) *';
+            window.seleccionarMonedaAbonoApt(mon);
+            window.calcularSaldosApartado();
+        };
+
+        window.alCambiarMonedaCatApartado = function() {
+            const mon = document.getElementById('apt-cat-moneda')?.value || 'USD';
+            const selMan = document.getElementById('apt-moneda-precio');
+            if (selMan && selMan.value !== mon) selMan.value = mon;
+            const lbl = document.getElementById('lbl-apt-manual-precio');
+            if (lbl) lbl.innerText = mon === 'COP' ? 'Costo Total Acordado (COP) *' : 'Costo Total Acordado ($ USD) *';
+            window.seleccionarMonedaAbonoApt(mon);
+            window.calcularSaldosApartado();
+        };
+
+        window.obtenerMonedaAcuerdoApartadoForm = function() {
+            if (modoCargaApartadoActivo === 'inventario') {
+                return document.getElementById('apt-cat-moneda')?.value || 'USD';
+            }
+            return document.getElementById('apt-moneda-precio')?.value || 'USD';
+        };
+
+        window.resolverMontosApartado = function(apt) {
+            const tCOP = parseFloat(document.getElementById('tasa-cop')?.value) || Number(apt?.tasaCopRegistro) || 3600;
+            const tBS = parseFloat(document.getElementById('tasa-bs')?.value) || Number(apt?.tasaBsRegistro) || 3.3;
+            const moneda = (apt && apt.monedaAcuerdo === 'COP') ? 'COP' : 'USD';
+
+            if (moneda === 'COP') {
+                const totalCOP = apt.precioPactadoCOP !== undefined ? Math.round(Number(apt.precioPactadoCOP)) : Math.round((Number(apt.precioPactadoUSD) || 0) * tCOP);
+                const abonadoCOP = apt.abonoAcumuladoCOP !== undefined ? Math.round(Number(apt.abonoAcumuladoCOP)) : Math.round((Number(apt.abonoAcumuladoUSD) || 0) * tCOP);
+                const saldoCOP = apt.saldoPendienteCOP !== undefined ? Math.round(Number(apt.saldoPendienteCOP)) : Math.max(0, totalCOP - abonadoCOP);
+
+                const totalUSD = tCOP > 0 ? window.redondear2(totalCOP / tCOP) : 0;
+                const abonadoUSD = tCOP > 0 ? window.redondear2(abonadoCOP / tCOP) : 0;
+                const saldoUSD = tCOP > 0 ? window.redondear2(saldoCOP / tCOP) : 0;
+                const saldoBS = tBS > 0 ? (saldoCOP / tBS) : 0;
+
+                return { moneda, tCOP, tBS, totalCOP, abonadoCOP, saldoCOP, totalUSD, abonadoUSD, saldoUSD, saldoBS };
+            }
+
+            const totalUSD = window.redondear2(Number(apt.precioPactadoUSD) || 0);
+            const abonadoUSD = window.redondear2(Number(apt.abonoAcumuladoUSD) || 0);
+            const saldoUSD = window.redondear2(Math.max(0, apt.saldoPendienteUSD !== undefined ? Number(apt.saldoPendienteUSD) : (totalUSD - abonadoUSD)));
+            const totalCOP = Math.round(totalUSD * tCOP);
+            const abonadoCOP = Math.round(abonadoUSD * tCOP);
+            const saldoCOP = Math.round(saldoUSD * tCOP);
+            const saldoBS = tBS > 0 ? (saldoCOP / tBS) : 0;
+
+            return { moneda, tCOP, tBS, totalCOP, abonadoCOP, saldoCOP, totalUSD, abonadoUSD, saldoUSD, saldoBS };
+        };
+
         window.alSeleccionarProductoApartadoCatalogo = function() {
-            const id = document.getElementById('apt-select-producto')?.value;
-            const prod = PRODUCTOS.find(p => String(p.id) === String(id));
-            document.getElementById('apt-display-total').value = prod ? prod.precio.toFixed(2) : "0.00";
             window.calcularSaldosApartado();
         };
 
         window.calcularSaldosApartado = function() {
-            let precioTotal = 0;
+            const tCOP = parseFloat(document.getElementById('tasa-cop')?.value) || 3600;
+            const tBS = parseFloat(document.getElementById('tasa-bs')?.value) || 3.3;
+            const monAcuerdo = window.obtenerMonedaAcuerdoApartadoForm();
+
+            let totalUSD = 0;
+            let totalCOP = 0;
+
             if (modoCargaApartadoActivo === 'manual') {
-                precioTotal = window.parsearMontoFormateado(document.getElementById('apt-manual-precio')?.value);
-                document.getElementById('apt-display-total').value = precioTotal.toFixed(2);
+                const rawPrecio = window.parsearMontoFormateado(document.getElementById('apt-manual-precio')?.value);
+                if (monAcuerdo === 'COP') {
+                    totalCOP = Math.round(rawPrecio);
+                    totalUSD = tCOP > 0 ? window.redondear2(totalCOP / tCOP) : 0;
+                } else {
+                    totalUSD = window.redondear2(rawPrecio);
+                    totalCOP = Math.round(totalUSD * tCOP);
+                }
             } else {
                 const id = document.getElementById('apt-select-producto')?.value;
                 const prod = PRODUCTOS.find(p => String(p.id) === String(id));
-                precioTotal = prod ? prod.precio : 0;
-                document.getElementById('apt-display-total').value = precioTotal.toFixed(2);
+                const baseUSD = prod ? Number(prod.precio || 0) : 0;
+                totalUSD = window.redondear2(baseUSD);
+                totalCOP = Math.round(baseUSD * tCOP);
             }
 
-            const tCOP = parseFloat(document.getElementById('tasa-cop')?.value) || 3600;
-            const tBS = parseFloat(document.getElementById('tasa-bs')?.value) || 3.3;
-
             const abonoRaw = window.parsearMontoFormateado(document.getElementById('apt-abono-inicial')?.value);
-            let abonoUSD = abonoRaw;
+            let abonoUSD = 0;
+            let abonoCOP = 0;
 
-            if (monedaAbonoApartadoActiva === 'COP') abonoUSD = tCOP > 0 ? window.redondear2(abonoRaw / tCOP) : 0;
-            else if (monedaAbonoApartadoActiva === 'BS') abonoUSD = (tCOP > 0 && tBS > 0) ? window.redondear2((abonoRaw * tBS) / tCOP) : 0;
-            else abonoUSD = window.redondear2(abonoRaw);
+            if (monedaAbonoApartadoActiva === 'COP') {
+                abonoCOP = Math.round(abonoRaw);
+                abonoUSD = tCOP > 0 ? window.redondear2(abonoCOP / tCOP) : 0;
+            } else if (monedaAbonoApartadoActiva === 'BS') {
+                abonoCOP = Math.round(abonoRaw * tBS);
+                abonoUSD = tCOP > 0 ? window.redondear2(abonoCOP / tCOP) : 0;
+            } else {
+                abonoUSD = window.redondear2(abonoRaw);
+                abonoCOP = Math.round(abonoUSD * tCOP);
+            }
 
-            const saldoUSD = Math.max(0, precioTotal - abonoUSD);
-            const saldoCOP = saldoUSD * tCOP;
+            let saldoUSD, saldoCOP;
+            if (monAcuerdo === 'COP') {
+                saldoCOP = Math.max(0, totalCOP - abonoCOP);
+                saldoUSD = tCOP > 0 ? window.redondear2(saldoCOP / tCOP) : 0;
+            } else {
+                saldoUSD = window.redondear2(Math.max(0, totalUSD - abonoUSD));
+                saldoCOP = Math.round(saldoUSD * tCOP);
+            }
             const saldoBS = tBS > 0 ? (saldoCOP / tBS) : 0;
 
-            document.getElementById('apt-saldo-pendiente').value = saldoUSD.toFixed(2);
-            const lblCOP = document.getElementById('apt-saldo-cop-val');
-            const lblBS = document.getElementById('apt-saldo-bs-val');
-            if (lblCOP) lblCOP.innerText = `${Math.round(saldoCOP).toLocaleString('es-CO')} COP`;
-            if (lblBS) lblBS.innerText = `${saldoBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs`;
+            const lblTot = document.getElementById('lbl-apt-display-total');
+            const inpTot = document.getElementById('apt-display-total');
+            const lblSal = document.getElementById('lbl-apt-saldo-pendiente');
+            const inpSal = document.getElementById('apt-saldo-pendiente');
+            const lblEqPri = document.getElementById('lbl-apt-eq-primario');
+            const valEqPri = document.getElementById('apt-saldo-cop-val');
+            const valEqBs = document.getElementById('apt-saldo-bs-val');
+
+            if (monAcuerdo === 'COP') {
+                if (lblTot) lblTot.innerText = 'Costo Total (COP)';
+                if (inpTot) inpTot.value = `${totalCOP.toLocaleString('es-CO')} COP`;
+                if (lblSal) lblSal.innerText = 'Saldo Restante (COP)';
+                if (inpSal) inpSal.value = `${saldoCOP.toLocaleString('es-CO')} COP`;
+                if (lblEqPri) lblEqPri.innerText = 'Equivalente Saldo USD';
+                if (valEqPri) valEqPri.innerText = `$${saldoUSD.toFixed(2)} USD`;
+            } else {
+                if (lblTot) lblTot.innerText = 'Costo Total ($ USD)';
+                if (inpTot) inpTot.value = `$${totalUSD.toFixed(2)}`;
+                if (lblSal) lblSal.innerText = 'Saldo Restante ($ USD)';
+                if (inpSal) inpSal.value = `$${saldoUSD.toFixed(2)}`;
+                if (lblEqPri) lblEqPri.innerText = 'Equivalente Saldo COP';
+                if (valEqPri) valEqPri.innerText = `${saldoCOP.toLocaleString('es-CO')} COP`;
+            }
+
+            if (valEqBs) valEqBs.innerText = `${saldoBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs`;
         };
 
-        window.guardarNuevoApartadoFirebase = async function() {
+        window.limpiarFormularioApartado = function() {
+            const ids = ['apt-nombre', 'apt-cedula', 'apt-telefono', 'apt-direccion', 'apt-manual-modelo', 'apt-manual-precio', 'apt-abono-inicial'];
+            ids.forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+            const selProd = document.getElementById('apt-select-producto');
+            if (selProd) selProd.value = '';
+            window.calcularSaldosApartado();
+        };
+
+        window.guardarNuevoApartadoFirebase = async function(accion = 'guardar') {
             const nombre = document.getElementById('apt-nombre').value.trim();
             const cedula = document.getElementById('apt-cedula').value.trim();
             const telefono = document.getElementById('apt-telefono').value.trim();
             const direccion = document.getElementById('apt-direccion').value.trim() || 'Cordero';
 
+            const tCOP = parseFloat(document.getElementById('tasa-cop').value) || 3600;
+            const tBS = parseFloat(document.getElementById('tasa-bs').value) || 3.3;
+            const monAcuerdo = window.obtenerMonedaAcuerdoApartadoForm();
+
             let modelo = '';
-            let precioTotal = 0;
+            let precioTotalUSD = 0;
+            let precioTotalCOP = 0;
             let productoId = null;
 
             if (modoCargaApartadoActivo === 'manual') {
                 modelo = document.getElementById('apt-manual-modelo').value.trim();
-                precioTotal = window.parsearMontoFormateado(document.getElementById('apt-manual-precio').value);
+                const rawPrc = window.parsearMontoFormateado(document.getElementById('apt-manual-precio').value);
+                if (monAcuerdo === 'COP') {
+                    precioTotalCOP = Math.round(rawPrc);
+                    precioTotalUSD = tCOP > 0 ? window.redondear2(precioTotalCOP / tCOP) : 0;
+                } else {
+                    precioTotalUSD = window.redondear2(rawPrc);
+                    precioTotalCOP = Math.round(precioTotalUSD * tCOP);
+                }
             } else {
                 productoId = document.getElementById('apt-select-producto').value;
                 const prod = PRODUCTOS.find(p => String(p.id) === String(productoId));
                 if (!prod) return alert("Seleccione un modelo del catálogo.");
                 modelo = prod.modelo;
-                precioTotal = prod.precio;
+                precioTotalUSD = window.redondear2(Number(prod.precio || 0));
+                precioTotalCOP = Math.round(precioTotalUSD * tCOP);
             }
 
-            const tCOP = parseFloat(document.getElementById('tasa-cop').value) || 3600;
-            const tBS = parseFloat(document.getElementById('tasa-bs').value) || 3.3;
-
             const abonoRaw = window.parsearMontoFormateado(document.getElementById('apt-abono-inicial').value);
-            let abonoUSD = abonoRaw;
+            let abonoUSD = 0;
+            let abonoCOP = 0;
 
-            if (monedaAbonoApartadoActiva === 'COP') abonoUSD = tCOP > 0 ? window.redondear2(abonoRaw / tCOP) : 0;
-            else if (monedaAbonoApartadoActiva === 'BS') abonoUSD = (tCOP > 0 && tBS > 0) ? window.redondear2((abonoRaw * tBS) / tCOP) : 0;
-            else abonoUSD = window.redondear2(abonoRaw);
+            if (monedaAbonoApartadoActiva === 'COP') {
+                abonoCOP = Math.round(abonoRaw);
+                abonoUSD = tCOP > 0 ? window.redondear2(abonoCOP / tCOP) : 0;
+            } else if (monedaAbonoApartadoActiva === 'BS') {
+                abonoCOP = Math.round(abonoRaw * tBS);
+                abonoUSD = tCOP > 0 ? window.redondear2(abonoCOP / tCOP) : 0;
+            } else {
+                abonoUSD = window.redondear2(abonoRaw);
+                abonoCOP = Math.round(abonoUSD * tCOP);
+            }
 
-            const saldoPendiente = Math.max(0, precioTotal - abonoUSD);
+            let saldoPendienteUSD, saldoPendienteCOP;
+            if (monAcuerdo === 'COP') {
+                saldoPendienteCOP = Math.max(0, precioTotalCOP - abonoCOP);
+                saldoPendienteUSD = tCOP > 0 ? window.redondear2(saldoPendienteCOP / tCOP) : 0;
+            } else {
+                saldoPendienteUSD = window.redondear2(Math.max(0, precioTotalUSD - abonoUSD));
+                saldoPendienteCOP = Math.round(saldoPendienteUSD * tCOP);
+            }
 
-            if (!nombre || !cedula || !telefono || !modelo || precioTotal <= 0 || abonoRaw <= 0) {
-                return alert("Complete datos del cliente, modelo, precio total y monto de abono inicial.");
+            if (!nombre || !cedula || !telefono || !modelo || (precioTotalUSD <= 0 && precioTotalCOP <= 0) || abonoRaw <= 0) {
+                return alert("Complete datos del cliente, artículo/trabajo, costo total acordado y monto de abono inicial.");
             }
 
             const nuevoApartado = {
@@ -4697,9 +4860,15 @@
                 modoEntrada: modoCargaApartadoActivo,
                 productoId,
                 modelo,
-                precioPactadoUSD: precioTotal,
+                monedaAcuerdo: monAcuerdo,
+                precioPactadoUSD: precioTotalUSD,
+                precioPactadoCOP: precioTotalCOP,
                 abonoAcumuladoUSD: abonoUSD,
-                saldoPendienteUSD: saldoPendiente,
+                abonoAcumuladoCOP: abonoCOP,
+                saldoPendienteUSD: saldoPendienteUSD,
+                saldoPendienteCOP: saldoPendienteCOP,
+                tasaCopRegistro: tCOP,
+                tasaBsRegistro: tBS,
                 fechaRegistro: new Date().toLocaleDateString('es-VE'),
                 timestamp: Date.now(),
                 estatus: "ACTIVO",
@@ -4709,7 +4878,8 @@
                     fecha: new Date().toLocaleDateString('es-VE'),
                     moneda: monedaAbonoApartadoActiva,
                     montoOriginal: abonoRaw,
-                    montoUSD: abonoUSD
+                    montoUSD: abonoUSD,
+                    montoCOP: abonoCOP
                 }]
             };
 
@@ -4720,24 +4890,19 @@
                 nuevoApartado.id = docRef.id;
                 APARTADOS.unshift(nuevoApartado);
                 window.renderizarListaApartadosHTML(APARTADOS);
+                window.limpiarFormularioApartado();
 
-                const opcionAccion = prompt("✅ ¡Apartado registrado y sincronizado en la nube!\n\nCliente: " + nombre + "\nEquipo: " + modelo + "\nAbonado: $" + abonoUSD.toFixed(2) + " USD\nSaldo Pendiente: $" + saldoPendiente.toFixed(2) + " USD\n\n¿Qué desea hacer?\n[1] Imprimir Recibo 10x13\n[2] Enviar a WhatsApp del Cliente\n[3] Continuar", "2");
-
-                if (opcionAccion === "1") {
+                if (accion === 'imprimir') {
                     window.imprimirTicketApartado(docRef.id);
-                } else if (opcionAccion === "2") {
+                } else if (accion === 'whatsapp') {
                     window.enviarWhatsAppApartadoObjeto(nuevoApartado, abonoUSD, monedaAbonoApartadoActiva, abonoRaw);
+                } else {
+                    const resumenSaldo = monAcuerdo === 'COP'
+                        ? `${saldoPendienteCOP.toLocaleString('es-CO')} COP`
+                        : `$${saldoPendienteUSD.toFixed(2)} USD`;
+                    alert(`✅ Apartado guardado en la nube.\n\nCliente: ${nombre}\nTrabajo/Equipo: ${modelo}\nSaldo Restante: ${resumenSaldo}`);
                 }
 
-                document.getElementById('apt-nombre').value = '';
-                document.getElementById('apt-cedula').value = '';
-                document.getElementById('apt-telefono').value = '';
-                document.getElementById('apt-direccion').value = '';
-                document.getElementById('apt-manual-modelo').value = '';
-                document.getElementById('apt-manual-precio').value = '';
-                document.getElementById('apt-abono-inicial').value = '';
-                document.getElementById('apt-saldo-pendiente').value = '0.00';
-                document.getElementById('apt-display-total').value = '0.00';
                 await window.cargarApartadosFirebase();
             } catch(e) {
                 console.error(e);
@@ -4783,11 +4948,14 @@
                 return;
             }
 
-            cont.innerHTML = lista.map((apt, idx) => {
-                const tCOP = parseFloat(document.getElementById('tasa-cop').value) || 3600;
-                const tBS = parseFloat(document.getElementById('tasa-bs').value) || 3.3;
-                const saldoCOP = (apt.saldoPendienteUSD || 0) * tCOP;
-                const saldoBS = tBS > 0 ? (saldoCOP / tBS) : 0;
+            cont.innerHTML = lista.map((apt) => {
+                const m = window.resolverMontosApartado(apt);
+                const totalTxt = m.moneda === 'COP' ? `${m.totalCOP.toLocaleString('es-CO')} COP` : `$${m.totalUSD.toFixed(2)}`;
+                const abonoTxt = m.moneda === 'COP' ? `${m.abonadoCOP.toLocaleString('es-CO')} COP` : `$${m.abonadoUSD.toFixed(2)}`;
+                const restaTxt = m.moneda === 'COP' ? `${m.saldoCOP.toLocaleString('es-CO')} COP` : `$${m.saldoUSD.toFixed(2)}`;
+                const equivTxt = m.moneda === 'COP'
+                    ? `Equiv: $${m.saldoUSD.toFixed(2)} USD | ${m.saldoBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs`
+                    : `Equiv: ${m.saldoCOP.toLocaleString('es-CO')} COP | ${m.saldoBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs`;
 
                 return `
                     <div class="bg-slate-950 border border-slate-800 p-3 rounded-2xl flex flex-col justify-between gap-2 shadow-sm hover:border-slate-700 transition-all">
@@ -4798,13 +4966,13 @@
                             </div>
                             <p class="text-[11px] text-amber-300 font-bold mt-0.5 truncate">📦 ${apt.modelo}</p>
                             <p class="text-[9.5px] text-cyan-400 font-mono mt-0.5">📞 ${apt.telefono || 'Sin teléfono'}</p>
-                            <div class="mt-1.5 pt-1.5 border-t border-slate-800 text-[10px] font-mono text-slate-400 flex justify-between">
-                                <span>Total: <strong class="text-white">$${(apt.precioPactadoUSD || 0).toFixed(2)}</strong></span>
-                                <span>Abonado: <strong class="text-emerald-400">$${(apt.abonoAcumuladoUSD || 0).toFixed(2)}</strong></span>
-                                <span>Resta: <strong class="text-red-400">$${(apt.saldoPendienteUSD || 0).toFixed(2)}</strong></span>
+                            <div class="mt-1.5 pt-1.5 border-t border-slate-800 text-[10px] font-mono text-slate-400 flex flex-wrap justify-between gap-1">
+                                <span>Total: <strong class="text-white">${totalTxt}</strong></span>
+                                <span>Abono: <strong class="text-emerald-400">${abonoTxt}</strong></span>
+                                <span>Resta: <strong class="text-red-400">${restaTxt}</strong></span>
                             </div>
                             <div class="text-[9px] text-slate-500 font-mono mt-0.5">
-                                Equiv: ${Math.round(saldoCOP).toLocaleString('es-CO')} COP | ${saldoBS.toFixed(2).toLocaleString('es-VE')} Bs
+                                ${equivTxt}
                             </div>
                         </div>
                         <div class="flex gap-1.5 pt-1 border-t border-slate-800/80">
@@ -4840,109 +5008,171 @@
                     await window.cargarApartadosFirebase();
                 } catch(e) {
                     console.error(e);
-                    alert("Error al eliminar apartado.");
+                    alert("Error eliminando apartado: " + e.message);
                 }
             }
+        };
+
+        window.filtrarListaApartados = function() {
+            const val = (document.getElementById('busq-apartados-input')?.value || '').toLowerCase();
+            const f = APARTADOS.filter(a => (a.nombre || '').toLowerCase().includes(val) || (a.cedula || '').toLowerCase().includes(val) || (a.modelo || '').toLowerCase().includes(val));
+            window.renderizarListaApartadosHTML(f);
         };
 
         window.gestionarAbonoApartado = async function(id) {
             const apt = APARTADOS.find(a => a.id === id);
             if (!apt) return;
 
-            const tCOP = parseFloat(document.getElementById('tasa-cop').value) || 3600;
-            const tBS = parseFloat(document.getElementById('tasa-bs').value) || 3.3;
+            const m = window.resolverMontosApartado(apt);
+            const tCOP = m.tCOP;
+            const tBS = m.tBS;
+            const esCOP = m.moneda === 'COP';
 
-            let precioVentaFinal = apt.precioPactadoUSD;
-            const ajusteOpcion = prompt("🔔 ALERTA DE PRECIO — APARTADOS TUCOCEL\n\nCliente: " + apt.nombre + " (" + apt.cedula + ")\nEquipo: " + apt.modelo + "\nPrecio Base en Cuenta: $" + apt.precioPactadoUSD.toFixed(2) + " USD\nTotal Abonado Previo: $" + apt.abonoAcumuladoUSD.toFixed(2) + " USD\n\nSeleccione una opción:\n[1] MANTENER precio actual ($" + apt.precioPactadoUSD.toFixed(2) + " USD)\n[2] AJUSTAR / ACTUALIZAR a nuevo precio de mercado\n\nIngrese 1 o 2:", "1");
+            let precioFinalUSD = m.totalUSD;
+            let precioFinalCOP = m.totalCOP;
+            const precioStrActual = esCOP ? `${m.totalCOP.toLocaleString('es-CO')} COP` : `$${m.totalUSD.toFixed(2)} USD`;
+            const abonoStrActual = esCOP ? `${m.abonadoCOP.toLocaleString('es-CO')} COP` : `$${m.abonadoUSD.toFixed(2)} USD`;
+
+            const ajusteOpcion = prompt(
+                `🔔 ALERTA DE PRECIO — APARTADOS TUCOCEL\n\nCliente: ${apt.nombre} (${apt.cedula})\nEquipo/Trabajo: ${apt.modelo}\nCosto Base en Cuenta: ${precioStrActual}\nTotal Abonado Previo: ${abonoStrActual}\n\nSeleccione una opción:\n[1] MANTENER precio actual (${precioStrActual})\n[2] AJUSTAR / ACTUALIZAR a nuevo precio de mercado\n\nIngrese 1 o 2:`,
+                "1"
+            );
+            if (ajusteOpcion === null) return;
 
             if (ajusteOpcion === "2") {
-                const nuevoPrecioIngresado = parseFloat(prompt("Ingrese el NUEVO PRECIO de mercado para \"" + apt.modelo + "\" ($ USD):", apt.precioPactadoUSD.toFixed(2))) || apt.precioPactadoUSD;
-                if (nuevoPrecioIngresado > 0) {
-                    precioVentaFinal = nuevoPrecioIngresado;
-                    apt.precioPactadoUSD = precioVentaFinal;
+                const promptLbl = esCOP
+                    ? `Ingrese el NUEVO PRECIO de mercado para "${apt.modelo}" (en COP):`
+                    : `Ingrese el NUEVO PRECIO de mercado para "${apt.modelo}" ($ USD):`;
+                const defVal = esCOP ? String(m.totalCOP) : m.totalUSD.toFixed(2);
+                const nuevoRaw = window.parsearMontoFormateado(prompt(promptLbl, defVal));
+                if (nuevoRaw > 0) {
+                    if (esCOP) {
+                        precioFinalCOP = Math.round(nuevoRaw);
+                        precioFinalUSD = tCOP > 0 ? window.redondear2(precioFinalCOP / tCOP) : 0;
+                    } else {
+                        precioFinalUSD = window.redondear2(nuevoRaw);
+                        precioFinalCOP = Math.round(precioFinalUSD * tCOP);
+                    }
+                    apt.precioPactadoUSD = precioFinalUSD;
+                    apt.precioPactadoCOP = precioFinalCOP;
                 }
             }
 
-            const saldoCalculadoPrevio = Math.max(0, precioVentaFinal - apt.abonoAcumuladoUSD);
-            const monedaAbono = prompt("💵 MONEDA DE PAGO DEL NUEVO ABONO\n\nSaldo Pendiente: $" + saldoCalculadoPrevio.toFixed(2) + " USD\n(" + Math.round(saldoCalculadoPrevio * tCOP).toLocaleString('es-CO') + " COP | " + (tBS > 0 ? (saldoCalculadoPrevio * tCOP) / tBS : 0).toFixed(2).toLocaleString('es-VE') + " Bs)\n\nSeleccione la moneda en que entrega el dinero el cliente:\n[1] Dólares ($ USD)\n[2] Pesos Colombianos (COP)\n[3] Bolívares (Bs)\n\nIngrese 1, 2 o 3:", "1");
+            const saldoPrevCOP = esCOP ? Math.max(0, precioFinalCOP - m.abonadoCOP) : Math.round(Math.max(0, precioFinalUSD - m.abonadoUSD) * tCOP);
+            const saldoPrevUSD = esCOP ? (tCOP > 0 ? window.redondear2(saldoPrevCOP / tCOP) : 0) : window.redondear2(Math.max(0, precioFinalUSD - m.abonadoUSD));
+            const saldoPrevBS = tBS > 0 ? (saldoPrevCOP / tBS) : 0;
+
+            const defMonOpt = esCOP ? "2" : "1";
+            const monedaAbono = prompt(
+                `💵 MONEDA DE PAGO DEL NUEVO ABONO\n\nSaldo Pendiente:\n• ${esCOP ? `${saldoPrevCOP.toLocaleString('es-CO')} COP` : `$${saldoPrevUSD.toFixed(2)} USD`}\n(${esCOP ? `$${saldoPrevUSD.toFixed(2)} USD` : `${saldoPrevCOP.toLocaleString('es-CO')} COP`} | ${saldoPrevBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs)\n\nSeleccione la moneda en que entrega el dinero el cliente:\n[1] Dólares ($ USD)\n[2] Pesos Colombianos (COP)\n[3] Bolívares (Bs)\n\nIngrese 1, 2 o 3:`,
+                defMonOpt
+            );
+            if (monedaAbono === null) return;
 
             let monedaTexto = 'USD';
             if (monedaAbono === "2") monedaTexto = 'COP';
             else if (monedaAbono === "3") monedaTexto = 'BS';
 
-            let placeholderMonto = saldoCalculadoPrevio.toFixed(2);
-            if (monedaTexto === 'COP') placeholderMonto = Math.round(saldoCalculadoPrevio * tCOP);
-            else if (monedaTexto === 'BS') placeholderMonto = (tBS > 0 ? (saldoCalculadoPrevio * tCOP) / tBS : 0).toFixed(2);
+            let placeholderMonto = saldoPrevUSD.toFixed(2);
+            if (monedaTexto === 'COP') placeholderMonto = String(saldoPrevCOP);
+            else if (monedaTexto === 'BS') placeholderMonto = saldoPrevBS.toFixed(2);
 
-            const montoEntregadoRaw = parseFloat(prompt("Ingrese el monto abonado en " + monedaTexto + ":", placeholderMonto)) || 0;
+            const montoEntregadoRaw = window.parsearMontoFormateado(prompt("Ingrese el monto abonado en " + monedaTexto + ":", placeholderMonto));
             if (montoEntregadoRaw <= 0) return;
 
-            let nuevoAbonoUSD = montoEntregadoRaw;
-            if (monedaTexto === 'COP') nuevoAbonoUSD = tCOP > 0 ? (montoEntregadoRaw / tCOP) : 0;
-            else if (monedaTexto === 'BS') nuevoAbonoUSD = (tCOP > 0 && tBS > 0) ? ((montoEntregadoRaw * tBS) / tCOP) : 0;
+            let nuevoAbonoUSD = 0;
+            let nuevoAbonoCOP = 0;
+            if (monedaTexto === 'COP') {
+                nuevoAbonoCOP = Math.round(montoEntregadoRaw);
+                nuevoAbonoUSD = tCOP > 0 ? window.redondear2(nuevoAbonoCOP / tCOP) : 0;
+            } else if (monedaTexto === 'BS') {
+                nuevoAbonoCOP = Math.round(montoEntregadoRaw * tBS);
+                nuevoAbonoUSD = tCOP > 0 ? window.redondear2(nuevoAbonoCOP / tCOP) : 0;
+            } else {
+                nuevoAbonoUSD = window.redondear2(montoEntregadoRaw);
+                nuevoAbonoCOP = Math.round(nuevoAbonoUSD * tCOP);
+            }
 
-            apt.abonoAcumuladoUSD += nuevoAbonoUSD;
-            apt.saldoPendienteUSD = Math.max(0, precioVentaFinal - apt.abonoAcumuladoUSD);
+            if (esCOP) {
+                apt.abonoAcumuladoCOP = m.abonadoCOP + nuevoAbonoCOP;
+                apt.saldoPendienteCOP = Math.max(0, precioFinalCOP - apt.abonoAcumuladoCOP);
+                apt.abonoAcumuladoUSD = tCOP > 0 ? window.redondear2(apt.abonoAcumuladoCOP / tCOP) : 0;
+                apt.saldoPendienteUSD = tCOP > 0 ? window.redondear2(apt.saldoPendienteCOP / tCOP) : 0;
+            } else {
+                apt.abonoAcumuladoUSD = window.redondear2(m.abonadoUSD + nuevoAbonoUSD);
+                apt.saldoPendienteUSD = window.redondear2(Math.max(0, precioFinalUSD - apt.abonoAcumuladoUSD));
+                apt.abonoAcumuladoCOP = Math.round(apt.abonoAcumuladoUSD * tCOP);
+                apt.saldoPendienteCOP = Math.round(apt.saldoPendienteUSD * tCOP);
+            }
 
             if (!apt.historialAbonos) apt.historialAbonos = [];
             apt.historialAbonos.push({
                 fecha: new Date().toLocaleDateString('es-VE'),
                 moneda: monedaTexto,
                 montoOriginal: montoEntregadoRaw,
-                montoUSD: nuevoAbonoUSD
+                montoUSD: nuevoAbonoUSD,
+                montoCOP: nuevoAbonoCOP
             });
+
+            const cuentaLiquidada = esCOP ? (apt.saldoPendienteCOP <= 0) : (apt.saldoPendienteUSD <= 0.01);
+
+            if (cuentaLiquidada) {
+                const convertir = confirm(`🎉 ¡CUENTA LIQUIDADA AL 100%!\n\nEl cliente ${apt.nombre} ha saldado por completo "${apt.modelo}".\n\n¿Desea generar AHORA la Nota de Entrega Final (con IMEI y Garantía) y pasar los datos al Cajero?`);
+                if (convertir) {
+                    const firestoreDb = getDbCompat();
+                    if (firestoreDb) await firestoreDb.collection("equipos_apartados").doc(apt.id).delete();
+
+                    document.getElementById('fact-cli-nombre').value = apt.nombre;
+                    document.getElementById('fact-cli-cedula').value = apt.cedula;
+                    document.getElementById('fact-cli-telefono').value = apt.telefono;
+                    document.getElementById('fact-cli-direccion').value = apt.direccion || 'Cordero';
+
+                    window.cambiarSeccionAdministrativa('cajero');
+                    window.cambiarModoCargaFactura('manual');
+                    document.getElementById('manual-modelo').value = apt.modelo;
+                    const selMonPOS = document.getElementById('manual-moneda-item');
+                    if (selMonPOS) {
+                        selMonPOS.value = esCOP ? 'COP' : 'USD';
+                        window.alCambiarMonedaManualFactura();
+                    }
+                    document.getElementById('manual-precio').value = esCOP
+                        ? window.formatearNumeroParaInput(precioFinalCOP, false)
+                        : window.formatearNumeroParaInput(precioFinalUSD, true);
+                    document.getElementById('manual-cantidad').value = '1';
+                    const chk = document.getElementById('manual-check-imei');
+                    if (chk) { chk.checked = true; window.renderizarCamposImeiDinamicos('manual'); }
+
+                    alert("📲 Datos cargados en Facturación POS. Por favor escriba o escanee el IMEI físico (15 dígitos) si aplica y pulse 'Añadir al Ticket'.");
+                    await window.cargarApartadosFirebase();
+                    return;
+                }
+            }
 
             try {
                 const firestoreDb = getDbCompat();
-                if (!firestoreDb) throw new Error("Sin conexión a Firebase.");
-
-                if (apt.saldoPendienteUSD <= 0.01) {
-                    apt.saldoPendienteUSD = 0;
-                    const imeiFisico = prompt("🎉 ¡APARTADO TOTALMENTE LIQUIDADO!\n\nPor favor ingrese los 4 últimos dígitos del IMEI del equipo físico que se le entrega en mano al cliente:", "0000");
-
-                    const snapVentas = await firestoreDb.collection("notas_ventas").get();
-                    await firestoreDb.collection("notas_ventas").add({
-                        numNota: snapVentas.size + 1,
-                        fecha: new Date().toLocaleDateString('es-VE'),
-                        cliente: apt.nombre,
-                        cedula: apt.cedula,
-                        telefono: apt.telefono,
-                        direccion: apt.direccion || "Apartado Liquidado",
-                        items: [{
-                            cantidad: 1,
-                            modelo: `${apt.modelo} (Apartado Liquidado)`,
-                            precio: precioVentaFinal,
-                            imeis: imeiFisico ? [imeiFisico.trim()] : null
-                        }],
-                        totalUSD: precioVentaFinal,
-                        tasaCop: tCOP,
-                        tasaBs: tBS,
-                        estatus: "PROCESADA",
-                        timestamp: Date.now()
-                    });
-
-                    await firestoreDb.collection("equipos_apartados").doc(apt.id).delete();
-                    alert("✨ Apartado liquidado y registrado con éxito en el Historial de Notas de Entrega.");
-                } else {
+                if (firestoreDb) {
                     await firestoreDb.collection("equipos_apartados").doc(apt.id).update({
                         precioPactadoUSD: apt.precioPactadoUSD,
+                        precioPactadoCOP: apt.precioPactadoCOP || Math.round(apt.precioPactadoUSD * tCOP),
                         abonoAcumuladoUSD: apt.abonoAcumuladoUSD,
+                        abonoAcumuladoCOP: apt.abonoAcumuladoCOP || Math.round(apt.abonoAcumuladoUSD * tCOP),
                         saldoPendienteUSD: apt.saldoPendienteUSD,
+                        saldoPendienteCOP: apt.saldoPendienteCOP || Math.round(apt.saldoPendienteUSD * tCOP),
                         historialAbonos: apt.historialAbonos
                     });
-
-                    const accionPost = prompt("✅ Abono registrado exitosamente.\n\nSaldo Restante por Pagar: $" + apt.saldoPendienteUSD.toFixed(2) + " USD\n\n[1] Imprimir Recibo 10x13\n[2] Enviar a WhatsApp\n[3] Cerrar", "2");
-                    if (accionPost === "1") {
-                        window.imprimirTicketApartado(apt.id);
-                    } else if (accionPost === "2") {
-                        window.enviarWhatsAppApartadoObjeto(apt, nuevoAbonoUSD, monedaTexto, montoEntregadoRaw);
-                    }
                 }
+
+                const saldoNuevoStr = esCOP
+                    ? `${(apt.saldoPendienteCOP || 0).toLocaleString('es-CO')} COP`
+                    : `$${(apt.saldoPendienteUSD || 0).toFixed(2)} USD`;
+
+                const op = prompt(`✅ ¡Abono actualizado en la nube!\n\nNuevo Saldo Restante: ${saldoNuevoStr}\n\n[1] Imprimir Recibo 10x13\n[2] Enviar Comprobante por WhatsApp\n[3] Solo Guardar`, "2");
+                if (op === "1") window.imprimirTicketApartado(apt.id);
+                else if (op === "2") window.enviarWhatsAppApartadoObjeto(apt, nuevoAbonoUSD, monedaTexto, montoEntregadoRaw);
 
                 await window.cargarApartadosFirebase();
             } catch(e) {
-                console.error(e);
-                alert("Error actualizando apartado: " + (e.message || e));
+                alert("Error actualizando abono: " + e.message);
             }
         };
 
@@ -4954,22 +5184,37 @@
                 return;
             }
             const incluirBs = Boolean(mostrarBs);
-            const tCOP = parseFloat(document.getElementById('tasa-cop').value) || 3600;
-            const tBS = parseFloat(document.getElementById('tasa-bs').value) || 3.3;
-
-            const totalUSD = Number(apt.precioPactadoUSD || 0);
-            const abonadoTotalUSD = Number(apt.abonoAcumuladoUSD || 0);
-            const saldoUSD = Number(apt.saldoPendienteUSD || 0);
-            const saldoCOP = Math.round(saldoUSD * tCOP);
-            const saldoBS = tBS > 0 ? (saldoCOP / tBS) : 0;
+            const m = window.resolverMontosApartado(apt);
+            const esCOP = m.moneda === 'COP';
 
             let bloqueAbonoHoy = '';
             if (abonoUSD !== null) {
-                let lineaOrig = `   • *$${Number(abonoUSD).toFixed(2)} USD*`;
-                if (moneda === 'COP') lineaOrig += `\n   • ${Math.round(montoOriginal).toLocaleString('es-CO')} COP`;
-                else if (moneda === 'BS') lineaOrig += `\n   • ${Number(montoOriginal).toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs`;
+                let lineaOrig = '';
+                if (moneda === 'COP') {
+                    lineaOrig = `   • *${Math.round(montoOriginal).toLocaleString('es-CO')} COP*` +
+                                `\n   • Ref: $${Number(abonoUSD).toFixed(2)} USD`;
+                } else if (moneda === 'BS') {
+                    lineaOrig = `   • *${Number(montoOriginal).toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs*` +
+                                `\n   • Ref: $${Number(abonoUSD).toFixed(2)} USD`;
+                } else {
+                    lineaOrig = `   • *$${Number(abonoUSD).toFixed(2)} USD*`;
+                }
                 bloqueAbonoHoy = `💰 *ABONO REGISTRADO HOY:*\n${lineaOrig}\n\n`;
             }
+
+            const lineaCostoTotal = esCOP
+                ? `   Costo total: *${m.totalCOP.toLocaleString('es-CO')} COP* (Ref: $${m.totalUSD.toFixed(2)} USD)`
+                : `   Costo total: *$${m.totalUSD.toFixed(2)} USD*`;
+
+            const lineaTotalAbonado = esCOP
+                ? `   • *${m.abonadoCOP.toLocaleString('es-CO')} COP*\n   • Ref: $${m.abonadoUSD.toFixed(2)} USD`
+                : `   • *$${m.abonadoUSD.toFixed(2)} USD*`;
+
+            const lineaSaldoRestante = esCOP
+                ? `   • *${m.saldoCOP.toLocaleString('es-CO')} COP*\n   • $${m.saldoUSD.toFixed(2)} USD\n` +
+                  (incluirBs ? `   • ${m.saldoBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs\n` : '')
+                : `   • *$${m.saldoUSD.toFixed(2)} USD*\n   • ${m.saldoCOP.toLocaleString('es-CO')} COP\n` +
+                  (incluirBs ? `   • ${m.saldoBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs\n` : '');
 
             const msg = `🧾 *COMPROBANTE DE APARTADO*\n` +
                         `🏢 *TUCOCEL C.A.*\n` +
@@ -4981,18 +5226,16 @@
                         `──────────────────\n` +
                         `📦 *EQUIPO / TRABAJO:*\n` +
                         `• *${apt.modelo}*\n` +
-                        `   Costo total: *$${totalUSD.toFixed(2)} USD*\n` +
+                        `${lineaCostoTotal}\n` +
                         `──────────────────\n` +
                         `${bloqueAbonoHoy}` +
                         `✅ *TOTAL ABONADO:*\n` +
-                        `   • *$${abonadoTotalUSD.toFixed(2)} USD*\n\n` +
+                        `${lineaTotalAbonado}\n\n` +
                         `⏳ *SALDO RESTANTE:*\n` +
-                        `   • *$${saldoUSD.toFixed(2)} USD*\n` +
-                        `   • ${saldoCOP.toLocaleString('es-CO')} COP\n` +
-                        (incluirBs ? `   • ${saldoBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs\n` : '') +
+                        `${lineaSaldoRestante}` +
                         `──────────────────\n` +
                         `⚠️ *NOTA COMERCIAL:*\n` +
-                        `El saldo pendiente se ajustará al valor vigente al momento de liquidar la cuenta. El equipo físico con su serial/IMEI se asigna al completar el pago.\n\n` +
+                        `Los precios y saldos pendientes pueden estar sujetos a variación de precio o ajuste cambiario dependiendo del tiempo que dure el producto o trabajo apartado. El equipo físico con su serial/IMEI se asigna al completar el pago.\n\n` +
                         `🛡️ *Garantía (60 días):* Activa a partir del retiro físico.\n` +
                         `📍 Av. Bolívar, entre calles 12 y 13, Cordero, Táchira.\n` +
                         `¡Gracias por su confianza! 🚀`;
@@ -5004,28 +5247,42 @@
             const apt = APARTADOS.find(a => a.id === id);
             if (!apt) return;
 
-            const tCOP = parseFloat(document.getElementById('tasa-cop').value) || 3600;
-            const tBS = parseFloat(document.getElementById('tasa-bs').value) || 3.3;
+            const m = window.resolverMontosApartado(apt);
+            const esCOP = m.moneda === 'COP';
+
+            const resumenItem = esCOP
+                ? `${apt.modelo} [Abonado: ${m.abonadoCOP.toLocaleString('es-CO')} COP | Resta: ${m.saldoCOP.toLocaleString('es-CO')} COP]`
+                : `${apt.modelo} [Abonado: $${m.abonadoUSD.toFixed(2)} | Resta: $${m.saldoUSD.toFixed(2)}]`;
 
             const notaApartado = {
+                esApartado: true,
                 numNota: "APT-" + String(apt.timestamp).slice(-5),
+                numControlTexto: "APT-" + String(apt.timestamp).slice(-5),
                 fecha: new Date().toLocaleDateString('es-VE'),
                 cliente: apt.nombre,
                 cedula: apt.cedula,
                 telefono: apt.telefono,
                 direccion: apt.direccion || "Apartado Comercial",
+                monedaPrincipal: m.moneda,
                 items: [{
                     cantidad: 1,
-                    modelo: `${apt.modelo} [Abonado: $${(apt.abonoAcumuladoUSD || 0).toFixed(2)} | Resta: $${(apt.saldoPendienteUSD || 0).toFixed(2)}]`,
-                    precio: apt.precioPactadoUSD || 0,
+                    modelo: resumenItem,
+                    monedaIngreso: m.moneda,
+                    precioOriginalUnit: esCOP ? m.totalCOP : m.totalUSD,
+                    precioUnitUSD: m.totalUSD,
+                    precio: m.totalUSD,
+                    totalCOP: m.totalCOP,
                     imeis: null
                 }],
-                totalUSD: apt.saldoPendienteUSD || 0,
-                tasaCop: tCOP,
-                tasaBs: tBS,
+                totalUSD: m.totalUSD,
+                totalCOP: m.totalCOP,
+                tasaCop: m.tCOP,
+                tasaBs: m.tBS,
                 estatus: "APARTADO EN CURSO",
-                abonoUSD: apt.abonoAcumuladoUSD || 0,
-                saldoUSD: apt.saldoPendienteUSD || 0
+                abonoUSD: m.abonadoUSD,
+                abonoCOP: m.abonadoCOP,
+                saldoUSD: m.saldoUSD,
+                saldoCOP: m.saldoCOP
             };
 
             window.dispararImpresionTicket(notaApartado);
@@ -5792,8 +6049,10 @@
                 setAll('.tk-bind-nota-tasas', incluirBs ? `Venta Cashea: Inicial calculada a Tasa Oficial BCV (${bcvTasa.toFixed(2)} Bs/$).` : `Venta Cashea: Montos expresados en USD.`);
 
                 document.querySelectorAll('.tk-bind-cashea-disclaimer').forEach(el => el.style.display = 'block');
+                document.querySelectorAll('.tk-bind-apartado-disclaimer').forEach(el => el.style.display = 'none');
             } else {
-                setAll('.tk-bind-doc-type', 'NOTA DE ENTREGA');
+                const esApartadoTk = Boolean(nota && (nota.esApartado || String(nota.estatus || '').toUpperCase().includes('APARTADO')));
+                setAll('.tk-bind-doc-type', esApartadoTk ? 'COMPROBANTE DE APARTADO' : 'NOTA DE ENTREGA');
 
                 if (monedaPrincipal === 'COP') {
                     setAll('.tk-bind-lbl-total-usd', 'Total COP:');
@@ -5822,6 +6081,7 @@
 
                 setAll('.tk-bind-status-label', nota.estatus || "PROCESADA");
                 document.querySelectorAll('.tk-bind-cashea-disclaimer').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.tk-bind-apartado-disclaimer').forEach(el => el.style.display = esApartadoTk ? 'block' : 'none');
             }
         };
         window.llenarDatosTicketImpresion = window.inyectarDatosAlTicketDOM;
