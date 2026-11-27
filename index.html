@@ -1700,9 +1700,18 @@
             <div id="bloque-equipos-apartados" class="p-3 sm:p-4 md:p-6 grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 overflow-y-auto flex-grow bg-gray-50 items-start hidden">
                 <div class="lg:col-span-2 space-y-4">
                     <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 space-y-3">
-                        <h4 class="text-[11px] font-black uppercase text-amber-600 tracking-wider flex items-center gap-1.5">
-                            <i class="fa-solid fa-user-tag"></i> Datos del Cliente (Apartado o Trabajo por Encargo)
-                        </h4>
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <h4 class="text-[11px] font-black uppercase text-amber-600 tracking-wider flex items-center gap-1.5">
+                                <i class="fa-solid fa-user-tag"></i> Datos del Cliente (Apartado o Trabajo por Encargo)
+                            </h4>
+                            <div class="flex items-center gap-1.5">
+                                <label for="apt-tipo-orden" class="text-[9.5px] font-black uppercase text-slate-500">Tipo:</label>
+                                <select id="apt-tipo-orden" class="bg-amber-50 border border-amber-300 text-amber-900 font-black text-[11px] px-2.5 py-1 rounded-xl focus:outline-none">
+                                    <option value="SERVICIO">🎨 Servicio / Trabajo / Encargo</option>
+                                    <option value="PRODUCTO">📱 Equipo / Producto Físico</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
                             <div>
                                 <label class="text-[9px] text-gray-400 font-bold uppercase block mb-1">Nombre y Apellido *</label>
@@ -2486,6 +2495,35 @@
                 <button type="button" onclick="window.cerrarModalSelectorEnvioWa()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-xs py-2 rounded-xl text-center cursor-pointer">
                     Cancelar
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL FLOTANTE HOJA BLANCA: FICHA COMPLETA DE REGISTRO (APARTADOS / PRESUPUESTOS / VENTAS / CASHEA) -->
+    <div id="modal-ficha-detalle-registro" onclick="if(event.target===this) window.cerrarFichaDetalleRegistro()" class="fixed inset-0 bg-slate-950/90 z-[145] overflow-y-auto backdrop-blur-md p-2 sm:p-4 hidden flex items-center justify-center">
+        <div class="bg-white text-slate-900 rounded-3xl w-full max-w-2xl my-2 shadow-2xl overflow-hidden border border-slate-200 flex flex-col max-h-[92vh]">
+            <!-- Encabezado -->
+            <div class="bg-slate-900 text-white px-4 sm:px-6 py-4 flex items-center justify-between gap-3 shrink-0 border-b border-slate-800">
+                <div class="min-w-0">
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <span id="ficha-det-badge" class="bg-amber-400 text-slate-950 text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full tracking-wider">FICHA DETALLADA</span>
+                        <span id="ficha-det-num" class="text-xs font-mono font-bold text-cyan-300"></span>
+                    </div>
+                    <h3 id="ficha-det-titulo" class="font-black text-sm sm:text-base tracking-wide uppercase mt-1 truncate">Detalle del Registro</h3>
+                </div>
+                <button type="button" onclick="window.cerrarFichaDetalleRegistro()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white w-9 h-9 rounded-xl flex items-center justify-center cursor-pointer shrink-0" title="Cerrar">
+                    <i class="fa-solid fa-xmark text-base"></i>
+                </button>
+            </div>
+
+            <!-- Cuerpo Hoja Blanca -->
+            <div id="ficha-det-cuerpo" class="p-4 sm:p-6 bg-white overflow-y-auto flex-grow space-y-4 text-xs sm:text-sm">
+                <!-- Generado dinámicamente -->
+            </div>
+
+            <!-- Pie con Botones Directos -->
+            <div id="ficha-det-footer" class="bg-slate-100 px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-2 shrink-0 border-t border-slate-200">
+                <!-- Generado dinámicamente -->
             </div>
         </div>
     </div>
@@ -5053,11 +5091,14 @@
                 return alert("Complete datos del cliente, añada al menos un artículo/trabajo y registre un abono inicial mayor a 0.");
             }
 
+            const tipoOrdenVal = document.getElementById('apt-tipo-orden')?.value || 'SERVICIO';
+
             const nuevoApartado = {
                 nombre,
                 cedula,
                 telefono,
                 direccion,
+                tipoOrden: tipoOrdenVal,
                 modoEntrada: modoCargaApartadoActivo,
                 items: itemsFinales,
                 modelo: modeloResumen,
@@ -5160,8 +5201,8 @@
                     : `Equiv: ${m.saldoCOP.toLocaleString('es-CO')} COP | ${m.saldoBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs`;
 
                 return `
-                    <div class="bg-slate-900 border border-slate-800 p-3 rounded-2xl flex flex-col justify-between gap-2 shadow-sm hover:border-slate-700 transition-all">
-                        <div>
+                    <div class="bg-slate-900 border border-slate-800 p-3 rounded-2xl flex flex-col justify-between gap-2 shadow-sm hover:border-amber-500/50 transition-all">
+                        <div onclick="window.abrirFichaDetalleRegistro('apartado', '${apt.id}')" class="cursor-pointer group" title="Toca para ver la ficha completa sin recortes">
                             <div class="flex items-center justify-between gap-2">
                                 <strong class="text-white text-xs uppercase truncate">${apt.nombre}</strong>
                                 <span class="bg-blue-900/60 text-blue-300 border border-blue-700 text-[9px] font-mono px-2 py-0.5 rounded font-bold">${apt.cedula}</span>
@@ -5392,13 +5433,14 @@
             const incluirBs = Boolean(mostrarBs);
             const m = window.resolverMontosApartado(apt);
             const esCOP = m.moneda === 'COP';
+            const esProductoFisico = (apt.tipoOrden === 'PRODUCTO');
 
             const itemsDetalle = (Array.isArray(apt.items) && apt.items.length > 0)
                 ? apt.items.map(it => {
                     const mSub = it.monedaIngreso === 'COP'
                         ? `${Number(it.totalCOP || 0).toLocaleString('es-CO')} COP`
                         : `$${Number(it.precio || 0).toFixed(2)} USD`;
-                    return `• *${it.cantidad}x ${it.modelo}* — ${mSub}`;
+                    return `• *${it.cantidad}x ${it.modelo}*\n   ${mSub}`;
                 }).join('\n')
                 : `• *${apt.modelo}*`;
 
@@ -5418,8 +5460,8 @@
             }
 
             const lineaCostoTotal = esCOP
-                ? `   Costo total: *${m.totalCOP.toLocaleString('es-CO')} COP* (Ref: $${m.totalUSD.toFixed(2)} USD)`
-                : `   Costo total: *$${m.totalUSD.toFixed(2)} USD*`;
+                ? `💵 *Costo total:* *${m.totalCOP.toLocaleString('es-CO')} COP* (Ref: $${m.totalUSD.toFixed(2)} USD)`
+                : `💵 *Costo total:* *$${m.totalUSD.toFixed(2)} USD*`;
 
             const lineaTotalAbonado = esCOP
                 ? `   • *${m.abonadoCOP.toLocaleString('es-CO')} COP*\n   • Ref: $${m.abonadoUSD.toFixed(2)} USD`
@@ -5431,6 +5473,14 @@
                 : `   • *$${m.saldoUSD.toFixed(2)} USD*\n   • ${m.saldoCOP.toLocaleString('es-CO')} COP\n` +
                   (incluirBs ? `   • ${m.saldoBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs\n` : '');
 
+            const notaComercialTxt = esProductoFisico
+                ? `Los precios y saldos pendientes pueden estar sujetos a variación de precio o ajuste cambiario dependiendo del tiempo que dure el producto apartado. El equipo físico con su serial/IMEI se asigna al completar el pago.`
+                : `Los precios y saldos pendientes pueden estar sujetos a variación de precio o ajuste cambiario dependiendo del tiempo que dure el trabajo o servicio encargado.`;
+
+            const bloqueGarantia = esProductoFisico
+                ? `🛡️ *Garantía (60 días):* Activa a partir del retiro físico.\n`
+                : '';
+
             const msg = `🧾 *COMPROBANTE DE APARTADO*\n` +
                         `🏢 *TUCOCEL C.A.*\n` +
                         `RIF: J-31378837-6\n` +
@@ -5441,6 +5491,7 @@
                         `──────────────────\n` +
                         `📦 *ARTÍCULOS / TRABAJOS:*\n` +
                         `${itemsDetalle}\n` +
+                        `──────────────────\n` +
                         `${lineaCostoTotal}\n` +
                         `──────────────────\n` +
                         `${bloqueAbonoHoy}` +
@@ -5450,10 +5501,12 @@
                         `${lineaSaldoRestante}` +
                         `──────────────────\n` +
                         `⚠️ *NOTA COMERCIAL:*\n` +
-                        `Los precios y saldos pendientes pueden estar sujetos a variación de precio o ajuste cambiario dependiendo del tiempo que dure el producto o trabajo apartado. El equipo físico con su serial/IMEI se asigna al completar el pago.\n\n` +
-                        `🛡️ *Garantía (60 días):* Activa a partir del retiro físico.\n` +
+                        `${notaComercialTxt}\n\n` +
+                        `${bloqueGarantia}` +
                         `📍 Av. Bolívar, entre calles 12 y 13, Cordero, Táchira.\n` +
-                        `¡Gracias por su confianza! 🚀`;
+                        `¡Gracias por su confianza! 🚀\n` +
+                        `──────────────────\n` +
+                        `💻 _Sistema desarrollado por TUCOCEL C.A. (RIF: J-31378837-6) — @publionlinemk, Agencia de Publicidad de Tucocel C.A._`;
 
             window.abrirWhatsAppSelector(apt.telefono, msg, { elegirMedio: true });
         };
@@ -5501,6 +5554,311 @@
             };
 
             window.dispararImpresionTicket(notaApartado);
+        };
+
+        window.cerrarFichaDetalleRegistro = function() {
+            const m = document.getElementById('modal-ficha-detalle-registro');
+            if (m) m.classList.add('hidden');
+        };
+
+        window.abrirFichaDetalleRegistro = function(tipo, id) {
+            const modal = document.getElementById('modal-ficha-detalle-registro');
+            const badge = document.getElementById('ficha-det-badge');
+            const numEl = document.getElementById('ficha-det-num');
+            const titEl = document.getElementById('ficha-det-titulo');
+            const cuerpo = document.getElementById('ficha-det-cuerpo');
+            const footer = document.getElementById('ficha-det-footer');
+            if (!modal || !cuerpo || !footer) return;
+
+            const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            const tCOP = parseFloat(document.getElementById('tasa-cop')?.value) || 3600;
+            const tBS = parseFloat(document.getElementById('tasa-bs')?.value) || 3.3;
+
+            if (tipo === 'apartado') {
+                const apt = APARTADOS.find(a => String(a.id) === String(id));
+                if (!apt) return;
+                const m = window.resolverMontosApartado(apt);
+                const esCOP = m.moneda === 'COP';
+                const esProd = apt.tipoOrden === 'PRODUCTO';
+                const numCtrl = 'APT-' + String(apt.timestamp || '').slice(-5);
+
+                badge.className = 'bg-amber-400 text-slate-950 text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full tracking-wider';
+                badge.innerText = esProd ? 'APARTADO DE PRODUCTO' : 'TRABAJO / SERVICIO EN CURSO';
+                numEl.innerText = numCtrl;
+                titEl.innerText = apt.nombre || 'Cliente';
+
+                const itemsArr = (Array.isArray(apt.items) && apt.items.length > 0)
+                    ? apt.items
+                    : [{
+                        cantidad: 1,
+                        modelo: apt.modelo || 'Apartado',
+                        monedaIngreso: m.moneda,
+                        precioOriginalUnit: esCOP ? m.totalCOP : m.totalUSD,
+                        precio: m.totalUSD,
+                        totalCOP: m.totalCOP
+                    }];
+
+                const itemsHtml = itemsArr.map((it, i) => {
+                    const itCOP = it.monedaIngreso === 'COP';
+                    const subStr = itCOP
+                        ? `${Number(it.totalCOP || 0).toLocaleString('es-CO')} COP`
+                        : `$${Number(it.precio || 0).toFixed(2)} USD`;
+                    const unitStr = itCOP
+                        ? `P/U: ${Number(it.precioOriginalUnit || 0).toLocaleString('es-CO')} COP`
+                        : `P/U: $${Number(it.precioUnitUSD || it.precioOriginalUnit || 0).toFixed(2)} USD`;
+                    return `
+                        <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl flex justify-between items-start gap-3">
+                            <div class="min-w-0 flex-1">
+                                <div class="font-black text-slate-900 text-xs sm:text-sm break-words leading-snug">
+                                    <span class="inline-block bg-blue-600 text-white text-[10px] font-mono px-1.5 py-0.5 rounded mr-1">${it.cantidad || 1}x</span>
+                                    ${esc(it.modelo)}
+                                </div>
+                                <div class="text-[11px] font-mono text-slate-500 mt-1">${unitStr}</div>
+                            </div>
+                            <div class="font-mono font-black text-slate-900 text-xs sm:text-sm whitespace-nowrap shrink-0">
+                                ${subStr}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                const abonosArr = Array.isArray(apt.historialAbonos) ? apt.historialAbonos : [];
+                const abonosHtml = abonosArr.length > 0
+                    ? abonosArr.map((ab, idxAb) => {
+                        const monAb = ab.moneda || 'USD';
+                        const origStr = monAb === 'COP'
+                            ? `${Math.round(Number(ab.montoOriginal || ab.montoCOP || 0)).toLocaleString('es-CO')} COP`
+                            : monAb === 'BS'
+                                ? `${Number(ab.montoOriginal || 0).toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs`
+                                : `$${Number(ab.montoOriginal || ab.montoUSD || 0).toFixed(2)} USD`;
+                        return `
+                            <div class="flex justify-between items-center text-xs py-1.5 border-b border-slate-100 last:border-b-0">
+                                <span class="text-slate-600 font-medium">Abono #${idxAb + 1} (${esc(ab.fecha || '')})</span>
+                                <span class="font-mono font-black text-emerald-700">${origStr} <span class="text-[10px] text-slate-400 font-normal">($${Number(ab.montoUSD || 0).toFixed(2)})</span></span>
+                            </div>
+                        `;
+                    }).join('')
+                    : '<p class="text-xs text-slate-400">Sin historial detallado.</p>';
+
+                const totalMain = esCOP ? `${m.totalCOP.toLocaleString('es-CO')} COP` : `$${m.totalUSD.toFixed(2)} USD`;
+                const abonoMain = esCOP ? `${m.abonadoCOP.toLocaleString('es-CO')} COP` : `$${m.abonadoUSD.toFixed(2)} USD`;
+                const restaMain = esCOP ? `${m.saldoCOP.toLocaleString('es-CO')} COP` : `$${m.saldoUSD.toFixed(2)} USD`;
+                const equivSec = esCOP
+                    ? `Ref. Saldo: $${m.saldoUSD.toFixed(2)} USD  |  ${m.saldoBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs`
+                    : `Ref. Saldo: ${m.saldoCOP.toLocaleString('es-CO')} COP  |  ${m.saldoBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs`;
+
+                cuerpo.innerHTML = `
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+                        <div><span class="text-slate-400 font-bold uppercase text-[10px] block">Cliente</span><strong class="text-slate-900 font-black uppercase">${esc(apt.nombre)}</strong></div>
+                        <div><span class="text-slate-400 font-bold uppercase text-[10px] block">Cédula / RIF</span><strong class="text-slate-900 font-mono">${esc(apt.cedula)}</strong></div>
+                        <div><span class="text-slate-400 font-bold uppercase text-[10px] block">Teléfono</span><strong class="text-blue-700 font-mono">${esc(apt.telefono || 'Sin teléfono')}</strong></div>
+                        <div><span class="text-slate-400 font-bold uppercase text-[10px] block">Dirección / Fecha</span><strong class="text-slate-800">${esc(apt.direccion || 'Cordero')} — ${esc(apt.fechaRegistro || '')}</strong></div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <h4 class="text-[11px] font-black uppercase tracking-wider text-slate-500">Artículos / Trabajos Detallados (${itemsArr.length})</h4>
+                        <div class="space-y-2">${itemsHtml}</div>
+                    </div>
+
+                    <div class="bg-slate-900 text-white rounded-2xl p-4 font-mono space-y-2">
+                        <div class="flex justify-between items-center text-xs">
+                            <span class="text-slate-400 font-sans font-bold uppercase">Costo Total Acordado:</span>
+                            <strong class="text-white text-sm sm:text-base font-black">${totalMain}</strong>
+                        </div>
+                        <div class="flex justify-between items-center text-xs">
+                            <span class="text-slate-400 font-sans font-bold uppercase">Total Abonado:</span>
+                            <strong class="text-emerald-400 text-sm font-black">${abonoMain}</strong>
+                        </div>
+                        <div class="border-t border-slate-800 pt-2 flex justify-between items-center">
+                            <span class="text-red-300 font-sans font-black uppercase text-xs">Saldo Restante:</span>
+                            <strong class="text-red-400 text-base sm:text-lg font-black">${restaMain}</strong>
+                        </div>
+                        <div class="text-[11px] text-amber-300 text-right pt-0.5">${equivSec}</div>
+                    </div>
+
+                    <div class="bg-emerald-50/60 border border-emerald-200 rounded-2xl p-3.5 space-y-1">
+                        <h4 class="text-[10.5px] font-black uppercase tracking-wider text-emerald-800 mb-1">Historial de Abonos Registrados</h4>
+                        ${abonosHtml}
+                    </div>
+                `;
+
+                footer.innerHTML = `
+                    <div class="flex flex-wrap gap-2 w-full sm:w-auto">
+                        <button type="button" onclick="window.cerrarFichaDetalleRegistro(); window.gestionarAbonoApartado('${apt.id}')" class="flex-1 sm:flex-none bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs px-4 py-2.5 rounded-xl shadow-sm flex items-center justify-center gap-1.5 uppercase cursor-pointer">
+                            <i class="fa-solid fa-hand-holding-dollar"></i> Abonar
+                        </button>
+                        <button type="button" onclick="window.cerrarFichaDetalleRegistro(); window.imprimirTicketApartado('${apt.id}')" class="flex-1 sm:flex-none bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-xs px-4 py-2.5 rounded-xl shadow-sm flex items-center justify-center gap-1.5 uppercase cursor-pointer">
+                            <i class="fa-solid fa-print"></i> Imprimir
+                        </button>
+                        <button type="button" onclick="const a=APARTADOS.find(x=>x.id==='${apt.id}'); window.cerrarFichaDetalleRegistro(); if(a) window.enviarWhatsAppApartadoObjeto(a);" class="flex-1 sm:flex-none bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs px-4 py-2.5 rounded-xl shadow-sm flex items-center justify-center gap-1.5 uppercase cursor-pointer">
+                            <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                        </button>
+                    </div>
+                    <button type="button" onclick="window.cerrarFichaDetalleRegistro()" class="w-full sm:w-auto bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold text-xs px-4 py-2.5 rounded-xl cursor-pointer">Cerrar</button>
+                `;
+
+                modal.classList.remove('hidden');
+                return;
+            }
+
+            // Presupuesto, Venta o Cashea
+            let doc = null;
+            if (tipo === 'presupuesto') doc = HISTORIAL_PRESUPUESTOS.find(x => String(x.id) === String(id));
+            else if (tipo === 'cashea') doc = HISTORIAL_NOTAS_CASHEA.find(x => String(x.id) === String(id));
+            else doc = HISTORIAL_NOTAS.find(x => String(x.id) === String(id));
+            if (!doc) return;
+
+            const res = window.resolverTotalesDocumento(doc);
+            const esCOP = res.monedaPrincipal === 'COP';
+            const numTxt = doc.numControlTexto || (tipo === 'presupuesto'
+                ? `PRE-${String(doc.numNota).padStart(6, '0')}`
+                : tipo === 'cashea'
+                    ? `NC-${String(doc.numNota).padStart(6, '0')}`
+                    : `#${String(doc.numNota).padStart(6, '0')}`);
+
+            if (tipo === 'presupuesto') {
+                badge.className = 'bg-sky-500 text-white text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full tracking-wider';
+                badge.innerText = 'PRESUPUESTO / COTIZACIÓN';
+            } else if (tipo === 'cashea') {
+                badge.className = 'bg-amber-400 text-slate-950 text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full tracking-wider';
+                badge.innerText = 'NOTA DE ENTREGA CASHEA';
+            } else {
+                badge.className = 'bg-emerald-500 text-white text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full tracking-wider';
+                badge.innerText = 'NOTA DE ENTREGA';
+            }
+            numEl.innerText = numTxt;
+            titEl.innerText = doc.cliente || 'Cliente';
+
+            const itemsHtml = res.itemsResueltos.map(it => {
+                const m = it._m;
+                const puStr = m.moneda === 'COP'
+                    ? `P/U: ${m.unitCOP.toLocaleString('es-CO')} COP`
+                    : `P/U: $${m.unitUSD.toFixed(2)} USD`;
+                const subStr = m.moneda === 'COP'
+                    ? `${m.subCOP.toLocaleString('es-CO')} COP`
+                    : `$${m.subUSD.toFixed(2)} USD`;
+                const imeiHtml = (Array.isArray(it.imeis) && it.imeis.length > 0)
+                    ? `<div class="text-[11px] font-mono font-bold text-red-600 mt-1">IMEI: ${esc(it.imeis.join(', '))}</div>`
+                    : '';
+                return `
+                    <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl flex justify-between items-start gap-3">
+                        <div class="min-w-0 flex-1">
+                            <div class="font-black text-slate-900 text-xs sm:text-sm break-words leading-snug">
+                                <span class="inline-block bg-slate-800 text-white text-[10px] font-mono px-1.5 py-0.5 rounded mr-1">${m.cant}x</span>
+                                ${esc(it.modelo)}
+                            </div>
+                            <div class="text-[11px] font-mono text-slate-500 mt-1">${puStr}</div>
+                            ${imeiHtml}
+                        </div>
+                        <div class="font-mono font-black text-slate-900 text-xs sm:text-sm whitespace-nowrap shrink-0">
+                            ${subStr}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            let bloqueExtra = '';
+            if (tipo === 'presupuesto') {
+                const pctAnt = Number(doc.porcAnticipo || 0);
+                const antMain = esCOP
+                    ? `${Math.round(Number(doc.anticipoCOP || 0)).toLocaleString('es-CO')} COP ($${Number(doc.anticipoUSD || 0).toFixed(2)} USD)`
+                    : `$${Number(doc.anticipoUSD || 0).toFixed(2)} USD (${Math.round(Number(doc.anticipoCOP || 0)).toLocaleString('es-CO')} COP)`;
+                const resMain = esCOP
+                    ? `${Math.round(Number(doc.restaCOP || 0)).toLocaleString('es-CO')} COP ($${Number(doc.restaUSD || 0).toFixed(2)} USD)`
+                    : `$${Number(doc.restaUSD || 0).toFixed(2)} USD (${Math.round(Number(doc.restaCOP || 0)).toLocaleString('es-CO')} COP)`;
+                bloqueExtra = `
+                    <div class="bg-sky-50 border border-sky-200 rounded-2xl p-3.5 space-y-1.5 text-xs">
+                        <div class="flex justify-between"><span class="text-slate-600 font-bold">Validez del Presupuesto:</span><strong class="text-sky-900 font-mono">${doc.diasValidez || 5} días continuos</strong></div>
+                        ${pctAnt > 0 ? `
+                            <div class="flex justify-between"><span class="text-slate-600 font-bold">Anticipo (${pctAnt}%):</span><strong class="text-emerald-700 font-mono">${antMain}</strong></div>
+                            <div class="flex justify-between"><span class="text-slate-600 font-bold">Resta al entregar (${100 - pctAnt}%):</span><strong class="text-amber-700 font-mono">${resMain}</strong></div>
+                        ` : ''}
+                    </div>
+                `;
+            } else if (tipo === 'cashea') {
+                const pctIni = parseFloat(doc.porcInicialCashea) || 40;
+                const iniUSD = res.totalUSD * (pctIni / 100);
+                const finUSD = res.totalUSD - iniUSD;
+                bloqueExtra = `
+                    <div class="bg-amber-50 border border-amber-300 rounded-2xl p-3.5 space-y-1.5 text-xs">
+                        ${doc.odc ? `<div class="flex justify-between"><span class="text-amber-900 font-bold">ODC Cashea:</span><strong class="font-mono font-black text-amber-950">${esc(doc.odc)}</strong></div>` : ''}
+                        <div class="flex justify-between"><span class="text-slate-700 font-bold">Inicial en Tienda (${pctIni}%):</span><strong class="text-emerald-700 font-mono font-black">$${iniUSD.toFixed(2)} USD</strong></div>
+                        <div class="flex justify-between"><span class="text-slate-700 font-bold">Financiado por Cashea (${100 - pctIni}%):</span><strong class="text-blue-700 font-mono font-black">$${finUSD.toFixed(2)} USD</strong></div>
+                    </div>
+                `;
+            }
+
+            const totPrincipal = esCOP
+                ? `${res.totalCOP.toLocaleString('es-CO')} COP`
+                : `$${res.totalUSD.toFixed(2)} USD`;
+            const totRefs = esCOP
+                ? `Ref. USD: $${res.totalUSD.toFixed(2)} USD  |  Ref. Bs: ${res.totalBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs`
+                : `Ref. COP: ${res.totalCOP.toLocaleString('es-CO')} COP  |  Ref. Bs: ${res.totalBS.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bs`;
+
+            cuerpo.innerHTML = `
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+                    <div><span class="text-slate-400 font-bold uppercase text-[10px] block">Cliente</span><strong class="text-slate-900 font-black uppercase">${esc(doc.cliente)}</strong></div>
+                    <div><span class="text-slate-400 font-bold uppercase text-[10px] block">Cédula / RIF</span><strong class="text-slate-900 font-mono">${esc(doc.cedula)}</strong></div>
+                    <div><span class="text-slate-400 font-bold uppercase text-[10px] block">Teléfono</span><strong class="text-blue-700 font-mono">${esc(doc.telefono || 'Sin teléfono')}</strong></div>
+                    <div><span class="text-slate-400 font-bold uppercase text-[10px] block">Fecha / Estatus</span><strong class="text-slate-800">${esc(doc.fecha || '')} ${esc(doc.hora || '')} — ${esc(doc.estatus || '')}</strong></div>
+                    ${doc.direccion ? `<div class="sm:col-span-2"><span class="text-slate-400 font-bold uppercase text-[10px] block">Dirección</span><strong class="text-slate-800">${esc(doc.direccion)}</strong></div>` : ''}
+                </div>
+
+                <div class="space-y-2">
+                    <h4 class="text-[11px] font-black uppercase tracking-wider text-slate-500">Detalle Completo (${res.itemsResueltos.length} ${res.itemsResueltos.length === 1 ? 'ítem' : 'ítems'})</h4>
+                    <div class="space-y-2">${itemsHtml}</div>
+                </div>
+
+                ${bloqueExtra}
+
+                <div class="bg-slate-900 text-white rounded-2xl p-4 font-mono space-y-1.5">
+                    <div class="flex justify-between items-center">
+                        <span class="text-slate-300 font-sans font-bold uppercase text-xs">Total Documento:</span>
+                        <strong class="text-emerald-400 text-base sm:text-lg font-black">${totPrincipal}</strong>
+                    </div>
+                    <div class="text-[11px] text-amber-300 text-right">${totRefs}</div>
+                </div>
+            `;
+
+            if (tipo === 'presupuesto') {
+                footer.innerHTML = `
+                    <div class="flex flex-wrap gap-2 w-full sm:w-auto">
+                        <button type="button" onclick="const d=HISTORIAL_PRESUPUESTOS.find(x=>String(x.id)==='${doc.id}'); window.cerrarFichaDetalleRegistro(); if(d) window.dispararImpresionPresupuestoObjeto(d);" class="flex-1 sm:flex-none bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-xs px-4 py-2.5 rounded-xl shadow-sm flex items-center justify-center gap-1.5 uppercase cursor-pointer">
+                            <i class="fa-solid fa-print"></i> Imprimir
+                        </button>
+                        <button type="button" onclick="const d=HISTORIAL_PRESUPUESTOS.find(x=>String(x.id)==='${doc.id}'); window.cerrarFichaDetalleRegistro(); if(d) window.enviarPresupuestoObjetoWa(d);" class="flex-1 sm:flex-none bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs px-4 py-2.5 rounded-xl shadow-sm flex items-center justify-center gap-1.5 uppercase cursor-pointer">
+                            <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                        </button>
+                    </div>
+                    <button type="button" onclick="window.cerrarFichaDetalleRegistro()" class="w-full sm:w-auto bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold text-xs px-4 py-2.5 rounded-xl cursor-pointer">Cerrar</button>
+                `;
+            } else if (tipo === 'cashea') {
+                footer.innerHTML = `
+                    <div class="flex flex-wrap gap-2 w-full sm:w-auto">
+                        <button type="button" onclick="const d=HISTORIAL_NOTAS_CASHEA.find(x=>String(x.id)==='${doc.id}'); window.cerrarFichaDetalleRegistro(); if(d) window.dispararImpresionTicket(d);" class="flex-1 sm:flex-none bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-xs px-4 py-2.5 rounded-xl shadow-sm flex items-center justify-center gap-1.5 uppercase cursor-pointer">
+                            <i class="fa-solid fa-print"></i> Imprimir
+                        </button>
+                        <button type="button" onclick="const d=HISTORIAL_NOTAS_CASHEA.find(x=>String(x.id)==='${doc.id}'); window.cerrarFichaDetalleRegistro(); if(d) window.procesarEnvioWaObjeto(d);" class="flex-1 sm:flex-none bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs px-4 py-2.5 rounded-xl shadow-sm flex items-center justify-center gap-1.5 uppercase cursor-pointer">
+                            <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                        </button>
+                    </div>
+                    <button type="button" onclick="window.cerrarFichaDetalleRegistro()" class="w-full sm:w-auto bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold text-xs px-4 py-2.5 rounded-xl cursor-pointer">Cerrar</button>
+                `;
+            } else {
+                footer.innerHTML = `
+                    <div class="flex flex-wrap gap-2 w-full sm:w-auto">
+                        <button type="button" onclick="const d=HISTORIAL_NOTAS.find(x=>String(x.id)==='${doc.id}'); window.cerrarFichaDetalleRegistro(); if(d) window.dispararImpresionTicket(d);" class="flex-1 sm:flex-none bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-xs px-4 py-2.5 rounded-xl shadow-sm flex items-center justify-center gap-1.5 uppercase cursor-pointer">
+                            <i class="fa-solid fa-print"></i> Imprimir
+                        </button>
+                        <button type="button" onclick="const d=HISTORIAL_NOTAS.find(x=>String(x.id)==='${doc.id}'); window.cerrarFichaDetalleRegistro(); if(d) window.procesarEnvioWaObjeto(d);" class="flex-1 sm:flex-none bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs px-4 py-2.5 rounded-xl shadow-sm flex items-center justify-center gap-1.5 uppercase cursor-pointer">
+                            <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                        </button>
+                    </div>
+                    <button type="button" onclick="window.cerrarFichaDetalleRegistro()" class="w-full sm:w-auto bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold text-xs px-4 py-2.5 rounded-xl cursor-pointer">Cerrar</button>
+                `;
+            }
+
+            modal.classList.remove('hidden');
         };
 
         // =========================================================================
@@ -6442,7 +6800,7 @@
                 const idxUse = realIdx !== -1 ? realIdx : 0;
                 const colorLabel = n.estatus === 'ANULADA' ? 'text-red-500 bg-red-50' : 'text-emerald-600 bg-emerald-50';
                 tabla.innerHTML += `
-                    <tr class="border-b hover:bg-gray-50">
+                    <tr onclick="window.abrirFichaDetalleRegistro('venta', '${n.id}')" class="border-b hover:bg-blue-50/60 cursor-pointer transition-colors" title="Toca para ver el detalle completo">
                         <td class="p-3 font-mono text-blue-600 font-bold">#${String(n.numNota).padStart(6, '0')}</td>
                         <td class="p-3 text-gray-500">${n.fecha}</td>
                         <td class="p-3 font-bold text-gray-900">${n.cliente}</td>
@@ -6450,7 +6808,7 @@
                         <td class="p-3 text-gray-500 truncate max-w-[180px]">${(n.items || []).map(i => `${i.cantidad}x ${i.modelo}`).join(', ')}</td>
                         <td class="p-3 text-right font-mono font-black text-gray-900">$${Number(n.totalUSD || 0).toFixed(2)}</td>
                         <td class="p-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase ${colorLabel}">${n.estatus || 'PROCESADA'}</span></td>
-                        <td class="p-3 text-center flex justify-center gap-1">
+                        <td onclick="event.stopPropagation()" class="p-3 text-center flex justify-center gap-1">
                             <button onclick="window.abrirVisualizadorHojaBlanca(${idxUse})" class="text-amber-600 bg-amber-50 hover:bg-amber-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Ver Hoja Blanca / Imprimir 10x13"><i class="fa-solid fa-file-lines"></i></button>
                             <button onclick="window.procesarEnvioWaObjeto(HISTORIAL_NOTAS[${idxUse}])" class="text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Reenviar WhatsApp directo a ${n.telefono || 'cliente'}"><i class="fa-brands fa-whatsapp"></i></button>
                             <button onclick="window.abrirEditorPreciosDocumento('ventas', ${idxUse})" class="text-purple-700 bg-purple-50 hover:bg-purple-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Editar Precios / Ítems"><i class="fa-solid fa-pen-to-square"></i></button>
@@ -6562,7 +6920,7 @@
                 const numTxt = n.numControlTexto || `NC-${String(n.numNota).padStart(6, '0')}`;
 
                 tabla.innerHTML += `
-                    <tr class="border-b hover:bg-amber-50/40">
+                    <tr onclick="window.abrirFichaDetalleRegistro('cashea', '${n.id}')" class="border-b hover:bg-amber-50 cursor-pointer transition-colors" title="Toca para ver el detalle completo">
                         <td class="p-3 font-mono text-amber-700 font-black">${numTxt}</td>
                         <td class="p-3 text-gray-500 font-medium">${n.fecha}</td>
                         <td class="p-3 font-bold text-gray-900">${n.cliente}</td>
@@ -6571,7 +6929,7 @@
                         <td class="p-3 text-right font-mono font-black text-gray-900">$${totalFinanciado.toFixed(2)}</td>
                         <td class="p-3 text-right font-mono font-black text-emerald-600">$${inicialUSD.toFixed(2)}</td>
                         <td class="p-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase ${colorLabel}">${n.estatus || 'VENTA CASHEA'}</span></td>
-                        <td class="p-3 text-center flex justify-center gap-1">
+                        <td onclick="event.stopPropagation()" class="p-3 text-center flex justify-center gap-1">
                             <button onclick="window.dispararImpresionTicket(HISTORIAL_NOTAS_CASHEA[${idxUse}])" class="text-amber-700 bg-amber-50 hover:bg-amber-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Reimprimir Ticket 10x13"><i class="fa-solid fa-print"></i></button>
                             <button onclick="window.procesarEnvioWaObjeto(HISTORIAL_NOTAS_CASHEA[${idxUse}])" class="text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Reenviar WhatsApp directo a ${n.telefono || 'cliente'}"><i class="fa-brands fa-whatsapp"></i></button>
                             <button onclick="window.abrirEditorPreciosDocumento('cashea', ${idxUse})" class="text-purple-700 bg-purple-50 hover:bg-purple-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Editar Precios / Ítems"><i class="fa-solid fa-pen-to-square"></i></button>
@@ -7939,7 +8297,7 @@
                 const pctTxt = Number(p.porcAnticipo || 0) > 0 ? `${p.porcAnticipo}% ($${Number(p.anticipoUSD || 0).toFixed(2)})` : 'Sin anticipo';
 
                 return `
-                    <tr class="border-b hover:bg-sky-50/40">
+                    <tr onclick="window.abrirFichaDetalleRegistro('presupuesto', '${p.id}')" class="border-b hover:bg-sky-50 cursor-pointer transition-colors" title="Toca para ver el detalle completo">
                         <td class="p-3 font-mono text-sky-700 font-black">${numTxt}</td>
                         <td class="p-3 text-gray-500">${p.fecha}</td>
                         <td class="p-3 font-bold text-gray-900">${p.cliente}</td>
@@ -7948,7 +8306,7 @@
                         <td class="p-3 text-center font-mono text-emerald-700 font-bold">${pctTxt}</td>
                         <td class="p-3 text-right font-mono font-black text-gray-900">$${Number(p.totalUSD || 0).toFixed(2)}</td>
                         <td class="p-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase ${colorEst}">${p.estatus || 'VIGENTE'}</span></td>
-                        <td class="p-3 text-center flex justify-center gap-1">
+                        <td onclick="event.stopPropagation()" class="p-3 text-center flex justify-center gap-1">
                             <button onclick="window.dispararImpresionPresupuestoObjeto(HISTORIAL_PRESUPUESTOS[${idxUse}])" class="text-amber-700 bg-amber-50 hover:bg-amber-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Reimprimir 10x13"><i class="fa-solid fa-print"></i></button>
                             <button onclick="window.enviarPresupuestoObjetoWa(HISTORIAL_PRESUPUESTOS[${idxUse}])" class="text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Reenviar WhatsApp directo a ${p.telefono || 'cliente'}"><i class="fa-brands fa-whatsapp"></i></button>
                             <button onclick="window.abrirEditorPreciosDocumento('presupuestos', ${idxUse})" class="text-purple-700 bg-purple-50 hover:bg-purple-100 px-2 py-1 rounded-lg text-xs font-bold cursor-pointer" title="Editar Precios / Ítems"><i class="fa-solid fa-pen-to-square"></i></button>
